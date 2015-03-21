@@ -34,7 +34,7 @@
  - pointers.md
  - ~~README.md~~
  - standard-input.md
- - static-and-dynamic-dispatch.md
+ - **static-and-dynamic-dispatch.md**
  - strings.md
  - SUMMARY.md
  - ~~testing.md~~
