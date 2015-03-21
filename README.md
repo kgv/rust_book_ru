@@ -5,7 +5,7 @@
  - arrays-vectors-and-slices.md
  - basic.md
  - ~~closures.md~~
- - comments.md
+ - ~~comments.md~~
  - compound-data-types.md
  - conclusion.md
  - concurrency.md
@@ -47,7 +47,11 @@
 
 ----
 
-Перевод осуществлен [kgv](https://github.com/kgv). Помощь в переводе приветствуется. ^_^
+В переводе принимали участие:
+ - [kgv](https://github.com/kgv)
+ - [ithamsteri](https://github.com/ithamsteri)
+
+Помощь в переводе приветствуется. ^_^
 
 ----
 
