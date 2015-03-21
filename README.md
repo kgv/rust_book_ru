@@ -53,6 +53,8 @@
 
 Помощь в переводе приветствуется. ^_^
 
+[Оригинальные файлы расположены здесь](https://github.com/rust-lang/rust/tree/master/src/doc/trpl).
+
 ----
 
 # README.md:
