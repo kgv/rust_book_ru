@@ -20,7 +20,7 @@
  - hello-cargo.md
  - hello-world.md
  - if.md
- - installing-rust.md
+ - ~~installing-rust.md~~
  - intermediate.md
  - iterators.md
  - ~~looping.md~~
