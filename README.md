@@ -23,7 +23,7 @@
  - installing-rust.md
  - intermediate.md
  - iterators.md
- - looping.md
+ - ~~looping.md~~
  - **macros.md**
  - match.md
  - method-syntax.md
