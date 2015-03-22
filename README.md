@@ -18,7 +18,7 @@
  - glossary.md
  - guessing-game.md
  - hello-cargo.md
- - hello-world.md
+ - ~~hello-world.md~~
  - if.md
  - ~~installing-rust.md~~
  - intermediate.md

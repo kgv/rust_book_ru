@@ -59,6 +59,6 @@ rustc 1.0.0-nightly (f4e0ce66a 2015-03-19) (built 2015-03-20)
 Установщик также устанавливает документацию, которая доступна без подключения к сети. На Linux и Mac она распологается в каталоге `/usr/local/share/doc/rust`. В Windows в каталоге `share/doc` там куда вы установили Rust.
 
 Но не только там вы можете найти помощь, а также еще здесь:
-* IRC чат: [канал #rust на irc.mozilla.org ](irc://irc.mozilla.org/#rust) к которому можно подключиться через [Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
+* IRC чат: [канал #rust на irc.mozilla.org](irc://irc.mozilla.org/#rust) к которому можно подключиться через [Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
 * Reddit: [/r/rust subreddit](http://www.reddit.com/r/rust)
 * [Stack Overflow](http://stackoverflow.com/questions/tagged/rust)
