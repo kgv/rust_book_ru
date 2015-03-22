@@ -9,7 +9,7 @@
  - compound-data-types.md
  - conclusion.md
  - concurrency.md
- - crates-and-modules.md
+ - **crates-and-modules.md**
  - documentation.md
  - ~~error-handling.md~~
  - ffi.md
