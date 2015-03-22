@@ -34,7 +34,7 @@
  - pointers.md
  - ~~README.md~~
  - standard-input.md
- - **static-and-dynamic-dispatch.md**
+ - ~~static-and-dynamic-dispatch.md~~
  - strings.md
  - SUMMARY.md
  - ~~testing.md~~
@@ -45,6 +45,8 @@
 ~~Зачеркнуты~~ - перевод файла закончен, но окончательная корректировка не произведена.
 **Выделены жирным** - перевод файла начат, но не окончен.
 
+[Оригинальные файлы расположены здесь](https://github.com/rust-lang/rust/tree/master/src/doc/trpl).
+
 ----
 
 В переводе принимали участие:
@@ -52,8 +54,6 @@
  - [ithamsteri](https://github.com/ithamsteri)
 
 Помощь в переводе приветствуется. ^_^
-
-[Оригинальные файлы расположены здесь](https://github.com/rust-lang/rust/tree/master/src/doc/trpl).
 
 ----
 
