@@ -29,7 +29,7 @@
  - method-syntax.md
  - more-strings.md
  - ~~ownership.md~~
- - patterns.md
+ - ~~patterns.md~~
  - plugins.md
  - pointers.md
  - ~~README.md~~
