@@ -9,24 +9,24 @@
 
 Rust активно тестируется на этих платформах и также на остальных, например на Android.
 
-# Linux и Mac
+## Linux и Mac
 
 Самый простой способ установить Rust - использовать скрипт `rustup`. Вам нужно ввести эту команду в консоль (вам не нужно вводить символ `$`, он лишь показывает приглашение командной строки к вводу новой команды):
 
-```
+```bash
 $ curl -L https://static.rust-lang.org/rustup.sh | sudo sh
 ```
 
 Если вы беспокоитесь о безопасности, используя данную команду, то продолжайте читать далее. Также можете скачать наш установочный скрипт и изучить его:
 
-```
+```bash
 $ curl -L https://static.rust-lang.org/rustup.sh -O
 $ sudo sh rustup.sh
 ```
 
 Если вы решили удалить Rust, то просто запустите скрипт деинсталяции:
 
-```
+```bash
 $ sudo /usr/local/lib/rustlib/uninstall.sh
 ```
 
@@ -34,9 +34,9 @@ $ sudo /usr/local/lib/rustlib/uninstall.sh
 
 Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки запускается с правами администратора, что может нарушить безопасность системы. Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha. Для безопасной установки Rust предлагаем изучить документацию по [установке Rust из исходных кодов](https://github.com/rust-lang/rust#building-from-source) или скачать уже [скомпилированный Rust](http://www.rust-lang.org/install.html).
 
-# Windows
+## Windows
 
-Если вы пользуетесь **Windows**, то пожалуйста скачайте установку: [32-битную](https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe) или [64-битную](https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe) и затем запустите её.
+Если вы пользуетесь *Windows*, то пожалуйста скачайте установку: [32-битную](https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe) или [64-битную](https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe) и затем запустите её.
 
 Удалить Rust можно через `Панель управления` -> `Программы` -> `Удаление программы`, а затем выбираем Rust в списке и нажимаем кнопку `Удалить`.
 
@@ -44,7 +44,7 @@ $ sudo /usr/local/lib/rustlib/uninstall.sh
 
 Если вы уже установили Rust, то откройте терминал и введите это:
 
-```
+```bash
 $ rustc --version
 ```
 
