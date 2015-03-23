@@ -22,7 +22,7 @@
  - if.md
  - ~~installing-rust.md~~
  - intermediate.md
- - iterators.md
+ - ~~iterators.md~~
  - ~~looping.md~~
  - **macros.md**
  - match.md
