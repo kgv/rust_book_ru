@@ -26,7 +26,7 @@
  - ~~looping.md~~
  - **macros.md**
  - match.md
- - method-syntax.md
+ - **method-syntax.md**
  - more-strings.md
  - ~~ownership.md~~
  - ~~patterns.md~~
