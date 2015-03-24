@@ -1,9 +1,9 @@
 # Ход выполнения перевода
 
- - advanced.md
+ - ~~advanced.md~~
  - advanced-macros.md
  - arrays-vectors-and-slices.md
- - basic.md
+ - ~~basic.md~~
  - ~~closures.md~~
  - ~~comments.md~~
  - compound-data-types.md
@@ -21,7 +21,7 @@
  - ~~hello-world.md~~
  - if.md
  - ~~installing-rust.md~~
- - intermediate.md
+ - ~~intermediate.md~~
  - ~~iterators.md~~
  - ~~looping.md~~
  - **macros.md**
