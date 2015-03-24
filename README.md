@@ -27,6 +27,7 @@
 В переводе принимали участие:
  - [kgv](https://github.com/kgv)
  - [ithamsteri](https://github.com/ithamsteri)
+ - [funkill](https://github.com/funkill)
 
 Помощь в переводе приветствуется. ^_^
 
@@ -36,6 +37,6 @@
 
 ----
 
-Перевод книги (текущий вариант) расположен [здесь](https://www.gitbook.com/read/book/kgv/rust_book_ru).
+Перевод книги (текущий вариант) расположен [здесь](https://www.gitbook.com/book/kgv/rust_book_ru).
 
 Оригинал книги расположен [здесь](https://doc.rust-lang.org/book).
