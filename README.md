@@ -1,64 +1,3 @@
-# Ход выполнения перевода:
-
- - advanced.md
- - advanced-macros.md
- - arrays-vectors-and-slices.md
- - basic.md
- - ~~closures.md~~
- - ~~comments.md~~
- - compound-data-types.md
- - conclusion.md
- - concurrency.md
- - ~~crates-and-modules.md~~
- - documentation.md
- - ~~error-handling.md~~
- - ffi.md
- - functions.md
- - ~~generics.md~~
- - glossary.md
- - guessing-game.md
- - ~~hello-cargo.md~~
- - ~~hello-world.md~~
- - if.md
- - ~~installing-rust.md~~
- - intermediate.md
- - ~~iterators.md~~
- - ~~looping.md~~
- - **macros.md**
- - match.md
- - ~~method-syntax.md~~
- - more-strings.md
- - ~~ownership.md~~
- - ~~patterns.md~~
- - plugins.md
- - pointers.md
- - ~~README.md~~
- - standard-input.md
- - ~~static-and-dynamic-dispatch.md~~
- - strings.md
- - ~~SUMMARY.md~~
- - ~~testing.md~~
- - ~~traits.md~~
- - unsafe.md
- - variable-bindings.md
-
-~~Зачеркнуты~~ - перевод файла закончен, но окончательная корректировка не произведена.
-**Выделены жирным** - перевод файла начат, но не окончен.
-
-[Оригинальные файлы расположены здесь](https://github.com/rust-lang/rust/tree/master/src/doc/trpl).
-
-----
-
-В переводе принимали участие:
- - [kgv](https://github.com/kgv)
- - [ithamsteri](https://github.com/ithamsteri)
-
-Помощь в переводе приветствуется. ^_^
-
-----
-
-# README.md:
-
 % Язык программирования Rust
 
 Добро пожаловать! Эта книга обучает основным принципам работы с языком программирования [Rust](http://www.rust-lang.org/). Rust - современный системный язык программирования с упором на безопасность и скорость. Он решает эти задачи, используя концепции безопасного управления памятью без использования сборщика мусора.
@@ -82,3 +21,21 @@
 Аналогично разделу "Средний уровень", этот раздел содержит самодостаточные подразделы, которые так же могут быть прочитаны в любом порядке. Эти подразделы содержат материалы для углубленного изучения концепций Rust. Они посвящены наиболее сложным особенносям Rust, а также некоторым вещам, которые будут доступны только в будущих версиях Rust.
 
 После прочтения раздела "Продвинутый уровень", вы будете экспертом в Rust!
+
+## От переводчика
+
+В переводе принимали участие:
+ - [kgv](https://github.com/kgv)
+ - [ithamsteri](https://github.com/ithamsteri)
+
+Помощь в переводе приветствуется. ^_^
+
+**ВНИМАНИЕ!** Перевод не окончен, поэтому могут встречаться ошибки.
+
+Если вы встретили ошибку или неточность в переводе, пожалуйста, напишите о ней [сюда](https://github.com/kgv/rust_book_ru/issues).
+
+----
+
+Перевод книги (текущий вариант) расположен [здесь](https://www.gitbook.com/read/book/kgv/rust_book_ru).
+
+Оригинал книги расположен [здесь](https://doc.rust-lang.org/book).
