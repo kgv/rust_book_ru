@@ -32,11 +32,11 @@ $ sudo /usr/local/lib/rustlib/uninstall.sh
 
 Вы можете повторно запускать скрипт для того, чтобы обновить Rust. На данный момент Rust находится в стадии alpha и очень часто обновляется.
 
-Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки запускается с правами администратора, что может нарушить безопасность системы. Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha. Для безопасной установки Rust предлагаем изучить документацию по [установке Rust из исходных кодов][rust_sources] или скачать уже [скомпилированный Rust][rust_binaries].
+Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки запускается с правами администратора, что может нарушить безопасность системы. Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha. Для безопасной установки Rust предлагаем изучить документацию по [установке Rust из исходных кодов][https://github.com/rust-lang/rust#building-from-source] или скачать уже [скомпилированный Rust][http://www.rust-lang.org/install.html].
 
 ## Windows
 
-Если вы пользуетесь *Windows*, то пожалуйста скачайте установочный пакет: [32-битный][win_32_bit] или [64-битный][win_64_bit] и затем запустите его.
+Если вы пользуетесь *Windows*, то пожалуйста скачайте установочный пакет: [32-битный][https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe] или [64-битный][https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe] и затем запустите его.
 
 Удалить Rust можно через `Панель управления` -> `Программы` -> `Удаление программы`, а затем выбираем Rust в списке и нажимаем кнопку `Удалить`.
 
@@ -62,8 +62,3 @@ rustc 1.0.0-nightly (f4e0ce66a 2015-03-19) (built 2015-03-20)
 * IRC чат: [канал #rust на irc.mozilla.org](irc://irc.mozilla.org/#rust) к которому можно подключиться через [Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
 * Reddit: [/r/rust subreddit](http://www.reddit.com/r/rust)
 * [Stack Overflow](http://stackoverflow.com/questions/tagged/rust)
-
-[rust_sources]: https://github.com/rust-lang/rust#building-from-source
-[rust_binaries]: http://www.rust-lang.org/install.html
-[win_32_bit]: https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe
-[win_64_bit]: https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe
