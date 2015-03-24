@@ -1,4 +1,4 @@
-% Error Handling
+% Обработка ошибок
 
 > The best-laid plans of mice and men  
 > Often go awry

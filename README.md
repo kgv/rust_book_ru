@@ -36,7 +36,7 @@
  - standard-input.md
  - ~~static-and-dynamic-dispatch.md~~
  - strings.md
- - SUMMARY.md
+ - ~~SUMMARY.md~~
  - ~~testing.md~~
  - ~~traits.md~~
  - unsafe.md
