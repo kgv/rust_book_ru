@@ -5,7 +5,7 @@
     * [Hello, world!](hello-world.md)
     * [Hello, Cargo!](hello-cargo.md)
     * [Привязка переменных](variable-bindings.md)
-    * [Условние переходы (If)](if.md)
+    * [Условные переходы (If)](if.md)
     * [Функции](functions.md)
     * [Коментарии](comments.md)
     * [Составные типы данных](compound-data-types.md)
