@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Шаблоны</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Шаблоны</h1>
+    <p>Мы уже использовали шаблоны несколько раз в этом руководстве: сначала при рассмотрении оператора <code>let</code>, а затем при изучении конструкции <code>match</code>. Давайте коротко пробежимся по всем возможностям, которые можно реализовать с помощью шаблонов!</p>
+
+<p>Быстро освежим в памяти: сопоставлять с образцами литералы можно либо напрямую, либо с помощью символа <code>_</code>, который означает <em>любой</em> случай:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one&quot;</span>),
+    <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;two&quot;</span>),
+    <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;three&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+}
+</pre>
+
+<p>Вы можете сопоставлять с несколькими шаблонами, используя <code>|</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='number'>1</span> <span class='op'>|</span> <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one or two&quot;</span>),
+    <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;three&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+}
+</pre>
+
+<p>Вы можете сопоставлять с диапазоном значений, используя <code>...</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one through five&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+}
+</pre>
+
+<p>Диапазоны в основном используются с числами или одиночными символами.</p>
+
+<p>Если вы используете множественное сопоставление, с помощью <code>|</code> или <code>...</code>, вы можете присвоить значение переменной с именем <code>@</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;got a range element {}&quot;</span>, <span class='ident'>e</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+}
+</pre>
+
+<p>Если при сопоставлении вы используете перечисление, содержащее варианты, то вы можете указать <code>..</code>, чтобы проигнорировать значение и тип в варианте:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>enum</span> <span class='ident'>OptionalInt</span> {
+    <span class='ident'>Value</span>(<span class='ident'>i32</span>),
+    <span class='ident'>Missing</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='number'>5</span>);
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int!&quot;</span>),
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;No such luck.&quot;</span>),
+}
+</pre>
+
+<p>Вы можете ввести <em>ограничители шаблонов сопоставления</em> (<em>match guards</em>) с помощью <code>if</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>enum</span> <span class='ident'>OptionalInt</span> {
+    <span class='ident'>Value</span>(<span class='ident'>i32</span>),
+    <span class='ident'>Missing</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='number'>5</span>);
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='ident'>i</span>) <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>&gt;</span> <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int bigger than five!&quot;</span>),
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int!&quot;</span>),
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;No such luck.&quot;</span>),
+}
+</pre>
+
+<p>Если вы сопоставляете с указателем, то вы можете использовать тот же синтаксис, что и при его объявлении. Во-первых, <code>&amp;</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='kw-2'>&amp;</span><span class='ident'>val</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a value: {}&quot;</span>, <span class='ident'>val</span>),
+}
+</pre>
+
+<p>Здесь <code>val</code> внутри <code>match</code> имеет тип <code>i32</code>. Другими словами, в левой части шаблона сопоставления значение деструктурируется. Если <code>&amp;val</code> соответствует <code>&amp;5</code>, то <code>val</code> будет <code>5</code>.</p>
+
+<p>Если же вы хотите получить ссылку, то используйте ключевое слово <code>ref</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='kw-2'>ref</span> <span class='ident'>r</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a reference to {}&quot;</span>, <span class='ident'>r</span>),
+}
+</pre>
+
+<p>Здесь <code>r</code> внутри <code>match</code> имеет тип <code>&amp;i32</code>. Другими словами, ключевое слово <code>ref</code> <em>создает</em> ссылку, для использования в шаблоне. Если вам нужна изменяемая ссылка, то <code>ref mut</code> будет работать аналогичным образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>mr</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a mutable reference to {}&quot;</span>, <span class='ident'>mr</span>),
+}
+</pre>
+
+<p>Если у вас есть структура, вы можете деструктурировать ее внутри шаблона:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, <span class='ident'>y</span>: <span class='ident'>y</span> } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;({},{})&quot;</span>, <span class='ident'>x</span>, <span class='ident'>y</span>),
+}
+</pre>
+
+<p>Если нам нужны значения только некоторых из полей структуры, то мы можем не присваивать им всем имена:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is {}&quot;</span>, <span class='ident'>x</span>),
+}
+</pre>
+
+<p>Вы можете сделать это для любого поля, а не только для первого:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>y</span>: <span class='ident'>y</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y is {}&quot;</span>, <span class='ident'>y</span>),
+}
+</pre>
+
+<p>Если вы хотите использовать сопоставление со срезом или массивом, то вы можете указать <code>&amp;</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='string'>&quot;match_this&quot;</span>, <span class='string'>&quot;1&quot;</span>];
+
+    <span class='kw'>match</span> <span class='kw-2'>&amp;</span><span class='ident'>v</span>[..] {
+        [<span class='string'>&quot;match_this&quot;</span>, <span class='ident'>second</span>] <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The second element is {}&quot;</span>, <span class='ident'>second</span>),
+        _ <span class='op'>=&gt;</span> {},
+    }
+}
+</pre>
+
+<p>Вот так! Существует много разных способов использования конструкции сопоставления с шаблоном, и все они могут быть смешаны и состыкованы, в зависимости от того, что вы хотите сделать:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>name</span>), <span class='ident'>y</span>: <span class='prelude-val'>None</span> } <span class='op'>=&gt;</span> ...
+}
+</pre>
+
+<p>Шаблоны являются очень мощным инструментом. Их использование находит очень широкое применение.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

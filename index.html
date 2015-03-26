@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Язык программирования Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Язык программирования Rust</h1>
+    <p>Добро пожаловать! Эта книга обучает основным принципам работы с языком программирования <a href="http://www.rust-lang.org/">Rust</a>. Rust - современный системный язык программирования с упором на безопасность и скорость. Он решает эти задачи, используя концепции безопасного управления памятью без использования сборщика мусора.</p>
+
+<p>Книга &quot;Язык программирования Rust&quot; делится на три раздела, перемещаться к которым вы можете по меню слева.</p>
+
+<h2 class="section-header"><a href="basic.html">Основной уровень</a></h2>
+
+<p>Этот раздел просто описывает основной синтаксис и семантику Rust. Он поделен на подразделы, в каждом из которых описана определенная часть синтаксиса Rust. Завершается раздел небольшим проектом: игрой в догадки.</p>
+
+<p>После прочтения раздела &quot;Основной уровень&quot; вы будете иметь базовые знания, необходимые для дальнейшего изучения Rust, и сможете писать очень простые программы.</p>
+
+<h2 class="section-header"><a href="intermediate.html">Средний уровень</a></h2>
+
+<p>Этот раздел содержит отдельные подразделы, каждый из которых является самодостаточным. Они сосредоточены на конкретных темах и могут быть прочитаны в любом порядке.</p>
+
+<p>После прочтения раздела &quot;Средний уровень&quot; вы будете иметь четкое представление о концепциях Rust, будете в состоянии понять большую часть кода на Rust и сможете писать более сложные программы.</p>
+
+<h2 class="section-header"><a href="advanced.html">Продвинутый уровень</a></h2>
+
+<p>Аналогично разделу &quot;Средний уровень&quot;, этот раздел содержит самодостаточные подразделы, которые так же могут быть прочитаны в любом порядке. Эти подразделы содержат материалы для углубленного изучения концепций Rust. Они посвящены наиболее сложным особенносям Rust, а также некоторым вещам, которые будут доступны только в будущих версиях Rust.</p>
+
+<p>После прочтения раздела &quot;Продвинутый уровень&quot;, вы будете экспертом в Rust!</p>
+
+<h2 id="От-переводчика" class='section-header'><a
+                           href="#От-переводчика">От переводчика</a></h2>
+<p>В переводе принимали участие:
+ - <a href="https://github.com/kgv">kgv</a>
+ - <a href="https://github.com/ithamsteri">ithamsteri</a>
+ - <a href="https://github.com/funkill">funkill</a></p>
+
+<p>Помощь в переводе приветствуется. <sup>_^</sup></p>
+
+<p><strong>ВНИМАНИЕ!</strong> Перевод не окончен, поэтому могут встречаться ошибки.</p>
+
+<p>Если вы встретили ошибку или неточность в переводе, пожалуйста, напишите о ней <a href="https://github.com/kgv/rust_book_ru/issues">сюда</a>.</p>
+
+<hr>
+
+<p>Перевод книги (текущий вариант) расположен <a href="https://www.gitbook.com/book/kgv/rust_book_ru">здесь</a>.</p>
+
+<p>Оригинал книги расположен <a href="https://doc.rust-lang.org/book">здесь</a>.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

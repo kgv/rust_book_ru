@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Тестирование</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Тестирование</h1>
+    <blockquote>
+<p>Program testing can be a very effective way to show the presence of bugs, but
+it is hopelessly inadequate for showing their absence. </p>
+
+<p>Edsger W. Dijkstra, &quot;The Humble Programmer&quot; (1972)</p>
+</blockquote>
+
+<p>Давайте поговорим о том, как тестировать Rust код. Мы не будем рассказывать о том, какой подход к тестированию Rust кода является правильным. Есть много подходов, каждый из которых имеет свое представление о правильном написании тестов. Но все эти подходы используют одни и те же основные инструменты, и мы покажем вам синтаксис их использования.</p>
+
+<h1 id="Тесты-с-аттрибутом-test" class='section-header'><a
+                           href="#Тесты-с-аттрибутом-test">Тесты с аттрибутом <code>test</code></a></h1>
+<p>В самом простом случае, тест в Rust - это функция, аннотированная с помощью атрибута <code>test</code>. Давайте создадим новый проект с помощью Cargo, который будет называться <code>adder</code>:</p>
+
+<pre><code class="language-bash">$ cargo new adder
+$ cd adder
+</code></pre>
+
+<p>При создании нового проекта, Cargo автоматически сгенерирует простой тест. Ниже представлено содержимое <code>src/lib.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+}
+</pre>
+
+<p>Обратите внимание на <code>#[test]</code>. Этот аттрибут указывает, что это тестовая функция. Сейчас она не имеет тела функции. Но такого вида функции достаточно, чтобы успешно выполнить тест. Запуск тестов осуществляется командой <code>cargo test</code>.</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Cargo компилирует и запускает ваши тесты. В результате мы получаем выходные данные, поделенные на два раздела: один содержит информацию о тесте, который мы написали, а другой - информацию о тестах из документации. Но об этом позже. А сейчас посмотрим на эту строку:</p>
+
+<pre><code class="language-text">test it_works ... ok
+</code></pre>
+
+<p>Обратите внимание на <code>it_works</code>. Это название нашей функции:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+</pre>
+
+<p>Мы также получаем итоговую строку:</p>
+
+<pre><code class="language-text">test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Так почему же наш ничего не делающий тест был выполнен успешно? Любой тест, который не вызывает <code>panic!</code>, выполняется успешно, и любой тест, который вызывает <code>panic!</code>, выполняется неудачно. Давайте сделаем тест, который выполнится неудачно:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='boolval'>false</span>);
+}
+</pre>
+
+<p><code>assert!</code> является макросом, который принимает один аргумент: если аргумент имеет значение <code>true</code>, то ничего не происходит; если аргумент является <code>false</code>, то вызывается <code>panic!</code>. Давайте запустим наши тесты снова:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... FAILED
+
+failures:
+
+---- it_works stdout ----
+        thread &#39;it_works&#39; panicked at &#39;assertion failed: false&#39;, /home/steve/tmp/adder/src/lib.rs:3
+
+
+
+failures:
+    it_works
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
+
+thread &#39;&lt;main&gt;&#39; panicked at &#39;Some tests failed&#39;, /home/steve/src/rust/src/libtest/lib.rs:247
+</code></pre>
+
+<p>Rust сообщает, что наш тест выполнен неудачно:</p>
+
+<pre><code class="language-text">test it_works ... FAILED
+</code></pre>
+
+<p>Это же отражается в итоговой строке:</p>
+
+<pre><code class="language-text">test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Мы также получаем ненулевой код состояния:</p>
+
+<pre><code class="language-bash">$ echo $?
+101
+</code></pre>
+
+<p>Это полезно, если вы хотите интегрировать <code>cargo test</code> в сторонний инструмент.</p>
+
+<p>Мы можем обратить ожидаемый результат теста с помощью атрибута: <code>should_fail</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>should_fail</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='boolval'>false</span>);
+}
+</pre>
+
+<p>Теперь этот тест будет выполнен успешно, если вызывается <code>panic!</code>, и неудачно, если <code>panic!</code> не вызывается. Давайте попробуем:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Rust предоставляет и другой макрос, <code>assert_eq!</code>, который проверяет эквивалентность двух артументов:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>should_fail</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
+}
+</pre>
+
+<p>А теперь этот тест будет выполнен успешно или неудачно? Из-за атрибута <code>should_fail</code> он завершится успешно:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p><code>should_fail</code> тесты могут быть хрупкими, потому как трудно гарантировать, что тест не выдаст панику по неожиданной причине. Чтобы помочь в этом аспекте, к атрибуту <code>should_fail</code> может быть добавлен необязательный параметр <code>expected</code>. Тогда тест также будет проверять, что сообщение об ошибке содержит ожидаемый текст. Ниже представлен более безопасный вариант приведенного выше примера:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>should_fail</span>(<span class='ident'>expected</span> <span class='op'>=</span> <span class='string'>&quot;assertion failed&quot;</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
+}
+</pre>
+
+<p>Вот и все, что касается основ! Давайте напишем один &quot;реальный&quot; тест:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+}
+</pre>
+
+<p>Это распространенное использование макроса <code>assert_eq!</code>: вызывать некоторую функцию с известными аргументами и сравнить ее вызов с ожидаемыми результатом.</p>
+
+<h1 id="Тесты-в-модуле-test" class='section-header'><a
+                           href="#Тесты-в-модуле-test">Тесты в модуле <code>test</code></a></h1>
+<p>Есть один нюанс, из-за которого наш пример нельзя назвать идиоматическим: отсутствует модуль тестирования. Идиоматический вариант написания нашего примера будет выглядить примерно так:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>add_two</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Здесь есть несколько изменений. Первое - это введение <code>mod tests</code> с атрибутом <code>cfg</code>. Модуль позволяет сгруппировать все наши тесты вместе, а также определить вспомогательные функции, если это необходимо, которые будут отделены от остальной части крейта. Атрибут <code>cfg</code> указывает на то, что тест будет скомпилирован, только когда мы попытаемся запустить тесты. Это может сэкономить время компиляции, а также гарантирует, что наши тесты полностью исключены из обычного билда.</p>
+
+<p>Второе изменение заключается в объявлении <code>use</code>. Так как мы находимся во внутреннем модуле, то мы должны объявить использование тестируемой функции в его области видимости. Это может раздражать, если у вас большой модуль, и поэтому обычно используют фичу <code>glob</code>. Давайте, в соответствии с этим, изменим наш <code>src/lib.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Обратите внимание на различие в строке с <code>use</code>. Теперь запустим наши тесты:</p>
+
+<pre><code class="language-bash">$ cargo test
+    Updating registry `https://github.com/rust-lang/crates.io-index`
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test test::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Работает!</p>
+
+<p>Данный подход представляет собой использование модуля <code>test</code> содержащего тесты в &quot;юнит стиле&quot;. Любой код, задачей которого является только лишь тестирование небольшего кусочка функциональности, имеет смысл перенести в этот модуль. Но что если мы хотим использовать &quot;интеграционный стиль&quot; для создания тестов? Для этого мы можем использовать директорию <code>tests</code></p>
+
+<h1 id="Тесты-в-директории-tests" class='section-header'><a
+                           href="#Тесты-в-директории-tests">Тесты в директории <code>tests</code></a></h1>
+<p>Чтобы написать интеграционный тест, давайте создадим директорию <code>tests</code>, и положим в нее файл <code>tests/lib.rs</code> со следующим содержимое:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>adder</span>;
+
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>adder</span>::<span class='ident'>add_two</span>(<span class='number'>2</span>));
+}   
+</pre>
+
+<p>Выглядит примерно так же, как и наши предыдущие тесты, но есть некоторые отличия. Теперь сверху у нас расположено <code>extern crate adder</code>. Это потому, что тесты в директории <code>tests</code> - это отдельный крейт, и, следовательно, мы должны импортировать нашу библиотеку. Это также объясняет, почему директория <code>tests</code> наиболее подходящее место для написания интеграционных тестов: они используют библиотеку, как это делал бы любой другой потребитель.</p>
+
+<p>Давайте запустим:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test test::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+     Running target/lib-c18e7d3494509e74
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Теперь у нас появилось три раздела: запускается предыдущий тест, а также запускается наш новый тест.</p>
+
+<p>Это все, что касается директории <code>tests</code>. Модуль <code>test</code> здесь не нужен, так как все здесь ориентировано на тесты.</p>
+
+<p>Давайте, наконец, перейдем к третьей части: тесты из документации.</p>
+
+<h1 id="Тесты-в-документации" class='section-header'><a
+                           href="#Тесты-в-документации">Тесты в документации</a></h1>
+<p>Нет ничего лучше, чем документация с примерами. Нет ничего хуже, чем примеры, которые на самом деле не работают, потому что код изменился с тех пор, как документация была написана. Для этого, Rust поддерживает автоматический запуск примеров в документации. Вот дополненный <code>src/lib.rs</code> с примерами:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='doccomment'>//! The `adder` crate provides functions that add numbers to other numbers.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Examples</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! assert_eq!(4, adder::add_two(2));</span>
+<span class='doccomment'>//! ```</span>
+
+<span class='doccomment'>/// This function adds two to its argument.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use adder::add_two;</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// assert_eq!(4, add_two(2));</span>
+<span class='doccomment'>/// ```</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Обратите внимание на документацию уровня модуля, начинающуюся с <code>//!</code> и на документацию уровня функции, начинающуюся с <code>///</code>. Документация Rust поддерживает Markdown в комментариях, поэтому блоки кода помечают тройным `. Обычно включают раздел <code># Examples</code>, содержащий примеры, такие как этот.</p>
+
+<p>Давайте запустим тесты снова:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/steve/tmp/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test test::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+     Running target/lib-c18e7d3494509e74
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 2 tests
+test add_two_0 ... ok
+test _0 ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Теперь у нас есть все три вида запущенных тестов! Обратите внимание на имена тестов из документации: <code>_0</code> создается для модульных тестов, и <code>add_two_0</code> для функцииональных тестов. Цифры на конце будут автоматически инкрементироваться, например <code>add_two_1</code>, если вы добавите еще примеров.</p>
+
+<h1 id="Тесты-производительности" class='section-header'><a
+                           href="#Тесты-производительности">Тесты производительности</a></h1>
+<p>Rust также поддерживает тесты производительности, которые помогают измерить производительность вашего кода. Давайте изменим наш <code>src/lib.rs</code>, чтобы он выглядел следующим образом (комментарии опущены):</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>test</span>::<span class='ident'>Bencher</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+
+    <span class='attribute'>#[<span class='ident'>bench</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>bench_add_two</span>(<span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bencher</span>) {
+        <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Мы импортировали крейт <code>test</code>, который содержит поддержку измерения производительности. У нас есть новая функция, аннотированная с помощью атрибута <code>bench</code>. В отличие от обычных тестов, которые не принимают никаких аргументов, тесты производительности в качестве аргумента принимают <code>&amp;mut Bencher</code>. <code>Bencher</code> предоставляет метод <code>iter</code>, который в качестве аргумента принимает замыкание. Это замыкание содержит код, производительность которого мы хотели бы протестировать.</p>
+
+<p>Запуск тестов производительности осуществляется командой <code>cargo bench</code>:</p>
+
+<pre><code class="language-bash">$ cargo bench
+   Compiling adder v0.0.1 (file:///home/steve/tmp/adder)
+     Running target/release/adder-91b3e234d4ed382a
+
+running 2 tests
+test tests::it_works ... ignored
+test tests::bench_add_two ... bench:         1 ns/iter (+/- 0)
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 1 measured
+</code></pre>
+
+<p>Все тесты, не относящиеся к тестам производительности, были проигнорированы. Вы, наверное, заметили, что выполнение <code>cargo bench</code> занимает немного больше времени чем <code>cargo test</code>. Это происходит потому, что Rust запускает наш тест несколько раз, а затем выдает среднее значение. Так как мы выполняем слишком мало полезной работы в этом примере, у нас получается <code>1 ns/iter (+/- 0)</code>, но была бы выведена дисперсия, если бы был один.</p>
+
+<p>Советы по написанию тестов производительности:</p>
+
+<ul>
+<li>Внутри <code>iter</code> цикла пишите только тот код, производительность которой вы хотите измерить; инициализацию выполняйте за пределами <code>iter</code> цикла</li>
+<li>Внутри <code>iter</code> цикла пишите код, который будет идемпотентным (будет делать &quot;то же самое&quot; на каждой итерации); не накапливайте и не изменяйте состояние</li>
+<li>Вне <code>iter</code> цикла пишите код который также будет идемпотентным; скорее всего, он будет запущен много раз во время теста</li>
+<li>Внутри <code>iter</code> цикла пишите код, который будет коротким и быстрым, <strong>так чтобы тестов работает быстро и калибратор можно настроить по длине прогона на четком разрешении</strong></li>
+<li>Внутри <code>iter</code> цикла пишите код, делающий что-то простое, чтобы помочь в выявлении улучшения (или уменьшения) производительности</li>
+</ul>
+
+<h2 id="Особенности-оптимизации" class='section-header'><a
+                           href="#Особенности-оптимизации">Особенности оптимизации</a></h2>
+<p>А вот другой сложный момент, относящийся к написанию тестов производительности: тесты, скомпилированные с оптимизацией, могут быть значительно изменены оптимизатором, после чего тест будет мерить производительность не так, как мы этого ожидаем. Например, компилятор может определить, что некоторые выражения не оказывают каких-либо внешних эффектов и просто удалит их полностью.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
+<span class='kw'>use</span> <span class='ident'>test</span>::<span class='ident'>Bencher</span>;
+
+<span class='attribute'>#[<span class='ident'>bench</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>bench_xor_1000_ints</span>(<span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bencher</span>) {
+    <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
+        (<span class='number'>0</span>..<span class='number'>1000</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>old</span>, <span class='ident'>new</span><span class='op'>|</span> <span class='ident'>old</span> <span class='op'>^</span> <span class='ident'>new</span>);
+    });
+}
+</pre>
+
+<p>выведет следующие результаты</p>
+
+<pre><code class="language-text">running 1 test
+test bench_xor_1000_ints ... bench:         0 ns/iter (+/- 0)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
+</code></pre>
+
+<p>Движок для запуска тестов производительности оставляет две возможности, позволяющие этого избежать. Либо использовать замыкание, передаваемое в метод <code>iter</code>, которое возвращает какое-либо значение; тогда это заставит оптимизатор думать, что возвращаемое значение будет использовано, из-за чего удалить вычисления полностью будет не возможно. Для примера выше этого можно достигнуть, изменив вызова <code>b.iter</code></p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
+    <span class='comment'>// note lack of `;` (could also use an explicit `return`).</span>
+    (<span class='number'>0</span>..<span class='number'>1000</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>old</span>, <span class='ident'>new</span><span class='op'>|</span> <span class='ident'>old</span> <span class='op'>^</span> <span class='ident'>new</span>)
+});
+</pre>
+
+<p>Либо использовать вызов функции <code>test::black_box</code>, которая представляет собой &quot;черный ящик&quot;, непрозрачный для оптимизатора, тем самым заставляя его рассматривать любой аргумент как используемый.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
+
+<span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
+    <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>test</span>::<span class='ident'>black_box</span>(<span class='number'>1000</span>);
+
+    (<span class='number'>0</span>..<span class='ident'>n</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>a</span>, <span class='ident'>b</span><span class='op'>|</span> <span class='ident'>a</span> <span class='op'>^</span> <span class='ident'>b</span>)
+})
+</pre>
+
+<p>В этом примере не происходит ни чтения, ни измения значения, что очень дешево для малых значений. Большие значения могут быть переданы косвенно для уменьшения издержек (например, <code>black_box(&amp;huge_struct)</code>).</p>
+
+<p>Выполнение одного из вышеперечисленных изменений дает следующие результаты измерения производительности</p>
+
+<pre><code class="language-text">running 1 test
+test bench_xor_1000_ints ... bench:       131 ns/iter (+/- 3)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
+</code></pre>
+
+<p>Тем не менее, оптимизатор все еще может вносить нежелательные изменения в определенных случаях, даже при использовании любого из вышеописанных приемов.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

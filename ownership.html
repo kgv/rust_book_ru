@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Владение</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Владение</h1>
+    <p>Это руководство описывает систему владения ресурсами Rust. Она представляет собой наиболее уникальную и привлекательную особенность Rust, о которой разработчики на Rust должны иметь полное представление. Владение - это то, как Rust достигает своей главной цели - безопасности памяти. Система владения несет в себе следующие основные концепции: <em>владение</em> (<em>ownership</em>), <em>заимствование</em> (<em>borrowing</em>), и <em>срок жизни</em> (<em>lifetimes</em>). Мы поговорим о каждой из них в дальнейшем.</p>
+
+<h1 id="Мета" class='section-header'><a
+                           href="#Мета">Мета</a></h1>
+<p>Прежде чем перейти к деталям, отметитм два важных нюанса о системе владения.</p>
+
+<p>Rust сфокусирован на безопасности и скорости. Это достигается за счет абстракций с нулевой стоимостью (<em>zero-cost abstractions</em>), что означает, что в Rust стоимость абстракций должна быть настолько минимальной, насколько это возможно, без ущерба для работоспособности. Система владения ресурсами - это яркий пример абстракции с нулевой стоимостью. Весь анализ, о котором мы будем говорить в этом руководстве, происходит <em>во время компиляции</em>. Вы не платите хоть сколько-нибудь времени рантайма за какую-либо из фич.</p>
+
+<p>Тем не менее, эта система все же имеет определенную стоимость: кривая обучения. Многие новые пользователи Rust испытыват то, что мы называем &quot;борьба с проверкой заимствования&quot;, когда компилятор Rust отказывается компилировать программу, которая по мнению автора является абсолютно правильной. Это часто происходит потому, что мысленное представление программиста о том, как должно работать владение, не совпадает с реальными правилами, которыми оперирует Rust. Вы, наверное, также будете испытывать подобные трудности поначалу. Однако существует и хорошая новость: более опытные разработчики на Rust сообщают, что чем больше они работают с правилами системы владения, тем меньше они борются с проверкой заимствования.</p>
+
+<p>Имея это в виду, давайте перейдем к изучению систему владения.</p>
+
+<h1 id="Владение" class='section-header'><a
+                           href="#Владение">Владение</a></h1>
+<p>По своей сути, владение применяется к <em>ресурсам</em>. В подавляющем большинстве, для данного руководства, мы будем говорить о конкретном ресурсе: памяти. Вообще, эта концепция обобщает понятие ресурса, то есть в качестве ресурса может выступать и дескриптор файла. Но, чтобы оперировать более конкретными понятиями, мы сосредоточимся на памяти.</p>
+
+<p>Когда ваша программа выделяет некоторый объем памяти, то она также должна каким-то образом освобождать эту память. Представьте себе функцию <code>foo</code>, которая выделяет четыре байта памяти, а затем никогда не освобождает эту память. Мы называем это проблемой <em>утечки</em> (<em>leaking</em>) памяти, потому что каждый раз, когда мы называем <code>foo</code>, мы снова и снова выделяем четыре байта. В конце концов, при достаточном количестве вызовов <code>foo</code>, мы получим системную ошибку, сообщающую о нехватки памяти (out of memory). Это плохо. Так что мы должны каким-то образом освобождать этих четыре байта при вызове <code>foo</code>. Важно также, чтобы память не была освобождена слишком много раз. Не вдаваясь в детали, скажем, что попытка освободить память более одного раза может привести к проблемам. Другими словами, выделяя некоторый объем памяти, мы должны убедиться в дальнейшем, что мы освободили эту память и освободили ее лишь один раз. Много - плохо, мало - тоже плохо. Счетчики должны совпадать.</p>
+
+<p>Вот еще одна важная деталь в отношении выделения памяти. Всякий раз, когда мы выделяем некоторое количество памяти, мы получаем ручку (handle) для взаимодействия с этой памятью. Эта ручка (часто называемая <em>указателем</em> (<em>pointer</em>), если мы ссылаемся на память) необходима для взаимодействия с выделенной памяти. До тех пор пока у нас есть ручка, мы можем делать с памятью все что угодно. После того как мы закончили работать с ручкой, мы также заканчиваем работать с и памятью, так как мы не сможем сделать что-либо полезное без ручки.</p>
+
+<p>Исторически сложилось так, что системные языки программирования требуют от разработчика самостоятельно отслеживать и обрабатывать выделение и освобождение ресурсов. Например, если мы хотим выделить немного памяти из кучи в языке, таком как C, мы делаем следующее:</p>
+
+<pre><code class="language-c">{
+    int *x = malloc(sizeof(int));
+
+    // we can now do stuff with our handle x
+    *x = 5;
+
+    free(x);
+}
+</code></pre>
+
+<p>Вызов <code>malloc</code> выделяет память. Тут же производится рассчет необходимого количества памяти. Вызов <code>free</code> освобождает выделенную память.</p>
+
+<p>Rust объединяет эти два аспекта выделения памяти (и других ресурсов) в концепции под названием <em>владение</em>. Всякий раз, когда мы запрашиваем некоторую память, то мы получаем ручку, которая называется <em>ручкой, владеющей ресурсом</em>. Всякий раз, когда эта ручка выходит из области видимости, Rust знает, что мы больше ничего не можем делать с этой памятью, и освобождает память за нас. Вот эквивалентный пример в Rust:</p>
+<pre id='rust-example-rendered' class='rust '>
+{
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+}
+</pre>
+
+<p>Функция <code>Box::new</code> создает <code>Box&lt;T&gt;</code> (в данном конкретньм случае - <code>Box&lt;i32&gt;</code>) путем выделения небольшого сегмента памяти в куче, достаточного для хранения <code>i32</code>. Но где же в коде освобождается бокс? Мы говорили, что для каждого выделения памяти должно быть соответствующее освобождение памяти. Rust освобождает память за нас. Он знает, что наша ручка, <code>x</code>, является владельцем ссылки на бокс. Также Rust знает, что область определения <code>x</code> завершается в конце блока, и поэтому он вставляет вызов, освобождающий память, после завершения области определения. Так как компилятор делает это за нас, невозможно забыть освободить память. У нас всегда есть ровно одно освобождение памяти в паре с каждым выделением памяти.</p>
+
+<p>Это довольно просто, но что будет, если мы передадим наш бокс в функцию? Давайте посмотрим на код:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+
+    <span class='ident'>add_one</span>(<span class='ident'>x</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='kw-2'>mut</span> <span class='ident'>num</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Этот код работает, но он не идеален. Давайте добавим еще одну строку кода, которая выводит значение <code>x</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+
+    <span class='ident'>add_one</span>(<span class='ident'>x</span>);
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='kw-2'>mut</span> <span class='ident'>num</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Этот код не скомпилируется и выведет ошибку:</p>
+
+<pre><code class="language-text">error: use of moved value: `x`
+   println!(&quot;{}&quot;, x);
+                  ^
+</code></pre>
+
+<p>Помните, что у нас должно быть лишь одно освобождение памяти для соответствующего выделения памяти. Если мы попытаемся передать наш бокс в <code>add_one</code>, то мы получим две ручки для управления памятью: <code>x</code> в <code>main</code>, и <code>num</code> в <code>add_one</code>. Так как Rust освобождает память каждая раз, когда ручка выходит за пределы области определения, то у нас было бы два освобождения и одно выделение памяти, что неправильно. Поэтому, когда мы вызываем <code>add_one</code>, Rust назначает ручку <code>num</code> владельцем. Поэтому теперь, когда мы передали право владения <code>num</code>, <code>x</code> становится недействительным. Значение <code>x</code> &quot;перемещается&quot; из <code>x</code> в <code>num</code>. Отсюда ошибка: использование перемещенного значения <code>x</code>.</p>
+
+<p>Чтобы исправить это, мы можем переписать функцию <code>add_one</code>, чтобы она возвращала право владения обратно, когда закончит работать с боксом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>);
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>y</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='kw-2'>mut</span> <span class='ident'>num</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+
+    <span class='ident'>num</span>
+}
+</pre>
+
+<p>Этот код будет скомпилирован и будет работать нормально. Теперь мы возвращаем <code>box</code>, и поэтому право собственности возвращается обратно к <code>y</code> в функцию <code>main</code>. Право собственности передается в функцию лишь на время, а затем возвращается обратно. Этот паттерн является очень распространенным, и поэтому Rust вводит понятие для описания ручки, которая временно ссылается на другую ручку, владеющую правом собственности. Оно называется <em>заимствованием</em>, и делается оно с использованием <em>ссылок</em>, которые обозначаются символом <code>&amp;</code>.</p>
+
+<h1 id="Заимствование" class='section-header'><a
+                           href="#Заимствование">Заимствование</a></h1>
+<p>Вот текущее состояние нашей функции <code>add_one</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='kw-2'>mut</span> <span class='ident'>num</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+
+    <span class='ident'>num</span>
+}
+</pre>
+
+<p>Эта функция принимает право владения, потому что она принимает <code>Box</code>, который владеет своим содержимым. Но затем мы возвращаем право владения обратно.</p>
+
+<p>В физическом мире, вы можете передать какое-либо ваше имущество кому-то на короткий период времени. Вы все еще будете владельцем переданного имущества, вы просто позволите кому-то использовать его некоторое время. Это называется <em>одолжить</em> что-то кому-то, или, если рассматривать это с другого ракурса, <em>занять</em> что-то у кого-то.</p>
+
+<p>Система владения Rust также позволяет владельцу одолжить ручку на определенный период времени. Это также называется <em>заимствование</em>. Вот версия <code>add_one</code>, которая заимствует свой аргумент, а не забирает право владения:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>num</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>i32</span>) {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Эта функция заимствует <code>i32</code> у вызвавшей ее функции, а затем увеличивает его. Когда функция заканчивается, и <code>num</code> выходит из области определения, то заем также заканчивается.</p>
+
+<p>Мы должны немного изменить нашу функцию <code>main</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+    <span class='ident'>add_one</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>);
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>num</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>i32</span>) {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Нам больше не нужно присваивать результат <code>add_one()</code> какой-либо переменной, потому что она больше ничего не возвращает. Это потому, что мы не возвращаем право владения обратно, так как мы использовали заимствование, а не забирали себе право владения.</p>
+
+<h1 id="Срок-жизни" class='section-header'><a
+                           href="#Срок-жизни">Срок жизни</a></h1>
+<p>Одалживание ссылки на ресурс, которым кто-то владеет может быть довольно сложным. Например, представьте себе следующий набор операций:</p>
+
+<ol>
+<li>Я получаю ручку на какой-то ресурс.</li>
+<li>Я одалживаю вам ссылку на это ресурс.</li>
+<li>Я решаю, что ресурс мне больше не требуется, и освобождаю его, в то время как у вас все еще есть на него ссылка.</li>
+<li>Вы решаете использовать этот ресурс.</li>
+</ol>
+
+<p>Ой-ой! Ваша ссылка указывает на недопустимый ресурс. Это называется <em>висячий указатель</em> или &quot;использование после освобождения&quot;, когда ресурсом является память.</p>
+
+<p>Чтобы исправить это, мы должны убедиться, что четвертый шаг никогда не произойдет после третьего шага. Система владения в Rust делает это через концепцию под названием <em>срок жизни</em>, которая описывает область определения, на протяжении которой ссылка будет действительна.</p>
+
+<p>Помните функцию, которая заимствовала <code>i32</code>? Давайте посмотрим на нее еще раз.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>num</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>i32</span>) {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Rust имеет фичу под названием <em>элизия срока жизни</em>, которая позволяет не писать аннотации срока жизни в определенных случаях. Это одна из них. Другие мы рассмотрим позже. Без элизии срока жизни, <code>add_one</code> выглядит следующим образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>num</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>i32</span>) {
+    <span class='op'>*</span><span class='ident'>num</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p><code>&#39;a</code> называется <em>сроком жизни</em>. В большинстве случаев использование коротких имен для обозначения срока жизни, как например <code>&#39;a</code>, <code>&#39;b</code> и <code>&#39;c</code>, является наиболее правильным, но довольно часто бывает полезно использовать и более говорящие имена. Давайте углубимся в синтаксис немного более подробно:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(...)
+</pre>
+
+<p>Эта часть <em>объявляет</em> срок жизни. Это говорит о том, что <code>add_one</code> имеет один срок жизни, <code>&#39;a</code>. Если у нас было бы два срока жизни, то это выглядело бы так:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_two</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span>(...)
+</pre>
+
+<p>Затем в списке параметров, мы используем заданное время жизни:</p>
+<pre id='rust-example-rendered' class='rust '>
+...(<span class='ident'>num</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>i32</span>)
+</pre>
+
+<p>Если вы сравните <code>&amp;mut i32</code> с <code>&amp;&#39;a mut i32</code>, то увидите, что они отличаются только определением срока жизни <code>&#39;a</code>, написанным между <code>&amp;</code> и <code>mut i32</code>. <code>&amp;mut i32</code> читается как &quot;изменяемая ссылка на i32&quot;, а <code>&amp;&#39;a mut i32</code> - как &quot;изменяемая ссылка на i32 со сроком жизни &#39;a&quot;.</p>
+
+<p>Почему срок жизни имеет значение? Например, вот некоторый код:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>; <span class='comment'>// this is the same as `let _y = 5; let y = &amp;_y;`</span>
+    <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='ident'>y</span> };
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>f</span>.<span class='ident'>x</span>);
+}
+</pre>
+
+<p>Как вы можете заметить, <code>struct</code> также могут иметь сроки жизни. Так же как и функции</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+</pre>
+
+<p>определяют срок жизни и </p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span>,
+</pre>
+
+<p>используют его. Почему же мы должны определять срок жизни здесь? Мы должны убедиться, что ссылка на <code>Foo</code> не может жить дольше, чем ссылка на <code>i32</code>, содержащаяся в нем.</p>
+
+<h2 id="Область-определения" class='section-header'><a
+                           href="#Область-определения">Область определения</a></h2>
+<p>Один из способов понять, что же такое срок жизни, это визуализировать область, в которой ссылка является действительной. Например:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>;     <span class='comment'>// -+ y goes into scope</span>
+                    <span class='comment'>//  |</span>
+    <span class='comment'>// stuff        //  |</span>
+                    <span class='comment'>//  |</span>
+}                   <span class='comment'>// -+ y goes out of scope</span>
+</pre>
+
+<p>Добавим нашу структуру <code>Foo</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>;           <span class='comment'>// -+ y goes into scope</span>
+    <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='ident'>y</span> }; <span class='comment'>// -+ f goes into scope</span>
+    <span class='comment'>// stuff              //  |</span>
+                          <span class='comment'>//  |</span>
+}                         <span class='comment'>// -+ f and y go out of scope</span>
+</pre>
+
+<p>Наша <code>f</code> живет в области определения <code>y</code>, поэтому все работает. Что же будет, если это не так? Этот код не будет работать:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span>;                    <span class='comment'>// -+ x goes into scope</span>
+                              <span class='comment'>//  |</span>
+    {                         <span class='comment'>//  |</span>
+        <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>;           <span class='comment'>// ---+ y goes into scope</span>
+        <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='ident'>y</span> }; <span class='comment'>// ---+ f goes into scope</span>
+        <span class='ident'>x</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>f</span>.<span class='ident'>x</span>;             <span class='comment'>//  | | error here</span>
+    }                         <span class='comment'>// ---+ f and y go out of scope</span>
+                              <span class='comment'>//  |</span>
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);        <span class='comment'>//  |</span>
+}                             <span class='comment'>// -+ x goes out of scope</span>
+</pre>
+
+<p>Вот так! Как вы можете видеть здесь, области определения <code>f</code> и <code>y</code> меньше, чем область определения <code>x</code>. Но когда мы выполняем <code>x = &amp;f.x</code>, мы присваиваем <code>x</code> ссылку на что-то, что вот-вот выйдет из области определения.</p>
+
+<p>Присвоение имени сроку жизни - это способ задать имя его области определения. Задание имени является первым шагом, чтобы иметь возможность оперировать этим именованным понятием.</p>
+
+<h2 id="&#39;static" class='section-header'><a
+                           href="#&#39;static">&#39;static</a></h2>
+<p>Срок жизни с именем <em>static</em> является специальным. Он обозначает, что что-то имеет срок жизни равный сроку жизни всей программы. Большинство Rust программистов впервые столкиваются с <code>&#39;static</code>, когда имеют дело со строками:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;Hello, world.&quot;</span>;
+</pre>
+
+<p>Строковые литералы имеют тип <code>&amp;&#39;static str</code>, потому что ссылка должна быть действительна на протяжении работы всей программы: они располагаются в сегменте данных конечного двоичного файла. Другой пример - глобальные переменные:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>static</span> <span class='ident'>FOO</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>i32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>FOO</span>;
+</pre>
+
+<p>В этом примере <code>i32</code> добавляется в сегмент данных двоичного файла, а <code>x</code> ссылается на него.</p>
+
+<h1 id="Распределенное-владение" class='section-header'><a
+                           href="#Распределенное-владение">Распределенное владение</a></h1>
+<p>Во всех примерах, которые мы рассматривали до сих пор, мы предполагали, что каждая ручка имеет лишь одного владельца. Но иногда, это не работает. Рассмотрим автомобиль. Автомобили имеют четыре колеса. Мы бы хотели, чтобы колесо обладало информацией, к какому автомобилю он было присоединено. Но это не будет работать:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Car</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}
+
+<span class='kw'>struct</span> <span class='ident'>Wheel</span> {
+    <span class='ident'>size</span>: <span class='ident'>i32</span>,
+    <span class='ident'>owner</span>: <span class='ident'>Car</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>car</span> <span class='op'>=</span> <span class='ident'>Car</span> { <span class='ident'>name</span>: <span class='string'>&quot;DeLorean&quot;</span>.<span class='ident'>to_string</span>() };
+
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>4</span> {
+        <span class='ident'>Wheel</span> { <span class='ident'>size</span>: <span class='number'>360</span>, <span class='ident'>owner</span>: <span class='ident'>car</span> };
+    }
+}
+</pre>
+
+<p>Попробуем создать четыре колеса <code>Wheel</code>, каждое из которых содержит автомобиль <code>Car</code>, к которому оно присоединено. Но компилятор сообщит, что на второй итерации цикла есть проблема:</p>
+
+<pre><code class="language-text">error: use of moved value: `car`
+    Wheel { size: 360, owner: car };
+                              ^~~
+note: `car` moved here because it has type `Car`, which is non-copyable
+    Wheel { size: 360, owner: car };
+                              ^~~
+</code></pre>
+
+<p>Нам нужно, чтобы на наш автомобиль <code>Car</code> ссылалось каждое из колес <code>Wheel</code>. Мы не можем реализовать это с помощью <code>Box&lt;T&gt;</code>, потому что он может иметь лишь одного владельца. Вместо этого, мы можем реализовать это с помощью <code>Rc&lt;T&gt;</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>rc</span>::<span class='ident'>Rc</span>;
+
+<span class='kw'>struct</span> <span class='ident'>Car</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}
+
+<span class='kw'>struct</span> <span class='ident'>Wheel</span> {
+    <span class='ident'>size</span>: <span class='ident'>i32</span>,
+    <span class='ident'>owner</span>: <span class='ident'>Rc</span><span class='op'>&lt;</span><span class='ident'>Car</span><span class='op'>&gt;</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>car</span> <span class='op'>=</span> <span class='ident'>Car</span> { <span class='ident'>name</span>: <span class='string'>&quot;DeLorean&quot;</span>.<span class='ident'>to_string</span>() };
+
+    <span class='kw'>let</span> <span class='ident'>car_owner</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='ident'>car</span>);
+
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>4</span> {
+        <span class='ident'>Wheel</span> { <span class='ident'>size</span>: <span class='number'>360</span>, <span class='ident'>owner</span>: <span class='ident'>car_owner</span>.<span class='ident'>clone</span>() };
+    }
+}
+</pre>
+
+<p>Мы обернули наш автомобиль <code>Car</code> в <code>Rc&lt;T&gt;</code>, получив при этом <code>Rc&lt;Car&gt;</code>, а затем использовали метод <code>clone()</code>, чтобы создавать новые ссылки. Мы также изменили наше колесо <code>Wheel</code>, чтобы оно содержало <code>Rc&lt;Car&gt;</code>, а не просто <code>Car</code>.</p>
+
+<p>Это простейший вид множественного владения из возможных. Например, есть также <code>Arc&lt;T&gt;</code>, который использует более дорогие атомарные инструкции и является потоко-безопасным аналогом <code>Rc&lt;T&gt;</code>.</p>
+
+<h2 id="Элизия-срока-жизни" class='section-header'><a
+                           href="#Элизия-срока-жизни">Элизия срока жизни</a></h2>
+<p>Ранее мы уже упоминали об элизии срока жизни, особенности Rust, которая позволяет не задавать явно аннотации срока жизни в определенных случаях. Все ссылки имеют свой срок жизни, и поэтому, если вы не зададите срок жизни явно (как например <code>&amp;T</code> вместо <code>&amp;&#39;a T</code>), Rust будет делать три вещи, чтобы определить, каким этот срок жизни должен быть.</p>
+
+<p>Когда речь идет о сокрытом сроке жизни, мы используем термин <em>входной срок жизни</em> и <em>выходной срок жизни</em>. <em>Входной срок жизни</em> связан с передаваемыми в функцию параметрами, а <em>выходной срок жизни</em> связан с возвращаемым функцией значением. Например, эта функция имеет входной срок жизни:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>bar</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>)
+</pre>
+
+<p>А эта имеет выходной срок жизни:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>
+</pre>
+
+<p>Эта же имеет как входной, так и выходной сроки жизни:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>bar</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>
+</pre>
+
+<p>Ниже представлены три правила:</p>
+
+<ul>
+<li><p>Каждый опущенный срок жизни в аргументах функции становится индивидуальным сроком жизни.</p></li>
+<li><p>Если есть ровно один входной срок жизни, опущенный или нет, этот срок жизни присваивается всем опущенным выходным срокам жизни.</p></li>
+<li><p>Если есть несколько входных сроков жизней, но один из них это <code>&amp;self</code> или <code>&amp;mut self</code>, то всем опущенным выходным срокам жизни назначается срок жизни <code>self</code>.</p></li>
+</ul>
+
+<p>В противном случае, опускание выходного срока жизни является ошибкой.</p>
+
+<h3 id="Примеры" class='section-header'><a
+                           href="#Примеры">Примеры</a></h3>
+<p>Вот некоторые примеры функций, представленные в 2 видах: с опущенным и с раскрытым (явно указанным) сроком жизни:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>); <span class='comment'>// elided</span>
+<span class='kw'>fn</span> <span class='ident'>print</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>); <span class='comment'>// expanded</span>
+
+<span class='kw'>fn</span> <span class='ident'>debug</span>(<span class='ident'>lvl</span>: <span class='ident'>u32</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>); <span class='comment'>// elided</span>
+<span class='kw'>fn</span> <span class='ident'>debug</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>lvl</span>: <span class='ident'>u32</span>, <span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>); <span class='comment'>// expanded</span>
+
+<span class='comment'>// In the preceding example, `lvl` doesn&#39;t need a lifetime because it&#39;s not a</span>
+<span class='comment'>// reference (`&amp;`). Only things relating to references (such as a `struct`</span>
+<span class='comment'>// which contains a reference) need lifetimes.</span>
+
+<span class='kw'>fn</span> <span class='ident'>substr</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>until</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>; <span class='comment'>// elided</span>
+<span class='kw'>fn</span> <span class='ident'>substr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>, <span class='ident'>until</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>; <span class='comment'>// expanded</span>
+
+<span class='kw'>fn</span> <span class='ident'>get_str</span>() <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>; <span class='comment'>// ILLEGAL, no inputs</span>
+
+<span class='kw'>fn</span> <span class='ident'>frob</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>t</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>; <span class='comment'>// ILLEGAL, two inputs</span>
+<span class='kw'>fn</span> <span class='ident'>frob</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>, <span class='ident'>t</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span>; <span class='comment'>// Expanded: Output lifetime is unclear</span>
+
+<span class='kw'>fn</span> <span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span>; <span class='comment'>// elided</span>
+<span class='kw'>fn</span> <span class='ident'>get_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>T</span>; <span class='comment'>// expanded</span>
+
+<span class='kw'>fn</span> <span class='ident'>args</span><span class='op'>&lt;</span><span class='ident'>T</span>:<span class='ident'>ToCStr</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>args</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>T</span>]) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Command</span> <span class='comment'>// elided</span>
+<span class='kw'>fn</span> <span class='ident'>args</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span>, <span class='ident'>T</span>:<span class='ident'>ToCStr</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>args</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> [<span class='ident'>T</span>]) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Command</span> <span class='comment'>// expanded</span>
+
+<span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>BufWriter</span>; <span class='comment'>// elided</span>
+<span class='kw'>fn</span> <span class='ident'>new</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='comment'>// expanded</span>
+</pre>
+
+<h1 id="related-resources" class='section-header'><a
+                           href="#related-resources">Related Resources</a></h1>
+<p>Coming Soon.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

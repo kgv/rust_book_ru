@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Hello, world!</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Hello, world!</h1>
+    <p>Теперь, когда вы установили Rust, напишем первую вашу программу на Rust. Это традиция, в любом новом языке программирования, делать первую программу такой, которая выводит текст &quot;Hello, World!&quot; на экран. Хорошо начинать с такой простой программы, т.к. вы можете убедиться что ваш компилятор не только установлен, но и работает правильно. Вывод информации на экран будет замечательным способом проверить это.</p>
+
+<p>Первое с чего мы должны начать это создать файл для нашего кода. Мне нравится размещать каталог <code>projects</code> в домашнем каталоге, и хранить там все мои проекты. Для Rust не имеет значение где располагается ваш код.</p>
+
+<p>Это на самом деле приводит к еще одной проблеме о которой мы должны предупредить: это руководство предполагает, что у вас есть базовые навыки работы в командной строке. Rust не требует от вас великих познаний о командной строке, но до тех пор пока язык не будет в более завершенном виде, поддержка IDE затруднительна. У Rust нет специфичных требований к вашей среде разработки или к тому где вы храните свой код.</p>
+
+<p>С учетом вышесказанного, давайте сделаем каталог в нашем каталоге с проектами.</p>
+
+<pre><code class="language-bash">$ mkdir ~/projects
+$ cd ~/projects
+$ mkdir hello_world
+$ cd hello_world
+</code></pre>
+
+<p>Если вы используете Windows и не используете PowerShell, <code>~</code> может не работать. Обратитесь к документации вашей оболочки для уточнения деталей.</p>
+
+<p>Теперь создадим новый файл для текста программы. Я собираюсь использовать синтаксис <code>editor имя_файла</code> для обозначения редактируемого файла в этих примерах, но вы можете создать и сохранить файл сами как угодно. Назовем наш файл <code>main.rs</code>:</p>
+
+<pre><code class="language-bash">$ editor main.rs
+</code></pre>
+
+<p>Rust файлы всегда заканчиваются расширением <code>.rs</code>. Если вы используете больше одного слова в имени вашего файла используйте подчеркивание. <code>hello_world.rs</code> лучше чем <code>helloworld.rs</code>.</p>
+
+<p>Теперь когда файл открыт, добавьте в него следующий код:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello, world!&quot;</span>);
+}
+</pre>
+
+<p>Сохраните файл, а затем введите эти команды в ваше окно терминала:</p>
+
+<pre><code class="language-bash">$ rustc main.rs
+$ ./main # или main.exe в Windows
+Hello, world!
+</code></pre>
+
+<p>Вы также можете запустить эти примеры на сайте <a href="http://play.rust-lang.org/">play.rust-lang.org</a>.</p>
+
+<p>Работает! Разберем подробнее что же произошло.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+
+}
+</pre>
+
+<p>Эти строки определяют <em>функцию</em> в Rust&#39;е. Функция <code>main</code> особена: это начало каждой программы на Rust. Первая строка говорит &quot;Я объявляю функцию именуемую <code>main</code>, которая не получает параметров и ничего не возвращает&quot;. Если бы были параметры, они бы шли в скобках (<code>(</code> и <code>)</code>), и потому что мы ничего не возвращаем из этой функции, мы опустим эту запись полностью. Мы вернемся к этому позже.</p>
+
+<p>Вы должны были заметить, что функция обернута в фигурные скобки (<code>{</code> и <code>}</code>). Rust требует их вокруг всех тел функций. Так же хорошим стилем считается ставить открывающую фигурную скобку на той же строке, что и объявление функции, отделенную одним пробелом.</p>
+
+<p>Теперь эта строка:</p>
+<pre id='rust-example-rendered' class='rust '>
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello, world!&quot;</span>);
+</pre>
+
+<p>Эта строка делает всю работу в нашей маленькой программе. Тут есть несколько деталей, которые имеют существенное значение. Во-первых, отступ в четыре пробела, а не табуляция. Пожалуйста, настройте выбранный вами редактор так, чтобы вставлять четыре пробела при помощи клавиши табуляции. Мы предоставляем некоторые <a href="https://github.com/rust-lang/rust/tree/master/src/etc/CONFIGS.html">примеры настроек для различных редакторов</a>.</p>
+
+<p>А теперь разберемся с <code>println!()</code>. Это вызов макроса Rust, которым представлено метапрограммирование в Rust&#39;e. Если бы вместо этого была функция, это бы выглядело следующим образом: <code>println()</code>. Для достижения нашей цели, нас не должна волновать эта разница. Просто знайте, что иногда вы будете видеть <code>!</code>, и это означает, что вы вызываете макрос вместо нормальной функции. Rust реализует <code>println!</code> как макрос вместо функции по веским причинам, но это очень углубленная тема. Вы узнаете больше, когда мы позже расскажем о макросах. И последнее, что нужно отметить: макросы Rust&#39;a значительно отличаются от макросов на C, если вы их использовали. Не бойтесь использовать макросы. В конце концов мы вернемся к деталям, а сейчас просто доверьтесь нам.</p>
+
+<p>Дальше, <code>&quot;Hello, world!&quot;</code> это строка. Строки удивительно сложная тема в системном языке программирования и это статически расположенная в памяти строка. Мы расскажем больше о различных видах распределения памяти позже. Передадим эту строку в качестве аргумента в <code>println!</code>, который выводит строки на экран. Это достаточно просто!</p>
+
+<p>В завершение, строка заканчивается точкой с запятой(<code>;</code>). Rust <code>выражение-ориентированный язык</code>, что означает, что в нем большая часть вещей является выражением. <code>;</code> используется для указания, что это выражение заканчивается, а следующее начинается. Большинство строк кода на Rust заканчивается <code>;</code>. Мы рассмотрим это позже в отдельном разделе руководства.</p>
+
+<p>На самом деле, завершением будет <em>сборка</em> и <em>запуск</em> нашей программы. Соберем нашим компилятором <code>rustc</code>, передав ему в качестве аргумента название нашего файла с кодом:</p>
+
+<pre><code class="language-bash">$ rustc main.rs
+</code></pre>
+
+<p>Это похоже на <code>gcc</code> или <code>clang</code>, если вы программировали раньше на C или C++. Rust выдаст двоичный исполняемый файл. Вы можете убедиться в этом с помощью <code>ls</code>:</p>
+
+<pre><code class="language-bash">$ ls
+main  main.rs
+</code></pre>
+
+<p>Или в Windows:</p>
+
+<pre><code class="language-bash">$ dir
+main.exe  main.rs
+</code></pre>
+
+<p>Это два файла: наш исходный код, с расширением <code>.rs</code> и исполняемый файл (<code>main.exe</code> в Windows, <code>main</code> в остальных случаях)</p>
+
+<pre><code class="language-bash">$ ./main  # или main.exe в Windows
+</code></pre>
+
+<p>Это выведет наш <code>&quot;Hello, world!&quot;</code> текст в окно терминала.</p>
+
+<p>Если вы перешли из динамически-типизированных языков программирования вроде Ruby, Python или JavaScript, вы не можете использовать эти два шага отдельно. Rust <em>компилируемый перед исполнением</em> язык, это означает, что вы можете собрать программу, дать ее кому-то еще, и ему не нужно устанавливать Rust. Если вы передадите один из <code>.rb</code> или <code>.py</code> или <code>.js</code> файл, ему нужно будет установить Ruby/Python/JavaScript, но запустить только одну команду для каждого из них, чтобы скомпилировать и запустить вашу программу. Все это взаимоисключаемо в дизайне языков программирования, и Rust сделал свой выбор.</p>
+
+<p>Поздравляем! Вы официально написали программу на Rust. Это делает вас Rust-программистом! Добро пожаловать.</p>
+
+<p>Дальше мы познакомимся с новым инструментом <code>cargo</code>, который используется для написания настоящих програм в Rust. Использовать <code>rustc</code> удобно лишь для небольших программ, но по мере роста проекта потребуется инструмент, помогающий управлять настройками проекта, а также облегчит обмен кода с другими людьми и проектами.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

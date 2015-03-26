@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Functions</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Functions</h1>
+    <p>You&#39;ve already seen one function so far, the <code>main</code> function:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+}
+</pre>
+
+<p>This is the simplest possible function declaration. As we mentioned before,
+<code>fn</code> says &quot;this is a function,&quot; followed by the name, some parentheses because
+this function takes no arguments, and then some curly braces to indicate the
+body. Here&#39;s a function named <code>foo</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() {
+}
+</pre>
+
+<p>So, what about taking arguments? Here&#39;s a function that prints a number:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print_number</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is: {}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>Here&#39;s a complete program that uses <code>print_number</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>print_number</span>(<span class='number'>5</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>print_number</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is: {}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>As you can see, function arguments work very similar to <code>let</code> declarations:
+you add a type to the argument name, after a colon.</p>
+
+<p>Here&#39;s a complete program that adds two numbers together and prints them:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>print_sum</span>(<span class='number'>5</span>, <span class='number'>6</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>print_sum</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>, <span class='ident'>y</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;sum is: {}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
+}
+</pre>
+
+<p>You separate arguments with a comma, both when you call the function, as well
+as when you declare it.</p>
+
+<p>Unlike <code>let</code>, you <em>must</em> declare the types of function arguments. This does
+not work:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print_sum</span>(<span class='ident'>x</span>, <span class='ident'>y</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;sum is: {}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
+}
+</pre>
+
+<p>You get this error:</p>
+
+<pre><code class="language-text">hello.rs:5:18: 5:19 expected one of `!`, `:`, or `@`, found `)`
+hello.rs:5 fn print_number(x, y) {
+</code></pre>
+
+<p>This is a deliberate design decision. While full-program inference is possible,
+languages which have it, like Haskell, often suggest that documenting your
+types explicitly is a best-practice. We agree that forcing functions to declare
+types while allowing for inference inside of function bodies is a wonderful
+sweet spot between full inference and no inference.</p>
+
+<p>What about returning a value? Here&#39;s a function that adds one to an integer:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
+}
+</pre>
+
+<p>Rust functions return exactly one value, and you declare the type after an
+&quot;arrow,&quot; which is a dash (<code>-</code>) followed by a greater-than sign (<code>&gt;</code>).</p>
+
+<p>You&#39;ll note the lack of a semicolon here. If we added it in:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>We would get an error:</p>
+
+<pre><code class="language-text">error: not all control paths return a value
+fn add_one(x: i32) -&gt; i32 {
+     x + 1;
+}
+
+help: consider removing this semicolon:
+     x + 1;
+          ^
+</code></pre>
+
+<p>Remember our earlier discussions about semicolons and <code>()</code>? Our function claims
+to return an <code>i32</code>, but with a semicolon, it would return <code>()</code> instead. Rust
+realizes this probably isn&#39;t what we want, and suggests removing the semicolon.</p>
+
+<p>This is very much like our <code>if</code> statement before: the result of the block
+(<code>{}</code>) is the value of the expression. Other expression-oriented languages,
+such as Ruby, work like this, but it&#39;s a bit unusual in the systems programming
+world. When people first learn about this, they usually assume that it
+introduces bugs. But because Rust&#39;s type system is so strong, and because unit
+is its own unique type, we have never seen an issue where adding or removing a
+semicolon in a return position would cause a bug.</p>
+
+<p>But what about early returns? Rust does have a keyword for that, <code>return</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>&lt;</span> <span class='number'>5</span> { <span class='kw'>return</span> <span class='ident'>x</span>; }
+
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
+}
+</pre>
+
+<p>Using a <code>return</code> as the last line of a function works, but is considered poor
+style:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>&lt;</span> <span class='number'>5</span> { <span class='kw'>return</span> <span class='ident'>x</span>; }
+
+    <span class='kw'>return</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>The previous definition without <code>return</code> may look a bit strange if you haven&#39;t
+worked in an expression-based language before, but it becomes intuitive over
+time. If this were production code, we wouldn&#39;t write it in that way anyway,
+we&#39;d write this:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>&lt;</span> <span class='number'>5</span> {
+        <span class='ident'>x</span>
+    } <span class='kw'>else</span> {
+        <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
+    }
+}
+</pre>
+
+<p>Because <code>if</code> is an expression, and it&#39;s the only expression in this function,
+the value will be the result of the <code>if</code>.</p>
+
+<h2 id="diverging-functions" class='section-header'><a
+                           href="#diverging-functions">Diverging functions</a></h2>
+<p>Rust has some special syntax for &#39;diverging functions&#39;, which are functions that
+do not return:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>diverges</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> {
+    <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;This function never returns!&quot;</span>);
+}
+</pre>
+
+<p><code>panic!</code> is a macro, similar to <code>println!()</code> that we&#39;ve already seen. Unlike
+<code>println!()</code>, <code>panic!()</code> causes the current thread of execution to crash with
+the given message.</p>
+
+<p>Because this function will cause a crash, it will never return, and so it has
+the type &#39;<code>!</code>&#39;, which is read &quot;diverges.&quot; A diverging function can be used
+as any type:</p>
+
+<pre><code class="language-should_panic"># fn diverges() -&gt; ! {
+#    panic!(&quot;This function never returns!&quot;);
+# }
+
+let x: i32 = diverges();
+let x: String = diverges();
+</code></pre>
+
+<p>We don&#39;t have a good use for diverging functions yet, because they&#39;re used in
+conjunction with other Rust features. But when you see <code>-&gt; !</code> later, you&#39;ll
+know what it&#39;s called.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

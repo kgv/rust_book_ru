@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Arrays, Vectors, and Slices</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Arrays, Vectors, and Slices</h1>
+    <p>Like many programming languages, Rust has list types to represent a sequence of
+things. The most basic is the <em>array</em>, a fixed-size list of elements of the
+same type. By default, arrays are immutable.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// a: [i32; 3]</span>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>m</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// mut m: [i32; 3]</span>
+</pre>
+
+<p>There&#39;s a shorthand for initializing each element of an array to the same
+value. In this example, each element of <code>a</code> will be initialized to <code>0</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>20</span>]; <span class='comment'>// a: [i32; 20]</span>
+</pre>
+
+<p>Arrays have type <code>[T; N]</code>. We&#39;ll talk about this <code>T</code> notation later, when we
+cover generics.</p>
+
+<p>You can get the number of elements in an array <code>a</code> with <code>a.len()</code>, and use
+<code>a.iter()</code> to iterate over them with a for loop. This code will print each
+number in order:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;a has {} elements&quot;</span>, <span class='ident'>a</span>.<span class='ident'>len</span>());
+<span class='kw'>for</span> <span class='ident'>e</span> <span class='kw'>in</span> <span class='ident'>a</span>.<span class='ident'>iter</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>);
+}
+</pre>
+
+<p>You can access a particular element of an array with <em>subscript notation</em>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>names</span> <span class='op'>=</span> [<span class='string'>&quot;Graydon&quot;</span>, <span class='string'>&quot;Brian&quot;</span>, <span class='string'>&quot;Niko&quot;</span>]; <span class='comment'>// names: [&amp;str; 3]</span>
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The second name is: {}&quot;</span>, <span class='ident'>names</span>[<span class='number'>1</span>]);
+</pre>
+
+<p>Subscripts start at zero, like in most programming languages, so the first name
+is <code>names[0]</code> and the second name is <code>names[1]</code>. The above example prints
+<code>The second name is: Brian</code>. If you try to use a subscript that is not in the
+array, you will get an error: array access is bounds-checked at run-time. Such
+errant access is the source of many bugs in other systems programming
+languages.</p>
+
+<p>A <em>vector</em> is a dynamic or &quot;growable&quot; array, implemented as the standard
+library type <a href="../std/vec/"><code>Vec&lt;T&gt;</code></a> (we&#39;ll talk about what the <code>&lt;T&gt;</code> means
+later). Vectors always allocate their data on the heap. Vectors are to slices
+what <code>String</code> is to <code>&amp;str</code>. You can create them with the <code>vec!</code> macro:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// v: Vec&lt;i32&gt;</span>
+</pre>
+
+<p>(Notice that unlike the <code>println!</code> macro we&#39;ve used in the past, we use square
+brackets <code>[]</code> with <code>vec!</code>. Rust allows you to use either in either situation,
+this is just convention.)</p>
+
+<p>There&#39;s an alternate form of <code>vec!</code> for repeating an initial value:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0</span>; <span class='number'>10</span>]; <span class='comment'>// ten zeroes</span>
+</pre>
+
+<p>You can get the length of, iterate over, and subscript vectors just like
+arrays. In addition, (mutable) vectors can grow automatically:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nums</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// mut nums: Vec&lt;i32&gt;</span>
+
+<span class='ident'>nums</span>.<span class='ident'>push</span>(<span class='number'>4</span>);
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The length of nums is now {}&quot;</span>, <span class='ident'>nums</span>.<span class='ident'>len</span>()); <span class='comment'>// Prints 4</span>
+</pre>
+
+<p>Vectors have many more useful methods.</p>
+
+<p>A <em>slice</em> is a reference to (or &quot;view&quot; into) an array. They are useful for
+allowing safe, efficient access to a portion of an array without copying. For
+example, you might want to reference just one line of a file read into memory.
+By nature, a slice is not created directly, but from an existing variable.
+Slices have a length, can be mutable or not, and in many ways behave like
+arrays:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0</span>, <span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>];
+<span class='kw'>let</span> <span class='ident'>middle</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>a</span>[<span class='number'>1</span>..<span class='number'>4</span>]; <span class='comment'>// A slice of a: just the elements 1, 2, and 3</span>
+
+<span class='kw'>for</span> <span class='ident'>e</span> <span class='kw'>in</span> <span class='ident'>middle</span>.<span class='ident'>iter</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>e</span>); <span class='comment'>// Prints 1, 2, 3</span>
+}
+</pre>
+
+<p>You can also take a slice of a vector, <code>String</code>, or <code>&amp;str</code>, because they are
+backed by arrays. Slices have type <code>&amp;[T]</code>, which we&#39;ll talk about when we cover
+generics.</p>
+
+<p>We have now learned all of the most basic Rust concepts. We&#39;re ready to start
+building ourselves a guessing game, we just need to know one last thing: how to
+get input from the keyboard. You can&#39;t have a guessing game without the ability
+to guess!</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

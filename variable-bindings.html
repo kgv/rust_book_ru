@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Variable Bindings</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Variable Bindings</h1>
+    <p>The first thing we&#39;ll learn about are <em>variable bindings</em>. They look like this:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+}
+</pre>
+
+<p>Putting <code>fn main() {</code> in each example is a bit tedious, so we&#39;ll leave that out
+in the future. If you&#39;re following along, make sure to edit your <code>main()</code>
+function, rather than leaving it off. Otherwise, you&#39;ll get an error.</p>
+
+<p>In many languages, this is called a <em>variable</em>. But Rust&#39;s variable bindings
+have a few tricks up their sleeves. Rust has a very powerful feature called
+<em>pattern matching</em> that we&#39;ll get into detail with later, but the left
+hand side of a <code>let</code> expression is a full pattern, not just a variable name.
+This means we can do things like:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> (<span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>);
+</pre>
+
+<p>After this expression is evaluated, <code>x</code> will be one, and <code>y</code> will be two.
+Patterns are really powerful, but this is about all we can do with them so far.
+So let&#39;s just keep this in the back of our minds as we go forward.</p>
+
+<p>Rust is a statically typed language, which means that we specify our types up
+front. So why does our first example compile? Well, Rust has this thing called
+<em>type inference</em>. If it can figure out what the type of something is, Rust
+doesn&#39;t require you to actually type it out.</p>
+
+<p>We can add the type if we want to, though. Types come after a colon (<code>:</code>):</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>5</span>;
+</pre>
+
+<p>If I asked you to read this out loud to the rest of the class, you&#39;d say &quot;<code>x</code>
+is a binding with the type <code>i32</code> and the value <code>five</code>.&quot;</p>
+
+<p>In this case we chose to represent <code>x</code> as a 32-bit signed integer. Rust has
+many different primitive integer types. They begin with <code>i</code> for signed integers
+and <code>u</code> for unsigned integers. The possible integer sizes are 8, 16, 32, and 64
+bits.</p>
+
+<p>In future examples, we may annotate the type in a comment. The examples will
+look like this:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>; <span class='comment'>// x: i32</span>
+}
+</pre>
+
+<p>Note the similarities between this annotation and the syntax you use with <code>let</code>.
+Including these kinds of comments is not idiomatic Rust, but we&#39;ll occasionally
+include them to help you understand what the types that Rust infers are.</p>
+
+<p>By default, bindings are <em>immutable</em>. This code will not compile:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
+</pre>
+
+<p>It will give you this error:</p>
+
+<pre><code class="language-text">error: re-assignment of immutable variable `x`
+     x = 10;
+     ^~~~~~~
+</code></pre>
+
+<p>If you want a binding to be mutable, you can use <code>mut</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>; <span class='comment'>// mut x: i32</span>
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
+</pre>
+
+<p>There is no single reason that bindings are immutable by default, but we can
+think about it through one of Rust&#39;s primary focuses: safety. If you forget to
+say <code>mut</code>, the compiler will catch it, and let you know that you have mutated
+something you may not have intended to mutate. If bindings were mutable by
+default, the compiler would not be able to tell you this. If you <em>did</em> intend
+mutation, then the solution is quite easy: add <code>mut</code>.</p>
+
+<p>There are other good reasons to avoid mutable state when possible, but they&#39;re
+out of the scope of this guide. In general, you can often avoid explicit
+mutation, and so it is preferable in Rust. That said, sometimes, mutation is
+what you need, so it&#39;s not verboten.</p>
+
+<p>Let&#39;s get back to bindings. Rust variable bindings have one more aspect that
+differs from other languages: bindings are required to be initialized with a
+value before you&#39;re allowed to use them.</p>
+
+<p>Let&#39;s try it out. Change your <code>src/main.rs</code> file to look like this:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span>;
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello world!&quot;</span>);
+}
+</pre>
+
+<p>You can use <code>cargo build</code> on the command line to build it. You&#39;ll get a warning,
+but it will still print &quot;Hello, world!&quot;:</p>
+
+<pre><code class="language-text">   Compiling hello_world v0.0.1 (file:///home/you/projects/hello_world)
+src/main.rs:2:9: 2:10 warning: unused variable: `x`, #[warn(unused_variable)] on by default
+src/main.rs:2     let x: i32;
+                      ^
+</code></pre>
+
+<p>Rust warns us that we never use the variable binding, but since we never use it,
+no harm, no foul. Things change if we try to actually use this <code>x</code>, however. Let&#39;s
+do that. Change your program to look like this:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span>;
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The value of x is: {}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>And try to build it. You&#39;ll get an error:</p>
+
+<pre><code class="language-{bash}">$ cargo build
+   Compiling hello_world v0.0.1 (file:///home/you/projects/hello_world)
+src/main.rs:4:39: 4:40 error: use of possibly uninitialized variable: `x`
+src/main.rs:4     println!(&quot;The value of x is: {}&quot;, x);
+                                                    ^
+note: in expansion of format_args!
+&lt;std macros&gt;:2:23: 2:77 note: expansion site
+&lt;std macros&gt;:1:1: 3:2 note: in expansion of println!
+src/main.rs:4:5: 4:42 note: expansion site
+error: aborting due to previous error
+Could not compile `hello_world`.
+</code></pre>
+
+<p>Rust will not let us use a value that has not been initialized. Next, let&#39;s
+talk about this stuff we&#39;ve added to <code>println!</code>.</p>
+
+<p>If you include two curly braces (<code>{}</code>, some call them moustaches...) in your
+string to print, Rust will interpret this as a request to interpolate some sort
+of value. <em>String interpolation</em> is a computer science term that means &quot;stick
+in the middle of a string.&quot; We add a comma, and then <code>x</code>, to indicate that we
+want <code>x</code> to be the value we&#39;re interpolating. The comma is used to separate
+arguments we pass to functions and macros, if you&#39;re passing more than one.</p>
+
+<p>When you just use the curly braces, Rust will attempt to display the
+value in a meaningful way by checking out its type. If you want to specify the
+format in a more detailed manner, there are a <a href="../std/fmt/index.html">wide number of options
+available</a>. For now, we&#39;ll just stick to the default:
+integers aren&#39;t very complicated to print.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

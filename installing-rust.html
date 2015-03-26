@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Установка Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Установка Rust</h1>
+    <p>Для работы с Rust нужно сделать первый шаг - установить его! В этой главе мы покажем как это можно сделать.</p>
+
+<p>Официально поддерживаемые платформы:
+* Windows (7, 8, Server 2008 R2)
+* Linux (2.6.18 или позже, разные дистрибутивы), x86 и x86-64
+* OSX 10.7 (Lion) и новее, x86 и x86-64</p>
+
+<p>Rust активно тестируется на этих платформах, а также на остальных, например на Android.</p>
+
+<h2 id="linux-и-mac" class='section-header'><a
+                           href="#linux-и-mac">Linux и Mac</a></h2>
+<p>Самый простой способ установить Rust - использовать скрипт <code>rustup</code>. Вам нужно ввести эту команду в консоль (вам не нужно вводить символ <code>$</code>, он лишь показывает приглашение командной строки к вводу новой команды):</p>
+
+<pre><code class="language-bash">$ curl -L https://static.rust-lang.org/rustup.sh | sudo sh
+</code></pre>
+
+<p>Если вы беспокоитесь о безопасности использования данной команды, то продолжайте читать далее. Также можете скачать наш установочный скрипт и изучить его:</p>
+
+<pre><code class="language-bash">$ curl -L https://static.rust-lang.org/rustup.sh -O
+$ sudo sh rustup.sh
+</code></pre>
+
+<p>Если вы решили удалить Rust, то просто запустите скрипт деинсталяции:</p>
+
+<pre><code class="language-bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
+</code></pre>
+
+<p>Вы можете повторно запускать скрипт для того, чтобы обновить Rust. На данный момент Rust находится в стадии alpha и очень часто обновляется.</p>
+
+<p>Команда установки <code>curl | sudo sh</code> потенциально опасна, т.к. скрипт установки запускается с правами администратора, что может нарушить безопасность системы. Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha. Для безопасной установки Rust предлагаем изучить документацию по <a href="https://github.com/rust-lang/rust#building-from-source">установке Rust из исходных кодов</a> или скачать уже <a href="http://www.rust-lang.org/install.html">скомпилированный Rust</a>.</p>
+
+<h2 id="windows" class='section-header'><a
+                           href="#windows">Windows</a></h2>
+<p>Если вы пользуетесь <em>Windows</em>, то пожалуйста скачайте установочный пакет: <a href="https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe">32-битный</a> или <a href="https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe">64-битный</a> и затем запустите его.</p>
+
+<p>Удалить Rust можно через <code>Панель управления</code> -&gt; <code>Программы</code> -&gt; <code>Удаление программы</code>, а затем выбираем Rust в списке и нажимаем кнопку <code>Удалить</code>.</p>
+
+<h1 id="После-установки" class='section-header'><a
+                           href="#После-установки">После установки</a></h1>
+<p>Если вы уже установили Rust, то откройте терминал и введите это:</p>
+
+<pre><code class="language-bash">$ rustc --version
+</code></pre>
+
+<p>Вы должны увидеть версию, хэш коммита, дату коммита и дату сборки:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='ident'>rustc</span> <span class='number'>1.0</span>.<span class='number'>0</span><span class='op'>-</span><span class='ident'>nightly</span> (<span class='ident'>f4e0ce66a</span> <span class='number'>2015</span><span class='op'>-</span><span class='number'>03</span><span class='op'>-</span><span class='number'>19</span>) (<span class='ident'>built</span> <span class='number'>2015</span><span class='op'>-</span><span class='number'>03</span><span class='op'>-</span><span class='number'>20</span>)
+</pre>
+
+<p>Итак, теперь у вас есть установленный Rust! Поздравляем!</p>
+
+<p>Установщик также устанавливает документацию, которая доступна без подключения к сети. На Linux и Mac она располагается в каталоге <code>/usr/local/share/doc/rust</code>. В Windows - в каталоге <code>share/doc</code> там, куда вы установили Rust.</p>
+
+<p>Но не только там вы можете найти помощь, а также еще здесь:
+* IRC чат: <a href="irc://irc.mozilla.org/#rust">канал #rust на irc.mozilla.org</a> к которому можно подключиться через <a href="http://chat.mibbit.com/?server=irc.mozilla.org&amp;channel=%23rust">Mibbit</a>.
+* Reddit: <a href="http://www.reddit.com/r/rust">/r/rust subreddit</a>
+* <a href="http://stackoverflow.com/questions/tagged/rust">Stack Overflow</a></p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

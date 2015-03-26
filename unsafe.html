@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Unsafe and Low-Level Code</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Unsafe and Low-Level Code</h1>
+    
+<h1 id="introduction" class='section-header'><a
+                           href="#introduction">Introduction</a></h1>
+<p>Rust aims to provide safe abstractions over the low-level details of
+the CPU and operating system, but sometimes one needs to drop down and
+write code at that level. This guide aims to provide an overview of
+the dangers and power one gets with Rust&#39;s unsafe subset.</p>
+
+<p>Rust provides an escape hatch in the form of the <code>unsafe { ... }</code>
+block which allows the programmer to dodge some of the compiler&#39;s
+checks and do a wide range of operations, such as:</p>
+
+<ul>
+<li>dereferencing <a href="#raw-pointers">raw pointers</a></li>
+<li>calling a function via FFI (<a href="ffi.html">covered by the FFI guide</a>)</li>
+<li>casting between types bitwise (<code>transmute</code>, aka &quot;reinterpret cast&quot;)</li>
+<li><a href="#inline-assembly">inline assembly</a></li>
+</ul>
+
+<p>Note that an <code>unsafe</code> block does not relax the rules about lifetimes
+of <code>&amp;</code> and the freezing of borrowed data.</p>
+
+<p>Any use of <code>unsafe</code> is the programmer saying &quot;I know more than you&quot; to
+the compiler, and, as such, the programmer should be very sure that
+they actually do know more about why that piece of code is valid.  In
+general, one should try to minimize the amount of unsafe code in a
+code base; preferably by using the bare minimum <code>unsafe</code> blocks to
+build safe interfaces.</p>
+
+<blockquote>
+<p><strong>Note</strong>: the low-level details of the Rust language are still in
+flux, and there is no guarantee of stability or backwards
+compatibility. In particular, there may be changes that do not cause
+compilation errors, but do cause semantic changes (such as invoking
+undefined behaviour). As such, extreme care is required.</p>
+</blockquote>
+
+<h1 id="pointers" class='section-header'><a
+                           href="#pointers">Pointers</a></h1>
+<h2 id="references" class='section-header'><a
+                           href="#references">References</a></h2>
+<p>One of Rust&#39;s biggest features is memory safety.  This is achieved in
+part via <a href="ownership.html">the ownership system</a>, which is how the
+compiler can guarantee that every <code>&amp;</code> reference is always valid, and,
+for example, never pointing to freed memory.</p>
+
+<p>These restrictions on <code>&amp;</code> have huge advantages. However, they also
+constrain how we can use them. For example, <code>&amp;</code> doesn&#39;t behave
+identically to C&#39;s pointers, and so cannot be used for pointers in
+foreign function interfaces (FFI). Additionally, both immutable (<code>&amp;</code>)
+and mutable (<code>&amp;mut</code>) references have some aliasing and freezing
+guarantees, required for memory safety.</p>
+
+<p>In particular, if you have an <code>&amp;T</code> reference, then the <code>T</code> must not be
+modified through that reference or any other reference. There are some
+standard library types, e.g. <code>Cell</code> and <code>RefCell</code>, that provide inner
+mutability by replacing compile time guarantees with dynamic checks at
+runtime.</p>
+
+<p>An <code>&amp;mut</code> reference has a different constraint: when an object has an
+<code>&amp;mut T</code> pointing into it, then that <code>&amp;mut</code> reference must be the only
+such usable path to that object in the whole program. That is, an
+<code>&amp;mut</code> cannot alias with any other references.</p>
+
+<p>Using <code>unsafe</code> code to incorrectly circumvent and violate these
+restrictions is undefined behaviour. For example, the following
+creates two aliasing <code>&amp;mut</code> pointers, and is invalid.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>1</span>;
+
+<span class='kw'>let</span> <span class='ident'>ref_1</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
+<span class='kw'>let</span> <span class='ident'>ref_2</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>ref_1</span>) };
+
+<span class='comment'>// oops, ref_1 and ref_2 point to the same piece of data (x) and are</span>
+<span class='comment'>// both usable</span>
+<span class='op'>*</span><span class='ident'>ref_1</span> <span class='op'>=</span> <span class='number'>10</span>;
+<span class='op'>*</span><span class='ident'>ref_2</span> <span class='op'>=</span> <span class='number'>20</span>;
+</pre>
+
+<h2 id="raw-pointers" class='section-header'><a
+                           href="#raw-pointers">Raw pointers</a></h2>
+<p>Rust offers two additional pointer types (<em>raw pointers</em>), written as
+<code>*const T</code> and <code>*mut T</code>. They&#39;re an approximation of C&#39;s <code>const T*</code> and <code>T*</code>
+respectively; indeed, one of their most common uses is for FFI,
+interfacing with external C libraries.</p>
+
+<p>Raw pointers have much fewer guarantees than other pointer types
+offered by the Rust language and libraries. For example, they</p>
+
+<ul>
+<li>are not guaranteed to point to valid memory and are not even
+guaranteed to be non-null (unlike both <code>Box</code> and <code>&amp;</code>);</li>
+<li>do not have any automatic clean-up, unlike <code>Box</code>, and so require
+manual resource management;</li>
+<li>are plain-old-data, that is, they don&#39;t move ownership, again unlike
+<code>Box</code>, hence the Rust compiler cannot protect against bugs like
+use-after-free;</li>
+<li>lack any form of lifetimes, unlike <code>&amp;</code>, and so the compiler cannot
+reason about dangling pointers; and</li>
+<li>have no guarantees about aliasing or mutability other than mutation
+not being allowed directly through a <code>*const T</code>.</li>
+</ul>
+
+<p>Fortunately, they come with a redeeming feature: the weaker guarantees
+mean weaker restrictions. The missing restrictions make raw pointers
+appropriate as a building block for implementing things like smart
+pointers and vectors inside libraries. For example, <code>*</code> pointers are
+allowed to alias, allowing them to be used to write shared-ownership
+types like reference counted and garbage collected pointers, and even
+thread-safe shared memory types (<code>Rc</code> and the <code>Arc</code> types are both
+implemented entirely in Rust).</p>
+
+<p>There are two things that you are required to be careful about
+(i.e. require an <code>unsafe { ... }</code> block) with raw pointers:</p>
+
+<ul>
+<li>dereferencing: they can have any value: so possible results include
+a crash, a read of uninitialised memory, a use-after-free, or
+reading data as normal.</li>
+<li>pointer arithmetic via the <code>offset</code> <a href="#intrinsics">intrinsic</a> (or
+<code>.offset</code> method): this intrinsic uses so-called &quot;in-bounds&quot;
+arithmetic, that is, it is only defined behaviour if the result is
+inside (or one-byte-past-the-end) of the object from which the
+original pointer came.</li>
+</ul>
+
+<p>The latter assumption allows the compiler to optimize more
+effectively. As can be seen, actually <em>creating</em> a raw pointer is not
+unsafe, and neither is converting to an integer.</p>
+
+<h3 id="references-and-raw-pointers" class='section-header'><a
+                           href="#references-and-raw-pointers">References and raw pointers</a></h3>
+<p>At runtime, a raw pointer <code>*</code> and a reference pointing to the same
+piece of data have an identical representation. In fact, an <code>&amp;T</code>
+reference will implicitly coerce to an <code>*const T</code> raw pointer in safe code
+and similarly for the <code>mut</code> variants (both coercions can be performed
+explicitly with, respectively, <code>value as *const T</code> and <code>value as *mut T</code>).</p>
+
+<p>Going the opposite direction, from <code>*const</code> to a reference <code>&amp;</code>, is not
+safe. A <code>&amp;T</code> is always valid, and so, at a minimum, the raw pointer
+<code>*const T</code> has to point to a valid instance of type <code>T</code>. Furthermore,
+the resulting pointer must satisfy the aliasing and mutability laws of
+references. The compiler assumes these properties are true for any
+references, no matter how they are created, and so any conversion from
+raw pointers is asserting that they hold. The programmer <em>must</em>
+guarantee this.</p>
+
+<p>The recommended method for the conversion is</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>i</span>: <span class='ident'>u32</span> <span class='op'>=</span> <span class='number'>1</span>;
+<span class='comment'>// explicit cast</span>
+<span class='kw'>let</span> <span class='ident'>p_imm</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>i</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>;
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>m</span>: <span class='ident'>u32</span> <span class='op'>=</span> <span class='number'>2</span>;
+<span class='comment'>// implicit coercion</span>
+<span class='kw'>let</span> <span class='ident'>p_mut</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>m</span>;
+
+<span class='kw'>unsafe</span> {
+    <span class='kw'>let</span> <span class='ident'>ref_imm</span>: <span class='kw-2'>&amp;</span><span class='ident'>u32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>p_imm</span>;
+    <span class='kw'>let</span> <span class='ident'>ref_mut</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>u32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>p_mut</span>;
+}
+</pre>
+
+<p>The <code>&amp;*x</code> dereferencing style is preferred to using a <code>transmute</code>.
+The latter is far more powerful than necessary, and the more
+restricted operation is harder to use incorrectly; for example, it
+requires that <code>x</code> is a pointer (unlike <code>transmute</code>).</p>
+
+<h2 id="making-the-unsafe-safe(r)" class='section-header'><a
+                           href="#making-the-unsafe-safe(r)">Making the unsafe safe(r)</a></h2>
+<p>There are various ways to expose a safe interface around some unsafe
+code:</p>
+
+<ul>
+<li>store pointers privately (i.e. not in public fields of public
+structs), so that you can see and control all reads and writes to
+the pointer in one place.</li>
+<li>use <code>assert!()</code> a lot: since you can&#39;t rely on the protection of the
+compiler &amp; type-system to ensure that your <code>unsafe</code> code is correct
+at compile-time, use <code>assert!()</code> to verify that it is doing the
+right thing at run-time.</li>
+<li>implement the <code>Drop</code> for resource clean-up via a destructor, and use
+RAII (Resource Acquisition Is Initialization). This reduces the need
+for any manual memory management by users, and automatically ensures
+that clean-up is always run, even when the thread panics.</li>
+<li>ensure that any data stored behind a raw pointer is destroyed at the
+appropriate time.</li>
+</ul>
+
+<p>As an example, we give a reimplementation of owned boxes by wrapping
+<code>malloc</code> and <code>free</code>. Rust&#39;s move semantics and lifetimes mean this
+reimplementation is as safe as the <code>Box</code> type.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>unsafe_destructor</span>)]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_void</span>, <span class='ident'>size_t</span>, <span class='ident'>malloc</span>, <span class='ident'>free</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
+
+<span class='comment'>// Define a wrapper around the handle returned by the foreign code.</span>
+<span class='comment'>// Unique&lt;T&gt; has the same semantics as Box&lt;T&gt;</span>
+<span class='comment'>//</span>
+<span class='comment'>// NB: For simplicity and correctness, we require that T has kind Send</span>
+<span class='comment'>// (owned boxes relax this restriction).</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Unique</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Send</span><span class='op'>&gt;</span> {
+    <span class='comment'>// It contains a single raw, mutable pointer to the object in question.</span>
+    <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
+}
+
+<span class='comment'>// Implement methods for creating and using the values in the box.</span>
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Send</span><span class='op'>&gt;</span> <span class='ident'>Unique</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>value</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Unique</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>malloc</span>(<span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>;
+            <span class='comment'>// we *need* valid pointer.</span>
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>ptr</span>.<span class='ident'>is_null</span>());
+            <span class='comment'>// `*ptr` is uninitialized, and `*ptr = value` would</span>
+            <span class='comment'>// attempt to destroy it `overwrite` moves a value into</span>
+            <span class='comment'>// this memory without attempting to drop the original</span>
+            <span class='comment'>// value.</span>
+            <span class='ident'>ptr</span>::<span class='ident'>write</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>ptr</span>, <span class='ident'>value</span>);
+            <span class='ident'>Unique</span>{<span class='ident'>ptr</span>: <span class='ident'>ptr</span>}
+        }
+    }
+
+    <span class='comment'>// the &#39;r lifetime results in the same semantics as `&amp;*x` with</span>
+    <span class='comment'>// Box&lt;T&gt;</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>borrow</span><span class='op'>&lt;</span><span class='lifetime'>&#39;r</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;r</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;r</span> <span class='ident'>T</span> {
+        <span class='comment'>// By construction, self.ptr is valid</span>
+        <span class='kw'>unsafe</span> { <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span> }
+    }
+
+    <span class='comment'>// the &#39;r lifetime results in the same semantics as `&amp;mut *x` with</span>
+    <span class='comment'>// Box&lt;T&gt;</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>borrow_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;r</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;r</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;r</span> <span class='kw-2'>mut</span> <span class='ident'>T</span> {
+        <span class='kw'>unsafe</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span> }
+    }
+}
+
+<span class='comment'>// A key ingredient for safety, we associate a destructor with</span>
+<span class='comment'>// Unique&lt;T&gt;, making the struct manage the raw pointer: when the</span>
+<span class='comment'>// struct goes out of scope, it will automatically free the raw pointer.</span>
+<span class='comment'>//</span>
+<span class='comment'>// NB: This is an unsafe destructor; rustc will not normally allow</span>
+<span class='comment'>// destructors to be associated with parameterized types (due to</span>
+<span class='comment'>// historically failing to check them soundly).  Note that the</span>
+<span class='comment'>// `#[unsafe_destructor]` feature gate is currently required to use</span>
+<span class='comment'>// unsafe destructors.</span>
+<span class='attribute'>#[<span class='ident'>unsafe_destructor</span>]</span>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Send</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Unique</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>unsafe</span> {
+            <span class='comment'>// Copy the object out from the pointer onto the stack,</span>
+            <span class='comment'>// where it is covered by normal Rust destructor semantics</span>
+            <span class='comment'>// and cleans itself up, if necessary</span>
+            <span class='ident'>ptr</span>::<span class='ident'>read</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
+
+            <span class='comment'>// clean-up our allocation</span>
+            <span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+        }
+    }
+}
+
+<span class='comment'>// A comparison between the built-in `Box` and this reimplementation</span>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+        <span class='op'>*</span><span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
+    } <span class='comment'>// `x` is freed here</span>
+
+    {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+        <span class='op'>*</span><span class='ident'>y</span>.<span class='ident'>borrow_mut</span>() <span class='op'>=</span> <span class='number'>10</span>;
+    } <span class='comment'>// `y` is freed here</span>
+}
+</pre>
+
+<p>Notably, the only way to construct a <code>Unique</code> is via the <code>new</code>
+function, and this function ensures that the internal pointer is valid
+and hidden in the private field. The two <code>borrow</code> methods are safe
+because the compiler statically guarantees that objects are never used
+before creation or after destruction (unless you use some <code>unsafe</code>
+code...).</p>
+
+<h1 id="inline-assembly" class='section-header'><a
+                           href="#inline-assembly">Inline assembly</a></h1>
+<p>For extremely low-level manipulations and performance reasons, one
+might wish to control the CPU directly. Rust supports using inline
+assembly to do this via the <code>asm!</code> macro. The syntax roughly matches
+that of GCC &amp; Clang:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='ident'>assembly</span> <span class='ident'>template</span>
+   : <span class='ident'>output</span> <span class='ident'>operands</span>
+   : <span class='ident'>input</span> <span class='ident'>operands</span>
+   : <span class='ident'>clobbers</span>
+   : <span class='ident'>options</span>
+   );
+</pre>
+
+<p>Any use of <code>asm</code> is feature gated (requires <code>#![feature(asm)]</code> on the
+crate to allow) and of course requires an <code>unsafe</code> block.</p>
+
+<blockquote>
+<p><strong>Note</strong>: the examples here are given in x86/x86-64 assembly, but
+all platforms are supported.</p>
+</blockquote>
+
+<h2 id="assembly-template" class='section-header'><a
+                           href="#assembly-template">Assembly template</a></h2>
+<p>The <code>assembly template</code> is the only required parameter and must be a
+literal string (i.e. <code>&quot;&quot;</code>)</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>asm</span>)]</span>
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86&quot;</span>, <span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>))]</span>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() {
+    <span class='kw'>unsafe</span> {
+        <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;NOP&quot;</span>);
+    }
+}
+
+<span class='comment'>// other platforms</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>any</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86&quot;</span>, <span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)))]</span>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() { <span class='comment'>/* ... */</span> }
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='comment'>// ...</span>
+    <span class='ident'>foo</span>();
+    <span class='comment'>// ...</span>
+}
+</pre>
+
+<p>(The <code>feature(asm)</code> and <code>#[cfg]</code>s are omitted from now on.)</p>
+
+<p>Output operands, input operands, clobbers and options are all optional
+but you must add the right number of <code>:</code> if you skip them:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span>
+    :
+    :
+    : <span class='string'>&quot;eax&quot;</span>
+   );
+</pre>
+
+<p>Whitespace also doesn&#39;t matter:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span> ::: <span class='string'>&quot;eax&quot;</span>);
+</pre>
+
+<h2 id="operands" class='section-header'><a
+                           href="#operands">Operands</a></h2>
+<p>Input and output operands follow the same format: <code>:
+&quot;constraints1&quot;(expr1), &quot;constraints2&quot;(expr2), ...&quot;</code>. Output operand
+expressions must be mutable lvalues:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>, <span class='ident'>b</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='number'>0</span>;
+    <span class='kw'>unsafe</span> {
+        <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;add $2, $0&quot;</span>
+             : <span class='string'>&quot;=r&quot;</span>(<span class='ident'>c</span>)
+             : <span class='string'>&quot;0&quot;</span>(<span class='ident'>a</span>), <span class='string'>&quot;r&quot;</span>(<span class='ident'>b</span>)
+             );
+    }
+    <span class='ident'>c</span>
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>add</span>(<span class='number'>3</span>, <span class='number'>14159</span>), <span class='number'>14162</span>)
+}
+</pre>
+
+<h2 id="clobbers" class='section-header'><a
+                           href="#clobbers">Clobbers</a></h2>
+<p>Some instructions modify registers which might otherwise have held
+different values so we use the clobbers list to indicate to the
+compiler not to assume any values loaded into those registers will
+stay valid.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// Put the value 0x200 in eax</span>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;mov $$0x200, %eax&quot;</span> : <span class='comment'>/* no outputs */</span> : <span class='comment'>/* no inputs */</span> : <span class='string'>&quot;eax&quot;</span>);
+</pre>
+
+<p>Input and output registers need not be listed since that information
+is already communicated by the given constraints. Otherwise, any other
+registers used either implicitly or explicitly should be listed.</p>
+
+<p>If the assembly changes the condition code register <code>cc</code> should be
+specified as one of the clobbers. Similarly, if the assembly modifies
+memory, <code>memory</code> should also be specified.</p>
+
+<h2 id="options" class='section-header'><a
+                           href="#options">Options</a></h2>
+<p>The last section, <code>options</code> is specific to Rust. The format is comma
+separated literal strings (i.e. <code>:&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;</code>). It&#39;s used to
+specify some extra info about the inline assembly:</p>
+
+<p>Current valid options are:</p>
+
+<ol>
+<li><em>volatile</em> - specifying this is analogous to
+<code>__asm__ __volatile__ (...)</code> in gcc/clang.</li>
+<li><em>alignstack</em> - certain instructions expect the stack to be
+aligned a certain way (i.e. SSE) and specifying this indicates to
+the compiler to insert its usual stack alignment code</li>
+<li><em>intel</em> - use intel syntax instead of the default AT&amp;T.</li>
+</ol>
+
+<h1 id="avoiding-the-standard-library" class='section-header'><a
+                           href="#avoiding-the-standard-library">Avoiding the standard library</a></h1>
+<p>By default, <code>std</code> is linked to every Rust crate. In some contexts,
+this is undesirable, and can be avoided with the <code>#![no_std]</code>
+attribute attached to the crate.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// a minimal library</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span><span class='op'>=</span><span class='string'>&quot;lib&quot;</span>]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>no_std</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
+</pre>
+
+<p>Obviously there&#39;s more to life than just libraries: one can use
+<code>#[no_std]</code> with an executable, controlling the entry point is
+possible in two ways: the <code>#[start]</code> attribute, or overriding the
+default shim for the C <code>main</code> function with your own.</p>
+
+<p>The function marked <code>#[start]</code> is passed the command line parameters
+in the same format as C:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>start</span>, <span class='ident'>no_std</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
+
+<span class='comment'>// Pull in the system libc library for what crt0.o likely requires</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+
+<span class='comment'>// Entry point for this program</span>
+<span class='attribute'>#[<span class='ident'>start</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>start</span>(<span class='ident'>_argc</span>: <span class='ident'>isize</span>, <span class='ident'>_argv</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>isize</span> {
+    <span class='number'>0</span>
+}
+
+<span class='comment'>// These functions and traits are used by the compiler, but not</span>
+<span class='comment'>// for a bare-bones hello world. These are normally</span>
+<span class='comment'>// provided by libstd.</span>
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;stack_exhausted&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>stack_exhausted</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;eh_personality&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>eh_personality</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;panic_fmt&quot;</span>]</span> <span class='kw'>fn</span> <span class='ident'>panic_fmt</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> { <span class='kw'>loop</span> {} }
+</pre>
+
+<p>To override the compiler-inserted <code>main</code> shim, one has to disable it
+with <code>#![no_main]</code> and then create the appropriate symbol with the
+correct ABI and the correct name, which requires overriding the
+compiler&#39;s name mangling too:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>no_std</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_main</span>]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>start</span>)]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+
+<span class='attribute'>#[<span class='ident'>no_mangle</span>]</span> <span class='comment'>// ensure that this symbol is called `main` in the output</span>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>main</span>(<span class='ident'>argc</span>: <span class='ident'>i32</span>, <span class='ident'>argv</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='number'>0</span>
+}
+
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;stack_exhausted&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>stack_exhausted</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;eh_personality&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>eh_personality</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;panic_fmt&quot;</span>]</span> <span class='kw'>fn</span> <span class='ident'>panic_fmt</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> { <span class='kw'>loop</span> {} }
+</pre>
+
+<p>The compiler currently makes a few assumptions about symbols which are available
+in the executable to call. Normally these functions are provided by the standard
+library, but without it you must define your own.</p>
+
+<p>The first of these three functions, <code>stack_exhausted</code>, is invoked whenever stack
+overflow is detected.  This function has a number of restrictions about how it
+can be called and what it must do, but if the stack limit register is not being
+maintained then a thread always has an &quot;infinite stack&quot; and this function
+shouldn&#39;t get triggered.</p>
+
+<p>The second of these three functions, <code>eh_personality</code>, is used by the
+failure mechanisms of the compiler. This is often mapped to GCC&#39;s
+personality function (see the
+<a href="../std/rt/unwind/index.html">libstd implementation</a> for more
+information), but crates which do not trigger a panic can be assured
+that this function is never called. The final function, <code>panic_fmt</code>, is
+also used by the failure mechanisms of the compiler.</p>
+
+<h2 id="using-libcore" class='section-header'><a
+                           href="#using-libcore">Using libcore</a></h2>
+<blockquote>
+<p><strong>Note</strong>: the core library&#39;s structure is unstable, and it is recommended to
+use the standard library instead wherever possible.</p>
+</blockquote>
+
+<p>With the above techniques, we&#39;ve got a bare-metal executable running some Rust
+code. There is a good deal of functionality provided by the standard library,
+however, that is necessary to be productive in Rust. If the standard library is
+not sufficient, then <a href="../core/index.html">libcore</a> is designed to be used
+instead.</p>
+
+<p>The core library has very few dependencies and is much more portable than the
+standard library itself. Additionally, the core library has most of the
+necessary functionality for writing idiomatic and effective Rust code.</p>
+
+<p>As an example, here is a program that will calculate the dot product of two
+vectors provided from C, using idiomatic Rust practices.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>start</span>, <span class='ident'>no_std</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>core</span>;
+
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>mem</span>;
+
+<span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>dot_product</span>(<span class='ident'>a</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>, <span class='ident'>a_len</span>: <span class='ident'>u32</span>,
+                          <span class='ident'>b</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>, <span class='ident'>b_len</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
+    <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>raw</span>::<span class='ident'>Slice</span>;
+
+    <span class='comment'>// Convert the provided arrays into Rust slices.</span>
+    <span class='comment'>// The core::raw module guarantees that the Slice</span>
+    <span class='comment'>// structure has the same memory layout as a &amp;[T]</span>
+    <span class='comment'>// slice.</span>
+    <span class='comment'>//</span>
+    <span class='comment'>// This is an unsafe operation because the compiler</span>
+    <span class='comment'>// cannot tell the pointers are valid.</span>
+    <span class='kw'>let</span> (<span class='ident'>a_slice</span>, <span class='ident'>b_slice</span>): (<span class='kw-2'>&amp;</span>[<span class='ident'>u32</span>], <span class='kw-2'>&amp;</span>[<span class='ident'>u32</span>]) <span class='op'>=</span> <span class='kw'>unsafe</span> {
+        <span class='ident'>mem</span>::<span class='ident'>transmute</span>((
+            <span class='ident'>Slice</span> { <span class='ident'>data</span>: <span class='ident'>a</span>, <span class='ident'>len</span>: <span class='ident'>a_len</span> <span class='kw'>as</span> <span class='ident'>usize</span> },
+            <span class='ident'>Slice</span> { <span class='ident'>data</span>: <span class='ident'>b</span>, <span class='ident'>len</span>: <span class='ident'>b_len</span> <span class='kw'>as</span> <span class='ident'>usize</span> },
+        ))
+    };
+
+    <span class='comment'>// Iterate over the slices, collecting the result</span>
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ret</span> <span class='op'>=</span> <span class='number'>0</span>;
+    <span class='kw'>for</span> (<span class='ident'>i</span>, <span class='ident'>j</span>) <span class='kw'>in</span> <span class='ident'>a_slice</span>.<span class='ident'>iter</span>().<span class='ident'>zip</span>(<span class='ident'>b_slice</span>.<span class='ident'>iter</span>()) {
+        <span class='ident'>ret</span> <span class='op'>+=</span> (<span class='op'>*</span><span class='ident'>i</span>) <span class='op'>*</span> (<span class='op'>*</span><span class='ident'>j</span>);
+    }
+    <span class='kw'>return</span> <span class='ident'>ret</span>;
+}
+
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;panic_fmt&quot;</span>]</span>
+<span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>panic_fmt</span>(<span class='ident'>args</span>: <span class='kw-2'>&amp;</span><span class='ident'>core</span>::<span class='ident'>fmt</span>::<span class='ident'>Arguments</span>,
+                    <span class='ident'>file</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>,
+                    <span class='ident'>line</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='op'>!</span> {
+    <span class='kw'>loop</span> {}
+}
+
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;stack_exhausted&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>stack_exhausted</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;eh_personality&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>eh_personality</span>() {}
+</pre>
+
+<p>Note that there is one extra lang item here which differs from the examples
+above, <code>panic_fmt</code>. This must be defined by consumers of libcore because the
+core library declares panics, but it does not define it. The <code>panic_fmt</code>
+lang item is this crate&#39;s definition of panic, and it must be guaranteed to
+never return.</p>
+
+<p>As can be seen in this example, the core library is intended to provide the
+power of Rust in all circumstances, regardless of platform requirements. Further
+libraries, such as liballoc, add functionality to libcore which make other
+platform-specific assumptions, but continue to be more portable than the
+standard library itself.</p>
+
+<h1 id="interacting-with-the-compiler-internals" class='section-header'><a
+                           href="#interacting-with-the-compiler-internals">Interacting with the compiler internals</a></h1>
+<blockquote>
+<p><strong>Note</strong>: this section is specific to the <code>rustc</code> compiler; these
+parts of the language may never be fully specified and so details may
+differ wildly between implementations (and even versions of <code>rustc</code>
+itself).</p>
+
+<p>Furthermore, this is just an overview; the best form of
+documentation for specific instances of these features are their
+definitions and uses in <code>std</code>.</p>
+</blockquote>
+
+<p>The Rust language currently has two orthogonal mechanisms for allowing
+libraries to interact directly with the compiler and vice versa:</p>
+
+<ul>
+<li>intrinsics, functions built directly into the compiler providing
+very basic low-level functionality,</li>
+<li>lang-items, special functions, types and traits in libraries marked
+with specific <code>#[lang]</code> attributes</li>
+</ul>
+
+<h2 id="intrinsics" class='section-header'><a
+                           href="#intrinsics">Intrinsics</a></h2>
+<blockquote>
+<p><strong>Note</strong>: intrinsics will forever have an unstable interface, it is
+recommended to use the stable interfaces of libcore rather than intrinsics
+directly.</p>
+</blockquote>
+
+<p>These are imported as if they were FFI functions, with the special
+<code>rust-intrinsic</code> ABI. For example, if one was in a freestanding
+context, but wished to be able to <code>transmute</code> between types, and
+perform efficient pointer arithmetic, one would import those functions
+via a declaration like</p>
+<pre id='rust-example-rendered' class='rust '>
+
+<span class='kw'>extern</span> <span class='string'>&quot;rust-intrinsic&quot;</span> {
+    <span class='kw'>fn</span> <span class='ident'>transmute</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>U</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>U</span>;
+
+    <span class='kw'>fn</span> <span class='ident'>offset</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>dst</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>, <span class='ident'>offset</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>;
+}
+</pre>
+
+<p>As with any other FFI functions, these are always <code>unsafe</code> to call.</p>
+
+<h2 id="lang-items" class='section-header'><a
+                           href="#lang-items">Lang items</a></h2>
+<blockquote>
+<p><strong>Note</strong>: lang items are often provided by crates in the Rust distribution,
+and lang items themselves have an unstable interface. It is recommended to use
+officially distributed crates instead of defining your own lang items.</p>
+</blockquote>
+
+<p>The <code>rustc</code> compiler has certain pluggable operations, that is,
+functionality that isn&#39;t hard-coded into the language, but is
+implemented in libraries, with a special marker to tell the compiler
+it exists. The marker is the attribute <code>#[lang=&quot;...&quot;]</code> and there are
+various different values of <code>...</code>, i.e. various different &#39;lang
+items&#39;.</p>
+
+<p>For example, <code>Box</code> pointers require two lang items, one for allocation
+and one for deallocation. A freestanding program that uses the <code>Box</code>
+sugar for dynamic allocations via <code>malloc</code> and <code>free</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>box_syntax</span>, <span class='ident'>start</span>, <span class='ident'>no_std</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+
+<span class='kw'>extern</span> {
+    <span class='kw'>fn</span> <span class='ident'>abort</span>() <span class='op'>-&gt;</span> <span class='op'>!</span>;
+}
+
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;owned_box&quot;</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>);
+
+<span class='attribute'>#[<span class='ident'>lang</span><span class='op'>=</span><span class='string'>&quot;exchange_malloc&quot;</span>]</span>
+<span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>allocate</span>(<span class='ident'>size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> {
+    <span class='kw'>let</span> <span class='ident'>p</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>libc</span>::<span class='ident'>size_t</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>;
+
+    <span class='comment'>// malloc failed</span>
+    <span class='kw'>if</span> <span class='ident'>p</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>==</span> <span class='number'>0</span> {
+        <span class='ident'>abort</span>();
+    }
+
+    <span class='ident'>p</span>
+}
+<span class='attribute'>#[<span class='ident'>lang</span><span class='op'>=</span><span class='string'>&quot;exchange_free&quot;</span>]</span>
+<span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>deallocate</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>, <span class='ident'>_size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) {
+    <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>)
+}
+
+<span class='attribute'>#[<span class='ident'>start</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>main</span>(<span class='ident'>argc</span>: <span class='ident'>isize</span>, <span class='ident'>argv</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>isize</span> {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='kw'>box</span> <span class='number'>1</span>;
+
+    <span class='number'>0</span>
+}
+
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;stack_exhausted&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>stack_exhausted</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;eh_personality&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>eh_personality</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;panic_fmt&quot;</span>]</span> <span class='kw'>fn</span> <span class='ident'>panic_fmt</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> { <span class='kw'>loop</span> {} }
+</pre>
+
+<p>Note the use of <code>abort</code>: the <code>exchange_malloc</code> lang item is assumed to
+return a valid pointer, and so needs to do the check internally.</p>
+
+<p>Other features provided by lang items include:</p>
+
+<ul>
+<li>overloadable operators via traits: the traits corresponding to the
+<code>==</code>, <code>&lt;</code>, dereferencing (<code>*</code>) and <code>+</code> (etc.) operators are all
+marked with lang items; those specific four are <code>eq</code>, <code>ord</code>,
+<code>deref</code>, and <code>add</code> respectively.</li>
+<li>stack unwinding and general failure; the <code>eh_personality</code>, <code>fail</code>
+and <code>fail_bounds_checks</code> lang items.</li>
+<li>the traits in <code>std::marker</code> used to indicate types of
+various kinds; lang items <code>send</code>, <code>sync</code> and <code>copy</code>.</li>
+<li>the marker types and variance indicators found in
+<code>std::marker</code>; lang items <code>covariant_type</code>,
+<code>contravariant_lifetime</code>, etc.</li>
+</ul>
+
+<p>Lang items are loaded lazily by the compiler; e.g. if one never uses
+<code>Box</code> then there is no need to define functions for <code>exchange_malloc</code>
+and <code>exchange_free</code>. <code>rustc</code> will emit an error when an item is needed
+but not found in the current crate or any that it depends on.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>

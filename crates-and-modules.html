@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Крейты и модули</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
+</li>
+<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+</li>
+<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
+</li>
+<li><a href='functions.html'><b>2.6.</b> Функции</a>
+</li>
+<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+</li>
+<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+</li>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+</li>
+<li><a href='looping.html'><b>2.10.</b> Циклы</a>
+</li>
+<li><a href='strings.html'><b>2.11.</b> Строки</a>
+</li>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
+</li>
+<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+</li>
+</ul>
+</li>
+<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<ul class='section'>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+</li>
+<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
+</li>
+<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
+</li>
+<li><a href='ownership.html'><b>3.4.</b> Владение</a>
+</li>
+<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
+</li>
+<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
+</li>
+<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
+</li>
+<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+</li>
+<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+</li>
+<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+</li>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+</li>
+<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+</li>
+<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+</li>
+<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+</li>
+</ul>
+</li>
+<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<ul class='section'>
+<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+</li>
+<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+</li>
+<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+</li>
+<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</li>
+</ul>
+</li>
+<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+</li>
+<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Крейты и модули</h1>
+    <p>Когда проект начинает разрастаться, то хорошей практикой разработки программного обеспечения считается разбить его на кучу мелких кусочков, а затем собрать их вместе. Также важно иметь четко определенный интерфейс, потому что часть вашей функциональности является приватной, а часть - публичной. Для облегчения такого рода вещей, Rust обладает модульной системой.</p>
+
+<h1 id="Основные-термины:-крейты-и-модули" class='section-header'><a
+                           href="#Основные-термины:-крейты-и-модули">Основные термины: крейты и модули</a></h1>
+<p>Rust имеет два различных термина, которые относятся к модульной системе: <em>крейт</em> и <em>модуль</em>. Крейт - это синоним <em>библиотеки</em> или <em>пакета</em> на других языках. Именно поэтому инструмент управления пакетами в Rust называется &quot;Cargo&quot;: вы пересылаете ваши ящики (crate - ящик) другим в виде груза (cargo - груз). Крейты могут производить исполняемый файл или библиотеку, в зависимости от проекта.</p>
+
+<p>Каждый крейт имеет неявный <em>корневой модуль</em>, содержащий код для этого ящика. В рамках этого базового модуля можно определить дерево суб-модулей. Модули позволяют разделить ваш код внутри крейта.</p>
+
+<p>В качестве примера, давайте сделаем крейт <em>phrases</em>, который выдает нам различные фразы на разных языках. Чтобы не усложнять пример, мы будем использовать два вида фраз: &quot;greetings&quot; и &quot;farewells&quot;, и два языка для этих фраз: английский и японский (日本語). Мы будем использовать следующий шаблон модуля:</p>
+
+<pre><code class="language-text">                                +-----------+
+                            +---| greetings |
+                            |   +-----------+
+              +---------+   |
+              | english |---+
+              +---------+   |   +-----------+
+              |             +---| farewells |
++---------+   |                 +-----------+
+| phrases |---+
++---------+   |                  +-----------+
+              |              +---| greetings |
+              +----------+   |   +-----------+
+              | japanese |---+
+              +----------+   |
+                             |   +-----------+
+                             +---| farewells |
+                                 +-----------+
+</code></pre>
+
+<p>В этом примере, <code>phrases</code> - это название нашего крейта. Все остальное - модули. Вы можете видеть, что они образуют дерево, в основании которого располагается <em>корневой</em> крейт - <code>phrases</code>.</p>
+
+<p>Теперь, когда у нас есть шаблон, давайте определим эти модули в коде. Для начала создайте новый крейт с помощью Cargo:</p>
+
+<pre><code class="language-bash">$ cargo new phrases
+$ cd phrases
+</code></pre>
+
+<p>Если вы помните, то эта команда создает простой проект:</p>
+
+<pre><code class="language-bash">$ tree .
+.
+├── Cargo.toml
+└── src
+    └── lib.rs
+
+1 directory, 2 files
+</code></pre>
+
+<p><code>src/lib.rs</code> - наш корневой крейт, соответствующий <code>phrases</code> в нашей диаграмме выше.</p>
+
+<h1 id="Определение-модулей" class='section-header'><a
+                           href="#Определение-модулей">Определение модулей</a></h1>
+<p>Для определения каждого из наших модулей, мы используем ключевое слово <code>mod</code>. Давайте сделаем, чтобы наш <code>src/lib.rs</code> выглядел следующим образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/lib.rs</span>
+
+<span class='kw'>mod</span> <span class='ident'>english</span> {
+    <span class='kw'>mod</span> <span class='ident'>greetings</span> {
+
+    }
+
+    <span class='kw'>mod</span> <span class='ident'>farewells</span> {
+
+    }
+}
+
+<span class='kw'>mod</span> <span class='ident'>japanese</span> {
+    <span class='kw'>mod</span> <span class='ident'>greetings</span> {
+
+    }
+
+    <span class='kw'>mod</span> <span class='ident'>farewells</span> {
+
+    }
+}
+</pre>
+
+<p>После ключевого слова <code>mod</code>, вы задаете имя модуля. Имена модулей следуют соглашениям, как и другие идентификаторы Rust: <code>lower_snake_case</code>. Содержание каждого модуля обрамляется в фигурные скобки (<code>{}</code>).</p>
+
+<p>Внутри <code>mod</code> вы можете объявить суб-<code>mod</code>. Мы можем обращаться к суб-модулям с помощью нотации (<code>::</code>). Обращение к нашим четырем вложенным модулям: <code>english::greetings</code>, <code>english::farewells</code>, <code>japanese::greetings</code> и <code>japanese::farewells</code>. Так как суб-модули располагаются в пространстве имен своих родительских модулей, то суб-модули <code>english::greetings</code> и <code>japanese::greetings</code> не конфликтуют, несмотря на то, что они имеют одинаковые имена <code>greetings</code>.</p>
+
+<p>Так как в этом крейте нет функции <code>main()</code>, и называется он <code>lib.rs</code>, Cargo соберет этот ящик в виде библиотеки:</p>
+
+<pre><code class="language-bash">$ cargo build
+   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
+$ ls target
+deps  libphrases-a7448e02a0468eaa.rlib  native
+</code></pre>
+
+<p><code>libphrase-hash.rlib</code> - это скомпилированный крейт. Прежде чем мы рассмотрим, как использовать этот крейт из другого крейта, давайте разобьем его на несколько файлов.</p>
+
+<h1 id="Крейты-с-несколькими-файлами" class='section-header'><a
+                           href="#Крейты-с-несколькими-файлами">Крейты с несколькими файлами</a></h1>
+<p>Если бы каждый крейт мог состоять только из одного файла, то этот файл был бы очень большими. Зачастую легче разделить крейты на несколько файлов, и Rust поддерживает это двумя способами.</p>
+
+<p>Вместо объявления модуля наподобие:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>mod</span> <span class='ident'>english</span> {
+    <span class='comment'>// contents of our module go here</span>
+}
+</pre>
+
+<p>Мы можем объявить наш модуль в виде:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>mod</span> <span class='ident'>english</span>;
+</pre>
+
+<p>Если мы это сделаем, то Rust будет ожидать, что найдет либо файл <code>english.rs</code>, либо файл <code>english/mod.rs</code> с содержимым нашего модуля:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// contents of our module go here</span>
+</pre>
+
+<p>Обратите внимание, что в этих файлах вам не нужно заново объявить модуль: это уже сделано при изначальной декларации <code>mod</code>.</p>
+
+<p>С помощью этих двух приемов мы можем разбить наш крейт на две директории и семь файлов:</p>
+
+<pre><code class="language-bash">$ tree .
+.
+├── Cargo.lock
+├── Cargo.toml
+├── src
+│   ├── english
+│   │   ├── farewells.rs
+│   │   ├── greetings.rs
+│   │   └── mod.rs
+│   ├── japanese
+│   │   ├── farewells.rs
+│   │   ├── greetings.rs
+│   │   └── mod.rs
+│   └── lib.rs
+└── target
+    ├── deps
+    ├── libphrases-a7448e02a0468eaa.rlib
+    └── native
+</code></pre>
+
+<p><code>src/lib.rs</code> - наш корневой крейт, и выглядит он следующим образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/lib.rs</span>
+
+<span class='kw'>mod</span> <span class='ident'>english</span>;
+
+<span class='kw'>mod</span> <span class='ident'>japanese</span>;
+</pre>
+
+<p>Эти две декларации информируют Rust, что следует искать: <code>src/english.rs</code> или <code>src/english/mod.rs</code>, <code>src/japanese.rs</code> или <code>src/japanese/mod.rs</code>, в зависимости от нашей структуры. В данном примере мы выбрали второй вариант из-за того, что наши модули содержат суб-модули. И <code>src/english/mod.rs</code> и <code>src/japanese/mod.rs</code> выглядят следующим образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// both src/english/mod.rs and src/japanese/mod.rs</span>
+
+<span class='kw'>mod</span> <span class='ident'>greetings</span>;
+
+<span class='kw'>mod</span> <span class='ident'>farewells</span>;
+</pre>
+
+<p>Опять же, эти декларации информируют Rust, что следует искать: <code>src/english/greetings.rs</code>, <code>src/japanese/greetings.rs</code>, <code>src/english/farewells.rs</code>, <code>src/japanese/farewells.rs</code> или <code>src/english/greetings/mod.rs</code>, <code>src/japanese/greetings/mod.rs</code>, <code>src/english/farewells/mod.rs</code>, <code>src/japanese/farewells/mod.rs</code>. Так как эти суб-модули не содержат свои собственные суб-модули, то мы выбрали <code>src/english/greetings.rs</code> и <code>src/japanese/farewells.rs</code>. Вот так!</p>
+
+<p>Содержание <code>src/english/greetings.rs</code> и <code>src/japanese/farewells.rs</code> являются пустыми на данный момент. Давайте добавим несколько функций.</p>
+
+<p>Поместите следующий код в <code>src/english/greetings.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/english/greetings.rs</span>
+
+<span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;Hello!&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>Следующий код в <code>src/english/farewells.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/english/farewells.rs</span>
+
+<span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;Goodbye.&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>Следующий код в <code>src/japanese/greetings.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/japanese/greetings.rs</span>
+
+<span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;こんにちは&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>Конечно, вы можете скопировать и вставить этот код с этой страницы, или просто напечатать что-нибудь еще. Не важно, что вы на самом деле поместили &quot;Konnichiwa&quot;, чтобы узнать о модульной системе.</p>
+
+<p>Поместите следующий код в <code>src/japanese/farewells.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/japanese/farewells.rs</span>
+
+<span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;さようなら&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>(Это &quot;Sayonara&quot;, если вам интересно.)</p>
+
+<p>Теперь у нас есть некоторая функциональность в нашем крейте, давайте попробуем использовать его из другого крейта.</p>
+
+<h1 id="Импорт-внешних-крейтов" class='section-header'><a
+                           href="#Импорт-внешних-крейтов">Импорт внешних крейтов</a></h1>
+<p>У нас есть крейт библиотека. Давайте создадим исполняемый крейт, который импортирует и использует нашу библиотеку.</p>
+
+<p>Создайте <code>src/main.rs</code> и положите в не него следующее: (при этом он не будет компилироваться)</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/main.rs</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>phrases</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in Japanese: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>japanese</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in Japanese: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>japanese</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
+}
+</pre>
+
+<p>Декларация <code>extern crate</code> информирует Rust о том, что для компиляции и линковки кода нам нужен крейт <code>phrases</code>. После этого мы сможем использовать модули <code>phrases</code> здесь. Как мы уже упоминали ранее, вы можете использовать двойные двоеточия для обращения к суб-модулям и функциям внутри них.</p>
+
+<p>Кроме того, Cargo предполагает, что <code>src/main.rs</code> это корневой крейт бинарного крейта, а не крейта библиотеки. Теперь наш пакет содержит два крейта: <code>src/lib.rs</code> и <code>src/main.rs</code>. Этот шаблон является довольно распространенным для исполняемых крейтов: основная функциональность сосредоточена в библиотечном крейте, а исполняемый крейт использует эту библиотеку. Таким образом, другие программы также могут использовать крейт библиотеку, к тому же этот подход обеспечивает отделение интереса (разделение функциональности).</p>
+
+<p>Хотя зтот все еще не работает. Мы получаем четыре ошибки, которые выглядят примерно так:</p>
+
+<pre><code class="language-bash">$ cargo build
+   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
+/home/you/projects/phrases/src/main.rs:4:38: 4:72 error: function `hello` is private
+/home/you/projects/phrases/src/main.rs:4     println!(&quot;Hello in English: {}&quot;, phrases::english::greetings::hello());
+                                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+note: in expansion of format_args!
+&lt;std macros&gt;:2:23: 2:77 note: expansion site
+&lt;std macros&gt;:1:1: 3:2 note: in expansion of println!
+/home/you/projects/phrases/src/main.rs:4:5: 4:76 note: expansion site
+
+</code></pre>
+
+<p>По умолчанию, все элементы в Rust являются приватными. Давайте поговорим об этом более подробно.</p>
+
+<h1 id="Экспорт-публичных-интерфейсов" class='section-header'><a
+                           href="#Экспорт-публичных-интерфейсов">Экспорт публичных интерфейсов</a></h1>
+<p>Ржавчина позволяет точно контролировать, какие элементы вашего интерфейса являются публичными, и поэтому по умолчанию элементы являются приватными. Чтобы сделать элементы публичными, вы используете ключевое слово <code>pub</code>. Давайте сначала сосредоточимся на модуле <code>english</code>, поэтому сократим файл <code>src/main.rs</code> до этого:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/main.rs</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>phrases</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
+}
+</pre>
+
+<p>В файле <code>src/lib.rs</code> давайте добавим <code>pub</code> в объявлении модуля <code>english</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/lib.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>english</span>;
+
+<span class='kw'>mod</span> <span class='ident'>japanese</span>;
+</pre>
+
+<p>И в файле <code>src/english/mod.rs</code> давайте сделаем оба модуля <code>pub</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/english/mod.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>greetings</span>;
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>farewells</span>;
+</pre>
+
+<p>В файле <code>src/english/greetings.rs</code> давайте добавим <code>pub</code> к декларации нашей функции <code>fn</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/english/greetings.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;Hello!&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>А также в <code>src/english/farewells.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/english/farewells.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;Goodbye.&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>Теперь наши крейты компилируются, хотя и с предупреждениями о том, что функции в модуле <code>japanese</code> не используются:</p>
+
+<pre><code class="language-bash">$ cargo run
+   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
+/home/you/projects/phrases/src/japanese/greetings.rs:1:1: 3:2 warning: code is never used: `hello`, #[warn(dead_code)] on by default
+/home/you/projects/phrases/src/japanese/greetings.rs:1 fn hello() -&gt; String {
+/home/you/projects/phrases/src/japanese/greetings.rs:2     &quot;こんにちは&quot;.to_string()
+/home/you/projects/phrases/src/japanese/greetings.rs:3 }
+/home/you/projects/phrases/src/japanese/farewells.rs:1:1: 3:2 warning: code is never used: `goodbye`, #[warn(dead_code)] on by default
+/home/you/projects/phrases/src/japanese/farewells.rs:1 fn goodbye() -&gt; String {
+/home/you/projects/phrases/src/japanese/farewells.rs:2     &quot;さようなら&quot;.to_string()
+/home/you/projects/phrases/src/japanese/farewells.rs:3 }
+     Running `target/phrases`
+Hello in English: Hello!
+Goodbye in English: Goodbye.
+</code></pre>
+
+<p>Теперь, когда наши функции являются публичными, мы можем использовать их. Отлично! Тем не менее, написание <code>phrases::english::greetings::hello()</code> является очень длинным и неудобным. Rust предоставляет другое ключевое слово, для импорта имен в текущую область, чтобы для обращения можно было использовать короткие имена. Давайте поговорим об этом ключевом слове <code>use</code>.</p>
+
+<h1 id="Импорт-модулей-с-помощью-use" class='section-header'><a
+                           href="#Импорт-модулей-с-помощью-use">Импорт модулей с помощью <code>use</code></a></h1>
+<p>Rust предоставляет ключевое слово <code>use</code>, которое позволяет импортировать имена в нашу локальную область видимости. Давайте изменим наш файл <code>src/main.rs</code>, чтобы он выглядел следующим образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/main.rs</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>phrases</span>;
+
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>;
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>greetings</span>::<span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
+}
+</pre>
+
+<p>Две строки с <code>use</code> импортируют соответствующие модули в локальную область видимости, поэтому мы можем обратиться к функциям по гораздо более коротким именам. По соглашению, при импорте функции, лучшей практикой считается импортировать модуль, а не функцию непосредственно. Другими словами, вы <em>могли бы</em> сделать следующее:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>phrases</span>;
+
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>;
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>goodbye</span>());
+}
+</pre>
+
+<p>Но такой подход не является идиоматическим. Он значительно чаще приводит к конфликту имен. Для нашей короткой программы это не так важно, но, как только программа разрастается, это становится проблемой. Если у нас возникает конфликт имен, Rust выдает ошибку компиляции. Например, если мы сделаем функции <code>japanese</code> публичными, и пытаемся сделать это:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>phrases</span>;
+
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>;
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>japanese</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in Japanese: {}&quot;</span>, <span class='ident'>hello</span>());
+}
+</pre>
+
+<p>Rust выдаст нам сообщение об ошибке во время компиляции:</p>
+
+<pre><code class="language-text">   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
+/home/you/projects/phrases/src/main.rs:4:5: 4:40 error: a value named `hello` has already been imported in this module
+/home/you/projects/phrases/src/main.rs:4 use phrases::japanese::greetings::hello;
+                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+error: aborting due to previous error
+Could not compile `phrases`.
+</code></pre>
+
+<p>Если мы импортируем несколько имен из одного модуля, то нам совсем не обязательно писать одно и то же много раз. Для этого в Rust предусмотрен сокращенный синтаксис:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>;
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>;
+</pre>
+
+<p>Вы можете использовать фигурные скобки:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::{<span class='ident'>greetings</span>, <span class='ident'>farewells</span>};
+</pre>
+
+<p>Эти две декларации эквивалентны, но вторая гораздо более компактная.</p>
+
+<h2 id="Реэкспорт-с-помощью-pub-use" class='section-header'><a
+                           href="#Реэкспорт-с-помощью-pub-use">Реэкспорт с помощью <code>pub use</code></a></h2>
+<p>Вы можете использовать <code>use</code> не просто для сокращения идентификаторов. Вы также можете использовать его внутри вашего крейта, чтобы реэкспортировать функцию из другого модуля. Это позволяет представить внешний интерфейс, который может не напрямую отображать внутреннюю организацию кода.</p>
+
+<p>Давайте посмотрим на примере. Измените файл <code>src/main.rs</code> следующим образом:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/main.rs</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>phrases</span>;
+
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::{<span class='ident'>greetings</span>,<span class='ident'>farewells</span>};
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>japanese</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>greetings</span>::<span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in Japanese: {}&quot;</span>, <span class='ident'>japanese</span>::<span class='ident'>hello</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in Japanese: {}&quot;</span>, <span class='ident'>japanese</span>::<span class='ident'>goodbye</span>());
+}
+</pre>
+
+<p>Затем измените файл <code>src/lib.rs</code>, чтобы сделать модуль <code>japanese</code> с публичным:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/lib.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>english</span>;
+
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>japanese</span>;
+</pre>
+
+<p>Далее, убедитесь, что обе функции публичные, сперва в <code>src/japanese/greetings.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/japanese/greetings.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;こんにちは&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>А затем в <code>src/japanese/farewells.rs</code>:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/japanese/farewells.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='string'>&quot;さようなら&quot;</span>.<span class='ident'>to_string</span>()
+}
+</pre>
+
+<p>Наконец, измените файл <code>src/japanese/mod.rs</code> вот так:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// in src/japanese/mod.rs</span>
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>;
+
+<span class='kw'>mod</span> <span class='ident'>greetings</span>;
+
+<span class='kw'>mod</span> <span class='ident'>farewells</span>;
+</pre>
+
+<p>Декларация <code>pub use</code> переносит функцию в рамках в этой части нашего модуля иерархии. Так как мы использовали <code>pub use</code> внутри нашего модуля <code>japanese</code>, то теперь мы можем вызывать функцию <code>phrases::japanese::hello()</code> и функцию <code>phrases::japanese::goodbye()</code>, хотя код для них расположен в <code>phrases::japanese::greetings::hello()</code> и <code>phrases::japanese::farewells::goodbye()</code> соответственно. Наша внутренняя организация не определяет наш внешний интерфейс.</p>
+
+<p>Здесь мы используем <code>pub use</code> для каждой функции, которую хотим перенести в область <code>japanese</code>. В качестве альтернативы, мы могли бы использовать шаблонный синтаксис, чтобы включать в себя все элементы из модуля <code>greetings</code> в текущую области: <code>pub use self::greetings::*</code>.</p>
+
+<p>Что можно сказать о <code>self</code>? По умолчанию декларации <code>use</code> используют абсолютные пути, начинающиеся с корневого крейта. <code>self</code>, напротив, формирует эти пути относительно текущего места в иерархии. У <code>use</code> есть еще одна особая форма: вы можете использовать <code>use super::</code>, чтобы подняться на один уровень вверх по дереву от вашего текущего местоположения. Некоторые предпочитают думать о <code>self</code> как о <code>.</code>, а о <code>super</code> как о <code>..</code>, что для многих командных оболочек является представлением для текущей директории и для родительской директории соответственно.</p>
+
+<p>Вне <code>use</code>, пути относительны: <code>foo::bar()</code> относится к функции внутри <code>foo</code> относительно того, где мы находимся. Если же используется префикс <code>::</code>, как в <code>::foo::bar()</code>, это указывает на другой <code>foo</code>, абсолютный путь относительно корневого крейта.</p>
+
+<p>Кроме того, обратите внимание, что мы использовали <code>pub use</code> прежде, чем объявили наши модули <code>mod</code>. Rust требует, чтобы декларации <code>use</code> шли в первую очередь.</p>
+
+<p>Следующий код собирается и работает:</p>
+
+<pre><code class="language-bash">$ cargo run
+   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
+     Running `target/phrases`
+Hello in English: Hello!
+Goodbye in English: Goodbye.
+Hello in Japanese: こんにちは
+Goodbye in Japanese: さようなら
+</code></pre>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceeding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+</div></div>
+
+
+</body>
+</html>
