@@ -37,6 +37,9 @@
 
 ----
 
-Перевод книги (текущий вариант) расположен [здесь](https://www.gitbook.com/book/kgv/rust_book_ru).
+Перевод книги (текущий вариант):
+
+ * Вариант gitbook расположен [здесь](https://www.gitbook.com/book/kgv/rust_book_ru).
+ * Вариант rustbook расположен [здесь](http://kgv.github.io/rust_book_ru/)
 
 Оригинал книги расположен [здесь](https://doc.rust-lang.org/book).
