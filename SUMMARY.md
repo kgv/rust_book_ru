@@ -22,6 +22,7 @@
     * [Больше о строках](more-strings.md)
     * [Шаблоны](patterns.md)
     * [Синтаксис методов](method-syntax.md)
+    * [Ассоциированные типы](associated-types.md)
     * [Замыкания](closures.md)
     * [Итераторы](iterators.md)
     * [Дженерики](generics.md)
