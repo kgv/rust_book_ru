@@ -29,7 +29,7 @@
     * [Трейты](traits.md)
     * [Статическая и Динамическая диспетчерезация](static-and-dynamic-dispatch.md)
     * [Макросы](macros.md)
-    * [Concurrency](concurrency.md)
+    * [Многозадачность](concurrency.md)
     * [Обработка ошибок](error-handling.md)
     * [Документация](documentation.md)
 * [Продвинутый уровень](advanced.md)

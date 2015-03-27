@@ -9,7 +9,7 @@
 * ~~comments.md~~
 * compound-data-types.md
 * conclusion.md
-* **concurrency.md**
+* ~~concurrency.md~~
 * ~~crates-and-modules.md~~
 * ~~documentation.md~~
 * ~~error-handling.md~~
