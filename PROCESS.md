@@ -8,7 +8,7 @@
 * ~~closures.md~~
 * ~~comments.md~~
 * compound-data-types.md
-* conclusion.md
+* ~~conclusion.md~~
 * ~~concurrency.md~~
 * ~~crates-and-modules.md~~
 * ~~documentation.md~~
