@@ -16,7 +16,7 @@
 * ffi.md
 * functions.md
 * ~~generics.md~~
-* glossary.md
+* ~~glossary.md~~
 * guessing-game.md
 * ~~hello-cargo.md~~
 * ~~hello-world.md~~
