@@ -2,7 +2,7 @@
 
 * ~~advanced.md~~
 * advanced-macros.md
-* **arrays-vectors-and-slices.md**
+* ~~arrays-vectors-and-slices.md~~
 * ~~associated-types.md~~
 * ~~basic.md~~
 * ~~closures.md~~

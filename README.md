@@ -28,6 +28,7 @@
  - [kgv](https://github.com/kgv)
  - [ithamsteri](https://github.com/ithamsteri)
  - [funkill](https://github.com/funkill)
+ - [mkpankov](https://github.com/mkpankov)
 
 Помощь в переводе приветствуется. ^_^
 
