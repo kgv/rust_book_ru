@@ -28,7 +28,7 @@
 * **macros.md**
 * match.md
 * ~~method-syntax.md~~
-* more-strings.md
+* ~~more-strings.md~~
 * ~~ownership.md~~
 * ~~patterns.md~~
 * plugins.md
