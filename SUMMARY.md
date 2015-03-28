@@ -4,7 +4,7 @@
     * [Установка Rust](installing-rust.md)
     * [Hello, world!](hello-world.md)
     * [Hello, Cargo!](hello-cargo.md)
-    * [Привязка переменных](variable-bindings.md)
+    * [Связывание переменных](variable-bindings.md)
     * [Условные переходы (If)](if.md)
     * [Функции](functions.md)
     * [Коментарии](comments.md)

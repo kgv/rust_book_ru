@@ -41,7 +41,7 @@
 * ~~testing.md~~
 * ~~traits.md~~
 * unsafe.md
-* variable-bindings.md
+* ~~variable-bindings.md~~
 
 **Выделены жирным** - перевод файла начат, но не окончен.
 
