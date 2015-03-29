@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/error-handling.md b/master:error-handling.md
+diff --git a/rust/master:src/doc/trpl/error-handling.md b/fix_current_version:error-handling.md
 index cf60bd8..e49ccfd 100644
 --- a/rust/master:src/doc/trpl/error-handling.md
-+++ b/master:error-handling.md
++++ b/fix_current_version:error-handling.md
 @@ -1,52 +1,39 @@
 -% Error Handling
 +% Обработка ошибок

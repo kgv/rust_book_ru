@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/conclusion.md b/master:conclusion.md
+diff --git a/rust/master:src/doc/trpl/conclusion.md b/fix_current_version:conclusion.md
 index 9afddb1..6669f07 100644
 --- a/rust/master:src/doc/trpl/conclusion.md
-+++ b/master:conclusion.md
++++ b/fix_current_version:conclusion.md
 @@ -1,11 +1,5 @@
 -% Conclusion
 +% Заключение

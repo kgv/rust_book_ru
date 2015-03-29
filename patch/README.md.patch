@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/README.md b/master:README.md
-index 4a866d6..8a021fb 100644
+diff --git a/rust/master:src/doc/trpl/README.md b/fix_current_version:README.md
+index 4a866d6..200fd49 100644
 --- a/rust/master:src/doc/trpl/README.md
-+++ b/master:README.md
-@@ -1,39 +1,46 @@
++++ b/fix_current_version:README.md
+@@ -1,39 +1,50 @@
 -% The Rust Programming Language
 +% Язык программирования Rust
  
@@ -44,17 +44,21 @@ index 4a866d6..8a021fb 100644
 -In a similar fashion to "Intermediate," this section is full of individual,
 -deep-dive chapters, which stand alone and can be read in any order. These
 -chapters focus on the most complex features,
-+Аналогично разделу "Средний уровень", этот раздел содержит самодостаточные подразделы, которые так же могут быть прочитаны в любом порядке. Эти подразделы содержат материалы для углубленного изучения концепций Rust. Они посвящены наиболее сложным особенносям Rust, а также некоторым вещам, которые будут доступны только в будущих версиях Rust.
++Аналогично разделу "Средний уровень", этот раздел содержит самодостаточные подразделы, которые так же могут быть прочитаны в любом порядке. Эти подразделы содержат материалы для углубленного изучения концепций Rust. Они посвящены наиболее сложным особенносям Rust.
  
 -<h2 class="section-header"><a href="unstable.html">Unstable</a></h2>
-+После прочтения раздела "Продвинутый уровень", вы будете экспертом в Rust!
++<h2 class="section-header"><a href="unstable.html">Нестабильный</a></h2>
  
 -In a similar fashion to "Intermediate," this section is full of individual,
 -deep-dive chapters, which stand alone and can be read in any order.
-+## От переводчика
++Аналогично разделу "Средний уровень", этот раздел содержит самодостаточные подразделы, которые так же могут быть прочитаны в любом порядке.
  
 -This chapter contains things that are only available on the nightly channel of
 -Rust.
++Эти подразделы содержат вещи, которые доступны только в nightly сборках Rust.
++
++## От переводчика
++
 +В переводе принимали участие:
 + - [kgv](https://github.com/kgv)
 + - [ithamsteri](https://github.com/ithamsteri)

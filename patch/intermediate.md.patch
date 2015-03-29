@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/intermediate.md b/master:intermediate.md
+diff --git a/rust/master:src/doc/trpl/intermediate.md b/fix_current_version:intermediate.md
 index 73370a3..58c8207 100644
 --- a/rust/master:src/doc/trpl/intermediate.md
-+++ b/master:intermediate.md
++++ b/fix_current_version:intermediate.md
 @@ -1,7 +1,5 @@
 -% Intermediate
 +% Средний уровень

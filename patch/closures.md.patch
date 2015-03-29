@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/closures.md b/master:closures.md
+diff --git a/rust/master:src/doc/trpl/closures.md b/fix_current_version:closures.md
 index bf4c2d9..9636c31 100644
 --- a/rust/master:src/doc/trpl/closures.md
-+++ b/master:closures.md
++++ b/fix_current_version:closures.md
 @@ -1,12 +1,8 @@
 -% Closures
 +% Замыкания

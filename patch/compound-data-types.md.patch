@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/compound-data-types.md b/master:compound-data-types.md
-index e44d2ed..0aab254 100644
+diff --git a/rust/master:src/doc/trpl/compound-data-types.md b/fix_current_version:compound-data-types.md
+index e44d2ed..5c0d826 100644
 --- a/rust/master:src/doc/trpl/compound-data-types.md
-+++ b/master:compound-data-types.md
++++ b/fix_current_version:compound-data-types.md
 @@ -1,54 +1,53 @@
 -% Compound Data Types
 +% Агрегатные типы данных
@@ -315,7 +315,7 @@ index e44d2ed..0aab254 100644
  
  ```rust
  struct Empty;
-@@ -240,36 +250,41 @@ struct Status { Health: i32, Mana: i32, Attack: i32, Defense: i32 }
+@@ -240,18 +250,21 @@ struct Status { Health: i32, Mana: i32, Attack: i32, Defense: i32 }
  struct HeightDatabase(Vec<i32>);
  ```
  
@@ -346,16 +346,7 @@ index e44d2ed..0aab254 100644
  let ten  = Character::Digit(10);
  let four = Character::Digit(4);
  
--// Error: `*` is not implemented for type `Character`
-+// Error: binary operation `*` cannot be applied to type `Character`
- let forty = ten * four;
- 
--// Error: `<=` is not implemented for type `Character`
-+// Error: binary operation `<=` cannot be applied to type `Character`
- let four_is_smaller = four <= ten;
- 
--// Error: `==` is not implemented for type `Character`
-+// Error: binary operation `==` cannot be applied to type `Character`
+@@ -265,11 +278,13 @@ let four_is_smaller = four <= ten;
  let four_equals_ten = four == ten;
  ```
  

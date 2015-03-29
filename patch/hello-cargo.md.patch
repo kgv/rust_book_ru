@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/hello-cargo.md b/master:hello-cargo.md
+diff --git a/rust/master:src/doc/trpl/hello-cargo.md b/fix_current_version:hello-cargo.md
 index b45211e..f4395f4 100644
 --- a/rust/master:src/doc/trpl/hello-cargo.md
-+++ b/master:hello-cargo.md
++++ b/fix_current_version:hello-cargo.md
 @@ -1,79 +1,55 @@
  % Hello, Cargo!
  

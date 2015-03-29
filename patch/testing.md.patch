@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/testing.md b/master:testing.md
+diff --git a/rust/master:src/doc/trpl/testing.md b/fix_current_version:testing.md
 index 8fb08e1..a43c05c 100644
 --- a/rust/master:src/doc/trpl/testing.md
-+++ b/master:testing.md
++++ b/fix_current_version:testing.md
 @@ -1,27 +1,22 @@
 -% Testing
 +% Тестирование

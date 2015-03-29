@@ -1,24 +1,23 @@
-diff --git a/rust/master:src/doc/trpl/comments.md b/master:comments.md
-index 441496e..060086b 100644
+diff --git a/rust/master:src/doc/trpl/comments.md b/fix_current_version:comments.md
+index 441496e..abc932b 100644
 --- a/rust/master:src/doc/trpl/comments.md
-+++ b/master:comments.md
-@@ -1,47 +1,37 @@
++++ b/fix_current_version:comments.md
+@@ -1,47 +1,38 @@
 -% Comments
-+% Коментарии
++% Комментарии
  
 -Now that we have some functions, it's a good idea to learn about comments.
 -Comments are notes that you leave to other programmers to help explain things
 -about your code. The compiler mostly ignores them.
-+Теперь, когда у нас есть несколько функций, неплохо бы узнать о комментариях. Комментарии это заметки, которые вы оставляете для других программистов, что бы помочь объяснить некоторые вещи в вашем коде. Компилятор в основном игнорирует их.
++Теперь, когда у нас есть несколько функций, неплохо бы узнать о комментариях. Комментарии - это заметки, которые вы оставляете для других программистов, чтобы помочь объяснить некоторые вещи в вашем коде. Компилятор в основном игнорирует их.
  
 -Rust has two kinds of comments that you should care about: *line comments*
 -and *doc comments*.
 +В Rust есть два вида комментариев: `строчные комментарии` и `doc-комментарии`.
  
--```{rust}
+ ```{rust}
 -// Line comments are anything after '//' and extend to the end of the line.
-+```rust
-+// Строчные комментарии это все что угодно после '//' и до конца строки.
++// Строчные комментарии - это всё что угодно после '//' и до конца строки.
  
 -let x = 5; // this is also a line comment.
 +let x = 5; // это тоже строчный комментарий.
@@ -27,39 +26,37 @@ index 441496e..060086b 100644
 -// to each other. Put a space between the // and your comment so that it's
 -// more readable.
 +// Если у вас длинное объяснение для чего-либо, вы можете расположить строчные комментарии
-+// один за другим. Поместите пробел между // и вашим комментарием, так как это более читаемо.
++// один за другим. Поместите пробел между '//' и вашим комментарием, так как это более читаемо.
  ```
-+Другое применение комментария - это doc-комментарий. Doc-комментарий использует `///` вместо `//`, и поддерживает Markdown-разметку внутри:
  
 -The other kind of comment is a doc comment. Doc comments use `///` instead of
 -`//`, and support Markdown notation inside:
--
--```{rust}
++Другое применение комментария - это doc-комментарий. Doc-комментарий использует `///` вместо `//`, и поддерживает Markdown-разметку внутри:
+ 
+ ```{rust}
 -/// `hello` is a function that prints a greeting that is personalized based on
 -/// the name given.
-+```rust
-+/// `hello` это функция которая выводит на экран персональное приветствие
++/// `hello` - это функция, которая выводит на экран персональное приветствие
 +/// основанное на полученном имени
  ///
--/// # Arguments
-+/// # Параметры
+ /// # Arguments
  ///
 -/// * `name` - The name of the person you'd like to greet.
 +/// * `name` - Имя особы, которую вы хотите поприветствовать.
  ///
--/// # Examples
-+/// # Пример
+ /// # Examples
  ///
  /// ```rust
  /// let name = "Steve";
 -/// hello(name); // prints "Hello, Steve!"
-+/// hello(name); // выведет "Hello, Steve!"
++/// hello(name); // выведет "Привет, Steve!"
  /// ```
  fn hello(name: &str) {
-     println!("Hello, {}!", name);
+-    println!("Hello, {}!", name);
++    println!("Привет, {}!", name);
  }
  ```
-+При написании doc-комментария, добавление разделов для любых аргументов, возвращаемых значений, и приведение некоторых примеров использования очень и очень полезно.
++При написании doc-комментария, очень полезно добавлять разделы для любых аргументов, возвращаемых значений и приводить некоторые примеры использования.
  
 -When writing doc comments, adding sections for any arguments, return values,
 -and providing some examples of usage is very, very helpful. Don't worry about
@@ -67,4 +64,4 @@ index 441496e..060086b 100644
 -
 -You can use the [`rustdoc`](documentation.html) tool to generate HTML documentation
 -from these doc comments.
-+Вы можете использовать инструмент `rustdoc` для генерации HTML-документации из этих doc-комментариев. Мы расскажем больше о `rustdoc` позже в отдельной теме.
++Вы можете использовать [`rustdoc`](documentation.html) для генерации HTML-документации из этих doc-комментариев. Мы расскажем больше о `rustdoc` позже в отдельной теме.

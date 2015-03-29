@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/static-and-dynamic-dispatch.md b/master:static-and-dynamic-dispatch.md
+diff --git a/rust/master:src/doc/trpl/static-and-dynamic-dispatch.md b/fix_current_version:static-and-dynamic-dispatch.md
 index a779481..f80381d 100644
 --- a/rust/master:src/doc/trpl/static-and-dynamic-dispatch.md
-+++ b/master:static-and-dynamic-dispatch.md
++++ b/fix_current_version:static-and-dynamic-dispatch.md
 @@ -1,16 +1,10 @@
 -% Static and Dynamic Dispatch
 +% Статическая и Динамическая диспетчерезация
