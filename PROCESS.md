@@ -14,7 +14,7 @@
 * ~~documentation.md~~
 * ~~error-handling.md~~
 * ffi.md
-* functions.md
+* ~~functions.md~~
 * ~~generics.md~~
 * ~~glossary.md~~
 * guessing-game.md
