@@ -1,0 +1,15 @@
+diff --git a/rust/master:src/doc/trpl/basic.md b/master:basic.md
+index c267830..3134346 100644
+--- a/rust/master:src/doc/trpl/basic.md
++++ b/master:basic.md
+@@ -1,7 +1,5 @@
+-% Basics
++% Основной уровень
+ 
+-This section is a linear introduction to the basic syntax and semantics of
+-Rust. It has individual sections on each part of Rust's syntax.
++Этот раздел просто описывает основной синтаксис и семантику Rust. Он поделен на подразделы, в каждом из которых описана определенная часть синтаксиса Rust. Завершается раздел небольшим проектом: игрой в догадки.
+ 
+-After reading "Basics," you will have a good foundation to learn more about
+-Rust, and can write very simple programs.
++После прочтения раздела "Основной уровень" вы будете иметь базовые знания, необходимые для дальнейшего изучения Rust, и сможете писать очень простые программы.
