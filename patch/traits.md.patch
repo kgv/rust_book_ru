@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/traits.md b/master:traits.md
-index 1e44076..53c16e9 100644
+index 1e44076..a5f0eea 100644
 --- a/rust/master:src/doc/trpl/traits.md
 +++ b/master:traits.md
-@@ -1,10 +1,8 @@
+@@ -1,7 +1,6 @@
 -% Traits
 +% Трейты
  
@@ -11,11 +11,8 @@ index 1e44076..53c16e9 100644
 +Вы помните, ключевое слово `impl`, используемое для вызова функции с синтаксисом метода?
  
  ```{rust}
--# #![feature(core)]
- struct Circle {
-     x: f64,
-     y: f64,
-@@ -18,11 +16,9 @@ impl Circle {
+ # #![feature(core)]
+@@ -18,8 +17,7 @@ impl Circle {
  }
  ```
  
@@ -24,11 +21,8 @@ index 1e44076..53c16e9 100644
 +Трейты схожи, за исключением того, что мы определяем трейт, содержащий лишь сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например, как показано ниже:
  
  ```{rust}
--# #![feature(core)]
- struct Circle {
-     x: f64,
-     y: f64,
-@@ -40,19 +36,15 @@ impl HasArea for Circle {
+ # #![feature(core)]
+@@ -40,19 +38,15 @@ impl HasArea for Circle {
  }
  ```
  
@@ -51,7 +45,7 @@ index 1e44076..53c16e9 100644
  
  ```{rust,ignore}
  fn print_area<T>(shape: T) {
-@@ -60,15 +52,13 @@ fn print_area<T>(shape: T) {
+@@ -60,15 +54,13 @@ fn print_area<T>(shape: T) {
  }
  ```
  
@@ -69,7 +63,7 @@ index 1e44076..53c16e9 100644
  
  ```{rust}
  # trait HasArea {
-@@ -79,14 +69,11 @@ fn print_area<T: HasArea>(shape: T) {
+@@ -79,11 +71,9 @@ fn print_area<T: HasArea>(shape: T) {
  }
  ```
  
@@ -82,11 +76,8 @@ index 1e44076..53c16e9 100644
 +Вот расширенный пример того, как это работает:
  
  ```{rust}
--# #![feature(core)]
- trait HasArea {
-     fn area(&self) -> f64;
- }
-@@ -137,29 +124,26 @@ fn main() {
+ # #![feature(core)]
+@@ -137,29 +127,26 @@ fn main() {
  }
  ```
  
@@ -120,7 +111,7 @@ index 1e44076..53c16e9 100644
  
  ```{rust}
  trait HasArea {
-@@ -177,13 +161,9 @@ impl HasArea for i32 {
+@@ -177,13 +164,9 @@ impl HasArea for i32 {
  5.area();
  ```
  
@@ -136,7 +127,7 @@ index 1e44076..53c16e9 100644
  
  ```{rust,ignore}
  mod shapes {
-@@ -217,18 +197,15 @@ fn main() {
+@@ -217,15 +200,13 @@ fn main() {
  }
  ```
  
@@ -153,11 +144,8 @@ index 1e44076..53c16e9 100644
 +Если мы добавим строку с `use` над функцией `main` и сделаем нужные элементы публичными, все будет в порядке:
  
  ```{rust}
--# #![feature(core)]
- use shapes::HasArea;
- 
- mod shapes {
-@@ -263,25 +240,15 @@ fn main() {
+ # #![feature(core)]
+@@ -263,25 +244,15 @@ fn main() {
  }
  ```
  
@@ -188,7 +176,7 @@ index 1e44076..53c16e9 100644
  
  ```
  use std::fmt::Debug;
-@@ -293,10 +260,9 @@ fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
+@@ -293,10 +264,9 @@ fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
  }
  ```
  
@@ -201,7 +189,7 @@ index 1e44076..53c16e9 100644
  
  ```
  use std::fmt::Debug;
-@@ -319,10 +285,7 @@ fn main() {
+@@ -319,10 +289,7 @@ fn main() {
  }
  ```
  
@@ -213,7 +201,7 @@ index 1e44076..53c16e9 100644
  
  ```
  use std::fmt::Debug;
-@@ -337,9 +300,9 @@ fn bar<T, K>(x: T, y: K)
+@@ -337,9 +304,9 @@ fn bar<T, K>(x: T, y: K)
  }
  ```
  
@@ -225,7 +213,7 @@ index 1e44076..53c16e9 100644
  
  ```
  trait ConvertTo<Output> {
-@@ -363,13 +326,11 @@ fn inverse<T>() -> T
+@@ -363,13 +330,11 @@ fn inverse<T>() -> T
  }
  ```
  
@@ -242,7 +230,7 @@ index 1e44076..53c16e9 100644
  
  ```{rust,ignore}
  fn inverse<T>(x: T) -> Result<T, String> {
-@@ -379,15 +340,13 @@ fn inverse<T>(x: T) -> Result<T, String> {
+@@ -379,15 +344,13 @@ fn inverse<T>(x: T) -> Result<T, String> {
  }
  ```
  
@@ -260,7 +248,7 @@ index 1e44076..53c16e9 100644
  
  ```{rust,ignore}
  fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
-@@ -397,7 +356,7 @@ fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
+@@ -397,7 +360,7 @@ fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
  }
  ```
  
@@ -269,7 +257,7 @@ index 1e44076..53c16e9 100644
  
  ```text
  error: mismatched types:
-@@ -407,12 +366,9 @@ error: mismatched types:
+@@ -407,9 +370,7 @@ error: mismatched types:
      found floating-point variable)
  ```
  
@@ -279,11 +267,8 @@ index 1e44076..53c16e9 100644
 +Как уже было сказано, этот код не будет работать. Это потому, что наш `T` реализует `PartialEq`, который принимает на вход другой `T`, но, вместо этого, мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С помощью `Float` можно исправить ошибку:
  
  ```
--# #![feature(std_misc)]
- use std::num::Float;
- 
- fn inverse<T: Float>(x: T) -> Result<T, String> {
-@@ -423,12 +379,9 @@ fn inverse<T: Float>(x: T) -> Result<T, String> {
+ # #![feature(std_misc)]
+@@ -423,9 +384,7 @@ fn inverse<T: Float>(x: T) -> Result<T, String> {
  }
  ```
  
@@ -293,11 +278,8 @@ index 1e44076..53c16e9 100644
 +Нам следует заменить `0.0` и `1.0` соответствующими методами из трейта `Float`. И `f32`, и `f64` реализуют трейт `Float`, так что наша функция будет работать просто отлично:
  
  ```
--# #![feature(std_misc)]
- # use std::num::Float;
- # fn inverse<T: Float>(x: T) -> Result<T, String> {
- #     if x == Float::zero() { return Err("x cannot be zero!".to_string()) }
-@@ -442,10 +395,9 @@ println!("the inverse of {} is {:?}", 0.0f32, inverse(0.0f32));
+ # #![feature(std_misc)]
+@@ -442,10 +401,9 @@ println!("the inverse of {} is {:?}", 0.0f32, inverse(0.0f32));
  println!("the inverse of {} is {:?}", 0.0f64, inverse(0.0f64));
  ```
  
@@ -310,7 +292,7 @@ index 1e44076..53c16e9 100644
  
  ```rust
  trait Foo {
-@@ -455,9 +407,7 @@ trait Foo {
+@@ -455,9 +413,7 @@ trait Foo {
  }
  ```
  
@@ -321,12 +303,3 @@ index 1e44076..53c16e9 100644
  
  ```rust
  # trait Foo {
-@@ -479,7 +429,7 @@ impl Foo for OverrideDefault {
- }
- 
- let default = UseDefault;
--default.baz(); // prints "We called baz."
-+default.baz(); // prints "We called bar."
- 
- let over = OverrideDefault;
- over.baz(); // prints "Override baz!"

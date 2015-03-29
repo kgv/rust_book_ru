@@ -3,6 +3,7 @@
 Вы помните, ключевое слово `impl`, используемое для вызова функции с синтаксисом метода?
 
 ```{rust}
+# #![feature(core)]
 struct Circle {
     x: f64,
     y: f64,
@@ -19,6 +20,7 @@ impl Circle {
 Трейты схожи, за исключением того, что мы определяем трейт, содержащий лишь сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например, как показано ниже:
 
 ```{rust}
+# #![feature(core)]
 struct Circle {
     x: f64,
     y: f64,
@@ -74,6 +76,7 @@ fn print_area<T: HasArea>(shape: T) {
 Вот расширенный пример того, как это работает:
 
 ```{rust}
+# #![feature(core)]
 trait HasArea {
     fn area(&self) -> f64;
 }
@@ -206,6 +209,7 @@ error: type `shapes::Circle` does not implement any method in scope named `area`
 Если мы добавим строку с `use` над функцией `main` и сделаем нужные элементы публичными, все будет в порядке:
 
 ```{rust}
+# #![feature(core)]
 use shapes::HasArea;
 
 mod shapes {
@@ -369,6 +373,7 @@ error: mismatched types:
 Как уже было сказано, этот код не будет работать. Это потому, что наш `T` реализует `PartialEq`, который принимает на вход другой `T`, но, вместо этого, мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С помощью `Float` можно исправить ошибку:
 
 ```
+# #![feature(std_misc)]
 use std::num::Float;
 
 fn inverse<T: Float>(x: T) -> Result<T, String> {
@@ -382,6 +387,7 @@ fn inverse<T: Float>(x: T) -> Result<T, String> {
 Нам следует заменить `0.0` и `1.0` соответствующими методами из трейта `Float`. И `f32`, и `f64` реализуют трейт `Float`, так что наша функция будет работать просто отлично:
 
 ```
+# #![feature(std_misc)]
 # use std::num::Float;
 # fn inverse<T: Float>(x: T) -> Result<T, String> {
 #     if x == Float::zero() { return Err("x cannot be zero!".to_string()) }
@@ -429,7 +435,7 @@ impl Foo for OverrideDefault {
 }
 
 let default = UseDefault;
-default.baz(); // prints "We called bar."
+default.baz(); // prints "We called baz."
 
 let over = OverrideDefault;
 over.baz(); // prints "Override baz!"

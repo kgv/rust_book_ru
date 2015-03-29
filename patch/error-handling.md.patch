@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/error-handling.md b/master:error-handling.md
-index cf60bd8..5eab847 100644
+index cf60bd8..e49ccfd 100644
 --- a/rust/master:src/doc/trpl/error-handling.md
 +++ b/master:error-handling.md
 @@ -1,52 +1,39 @@
@@ -113,23 +113,22 @@ index cf60bd8..5eab847 100644
  
  ```rust
  enum Result<T, E> {
-@@ -138,13 +118,9 @@ enum Result<T, E> {
-    Err(E)
+@@ -139,12 +119,9 @@ enum Result<T, E> {
  }
  ```
-+Это перечисление определено непосредственно в Rust, так что вам не нужно определять его самостоятельно, чтобы использовать в своем коде. `Ok(T)` вариант представляет собой успех, а `Err(E)` вариант представляет собой неудачу. Рекомендуется возвращать `Result` вместо `Option` во всех случаях, кроме самых тривиальных.
  
 -This enum is provided by Rust itself, so you don't need to define it to use it
 -in your code. The `Ok(T)` variant represents a success, and the `Err(E)` variant
 -represents a failure. Returning a `Result` instead of an `Option` is recommended
 -for all but the most trivial of situations.
--
++Это перечисление определено непосредственно в Rust, так что вам не нужно определять его самостоятельно, чтобы использовать в своем коде. `Ok(T)` вариант представляет собой успех, а `Err(E)` вариант представляет собой неудачу. Рекомендуется возвращать `Result` вместо `Option` во всех случаях, кроме самых тривиальных.
+ 
 -Here's an example of using `Result`:
 +Ниже приведен пример использования `Result`:
  
  ```rust
  #[derive(Debug)]
-@@ -175,48 +151,39 @@ match version {
+@@ -175,48 +152,39 @@ match version {
  }
  ```
  
@@ -189,7 +188,7 @@ index cf60bd8..5eab847 100644
  
  ```{rust,ignore}
  let input = io::stdin().read_line()
-@@ -224,17 +191,13 @@ let input = io::stdin().read_line()
+@@ -224,17 +192,13 @@ let input = io::stdin().read_line()
                         .expect("Failed to read line");
  ```
  
@@ -211,7 +210,7 @@ index cf60bd8..5eab847 100644
  
  ```rust
  use std::fs::File;
-@@ -264,7 +227,7 @@ fn write_info(info: &Info) -> io::Result<()> {
+@@ -264,7 +228,7 @@ fn write_info(info: &Info) -> io::Result<()> {
  }
  ```
  
@@ -220,7 +219,7 @@ index cf60bd8..5eab847 100644
  
  ```rust
  use std::fs::File;
-@@ -288,13 +251,8 @@ fn write_info(info: &Info) -> io::Result<()> {
+@@ -288,13 +252,8 @@ fn write_info(info: &Info) -> io::Result<()> {
  }
  ```
  

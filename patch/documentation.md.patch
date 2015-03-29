@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/documentation.md b/master:documentation.md
-index 43b49c0..6d314da 100644
+index 43b49c0..3478892 100644
 --- a/rust/master:src/doc/trpl/documentation.md
 +++ b/master:documentation.md
 @@ -1,21 +1,16 @@
@@ -229,7 +229,7 @@ index 43b49c0..6d314da 100644
  
  ```
  fn main() {
-@@ -237,17 +205,14 @@ fn main() {
+@@ -237,42 +205,30 @@ fn main() {
  }
  ```
  
@@ -249,17 +249,18 @@ index 43b49c0..6d314da 100644
 +2. Будут вставлены некоторые общие `allow` атрибуты, в том числе: `unused_variables`, `unused_assignments`, `unused_mut`, `unused_attributes`, `dead_code`. Небольшие примеры часто вызывают эти lints.
 +3. Если пример не содержит `extern crate`, то будет вставлено `extern crate <mycrate>;`.
 +4. Наконец, если пример не содержит `fn main`, то оставшаяся часть текста будет обернута в `fn main() { your_code }`
-+
-+Хотя иногда этого не достаточно. Например, все эти примеры кода с `///` мы говорим о? Ниже представлен блок кода до обработки `rustdoc`, в виде простого текста:
  
  Sometimes, this isn't enough, though. For example, all of these code samples
  with `///` we've been talking about? The raw text:
-@@ -257,22 +222,16 @@ with `///` we've been talking about? The raw text:
++Хотя иногда этого не достаточно. Например, все эти примеры кода с `///` мы говорим о? Представленный ниже блок кода до обработки `rustdoc`, в виде простого текста:
+ 
+ ```text
+ /// Some documentation.
  # fn foo() {}
  ```
  
 -looks different than the output:
-+и после обработки `rustdoc`, в виде вывода:
++выглядит иначе, чем после обработки `rustdoc`, в виде вывода:
  
  ```
  /// Some documentation.
@@ -275,13 +276,11 @@ index 43b49c0..6d314da 100644
 -it makes the example more clear. You can use this technique to explain
 -longer examples in detail, while still preserving the testability of your
 -documentation. For example, this code:
-+Выглядят они по-разному.
-+
 +Да, именно так: вы можете добавлять строки, которые начинаются с `# `, и они будут скрыты в выводе, но при этом будут использоваться во время компиляции кода. Вы можете использовать это в своих интересах. Если в комментарии документации необходимо обратиться к какой-то функции, то ниже нужно будет добавить определение этой функции. В то же время, это делается только для того, чтобы удовлетворить компилятор, поэтому сокрытие ненужных строк в выводе делает пример более ясным. Вы можете использовать эту технику, чтобы детально объяснять длинные примеры, сохраняя при этом тестируемость документации. Например, этот код:
  
  ```
  let x = 5;
-@@ -280,9 +239,9 @@ let y = 6;
+@@ -280,9 +236,9 @@ let y = 6;
  println!("{}", x + y);
  ```
  
@@ -293,7 +292,7 @@ index 43b49c0..6d314da 100644
  
  ```
  let x = 5;
-@@ -290,7 +249,7 @@ let x = 5;
+@@ -290,7 +246,7 @@ let x = 5;
  # println!("{}", x + y);
  ```
  
@@ -302,7 +301,7 @@ index 43b49c0..6d314da 100644
  
  ```
  # let x = 5;
-@@ -298,7 +257,7 @@ let y = 6;
+@@ -298,7 +254,7 @@ let y = 6;
  # println!("{}", x + y);
  ```
  
@@ -311,7 +310,7 @@ index 43b49c0..6d314da 100644
  
  ```
  # let x = 5;
-@@ -306,9 +265,9 @@ Finally, we print the sum of `x` and `y`:
+@@ -306,9 +262,9 @@ Finally, we print the sum of `x` and `y`:
  println!("{}", x + y);
  ```
  
@@ -323,7 +322,7 @@ index 43b49c0..6d314da 100644
  >
  > ```text
  > let x = 5;
-@@ -316,7 +275,7 @@ Here's the same explanation, in raw text:
+@@ -316,7 +272,7 @@ Here's the same explanation, in raw text:
  > # println!("{}", x + y);
  > ```
  >
@@ -332,7 +331,7 @@ index 43b49c0..6d314da 100644
  >
  > ```text
  > # let x = 5;
-@@ -324,7 +283,7 @@ Here's the same explanation, in raw text:
+@@ -324,7 +280,7 @@ Here's the same explanation, in raw text:
  > # println!("{}", x + y);
  > ```
  >
@@ -341,7 +340,7 @@ index 43b49c0..6d314da 100644
  >
  > ```text
  > # let x = 5;
-@@ -332,13 +291,11 @@ Here's the same explanation, in raw text:
+@@ -332,13 +288,11 @@ Here's the same explanation, in raw text:
  > println!("{}", x + y);
  > ```
  
@@ -358,16 +357,7 @@ index 43b49c0..6d314da 100644
  
  ```
  /// Panic with a given message unless an expression evaluates to true.
-@@ -352,7 +309,7 @@ Here’s an example of documenting a macro:
- /// # }
- /// ```
- ///
--/// ```should_panic
-+/// ```should_fail
- /// # #[macro_use] extern crate foo;
- /// # fn main() {
- /// panic_unless!(true == false, “I’m broken.”);
-@@ -365,14 +322,11 @@ macro_rules! panic_unless {
+@@ -365,14 +319,11 @@ macro_rules! panic_unless {
  # fn main() {}
  ```
  
@@ -385,7 +375,7 @@ index 43b49c0..6d314da 100644
  
  ```bash
  $ rustdoc --test path/to/my/crate/root.rs
-@@ -380,10 +334,9 @@ $ rustdoc --test path/to/my/crate/root.rs
+@@ -380,10 +331,9 @@ $ rustdoc --test path/to/my/crate/root.rs
  $ cargo test
  ```
  
@@ -398,7 +388,7 @@ index 43b49c0..6d314da 100644
  
  ```
  /// ```ignore
-@@ -392,10 +345,7 @@ thing when testing your code:
+@@ -392,10 +342,7 @@ thing when testing your code:
  # fn foo() {}
  ```
  
@@ -410,7 +400,7 @@ index 43b49c0..6d314da 100644
  
  ```
  /// ```should_panic
-@@ -404,8 +354,7 @@ only shows the part you care about.
+@@ -404,8 +351,7 @@ only shows the part you care about.
  # fn foo() {}
  ```
  
@@ -420,7 +410,7 @@ index 43b49c0..6d314da 100644
  
  ```
  /// ```no_run
-@@ -416,13 +365,11 @@ not actually pass as a test.
+@@ -416,13 +362,11 @@ not actually pass as a test.
  # fn foo() {}
  ```
  
@@ -437,7 +427,7 @@ index 43b49c0..6d314da 100644
  
  ```
  mod foo {
-@@ -434,8 +381,7 @@ mod foo {
+@@ -434,8 +378,7 @@ mod foo {
  }
  ```
  
@@ -447,7 +437,7 @@ index 43b49c0..6d314da 100644
  
  ```
  //! A module for using `foo`s.
-@@ -443,20 +389,17 @@ you have a module in `foo.rs`, you'll often open its code and see this:
+@@ -443,20 +386,17 @@ you have a module in `foo.rs`, you'll often open its code and see this:
  //! The `foo` module contains a lot of useful functionality blah blah blah
  ```
  
@@ -473,7 +463,7 @@ index 43b49c0..6d314da 100644
  
  ```
  /// # Examples
-@@ -469,7 +412,7 @@ the documentation with comments. For example:
+@@ -469,7 +409,7 @@ the documentation with comments. For example:
  # fn foo() {}
  ```
  
@@ -482,7 +472,7 @@ index 43b49c0..6d314da 100644
  
  ~~~markdown
  # Examples
-@@ -481,8 +424,7 @@ let five = Rc::new(5);
+@@ -481,8 +421,7 @@ let five = Rc::new(5);
  ```
  ~~~
  
@@ -492,7 +482,7 @@ index 43b49c0..6d314da 100644
  
  ```markdown
  % The title
-@@ -490,11 +432,11 @@ to have a title like this:
+@@ -490,11 +429,11 @@ to have a title like this:
  This is the example documentation.
  ```
  
@@ -507,31 +497,30 @@ index 43b49c0..6d314da 100644
  
  ```
  /// this
-@@ -504,6 +446,8 @@ At a deeper level, documentation comments are sugar for documentation attributes
- # fn bar() {}
+@@ -505,6 +444,7 @@ At a deeper level, documentation comments are sugar for documentation attributes
  ```
  
-+такие же, как и эти:
-+
  are the same, as are these:
++такие же, как и эти:
  
  ```
-@@ -512,10 +456,11 @@ are the same, as are these:
+ //! this
+@@ -512,10 +452,11 @@ are the same, as are these:
  #![doc="/// this"]
  ```
  
 -You won't often see this attribute used for writing documentation, but it
 -can be useful when changing some options, or when writing a macro.
 +Вы не часто будете видеть этот атрибут, используемый для написания документации, но он может быть полезен, когда изменения некоторых настроек, или при написании макроса.
-+
-+### Ре-экспорт
  
 -### Re-exports
++### Ре-экспорт
++
 +`rustdoc` будет показывать документацию для publc реэкспорта в обоих местах:
  
  `rustdoc` will show the documentation for a publc re-export in both places:
  
-@@ -525,11 +470,9 @@ extern crate foo;
+@@ -525,11 +466,9 @@ extern crate foo;
  pub use foo::bar;
  ```
  
@@ -545,7 +534,7 @@ index 43b49c0..6d314da 100644
  
  ```ignore
  extern crate foo;
-@@ -538,10 +481,9 @@ extern crate foo;
+@@ -538,10 +477,9 @@ extern crate foo;
  pub use foo::bar;
  ```
  
@@ -558,7 +547,7 @@ index 43b49c0..6d314da 100644
  
  ```
  #![doc(html_logo_url = "http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png",
-@@ -549,14 +491,12 @@ You can control a few aspects of the HTML that `rustdoc` generates through the
+@@ -549,14 +487,12 @@ You can control a few aspects of the HTML that `rustdoc` generates through the
         html_root_url = "http://doc.rust-lang.org/")];
  ```
  

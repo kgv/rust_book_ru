@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/associated-types.md b/master:associated-types.md
-index f36c2c5..a463eb4 100644
+index f36c2c5..33936ae 100644
 --- a/rust/master:src/doc/trpl/associated-types.md
 +++ b/master:associated-types.md
 @@ -1,11 +1,6 @@
@@ -64,19 +64,22 @@ index f36c2c5..a463eb4 100644
  
  ```rust
  trait Graph {
-@@ -64,8 +55,9 @@ trait Graph {
+@@ -64,12 +55,12 @@ trait Graph {
  }
  ```
  
 -Simple enough. Associated types use the `type` keyword, and go inside the body
 -of the trait, with the functions.
 +Достаточно просто. Ассоциированные типы используют ключевое слово `type`, и расположены внутри тела трейта, наряду с функциями.
-+
-+Эти объявления `type` могут иметь все то же самое, как функции делают. Например, если бы мы хотели, чтобы тип `N` реализовывал `Display`, чтобы была возможность печатать узлы, мы могли бы сделать следующее:
  
  These `type` declarations can have all the same thing as functions do. For example,
  if we wanted our `N` type to implement `Display`, so we can print the nodes out,
-@@ -83,10 +75,9 @@ trait Graph {
+ we could do this:
++Эти объявления `type` могут иметь все то же самое, как функции делают. Например, если бы мы хотели, чтобы тип `N` реализовывал `Display`, чтобы была возможность печатать узлы, мы могли бы сделать следующее:
+ 
+ ```rust
+ use std::fmt;
+@@ -83,10 +74,9 @@ trait Graph {
  }
  ```
  
@@ -89,7 +92,7 @@ index f36c2c5..a463eb4 100644
  
  ```rust
  # trait Graph {
-@@ -115,23 +106,15 @@ impl Graph for MyGraph {
+@@ -115,23 +105,15 @@ impl Graph for MyGraph {
  }
  ```
  
@@ -118,7 +121,7 @@ index f36c2c5..a463eb4 100644
  
  ```rust,ignore
  # trait Graph {
-@@ -157,7 +140,7 @@ let graph = MyGraph;
+@@ -157,7 +139,7 @@ let graph = MyGraph;
  let obj = Box::new(graph) as Box<Graph>;
  ```
  
@@ -127,7 +130,7 @@ index f36c2c5..a463eb4 100644
  
  ```text
  error: the value of the associated type `E` (from the trait `main::Graph`) must
-@@ -170,8 +153,7 @@ let obj = Box::new(graph) as Box<Graph>;
+@@ -170,8 +152,7 @@ let obj = Box::new(graph) as Box<Graph>;
            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  ```
  
@@ -137,7 +140,7 @@ index f36c2c5..a463eb4 100644
  
  ```rust
  # trait Graph {
-@@ -197,6 +179,4 @@ let graph = MyGraph;
+@@ -197,6 +178,4 @@ let graph = MyGraph;
  let obj = Box::new(graph) as Box<Graph<N=Node, E=Edge>>;
  ```
  

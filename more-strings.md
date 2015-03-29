@@ -107,12 +107,11 @@ fn foo(s: String) {
 
 ## Обобщенные функции
 
+To write a function that's generic over types of strings, use `&str`.
 Чтобы записать функцию, которая является обобщенной по типам строк, используйте `&str`.
 
-To write a function that's generic over types of strings, use `&str`.
-
 ```
-fn some_string_length(x: &str) -> uint {
+fn some_string_length(x: &str) -> usize {
     x.len()
 }
 

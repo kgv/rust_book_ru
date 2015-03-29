@@ -19,6 +19,7 @@ x.foo().bar().baz();
 Вот как это работает:
 
 ```{rust}
+# #![feature(core)]
 struct Circle {
     x: f64,
     y: f64,
@@ -69,7 +70,9 @@ impl Circle {
 
 Итак, теперь мы знаем, как вызвать метод, например `foo.bar()`. Но что насчет нашего первоначального примера, `foo.bar().baz()`? Это называется 'цепочка вызовов', и мы можем сделать это, вернув `self`.
 
+
 ```
+# #![feature(core)]
 struct Circle {
     x: f64,
     y: f64,
@@ -81,8 +84,8 @@ impl Circle {
         std::f64::consts::PI * (self.radius * self.radius)
     }
 
-    fn grow(&self) -> Circle {
-        Circle { x: self.x, y: self.y, radius: (self.radius * 10.0) }
+    fn grow(&self, increment: f64) -> Circle {
+        Circle { x: self.x, y: self.y, radius: self.radius + increment }
     }
 }
 
@@ -90,7 +93,7 @@ fn main() {
     let c = Circle { x: 0.0, y: 0.0, radius: 2.0 };
     println!("{}", c.area());
 
-    let d = c.grow().area();
+    let d = c.grow(2.0).area();
     println!("{}", d);
 }
 ```
@@ -139,6 +142,7 @@ fn main() {
 Давайте предположим, что нам нужно, чтобы наши пользователи могли создавать круги и чтобы у них была возможность задавать только те свойства, которые им нужны. В противном случае, атрибуты `x` и `y` будут `0.0`, а `radius` будет `1.0`. Rust не поддерживает перегрузку методов, именованные аргументы или переменное количество аргументов. Вместо этого мы используем паттерн строитель. Он выглядит следующим образом:
 
 ```
+# #![feature(core)]
 struct Circle {
     x: f64,
     y: f64,

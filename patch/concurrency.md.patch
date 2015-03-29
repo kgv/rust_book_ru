@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/concurrency.md b/master:concurrency.md
-index 79cb311..301ec14 100644
+index 79cb311..210094a 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
 +++ b/master:concurrency.md
-@@ -1,38 +1,22 @@
+@@ -1,63 +1,37 @@
 -% Concurrency
 +% Многозадачность (параллелизм)
  
@@ -46,12 +46,11 @@ index 79cb311..301ec14 100644
 -down the channel and to the other thread. Therefore, we'd ensure that `Send` was
 -implemented for that type.
 +Это важно для соблюдения некоторых ограничений. Например, если у нас есть канал, соединяющий два потока, и мы хотели бы иметь возможность отправлять некоторые данные по каналу из одного потока в другой. Следовательно, мы должны гарантировать, что для отправляемого типа данных реализован трейт `Send`.
-+
-+И наоборот, если мы были упаковка библиотека с помощью FFI (Foreign Function Interface), который не является потокобезопасным, мы не хотели бы реализовать трейт `Send`, и поэтому компилятор поможет нам обеспечивать это, что нельзя оставить текущий поток.
  
  In the opposite way, if we were wrapping a library with FFI that isn't
  threadsafe, we wouldn't want to implement `Send`, and so the compiler will help
-@@ -40,24 +24,15 @@ us enforce that it can't leave the current thread.
+ us enforce that it can't leave the current thread.
++И наоборот, если мы были упаковка библиотека с помощью FFI (Foreign Function Interface), который не является потокобезопасным, мы не хотели бы реализовать трейт `Send`, и поэтому компилятор поможет нам обеспечивать это, что нельзя оставить текущий поток.
  
  ### `Sync`
  
@@ -81,7 +80,7 @@ index 79cb311..301ec14 100644
  
  ```
  use std::thread;
-@@ -69,8 +44,7 @@ fn main() {
+@@ -69,8 +43,7 @@ fn main() {
  }
  ```
  
@@ -91,7 +90,7 @@ index 79cb311..301ec14 100644
  
  ```
  use std::thread;
-@@ -84,11 +58,9 @@ fn main() {
+@@ -84,8 +57,7 @@ fn main() {
  }
  ```
  
@@ -100,10 +99,7 @@ index 79cb311..301ec14 100644
 +Когда `guard` выходит из области видимости, он будет блокировать выполнение до тех пор, пока присоединенный к нему поток не закончит выполняться. Если бы мы не хотели такого поведения, то могли бы использовать метод `thread::spawn()`:
  
  ```
--# #![feature(old_io, std_misc)]
- use std::thread;
- use std::old_io::timer;
- use std::time::Duration;
+ # #![feature(old_io, std_misc)]
 @@ -102,11 +74,9 @@ fn main() {
  }
  ```
@@ -118,7 +114,7 @@ index 79cb311..301ec14 100644
  
  ```text
  fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
-@@ -115,39 +85,23 @@ fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
+@@ -115,36 +85,21 @@ fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
            F: Send + 'a
  ```
  
@@ -162,11 +158,8 @@ index 79cb311..301ec14 100644
 +В качестве примера приведем программу на Rust, которая входила бы в состояние гонки данных на многих языках. На Rust она не будет компилироваться:
  
  ```ignore
--# #![feature(old_io, std_misc)]
- use std::thread;
- use std::old_io::timer;
- use std::time::Duration;
-@@ -165,7 +119,7 @@ fn main() {
+ # #![feature(old_io, std_misc)]
+@@ -165,7 +120,7 @@ fn main() {
  }
  ```
  
@@ -175,7 +168,7 @@ index 79cb311..301ec14 100644
  
  ```text
  12:17 error: capture of moved value: `data`
-@@ -173,21 +127,11 @@ This gives us an error:
+@@ -173,18 +128,9 @@ This gives us an error:
          ^~~~
  ```
  
@@ -195,11 +188,8 @@ index 79cb311..301ec14 100644
 +`Arc<T>` предполагает наличие еще одного свойства у своего содержимого, чтобы гарантировать, что его можно безопасно использовать из нескольких потоков: он предполагает, что его содержимое реализует трейт `Sync`. В нашем случае мы также хотим, чтобы была возможность изменять значение содержимого. Нам нужен тип, который может обеспечить возможность изменения своего содержимого лишь одиним пользователем единовременно. Для этого мы можем использовать тип `Mutex<T>`. Вот вторая версия нашего кода. Она по-прежнему не работает, но по другой причине:
  
  ```ignore
--# #![feature(old_io, std_misc)]
- use std::thread;
- use std::old_io::timer;
- use std::time::Duration;
-@@ -207,32 +151,28 @@ fn main() {
+ # #![feature(old_io, std_misc)]
+@@ -207,7 +153,7 @@ fn main() {
  }
  ```
  
@@ -208,12 +198,7 @@ index 79cb311..301ec14 100644
  
  ```text
  <anon>:11:9: 11:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` [E0277]
--<anon>:11         thread::spawn(move || {
-+<anon>:11         Thread::spawn(move || {
-                   ^~~~~~~~~~~~~
- <anon>:11:9: 11:22 note: `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` cannot be sent between threads safely
--<anon>:11         thread::spawn(move || {
-+<anon>:11         Thread::spawn(move || {
+@@ -218,18 +164,15 @@ Here's the error:
                    ^~~~~~~~~~~~~
  ```
  
@@ -234,11 +219,8 @@ index 79cb311..301ec14 100644
 +Мы можем использовать `Arc<T>`, чтобы исправить это. Вот рабочая версия:
  
  ```
--# #![feature(old_io, std_misc)]
- use std::sync::{Arc, Mutex};
- use std::thread;
- use std::old_io::timer;
-@@ -253,12 +193,9 @@ fn main() {
+ # #![feature(old_io, std_misc)]
+@@ -253,9 +196,7 @@ fn main() {
  }
  ```
  
@@ -248,11 +230,8 @@ index 79cb311..301ec14 100644
 +Теперь мы вызываем `clone()` для нашего `Arc`, что увеличивает внутренний счетчик. Затем эта ручка перемещается в новый поток. Давайте более подробно рассмотрим тело потока:
  
  ```
--# #![feature(old_io, std_misc)]
- # use std::sync::{Arc, Mutex};
- # use std::thread;
- # use std::old_io::timer;
-@@ -275,23 +212,15 @@ thread::spawn(move || {
+ # #![feature(old_io, std_misc)]
+@@ -275,23 +216,15 @@ thread::spawn(move || {
  # }
  ```
  
@@ -281,7 +260,7 @@ index 79cb311..301ec14 100644
  
  ```
  use std::sync::{Arc, Mutex};
-@@ -320,13 +249,12 @@ fn main() {
+@@ -320,11 +253,9 @@ fn main() {
  }
  ```
  
@@ -294,18 +273,15 @@ index 79cb311..301ec14 100644
 +В то время как по этому каналу послается просто общий сигнал, в общем случае мы можем отправить по каналу любые данные, которые реализуют трейт `Send`!
  
  ```
-+use std::sync::{Arc, Mutex};
  use std::thread;
- use std::sync::mpsc;
- 
-@@ -347,14 +275,11 @@ fn main() {
+@@ -347,14 +278,12 @@ fn main() {
  }
  ```
  
 -A `u32` is `Send` because we can make a copy. So we create a thread, ask it to calculate
 -the answer, and then it `send()`s us the answer over the channel.
--
 +`u32` реализует `Send` потому что мы можем сделать копию. Итак, создается поток, в котором вычисляется ответ, а затем этот ответ с помощью метода `send()` передается обратно по каналу.
+ 
  
 -## Panics
 +## Паника
@@ -316,7 +292,7 @@ index 79cb311..301ec14 100644
  
  ```
  use std::thread;
-@@ -366,5 +291,4 @@ let result = thread::spawn(move || {
+@@ -366,5 +295,4 @@ let result = thread::spawn(move || {
  assert!(result.is_err());
  ```
  

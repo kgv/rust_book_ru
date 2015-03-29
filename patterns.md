@@ -167,6 +167,7 @@ match origin {
 Если вы хотите использовать сопоставление со срезом или массивом, то вы можете указать `&`:
 
 ```{rust}
+# #![feature(slice_patterns)]
 fn main() {
     let v = vec!["match_this", "1"];
 

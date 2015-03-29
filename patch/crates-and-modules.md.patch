@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/crates-and-modules.md b/master:crates-and-modules.md
-index 0cc54c9..feb8f77 100644
+index 0cc54c9..2cfdfe7 100644
 --- a/rust/master:src/doc/trpl/crates-and-modules.md
 +++ b/master:crates-and-modules.md
-@@ -1,61 +1,45 @@
+@@ -1,27 +1,14 @@
 -% Crates and Modules
 +% Крейты и модули
  
@@ -35,39 +35,9 @@ index 0cc54c9..feb8f77 100644
 +В качестве примера, давайте сделаем крейт *phrases*, который выдает нам различные фразы на разных языках. Чтобы не усложнять пример, мы будем использовать два вида фраз: "greetings" и "farewells", и два языка для этих фраз: английский и японский (日本語). Мы будем использовать следующий шаблон модуля:
  
  ```text
--                                    +-----------+
--                                +---| greetings |
--                                |   +-----------+
--                  +---------+   |
--              +---| english |---+
--              |   +---------+   |   +-----------+
--              |                 +---| farewells |
--+---------+   |                     +-----------+
-+                                +-----------+
-+                            +---| greetings |
-+                            |   +-----------+
-+              +---------+   |
-+              | english |---+
-+              +---------+   |   +-----------+
-+              |             +---| farewells |
-++---------+   |                 +-----------+
- | phrases |---+
--+---------+   |                     +-----------+
--              |                 +---| greetings |
--              |   +----------+  |   +-----------+
--              +---| japanese |--+
--                  +----------+  |
--                                |   +-----------+
--                                +---| farewells |
--                                    +-----------+
-++---------+   |                  +-----------+
-+              |              +---| greetings |
-+              +----------+   |   +-----------+
-+              | japanese |---+
-+              +----------+   |
-+                             |   +-----------+
-+                             +---| farewells |
-+                                 +-----------+
+                                     +-----------+
+@@ -43,19 +30,16 @@ two languages for those phrases to be in. We'll use this module layout:
+                                     +-----------+
  ```
  
 -In this example, `phrases` is the name of our crate. All of the rest are
@@ -89,7 +59,7 @@ index 0cc54c9..feb8f77 100644
  
  ```bash
  $ tree .
-@@ -67,46 +51,41 @@ $ tree .
+@@ -67,13 +51,11 @@ $ tree .
  1 directory, 2 files
  ```
  
@@ -105,26 +75,8 @@ index 0cc54c9..feb8f77 100644
 +Для определения каждого из наших модулей, мы используем ключевое слово `mod`. Давайте сделаем, чтобы наш `src/lib.rs` выглядел следующим образом:
  
  ```
-+// in src/lib.rs
-+
  mod english {
-     mod greetings {
-+
-     }
- 
-     mod farewells {
-+
-     }
- }
- 
- mod japanese {
-     mod greetings {
-+
-     }
- 
-     mod farewells {
-+
-     }
+@@ -93,20 +75,11 @@ mod japanese {
  }
  ```
  
@@ -148,7 +100,7 @@ index 0cc54c9..feb8f77 100644
  
  ```bash
  $ cargo build
-@@ -115,16 +94,13 @@ $ ls target
+@@ -115,16 +88,13 @@ $ ls target
  deps  libphrases-a7448e02a0468eaa.rlib  native
  ```
  
@@ -169,7 +121,7 @@ index 0cc54c9..feb8f77 100644
  
  ```{rust,ignore}
  mod english {
-@@ -132,20 +108,21 @@ mod english {
+@@ -132,20 +102,17 @@ mod english {
  }
  ```
  
@@ -182,23 +134,19 @@ index 0cc54c9..feb8f77 100644
  
 -If we do that, Rust will expect to find either a `english.rs` file, or a
 -`english/mod.rs` file with the contents of our module.
-+Если мы это сделаем, то Rust будет ожидать, что найдет либо файл `english.rs`, либо файл `english/mod.rs` с содержимым нашего модуля:
++Если мы это сделаем, то Rust будет ожидать, что найдет либо файл `english.rs`, либо файл `english/mod.rs` с содержимым нашего модуля.
  
 -Note that in these files, you don't need to re-declare the module: that's
 -already been done with the initial `mod` declaration.
-+```{rust,ignore}
-+// contents of our module go here
-+```
++Обратите внимание, что в этих файлах вам не нужно заново объявить модуль: это уже сделано при изначальной декларации `mod`.
  
 -Using these two techniques, we can break up our crate into two directories and
 -seven files:
-+Обратите внимание, что в этих файлах вам не нужно заново объявить модуль: это уже сделано при изначальной декларации `mod`.
-+
 +С помощью этих двух приемов мы можем разбить наш крейт на две директории и семь файлов:
  
  ```bash
  $ tree .
-@@ -168,50 +145,51 @@ $ tree .
+@@ -168,34 +135,25 @@ $ tree .
      └── native
  ```
  
@@ -206,10 +154,7 @@ index 0cc54c9..feb8f77 100644
 +`src/lib.rs` - наш корневой крейт, и выглядит он следующим образом:
  
  ```{rust,ignore}
-+// in src/lib.rs
-+
  mod english;
-+
  mod japanese;
  ```
  
@@ -221,10 +166,7 @@ index 0cc54c9..feb8f77 100644
 +Эти две декларации информируют Rust, что следует искать: `src/english.rs` или `src/english/mod.rs`, `src/japanese.rs` или `src/japanese/mod.rs`, в зависимости от нашей структуры. В данном примере мы выбрали второй вариант из-за того, что наши модули содержат суб-модули. И `src/english/mod.rs` и `src/japanese/mod.rs` выглядят следующим образом:
  
  ```{rust,ignore}
-+// both src/english/mod.rs and src/japanese/mod.rs
-+
  mod greetings;
-+
  mod farewells;
  ```
  
@@ -243,10 +185,8 @@ index 0cc54c9..feb8f77 100644
 +Поместите следующий код в `src/english/greetings.rs`:
  
  ```rust
-+// in src/english/greetings.rs
-+
  fn hello() -> String {
-     "Hello!".to_string()
+@@ -203,7 +161,7 @@ fn hello() -> String {
  }
  ```
  
@@ -254,10 +194,8 @@ index 0cc54c9..feb8f77 100644
 +Следующий код в `src/english/farewells.rs`:
  
  ```rust
-+// in src/english/farewells.rs
-+
  fn goodbye() -> String {
-     "Goodbye.".to_string()
+@@ -211,7 +169,7 @@ fn goodbye() -> String {
  }
  ```
  
@@ -266,7 +204,7 @@ index 0cc54c9..feb8f77 100644
  
  ```rust
  // in src/japanese/greetings.rs
-@@ -221,31 +199,31 @@ fn hello() -> String {
+@@ -221,11 +179,9 @@ fn hello() -> String {
  }
  ```
  
@@ -279,10 +217,8 @@ index 0cc54c9..feb8f77 100644
 +Поместите следующий код в `src/japanese/farewells.rs`:
  
  ```rust
-+// in src/japanese/farewells.rs
-+
  fn goodbye() -> String {
-     "さようなら".to_string()
+@@ -233,17 +189,15 @@ fn goodbye() -> String {
  }
  ```
  
@@ -304,12 +240,8 @@ index 0cc54c9..feb8f77 100644
 +Создайте `src/main.rs` и положите в не него следующее: (при этом он не будет компилироваться)
  
  ```rust,ignore
-+// in src/main.rs
-+
  extern crate phrases;
- 
- fn main() {
-@@ -257,20 +235,11 @@ fn main() {
+@@ -257,20 +211,11 @@ fn main() {
  }
  ```
  
@@ -333,7 +265,7 @@ index 0cc54c9..feb8f77 100644
  
  ```bash
  $ cargo build
-@@ -285,17 +254,15 @@ note: in expansion of format_args!
+@@ -285,15 +230,11 @@ note: in expansion of format_args!
  
  ```
  
@@ -348,15 +280,11 @@ index 0cc54c9..feb8f77 100644
 -public, and so private is the default. To make things public, you use the `pub`
 -keyword. Let's focus on the `english` module first, so let's reduce our `src/main.rs`
 -to just this:
-+Ржавчина позволяет точно контролировать, какие элементы вашего интерфейса являются публичными, и поэтому по умолчанию элементы являются приватными. Чтобы сделать элементы публичными, вы используете ключевое слово `pub`. Давайте сначала сосредоточимся на модуле `english`, поэтому сократим файл `src/main.rs` до этого:
++Rust позволяет точно контролировать, какие элементы вашего интерфейса являются публичными, и поэтому по умолчанию элементы являются приватными. Чтобы сделать элементы публичными, вы используете ключевое слово `pub`. Давайте сначала сосредоточимся на модуле `english`, поэтому сократим файл `src/main.rs` до этого:
  
  ```{rust,ignore}
-+// in src/main.rs
-+
  extern crate phrases;
- 
- fn main() {
-@@ -304,38 +271,47 @@ fn main() {
+@@ -304,21 +245,21 @@ fn main() {
  }
  ```
  
@@ -364,10 +292,7 @@ index 0cc54c9..feb8f77 100644
 +В файле `src/lib.rs` давайте добавим `pub` в объявлении модуля `english`:
  
  ```{rust,ignore}
-+// in src/lib.rs
-+
  pub mod english;
-+
  mod japanese;
  ```
  
@@ -375,10 +300,7 @@ index 0cc54c9..feb8f77 100644
 +И в файле `src/english/mod.rs` давайте сделаем оба модуля `pub`:
  
  ```{rust,ignore}
-+// in src/english/mod.rs
-+
  pub mod greetings;
-+
  pub mod farewells;
  ```
  
@@ -386,10 +308,8 @@ index 0cc54c9..feb8f77 100644
 +В файле `src/english/greetings.rs` давайте добавим `pub` к декларации нашей функции `fn`:
  
  ```{rust,ignore}
-+// in src/english/greetings.rs
-+
  pub fn hello() -> String {
-     "Hello!".to_string()
+@@ -326,7 +267,7 @@ pub fn hello() -> String {
  }
  ```
  
@@ -397,10 +317,8 @@ index 0cc54c9..feb8f77 100644
 +А также в `src/english/farewells.rs`:
  
  ```{rust,ignore}
-+// in src/english/farewells.rs
-+
  pub fn goodbye() -> String {
-     "Goodbye.".to_string()
+@@ -334,8 +275,7 @@ pub fn goodbye() -> String {
  }
  ```
  
@@ -410,7 +328,7 @@ index 0cc54c9..feb8f77 100644
  
  ```bash
  $ cargo run
-@@ -353,17 +329,15 @@ Hello in English: Hello!
+@@ -353,15 +293,11 @@ Hello in English: Hello!
  Goodbye in English: Goodbye.
  ```
  
@@ -428,12 +346,8 @@ index 0cc54c9..feb8f77 100644
 +Rust предоставляет ключевое слово `use`, которое позволяет импортировать имена в нашу локальную область видимости. Давайте изменим наш файл `src/main.rs`, чтобы он выглядел следующим образом:
  
  ```{rust,ignore}
-+// in src/main.rs
-+
  extern crate phrases;
- 
- use phrases::english::greetings;
-@@ -375,10 +349,7 @@ fn main() {
+@@ -375,10 +311,7 @@ fn main() {
  }
  ```
  
@@ -445,7 +359,7 @@ index 0cc54c9..feb8f77 100644
  
  ```{rust,ignore}
  extern crate phrases;
-@@ -392,11 +363,7 @@ fn main() {
+@@ -392,11 +325,7 @@ fn main() {
  }
  ```
  
@@ -458,7 +372,7 @@ index 0cc54c9..feb8f77 100644
  
  ```{rust,ignore}
  extern crate phrases;
-@@ -410,7 +377,7 @@ fn main() {
+@@ -410,7 +339,7 @@ fn main() {
  }
  ```
  
@@ -467,13 +381,13 @@ index 0cc54c9..feb8f77 100644
  
  ```text
     Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
-@@ -421,29 +388,30 @@ error: aborting due to previous error
+@@ -421,27 +350,24 @@ error: aborting due to previous error
  Could not compile `phrases`.
  ```
  
 -If we're importing multiple names from the same module, we don't have to type it out
 -twice. Instead of this:
-+Если мы импортируем несколько имен из одного модуля, то нам совсем не обязательно писать одно и то же много раз. Для этого в Rust предусмотрен сокращенный синтаксис:
++Если мы импортируем несколько имен из одного модуля, то нам совсем не обязательно писать одно и то же много раз. Вместо этого кода:
  
  ```{rust,ignore}
  use phrases::english::greetings;
@@ -481,15 +395,13 @@ index 0cc54c9..feb8f77 100644
  ```
  
 -We can use this shortcut:
-+Вы можете использовать фигурные скобки:
++Вы можете использовать сокращение:
  
  ```{rust,ignore}
  use phrases::english::{greetings, farewells};
  ```
  
 -## Re-exporting with `pub use`
-+Эти две декларации эквивалентны, но вторая гораздо более компактная.
-+
 +## Реэкспорт с помощью `pub use`
  
 -You don't just use `use` to shorten identifiers. You can also use it inside of your crate
@@ -501,12 +413,8 @@ index 0cc54c9..feb8f77 100644
 +Давайте посмотрим на примере. Измените файл `src/main.rs` следующим образом:
  
  ```{rust,ignore}
-+// in src/main.rs
-+
  extern crate phrases;
- 
- use phrases::english::{greetings,farewells};
-@@ -458,67 +426,60 @@ fn main() {
+@@ -458,14 +384,14 @@ fn main() {
  }
  ```
  
@@ -514,10 +422,7 @@ index 0cc54c9..feb8f77 100644
 +Затем измените файл `src/lib.rs`, чтобы сделать модуль `japanese` с публичным:
  
  ```{rust,ignore}
-+// in src/lib.rs
-+
  pub mod english;
-+
  pub mod japanese;
  ```
  
@@ -525,10 +430,8 @@ index 0cc54c9..feb8f77 100644
 +Далее, убедитесь, что обе функции публичные, сперва в `src/japanese/greetings.rs`:
  
  ```{rust,ignore}
-+// in src/japanese/greetings.rs
-+
  pub fn hello() -> String {
-     "こんにちは".to_string()
+@@ -473,7 +399,7 @@ pub fn hello() -> String {
  }
  ```
  
@@ -536,10 +439,8 @@ index 0cc54c9..feb8f77 100644
 +А затем в `src/japanese/farewells.rs`:
  
  ```{rust,ignore}
-+// in src/japanese/farewells.rs
-+
  pub fn goodbye() -> String {
-     "さようなら".to_string()
+@@ -481,44 +407,28 @@ pub fn goodbye() -> String {
  }
  ```
  
@@ -547,8 +448,6 @@ index 0cc54c9..feb8f77 100644
 +Наконец, измените файл `src/japanese/mod.rs` вот так:
  
  ```{rust,ignore}
-+// in src/japanese/mod.rs
-+
  pub use self::greetings::hello;
  pub use self::farewells::goodbye;
  

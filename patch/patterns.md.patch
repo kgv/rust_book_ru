@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/patterns.md b/master:patterns.md
-index 4ebf696..6394cde 100644
+index 4ebf696..374ca0e 100644
 --- a/rust/master:src/doc/trpl/patterns.md
 +++ b/master:patterns.md
 @@ -1,11 +1,8 @@
@@ -129,7 +129,7 @@ index 4ebf696..6394cde 100644
  
  ```{rust}
  # #![allow(non_shorthand_field_patterns)]
-@@ -174,10 +164,9 @@ match origin {
+@@ -174,7 +164,7 @@ match origin {
  }
  ```
  
@@ -137,11 +137,8 @@ index 4ebf696..6394cde 100644
 +Если вы хотите использовать сопоставление со срезом или массивом, то вы можете указать `&`:
  
  ```{rust}
--# #![feature(slice_patterns)]
- fn main() {
-     let v = vec!["match_this", "1"];
- 
-@@ -188,8 +177,7 @@ fn main() {
+ # #![feature(slice_patterns)]
+@@ -188,8 +178,7 @@ fn main() {
  }
  ```
  
@@ -151,7 +148,7 @@ index 4ebf696..6394cde 100644
  
  ```{rust,ignore}
  match x {
-@@ -197,4 +185,4 @@ match x {
+@@ -197,4 +186,4 @@ match x {
  }
  ```
  

@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/iterators.md b/master:iterators.md
-index 8d7b1c3..5749a2e 100644
+index 8d7b1c3..32b0a70 100644
 --- a/rust/master:src/doc/trpl/iterators.md
 +++ b/master:iterators.md
 @@ -1,8 +1,8 @@
@@ -262,7 +262,7 @@ index 8d7b1c3..5749a2e 100644
  
  ```rust
  let nums = [1, 2, 3];
-@@ -242,35 +168,25 @@ for num in nums.iter() {
+@@ -242,35 +168,26 @@ for num in nums.iter() {
  }
  ```
  
@@ -271,7 +271,7 @@ index 8d7b1c3..5749a2e 100644
 +Эти два основных итератора должны служить вам хорошо. Есть и более продвинутые итераторы, в том числе и те, которые генерируют бесконечную последовательность. Как, например, `count`:
  
  ```rust
--# #![feature(core)]
+ # #![feature(core)]
  std::iter::count(1, 5);
  ```
  
@@ -304,7 +304,7 @@ index 8d7b1c3..5749a2e 100644
  
  ```text
  warning: unused result which must be used: iterator adaptors are lazy and
-@@ -279,29 +195,26 @@ warning: unused result which must be used: iterator adaptors are lazy and
+@@ -279,8 +196,7 @@ warning: unused result which must be used: iterator adaptors are lazy and
   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  ```
  
@@ -314,12 +314,11 @@ index 8d7b1c3..5749a2e 100644
  
  ```{rust,ignore}
  (1..100).map(|x| println!("{}", x));
- ```
+@@ -288,11 +204,9 @@ doesn't print any numbers:
  
-+Если вы попытаетесь выполнить замыкание для итератор для своих побочных эффектов, вместо этого просто используйте `for`.
-+
  If you are trying to execute a closure on an iterator for its side effects,
  just use `for` instead.
++Если вы попытаетесь выполнить замыкание для итератор для своих побочных эффектов, вместо этого просто используйте `for`.
  
 -There are tons of interesting iterator adapters. `take(n)` will return an
 -iterator over the next `n` elements of the original iterator, note that this
@@ -328,9 +327,8 @@ index 8d7b1c3..5749a2e 100644
 +Есть масса интересных адаптеров итераторов. `take(n)` вернет итератор, представляющий следующие `n` элементов исходного итератора. Обратите внимание, что это не оказывает никакого влияния на оригинальный итератор. Давайте попробуем применить его для бесконечного итератора `count()`, рассмотренного прежде:
  
  ```rust
--# #![feature(core)]
- for i in std::iter::count(1, 5).take(5) {
-     println!("{}", i);
+ # #![feature(core)]
+@@ -301,7 +215,7 @@ for i in std::iter::count(1, 5).take(5) {
  }
  ```
  
@@ -339,7 +337,7 @@ index 8d7b1c3..5749a2e 100644
  
  ```text
  1
-@@ -311,9 +224,7 @@ This will print
+@@ -311,9 +225,7 @@ This will print
  21
  ```
  
@@ -350,7 +348,7 @@ index 8d7b1c3..5749a2e 100644
  
  ```rust
  for i in (1..100).filter(|&x| x % 2 == 0) {
-@@ -321,14 +232,9 @@ for i in (1..100).filter(|&x| x % 2 == 0) {
+@@ -321,14 +233,9 @@ for i in (1..100).filter(|&x| x % 2 == 0) {
  }
  ```
  
@@ -359,7 +357,7 @@ index 8d7b1c3..5749a2e 100644
 -being iterated over, it is passed a reference to each element, and
 -thus the filter predicate uses the `&x` pattern to extract the integer
 -itself.)
-+Этот примет будет печатать все четные числа от одного до ста. (Обратите внимание, что так как `filter` не потребляет элементы, которые выдаются во время итерации, то передается ссылка на каждый элемент, поэтому фильтрующий предикат использует шаблон `&x`, чтобы извлечь само целое число.)
++Этот пример будет печатать все четные числа от одного до ста. (Обратите внимание, что так как `filter` не потребляет элементы, которые выдаются во время итерации, то передается ссылка на каждый элемент, поэтому фильтрующий предикат использует шаблон `&x`, чтобы извлечь само целое число.)
  
 -You can chain all three things together: start with an iterator, adapt it
 -a few times, and then consume the result. Check it out:
@@ -367,7 +365,7 @@ index 8d7b1c3..5749a2e 100644
  
  ```rust
  (1..1000)
-@@ -338,11 +244,6 @@ a few times, and then consume the result. Check it out:
+@@ -338,11 +245,6 @@ a few times, and then consume the result. Check it out:
      .collect::<Vec<i32>>();
  ```
  

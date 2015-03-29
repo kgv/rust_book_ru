@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/more-strings.md b/master:more-strings.md
-index 17a4638..8d8b452 100644
+index 17a4638..74f23c3 100644
 --- a/rust/master:src/doc/trpl/more-strings.md
 +++ b/master:more-strings.md
 @@ -1,30 +1,20 @@
@@ -108,7 +108,7 @@ index 17a4638..8d8b452 100644
  
  ```
  use std::str;
-@@ -101,35 +85,34 @@ let x: &[u8] = &[b'a', b'b'];
+@@ -101,32 +85,30 @@ let x: &[u8] = &[b'a', b'b'];
  let stack_str: &str = str::from_utf8(x).unwrap();
  ```
  
@@ -143,18 +143,13 @@ index 17a4638..8d8b452 100644
  
 -## Generic functions
 +## Обобщенные функции
-+
-+Чтобы записать функцию, которая является обобщенной по типам строк, используйте `&str`.
  
  To write a function that's generic over types of strings, use `&str`.
++Чтобы записать функцию, которая является обобщенной по типам строк, используйте `&str`.
  
  ```
--fn some_string_length(x: &str) -> usize {
-+fn some_string_length(x: &str) -> uint {
-     x.len()
- }
- 
-@@ -144,12 +127,11 @@ fn main() {
+ fn some_string_length(x: &str) -> usize {
+@@ -144,12 +126,11 @@ fn main() {
  }
  ```
  
@@ -170,7 +165,7 @@ index 17a4638..8d8b452 100644
  
  ```{rust,ignore}
  let s = "hello".to_string();
-@@ -157,24 +139,21 @@ let s = "hello".to_string();
+@@ -157,24 +138,21 @@ let s = "hello".to_string();
  println!("{}", s[0]);
  ```
  
@@ -205,7 +200,7 @@ index 17a4638..8d8b452 100644
  
  ```
  # #![feature(unicode)]
-@@ -185,7 +164,7 @@ for l in s.graphemes(true) {
+@@ -185,7 +163,7 @@ for l in s.graphemes(true) {
  }
  ```
  
@@ -214,7 +209,7 @@ index 17a4638..8d8b452 100644
  
  ```text
  u͔
-@@ -197,11 +176,9 @@ d͔̆̓ͥ
+@@ -197,11 +175,9 @@ d͔̆̓ͥ
  é
  ```
  
@@ -228,7 +223,7 @@ index 17a4638..8d8b452 100644
  
  ```
  let s = "u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé";
-@@ -211,7 +188,7 @@ for l in s.chars() {
+@@ -211,7 +187,7 @@ for l in s.chars() {
  }
  ```
  
@@ -237,7 +232,7 @@ index 17a4638..8d8b452 100644
  
  ```text
  u
-@@ -242,11 +219,9 @@ e
+@@ -242,11 +218,9 @@ e
  ́
  ```
  
@@ -251,7 +246,7 @@ index 17a4638..8d8b452 100644
  
  ```
  let s = "u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé";
-@@ -256,7 +231,7 @@ for l in s.bytes() {
+@@ -256,7 +230,7 @@ for l in s.bytes() {
  }
  ```
  
@@ -260,7 +255,7 @@ index 17a4638..8d8b452 100644
  
  ```text
  117
-@@ -306,11 +281,11 @@ This will print:
+@@ -306,11 +280,11 @@ This will print:
  129
  ```
  

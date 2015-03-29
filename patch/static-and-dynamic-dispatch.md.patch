@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/static-and-dynamic-dispatch.md b/master:static-and-dynamic-dispatch.md
-index a779481..c343178 100644
+index a779481..f80381d 100644
 --- a/rust/master:src/doc/trpl/static-and-dynamic-dispatch.md
 +++ b/master:static-and-dynamic-dispatch.md
 @@ -1,16 +1,10 @@
@@ -32,20 +32,19 @@ index a779481..c343178 100644
  
  ```rust
  # trait Foo { fn method(&self) -> String; }
-@@ -31,10 +25,9 @@ impl Foo for String {
- }
+@@ -32,9 +26,9 @@ impl Foo for String {
  ```
  
-+## Статическая диспетчерезация
  
 -## Static dispatch
--
++## Статическая диспетчерезация
+ 
 -We can use this trait to perform static dispatch with trait bounds:
 +Мы можем использовать этот трейт для выполнения статической диспетчерезации с помощью ограничения трейтом:
  
  ```rust
  # trait Foo { fn method(&self) -> String; }
-@@ -53,10 +46,7 @@ fn main() {
+@@ -53,10 +47,7 @@ fn main() {
  }
  ```
  
@@ -57,7 +56,7 @@ index a779481..c343178 100644
  
  ```rust
  # trait Foo { fn method(&self) -> String; }
-@@ -79,45 +69,23 @@ fn main() {
+@@ -79,45 +70,23 @@ fn main() {
  }
  ```
  
@@ -112,7 +111,7 @@ index a779481..c343178 100644
  
  ```rust
  # trait Foo { fn method(&self) -> String; }
-@@ -134,7 +102,7 @@ fn main() {
+@@ -134,7 +103,7 @@ fn main() {
  }
  ```
  
@@ -121,7 +120,7 @@ index a779481..c343178 100644
  
  ```rust
  # trait Foo { fn method(&self) -> String; }
-@@ -151,42 +119,23 @@ fn main() {
+@@ -151,42 +120,23 @@ fn main() {
  }
  ```
  
@@ -173,19 +172,19 @@ index a779481..c343178 100644
  
  ```rust
  # mod foo {
-@@ -199,18 +148,11 @@ pub struct TraitObject {
+@@ -199,18 +149,12 @@ pub struct TraitObject {
  
  [stdraw]: ../std/raw/struct.TraitObject.html
  
 -That is, a trait object like `&Foo` consists of a "data" pointer and a "vtable"
 -pointer.
--
++То есть трейт объект, такой как `&Foo`, состоит из указателя на "данные" и указателя на "виртуальную таблицу".
+ 
 -The data pointer addresses the data (of some unknown type `T`) that the trait
 -object is storing, and the vtable pointer points to the vtable ("virtual method
 -table") corresponding to the implementation of `Foo` for `T`.
-+То есть трейт объект, такой как `&Foo`, состоит из указателя на "данные" и указателя на "виртуальную таблицу".
- 
 +Указатель `data` адрессует данные (какого-то неизвестного типа `T`), которые хранит трейт объект, а указатель `vtable` указывает на виртуальную таблицу ("таблица виртуальных методов"), которая соответствует реализации `Foo` для `T`.
+ 
  
 -A vtable is essentially a struct of function pointers, pointing to the concrete
 -piece of machine code for each method in the implementation. A method call like
@@ -195,7 +194,7 @@ index a779481..c343178 100644
  
  ```{rust,ignore}
  struct FooVtable {
-@@ -260,19 +202,9 @@ static Foo_for_String_vtable: FooVtable = FooVtable {
+@@ -260,19 +204,9 @@ static Foo_for_String_vtable: FooVtable = FooVtable {
  };
  ```
  
@@ -217,7 +216,7 @@ index a779481..c343178 100644
  
  ```{rust,ignore}
  let a: String = "foo".to_string();
-@@ -301,6 +233,4 @@ let y = TraitObject {
+@@ -301,6 +235,4 @@ let y = TraitObject {
  (y.vtable.method)(y.data);
  ```
  
