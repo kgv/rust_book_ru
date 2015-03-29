@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index d31348d..f6d79b1 100644
+index d31348d..68b3178 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
-@@ -1,46 +1,46 @@
+@@ -1,46 +1,47 @@
 -# Summary
 +# Содержание
  
@@ -44,11 +44,12 @@ index d31348d..f6d79b1 100644
 +    * [Условные переходы (If)](if.md)
 +    * [Функции](functions.md)
 +    * [Коментарии](comments.md)
-+    * [Составные типы данных](compound-data-types.md)
++    * [Агрегатные типы данных](compound-data-types.md)
 +    * [Сопоставление с шаблоном (Match)](match.md)
 +    * [Циклы](looping.md)
 +    * [Строки](strings.md)
-+    * [Массивы, Вектора, Слайсы/Срезы](arrays-vectors-and-slices.md)
++    * [Массивы, вектора, срезы](arrays-vectors-and-slices.md)
++    * [Стандартный ввод/вывод](standard-input.md)
 +* [Средний уровень](intermediate.md)
 +    * [Крейты и Модули](crates-and-modules.md)
 +    * [Тестирование](testing.md)
