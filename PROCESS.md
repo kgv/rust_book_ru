@@ -1,7 +1,7 @@
 # Ход выполнения перевода
 
-* ~~advanced.md~~
 * advanced-macros.md
+* ~~advanced.md~~
 * ~~arrays-vectors-and-slices.md~~
 * ~~associated-types.md~~
 * ~~basic.md~~
@@ -17,18 +17,21 @@
 * ~~functions.md~~
 * ~~generics.md~~
 * ~~glossary.md~~
-* guessing-game.md
 * ~~hello-cargo.md~~
 * ~~hello-world.md~~
 * **if.md**
+* inline-assembly.md
 * ~~installing-rust.md~~
 * ~~intermediate.md~~
 * ~~iterators.md~~
+* lang-items.md
+* link-args.md
 * ~~looping.md~~
 * **macros.md**
-* match.md
+* ~~match.md~~
 * ~~method-syntax.md~~
 * ~~more-strings.md~~
+* no-stdlib.md
 * ~~ownership.md~~
 * ~~patterns.md~~
 * plugins.md
@@ -39,8 +42,10 @@
 * strings.md
 * ~~SUMMARY.md~~
 * ~~testing.md~~
+* tracing-macros.md
 * ~~traits.md~~
 * unsafe.md
+* unstable.md
 * ~~variable-bindings.md~~
 
 **Выделены жирным** - перевод файла начат, но не окончен.
