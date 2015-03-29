@@ -20,7 +20,7 @@
 * guessing-game.md
 * ~~hello-cargo.md~~
 * ~~hello-world.md~~
-* if.md
+* **if.md**
 * ~~installing-rust.md~~
 * ~~intermediate.md~~
 * ~~iterators.md~~
