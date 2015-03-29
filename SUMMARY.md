@@ -9,7 +9,7 @@
     * [Функции](functions.md)
     * [Комментарии](comments.md)
     * [Агрегатные типы данных](compound-data-types.md)
-    * [Сопоставление с шаблоном (Match)](match.md)
+    * [Сопоставление с образцом (Match)](match.md)
     * [Циклы](looping.md)
     * [Строки](strings.md)
     * [Массивы, вектора, срезы](arrays-vectors-and-slices.md)
