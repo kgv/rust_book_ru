@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/glossary.md b/master:glossary.md
+diff --git a/rust/master:src/doc/trpl/glossary.md b/fix_current_version:glossary.md
 index 9789832..3e64fb7 100644
 --- a/rust/master:src/doc/trpl/glossary.md
-+++ b/master:glossary.md
++++ b/fix_current_version:glossary.md
 @@ -1,11 +1,10 @@
 -% Glossary
 +% Глоссарий

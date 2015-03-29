@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/ownership.md b/master:ownership.md
+diff --git a/rust/master:src/doc/trpl/ownership.md b/fix_current_version:ownership.md
 index b851f19..52da1d1 100644
 --- a/rust/master:src/doc/trpl/ownership.md
-+++ b/master:ownership.md
++++ b/fix_current_version:ownership.md
 @@ -1,63 +1,26 @@
 -% Ownership
 -

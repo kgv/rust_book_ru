@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/master:SUMMARY.md
-index 140086e..9ee6cf2 100644
+diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
+index d31348d..f6d79b1 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
-+++ b/master:SUMMARY.md
-@@ -1,47 +1,41 @@
++++ b/fix_current_version:SUMMARY.md
+@@ -1,46 +1,46 @@
 -# Summary
 +# Содержание
  
@@ -21,7 +21,6 @@ index 140086e..9ee6cf2 100644
 -    * [Looping](looping.md)
 -    * [Strings](strings.md)
 -    * [Arrays, Vectors, and Slices](arrays-vectors-and-slices.md)
--    * [Standard Input](standard-input.md)
 -* [Intermediate Rust](intermediate.md)
 -    * [Crates and Modules](crates-and-modules.md)
 -    * [Testing](testing.md)
@@ -50,7 +49,6 @@ index 140086e..9ee6cf2 100644
 +    * [Циклы](looping.md)
 +    * [Строки](strings.md)
 +    * [Массивы, Вектора, Слайсы/Срезы](arrays-vectors-and-slices.md)
-+    * [Стандартный ввод/вывод](standard-input.md)
 +* [Средний уровень](intermediate.md)
 +    * [Крейты и Модули](crates-and-modules.md)
 +    * [Тестирование](testing.md)
@@ -75,15 +73,16 @@ index 140086e..9ee6cf2 100644
 -    * [Advanced Macros](advanced-macros.md)
 -* [Unstable Rust](unstable.md)
 -    * [Compiler Plugins](plugins.md)
--    * [Inline Assembly](inline-assembly.md)
--    * [No stdlib](no-stdlib.md)
--    * [Intrinsics](intrinsics.md)
--    * [Lang items](lang-items.md)
--    * [Link args](link-args.md)
--* [Conclusion](conclusion.md)
--* [Glossary](glossary.md)
 +    * [Небезопасный код](unsafe.md)
 +    * [Продвинутые макросы](advanced-macros.md)
++* [Нестабильный Rust](unstable.md)
 +    * [Плагины компилятора](plugins.md)
+     * [Inline Assembly](inline-assembly.md)
+     * [No stdlib](no-stdlib.md)
+     * [Intrinsics](intrinsics.md)
+     * [Lang items](lang-items.md)
+     * [Link args](link-args.md)
+-* [Conclusion](conclusion.md)
+-* [Glossary](glossary.md)
 +* [Заключение](conclusion.md)
 +* [Глоссарий](glossary.md)

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/crates-and-modules.md b/master:crates-and-modules.md
+diff --git a/rust/master:src/doc/trpl/crates-and-modules.md b/fix_current_version:crates-and-modules.md
 index 0cc54c9..2cfdfe7 100644
 --- a/rust/master:src/doc/trpl/crates-and-modules.md
-+++ b/master:crates-and-modules.md
++++ b/fix_current_version:crates-and-modules.md
 @@ -1,27 +1,14 @@
 -% Crates and Modules
 +% Крейты и модули

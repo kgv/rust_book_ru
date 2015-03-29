@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/arrays-vectors-and-slices.md b/master:arrays-vectors-and-slices.md
+diff --git a/rust/master:src/doc/trpl/arrays-vectors-and-slices.md b/fix_current_version:arrays-vectors-and-slices.md
 index fb56e4a..cbccbc1 100644
 --- a/rust/master:src/doc/trpl/arrays-vectors-and-slices.md
-+++ b/master:arrays-vectors-and-slices.md
++++ b/fix_current_version:arrays-vectors-and-slices.md
 @@ -1,103 +1,108 @@
 -% Arrays, Vectors, and Slices
 +% Массивы, вектора, срезы

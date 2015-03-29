@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/traits.md b/master:traits.md
+diff --git a/rust/master:src/doc/trpl/traits.md b/fix_current_version:traits.md
 index 1e44076..a5f0eea 100644
 --- a/rust/master:src/doc/trpl/traits.md
-+++ b/master:traits.md
++++ b/fix_current_version:traits.md
 @@ -1,7 +1,6 @@
 -% Traits
 +% Трейты

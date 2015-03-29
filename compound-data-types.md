@@ -268,13 +268,13 @@ struct HeightDatabase(Vec<i32>);
 let ten  = Character::Digit(10);
 let four = Character::Digit(4);
 
-// Error: binary operation `*` cannot be applied to type `Character`
+// Error: `*` is not implemented for type `Character`
 let forty = ten * four;
 
-// Error: binary operation `<=` cannot be applied to type `Character`
+// Error: `<=` is not implemented for type `Character`
 let four_is_smaller = four <= ten;
 
-// Error: binary operation `==` cannot be applied to type `Character`
+// Error: `==` is not implemented for type `Character`
 let four_equals_ten = four == ten;
 ```
 

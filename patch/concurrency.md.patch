@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/concurrency.md b/master:concurrency.md
+diff --git a/rust/master:src/doc/trpl/concurrency.md b/fix_current_version:concurrency.md
 index 79cb311..210094a 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
-+++ b/master:concurrency.md
++++ b/fix_current_version:concurrency.md
 @@ -1,63 +1,37 @@
 -% Concurrency
 +% Многозадачность (параллелизм)

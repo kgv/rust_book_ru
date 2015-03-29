@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/documentation.md b/master:documentation.md
+diff --git a/rust/master:src/doc/trpl/documentation.md b/fix_current_version:documentation.md
 index 43b49c0..3478892 100644
 --- a/rust/master:src/doc/trpl/documentation.md
-+++ b/master:documentation.md
++++ b/fix_current_version:documentation.md
 @@ -1,21 +1,16 @@
 -% Documentation
 +% Документация

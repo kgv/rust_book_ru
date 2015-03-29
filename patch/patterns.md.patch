@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/patterns.md b/master:patterns.md
+diff --git a/rust/master:src/doc/trpl/patterns.md b/fix_current_version:patterns.md
 index 4ebf696..374ca0e 100644
 --- a/rust/master:src/doc/trpl/patterns.md
-+++ b/master:patterns.md
++++ b/fix_current_version:patterns.md
 @@ -1,11 +1,8 @@
 -% Patterns
 +% Шаблоны

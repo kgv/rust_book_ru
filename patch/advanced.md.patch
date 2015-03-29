@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/advanced.md b/master:advanced.md
+diff --git a/rust/master:src/doc/trpl/advanced.md b/fix_current_version:advanced.md
 index 447a8a6..e53b7cf 100644
 --- a/rust/master:src/doc/trpl/advanced.md
-+++ b/master:advanced.md
++++ b/fix_current_version:advanced.md
 @@ -1,8 +1,5 @@
 -% Advanced
 +% Продвинутый уровень

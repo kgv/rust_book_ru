@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/generics.md b/master:generics.md
+diff --git a/rust/master:src/doc/trpl/generics.md b/fix_current_version:generics.md
 index 3e4e0a6..b27d685 100644
 --- a/rust/master:src/doc/trpl/generics.md
-+++ b/master:generics.md
++++ b/fix_current_version:generics.md
 @@ -1,7 +1,6 @@
 -% Generics
 +% Дженерики (обобщённые типы)

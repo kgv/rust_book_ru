@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/looping.md b/master:looping.md
-index 28f02b1..35cba9e 100644
+diff --git a/rust/master:src/doc/trpl/looping.md b/fix_current_version:looping.md
+index 28f02b1..d48d280 100644
 --- a/rust/master:src/doc/trpl/looping.md
-+++ b/master:looping.md
-@@ -1,59 +1,46 @@
++++ b/fix_current_version:looping.md
+@@ -1,13 +1,10 @@
 -% Looping
 +% Циклы
  
@@ -18,30 +18,27 @@ index 28f02b1..35cba9e 100644
 -loop doesn't look like this "C-style" `for` loop:
 +Цикл `for` нужен для повторения блока кода определенного количества раз. Циклы `for` в Rust работают немного иначе, чем в других языках программирования. Например в Си подобном языке цикл `for` выглядит так:
  
--```{c}
-+```c
+ ```{c}
  for (x = 0; x < 10; x++) {
-     printf( "%d\n", x );
+@@ -15,7 +12,7 @@ for (x = 0; x < 10; x++) {
  }
  ```
  
 -Instead, it looks like this:
 +Однако, этот код в Rust будет выглядеть следующим образом:
  
--```{rust}
-+```rust
+ ```{rust}
  for x in 0..10 {
-     println!("{}", x); // x: i32
+@@ -23,35 +20,25 @@ for x in 0..10 {
  }
  ```
  
 -In slightly more abstract terms,
 +Можно показать цикл более абстрактнее:
  
--```{ignore}
+ ```{ignore}
 -for var in expression {
 -    code
-+```
 +for var in выражение {
 +    тело_цикла
  }
@@ -75,12 +72,9 @@ index 28f02b1..35cba9e 100644
 -this:
 +Цикл `while` это еще один вид конструкции цикла в Rust. Выглядит он так:
  
--```{rust}
-+```rust
+ ```{rust}
  let mut x = 5; // mut x: u32
- let mut done = false; // mut done: bool
- 
-@@ -64,33 +51,27 @@ while !done {
+@@ -64,31 +51,25 @@ while !done {
  }
  ```
  
@@ -91,16 +85,14 @@ index 28f02b1..35cba9e 100644
 -If you need an infinite loop, you may be tempted to write this:
 +Если вам нужен бесконечный цикл, то можете сделать условие всегда истинным:
  
--```{rust,ignore}
-+```rust
+ ```{rust,ignore}
  while true {
  ```
  
 -However, Rust has a dedicated keyword, `loop`, to handle this case:
 +Однако, в Rust имеется ключевое слово `loop` для такого случая:
  
--```{rust,ignore}
-+```rust
+ ```{rust,ignore}
  loop {
  ```
  
@@ -118,12 +110,9 @@ index 28f02b1..35cba9e 100644
 -Let's take a look at that `while` loop we had earlier:
 +Давайте посмотрим на цикл `while` снова:
  
--```{rust}
-+```rust
+ ```{rust}
  let mut x = 5;
- let mut done = false;
- 
-@@ -101,13 +82,11 @@ while !done {
+@@ -101,11 +82,9 @@ while !done {
  }
  ```
  
@@ -135,11 +124,8 @@ index 28f02b1..35cba9e 100644
 -In this case, we can write the loop in a better way with `break`:
 +Можем переписать цикл более лучшим способом с помощью `break`, чтобы избавиться от переменной `done`:
  
--```{rust}
-+```rust
+ ```{rust}
  let mut x = 5;
- 
- loop {
 @@ -117,17 +96,16 @@ loop {
  }
  ```
@@ -151,9 +137,8 @@ index 28f02b1..35cba9e 100644
 -iteration. This will only print the odd numbers:
 +`continue` похож на `break`, но вместо выхода из цикла переходит к следующей итерации. Следующий пример отобразит только нечетные числа:
  
--```{rust}
+ ```{rust}
 -for x in 0..10 {
-+```rust
 +for x in 0u32..10 {
      if x % 2 == 0 { continue; }
  

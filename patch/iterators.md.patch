@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/iterators.md b/master:iterators.md
+diff --git a/rust/master:src/doc/trpl/iterators.md b/fix_current_version:iterators.md
 index 8d7b1c3..32b0a70 100644
 --- a/rust/master:src/doc/trpl/iterators.md
-+++ b/master:iterators.md
++++ b/fix_current_version:iterators.md
 @@ -1,8 +1,8 @@
 -% Iterators
 +% Итераторы

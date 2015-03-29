@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/method-syntax.md b/master:method-syntax.md
+diff --git a/rust/master:src/doc/trpl/method-syntax.md b/fix_current_version:method-syntax.md
 index c8309a1..589191a 100644
 --- a/rust/master:src/doc/trpl/method-syntax.md
-+++ b/master:method-syntax.md
++++ b/fix_current_version:method-syntax.md
 @@ -1,26 +1,22 @@
 -% Method Syntax
 +% Синтаксис методов

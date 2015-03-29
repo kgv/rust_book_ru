@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/basic.md b/master:basic.md
+diff --git a/rust/master:src/doc/trpl/basic.md b/fix_current_version:basic.md
 index c267830..3134346 100644
 --- a/rust/master:src/doc/trpl/basic.md
-+++ b/master:basic.md
++++ b/fix_current_version:basic.md
 @@ -1,7 +1,5 @@
 -% Basics
 +% Основной уровень

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/associated-types.md b/master:associated-types.md
+diff --git a/rust/master:src/doc/trpl/associated-types.md b/fix_current_version:associated-types.md
 index f36c2c5..33936ae 100644
 --- a/rust/master:src/doc/trpl/associated-types.md
-+++ b/master:associated-types.md
++++ b/fix_current_version:associated-types.md
 @@ -1,11 +1,6 @@
 -% Associated Types
 +% Ассоциированные типы
