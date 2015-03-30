@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index d31348d..68b3178 100644
+index d31348d..5fb4aeb 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
 @@ -1,46 +1,47 @@
@@ -43,9 +43,9 @@ index d31348d..68b3178 100644
 +    * [Связывание переменных](variable-bindings.md)
 +    * [Условные переходы (If)](if.md)
 +    * [Функции](functions.md)
-+    * [Коментарии](comments.md)
++    * [Комментарии](comments.md)
 +    * [Агрегатные типы данных](compound-data-types.md)
-+    * [Сопоставление с шаблоном (Match)](match.md)
++    * [Сопоставление с образцом (Match)](match.md)
 +    * [Циклы](looping.md)
 +    * [Строки](strings.md)
 +    * [Массивы, вектора, срезы](arrays-vectors-and-slices.md)
@@ -63,7 +63,7 @@ index d31348d..68b3178 100644
 +    * [Итераторы](iterators.md)
 +    * [Дженерики](generics.md)
 +    * [Трейты](traits.md)
-+    * [Статическая и Динамическая диспетчерезация](static-and-dynamic-dispatch.md)
++    * [Статическая и динамическая диспетчерезация](static-and-dynamic-dispatch.md)
 +    * [Макросы](macros.md)
 +    * [Многозадачность](concurrency.md)
 +    * [Обработка ошибок](error-handling.md)

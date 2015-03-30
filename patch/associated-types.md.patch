@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/associated-types.md b/fix_current_version:associated-types.md
-index f36c2c5..33936ae 100644
+index 7161cd3..33936ae 100644
 --- a/rust/master:src/doc/trpl/associated-types.md
 +++ b/fix_current_version:associated-types.md
 @@ -1,11 +1,6 @@
@@ -134,7 +134,7 @@ index f36c2c5..33936ae 100644
            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  ```
  
--We can’t create a trait object like this, becuase we don’t know the associated
+-We can’t create a trait object like this, because we don’t know the associated
 -types. Instead, we can write this:
 +Мы не сможем создать трейт объект, подобный этому, потому что у него нет информации об ассоциированных типах. Вместо этого, мы можем написать так:
  

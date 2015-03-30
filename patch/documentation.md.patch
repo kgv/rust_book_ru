@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/documentation.md b/fix_current_version:documentation.md
-index 43b49c0..3478892 100644
+index 06071a8..9a32919 100644
 --- a/rust/master:src/doc/trpl/documentation.md
 +++ b/fix_current_version:documentation.md
 @@ -1,21 +1,16 @@
@@ -505,7 +505,7 @@ index 43b49c0..3478892 100644
  
  ```
  //! this
-@@ -512,10 +452,11 @@ are the same, as are these:
+@@ -512,12 +452,11 @@ are the same, as are these:
  #![doc="/// this"]
  ```
  
@@ -515,12 +515,13 @@ index 43b49c0..3478892 100644
  
 -### Re-exports
 +### Ре-экспорт
-+
+ 
+-`rustdoc` will show the documentation for a public re-export in both places:
 +`rustdoc` будет показывать документацию для publc реэкспорта в обоих местах:
  
- `rustdoc` will show the documentation for a publc re-export in both places:
- 
-@@ -525,11 +466,9 @@ extern crate foo;
+ ```ignore
+ extern crate foo;
+@@ -525,11 +464,9 @@ extern crate foo;
  pub use foo::bar;
  ```
  
@@ -529,12 +530,12 @@ index 43b49c0..3478892 100644
 -documentation in both places.
 +Это создаст документацию для `bar` как в документации для крейта `foo`, так и в документации к вашему крейту. Так что будет использована одна и та же документация в обоих местах.
  
--This behavior can be supressed with `no_inline`:
+-This behavior can be suppressed with `no_inline`:
 +Такое поведение может быть подавлено с помощью `no_inline`:
  
  ```ignore
  extern crate foo;
-@@ -538,10 +477,9 @@ extern crate foo;
+@@ -538,10 +475,9 @@ extern crate foo;
  pub use foo::bar;
  ```
  
@@ -547,7 +548,7 @@ index 43b49c0..3478892 100644
  
  ```
  #![doc(html_logo_url = "http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png",
-@@ -549,14 +487,12 @@ You can control a few aspects of the HTML that `rustdoc` generates through the
+@@ -549,14 +485,12 @@ You can control a few aspects of the HTML that `rustdoc` generates through the
         html_root_url = "http://doc.rust-lang.org/")];
  ```
  

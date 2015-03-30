@@ -456,9 +456,7 @@ are the same, as are these:
 
 ### Ре-экспорт
 
-`rustdoc` будет показывать документацию для publc реэкспорта в обоих местах:
-
-`rustdoc` will show the documentation for a publc re-export in both places:
+`rustdoc` будет показывать документацию для public реэкспорта в обоих местах:
 
 ```ignore
 extern crate foo;
