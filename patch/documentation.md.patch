@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/documentation.md b/fix_current_version:documentation.md
-index 06071a8..9a32919 100644
+index 06071a8..5728c58 100644
 --- a/rust/master:src/doc/trpl/documentation.md
 +++ b/fix_current_version:documentation.md
 @@ -1,21 +1,16 @@
@@ -517,7 +517,7 @@ index 06071a8..9a32919 100644
 +### Ре-экспорт
  
 -`rustdoc` will show the documentation for a public re-export in both places:
-+`rustdoc` будет показывать документацию для publc реэкспорта в обоих местах:
++`rustdoc` будет показывать документацию для public реэкспорта в обоих местах:
  
  ```ignore
  extern crate foo;

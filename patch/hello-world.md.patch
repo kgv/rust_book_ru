@@ -109,7 +109,8 @@ index a3b5d65..f7df60e 100644
 -spaces, not tabs. Please configure your editor of choice to insert four spaces
 -with the tab key. We provide some [sample configurations for various
 -editors](https://github.com/rust-lang/rust/tree/master/src/etc/CONFIGS.md).
--
++Эта строка делает всю работу в нашей маленькой программе. Тут есть несколько деталей, которые имеют существенное значение. Во-первых, отступ в четыре пробела, а не табуляция. Пожалуйста, настройте выбранный вами редактор так, чтобы вставлять четыре пробела при помощи клавиши табуляции. Мы предоставляем некоторые [примеры настроек для различных редакторов](https://github.com/rust-lang/rust/tree/master/src/etc/CONFIGS.md).
+ 
 -The second point is the `println!()` part. This is calling a Rust *macro*,
 -which is how metaprogramming is done in Rust. If it were a function instead, it
 -would look like this: `println()`. For our purposes, we don't need to worry
@@ -120,29 +121,24 @@ index a3b5d65..f7df60e 100644
 -last thing to mention: Rust's macros are significantly different from C macros,
 -if you've used those. Don't be scared of using macros. We'll get to the details
 -eventually, you'll just have to trust us for now.
--
++Теперь разберёмся с `println!()`. Это вызов *макроса*, которым представлено метапрограммирование в Rust'e. Если бы вместо макроса была функция, это бы выглядело следующим образом: `println()`. Для достижения нашей цели, нас не должна волновать эта разница. Просто знайте, что иногда вы будете видеть `!`, по которому можно понять, что вы вызываете макрос вместо нормальной функции. Rust реализует `println!` как макрос вместо функции по веским причинам, но это достаточно глубокая тема о которой мы поговорим позже. И последнее, что нужно отметить: макросы Rust'a значительно отличаются от макросов C, если вы их использовали. Не бойтесь использовать макросы. В конце концов мы вернёмся к деталям, а сейчас просто доверьтесь нам.
+ 
 -Next, `"Hello, world!"` is a *string*. Strings are a surprisingly complicated
 -topic in a systems programming language, and this is a *statically allocated*
 -string. We will talk more about different kinds of allocation later. We pass
 -this string as an argument to `println!`, which prints the string to the
 -screen. Easy enough!
--
++Идём дальше. `"Hello, world!"` - это *строка*. Строки удивительно сложная тема в системном языке программирования, и это статически расположенная в памяти строка. Мы расскажем больше о различных видах распределения памяти позже. Передадим эту строку в качестве аргумента в `println!`, который выводит строки на экран. Это достаточно просто!
+ 
 -Finally, the line ends with a semicolon (`;`). Rust is an *expression
 -oriented* language, which means that most things are expressions. The `;` is
 -used to indicate that this expression is over, and the next one is ready to
 -begin. Most lines of Rust code end with a `;`. We will cover this in-depth
 -later in the guide.
--
++В завершение, строка заканчивается точкой с запятой (`;`). Rust `выражение-ориентированный язык`, что означает, что в нём большая часть вещей является выражением. `;` используется для указания, что выражение закончилось и начинается следующее. Большинство строк кода на Rust заканчивается `;`. Мы рассмотрим это позже в отдельном разделе руководства.
+ 
 -Finally, actually *compiling* and *running* our program. We can compile
 -with our compiler, `rustc`, by passing it the name of our source file:
-+Эта строка делает всю работу в нашей маленькой программе. Тут есть несколько деталей, которые имеют существенное значение. Во-первых, отступ в четыре пробела, а не табуляция. Пожалуйста, настройте выбранный вами редактор так, чтобы вставлять четыре пробела при помощи клавиши табуляции. Мы предоставляем некоторые [примеры настроек для различных редакторов](https://github.com/rust-lang/rust/tree/master/src/etc/CONFIGS.md).
-+
-+Теперь разберёмся с `println!()`. Это вызов *макроса*, которым представлено метапрограммирование в Rust'e. Если бы вместо макроса была функция, это бы выглядело следующим образом: `println()`. Для достижения нашей цели, нас не должна волновать эта разница. Просто знайте, что иногда вы будете видеть `!`, по которому можно понять, что вы вызываете макрос вместо нормальной функции. Rust реализует `println!` как макрос вместо функции по веским причинам, но это достаточно глубокая тема о которой мы поговорим позже. И последнее, что нужно отметить: макросы Rust'a значительно отличаются от макросов C, если вы их использовали. Не бойтесь использовать макросы. В конце концов мы вернёмся к деталям, а сейчас просто доверьтесь нам.
-+
-+Идём дальше. `"Hello, world!"` - это *строка*. Строки удивительно сложная тема в системном языке программирования, и это статически расположенная в памяти строка. Мы расскажем больше о различных видах распределения памяти позже. Передадим эту строку в качестве аргумента в `println!`, который выводит строки на экран. Это достаточно просто!
-+
-+В завершение, строка заканчивается точкой с запятой (`;`). Rust `выражение-ориентированный язык`, что означает, что в нём большая часть вещей является выражением. `;` используется для указания, что выражение закончилось и начинается следующее. Большинство строк кода на Rust заканчивается `;`. Мы рассмотрим это позже в отдельном разделе руководства.
-+
 +На самом деле, завершением будет *сборка* и *запуск* нашей программы. Соберём программу компилятором `rustc`, передав ему в качестве аргумента название нашего файла с кодом:
  
  ```{bash}
@@ -176,7 +172,8 @@ index a3b5d65..f7df60e 100644
  ```
  
 -This prints out our `Hello, world!` text to our terminal.
--
++Мы получили выведенный в окне терминала текст `"Hello, world!"`.
+ 
 -If you come from a dynamically typed language like Ruby, Python, or JavaScript,
 -you may not be used to these two steps being separate. Rust is an
 -*ahead-of-time compiled language*, which means that you can compile a
@@ -185,19 +182,15 @@ index a3b5d65..f7df60e 100644
 -Ruby/Python/JavaScript installed, but you just need one command to both compile
 -and run your program. Everything is a tradeoff in language design, and Rust has
 -made its choice.
--
++Если вы перешли из динамически-типизированных языков программирования вроде Ruby, Python или JavaScript, вы не можете использовать эти два шага отдельно. Rust *компилируемый перед исполнением* язык, это означает, что вы можете собрать программу, дать её кому-то ещё, и ему не нужно устанавливать Rust. Если вы передадите кому-нибудь `.rb`, `.py` или `.js` файл, им понадобится Ruby/Python/JavaScript, чтобы скомпилировать и запустить вашу программу, но запустить его они смогу одной командой. Все это взаимоисключаемо в дизайне языков программирования, и Rust сделал свой выбор.
+ 
 -Congratulations! You have officially written a Rust program. That makes you a
 -Rust programmer! Welcome.
--
++Поздравляем! Вы официально написали программу на Rust. Это делает вас Rust-программистом! Добро пожаловать!
+ 
 -Next, I'd like to introduce you to another tool, Cargo, which is used to write
 -real-world Rust programs. Just using `rustc` is nice for simple things, but as
 -your project grows, you'll want something to help you manage all of the options
 -that it has, and to make it easy to share your code with other people and
 -projects.
-+Мы получили выведенный в окне терминала текст `"Hello, world!"`.
-+
-+Если вы перешли из динамически-типизированных языков программирования вроде Ruby, Python или JavaScript, вы не можете использовать эти два шага отдельно. Rust *компилируемый перед исполнением* язык, это означает, что вы можете собрать программу, дать её кому-то ещё, и ему не нужно устанавливать Rust. Если вы передадите кому-нибудь `.rb`, `.py` или `.js` файл, им понадобится Ruby/Python/JavaScript, чтобы скомпилировать и запустить вашу программу, но запустить его они смогу одной командой. Все это взаимоисключаемо в дизайне языков программирования, и Rust сделал свой выбор.
-+
-+Поздравляем! Вы официально написали программу на Rust. Это делает вас Rust-программистом! Добро пожаловать!
-+
 +Дальше мы познакомимся с новым инструментом `cargo`, который используется для написания настоящих программ в Rust. Использовать `rustc` удобно лишь для небольших программ, но по мере роста проекта потребуется инструмент, помогающий управлять настройками проекта, а также облегчит обмен кода с другими людьми и проектами.

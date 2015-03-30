@@ -446,17 +446,16 @@ index e44d2ed..5c0d826 100644
 -Importing variants is convenient and compact, but can also cause name conflicts,
 -so do this with caution. For this reason, it's normally considered better style
 -to `use` an enum rather than its variants directly.
--
++Импорт вариантов удобен и компактен, но он может вызывать конфликты имён,
++поэтому будьте осторожны при его использовании. Обычно стилистически лучше
++импортировать перечисление, а не его варианты.
+ 
 -As you can see, `enum`s are quite a powerful tool for data representation, and
 -are even more useful when they're [generic][generics] across types. Before we
 -get to generics, though, let's talk about how to use enums with pattern
 -matching, a tool that will let us deconstruct sum types (the type theory term
 -for enums) like `Ordering` in a very elegant way that avoids all these messy
 -and brittle `if`/`else`s.
-+Импорт вариантов удобен и компактен, но он может вызывать конфликты имён,
-+поэтому будьте осторожны при его использовании. Обычно стилистически лучше
-+импортировать перечисление, а не его варианты.
-+
 +Как видите, перечисления довольно удобны, и особенно полезны когда они
 +[обобщены][generics] относительно вложенных в них типов. Однако, прежде чем
 +мы перейдём к рассмотрению обобщённых типов, давайте поговорим об использовании

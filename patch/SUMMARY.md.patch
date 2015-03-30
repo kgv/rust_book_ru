@@ -1,14 +1,14 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index d31348d..5fb4aeb 100644
+index d31348d..a1df18f 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
-@@ -1,46 +1,47 @@
+@@ -1,46 +1,46 @@
 -# Summary
 +# Содержание
  
 -* [The Basics](basic.md)
 -    * [Installing Rust](installing-rust.md)
-+* [Основной уровень](basic.md)
++* [Начальный Rust](basic.md)
 +    * [Установка Rust](installing-rust.md)
      * [Hello, world!](hello-world.md)
      * [Hello, Cargo!](hello-cargo.md)
@@ -40,6 +40,13 @@ index d31348d..5fb4aeb 100644
 -    * [Error Handling](error-handling.md)
 -    * [Documentation](documentation.md)
 -* [Advanced Topics](advanced.md)
+-    * [FFI](ffi.md)
+-    * [Unsafe Code](unsafe.md)
+-    * [Advanced Macros](advanced-macros.md)
+-* [Unstable Rust](unstable.md)
+-    * [Compiler Plugins](plugins.md)
+-    * [Inline Assembly](inline-assembly.md)
+-    * [No stdlib](no-stdlib.md)
 +    * [Связывание переменных](variable-bindings.md)
 +    * [Условные переходы (If)](if.md)
 +    * [Функции](functions.md)
@@ -49,9 +56,8 @@ index d31348d..5fb4aeb 100644
 +    * [Циклы](looping.md)
 +    * [Строки](strings.md)
 +    * [Массивы, вектора, срезы](arrays-vectors-and-slices.md)
-+    * [Стандартный ввод/вывод](standard-input.md)
-+* [Средний уровень](intermediate.md)
-+    * [Крейты и Модули](crates-and-modules.md)
++* [Средний Rust](intermediate.md)
++    * [Крейты и модули](crates-and-modules.md)
 +    * [Тестирование](testing.md)
 +    * [Указатели](pointers.md)
 +    * [Владение](ownership.md)
@@ -68,18 +74,14 @@ index d31348d..5fb4aeb 100644
 +    * [Многозадачность](concurrency.md)
 +    * [Обработка ошибок](error-handling.md)
 +    * [Документация](documentation.md)
-+* [Продвинутый уровень](advanced.md)
-     * [FFI](ffi.md)
--    * [Unsafe Code](unsafe.md)
--    * [Advanced Macros](advanced-macros.md)
--* [Unstable Rust](unstable.md)
--    * [Compiler Plugins](plugins.md)
++* [Продвинутый Rust](advanced.md)
++    * [Интерфейс внешних функций (FFI)](ffi.md)
 +    * [Небезопасный код](unsafe.md)
 +    * [Продвинутые макросы](advanced-macros.md)
 +* [Нестабильный Rust](unstable.md)
 +    * [Плагины компилятора](plugins.md)
-     * [Inline Assembly](inline-assembly.md)
-     * [No stdlib](no-stdlib.md)
++    * [Встроенный ассемблерный код](inline-assembly.md)
++    * [Без stdlib](no-stdlib.md)
      * [Intrinsics](intrinsics.md)
      * [Lang items](lang-items.md)
      * [Link args](link-args.md)

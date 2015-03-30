@@ -1,0 +1,7 @@
+diff --git a/rust/master:src/doc/trpl/unstable.md b/fix_current_version:unstable.md
+index e8e02cc..509b935 100644
+--- a/rust/master:src/doc/trpl/unstable.md
++++ b/fix_current_version:unstable.md
+@@ -1 +1 @@
+-% Unstable Rust
++% Нестабильный Rust

@@ -169,21 +169,19 @@ index 88babd8..7654660 100644
  
 -Rust will not let us use a value that has not been initialized. Next, let's
 -talk about this stuff we've added to `println!`.
--
++Rust не позволит использовать неинициализированную переменную. Далее, поговорим о `{}`, которые мы добавили в `println!`.
+ 
 -If you include two curly braces (`{}`, some call them moustaches...) in your
 -string to print, Rust will interpret this as a request to interpolate some sort
 -of value. *String interpolation* is a computer science term that means "stick
 -in the middle of a string." We add a comma, and then `x`, to indicate that we
 -want `x` to be the value we're interpolating. The comma is used to separate
 -arguments we pass to functions and macros, if you're passing more than one.
--
++Если вы добавите две фигурные скобки (`{}`, иногда называемые "усами"...) в вашу печатаемую строку, Rust истолкует это как просьбу вставки некоторого значения. *Строковая интерполяция* - это термин в информатике, который обозначает "вставить посреди строки". Мы добавили запятую, и затем `x`, что бы указать, что мы хотим вставить `x` в строку. Запятая используется для разделения параметров, если в функцию или макрос передаётся больше одного параметра.
+ 
 -When you just use the curly braces, Rust will attempt to display the
 -value in a meaningful way by checking out its type. If you want to specify the
 -format in a more detailed manner, there are a [wide number of options
 -available](../std/fmt/index.html). For now, we'll just stick to the default:
 -integers aren't very complicated to print.
-+Rust не позволит использовать неинициализированную переменную. Далее, поговорим о `{}`, которые мы добавили в `println!`.
-+
-+Если вы добавите две фигурные скобки (`{}`, иногда называемые "усами"...) в вашу печатаемую строку, Rust истолкует это как просьбу вставки некоторого значения. *Строковая интерполяция* - это термин в информатике, который обозначает "вставить посреди строки". Мы добавили запятую, и затем `x`, что бы указать, что мы хотим вставить `x` в строку. Запятая используется для разделения параметров, если в функцию или макрос передаётся больше одного параметра.
-+
 +При вставке переменной в строку, Rust проверит её тип и попытается отобразить осмысленное значение. Если вы хотите указать формат более детально, то можете ознакомиться с [доступными опциями форматирования строк](http://doc.rust-lang.org/std/fmt/index.html). На данный момент мы будем вставлять как есть: целые числа не очень сложны для печати.

@@ -195,32 +195,28 @@ index bf4c2d9..9636c31 100644
 -You might ask yourself: why do we need to introduce two type
 -parameters `F` and `G` here?  Evidently, both `f` and `g` have the
 -same signature: `Fn(i32) -> i32`.
--
++Вы можете задаться вопросом: почему мы использовали два параметра типа `F` и `G` здесь? Очевидно, что оба аргумента `f` и `g` имеют одинаковую сигнатуру: `Fn(i32) -> i32`.
+ 
 -That is because in Rust each closure has its own unique type.
 -So, not only do closures with different signatures have different types,
 -but different closures with the *same* signature have *different*
 -types, as well!
--
++Это потому, что в Rust каждое замыкание имеет свой собственный уникальный тип. Поэтому не только замыкания с разными сигнатурами имеют различные типы, но и разные замыкания с *одинаковыми* сигнатурами также имеют *различные* типы!
+ 
 -You can think of it this way: the behavior of a closure is part of its
 -type.  Therefore, using a single type parameter for both closures
 -will accept the first of them, rejecting the second. The distinct
 -type of the second closure does not allow it to be represented by the
 -same type parameter as that of the first.  We acknowledge this, and
 -use two different type parameters `F` and `G`.
--
++Вы можете думать об этом так: поведение замыкания является частью его типа. Таким образом, использование одного параметра типа для обоих замыканий будет принято первым из них, но отвергнуто вторым. Отличный тип второго замыкания не позволяет ему быть представленным тем же параметром типа, что и первое замыкание. Мы осознаем это, и поэтому используем два разных параметра типа `F` и `G`.
+ 
 -This also introduces the `where` clause, which lets us describe type
 -parameters in a more flexible manner.
--
++Этот пример также вводит статью `where`, что позволяет нам описать параметры типов в более гибкой манере.
+ 
 -That's all you need to get the hang of closures! Closures are a little bit
 -strange at first, but once you're used to them, you'll miss them
 -in other languages. Passing functions to other functions is
 -incredibly powerful, as you will see in the following chapter about iterators.
-+Вы можете задаться вопросом: почему мы использовали два параметра типа `F` и `G` здесь? Очевидно, что оба аргумента `f` и `g` имеют одинаковую сигнатуру: `Fn(i32) -> i32`.
-+
-+Это потому, что в Rust каждое замыкание имеет свой собственный уникальный тип. Поэтому не только замыкания с разными сигнатурами имеют различные типы, но и разные замыкания с *одинаковыми* сигнатурами также имеют *различные* типы!
-+
-+Вы можете думать об этом так: поведение замыкания является частью его типа. Таким образом, использование одного параметра типа для обоих замыканий будет принято первым из них, но отвергнуто вторым. Отличный тип второго замыкания не позволяет ему быть представленным тем же параметром типа, что и первое замыкание. Мы осознаем это, и поэтому используем два разных параметра типа `F` и `G`.
-+
-+Этот пример также вводит статью `where`, что позволяет нам описать параметры типов в более гибкой манере.
-+
 +Это все, что вам нужно, чтобы работать с замыканиями! Замыкания могут показаться немного странным на первый взгляд, но, как только вы привыкнете к ним, вам будет не хватать их в на других языках. Передача функций в другие функции может быть невероятно мощным, что вы увидите в следующей главе об итераторах.
