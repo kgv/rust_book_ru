@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/conclusion.md b/fix_current_version:conclusion.md
-index 9afddb1..6669f07 100644
+index 9afddb1..a495a86 100644
 --- a/rust/master:src/doc/trpl/conclusion.md
 +++ b/fix_current_version:conclusion.md
-@@ -1,11 +1,5 @@
+@@ -1,11 +1,12 @@
 -% Conclusion
 +% Заключение
  
@@ -13,7 +13,14 @@ index 9afddb1..6669f07 100644
 -[standard library](http://doc.rust-lang.org/std/), by discovering solutions for
 -common problems on [Rust by Example](http://rustbyexample.com/), or by browsing
 -crates written by the community on [crates.io](https://crates.io/).
-+Мы рассмотрели множество тем. Когда вы освоите все в этом руководстве, вы будете иметь твердое понимание принципов разработки на Rust. Несмотря на то что мы только что охватили значительный объем, все еще полным полно тем для дальнейшего изучения Rust. Вы можете изучить многие вопросы глубже, например, читая API документацию к [стандартной библиотеке](http://doc.rust-lang.org/std/), или изучая решения для общих проблем в [Rust by Example](http://rustbyexample.com/), или просматривая крейты, написанные сообществом на [crates.io](https://crates.io/).
++Мы рассмотрели множество тем. Когда вы освоите все в этом руководстве, вы будете
++иметь твердое понимание принципов разработки на Rust. Несмотря на то что мы
++только что охватили значительный объем, все еще полным полно тем для дальнейшего
++изучения Rust. Вы можете изучить многие вопросы глубже, например, читая API
++документацию к [стандартной библиотеке](http://doc.rust-lang.org/std/), или
++изучая решения для общих проблем в [Rust by Example](http://rustbyexample.com/),
++или просматривая крейты, написанные сообществом на
++[crates.io](https://crates.io/).
  
 -Happy hacking!
 +Удачного хакинга!

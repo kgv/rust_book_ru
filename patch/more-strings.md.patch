@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/more-strings.md b/fix_current_version:more-strings.md
-index 17a4638..74f23c3 100644
+index 17a4638..09f5f3c 100644
 --- a/rust/master:src/doc/trpl/more-strings.md
 +++ b/fix_current_version:more-strings.md
-@@ -1,30 +1,20 @@
+@@ -1,30 +1,32 @@
 -% More Strings
 +% Больше о строках
  
@@ -11,12 +11,20 @@ index 17a4638..74f23c3 100644
 -of string handling in a systems programming language. Efficient access and
 -allocation of memory for a dynamically sized structure involves a lot of
 -details. Luckily, Rust has lots of tools to help us here.
-+Строки - важное понятие, которое необходимо освоить в любом языке программирования. Если вы пришли из управляемого языка, то можете быть удивлены сложностью обработки строк в системном языке программирования. Эффективный доступ и выделение памяти для структуры динамического размера включает в себя много нюансов. К счастью, Rust имеет большое количество инструментов, чтобы помочь нам в этом вопросе.
++Строки - важное понятие, которое необходимо освоить в любом языке
++программирования. Если вы пришли из управляемого языка, то можете быть удивлены
++сложностью обработки строк в системном языке программирования. Эффективный
++доступ и выделение памяти для структуры динамического размера включает в себя
++много нюансов. К счастью, Rust имеет большое количество инструментов, чтобы
++помочь нам в этом вопросе.
  
 -A **string** is a sequence of unicode scalar values encoded as a stream of
 -UTF-8 bytes. All strings are guaranteed to be validly-encoded UTF-8 sequences.
 -Additionally, strings are not null-terminated and can contain null bytes.
-+**string** - это последовательность скалярных значений юникод, закодированных в виде потока UTF-8 байт. Все строки должны быть гарантированно валидными UTF-8 последовательностями. Кроме того, строки не оканчиваются нулем и могут содержать нулевые байты.
++**string** - это последовательность скалярных значений юникод, закодированных в
++виде потока UTF-8 байт. Все строки должны быть гарантированно валидными UTF-8
++последовательностями. Кроме того, строки не оканчиваются нулем и могут содержать
++нулевые байты.
  
 -Rust has two main types of strings: `&str` and `String`.
 +Rust имеет два основных типа строк: `&str` и `String`.
@@ -25,7 +33,8 @@ index 17a4638..74f23c3 100644
  
 -The first kind is a `&str`. This is pronounced a 'string slice'.
 -String literals are of the type `&str`:
-+Первый тип строк - `&str`. Это произносится как 'строковый слайс (срез)'. Строковые литералы имеют тип `&str`:
++Первый тип строк - `&str`. Это произносится как 'строковый слайс (срез)'.
++Строковые литералы имеют тип `&str`:
  
  ```
  let string = "Hello there.";
@@ -35,29 +44,36 @@ index 17a4638..74f23c3 100644
 -literal is a `&'static str`.  A string slice can be written without an explicit
 -lifetime in many cases, such as in function arguments. In these cases the
 -lifetime will be inferred:
-+Как и любая ссылка Rust, строковые слайсы имеют связанный срок жизни. Для строкового литерала - `&'static str`. Строковый слайс можно записать без явного указания срока жизни во многих случаях, например, в качестве аргументов функций. В этих случаях срок жизни будет выведен:
++Как и любая ссылка Rust, строковые слайсы имеют связанный срок жизни. Для
++строкового литерала - `&'static str`. Строковый слайс можно записать без явного
++указания срока жизни во многих случаях, например, в качестве аргументов функций.
++В этих случаях срок жизни будет выведен:
  
  ```
  fn takes_slice(slice: &str) {
-@@ -32,15 +22,11 @@ fn takes_slice(slice: &str) {
+@@ -32,15 +34,15 @@ fn takes_slice(slice: &str) {
  }
  ```
  
 -Like vector slices, string slices are simply a pointer plus a length. This
 -means that they're a 'view' into an already-allocated string, such as a
 -string literal or a `String`.
-+Как и векторные слайсы, строковые слайсы - это просто указатель плюс длина. Это означает, что они являются 'видом' ('представлением') уже размещенной в памяти строки, например, строковый литерал или `String`.
++Как и векторные слайсы, строковые слайсы - это просто указатель плюс длина. Это
++означает, что они являются 'видом' ('представлением') уже размещенной в памяти
++строки, например, строковый литерал или `String`.
  
  ## `str`
  
 -You may occasionally see references to a `str` type, without the `&`. While
 -this type does exist, it’s not something you want to use yourself. Sometimes,
 -people confuse `str` for `String`, and write this:
-+Иногда вы можете встретить использование типа `str` без `&`. Хотя этот тип существует, это не то, что вам следует использовать самостоятельно. Иногда люди путают `str` и `String`, и написать так:
++Иногда вы можете встретить использование типа `str` без `&`. Хотя этот тип
++существует, это не то, что вам следует использовать самостоятельно. Иногда люди
++путают `str` и `String`, и написать так:
  
  ```rust
  struct S {
-@@ -48,14 +34,14 @@ struct S {
+@@ -48,14 +50,14 @@ struct S {
  }
  ```
  
@@ -74,7 +90,7 @@ index 17a4638..74f23c3 100644
  
  ```rust
  struct S {
-@@ -63,13 +49,11 @@ struct S {
+@@ -63,13 +65,13 @@ struct S {
  }
  ```
  
@@ -86,11 +102,13 @@ index 17a4638..74f23c3 100644
 -A `String` is a heap-allocated string. This string is growable, and is
 -also guaranteed to be UTF-8. `String`s are commonly created by
 -converting from a string slice using the `to_string` method.
-+`String` - это размещенная в куче строка. Эта строка расширяема, а также гарантированно является UTF-8. `String` обычно создаются путем преобразования из строкового слайса при помощи метода `to_string`.
++`String` - это размещенная в куче строка. Эта строка расширяема, а также
++гарантированно является UTF-8. `String` обычно создаются путем преобразования из
++строкового слайса при помощи метода `to_string`.
  
  ```
  let mut s = "Hello".to_string();
-@@ -79,7 +63,7 @@ s.push_str(", world.");
+@@ -79,7 +81,7 @@ s.push_str(", world.");
  println!("{}", s);
  ```
  
@@ -99,7 +117,7 @@ index 17a4638..74f23c3 100644
  
  ```
  fn takes_slice(slice: &str) {
-@@ -92,7 +76,7 @@ fn main() {
+@@ -92,7 +94,7 @@ fn main() {
  }
  ```
  
@@ -108,7 +126,7 @@ index 17a4638..74f23c3 100644
  
  ```
  use std::str;
-@@ -101,32 +85,30 @@ let x: &[u8] = &[b'a', b'b'];
+@@ -101,32 +103,34 @@ let x: &[u8] = &[b'a', b'b'];
  let stack_str: &str = str::from_utf8(x).unwrap();
  ```
  
@@ -121,7 +139,9 @@ index 17a4638..74f23c3 100644
 -In general, you should prefer `String` when you need ownership, and `&str` when
 -you just need to borrow a string. This is very similar to using `Vec<T>` vs. `&[T]`,
 -and `T` vs `&T` in general.
-+В общем, следует отдавать предпочтение `String`, когда вам нужно право владения, и `&str`, когда вам нужно просто позаимствовать строку. Это очень похоже на использование `Vec<T>` vs `&[T]`, `T` vs `&T` в общем.
++В общем, следует отдавать предпочтение `String`, когда вам нужно право владения,
++и `&str`, когда вам нужно просто позаимствовать строку. Это очень похоже на
++использование `Vec<T>` vs `&[T]`, `T` vs `&T` в общем.
  
 -This means starting off with this:
 +Это означает, начинать с:
@@ -139,7 +159,9 @@ index 17a4638..74f23c3 100644
  
 -if you have good reason. It's not polite to hold on to ownership you don't
 -need, and it can make your lifetimes more complex.
-+если у вас есть веские основания для этого. Забирать право собственности в тех случаях, где это не нужно, является плохой практикой. К тому же это может сделать сроки жизни более запутанными.
++если у вас есть веские основания для этого. Забирать право собственности в тех
++случаях, где это не нужно, является плохой практикой. К тому же это может
++сделать сроки жизни более запутанными.
  
 -## Generic functions
 +## Обобщенные функции
@@ -149,7 +171,7 @@ index 17a4638..74f23c3 100644
  
  ```
  fn some_string_length(x: &str) -> usize {
-@@ -144,12 +126,11 @@ fn main() {
+@@ -144,12 +148,12 @@ fn main() {
  }
  ```
  
@@ -161,11 +183,12 @@ index 17a4638..74f23c3 100644
  
 -You may be tempted to try to access a certain character of a `String`, like
 -this:
-+Вы можете захотеть попробовать получить доступ к определенному символу `String`, например:
++Вы можете захотеть попробовать получить доступ к определенному символу `String`,
++например:
  
  ```{rust,ignore}
  let s = "hello".to_string();
-@@ -157,24 +138,21 @@ let s = "hello".to_string();
+@@ -157,24 +161,27 @@ let s = "hello".to_string();
  println!("{}", s[0]);
  ```
  
@@ -173,7 +196,11 @@ index 17a4638..74f23c3 100644
 -indexing is basically never what you want to do. The reason is that each
 -character can be a variable number of bytes. This means that you have to iterate
 -through the characters anyway, which is an O(n) operation.
-+Этот код не компилируется. И это не случайно. В мире UTF-8, прямая индексация практически никогда не является тем, что вы хотите сделать. Причина в том, что каждый символ может состоять из переменного количества байт. Это означает, что для перебора вы в любом случае должны использовать символы, что является O(n) операцией.
++Этот код не компилируется. И это не случайно. В мире UTF-8, прямая индексация
++практически никогда не является тем, что вы хотите сделать. Причина в том, что
++каждый символ может состоять из переменного количества байт. Это означает, что
++для перебора вы в любом случае должны использовать символы, что является O(n)
++операцией.
  
 -There's 3 basic levels of unicode (and its encodings):
 +Существует 3 основных уровня для unicode (и его кодировок):
@@ -181,8 +208,10 @@ index 17a4638..74f23c3 100644
 -- code units, the underlying data type used to store everything
 -- code points/unicode scalar values (char)
 -- graphemes (visible characters)
-+- кодовые единицы (code units), базовый тип данных, используемый для хранения всего
-+- кодовые точки/скалярные значения unicode (code points/unicode scalar values) (символы)
++- кодовые единицы (code units), базовый тип данных, используемый для хранения
++  всего
++- кодовые точки/скалярные значения unicode (code points/unicode scalar values)
++  (символы)
 +- графемы (grapheme) (визуальные символы)
  
 -Rust provides iterators for each of these situations:
@@ -200,7 +229,7 @@ index 17a4638..74f23c3 100644
  
  ```
  # #![feature(unicode)]
-@@ -185,7 +163,7 @@ for l in s.graphemes(true) {
+@@ -185,7 +192,7 @@ for l in s.graphemes(true) {
  }
  ```
  
@@ -209,21 +238,24 @@ index 17a4638..74f23c3 100644
  
  ```text
  u͔
-@@ -197,11 +175,9 @@ d͔̆̓ͥ
+@@ -197,11 +204,12 @@ d͔̆̓ͥ
  é
  ```
  
 -Note that `l` has the type `&str` here, since a single grapheme can consist of
 -multiple codepoints, so a `char` wouldn't be appropriate.
-+Следует отметить, что `l` здесь имеет тип `&str`, так как одна графема может состоять из нескольких кодовых точек, поэтому `char` тут не будет уместен.
++Следует отметить, что `l` здесь имеет тип `&str`, так как одна графема может
++состоять из нескольких кодовых точек, поэтому `char` тут не будет уместен.
  
 -This will print out each visible character in turn, as you'd expect: first `u͔`, then
 -`n͈̰̎`, etc. If you wanted each individual codepoint of each grapheme, you can use `.chars()`:
-+Как и следовало ожидать, этот код будет печатать каждый отображаемый символ в порядке очереди: первым `u͔`, затем `n͈̰̎`, и т.д. Если вы хотите получить каждую кодовую точку каждой графемы отдельно, то можете использовать `.chars()`:
++Как и следовало ожидать, этот код будет печатать каждый отображаемый символ в
++порядке очереди: первым `u͔`, затем `n͈̰̎`, и т.д. Если вы хотите получить
++каждую кодовую точку каждой графемы отдельно, то можете использовать `.chars()`:
  
  ```
  let s = "u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé";
-@@ -211,7 +187,7 @@ for l in s.chars() {
+@@ -211,7 +219,7 @@ for l in s.chars() {
  }
  ```
  
@@ -232,21 +264,23 @@ index 17a4638..74f23c3 100644
  
  ```text
  u
-@@ -242,11 +218,9 @@ e
+@@ -242,11 +250,11 @@ e
  ́
  ```
  
 -You can see how some of them are combining characters, and therefore the output
 -looks a bit odd.
-+Вы можете видеть, что некоторые из них являются комбинируемыми символами, и поэтому их отображение выглядит немного странным.
++Вы можете видеть, что некоторые из них являются комбинируемыми символами, и
++поэтому их отображение выглядит немного странным.
  
 -If you want the individual byte representation of each codepoint, you can use
 -`.bytes()`:
-+Если вы хотите получить представление каждого отдельного байта для каждой кодовой точки, то можете использовать `.bytes()`:
++Если вы хотите получить представление каждого отдельного байта для каждой
++кодовой точки, то можете использовать `.bytes()`:
  
  ```
  let s = "u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé";
-@@ -256,7 +230,7 @@ for l in s.bytes() {
+@@ -256,7 +264,7 @@ for l in s.bytes() {
  }
  ```
  
@@ -255,7 +289,7 @@ index 17a4638..74f23c3 100644
  
  ```text
  117
-@@ -306,11 +280,11 @@ This will print:
+@@ -306,11 +314,11 @@ This will print:
  129
  ```
  
