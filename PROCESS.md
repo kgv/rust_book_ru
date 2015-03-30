@@ -27,7 +27,7 @@
 * lang-items.md
 * link-args.md
 * ~~looping.md~~
-* **macros.md**
+* ~~macros.md~~
 * ~~match.md~~
 * ~~method-syntax.md~~
 * ~~more-strings.md~~
@@ -45,7 +45,7 @@
 * tracing-macros.md
 * ~~traits.md~~
 * unsafe.md
-* unstable.md
+* ~~unstable.md~~
 * ~~variable-bindings.md~~
 
 **Выделены жирным** - перевод файла начат, но не окончен.
