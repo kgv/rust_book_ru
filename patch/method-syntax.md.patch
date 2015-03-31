@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/method-syntax.md b/fix_current_version:method-syntax.md
-index c8309a1..137980b 100644
+index 18542e5..3835654 100644
 --- a/rust/master:src/doc/trpl/method-syntax.md
 +++ b/fix_current_version:method-syntax.md
 @@ -1,26 +1,28 @@
@@ -41,7 +41,7 @@ index c8309a1..137980b 100644
  
  ```{rust}
  # #![feature(core)]
-@@ -42,17 +44,16 @@ fn main() {
+@@ -42,17 +44,17 @@ fn main() {
  }
  ```
  
@@ -54,21 +54,22 @@ index c8309a1..137980b 100644
 -You can think of this first parameter as being the `x` in `x.foo()`. The three
 -variants correspond to the three kinds of thing `x` could be: `self` if it's
 -just a value on the stack, `&self` if it's a reference, and `&mut self` if it's
--a mutable reference. We should default to using `&self`, as it's the most
--common, as Rustaceans prefer borrowing over taking ownership, and references 
--over mutable references. Here's an example of all three variants:
+-a mutable reference. We should default to using `&self`, as you should prefer
+-borrowing over taking ownership, as well as taking immutable references
+-over mutable ones. Here's an example of all three variants:
 +Мы создали структуру, которая представляет собой круг. Затем мы написали блок
 +`impl` и определили метод `area` внутри него. Методы принимают специальный
 +первый параметр, `&self`. Есть три возможных варианта: `self`, `&self` и `&mut
 +self`. Вы можете думать об этом специальном параметре как о `x` в `x.foo()`. Три
 +варианта соответствуют трем возможным видам элемента `x`: `self` - если это
 +просто значение в стеке, `&self` - если это ссылка и `&mut self` - если это
-+изменяемая ссылка. По умолчанию мы должны использовать `&self`, так как это
-+наиболее распространенный случай. Вот пример, включающий все три варианта:
++изменяемая ссылка. По умолчанию следует использовать `&self`, также как следует
++предпочитать заимствование владению, а неизменные ссылки изменяемым. Вот пример,
++включающий все три варианта:
  
  ```rust
  struct Circle {
-@@ -76,17 +77,18 @@ impl Circle {
+@@ -76,17 +78,17 @@ impl Circle {
  }
  ```
  
@@ -85,14 +86,13 @@ index c8309a1..137980b 100644
  
 -## Chaining method calls
 +## Цепочка вызовов методов
-+
-+Итак, теперь мы знаем, как вызвать метод, например `foo.bar()`. Но что насчет
-+нашего первоначального примера, `foo.bar().baz()`? Это называется 'цепочка
-+вызовов', и мы можем сделать это, вернув `self`.
  
 -So, now we know how to call a method, such as `foo.bar()`. But what about our
 -original example, `foo.bar().baz()`? This is called 'method chaining', and we
 -can do it by returning `self`.
++Итак, теперь мы знаем, как вызвать метод, например `foo.bar()`. Но что насчет
++нашего первоначального примера, `foo.bar().baz()`? Это называется 'цепочка
++вызовов', и мы можем сделать это, вернув `self`.
  
  ```
  # #![feature(core)]
@@ -152,7 +152,7 @@ index c8309a1..137980b 100644
  
  ```
  # #![feature(core)]
-@@ -216,9 +219,10 @@ fn main() {
+@@ -224,9 +227,10 @@ fn main() {
  }
  ```
  

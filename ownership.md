@@ -499,11 +499,25 @@ fn main() {
 
 ## Элизия срока жизни
 
-Ранее мы уже упоминали об элизии срока жизни, особенности Rust, которая
-позволяет не задавать явно аннотации срока жизни в определенных случаях. Все
-ссылки имеют свой срок жизни, и поэтому, если вы не зададите срок жизни явно
-(как например `&T` вместо `&'a T`), Rust будет делать три вещи, чтобы
-определить, каким этот срок жизни должен быть.
+Rust supports powerful local type inference in function bodies, but it’s
+forbidden in item signatures to allow reasoning about the types just based in
+the item signature alone. However, for ergonomic reasons a very restricted
+secondary inference algorithm called “lifetime elision” applies in function
+signatures. It infers only based on the signature components themselves and not
+based on the body of the function, only infers lifetime paramters, and does
+this with only three easily memorizable and unambiguous rules. This makes
+lifetime elision a shorthand for writing an item signature, while not hiding
+away the actual types involved as full local inference would if applied to it.
+Rust поддерживает мощную систему вывода типов для локальных переменных в телах
+функций, но это запрещено в сигнатурах пункта, что позволит рассуждения о типах,
+основываясь только на пункт подписи в одиночку. Тем не менее, эргономических
+соображений очень ограничены вторичный алгоритм вывода, который называется
+"элизия срока жизни" относится сигнатуры функций. Он выводит только на основе
+компонентов подписи себя, а не на основе теле функции, только выводит параметры
+срока жизни, и делает это только исходя из трех легко запоминающихся и
+однозначных правил. Это делает неявные срок жизни лишь сокращением для написания
+сигратуры элемента, а не прячет конкретные типы в качестве полноправных
+местного вывода бы, если бы к нему применимы.
 
 Когда речь идет о неявном сроке жизни, мы используем термины *входной срок
 жизни* (*input lifetime*) и *выходной срок жизни* (*output lifetime*). *Входной

@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index d31348d..a1df18f 100644
+index d31348d..38e5b84 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
 @@ -1,46 +1,46 @@
@@ -57,7 +57,7 @@ index d31348d..a1df18f 100644
 +    * [Строки](strings.md)
 +    * [Массивы, вектора, срезы](arrays-vectors-and-slices.md)
 +* [Средний Rust](intermediate.md)
-+    * [Крейты и модули](crates-and-modules.md)
++    * [Контейнеры и модули](crates-and-modules.md)
 +    * [Тестирование](testing.md)
 +    * [Указатели](pointers.md)
 +    * [Владение](ownership.md)

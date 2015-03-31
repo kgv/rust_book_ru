@@ -52,8 +52,9 @@ fn main() {
 self`. Вы можете думать об этом специальном параметре как о `x` в `x.foo()`. Три
 варианта соответствуют трем возможным видам элемента `x`: `self` - если это
 просто значение в стеке, `&self` - если это ссылка и `&mut self` - если это
-изменяемая ссылка. По умолчанию мы должны использовать `&self`, так как это
-наиболее распространенный случай. Вот пример, включающий все три варианта:
+изменяемая ссылка. По умолчанию следует использовать `&self`, также как следует
+предпочитать заимствование владению, а неизменные ссылки изменяемым. Вот пример,
+включающий все три варианта:
 
 ```rust
 struct Circle {
@@ -88,7 +89,6 @@ impl Circle {
 Итак, теперь мы знаем, как вызвать метод, например `foo.bar()`. Но что насчет
 нашего первоначального примера, `foo.bar().baz()`? Это называется 'цепочка
 вызовов', и мы можем сделать это, вернув `self`.
-
 
 ```
 # #![feature(core)]
@@ -184,17 +184,23 @@ impl Circle {
 }
 
 struct CircleBuilder {
-    coordinate: f64,
+    x: f64,
+    y: f64,
     radius: f64,
 }
 
 impl CircleBuilder {
     fn new() -> CircleBuilder {
-        CircleBuilder { coordinate: 0.0, radius: 0.0, }
+        CircleBuilder { x: 0.0, y: 0.0, radius: 0.0, }
     }
 
-    fn coordinate(&mut self, coordinate: f64) -> &mut CircleBuilder {
-        self.coordinate = coordinate;
+    fn x(&mut self, coordinate: f64) -> &mut CircleBuilder {
+        self.x = coordinate;
+        self
+    }
+
+    fn y(&mut self, coordinate: f64) -> &mut CircleBuilder {
+        self.x = coordinate;
         self
     }
 
@@ -204,18 +210,20 @@ impl CircleBuilder {
     }
 
     fn finalize(&self) -> Circle {
-        Circle { x: self.coordinate, y: self.coordinate, radius: self.radius }
+        Circle { x: self.x, y: self.y, radius: self.radius }
     }
 }
 
 fn main() {
     let c = CircleBuilder::new()
-                .coordinate(10.0)
-                .radius(5.0)
+                .x(1.0)
+                .y(2.0)
+                .radius(2.0)
                 .finalize();
 
-
     println!("area: {}", c.area());
+    println!("x: {}", c.x);
+    println!("y: {}", c.y);
 }
 ```
 

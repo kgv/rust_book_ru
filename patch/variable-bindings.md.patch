@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/variable-bindings.md b/fix_current_version:variable-bindings.md
-index 88babd8..1ce5067 100644
+index 88babd8..7fd459c 100644
 --- a/rust/master:src/doc/trpl/variable-bindings.md
 +++ b/fix_current_version:variable-bindings.md
 @@ -1,6 +1,6 @@
@@ -182,7 +182,7 @@ index 88babd8..1ce5067 100644
      let x: i32;
  
 -    println!("The value of x is: {}", x);
-+    println!(x имеет значение {}", x);
++    println!("x имеет значение {}", x);
  }
  ```
  
