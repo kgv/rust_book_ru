@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Strings</title>
+    <title>Lang items</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -132,63 +132,87 @@
 <div id='page'>
 
 
-    <h1 class="title">Strings</h1>
-    <p>Strings are an important concept for any programmer to master. Rust&#39;s string
-handling system is a bit different from other languages, due to its systems
-focus. Any time you have a data structure of variable size, things can get
-tricky, and strings are a re-sizable data structure. That being said, Rust&#39;s
-strings also work differently than in some other systems languages, such as C.</p>
+    <h1 class="title">Lang items</h1>
+    <blockquote>
+<p><strong>Note</strong>: lang items are often provided by crates in the Rust distribution,
+and lang items themselves have an unstable interface. It is recommended to use
+officially distributed crates instead of defining your own lang items.</p>
+</blockquote>
 
-<p>Let&#39;s dig into the details. A <em>string</em> is a sequence of Unicode scalar values
-encoded as a stream of UTF-8 bytes. All strings are guaranteed to be
-validly encoded UTF-8 sequences. Additionally, strings are not null-terminated
-and can contain null bytes.</p>
+<p>The <code>rustc</code> compiler has certain pluggable operations, that is,
+functionality that isn&#39;t hard-coded into the language, but is
+implemented in libraries, with a special marker to tell the compiler
+it exists. The marker is the attribute <code>#[lang=&quot;...&quot;]</code> and there are
+various different values of <code>...</code>, i.e. various different &#39;lang
+items&#39;.</p>
 
-<p>Rust has two main types of strings: <code>&amp;str</code> and <code>String</code>.</p>
-
-<p>The first kind is a <code>&amp;str</code>. These are called <em>string slices</em>. String literals
-are of the type <code>&amp;str</code>:</p>
+<p>For example, <code>Box</code> pointers require two lang items, one for allocation
+and one for deallocation. A freestanding program that uses the <code>Box</code>
+sugar for dynamic allocations via <code>malloc</code> and <code>free</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='string'>&quot;Hello there.&quot;</span>; <span class='comment'>// string: &amp;str</span>
-</pre>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>box_syntax</span>, <span class='ident'>start</span>, <span class='ident'>no_std</span>, <span class='ident'>libc</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
 
-<p>This string is statically allocated, meaning that it&#39;s saved inside our
-compiled program, and exists for the entire duration it runs. The <code>string</code>
-binding is a reference to this statically allocated string. String slices
-have a fixed size, and cannot be mutated.</p>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
-<p>A <code>String</code>, on the other hand, is a heap-allocated string. This string
-is growable, and is also guaranteed to be UTF-8. <code>String</code>s are
-commonly created by converting from a string slice using the
-<code>to_string</code> method.</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>(); <span class='comment'>// mut s: String</span>
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
-
-<span class='ident'>s</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;, world.&quot;</span>);
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
-</pre>
-
-<p><code>String</code>s will coerce into <code>&amp;str</code> with an <code>&amp;</code>:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>fn</span> <span class='ident'>takes_slice</span>(<span class='ident'>slice</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got: {}&quot;</span>, <span class='ident'>slice</span>);
+<span class='kw'>extern</span> {
+    <span class='kw'>fn</span> <span class='ident'>abort</span>() <span class='op'>-&gt;</span> <span class='op'>!</span>;
 }
 
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>();
-    <span class='ident'>takes_slice</span>(<span class='kw-2'>&amp;</span><span class='ident'>s</span>);
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;owned_box&quot;</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>);
+
+<span class='attribute'>#[<span class='ident'>lang</span><span class='op'>=</span><span class='string'>&quot;exchange_malloc&quot;</span>]</span>
+<span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>allocate</span>(<span class='ident'>size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> {
+    <span class='kw'>let</span> <span class='ident'>p</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>libc</span>::<span class='ident'>size_t</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>;
+
+    <span class='comment'>// malloc failed</span>
+    <span class='kw'>if</span> <span class='ident'>p</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>==</span> <span class='number'>0</span> {
+        <span class='ident'>abort</span>();
+    }
+
+    <span class='ident'>p</span>
 }
+<span class='attribute'>#[<span class='ident'>lang</span><span class='op'>=</span><span class='string'>&quot;exchange_free&quot;</span>]</span>
+<span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>deallocate</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>, <span class='ident'>_size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) {
+    <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>)
+}
+
+<span class='attribute'>#[<span class='ident'>start</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>main</span>(<span class='ident'>argc</span>: <span class='ident'>isize</span>, <span class='ident'>argv</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>isize</span> {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='kw'>box</span> <span class='number'>1</span>;
+
+    <span class='number'>0</span>
+}
+
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;stack_exhausted&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>stack_exhausted</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;eh_personality&quot;</span>]</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>eh_personality</span>() {}
+<span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;panic_fmt&quot;</span>]</span> <span class='kw'>fn</span> <span class='ident'>panic_fmt</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> { <span class='kw'>loop</span> {} }
 </pre>
 
-<p>Viewing a <code>String</code> as a <code>&amp;str</code> is cheap, but converting the <code>&amp;str</code> to a
-<code>String</code> involves allocating memory. No reason to do that unless you have to!</p>
+<p>Note the use of <code>abort</code>: the <code>exchange_malloc</code> lang item is assumed to
+return a valid pointer, and so needs to do the check internally.</p>
 
-<p>That&#39;s the basics of strings in Rust! They&#39;re probably a bit more complicated
-than you are used to, if you come from a scripting language, but when the
-low-level details matter, they really matter. Just remember that <code>String</code>s
-allocate memory and control their data, while <code>&amp;str</code>s are a reference to
-another string, and you&#39;ll be all set.</p>
+<p>Other features provided by lang items include:</p>
+
+<ul>
+<li>overloadable operators via traits: the traits corresponding to the
+<code>==</code>, <code>&lt;</code>, dereferencing (<code>*</code>) and <code>+</code> (etc.) operators are all
+marked with lang items; those specific four are <code>eq</code>, <code>ord</code>,
+<code>deref</code>, and <code>add</code> respectively.</li>
+<li>stack unwinding and general failure; the <code>eh_personality</code>, <code>fail</code>
+and <code>fail_bounds_checks</code> lang items.</li>
+<li>the traits in <code>std::marker</code> used to indicate types of
+various kinds; lang items <code>send</code>, <code>sync</code> and <code>copy</code>.</li>
+<li>the marker types and variance indicators found in
+<code>std::marker</code>; lang items <code>covariant_type</code>,
+<code>contravariant_lifetime</code>, etc.</li>
+</ul>
+
+<p>Lang items are loaded lazily by the compiler; e.g. if one never uses
+<code>Box</code> then there is no need to define functions for <code>exchange_malloc</code>
+and <code>exchange_free</code>. <code>rustc</code> will emit an error when an item is needed
+but not found in the current crate or any that it depends on.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "";

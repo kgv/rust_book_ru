@@ -30,7 +30,7 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
 <ul class='section'>
 <li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
 </li>
@@ -38,31 +38,29 @@
 </li>
 <li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
 </li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
 </li>
 <li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
 </li>
 <li><a href='functions.html'><b>2.6.</b> Функции</a>
 </li>
-<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
 </li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
 </li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
 </li>
 <li><a href='looping.html'><b>2.10.</b> Циклы</a>
 </li>
 <li><a href='strings.html'><b>2.11.</b> Строки</a>
 </li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
-</li>
-<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
 </li>
 <li><a href='testing.html'><b>3.2.</b> Тестирование</a>
 </li>
@@ -76,41 +74,57 @@
 </li>
 <li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
 </li>
-<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
 </li>
-<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
 </li>
-<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
 </li>
-<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
 </li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+<li><a href='traits.html'><b>3.12.</b> Трейты</a>
 </li>
-<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
 </li>
-<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+<li><a href='macros.html'><b>3.14.</b> Макросы</a>
 </li>
-<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
 </li>
-<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.17.</b> Документация</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 <li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
 </li>
 <li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
 </li>
-<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</ul>
+</li>
+<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<ul class='section'>
+<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+</li>
+<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>5.6.</b> Link args</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+<li><a href='conclusion.html'><b>6.</b> Заключение</a>
 </li>
-<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
 </li>
 </ul>
 </div>
@@ -119,7 +133,8 @@
 
 
     <h1 class="title">Трейты</h1>
-    <p>Вы помните, ключевое слово <code>impl</code>, используемое для вызова функции с синтаксисом метода?</p>
+    <p>Вы помните, ключевое слово <code>impl</code>, используемое для вызова функции с синтаксисом
+метода?</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Circle</span> {
     <span class='ident'>x</span>: <span class='ident'>f64</span>,
@@ -134,7 +149,9 @@
 }
 </pre>
 
-<p>Трейты схожи, за исключением того, что мы определяем трейт, содержащий лишь сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например, как показано ниже:</p>
+<p>Трейты схожи, за исключением того, что мы определяем трейт, содержащий лишь
+сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например,
+как показано ниже:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Circle</span> {
     <span class='ident'>x</span>: <span class='ident'>f64</span>,
@@ -153,14 +170,19 @@
 }
 </pre>
 
-<p>Как вы можете видеть, блок <code>trait</code> очень похож на блок <code>impl</code>. Различие состоит лишь в том, что тело метода не определяется, а определяется только его сигнатура. Когда мы реализуем трейт, мы используем <code>impl Trait for Item</code>, а не просто <code>impl Item</code>.</p>
+<p>Как вы можете видеть, блок <code>trait</code> очень похож на блок <code>impl</code>. Различие состоит
+лишь в том, что тело метода не определяется, а определяется только его
+сигнатура. Когда мы реализуем трейт, мы используем <code>impl Trait for Item</code>, а не
+просто <code>impl Item</code>.</p>
 
-<p>Так что же в этом такого грандиозного? Помните ошибку, которую мы получали для нашей дженерик функции <code>inverse</code>?</p>
+<p>Так что же в этом такого грандиозного? Помните ошибку, которую мы получали для
+нашей дженерик функции <code>inverse</code>?</p>
 
 <pre><code class="language-text">error: binary operation `==` cannot be applied to type `T`
 </code></pre>
 
-<p>Мы можем использовать трейты для ограничения дженериков. Рассмотрим похожую функцию, которая также не компилируется, и выводит ошибку:</p>
+<p>Мы можем использовать трейты для ограничения дженериков. Рассмотрим похожую
+функцию, которая также не компилируется, и выводит ошибку:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
@@ -172,14 +194,18 @@
 <pre><code class="language-text">error: type `T` does not implement any method in scope named `area`
 </code></pre>
 
-<p>Поскольку <code>T</code> может быть любого типа, мы не можем быть уверены, что он реализует метод <code>area</code>. Но мы можем добавить <strong>ограничение по трейту</strong> к нашему дженерику <code>T</code>, гарантируя, что он будет соответствовать требованиям:</p>
+<p>Поскольку <code>T</code> может быть любого типа, мы не можем быть уверены, что он реализует
+метод <code>area</code>. Но мы можем добавить <strong>ограничение по трейту</strong> к нашему дженерику
+<code>T</code>, гарантируя, что он будет соответствовать требованиям:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>HasArea</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
 }
 </pre>
 
-<p>Синтаксис <code>&lt;T: HasArea&gt;</code> означает <strong>любой тип, реализующий трейт <code>HasArea</code></strong>. Так как трейты определяют сигнатуры типов функций, мы можем быть уверены, что любой тип, который реализует <code>HasArea</code> будет иметь метод <code>.area()</code>.</p>
+<p>Синтаксис <code>&lt;T: HasArea&gt;</code> означает <strong>любой тип, реализующий трейт <code>HasArea</code></strong>.
+Так как трейты определяют сигнатуры типов функций, мы можем быть уверены, что
+любой тип, который реализует <code>HasArea</code> будет иметь метод <code>.area()</code>.</p>
 
 <p>Вот расширенный пример того, как это работает:</p>
 <pre id='rust-example-rendered' class='rust '>
@@ -239,7 +265,9 @@
 This shape has an area of 1
 </code></pre>
 
-<p>Как вы можете видеть, теперь <code>print_area</code> не только является дженериком, но и гарантирует, что будет получен корректный тип. Если же мы передадим некорректный тип:</p>
+<p>Как вы можете видеть, теперь <code>print_area</code> не только является дженериком, но и
+гарантирует, что будет получен корректный тип. Если же мы передадим некорректный
+тип:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='ident'>print_area</span>(<span class='number'>5</span>);
 </pre>
@@ -249,7 +277,9 @@ This shape has an area of 1
 <pre><code class="language-text">error: failed to find an implementation of trait main::HasArea for int
 </code></pre>
 
-<p>До сих пор мы добавляли реализации трейтов лишь для структур, но реализовать трейт возможно для любого типа. Технически, мы <em>могли бы</em> реализовать <code>HasArea</code> для <code>i32</code>:</p>
+<p>До сих пор мы добавляли реализации трейтов лишь для структур, но реализовать
+трейт возможно для любого типа. Технически, мы <em>могли бы</em> реализовать <code>HasArea</code>
+для <code>i32</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
     <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
@@ -266,9 +296,14 @@ This shape has an area of 1
 <span class='number'>5</span>.<span class='ident'>area</span>();
 </pre>
 
-<p>Хотя технически это возможно, но реализация методов для таких примитивных типов считается плохим стилем программирования.</p>
+<p>Хотя технически это возможно, но реализация методов для таких примитивных типов
+считается плохим стилем программирования.</p>
 
-<p>Такой подход может показаться неконтролируемым, однако есть два ограничения, связанные с реализацией трейтов, которые мешают коду выйти из-под контроля. Во-первых, трейты должны быть объявлены используемыми, с помощью ключевого слова <code>use</code>, в той области видимости, где вы хотите использовать методы этих трейтов. Так, например, следующий код не будет работать:</p>
+<p>Такой подход может показаться неконтролируемым, однако есть два ограничения,
+связанные с реализацией трейтов, которые мешают коду выйти из-под контроля. Во-
+первых, трейты должны быть объявлены используемыми, с помощью ключевого слова
+<code>use</code>, в той области видимости, где вы хотите использовать методы этих трейтов.
+Так, например, следующий код не будет работать:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>mod</span> <span class='ident'>shapes</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
@@ -301,12 +336,14 @@ This shape has an area of 1
 }
 </pre>
 
-<p>Теперь, когда мы переместили структуры и трейты в свой собственный модуль, мы получаем следующую ошибку:</p>
+<p>Теперь, когда мы переместили структуры и трейты в свой собственный модуль, мы
+получаем следующую ошибку:</p>
 
 <pre><code class="language-text">error: type `shapes::Circle` does not implement any method in scope named `area`
 </code></pre>
 
-<p>Если мы добавим строку с <code>use</code> над функцией <code>main</code> и сделаем нужные элементы публичными, все будет в порядке:</p>
+<p>Если мы добавим строку с <code>use</code> над функцией <code>main</code> и сделаем нужные элементы
+публичными, все будет в порядке:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>shapes</span>::<span class='ident'>HasArea</span>;
 
@@ -342,15 +379,28 @@ This shape has an area of 1
 }
 </pre>
 
-<p>Это означает, что даже если кто-то сделает что-то плохое, как например добавит методы к <code>int</code>, на наш код это не окажет влияния, если вы не объявите <code>use</code> для этого трейта.</p>
+<p>Это означает, что даже если кто-то сделает что-то плохое, как например добавит
+методы к <code>int</code>, на наш код это не окажет влияния, если вы не объявите <code>use</code> для
+этого трейта.</p>
 
-<p>Вот еще одно ограничение, связанное с реализацией трейтов. Либо трейт, либо тип, для которого вы пишете <code>impl</code>, должны находиться в вашем крейте. Таким образом, мы могли бы реализовать трейт <code>HasArea</code> для <code>i32</code>, потому что <code>HasArea</code> находится в нашем крейте. Но если бы мы попытались реализовать трейт <code>Float</code>, предоставляемый самим Rust, для <code>i32</code>, мы не смогли бы этого сделать, потому что оба: трейт и тип отсутствуют в нашем крейте.</p>
+<p>Вот еще одно ограничение, связанное с реализацией трейтов. Либо трейт, либо тип,
+для которого вы пишете <code>impl</code>, должны находиться в вашем крейте. Таким образом,
+мы могли бы реализовать трейт <code>HasArea</code> для <code>i32</code>, потому что <code>HasArea</code>
+находится в нашем крейте. Но если бы мы попытались реализовать трейт <code>Float</code>,
+предоставляемый самим Rust, для <code>i32</code>, мы не смогли бы этого сделать, потому что
+оба: трейт и тип отсутствуют в нашем крейте.</p>
 
-<p>Последнее, что нужно сказать о трейтах: дженерик функции с ограничением по трейтам используют <em>мономорфизацию</em> (<em>mono</em>: один, <em>morph</em>: форма), поэтому они диспетчеризуются статически. Что это значит? Посмотрите главу <a href="static-and-dynamic-dispatch.html">Статическая и динамическая диспетчеризация</a>, чтобы получить больше информации.</p>
+<p>Последнее, что нужно сказать о трейтах: дженерик функции с ограничением по
+трейтам используют <em>мономорфизацию</em> (<em>mono</em>: один, <em>morph</em>: форма), поэтому они
+диспетчеризуются статически. Что это значит? Посмотрите главу <a href="static-and-dynamic-dispatch.html">Статическая и
+динамическая диспетчеризация</a>, чтобы получить
+больше информации.</p>
 
 <h2 id="Утверждение-where" class='section-header'><a
                            href="#Утверждение-where">Утверждение where</a></h2>
-<p>Написание функций с несколькими дженерик типами и небольшим количеством ограничений по трейтам выглядит не так уж плохо, но, с увеличением количества зависимостей, синтаксис получается более неуклюжим:</p>
+<p>Написание функций с несколькими дженерик типами и небольшим количеством
+ограничений по трейтам выглядит не так уж плохо, но, с увеличением количества
+зависимостей, синтаксис получается более неуклюжим:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 
@@ -361,7 +411,8 @@ This shape has an area of 1
 }
 </pre>
 
-<p>Имя функции находится слева, а список параметров - далеко справа. Привязки загромождают место.</p>
+<p>Имя функции находится слева, а список параметров - далеко справа. Привязки
+загромождают место.</p>
 
 <p>Rust имеет решение на этот счет, и оно называется &#39;утверждение <code>where</code>&#39;:</p>
 <pre id='rust-example-rendered' class='rust '>
@@ -385,7 +436,10 @@ This shape has an area of 1
 }
 </pre>
 
-<p><code>foo()</code> использует синтаксис, показанный ранее, а <code>bar()</code> использует утверждение <code>where</code>. Все, что нам нужно сделать, это убрать ограничения при определении типов параметров, а затем добавить <code>where</code> после списка параметров. Для более длинного списка, могут быть добавлены пробельные символы:</p>
+<p><code>foo()</code> использует синтаксис, показанный ранее, а <code>bar()</code> использует утверждение
+<code>where</code>. Все, что нам нужно сделать, это убрать ограничения при определении
+типов параметров, а затем добавить <code>where</code> после списка параметров. Для более
+длинного списка, могут быть добавлены пробельные символы:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 
@@ -424,7 +478,10 @@ This shape has an area of 1
 }
 </pre>
 
-<p>Этот код демонстрирует дополнительные преимущества использования утверждения <code>where</code>: оно позволяет задавать ограничение, где с левой стороны располагается произвольный тип (в данном случае <code>i32</code>), а не только простой параметр типа (как например <code>T</code>).</p>
+<p>Этот код демонстрирует дополнительные преимущества использования утверждения
+<code>where</code>: оно позволяет задавать ограничение, где с левой стороны располагается
+произвольный тип (в данном случае <code>i32</code>), а не только простой параметр типа (как
+например <code>T</code>).</p>
 
 <h2 id="Наш-пример-inverse" class='section-header'><a
                            href="#Наш-пример-inverse">Наш пример <code>inverse</code></a></h2>
@@ -442,7 +499,9 @@ This shape has an area of 1
 <pre><code class="language-text">error: binary operation `==` cannot be applied to type `T`
 </code></pre>
 
-<p>Все потому, что тип <code>T</code> является слишком общим: мы не можем знать наверняка, что любой случайный <code>T</code> можно сравнивать. Для конкретизации мы можем ограничить его трейтом. Хотя этот код и не будет работать, но попробуйте сделать следующее:</p>
+<p>Все потому, что тип <code>T</code> является слишком общим: мы не можем знать наверняка, что
+любой случайный <code>T</code> можно сравнивать. Для конкретизации мы можем ограничить его
+трейтом. Хотя этот код и не будет работать, но попробуйте сделать следующее:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialEq</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
     <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
@@ -460,7 +519,10 @@ This shape has an area of 1
     found floating-point variable)
 </code></pre>
 
-<p>Как уже было сказано, этот код не будет работать. Это потому, что наш <code>T</code> реализует <code>PartialEq</code>, который принимает на вход другой <code>T</code>, но, вместо этого, мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С помощью <code>Float</code> можно исправить ошибку:</p>
+<p>Как уже было сказано, этот код не будет работать. Это потому, что наш <code>T</code>
+реализует <code>PartialEq</code>, который принимает на вход другой <code>T</code>, но, вместо этого,
+мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С
+помощью <code>Float</code> можно исправить ошибку:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>num</span>::<span class='ident'>Float</span>;
 
@@ -472,7 +534,9 @@ This shape has an area of 1
 }
 </pre>
 
-<p>Нам следует заменить <code>0.0</code> и <code>1.0</code> соответствующими методами из трейта <code>Float</code>. И <code>f32</code>, и <code>f64</code> реализуют трейт <code>Float</code>, так что наша функция будет работать просто отлично:</p>
+<p>Нам следует заменить <code>0.0</code> и <code>1.0</code> соответствующими методами из трейта <code>Float</code>.
+И <code>f32</code>, и <code>f64</code> реализуют трейт <code>Float</code>, так что наша функция будет работать
+просто отлично:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f32</span>));
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f64</span>));
@@ -483,7 +547,8 @@ This shape has an area of 1
 
 <h2 id="Методы-по-умолчанию" class='section-header'><a
                            href="#Методы-по-умолчанию">Методы по умолчанию</a></h2>
-<p>Есть еще одна особенность трейтов, которую мы должны охватывать: методы по умолчанию. Проще всего это показать на примере:</p>
+<p>Есть еще одна особенность трейтов, которую мы должны охватывать: методы по
+умолчанию. Проще всего это показать на примере:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>trait</span> <span class='ident'>Foo</span> {
     <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
@@ -492,7 +557,9 @@ This shape has an area of 1
 }
 </pre>
 
-<p>При реализации трейта <code>Foo</code> необходимо реализовать метод <code>bar()</code>, но нет необходимости в реализации метода <code>baz()</code>. Это поведение будет реализовано по умолчанию. По желанию, можно переопределить значение метода по умолчанию:</p>
+<p>При реализации трейта <code>Foo</code> необходимо реализовать метод <code>bar()</code>, но нет
+необходимости в реализации метода <code>baz()</code>. Это поведение будет реализовано по
+умолчанию. По желанию, можно переопределить значение метода по умолчанию:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>UseDefault</span>;
 
@@ -509,7 +576,7 @@ This shape has an area of 1
 }
 
 <span class='kw'>let</span> <span class='ident'>default</span> <span class='op'>=</span> <span class='ident'>UseDefault</span>;
-<span class='ident'>default</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;We called bar.&quot;</span>
+<span class='ident'>default</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;We called baz.&quot;</span>
 
 <span class='kw'>let</span> <span class='ident'>over</span> <span class='op'>=</span> <span class='ident'>OverrideDefault</span>;
 <span class='ident'>over</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;Override baz!&quot;</span>
@@ -551,7 +618,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // of each of the sections.
   // It works by extracting the current page based on the url and iterates over
   // the menu links until it finds the menu item for the current page. We then
-  // create a copy of the preceeding and following menu links and add the
+  // create a copy of the preceding and following menu links and add the
   // correct css class and insert them into the bottom of the page.
   var toc = document.getElementById('toc').getElementsByTagName('a');
   var href = document.location.pathname.split('/').pop();

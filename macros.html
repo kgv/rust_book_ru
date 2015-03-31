@@ -30,7 +30,7 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
 <ul class='section'>
 <li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
 </li>
@@ -38,31 +38,29 @@
 </li>
 <li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
 </li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
 </li>
 <li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
 </li>
 <li><a href='functions.html'><b>2.6.</b> Функции</a>
 </li>
-<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
 </li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
 </li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
 </li>
 <li><a href='looping.html'><b>2.10.</b> Циклы</a>
 </li>
 <li><a href='strings.html'><b>2.11.</b> Строки</a>
 </li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
-</li>
-<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
 </li>
 <li><a href='testing.html'><b>3.2.</b> Тестирование</a>
 </li>
@@ -76,41 +74,57 @@
 </li>
 <li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
 </li>
-<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
 </li>
-<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
 </li>
-<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
 </li>
-<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
 </li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+<li><a href='traits.html'><b>3.12.</b> Трейты</a>
 </li>
-<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
 </li>
-<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+<li><a href='macros.html'><b>3.14.</b> Макросы</a>
 </li>
-<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
 </li>
-<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.17.</b> Документация</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 <li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
 </li>
 <li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
 </li>
-<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</ul>
+</li>
+<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<ul class='section'>
+<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+</li>
+<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>5.6.</b> Link args</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+<li><a href='conclusion.html'><b>6.</b> Заключение</a>
 </li>
-<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
 </li>
 </ul>
 </div>
@@ -119,24 +133,48 @@
 
 
     <h1 class="title">Макросы</h1>
-    <p>К этому моменту вы узнали о многих инструментах Rust, которые нацелены на абстрагирование и повторное использование кода. Эти единицы повторно использованного кода имеют богатую смысловую структуру. Например, функции имеют сигнатуры типа, типы параметров могут имеют ограничения по трейтам, перегруженные функции также могут принадлежать к определенному трейту.</p>
+    <p>К этому моменту вы узнали о многих инструментах Rust, которые нацелены на
+абстрагирование и повторное использование кода. Эти единицы повторно
+использованного кода имеют богатую смысловую структуру. Например, функции имеют
+сигнатуры типа, типы параметров могут имеют ограничения по трейтам,
+перегруженные функции также могут принадлежать к определенному трейту.</p>
 
-<p>Эта структура означает, что ключевые абстракции Rust имеют мощный механизм проверки времени компиляции. Но это достигается за счет снижения гибкости. Если вы визуально определите структуру повторно используемого кода, то вы можете найти трудным или громоздким выражение этой схемы в виде дженерик функции, трейта, или чего-то еще в семантике Rust.</p>
+<p>Эта структура означает, что ключевые абстракции Rust имеют мощный механизм
+проверки времени компиляции. Но это достигается за счет снижения гибкости. Если
+вы визуально определите структуру повторно используемого кода, то вы можете
+найти трудным или громоздким выражение этой схемы в виде дженерик функции,
+трейта, или чего-то еще в семантике Rust.</p>
 
-<p>Макросы позволяют абстрагироваться на <em>синтаксическом</em> уровне. Вызов макроса является сокращением для &quot;расширенной&quot; синтаксической формы. Это расширение происходит в начале компиляции, до начала статической проверки. В результате, макросы могут охватить много шаблонов повторного использования кода, которые невозможны при использовании лишь ключевых абстракций Rust.</p>
+<p>Макросы позволяют абстрагироваться на <em>синтаксическом</em> уровне. Вызов макроса
+является сокращением для &quot;расширенной&quot; синтаксической формы. Это расширение
+происходит в начале компиляции, до начала статической проверки. В результате,
+макросы могут охватить много шаблонов повторного использования кода, которые
+невозможны при использовании лишь ключевых абстракций Rust.</p>
 
-<p>Недостатком является то, что код, основанный на макросах, может быть трудным для понимания, потому что к нему применяется меньше встроенных правил. Подобно обычной функции, качественный макрос может быть использован без понимания его реализации. Тем не менее, может быть трудно разработать качественный макрос! Кроме того, ошибки компилятора в макро коде сложнее интерпретировать, потому что они описывают проблемы в расширенной форме кода, а не в исходной сокращенной форме кода, которую используют разработчики.</p>
+<p>Недостатком является то, что код, основанный на макросах, может быть трудным для
+понимания, потому что к нему применяется меньше встроенных правил. Подобно
+обычной функции, качественный макрос может быть использован без понимания его
+реализации. Тем не менее, может быть трудно разработать качественный макрос!
+Кроме того, ошибки компилятора в макро коде сложнее интерпретировать, потому что
+они описывают проблемы в расширенной форме кода, а не в исходной сокращенной
+форме кода, которую используют разработчики.</p>
 
-<p>Эти недостатки делают макросы чем-то вроде &quot;фичи последней инстанции&quot;. Это не означает, что макросы это плохо; они являются частью Rust, потому что иногда они все же нужны для по-настоящему краткой записи хорошо абстрагированной части кода. Просто имейте этот компромисс в виду.</p>
+<p>Эти недостатки делают макросы чем-то вроде &quot;фичи последней инстанции&quot;. Это не
+означает, что макросы это плохо; они являются частью Rust, потому что иногда они
+все же нужны для по-настоящему краткой записи хорошо абстрагированной части
+кода. Просто имейте этот компромисс в виду.</p>
 
-<h1 id="Определение-макросов" class='section-header'><a
-                           href="#Определение-макросов">Определение макросов</a></h1>
-<p>Вы, возможно, видели макрос <code>vec!</code>, который используется для инициализации <a href="arrays-vectors-and-slices.html">вектора</a> с произвольным количеством элементов.</p>
+<h1 id="Определение-макросов-(Макроопределения)" class='section-header'><a
+                           href="#Определение-макросов-(Макроопределения)">Определение макросов (Макроопределения)</a></h1>
+<p>Вы, возможно, видели макрос <code>vec!</code>, который используется для инициализации
+<a href="arrays-vectors-and-slices.html">вектора</a> с произвольным количеством элементов.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 </pre>
 
-<p>Он не может быть обычной функцией, потому что он принимает любое количество аргументов. Но мы можем представить его в виде синтаксического сокращения для</p>
+<p>Его нельзя реализовать в виде обычной функциии, так как он принимает любое
+количество аргументов. Но мы можем представить его в виде синтаксического
+сокращения для следующего кода</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> <span class='op'>=</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>temp_vec</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
@@ -148,6 +186,10 @@
 </pre>
 
 <p>Мы можем реализовать это сокращение, используя макрос: <sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
+
+<p>представленной здесь по соображениям эффективности и повторного использования.
+Некоторые из них упомянуты в главе [продвинутые макросы]<a href="advanced-macros.html">advanced macros
+chapter</a>.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>vec</span> {
     ( $( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span> ),<span class='op'>*</span> ) <span class='op'>=&gt;</span> {
@@ -167,20 +209,36 @@
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>vec</span> { ... }
 </pre>
 
-<p>Тут мы определяем макрос с именем <code>vec</code>, аналогично тому, как <code>fn vec</code> определяло бы функцию с именем <code>vec</code>. При вызове мы неформально пишем имя макроса с восклицательным знаком, например, <code>vec!</code>. Восклицательный знак является частью синтаксиса вызова и служит для того, чтобы отличать макрос от обычной функции.</p>
+<p>Тут мы определяем макрос с именем <code>vec</code>, аналогично тому, как <code>fn vec</code>
+определяло бы функцию с именем <code>vec</code>. При вызове мы неформально пишем имя
+макроса с восклицательным знаком, например, <code>vec!</code>. Восклицательный знак
+является частью синтаксиса вызова и служит для того, чтобы отличать макрос от
+обычной функции.</p>
 
-<h2 id="matching" class='section-header'><a
-                           href="#matching">Matching</a></h2>
-<p>Макрос определяется с помощью ряда <em>правил</em>, которые представляют собой варианты сопоставления с образцом. Выше у нас было</p>
+<h2 id="Сопоставление-(matching)-(Синтаксис-вызова-макрокоманды)" class='section-header'><a
+                           href="#Сопоставление-(matching)-(Синтаксис-вызова-макрокоманды)">Сопоставление (Matching) (Синтаксис вызова макрокоманды)</a></h2>
+<p>Макрос определяется с помощью ряда <em>правил</em>, которые представляют собой варианты
+сопоставления с образцом. Выше у нас было</p>
 <pre id='rust-example-rendered' class='rust '>
 ( $( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span> ),<span class='op'>*</span> ) <span class='op'>=&gt;</span> { ... };
 </pre>
 
-<p>Это как вариант выражения <code>match</code>, но сопоставление происходит на уровне синтаксических деревьев Rust, на этапе компиляции. Точка с запятой не является обязательной для последнего (только здесь) варианта. &quot;Шаблон&quot; слева от <code>=&gt;</code> известен как <em>шаблон совпадений</em> (<em>matcher</em>). Он имеет <a href="../reference.html#macros">свою собственную грамматику</a> в рамках языка.</p>
+<p>Это очень похоже на конструкцию <code>match</code>, но сопоставление происходит на уровне
+синтаксических деревьев Rust, на этапе компиляции. Точка с запятой не является
+обязательной для последнего (только здесь) варианта. &quot;Образец&quot; слева от <code>=&gt;</code>
+известен как <em>шаблон совпадений</em> (<em>образец</em>) (<em>обнаружитель совпадений</em>)
+(<em>matcher</em>). Он имеет <a href="../reference.html#macros">свою собственную грамматику</a> в
+рамках языка.</p>
 
-<p>Шаблон <code>$x:expr</code> будет соответствовать любому выражению Rust, связывая эго дерево синтаксиса с <em>метапеременной</em> <code>$x</code>. Идентификатор <code>expr</code> является <em>спецификатором фрагмента</em>; полные возможности перечислены в главе [продвинутые макросы][]. Шаблон, окруженный <code>$(...),*</code>, будет соответствовать нулю или более выражениям, разделенным запятыми.</p>
+<p>Образец <code>$x:expr</code> будет соответствовать любому выражению Rust, связывая его
+дерево синтаксиса с <em>метапеременной</em> <code>$x</code>. Идентификатор <code>expr</code> является
+<em>спецификатором фрагмента</em>; полные возможности перечислены в главе <a href="advanced-macros.html">продвинутые
+макросы</a>. Образец, окруженный <code>$(...),*</code>, будет
+соответствовать нулю или более выражениям, разделенным запятыми.</p>
 
-<p>Помимо специального синтаксиса шаблона совпадений, любые токены Rust, которые появляются в шаблоне должны в точности совпадать. Например,</p>
+<p>За исключением специального синтаксиса сопоставления с образцом, любые другие
+элементы Rust, которые появляются в образце, должны в точности совпадать.
+Например,</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     (<span class='ident'>x</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>e</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;mode X: {}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>e</span>));
@@ -207,33 +265,28 @@
 <pre><code class="language-text">error: no rules expected the token `z`
 </code></pre>
 
-<h2 id="Раскрытие" class='section-header'><a
-                           href="#Раскрытие">Раскрытие</a></h2>
-<p>С правой стороны макро правил используется, по большей части, обычный синтаксис Rust. Но мы можем соединить в битах синтаксиса, захваченных совпадений. Из предыдущего примера:</p>
-
-<p>The right-hand side of a macro rule is ordinary Rust syntax, for the most part.
-But we can splice in bits of syntax captured by the matcher. From the original
-example:</p>
+<h2 id="Развертывание-(expansion)-(Синтаксис-преобразования-макрокоманды)" class='section-header'><a
+                           href="#Развертывание-(expansion)-(Синтаксис-преобразования-макрокоманды)">Развертывание (Expansion) (Синтаксис преобразования макрокоманды)</a></h2>
+<p>С правой стороны макро правил используется, по большей части, обычный синтаксис
+Rust. Но мы можем соединить кусочки раздробленного синтаксиса, захваченные при
+сопоставлении с соответствующим образцом. Из предыдущего примера:</p>
 <pre id='rust-example-rendered' class='rust '>
 $(
     <span class='ident'>temp_vec</span>.<span class='ident'>push</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>);
 )<span class='op'>*</span>
 </pre>
 
-<p>Каждое соответствие выражению <code>$x</code> будет производить одиночный оператор <code>push</code> в раскрытой форме макроса. Повторение в расширение происходит в &quot;ногу&quot; с повторением в шаблоне совпадений (более подробно об этом чуть позже).</p>
+<p>Каждое соответствующее выражение <code>$x</code> будет генерировать одиночный оператор
+<code>push</code> в развернутой форме макроса. Повторение в развернутой форме происходит
+синхронно с повторением в форме образца (более подробно об этом чуть позже).</p>
 
-<p>Each matched expression <code>$x</code> will produce a single <code>push</code> statement in the
-macro expansion. The repetition in the expansion proceeds in &quot;lockstep&quot; with
-repetition in the matcher (more on this in a moment).</p>
+<p>Поскольку <code>$x</code> уже объявлен в образце как выражение, мы не повторяем <code>:expr</code> с
+правой стороны. Кроме того, мы не включаем разделителяющую запятую в качестве
+части оператора повторения. Вместо этого, у нас есть точка с запятой в пределах
+повторяемого блока.</p>
 
-<p>Поскольку <code>$x</code> уже объявлен соответствующий выражение, мы не повторяем <code>:expr</code> с правой стороны. Кроме того, мы не включаем разделительную запятую в качестве части оператора повторения. Вместо этого, у нас есть с запятой в пределах повторяемого блока.</p>
-
-<p>Because <code>$x</code> was already declared as matching an expression, we don&#39;t repeat
-<code>:expr</code> on the right-hand side. Also, we don&#39;t include a separating comma as
-part of the repetition operator. Instead, we have a terminating semicolon
-within the repeated block.</p>
-
-<p>Еще одна деталь: макрос <code>vec!</code> имеет <em>две</em> пары фигурных скобках правой части. Они часто сочетаются таким образом:</p>
+<p>Еще одна деталь: макрос <code>vec!</code> имеет <em>две</em> пары фигурных скобках правой части.
+Они часто сочетаются таким образом:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     () <span class='op'>=&gt;</span> {{
@@ -242,39 +295,46 @@ within the repeated block.</p>
 }
 </pre>
 
-<p>Внешние скобки являются частью синтаксиса <code>macro_rules!</code>. На самом деле, вы можете использовать <code>()</code> или <code>[]</code> вместо них. Они просто разграничивают правую часть в целом.</p>
+<p>Внешние скобки являются частью синтаксиса <code>macro_rules!</code>. На самом деле, вы
+можете использовать <code>()</code> или <code>[]</code> вместо них. Они просто разграничивают правую
+часть в целом.</p>
 
-<p>Внутренние скобки являются частью расширенного синтаксиса. Помните, что <code>vec!</code> макро используется в контексте выражения. Мы используем блок, чтобы записать выражение с множественными состояниями, в том числе включающее <code>let</code> привязки. Если ваш макрос раскрывается в одно единственное выражение, то дополнительной слой скобок не нужен.</p>
-
-<p>Обратите внимание, что мы никогда не <em>говорили</em>, что макрос создает выражения. На самом деле, это не определяется, пока мы не использовать макрос как выражение. С осторожностью, вы можете написать макрос, разложение которого работает в нескольких контекстах. Например, сокращение для типа данных может быть действительным или как выражение или рисунком.</p>
+<p>Внутренние скобки являются частью расширенного синтаксиса. Помните, что макрос
+<code>vec!</code> используется в контексте выражения. Мы используем блок, для записи
+выражения с множественными операторами, в том числе включающее <code>let</code> привязки.
+Если ваш макрос раскрывается в одно единственное выражение, то дополнительной
+слой скобок не нужен.</p>
 
 <p>Note that we never <em>declared</em> that the macro produces an expression. In fact,
 this is not determined until we use the macro as an expression. With care, you
 can write a macro whose expansion works in several contexts. For example,
 shorthand for a data type could be valid as either an expression or a pattern.</p>
 
-<h2 id="repetition" class='section-header'><a
-                           href="#repetition">Repetition</a></h2>
-<p>За оператором повтора следуют два основных правила:</p>
+<p>Обратите внимание, что мы никогда не <em>говорили</em>, что макрос создает выражения.
+На самом деле, это не определяется, пока мы не используем макрос в качестве
+выражения. Если соблюдать осторожность, то можно написать макрос, развернутая
+форма которого будет валидна сразу в нескольких контекстах. Например,
+сокращенная форма для типа данных может быть валидной и как выражение, и как
+шаблон.</p>
 
-<ol>
-<li><code>$(...)*</code> Прогулки через один &quot;слой&quot; повторений, для всех <code>$name</code>, которые он содержит, в ногу, и</li>
-<li>каждое <code>$name</code> должно быть под крайней мере, столько <code>$(...)*</code>, как это было сопоставляется. Если это в более, это будет дублироваться, при необходимости.</li>
-</ol>
-
-<p>Этот причудливый макрос иллюстрирует дублирования переменных из внешних уровней повторения.</p>
-
-<p>The repetition operator follows two principal rules:</p>
+<h2 id="Повторение-(repetition)-(Многовариантность)" class='section-header'><a
+                           href="#Повторение-(repetition)-(Многовариантность)">Повторение (Repetition) (Многовариантность)</a></h2>
+<p>Операции повтора всегда сопутствуют два основных правила:</p>
 
 <ol>
 <li><code>$(...)*</code> walks through one &quot;layer&quot; of repetitions, for all of the <code>$name</code>s
 it contains, in lockstep, and</li>
 <li>each <code>$name</code> must be under at least as many <code>$(...)*</code>s as it was matched
 against. If it is under more, it&#39;ll be duplicated, as appropriate.</li>
+<li><code>$(...)*</code> проходит через один &quot;слой&quot; повторений, для всех <code>$name</code>, которые он содержит, в ногу, и</li>
+<li>каждое <code>$name</code> должно быть под крайней мере, столько <code>$(...)*</code>, как это было сопоставляется. Если это в более, это будет дублироваться, при необходимости.</li>
 </ol>
 
 <p>This baroque macro illustrates the duplication of variables from outer
 repetition levels.</p>
+
+<p>Этот причудливый макрос иллюстрирует дублирования переменных из внешних уровней
+повторения.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>o_O</span> {
     (
@@ -295,18 +355,20 @@ repetition levels.</p>
 }
 </pre>
 
-<p>That&#39;s most of the matcher syntax. These examples use <code>$(...)*</code>, which is a
-&quot;zero or more&quot; match. Alternatively you can write <code>$(...)+</code> for a &quot;one or
-more&quot; match. Both forms optionally include a separator, which can be any token
-except <code>+</code> or <code>*</code>.</p>
+<p>Это наибольшая синтаксиса совпадений. Эти примеры используют конструкцию
+<code>$(...)*</code>, которая означает &quot;ноль или более&quot; совпадений. Также вы можете
+написать <code>$(...)+</code>, что будет означать &quot;одно или более&quot; совпадений. Обе формы
+записи включают необязательный разделитель, располагающийся сразу за закрывающей
+скобкой, который может быть любым символом, за исключением <code>+</code> или <code>*</code>.</p>
 
-<p>This system is based on
-&quot;<a href="http://www.cs.indiana.edu/ftp/techreports/TR206.pdf">Macro-by-Example</a>&quot;
-(PDF ссылка).</p>
+<p>Эта система повторений основана на &quot;<a href="http://www.cs.indiana.edu/ftp/techreports/TR206.pdf">Macro-by-
+Example</a>&quot; (PDF ссылка).</p>
 
 <h1 id="Гигиена-(hygiene)" class='section-header'><a
                            href="#Гигиена-(hygiene)">Гигиена (Hygiene)</a></h1>
-<p>Некоторые языки реализуют макросы с помощью простой текстовой замены, что приводит к различным проблемам. Например, нижеприведенная C программа напечатает <code>13</code> вместо ожидаемого <code>25</code>.</p>
+<p>Некоторые языки реализуют макросы с помощью простой текстовой замены, что
+приводит к различным проблемам. Например, нижеприведенная C программа напечатает
+<code>13</code> вместо ожидаемого <code>25</code>.</p>
 
 <pre><code class="language-text">#define FIVE_TIMES(x) 5 * x
 
@@ -316,7 +378,10 @@ int main() {
 }
 </code></pre>
 
-<p>После раскрытия мы получаем <code>5 * 2 + 3</code>, но умножение имеет больший приоритет чем сложение. Если вы часто использовали C макросы, вы, наверное, знаете стандартные идиомы для устранения этой проблемы, а также пять или шесть других проблем. В Rust мы не должны беспокоиться об этом.</p>
+<p>После развертывания мы получаем <code>5 * 2 + 3</code>, но умножение имеет больший
+приоритет чем сложение. Если вы часто использовали C макросы, вы, наверное,
+знаете стандартные идиомы для устранения этой проблемы, а также пять или шесть
+других проблем. В Rust мы можем не беспокоиться об этом.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>five_times</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='number'>5</span> <span class='op'>*</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>);
@@ -327,9 +392,12 @@ int main() {
 }
 </pre>
 
-<p>Метапеременная <code>$x</code> обрабатывается как единый узел выражения, и сохраняет свое место в дереве синтаксиса даже после замены.</p>
+<p>Метапеременная <code>$x</code> обрабатывается как единый узел выражения, и сохраняет свое
+место в дереве синтаксиса даже после замены.</p>
 
-<p>Другой распространенной проблемой в системе макросов является <em>захват переменной</em>. Вот C макрос, использующий [GNU C расширение], который эмулирует блоки выражениий в Rust.</p>
+<p>Другой распространенной проблемой в системе макросов является <em>захват
+переменной</em> (<em>variable capture</em>). Вот C макрос, использующий <a href="https://gcc.gnu.org/onlinedocs/gcc/Statement-Exprs.html">GNU C расширение</a>,
+который эмулирует блоки выражениий в Rust.</p>
 
 <pre><code class="language-text">#define LOG(msg) ({ \
     int state = get_log_state(); \
@@ -339,8 +407,7 @@ int main() {
 })
 </code></pre>
 
-<p>Вот простой случай использования, что идет ужасно неправильно:
-Here&#39;s a simple use case that goes terribly wrong:</p>
+<p>Вот простой случай использования, применение которого может плохо кончиться:</p>
 
 <pre><code class="language-text">const char *state = &quot;reticulating splines&quot;;
 LOG(state)
@@ -355,7 +422,8 @@ if (state &gt; 0) {
 }
 </code></pre>
 
-<p>Вторая переменная с именем <code>state</code> затеняет первую. Это проблема, потому что команде печати требуется обращаться к ним обоим.</p>
+<p>Вторая переменная с именем <code>state</code> затеняет первую. Это проблема, потому что
+команде печати требуется обращаться к ним обоим.</p>
 
 <p>Эквивалентный макрос в Rust обладает требуемым поведением.</p>
 <pre id='rust-example-rendered' class='rust '>
@@ -374,12 +442,15 @@ if (state &gt; 0) {
 }
 </pre>
 
-<p>Это работает, потому что Rust имеет <a href="http://en.wikipedia.org/wiki/Hygienic_macro">систему макросов с соблюдением гигиены</a>. Раскрытие каждого макроса происходит в отдельном <em>контексте синтаксиса</em>, и каждая переменная обладает меткой контекста синтаксиса, где она была введена. Это как если бы переменная <code>state</code> внутри <code>main</code> была бы окрашена в другой &quot;цвет&quot; в отличае от переменной <code>state</code> внутри макроса, из-за чего они бы не конфликтовали.</p>
+<p>Это работает, потому что Rust имеет <a href="http://en.wikipedia.org/wiki/Hygienic_macro">систему макросов с соблюдением
+гигиены</a>. Раскрытие каждого макроса происходит в
+отдельном <em>контексте синтаксиса</em>, и каждая переменная обладает меткой контекста
+синтаксиса, где она была введена. Это как если бы переменная <code>state</code> внутри
+<code>main</code> была бы окрашена в другой &quot;цвет&quot; в отличае от переменной <code>state</code> внутри
+макроса, из-за чего они бы не конфликтовали.</p>
 
-<p>Это также ограничивает возможности макросов для внедрения новых привязок на вызова сайте. Код, приведенный ниже, не будет работать:</p>
-
-<p>This also restricts the ability of macros to introduce new bindings at the
-invocation site. Code such as the following will not work:</p>
+<p>Это также ограничивает возможности макросов для внедрения новых связываний
+переменных на месте вызова. Код, приведенный ниже, не будет работать:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     () <span class='op'>=&gt;</span> (<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>3</span>);
@@ -391,7 +462,8 @@ invocation site. Code such as the following will not work:</p>
 }
 </pre>
 
-<p>Вместо этого вы должны передавать имя переменной при вызове, тогда она будет обладать меткой правильного контекста синтаксиса.</p>
+<p>Вместо этого вы должны передавать имя переменной при вызове, тогда она будет
+обладать меткой правильного контекста синтаксиса.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>v</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (<span class='kw'>let</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>v</span> <span class='op'>=</span> <span class='number'>3</span>);
@@ -403,7 +475,8 @@ invocation site. Code such as the following will not work:</p>
 }
 </pre>
 
-<p>Это справедливо для <code>let</code> привязок и меток loop, но не для <a href="../reference.html#items">элементов</a>. Код, приведенный ниже, компилируется:</p>
+<p>Это справедливо для <code>let</code> привязок и меток loop, но не для <a href="../reference.html#items">элементов</a>.
+Код, приведенный ниже, компилируется:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     () <span class='op'>=&gt;</span> (<span class='kw'>fn</span> <span class='ident'>x</span>() { });
@@ -417,12 +490,10 @@ invocation site. Code such as the following will not work:</p>
 
 <h1 id="Рекурсия-макросов" class='section-header'><a
                            href="#Рекурсия-макросов">Рекурсия макросов</a></h1>
-<p>Раскрытие макроса также может включать в себя вызовы макросов, в том числе вызовы того макроса, который раскрывается. Эти рекурсивные макросы могут быть использованы для обработки древовидного ввода, как показано на этом (упрощенном) HTML сокращение:</p>
-
-<p>A macro&#39;s expansion can include more macro invocations, including invocations
-of the very same macro being expanded.  These recursive macros are useful for
-processing tree-structured input, as illustrated by this (simplistic) HTML
-shorthand:</p>
+<p>Раскрытие макроса также может включать в себя вызовы макросов, в том числе
+вызовы того макроса, который раскрывается. Эти рекурсивные макросы могут быть
+использованы для обработки древовидного ввода, как показано на этом (упрощенном)
+HTML сокращение:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>write_html</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>w</span>:<span class='ident'>expr</span>, ) <span class='op'>=&gt;</span> (());
@@ -453,37 +524,39 @@ shorthand:</p>
 }
 </pre>
 
-<h1 id="debugging-macro-code" class='section-header'><a
-                           href="#debugging-macro-code">Debugging macro code</a></h1>
-<p>To see the results of expanding macros, run <code>rustc --pretty expanded</code>. The
-output represents a whole crate, so you can also feed it back in to <code>rustc</code>,
-which will sometimes produce better error messages than the original
-compilation. Note that the <code>--pretty expanded</code> output may have a different
-meaning if multiple variables of the same name (but different syntax contexts)
-are in play in the same scope. In this case <code>--pretty expanded,hygiene</code> will
-tell you about the syntax contexts.</p>
+<h1 id="Отладка-макросов" class='section-header'><a
+                           href="#Отладка-макросов">Отладка макросов</a></h1>
+<p>Чтобы увидеть результаты расширения макросов, выполните команду <code>rustc --pretty
+expanded</code>. Вывод представляет собой целый контейнер, так что вы можете подать
+его обратно в <code>rustc</code>, что иногда выдает лучшие сообщения об ошибках, чем при
+обычной компиляции. Обратите внимание, что вывод <code>--pretty expanded</code> может иметь
+разное значение, если несколько переменных, имеющих одно и то же имя (но разные
+контексты синтаксиса), находятся в той же области видимости. В этом случае
+<code>--pretty expanded,hygiene</code> расскажет вам о контекстах синтаксиса.</p>
 
-<p><code>rustc</code> provides two syntax extensions that help with macro debugging. For now,
-they are unstable and require feature gates.</p>
+<p><code>rustc</code>, поддерживает два синтаксических расширения, которые помогают с отладкой
+макросов. В настоящее время, они неустойчивы и требуют feature gates.</p>
 
 <ul>
-<li><p><code>log_syntax!(...)</code> will print its arguments to standard output, at compile
-time, and &quot;expand&quot; to nothing.</p></li>
-<li><p><code>trace_macros!(true)</code> will enable a compiler message every time a macro is
-expanded. Use <code>trace_macros!(false)</code> later in expansion to turn it off.</p></li>
+<li><p><code>log_syntax!(...)</code> будет печатать свои аргументы в стандартный вывод во время
+компиляции, и &quot;развертываться&quot; в ничто.</p></li>
+<li><p><code>trace_macros!(true)</code> будет выдавать сообщение компилятора каждый раз, когда
+макрос развертывается. Используйте <code>trace_macros!(false)</code> в конце развертывания,
+чтобы выключить его.</p></li>
 </ul>
 
-<h1 id="further-reading" class='section-header'><a
-                           href="#further-reading">Further reading</a></h1>
-<p>The <a href="advanced-macros.html">advanced macros chapter</a> goes into more detail about macro syntax. It
-also describes how to share macros between different modules or crates.</p>
+<h1 id="Дополнительные-источники-информации" class='section-header'><a
+                           href="#Дополнительные-источники-информации">Дополнительные источники информации</a></h1>
+<p>Подраздел <a href="advanced-macros.html">Продвинутые макросы</a> рассматривает синтаксис
+макросов более подробно. Он также рассказывает, как совместно использовать
+макросы из различных модулей или контейнеров.</p>
 
 <div class="footnotes">
 <hr>
 <ol>
 
 <li id="fn1">
-<p>Фактическое определение <code>vec!</code> в libcollections отличается от представленной здесь по соображениям эффективности и повторного использования. Некоторые из них упомянуты в главе [продвинутые макросы][].&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+<p>Фактическое определение <code>vec!</code> в libcollections отличается от&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
 </li>
 
 </ol>
@@ -525,7 +598,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // of each of the sections.
   // It works by extracting the current page based on the url and iterates over
   // the menu links until it finds the menu item for the current page. We then
-  // create a copy of the preceeding and following menu links and add the
+  // create a copy of the preceding and following menu links and add the
   // correct css class and insert them into the bottom of the page.
   var toc = document.getElementById('toc').getElementsByTagName('a');
   var href = document.location.pathname.split('/').pop();

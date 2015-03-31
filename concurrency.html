@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Concurrency</title>
+    <title>Многозадачность (параллелизм)</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,7 +30,7 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
 <ul class='section'>
 <li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
 </li>
@@ -38,31 +38,29 @@
 </li>
 <li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
 </li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
 </li>
 <li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
 </li>
 <li><a href='functions.html'><b>2.6.</b> Функции</a>
 </li>
-<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
 </li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
 </li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
 </li>
 <li><a href='looping.html'><b>2.10.</b> Циклы</a>
 </li>
 <li><a href='strings.html'><b>2.11.</b> Строки</a>
 </li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
-</li>
-<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
 </li>
 <li><a href='testing.html'><b>3.2.</b> Тестирование</a>
 </li>
@@ -76,41 +74,57 @@
 </li>
 <li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
 </li>
-<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
 </li>
-<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
 </li>
-<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
 </li>
-<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
 </li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+<li><a href='traits.html'><b>3.12.</b> Трейты</a>
 </li>
-<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
 </li>
-<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+<li><a href='macros.html'><b>3.14.</b> Макросы</a>
 </li>
-<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
 </li>
-<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.17.</b> Документация</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 <li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
 </li>
 <li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
 </li>
-<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</ul>
+</li>
+<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<ul class='section'>
+<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+</li>
+<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>5.6.</b> Link args</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+<li><a href='conclusion.html'><b>6.</b> Заключение</a>
 </li>
-<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
 </li>
 </ul>
 </div>
@@ -118,65 +132,75 @@
 <div id='page'>
 
 
-    <h1 class="title">Concurrency</h1>
-    <p>Concurrency and parallelism are incredibly important topics in computer
-science, and are also a hot topic in industry today. Computers are gaining more
-and more cores, yet many programmers aren&#39;t prepared to fully utilize them.</p>
+    <h1 class="title">Многозадачность (параллелизм)</h1>
+    <p>Многозадачность и параллелизм являются невероятно важными проблемами в области
+компьютерной науки. А также это актуальная тема для современной индустрии.
+Компьютеры приобретают все больше и больше ядер, но многие программисты не
+готовы в полной мере использовать это.</p>
 
-<p>Rust&#39;s memory safety features also apply to its concurrency story too. Even
-concurrent Rust programs must be memory safe, having no data races. Rust&#39;s type
-system is up to the task, and gives you powerful ways to reason about
-concurrent code at compile time.</p>
+<p>Средства Rust для безопасной работы с памятью в полной мере применимы и при
+работе в многозадачной среде. Поэтому многозадачные программы на Rust должны
+безопасно работать с памятью, и не создавать состояния гонки данных. Система
+типов Rust способна справиться с этими задачами еще на этапе компиляции,
+благодаря мощным средствам, которые она предоставляет.</p>
 
-<p>Before we talk about the concurrency features that come with Rust, it&#39;s important
-to understand something: Rust is low-level enough that all of this is provided
-by the standard library, not by the language. This means that if you don&#39;t like
-some aspect of the way Rust handles concurrency, you can implement an alternative
-way of doing things. <a href="https://github.com/carllerche/mio">mio</a> is a real-world
-example of this principle in action.</p>
+<p>Прежде чем мы поговорим об особенностях многозадачности, которые идут с Rust,
+важно понять вот что: Rust является достаточно низкоуровневым, поэтому все это
+предусмотрено в стандартной библиотеке, а не в самом языке. Это означает, что
+если вам не нравится какой-то аспект в способе обработки многозадачности,
+который использует Rust, вы всегда можете реализовать альтернативный способ.
+<a href="https://github.com/carllerche/mio">mio</a> представляет реальный пример этого
+принципа в действии.</p>
 
-<h2 id="background:-send-and-sync" class='section-header'><a
-                           href="#background:-send-and-sync">Background: <code>Send</code> and <code>Sync</code></a></h2>
-<p>Concurrency is difficult to reason about. In Rust, we have a strong, static
-type system to help us reason about our code. As such, Rust gives us two traits
-to help us make sense of code that can possibly be concurrent.</p>
+<h2 id="Справочная-информация:-send-и-sync" class='section-header'><a
+                           href="#Справочная-информация:-send-и-sync">Справочная информация: <code>Send</code> и <code>Sync</code></a></h2>
+<p>О многозадачности рассуждать довольно трудно. В Rust, у нас есть система
+строгой, статической типизации, чтобы помочь нам делать выводы о нашем коде. В
+связи с этим Rust дает нам два трейта, помогающих нам разбираться в коде,
+который, по всей вероятности, является многозадачным.</p>
 
 <h3 id="send" class='section-header'><a
                            href="#send"><code>Send</code></a></h3>
-<p>The first trait we&#39;re going to talk about is
-<a href="../std/marker/trait.Send.html"><code>Send</code></a>. When a type <code>T</code> implements <code>Send</code>, it indicates
-to the compiler that something of this type is able to have ownership transferred
-safely between threads.</p>
+<p>Первый трейт, о котором мы будем говорить, называется
+<a href="../std/marker/trait.Send.html"><code>Send</code></a>. Когда тип <code>T</code> реализует <code>Send</code>, это
+указывает компилятору, что право владения переменными этого типа можно безопасно
+перемещать между потоками.</p>
 
-<p>This is important to enforce certain restrictions. For example, if we have a
-channel connecting two threads, we would want to be able to send some data
-down the channel and to the other thread. Therefore, we&#39;d ensure that <code>Send</code> was
-implemented for that type.</p>
+<p>Это важно для соблюдения некоторых ограничений. Например, если у нас есть канал,
+соединяющий два потока, и мы хотели бы иметь возможность отправлять некоторые
+данные по каналу из одного потока в другой. Следовательно, мы должны
+гарантировать, что для отправляемого типа данных реализован трейт <code>Send</code>.</p>
 
 <p>In the opposite way, if we were wrapping a library with FFI that isn&#39;t
 threadsafe, we wouldn&#39;t want to implement <code>Send</code>, and so the compiler will help
-us enforce that it can&#39;t leave the current thread.</p>
+us enforce that it can&#39;t leave the current thread.
+И наоборот, если мы были упаковка библиотека с помощью FFI (Foreign Function
+Interface), который не является потокобезопасным, мы не хотели бы реализовать
+трейт <code>Send</code>, и поэтому компилятор поможет нам обеспечивать это, что нельзя
+оставить текущий поток.</p>
 
 <h3 id="sync" class='section-header'><a
                            href="#sync"><code>Sync</code></a></h3>
-<p>The second of these two trait is called <a href="../std/marker/trait.Sync.html"><code>Sync</code></a>.
-When a type <code>T</code> implements <code>Sync</code>, it indicates to the compiler that something
-of this type has no possibility of introducing memory unsafety when used from
-multiple threads concurrently.</p>
+<p>Второй из этих трейтов называется <a href="../std/marker/trait.Sync.html"><code>Sync</code></a>. Когда
+тип <code>T</code> реализует <code>Sync</code>, это указывает компилятору, что переменные этого типа
+не имеют возможности использовать небезопасную память, когда они используются из
+нескольких потоков одновременно.</p>
 
-<p>For example, sharing immutable data with an atomic reference count is
-threadsafe. Rust provides a type like this, <code>Arc&lt;T&gt;</code>, and it implements <code>Sync</code>,
-so that it could be safely shared between threads.</p>
+<p>Например, совместное использование неизменяемых данных с помощью атомарного
+счетчика ссылок является потокобезопасным. Rust обеспечивает такой тип,
+<code>Arc&lt;T&gt;</code>, и он реализует <code>Sync</code>, так что при помощи этого типа можно безопасно
+обмениваться данными между потоками.</p>
 
-<p>These two traits allow you to use the type system to make strong guarantees
-about the properties of your code under concurrency. Before we demonstrate
-why, we need to learn how to create a concurrent Rust program in the first
-place!</p>
+<p>Эти два трейта позволяют использовать систему типов, чтобы обеспечить надежные
+гарантии о свойствах вашего кода в условиях многозадачности. Прежде чем мы
+продемонстрируем как, сначала мы должны узнать, как создать многозадачную
+программу в Rust!</p>
 
-<h2 id="threads" class='section-header'><a
-                           href="#threads">Threads</a></h2>
-<p>Rust&#39;s standard library provides a library for &#39;threads&#39;, which allow you to
-run Rust code in parallel. Here&#39;s a basic example of using <code>std::thread</code>:</p>
+<h2 id="Потоки" class='section-header'><a
+                           href="#Потоки">Потоки</a></h2>
+<p>Стандартная библиотека Rust предоставляет библиотеку для &#39;потоков&#39;, которая
+позволяет запускать Rust код параллельно. Вот простой пример использования
+<code>std::thread</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
@@ -187,8 +211,9 @@ run Rust code in parallel. Here&#39;s a basic example of using <code>std::thread
 }
 </pre>
 
-<p>The <code>Thread::scoped()</code> method accepts a closure, which is executed in a new
-thread. It&#39;s called <code>scoped</code> because this thread returns a join guard:</p>
+<p>Метод <code>Thread::scoped()</code> в качестве единственного аргумента принимает замыкание,
+которое выполняется в новом потоке. Он называется <code>scoped</code>, потому что этот
+поток возвращает присоединенного к нему гварда:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
@@ -201,8 +226,9 @@ thread. It&#39;s called <code>scoped</code> because this thread returns a join g
 }
 </pre>
 
-<p>When <code>guard</code> goes out of scope, it will block execution until the thread is
-finished. If we didn&#39;t want this behaviour, we could use <code>thread::spawn()</code>:</p>
+<p>Когда <code>guard</code> выходит из области видимости, он будет блокировать выполнение до
+тех пор, пока присоединенный к нему поток не закончит выполняться. Если бы мы не
+хотели такого поведения, то могли бы использовать метод <code>thread::spawn()</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>old_io</span>::<span class='ident'>timer</span>;
@@ -217,11 +243,12 @@ finished. If we didn&#39;t want this behaviour, we could use <code>thread::spawn
 }
 </pre>
 
-<p>We need to <code>sleep</code> here because when <code>main()</code> ends, it kills all of the
-running threads.</p>
+<p>Когда заканчивается функция <code>main()</code>, то завершается основной поток, в
+результате чего убиваются все запущенные потоки. Для предотвращения этого мы
+должны вызвать метод <code>sleep</code>.</p>
 
-<p><a href="std/thread/struct.Builder.html#method.scoped"><code>scoped</code></a> has an interesting
-type signature:</p>
+<p><a href="std/thread/struct.Builder.html#method.scoped"><code>scoped</code></a> имеет интересную
+сигнатуру типа:</p>
 
 <pre><code class="language-text">fn scoped&lt;&#39;a, T, F&gt;(self, f: F) -&gt; JoinGuard&lt;&#39;a, T&gt;
     where T: Send + &#39;a,
@@ -229,38 +256,41 @@ type signature:</p>
           F: Send + &#39;a
 </code></pre>
 
-<p>Specifically, <code>F</code>, the closure that we pass to execute in the new thread. It
-has two restrictions: It must be a <code>FnOnce</code> from <code>()</code> to <code>T</code>. Using <code>FnOnce</code>
-allows the closure to take ownership of any data it mentions from the parent
-thread. The other restriction is that <code>F</code> must be <code>Send</code>. We aren&#39;t allowed to
-transfer this ownership unless the type thinks that&#39;s okay.</p>
+<p>А именно: <code>F</code>, замыкание, которое мы передаем для выполнения в новом потоке. Оно
+имеет два ограничения: оно должно быть <code>FnOnce</code>, принимающей <code>()</code> и возвращающей
+<code>T</code>. Ограничение <code>FnOnce</code> позволяет замыканию захватить право владения над теми
+данными в родительском потоке, на которые оно ссылается (которые оно
+использует). Другое ограничение состоит в том, что <code>F</code> должно быть <code>Send</code>. Мы не
+можем перемещать право владения, если сам тип не думает, что это нормально.</p>
 
-<p>Many languages have the ability to execute threads, but it&#39;s wildly unsafe.
-There are entire books about how to prevent errors that occur from shared
-mutable state. Rust helps out with its type system here as well, by preventing
-data races at compile time. Let&#39;s talk about how you actually share things
-between threads.</p>
+<p>Многие языки имеют возможность выполнять потоки, но это дико опасно. Есть целые
+книги о том, как избежать ошибок, которые происходят от совместного
+использования изменяемого состояния. В Rust снова помогает система типов,
+которая предотвращает гонки данных на этапе компиляции. Давайте поговорим о том,
+как же на самом деле обеспечивается совместное использование что-либо в условиях
+нескольких потоков.</p>
 
-<h2 id="safe-shared-mutable-state" class='section-header'><a
-                           href="#safe-shared-mutable-state">Safe Shared Mutable State</a></h2>
-<p>Due to Rust&#39;s type system, we have a concept that sounds like a lie: &quot;safe
-shared mutable state.&quot; Many programmers agree that shared mutable state is
-very, very bad.</p>
+<h2 id="Безопасное-совместное-использование-изменяемого-состояния" class='section-header'><a
+                           href="#Безопасное-совместное-использование-изменяемого-состояния">Безопасное совместное использование изменяемого состояния</a></h2>
+<p>Благодаря системе типов Rust, у нас есть понятие, которое звучит как ложь:
+&quot;безопасное совместное использование изменяемого состояния.&quot; Многие программисты
+считают, что совместное использование изменяемого состояния - это очень, очень
+плохо.</p>
 
-<p>Someone once said this:</p>
+<p>Кто-то однажды сказал это:</p>
 
 <blockquote>
-<p>Shared mutable state is the root of all evil. Most languages attempt to deal
-with this problem through the &#39;mutable&#39; part, but Rust deals with it by
-solving the &#39;shared&#39; part.</p>
+<p>Совместно используемое изменяемое состояние является корнем всех зол.
+Большинство языков пытаются решить эту проблему через &#39;изменяемое&#39; часть, но
+Rust решает ее через &#39;совместно используемое&#39; часть.</p>
 </blockquote>
 
-<p>The same <a href="ownership.html">ownership system</a> that helps prevent using pointers
-incorrectly also helps rule out data races, one of the worst kinds of
-concurrency bugs.</p>
+<p>Та же самая <a href="ownership.html">система владения</a>, которая помогает предотвратить
+неправильное использование указателей, также помогает исключить гонки данных,
+один из худших видов ошибок многозадачности.</p>
 
-<p>As an example, here is a Rust program that would have a data race in many
-languages. It will not compile:</p>
+<p>В качестве примера приведем программу на Rust, которая входила бы в состояние
+гонки данных на многих языках. На Rust она не будет компилироваться:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>old_io</span>::<span class='ident'>timer</span>;
@@ -279,25 +309,27 @@ languages. It will not compile:</p>
 }
 </pre>
 
-<p>This gives us an error:</p>
+<p>Она выдает ошибку:</p>
 
 <pre><code class="language-text">12:17 error: capture of moved value: `data`
         data[i] += 1;
         ^~~~
 </code></pre>
 
-<p>In this case, we know that our code <em>should</em> be safe, but Rust isn&#39;t sure. And
-it&#39;s actually not safe: if we had a reference to <code>data</code> in each thread, and the
-thread takes ownership of the reference, we have three owners! That&#39;s bad. We
-can fix this by using the <code>Arc&lt;T&gt;</code> type, which is an atomic reference counted
-pointer. The &#39;atomic&#39; part means that it&#39;s safe to share across threads.</p>
+<p>В данном случае мы знаем, что наш код <em>должен</em> быть безопасным, но Rust в этом
+не уверен. И, на самом деле, он не является безопасным: так как у нас есть
+ссылка на <code>data</code> в каждом потоке, а поток становится владельцем ссылки, то у нас
+есть три владельца! Это плохо. Мы можем исправить это с помощью типа <code>Arc&lt;T&gt;</code>,
+который является атомарным указателем со счетчиком ссылок. &#39;атомарный&#39; означает,
+что им безопасно можно обмениваться между потоками.</p>
 
-<p><code>Arc&lt;T&gt;</code> assumes one more property about its contents to ensure that it is safe
-to share across threads: it assumes its contents are <code>Sync</code>. But in our
-case, we want to be able to mutate the value. We need a type that can ensure
-only one person at a time can mutate what&#39;s inside. For that, we can use the
-<code>Mutex&lt;T&gt;</code> type. Here&#39;s the second version of our code. It still doesn&#39;t work,
-but for a different reason:</p>
+<p><code>Arc&lt;T&gt;</code> предполагает наличие еще одного свойства у своего содержимого, чтобы
+гарантировать, что его можно безопасно использовать из нескольких потоков: он
+предполагает, что его содержимое реализует трейт <code>Sync</code>. В нашем случае мы также
+хотим, чтобы была возможность изменять значение содержимого. Нам нужен тип,
+который может обеспечить возможность изменения своего содержимого лишь одиним
+пользователем единовременно. Для этого мы можем использовать тип <code>Mutex&lt;T&gt;</code>. Вот
+вторая версия нашего кода. Она по-прежнему не работает, но по другой причине:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>old_io</span>::<span class='ident'>timer</span>;
@@ -318,27 +350,27 @@ but for a different reason:</p>
 }
 </pre>
 
-<p>Here&#39;s the error:</p>
+<p>Вот ошибка:</p>
 
 <pre><code class="language-text">&lt;anon&gt;:11:9: 11:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard&lt;&#39;_, collections::vec::Vec&lt;u32&gt;&gt;` [E0277]
-&lt;anon&gt;:11         Thread::spawn(move || {
+&lt;anon&gt;:11         thread::spawn(move || {
                   ^~~~~~~~~~~~~
 &lt;anon&gt;:11:9: 11:22 note: `std::sync::mutex::MutexGuard&lt;&#39;_, collections::vec::Vec&lt;u32&gt;&gt;` cannot be sent between threads safely
-&lt;anon&gt;:11         Thread::spawn(move || {
+&lt;anon&gt;:11         thread::spawn(move || {
                   ^~~~~~~~~~~~~
 </code></pre>
 
-<p>You see, <a href="std/sync/struct.Mutex.html"><code>Mutex</code></a> has a
-<a href="http://doc.rust-lang.org/nightly/std/sync/struct.Mutex.html#method.lock"><code>lock</code></a>
-method which has this signature:</p>
+<p>Вы можете видеть, <a href="std/sync/struct.Mutex.html"><code>Mutex</code></a> содержит метод
+<a href="http://doc.rust-lang.org/nightly/std/sync/struct.Mutex.html#method.lock"><code>lock</code></a>,
+который имеет следующую сигнатуру:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>lock</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LockResult</span><span class='op'>&lt;</span><span class='ident'>MutexGuard</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span>
 </pre>
 
-<p>Because <code>Send</code> is not implemented for <code>MutexGuard&lt;T&gt;</code>, we can&#39;t transfer the
-guard across thread boundaries, which gives us our error.</p>
+<p>Так как трейт <code>Send</code> не был реализован для <code>MutexGuard&lt;T&gt;</code>, мы не можем
+перемещать гварда через границы потоков, что и сказано в сообщении об ошибке.</p>
 
-<p>We can use <code>Arc&lt;T&gt;</code> to fix this. Here&#39;s the working version:</p>
+<p>Мы можем использовать <code>Arc&lt;T&gt;</code>, чтобы исправить это. Вот рабочая версия:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
@@ -360,9 +392,9 @@ guard across thread boundaries, which gives us our error.</p>
 }
 </pre>
 
-<p>We now call <code>clone()</code> on our <code>Arc</code>, which increases the internal count. This
-handle is then moved into the new thread. Let&#39;s examine the body of the
-thread more closely:</p>
+<p>Теперь мы вызываем <code>clone()</code> для нашего <code>Arc</code>, что увеличивает внутренний
+счетчик. Затем эта ручка перемещается в новый поток. Давайте более подробно
+рассмотрим тело потока:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
@@ -370,23 +402,26 @@ thread more closely:</p>
 });
 </pre>
 
-<p>First, we call <code>lock()</code>, which acquires the mutex&#39;s lock. Because this may fail,
-it returns an <code>Result&lt;T, E&gt;</code>, and because this is just an example, we <code>unwrap()</code>
-it to get a reference to the data. Real code would have more robust error handling
-here. We&#39;re then free to mutate it, since we have the lock.</p>
+<p>Во-первых, мы вызываем метод <code>lock()</code>, который захватывает блокировку мьютекса.
+Так как вызов данного метода может потерпеть неудачу, то он возвращает
+<code>Result&lt;T, E&gt;</code>, но, поскольку это просто пример, мы используем <code>unwrap()</code>, чтобы
+получить ссылку на данные. Реальный код должен иметь более надежную обработку
+ошибок в такой ситуации. После этого мы свободно изменяем данные, так как у нас
+есть блокировка.</p>
 
-<p>This timer bit is a bit awkward, however. We have picked a reasonable amount of
-time to wait, but it&#39;s entirely possible that we&#39;ve picked too high, and that
-we could be taking less time. It&#39;s also possible that we&#39;ve picked too low,
-and that we aren&#39;t actually finishing this computation.</p>
+<p>Использовать в данном контексте <code>timer</code> не совсем правильно. Мы выбрали
+оптимальное время ожидания. Но вполне возможно, что мы выбрали слишком высокое
+время ожидания, в результате чего временные затраты на выполнение существенно
+увеличиваются. Также возможно, что мы выбрали слишком низкое время ожидания, из-
+за чего вычисления не будут выполнены до конца.</p>
 
-<p>Rust&#39;s standard library provides a few more mechanisms for two threads to
-synchronize with each other. Let&#39;s talk about one: channels.</p>
+<p>Стандартная библиотека Rust предоставляет несколько механизмов для синхронизации
+двух потоков друг с другом. Давайте поговорим об одном из них: каналах.</p>
 
-<h2 id="channels" class='section-header'><a
-                           href="#channels">Channels</a></h2>
-<p>Here&#39;s a version of our code that uses channels for synchronization, rather
-than waiting for a specific time:</p>
+<h2 id="Каналы" class='section-header'><a
+                           href="#Каналы">Каналы</a></h2>
+<p>А вот версия нашего кода, которая использует каналы для синхронизации, вместо
+того чтобы ждать в течение определенного времени:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
@@ -414,13 +449,14 @@ than waiting for a specific time:</p>
 }
 </pre>
 
-<p>We use the <code>mpsc::channel()</code> method to construct a new channel. We just <code>send</code>
-a simple <code>()</code> down the channel, and then wait for ten of them to come back.</p>
+<p>Мы используем метод <code>mpsc::channel()</code>, чтобы построить новый канал. В этом
+примере мы в каждом из десяти потоков вызываем метод <code>send</code>, который передает по
+каналу простое значение <code>()</code>, а затем в главном потоке ждем, пока не будут
+приняты все десять значений.</p>
 
-<p>While this channel is just sending a generic signal, we can send any data that
-is <code>Send</code> over the channel!</p>
+<p>В то время как по этому каналу послается просто общий сигнал, в общем случае мы
+можем отправить по каналу любые данные, которые реализуют трейт <code>Send</code>!</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>mpsc</span>;
 
@@ -441,13 +477,14 @@ is <code>Send</code> over the channel!</p>
 }
 </pre>
 
-<p>A <code>u32</code> is <code>Send</code> because we can make a copy. So we create a thread, ask it to calculate
-the answer, and then it <code>send()</code>s us the answer over the channel.</p>
+<p><code>u32</code> реализует <code>Send</code> потому что мы можем сделать копию. Итак, создается поток,
+в котором вычисляется ответ, а затем этот ответ с помощью метода <code>send()</code>
+передается обратно по каналу.</p>
 
-<h2 id="panics" class='section-header'><a
-                           href="#panics">Panics</a></h2>
-<p>A <code>panic!</code> will crash the currently executing thread. You can use Rust&#39;s
-threads as a simple isolation mechanism:</p>
+<h2 id="Паника" class='section-header'><a
+                           href="#Паника">Паника</a></h2>
+<p><code>panic!</code> аварийно завершает выполняемый в данный момент поток. Вы можете
+использовать потоки Rust, как простой механизм изоляции:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
@@ -458,8 +495,8 @@ threads as a simple isolation mechanism:</p>
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>result</span>.<span class='ident'>is_err</span>());
 </pre>
 
-<p>Our <code>Thread</code> gives us a <code>Result</code> back, which allows us to check if the thread
-has panicked or not.</p>
+<p><code>Thread</code> возвращает <code>Result</code>, что позволяет нам проверить, произошло ли
+завершение потока в результате паники или нет.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "";
@@ -497,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // of each of the sections.
   // It works by extracting the current page based on the url and iterates over
   // the menu links until it finds the menu item for the current page. We then
-  // create a copy of the preceeding and following menu links and add the
+  // create a copy of the preceding and following menu links and add the
   // correct css class and insert them into the bottom of the page.
   var toc = document.getElementById('toc').getElementsByTagName('a');
   var href = document.location.pathname.split('/').pop();

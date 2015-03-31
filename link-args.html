@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Начальный Rust</title>
+    <title>Link args</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -132,13 +132,27 @@
 <div id='page'>
 
 
-    <h1 class="title">Начальный Rust</h1>
-    <p>Этот раздел просто описывает основной синтаксис и семантику Rust. Он поделен на
-подразделы, в каждом из которых описана определенная часть синтаксиса Rust.</p>
+    <h1 class="title">Link args</h1>
+    <p>There is one other way to tell rustc how to customize linking, and that is via
+the <code>link_args</code> attribute. This attribute is applied to <code>extern</code> blocks and
+specifies raw flags which need to get passed to the linker when producing an
+artifact. An example usage would be:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>link_args</span>)]</span>
 
-<p>После прочтения раздела &quot;Начальный Rust&quot; вы будете иметь базовые знания,
-необходимые для дальнейшего изучения Rust, и сможете писать очень простые
-программы.</p>
+<span class='attribute'>#[<span class='ident'>link_args</span> <span class='op'>=</span> <span class='string'>&quot;-foo -bar -baz&quot;</span>]</span>
+<span class='kw'>extern</span> {}
+</pre>
+
+<p>Note that this feature is currently hidden behind the <code>feature(link_args)</code> gate
+because this is not a sanctioned way of performing linking. Right now rustc
+shells out to the system linker, so it makes sense to provide extra command line
+arguments, but this will not always be the case. In the future rustc may use
+LLVM directly to link native libraries in which case <code>link_args</code> will have no
+meaning.</p>
+
+<p>It is highly recommended to <em>not</em> use this attribute, and rather use the more
+formal <code>#[link(...)]</code> attribute on <code>extern</code> blocks instead.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "";

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>More Strings</title>
+    <title>Больше о строках</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,7 +30,7 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
 <ul class='section'>
 <li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
 </li>
@@ -38,31 +38,29 @@
 </li>
 <li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
 </li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
 </li>
 <li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
 </li>
 <li><a href='functions.html'><b>2.6.</b> Функции</a>
 </li>
-<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
 </li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
 </li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
 </li>
 <li><a href='looping.html'><b>2.10.</b> Циклы</a>
 </li>
 <li><a href='strings.html'><b>2.11.</b> Строки</a>
 </li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
-</li>
-<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
 </li>
 <li><a href='testing.html'><b>3.2.</b> Тестирование</a>
 </li>
@@ -76,41 +74,57 @@
 </li>
 <li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
 </li>
-<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
 </li>
-<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
 </li>
-<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
 </li>
-<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
 </li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+<li><a href='traits.html'><b>3.12.</b> Трейты</a>
 </li>
-<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
 </li>
-<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+<li><a href='macros.html'><b>3.14.</b> Макросы</a>
 </li>
-<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
 </li>
-<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.17.</b> Документация</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 <li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
 </li>
 <li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
 </li>
-<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</ul>
+</li>
+<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<ul class='section'>
+<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+</li>
+<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>5.6.</b> Link args</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+<li><a href='conclusion.html'><b>6.</b> Заключение</a>
 </li>
-<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
 </li>
 </ul>
 </div>
@@ -118,72 +132,74 @@
 <div id='page'>
 
 
-    <h1 class="title">More Strings</h1>
-    <p>Strings are an important concept to master in any programming language. If you
-come from a managed language background, you may be surprised at the complexity
-of string handling in a systems programming language. Efficient access and
-allocation of memory for a dynamically sized structure involves a lot of
-details. Luckily, Rust has lots of tools to help us here.</p>
+    <h1 class="title">Больше о строках</h1>
+    <p>Строки - важное понятие, которое необходимо освоить в любом языке
+программирования. Если вы пришли из управляемого языка, то можете быть удивлены
+сложностью обработки строк в системном языке программирования. Эффективный
+доступ и выделение памяти для структуры динамического размера включает в себя
+много нюансов. К счастью, Rust имеет большое количество инструментов, чтобы
+помочь нам в этом вопросе.</p>
 
-<p>A <strong>string</strong> is a sequence of unicode scalar values encoded as a stream of
-UTF-8 bytes. All strings are guaranteed to be validly-encoded UTF-8 sequences.
-Additionally, strings are not null-terminated and can contain null bytes.</p>
+<p><strong>string</strong> - это последовательность скалярных значений юникод, закодированных в
+виде потока UTF-8 байт. Все строки должны быть гарантированно валидными UTF-8
+последовательностями. Кроме того, строки не оканчиваются нулем и могут содержать
+нулевые байты.</p>
 
-<p>Rust has two main types of strings: <code>&amp;str</code> and <code>String</code>.</p>
+<p>Rust имеет два основных типа строк: <code>&amp;str</code> и <code>String</code>.</p>
 
 <h1 id="&amp;str" class='section-header'><a
                            href="#&amp;str"><code>&amp;str</code></a></h1>
-<p>The first kind is a <code>&amp;str</code>. This is pronounced a &#39;string slice&#39;.
-String literals are of the type <code>&amp;str</code>:</p>
+<p>Первый тип строк - <code>&amp;str</code>. Это произносится как &#39;строковый слайс (срез)&#39;.
+Строковые литералы имеют тип <code>&amp;str</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='string'>&quot;Hello there.&quot;</span>;
 </pre>
 
-<p>Like any Rust reference, string slices have an associated lifetime. A string
-literal is a <code>&amp;&#39;static str</code>.  A string slice can be written without an explicit
-lifetime in many cases, such as in function arguments. In these cases the
-lifetime will be inferred:</p>
+<p>Как и любая ссылка Rust, строковые слайсы имеют связанный срок жизни. Для
+строкового литерала - <code>&amp;&#39;static str</code>. Строковый слайс можно записать без явного
+указания срока жизни во многих случаях, например, в качестве аргументов функций.
+В этих случаях срок жизни будет выведен:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>takes_slice</span>(<span class='ident'>slice</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got: {}&quot;</span>, <span class='ident'>slice</span>);
 }
 </pre>
 
-<p>Like vector slices, string slices are simply a pointer plus a length. This
-means that they&#39;re a &#39;view&#39; into an already-allocated string, such as a
-string literal or a <code>String</code>.</p>
+<p>Как и векторные слайсы, строковые слайсы - это просто указатель плюс длина. Это
+означает, что они являются &#39;видом&#39; (&#39;представлением&#39;) уже размещенной в памяти
+строки, например, строковый литерал или <code>String</code>.</p>
 
 <h2 id="str" class='section-header'><a
                            href="#str"><code>str</code></a></h2>
-<p>You may occasionally see references to a <code>str</code> type, without the <code>&amp;</code>. While
-this type does exist, it’s not something you want to use yourself. Sometimes,
-people confuse <code>str</code> for <code>String</code>, and write this:</p>
+<p>Иногда вы можете встретить использование типа <code>str</code> без <code>&amp;</code>. Хотя этот тип
+существует, это не то, что вам следует использовать самостоятельно. Иногда люди
+путают <code>str</code> и <code>String</code>, и написать так:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>S</span> {
     <span class='ident'>s</span>: <span class='ident'>str</span>,
 }
 </pre>
 
-<p>This leads to ugly errors:</p>
+<p>Это приводит к неприятным ошибкам:</p>
 
 <pre><code class="language-text">error: the trait `core::marker::Sized` is not implemented for the type `str` [E0277]
 note: `str` does not have a constant size known at compile-time
 </code></pre>
 
-<p>Instead, this <code>struct</code> should be</p>
+<p>Вместо этого <code>struct</code> должна быть</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>S</span> {
     <span class='ident'>s</span>: <span class='ident'>String</span>,
 }
 </pre>
 
-<p>So let’s talk about <code>String</code>s.</p>
+<p>Итак, давайте поговорим о <code>String</code>.</p>
 
 <h1 id="string" class='section-header'><a
                            href="#string"><code>String</code></a></h1>
-<p>A <code>String</code> is a heap-allocated string. This string is growable, and is
-also guaranteed to be UTF-8. <code>String</code>s are commonly created by
-converting from a string slice using the <code>to_string</code> method.</p>
+<p><code>String</code> - это размещенная в куче строка. Эта строка расширяема, а также
+гарантированно является UTF-8. <code>String</code> обычно создаются путем преобразования из
+строкового слайса при помощи метода <code>to_string</code>.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>();
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
@@ -192,7 +208,7 @@ converting from a string slice using the <code>to_string</code> method.</p>
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
 </pre>
 
-<p>A reference to a <code>String</code> will automatically coerce to a string slice:</p>
+<p>Ссылка на <code>String</code> будет автоматически приводятся к строковому слайсу:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>takes_slice</span>(<span class='ident'>slice</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got: {}&quot;</span>, <span class='ident'>slice</span>);
@@ -204,7 +220,7 @@ converting from a string slice using the <code>to_string</code> method.</p>
 }
 </pre>
 
-<p>You can also get a <code>&amp;str</code> from a stack-allocated array of bytes:</p>
+<p>Вы также можете получить <code>&amp;str</code> из размещенного в стеке массива байт:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
 
@@ -212,32 +228,34 @@ converting from a string slice using the <code>to_string</code> method.</p>
 <span class='kw'>let</span> <span class='ident'>stack_str</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span> <span class='op'>=</span> <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='ident'>x</span>).<span class='ident'>unwrap</span>();
 </pre>
 
-<h1 id="best-practices" class='section-header'><a
-                           href="#best-practices">Best Practices</a></h1>
-<h2 id="string-vs.-&amp;str" class='section-header'><a
-                           href="#string-vs.-&amp;str"><code>String</code> vs. <code>&amp;str</code></a></h2>
-<p>In general, you should prefer <code>String</code> when you need ownership, and <code>&amp;str</code> when
-you just need to borrow a string. This is very similar to using <code>Vec&lt;T&gt;</code> vs. <code>&amp;[T]</code>,
-and <code>T</code> vs <code>&amp;T</code> in general.</p>
+<h1 id="Лучшая-практика" class='section-header'><a
+                           href="#Лучшая-практика">Лучшая практика</a></h1>
+<h2 id="string-vs-&amp;str" class='section-header'><a
+                           href="#string-vs-&amp;str"><code>String</code> vs <code>&amp;str</code></a></h2>
+<p>В общем, следует отдавать предпочтение <code>String</code>, когда вам нужно право владения,
+и <code>&amp;str</code>, когда вам нужно просто позаимствовать строку. Это очень похоже на
+использование <code>Vec&lt;T&gt;</code> vs <code>&amp;[T]</code>, <code>T</code> vs <code>&amp;T</code> в общем.</p>
 
-<p>This means starting off with this:</p>
+<p>Это означает, начинать с:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
 </pre>
 
-<p>and only moving to this:</p>
+<p>и только затем изменять на:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>s</span>: <span class='ident'>String</span>) {
 </pre>
 
-<p>if you have good reason. It&#39;s not polite to hold on to ownership you don&#39;t
-need, and it can make your lifetimes more complex.</p>
+<p>если у вас есть веские основания для этого. Забирать право собственности в тех
+случаях, где это не нужно, является плохой практикой. К тому же это может
+сделать сроки жизни более запутанными.</p>
 
-<h2 id="generic-functions" class='section-header'><a
-                           href="#generic-functions">Generic functions</a></h2>
-<p>To write a function that&#39;s generic over types of strings, use <code>&amp;str</code>.</p>
+<h2 id="Обобщенные-функции" class='section-header'><a
+                           href="#Обобщенные-функции">Обобщенные функции</a></h2>
+<p>To write a function that&#39;s generic over types of strings, use <code>&amp;str</code>.
+Чтобы записать функцию, которая является обобщенной по типам строк, используйте <code>&amp;str</code>.</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>fn</span> <span class='ident'>some_string_length</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>uint</span> {
+<span class='kw'>fn</span> <span class='ident'>some_string_length</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
     <span class='ident'>x</span>.<span class='ident'>len</span>()
 }
 
@@ -252,40 +270,43 @@ need, and it can make your lifetimes more complex.</p>
 }
 </pre>
 
-<p>Both of these lines will print <code>12</code>.</p>
+<p>Обе эти строки напечатают <code>12</code>.</p>
 
-<h2 id="indexing-strings" class='section-header'><a
-                           href="#indexing-strings">Indexing strings</a></h2>
-<p>You may be tempted to try to access a certain character of a <code>String</code>, like
-this:</p>
+<h2 id="Индексация-строк" class='section-header'><a
+                           href="#Индексация-строк">Индексация строк</a></h2>
+<p>Вы можете захотеть попробовать получить доступ к определенному символу <code>String</code>,
+например:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;hello&quot;</span>.<span class='ident'>to_string</span>();
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>[<span class='number'>0</span>]);
 </pre>
 
-<p>This does not compile. This is on purpose. In the world of UTF-8, direct
-indexing is basically never what you want to do. The reason is that each
-character can be a variable number of bytes. This means that you have to iterate
-through the characters anyway, which is an O(n) operation.</p>
+<p>Этот код не компилируется. И это не случайно. В мире UTF-8, прямая индексация
+практически никогда не является тем, что вы хотите сделать. Причина в том, что
+каждый символ может состоять из переменного количества байт. Это означает, что
+для перебора вы в любом случае должны использовать символы, что является O(n)
+операцией.</p>
 
-<p>There&#39;s 3 basic levels of unicode (and its encodings):</p>
-
-<ul>
-<li>code units, the underlying data type used to store everything</li>
-<li>code points/unicode scalar values (char)</li>
-<li>graphemes (visible characters)</li>
-</ul>
-
-<p>Rust provides iterators for each of these situations:</p>
+<p>Существует 3 основных уровня для unicode (и его кодировок):</p>
 
 <ul>
-<li><code>.bytes()</code> will iterate over the underlying bytes</li>
-<li><code>.chars()</code> will iterate over the code points</li>
-<li><code>.graphemes()</code> will iterate over each grapheme</li>
+<li>кодовые единицы (code units), базовый тип данных, используемый для хранения
+всего</li>
+<li>кодовые точки/скалярные значения unicode (code points/unicode scalar values)
+(символы)</li>
+<li>графемы (grapheme) (визуальные символы)</li>
 </ul>
 
-<p>Usually, the <code>graphemes()</code> method on <code>&amp;str</code> is what you want:</p>
+<p>Rust предоставляет итераторы для каждого из этих уровней:</p>
+
+<ul>
+<li><code>.bytes()</code> будет итерировать по нижележащим байтам (code units)</li>
+<li><code>.chars()</code> будет итерировать по кодовым точкам (code points)</li>
+<li><code>.graphemes()</code> будет итерировать по графемам (grapheme)</li>
+</ul>
+
+<p>Как правило, метод <code>graphemes()</code> для <code>&amp;str</code> - это именно то, что вы хотите:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé&quot;</span>;
 
@@ -294,7 +315,7 @@ through the characters anyway, which is an O(n) operation.</p>
 }
 </pre>
 
-<p>This prints:</p>
+<p>Этот код напечатает:</p>
 
 <pre><code class="language-text">u͔
 n͈̰̎
@@ -305,11 +326,12 @@ d͔̆̓ͥ
 é
 </code></pre>
 
-<p>Note that <code>l</code> has the type <code>&amp;str</code> here, since a single grapheme can consist of
-multiple codepoints, so a <code>char</code> wouldn&#39;t be appropriate.</p>
+<p>Следует отметить, что <code>l</code> здесь имеет тип <code>&amp;str</code>, так как одна графема может
+состоять из нескольких кодовых точек, поэтому <code>char</code> тут не будет уместен.</p>
 
-<p>This will print out each visible character in turn, as you&#39;d expect: first <code>u͔</code>, then
-<code>n͈̰̎</code>, etc. If you wanted each individual codepoint of each grapheme, you can use <code>.chars()</code>:</p>
+<p>Как и следовало ожидать, этот код будет печатать каждый отображаемый символ в
+порядке очереди: первым <code>u͔</code>, затем <code>n͈̰̎</code>, и т.д. Если вы хотите получить
+каждую кодовую точку каждой графемы отдельно, то можете использовать <code>.chars()</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé&quot;</span>;
 
@@ -318,7 +340,7 @@ multiple codepoints, so a <code>char</code> wouldn&#39;t be appropriate.</p>
 }
 </pre>
 
-<p>This prints:</p>
+<p>Этот код напечатает:</p>
 
 <pre><code class="language-text">u
 ͔
@@ -348,11 +370,11 @@ e
 ́
 </code></pre>
 
-<p>You can see how some of them are combining characters, and therefore the output
-looks a bit odd.</p>
+<p>Вы можете видеть, что некоторые из них являются комбинируемыми символами, и
+поэтому их отображение выглядит немного странным.</p>
 
-<p>If you want the individual byte representation of each codepoint, you can use
-<code>.bytes()</code>:</p>
+<p>Если вы хотите получить представление каждого отдельного байта для каждой
+кодовой точки, то можете использовать <code>.bytes()</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;u͔n͈̰̎i̙̮͚̦c͚̉o̼̩̰͗d͔̆̓ͥé&quot;</span>;
 
@@ -361,7 +383,7 @@ looks a bit odd.</p>
 }
 </pre>
 
-<p>This will print:</p>
+<p>Этот код напечатает:</p>
 
 <pre><code class="language-text">117
 205
@@ -410,11 +432,11 @@ looks a bit odd.</p>
 129
 </code></pre>
 
-<p>Many more bytes than graphemes!</p>
+<p>Количество байт намного больше, чем графем!</p>
 
-<h1 id="deref-coercions" class='section-header'><a
-                           href="#deref-coercions"><code>Deref</code> coercions</a></h1>
-<p>References to <code>String</code>s will automatically coerce into <code>&amp;str</code>s. Like this:</p>
+<h1 id="deref-приведение" class='section-header'><a
+                           href="#deref-приведение"><code>Deref</code> приведение</a></h1>
+<p>Ссылки на <code>String</code> автоматически приводятся к <code>&amp;str</code>. Как показано в коде ниже:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>hello</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello, {}!&quot;</span>, <span class='ident'>s</span>);
@@ -463,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // of each of the sections.
   // It works by extracting the current page based on the url and iterates over
   // the menu links until it finds the menu item for the current page. We then
-  // create a copy of the preceeding and following menu links and add the
+  // create a copy of the preceding and following menu links and add the
   // correct css class and insert them into the bottom of the page.
   var toc = document.getElementById('toc').getElementsByTagName('a');
   var href = document.location.pathname.split('/').pop();

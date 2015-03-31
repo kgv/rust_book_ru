@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Compound Data Types</title>
+    <title>Агрегатные типы данных</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,7 +30,7 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Основной уровень</a>
+<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
 <ul class='section'>
 <li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
 </li>
@@ -38,31 +38,29 @@
 </li>
 <li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
 </li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Привязка переменных</a>
+<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
 </li>
 <li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
 </li>
 <li><a href='functions.html'><b>2.6.</b> Функции</a>
 </li>
-<li><a href='comments.html'><b>2.7.</b> Коментарии</a>
+<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
 </li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Составные типы данных</a>
+<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
 </li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с шаблоном (Match)</a>
+<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
 </li>
 <li><a href='looping.html'><b>2.10.</b> Циклы</a>
 </li>
 <li><a href='strings.html'><b>2.11.</b> Строки</a>
 </li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, Вектора, Слайсы/Срезы</a>
-</li>
-<li><a href='standard-input.html'><b>2.13.</b> Стандартный ввод/вывод</a>
+<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний уровень</a>
+<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и Модули</a>
+<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
 </li>
 <li><a href='testing.html'><b>3.2.</b> Тестирование</a>
 </li>
@@ -76,41 +74,57 @@
 </li>
 <li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
 </li>
-<li><a href='closures.html'><b>3.8.</b> Замыкания</a>
+<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
 </li>
-<li><a href='iterators.html'><b>3.9.</b> Итераторы</a>
+<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
 </li>
-<li><a href='generics.html'><b>3.10.</b> Дженерики</a>
+<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
 </li>
-<li><a href='traits.html'><b>3.11.</b> Трейты</a>
+<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
 </li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.12.</b> Статическая и Динамическая диспетчерезация</a>
+<li><a href='traits.html'><b>3.12.</b> Трейты</a>
 </li>
-<li><a href='macros.html'><b>3.13.</b> Макросы</a>
+<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
 </li>
-<li><a href='concurrency.html'><b>3.14.</b> Concurrency</a>
+<li><a href='macros.html'><b>3.14.</b> Макросы</a>
 </li>
-<li><a href='error-handling.html'><b>3.15.</b> Обработка ошибок</a>
+<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
 </li>
-<li><a href='documentation.html'><b>3.16.</b> Документация</a>
+<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
+</li>
+<li><a href='documentation.html'><b>3.17.</b> Документация</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый уровень</a>
+<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> FFI</a>
+<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 <li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
 </li>
 <li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
 </li>
-<li><a href='plugins.html'><b>4.4.</b> Плагины компилятора</a>
+</ul>
+</li>
+<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<ul class='section'>
+<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+</li>
+<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>5.6.</b> Link args</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>5.</b> Заключение</a>
+<li><a href='conclusion.html'><b>6.</b> Заключение</a>
 </li>
-<li><a href='glossary.html'><b>6.</b> Глоссарий</a>
+<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
 </li>
 </ul>
 </div>
@@ -118,53 +132,52 @@
 <div id='page'>
 
 
-    <h1 class="title">Compound Data Types</h1>
-    <p>Rust, like many programming languages, has a number of different data types
-that are built-in. You&#39;ve already done some simple work with integers and
-strings, but next, let&#39;s talk about some more complicated ways of storing data.</p>
+    <h1 class="title">Агрегатные типы данных</h1>
+    <p>Как и во многих других языках программирования, в Rust есть несколько встроенных
+типов данных. Вы уже работали с целыми числами и строками, а теперь мы поговорим
+о более сложных способах хранения данных.</p>
 
-<h2 id="tuples" class='section-header'><a
-                           href="#tuples">Tuples</a></h2>
-<p>The first compound data type we&#39;re going to talk about is called the <em>tuple</em>.
-A tuple is an ordered list of fixed size. Like this:</p>
+<h2 id="Кортежи" class='section-header'><a
+                           href="#Кортежи">Кортежи</a></h2>
+<p>Первый агрегатный тип данных, о котором мы поговорим - это <em>кортеж</em>. Кортеж -
+это упорядоченный список фиксированного размера. Вроде такого:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;hello&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;привет&quot;</span>);
 </pre>
 
-<p>The parentheses and commas form this two-length tuple. Here&#39;s the same code, but
-with the type annotated:</p>
+<p>Этот кортеж из двух элементов создан с помощью скобок и запятой между
+элементами. Вот тот же код, но с аннотациями типов:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>x</span>: (<span class='ident'>i32</span>, <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;hello&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>x</span>: (<span class='ident'>i32</span>, <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;привет&quot;</span>);
 </pre>
 
-<p>As you can see, the type of a tuple looks just like the tuple, but with each
-position having a type name rather than the value. Careful readers will also
-note that tuples are heterogeneous: we have an <code>i32</code> and a <code>&amp;str</code> in this tuple.
-You have briefly seen <code>&amp;str</code> used as a type before, and we&#39;ll discuss the
-details of strings later. In systems programming languages, strings are a bit
-more complex than in other languages. For now, just read <code>&amp;str</code> as a <em>string
-slice</em>, and we&#39;ll learn more soon.</p>
+<p>Как вы можете видеть, тип кортежа выглядит как сам кортеж, но места элементов
+занимают типы. Внимательные читатели также отметят, что кортежи гетерогенны: в
+этом кортеже одновременно хранятся значения типов <code>i32</code> и <code>&amp;str</code>. Мы уже
+встречали тип <code>&amp;str</code> ранее, и мы обсудим строки подробнее далее. В языках
+системного программирования строки немного более сложны, чем в других языках.
+Пока вы можете читать <code>&amp;str</code> как <em>срез строки</em>. Мы вскоре узнаем об этом больше.</p>
 
-<p>You can access the fields in a tuple through a <em>destructuring let</em>. Here&#39;s
-an example:</p>
+<p>Доступ к полям кортежа можно получить с помощью <em>деконструирующего let</em>. Вот
+пример:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> (<span class='ident'>x</span>, <span class='ident'>y</span>, <span class='ident'>z</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>);
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is {}&quot;</span>, <span class='ident'>x</span>);
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это {}&quot;</span>, <span class='ident'>x</span>);
 </pre>
 
-<p>Remember before when I said the left-hand side of a <code>let</code> statement was more
-powerful than just assigning a binding? Here we are. We can put a pattern on
-the left-hand side of the <code>let</code>, and if it matches up to the right-hand side,
-we can assign multiple bindings at once. In this case, <code>let</code> &quot;destructures,&quot;
-or &quot;breaks up,&quot; the tuple, and assigns the bits to three bindings.</p>
+<p>Помните, я говорил, что левая часть оператора <code>let</code> более полезна, чем просто
+присваивание имени? Об этом я и говорил. Мы можем написать слева от <code>let</code>
+образец, и, если он совпадает со значением справа, произойдёт присваивание имён
+сразу нескольким значениям. В данном случае, <code>let</code> &quot;деконструирует&quot; или
+&quot;разбивает&quot; кортеж, и присваивает его части трём именам.</p>
 
-<p>This pattern is very powerful, and we&#39;ll see it repeated more later.</p>
+<p>Это очень удобный шаблон программирования, и мы ещё не раз увидим его.</p>
 
-<p>There are also a few things you can do with a tuple as a whole, without
-destructuring. You can assign one tuple into another, if they have the same
-contained types and <a href="./glossary.html#arity">arity</a>. Tuples have the same arity when they have the same
-length.</p>
+<p>Некоторые вещи можно делать с кортежами как с единым целым, без разбиения. Можно
+присваивать один кортеж другому, если они содержат значения одинаковых типов и
+имеют одинаковую <a href="./glossary.html#arity">арность</a>. Арность кортежей одинакова, когда их длина
+совпадает.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>); <span class='comment'>// x: (i32, i32)</span>
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='number'>2</span>, <span class='number'>3</span>); <span class='comment'>// y: (i32, i32)</span>
@@ -172,35 +185,35 @@ length.</p>
 <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>y</span>;
 </pre>
 
-<p>You can also check for equality with <code>==</code>. Again, this will only compile if the
-tuples have the same type.</p>
+<p>Вы также можете проверять кортежи на равенство с помощью операции <code>==</code>. Опять-
+таки, это скомпилируется только если кортежи имеют одинаковые типы.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>);
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='number'>2</span>, <span class='number'>2</span>, <span class='number'>4</span>);
 
 <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='ident'>y</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;yes&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;да&quot;</span>);
 } <span class='kw'>else</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;no&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;нет&quot;</span>);
 }
 </pre>
 
-<p>This will print <code>no</code>, because some of the values aren&#39;t equal.</p>
+<p>Этот код напечатает <code>нет</code>, потому что некоторые элементы не равны.</p>
 
-<p>Note that the order of the values is considered when checking for equality,
-so the following example will also print <code>no</code>.</p>
+<p>Заметьте, что порядок элементов важен при сравнении кортежей, поэтому в
+следующем примере код также напечатает <code>нет</code>.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>);
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='number'>2</span>, <span class='number'>1</span>, <span class='number'>3</span>);
 
 <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='ident'>y</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;yes&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;да&quot;</span>);
 } <span class='kw'>else</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;no&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;нет&quot;</span>);
 }
 </pre>
 
-<p>One other use of tuples is to return multiple values from a function:</p>
+<p>Другой способ использовать кортежи - это возврат множества значений из функции:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>next_two</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> (<span class='ident'>i32</span>, <span class='ident'>i32</span>) { (<span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>2</span>) }
 
@@ -210,18 +223,19 @@ so the following example will also print <code>no</code>.</p>
 }
 </pre>
 
-<p>Even though Rust functions can only return one value, a tuple <em>is</em> one value,
-that happens to be made up of more than one value. You can also see in this
-example how you can destructure a pattern returned by a function, as well.</p>
+<p>Несмотря на то, что функции в Rust могут возвращать только одно значение, в
+данном случае это не помеха. Кортеж - это <em>одно</em> значение, которое состоит из
+нескольких. В этом примере вы также можете видеть пример разбиения кортежа,
+возвращаемого функцией.</p>
 
-<p>Tuples are a very simple data structure, and so are not often what you want.
-Let&#39;s move on to their bigger sibling, structs.</p>
+<p>Кортежи - это очень простая структура данных, и часто они вам не подойдут.
+Давайте рассмотрим их старшего брата, структуры.</p>
 
-<h2 id="structs" class='section-header'><a
-                           href="#structs">Structs</a></h2>
-<p>A struct is another form of a <em>record type</em>, just like a tuple. There&#39;s a
-difference: structs give each element that they contain a name, called a
-<em>field</em> or a <em>member</em>. Check it out:</p>
+<h2 id="Структуры" class='section-header'><a
+                           href="#Структуры">Структуры</a></h2>
+<p>Структура - это другой вид <em>агрегатного типа</em>, как и кортеж. Разница в том, что
+в структурах у каждого элемента есть имя. Элемент структуры называется <em>полем</em>
+или <em>членом структуры</em>. Смотрите:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
@@ -231,23 +245,27 @@ difference: structs give each element that they contain a name, called a
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> }; <span class='comment'>// origin: Point</span>
 
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The origin is at ({}, {})&quot;</span>, <span class='ident'>origin</span>.<span class='ident'>x</span>, <span class='ident'>origin</span>.<span class='ident'>y</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Начало координат находится в ({}, {})&quot;</span>, <span class='ident'>origin</span>.<span class='ident'>x</span>, <span class='ident'>origin</span>.<span class='ident'>y</span>);
 }
 </pre>
 
-<p>There&#39;s a lot going on here, so let&#39;s break it down. We declare a struct with
-the <code>struct</code> keyword, and then with a name. By convention, structs begin with a
-capital letter and are also camel cased: <code>PointInSpace</code>, not <code>Point_In_Space</code>.</p>
+<p>Этот код делает много разных вещей, поэтому давайте разберём его по порядку. Мы
+объявляем структуру с помощью ключевого слова <code>struct</code>, за которым следует имя
+объявляемой структуры. Обычно, имена типов-структур начинаются с заглавной буквы
+и используют чередующийся регистр букв: название <code>PointInSpace</code> выглядит
+привычно, а <code>Point_In_Space</code> - нет.</p>
 
-<p>We can create an instance of our struct via <code>let</code>, as usual, but we use a <code>key:
-value</code> style syntax to set each field. The order doesn&#39;t need to be the same as
-in the original declaration.</p>
+<p>Как всегда, мы можем создать экземпляр нашей структуры с помощью оператора
+<code>let</code>. Однако в данном случае мы используем синтаксис вида <code>ключ: значение</code> для
+установки значения каждого поля. Порядок инициализации полей не обязательно
+должен совпадать с порядком их объявления.</p>
 
-<p>Finally, because fields have names, we can access the field through dot
-notation: <code>origin.x</code>.</p>
+<p>Наконец, поскольку у полей есть имена, мы можем получить поле с помощью операции
+<code>точка</code>: <code>origin.x</code>.</p>
 
-<p>The values in structs are immutable by default, like other bindings in Rust.
-Use <code>mut</code> to make them mutable:</p>
+<p>Значения, хранимые в структурах, неизменяемы по умолчанию. В этом плане они не
+отличаются от других именованных сущностей. Чтобы они стали изменяемы,
+используйте ключевое слово <code>mut</code>:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
@@ -259,29 +277,30 @@ Use <code>mut</code> to make them mutable:</p>
 
     <span class='ident'>point</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The point is at ({}, {})&quot;</span>, <span class='ident'>point</span>.<span class='ident'>x</span>, <span class='ident'>point</span>.<span class='ident'>y</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Точка находится в ({}, {})&quot;</span>, <span class='ident'>point</span>.<span class='ident'>x</span>, <span class='ident'>point</span>.<span class='ident'>y</span>);
 }
 </pre>
 
-<p>This will print <code>The point is at (5, 0)</code>.</p>
+<p>Этот код напечатает <code>Точка находится в (5, 0)</code>.</p>
 
-<h2 id="tuple-structs-and-newtypes" class='section-header'><a
-                           href="#tuple-structs-and-newtypes">Tuple Structs and Newtypes</a></h2>
-<p>Rust has another data type that&#39;s like a hybrid between a tuple and a struct,
-called a <em>tuple struct</em>. Tuple structs do have a name, but their fields don&#39;t:</p>
+<h2 id="Кортежные-структуры-и-новые-типы" class='section-header'><a
+                           href="#Кортежные-структуры-и-новые-типы">Кортежные структуры и новые типы</a></h2>
+<p>В Rust есть ещё один тип данных, который представляет собой нечто среднее между
+кортежем и структурой. Он называется <em>кортежной структурой</em>. Кортежные структуры
+именуются, а вот у их полей имён нет:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Color</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>);
 <span class='kw'>struct</span> <span class='ident'>Point</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>);
 </pre>
 
-<p>These two will not be equal, even if they have the same values:</p>
+<p>Эти два объекта различны, несмотря на то, что у них одинаковые значения:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>black</span> <span class='op'>=</span> <span class='ident'>Color</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>0</span>);
 <span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>0</span>);
 </pre>
 
-<p>It is almost always better to use a struct than a tuple struct. We would write
-<code>Color</code> and <code>Point</code> like this instead:</p>
+<p>Почти всегда, вместо кортежной структуры лучше использовать обычную структуру.
+Мы бы скорее объявили типы <code>Color</code> и <code>Point</code> вот так:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Color</span> {
     <span class='ident'>red</span>: <span class='ident'>i32</span>,
@@ -296,34 +315,38 @@ called a <em>tuple struct</em>. Tuple structs do have a name, but their fields d
 }
 </pre>
 
-<p>Now, we have actual names, rather than positions. Good names are important,
-and with a struct, we have actual names.</p>
+<p>Теперь у нас есть настоящие имена, а не только позиции. Хорошие имена важны, и
+при использовании структуры у нас есть эти имена.</p>
 
-<p>There <em>is</em> one case when a tuple struct is very useful, though, and that&#39;s a
-tuple struct with only one element. We call this the <em>newtype</em> pattern, because
-it allows you to create a new type, distinct from that of its contained value
-and expressing its own semantic meaning:</p>
+<p>Однако, <em>есть</em> один случай, когда кортежные структуры очень полезны. Это
+кортежная структура с всего одним элементом. Такое использование называется
+<em>новым типом</em>, потому что оно позволяет создать новый тип, отличный от типа
+значения, содержащегося в кортежной структуре. При этом новый тип обозначает
+что-то другое:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Inches</span>(<span class='ident'>i32</span>);
 
 <span class='kw'>let</span> <span class='ident'>length</span> <span class='op'>=</span> <span class='ident'>Inches</span>(<span class='number'>10</span>);
 
 <span class='kw'>let</span> <span class='ident'>Inches</span>(<span class='ident'>integer_length</span>) <span class='op'>=</span> <span class='ident'>length</span>;
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;length is {} inches&quot;</span>, <span class='ident'>integer_length</span>);
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Длина в дюймах: {}&quot;</span>, <span class='ident'>integer_length</span>);
 </pre>
 
-<p>As you can see here, you can extract the inner integer type through a
-destructuring <code>let</code>, as we discussed previously in &#39;tuples.&#39; In this case, the
-<code>let Inches(integer_length)</code> assigns <code>10</code> to <code>integer_length</code>.</p>
+<p>Как вы можете видеть в данном примере, извлечь вложенный целый тип можно с
+помощью деконструирующего <code>let</code>. Мы обсуждали это выше, в разделе &quot;кортежи&quot;. В
+данном случае, оператор <code>let Inches(integer_length)</code> присваивает <code>10</code> имени
+<code>integer_length</code>.</p>
 
-<h2 id="enums" class='section-header'><a
-                           href="#enums">Enums</a></h2>
-<p>Finally, Rust has a &quot;sum type&quot;, an <em>enum</em>. Enums are an incredibly useful
-feature of Rust, and are used throughout the standard library. An <code>enum</code> is
-a type which relates a set of alternates to a specific name. For example, below
-we define <code>Character</code> to be either a <code>Digit</code> or something else. These
-can be used via their fully scoped names: <code>Character::Other</code> (more about <code>::</code>
-below).</p>
+<h2 id="Перечисления" class='section-header'><a
+                           href="#Перечисления">Перечисления</a></h2>
+<p>Наконец, в Rust есть &quot;типы-суммы&quot;, или <em>перечисления</em> (тип-сумма - это термин из
+теории типов). Перечисления - это очень полезная возможность Rust, и они очень
+много используются в стандартной библиотеке языка. Они объявляются с помощью
+ключевого слова <code>enum</code>. <code>enum</code> - это тип, который соотносит набор неких
+вариантов одному имени. Например, ниже мы определяем перечисление <code>Character</code>
+(символ), представляющее собой или цифру (<code>Digit</code>), или что-то другое.
+Объявленные варианты можно использовать с помощью полностью квалифицированных
+имён, таких, как <code>Character::Other</code> (мы поговорим об операции <code>::</code> ниже).</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>enum</span> <span class='ident'>Character</span> {
     <span class='ident'>Digit</span>(<span class='ident'>i32</span>),
@@ -331,8 +354,8 @@ below).</p>
 }
 </pre>
 
-<p>Most normal types are allowed as the variant components of an <code>enum</code>. Here are
-some examples:</p>
+<p>Б&#39;ольшая часть обычных типов могут быть вариантами перечисления. Вот несколько
+примеров:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>struct</span> <span class='ident'>Empty</span>;
 <span class='kw'>struct</span> <span class='ident'>Color</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>);
@@ -341,17 +364,20 @@ some examples:</p>
 <span class='kw'>struct</span> <span class='ident'>HeightDatabase</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>);
 </pre>
 
-<p>You see that, depending on its type, an <code>enum</code> variant may or may not hold data.
-In <code>Character</code>, for instance, <code>Digit</code> gives a meaningful name for an <code>i32</code>
-value, where <code>Other</code> is only a name. However, the fact that they represent
-distinct categories of <code>Character</code> is a very useful property.</p>
+<p>Здесь мы видим, что, в зависимости от типа, вариант перечисления может содержать
+вложенные данные, а может и не иметь таковых. Например, в перечислении
+<code>Character</code> (символ), вариант <code>Digit</code> (цифра) даёт значимое имя числу типа
+<code>i32</code>. А вот вариант <code>Other</code> представляет собой лишь имя, без значения. Однако
+наиболее полезно именно то, что отдельные варианты представляют собой отдельные
+виды символов (<code>Character</code>).</p>
 
-<p>As with structures, the variants of an enum by default are not comparable with
-equality operators (<code>==</code>, <code>!=</code>), have no ordering (<code>&lt;</code>, <code>&gt;=</code>, etc.), and do not
-support other binary operations such as <code>*</code> and <code>+</code>. As such, the following code
-is invalid for the example <code>Character</code> type:</p>
+<p>Как и структуры, варианты перечислений по умолчанию не сравнимы операциями
+сравнения (<code>==</code>, <code>!=</code>), не упорядочены (не реализуют <code>&lt;</code>, <code>&gt;=</code> и другие) и не
+поддерживают другие двухместные операции, такие как умножение (<code>*</code>) и сложение
+(<code>+</code>). Нижеследующий код, как таковой, не верен (если мы используем приведённый
+выше тип-перечисление <code>Character</code>):</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='comment'>// These assignments both succeed</span>
+<span class='comment'>// Оба этих присваивания успешны</span>
 <span class='kw'>let</span> <span class='ident'>ten</span>  <span class='op'>=</span> <span class='ident'>Character</span>::<span class='ident'>Digit</span>(<span class='number'>10</span>);
 <span class='kw'>let</span> <span class='ident'>four</span> <span class='op'>=</span> <span class='ident'>Character</span>::<span class='ident'>Digit</span>(<span class='number'>4</span>);
 
@@ -365,11 +391,12 @@ is invalid for the example <code>Character</code> type:</p>
 <span class='kw'>let</span> <span class='ident'>four_equals_ten</span> <span class='op'>=</span> <span class='ident'>four</span> <span class='op'>==</span> <span class='ident'>ten</span>;
 </pre>
 
-<p>This may seem rather limiting, but it&#39;s a limitation which we can overcome.
-There are two ways: by implementing equality ourselves, or by pattern matching
-variants with <a href="./match.html"><code>match</code></a> expressions, which you&#39;ll learn in the next
-chapter. We don&#39;t know enough about Rust to implement equality yet, but we can
-use the <code>Ordering</code> enum from the standard library, which does:</p>
+<p>Наверное, это выглядит неудобным. Но мы можем преодолеть данное ограничение.
+Есть два способа сделать это: реализовать сравнение самим, или использовать
+сопоставление вариантов с образцом с помощью выражений <a href="./match.html"><code>match</code></a>. Мы
+узнаем о них в следующей главе. Пока мы не имеем достаточных знаний Rust для
+реализации сравнения. Но мы можем использовать перечисление <code>Ordering</code> (порядок)
+из стандартной библиотеки, которое выглядит так:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>enum</span> <span class='ident'>Ordering</span> {
     <span class='ident'>Less</span>,
@@ -378,8 +405,8 @@ use the <code>Ordering</code> enum from the standard library, which does:</p>
 }
 </pre>
 
-<p>Because <code>Ordering</code> has already been defined for us, we will import it with the
-<code>use</code> keyword. Here&#39;s an example of how it is used:</p>
+<p>Поскольку перечисление <code>Ordering</code> уже определено, мы импортируем его с помощью
+ключевого слова <code>use</code>. Вот пример его использования:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>Ordering</span>;
 
@@ -396,33 +423,35 @@ use the <code>Ordering</code> enum from the standard library, which does:</p>
     <span class='kw'>let</span> <span class='ident'>ordering</span> <span class='op'>=</span> <span class='ident'>cmp</span>(<span class='ident'>x</span>, <span class='ident'>y</span>); <span class='comment'>// ordering: Ordering</span>
 
     <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Ordering</span>::<span class='ident'>Less</span> {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;less&quot;</span>);
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;меньше&quot;</span>);
     } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Ordering</span>::<span class='ident'>Greater</span> {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;greater&quot;</span>);
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;больше&quot;</span>);
     } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Ordering</span>::<span class='ident'>Equal</span> {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;equal&quot;</span>);
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;равно&quot;</span>);
     }
 }
 </pre>
 
-<p>The <code>::</code> symbol is used to indicate a namespace. In this case, <code>Ordering</code> lives
-in the <code>cmp</code> submodule of the <code>std</code> module. We&#39;ll talk more about modules later
-in the guide. For now, all you need to know is that you can <code>use</code> things from
-the standard library if you need them.</p>
+<p>Мы используем символ <code>::</code> для обозначения пространства имён. В данном случае,
+перечисление <code>Ordering</code> находится в под-модуле модуля <code>std</code>. Мы подробнее
+поговорим о модулях позже. Пока же достаточно знать, что вы можете использовать
+(<code>use</code>) вещи из стандартной библиотеки, если они вам понадобятся.</p>
 
-<p>Okay, let&#39;s talk about the actual code in the example. <code>cmp</code> is a function that
-compares two things, and returns an <code>Ordering</code>. We return either
-<code>Ordering::Less</code>, <code>Ordering::Greater</code>, or <code>Ordering::Equal</code>, depending on
-whether the first value is less than, greater than, or equal to the second. Note
-that each variant of the <code>enum</code> is namespaced under the <code>enum</code> itself: it&#39;s
-<code>Ordering::Greater</code>, not <code>Greater</code>.</p>
+<p>Отлично, теперь давайте поговорим о самом коде примера. <code>cmp</code> - это функция,
+которая сравнивает два объекта, и возвращает значение типа &quot;порядок&quot;
+(<code>Ordering</code>). Мы возвращаем одно из значений <code>Ordering::Less</code>,
+<code>Ordering::Greater</code> или <code>Ordering::Equal</code>, когда первое значение меньше, больше
+или равно второму, соответственно. Заметьте, что варианты перечисления находятся
+в пространстве имён самого перечисления: к нему нужно обращаться
+<code>Ordering::Greater</code>, а не <code>Greater</code>.</p>
 
-<p>The <code>ordering</code> variable has the type <code>Ordering</code>, and so contains one of the
-three values. We then do a bunch of <code>if</code>/<code>else</code> comparisons to check which
-one it is.</p>
+<p>Переменная <code>ordering</code> имеет тип <code>Ordering</code>, и содержит одно из трёх значений.
+Затем мы делаем несколько сравнений с помощью <code>if</code>/<code>else</code>, чтобы проверить,
+какое из значений мы получили.</p>
 
-<p>This <code>Ordering::Greater</code> notation is too long. Let&#39;s use another form of <code>use</code>
-to import the <code>enum</code> variants instead. This will avoid full scoping:</p>
+<p>Запись <code>Ordering::Greater</code> неудобна из-за своей длины. Давайте используем другой
+вид оператора <code>use</code> и импортируем сами варианты перечисления. В таком коде не
+нужно полностью специфицировать имена вариантов:</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>Ordering</span>::{<span class='self'>self</span>, <span class='ident'>Equal</span>, <span class='ident'>Less</span>, <span class='ident'>Greater</span>};
 
@@ -438,22 +467,23 @@ to import the <code>enum</code> variants instead. This will avoid full scoping:<
 
     <span class='kw'>let</span> <span class='ident'>ordering</span> <span class='op'>=</span> <span class='ident'>cmp</span>(<span class='ident'>x</span>, <span class='ident'>y</span>); <span class='comment'>// ordering: Ordering</span>
 
-    <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Less</span> { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;less&quot;</span>); }
-    <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Greater</span> { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;greater&quot;</span>); }
-    <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Equal</span> { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;equal&quot;</span>); }
+    <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Less</span> { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;меньше&quot;</span>); }
+    <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Greater</span> { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;больше&quot;</span>); }
+    <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>ordering</span> <span class='op'>==</span> <span class='ident'>Equal</span> { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;равно&quot;</span>); }
 }
 </pre>
 
-<p>Importing variants is convenient and compact, but can also cause name conflicts,
-so do this with caution. For this reason, it&#39;s normally considered better style
-to <code>use</code> an enum rather than its variants directly.</p>
+<p>Импорт вариантов удобен и компактен, но он может вызывать конфликты имён,
+поэтому будьте осторожны при его использовании. Обычно стилистически лучше
+импортировать перечисление, а не его варианты.</p>
 
-<p>As you can see, <code>enum</code>s are quite a powerful tool for data representation, and
-are even more useful when they&#39;re <a href="./generics.html">generic</a> across types. Before we
-get to generics, though, let&#39;s talk about how to use enums with pattern
-matching, a tool that will let us deconstruct sum types (the type theory term
-for enums) like <code>Ordering</code> in a very elegant way that avoids all these messy
-and brittle <code>if</code>/<code>else</code>s.</p>
+<p>Как видите, перечисления довольно удобны, и особенно полезны когда они
+<a href="./generics.html">обобщены</a> относительно вложенных в них типов. Однако, прежде чем мы
+перейдём к рассмотрению обобщённых типов, давайте поговорим об использовании
+перечислений при сопоставлении с образцом. Сопоставление с образцом - это
+инструмент, позволяющий нам элегантно разбирать типы-суммы вроде <code>Ordering</code>.
+Данная техника позволит нам избежать всех этих хрупких сравнений с помощью
+<code>if</code>/<code>else</code>.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "";
@@ -491,7 +521,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // of each of the sections.
   // It works by extracting the current page based on the url and iterates over
   // the menu links until it finds the menu item for the current page. We then
-  // create a copy of the preceeding and following menu links and add the
+  // create a copy of the preceding and following menu links and add the
   // correct css class and insert them into the bottom of the page.
   var toc = document.getElementById('toc').getElementsByTagName('a');
   var href = document.location.pathname.split('/').pop();

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Начальный Rust</title>
+    <title>Intrinsics</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -132,13 +132,28 @@
 <div id='page'>
 
 
-    <h1 class="title">Начальный Rust</h1>
-    <p>Этот раздел просто описывает основной синтаксис и семантику Rust. Он поделен на
-подразделы, в каждом из которых описана определенная часть синтаксиса Rust.</p>
+    <h1 class="title">Intrinsics</h1>
+    <blockquote>
+<p><strong>Note</strong>: intrinsics will forever have an unstable interface, it is
+recommended to use the stable interfaces of libcore rather than intrinsics
+directly.</p>
+</blockquote>
 
-<p>После прочтения раздела &quot;Начальный Rust&quot; вы будете иметь базовые знания,
-необходимые для дальнейшего изучения Rust, и сможете писать очень простые
-программы.</p>
+<p>These are imported as if they were FFI functions, with the special
+<code>rust-intrinsic</code> ABI. For example, if one was in a freestanding
+context, but wished to be able to <code>transmute</code> between types, and
+perform efficient pointer arithmetic, one would import those functions
+via a declaration like</p>
+<pre id='rust-example-rendered' class='rust '>
+
+<span class='kw'>extern</span> <span class='string'>&quot;rust-intrinsic&quot;</span> {
+    <span class='kw'>fn</span> <span class='ident'>transmute</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>U</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>U</span>;
+
+    <span class='kw'>fn</span> <span class='ident'>offset</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>dst</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>, <span class='ident'>offset</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>;
+}
+</pre>
+
+<p>As with any other FFI functions, these are always <code>unsafe</code> to call.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "";

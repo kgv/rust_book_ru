@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Strings</title>
+    <title>Inline Assembly</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -132,63 +132,127 @@
 <div id='page'>
 
 
-    <h1 class="title">Strings</h1>
-    <p>Strings are an important concept for any programmer to master. Rust&#39;s string
-handling system is a bit different from other languages, due to its systems
-focus. Any time you have a data structure of variable size, things can get
-tricky, and strings are a re-sizable data structure. That being said, Rust&#39;s
-strings also work differently than in some other systems languages, such as C.</p>
-
-<p>Let&#39;s dig into the details. A <em>string</em> is a sequence of Unicode scalar values
-encoded as a stream of UTF-8 bytes. All strings are guaranteed to be
-validly encoded UTF-8 sequences. Additionally, strings are not null-terminated
-and can contain null bytes.</p>
-
-<p>Rust has two main types of strings: <code>&amp;str</code> and <code>String</code>.</p>
-
-<p>The first kind is a <code>&amp;str</code>. These are called <em>string slices</em>. String literals
-are of the type <code>&amp;str</code>:</p>
+    <h1 class="title">Inline Assembly</h1>
+    <p>For extremely low-level manipulations and performance reasons, one
+might wish to control the CPU directly. Rust supports using inline
+assembly to do this via the <code>asm!</code> macro. The syntax roughly matches
+that of GCC &amp; Clang:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='string'>&quot;Hello there.&quot;</span>; <span class='comment'>// string: &amp;str</span>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='ident'>assembly</span> <span class='ident'>template</span>
+   : <span class='ident'>output</span> <span class='ident'>operands</span>
+   : <span class='ident'>input</span> <span class='ident'>operands</span>
+   : <span class='ident'>clobbers</span>
+   : <span class='ident'>options</span>
+   );
 </pre>
 
-<p>This string is statically allocated, meaning that it&#39;s saved inside our
-compiled program, and exists for the entire duration it runs. The <code>string</code>
-binding is a reference to this statically allocated string. String slices
-have a fixed size, and cannot be mutated.</p>
+<p>Any use of <code>asm</code> is feature gated (requires <code>#![feature(asm)]</code> on the
+crate to allow) and of course requires an <code>unsafe</code> block.</p>
 
-<p>A <code>String</code>, on the other hand, is a heap-allocated string. This string
-is growable, and is also guaranteed to be UTF-8. <code>String</code>s are
-commonly created by converting from a string slice using the
-<code>to_string</code> method.</p>
+<blockquote>
+<p><strong>Note</strong>: the examples here are given in x86/x86-64 assembly, but
+all platforms are supported.</p>
+</blockquote>
+
+<h2 id="assembly-template" class='section-header'><a
+                           href="#assembly-template">Assembly template</a></h2>
+<p>The <code>assembly template</code> is the only required parameter and must be a
+literal string (i.e. <code>&quot;&quot;</code>)</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>(); <span class='comment'>// mut s: String</span>
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>asm</span>)]</span>
 
-<span class='ident'>s</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;, world.&quot;</span>);
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86&quot;</span>, <span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>))]</span>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() {
+    <span class='kw'>unsafe</span> {
+        <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;NOP&quot;</span>);
+    }
+}
+
+<span class='comment'>// other platforms</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>any</span>(<span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86&quot;</span>, <span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86_64&quot;</span>)))]</span>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() { <span class='comment'>/* ... */</span> }
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='comment'>// ...</span>
+    <span class='ident'>foo</span>();
+    <span class='comment'>// ...</span>
+}
 </pre>
 
-<p><code>String</code>s will coerce into <code>&amp;str</code> with an <code>&amp;</code>:</p>
+<p>(The <code>feature(asm)</code> and <code>#[cfg]</code>s are omitted from now on.)</p>
+
+<p>Output operands, input operands, clobbers and options are all optional
+but you must add the right number of <code>:</code> if you skip them:</p>
 <pre id='rust-example-rendered' class='rust '>
-<span class='kw'>fn</span> <span class='ident'>takes_slice</span>(<span class='ident'>slice</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got: {}&quot;</span>, <span class='ident'>slice</span>);
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span>
+    :
+    :
+    : <span class='string'>&quot;eax&quot;</span>
+   );
+</pre>
+
+<p>Whitespace also doesn&#39;t matter:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span> ::: <span class='string'>&quot;eax&quot;</span>);
+</pre>
+
+<h2 id="operands" class='section-header'><a
+                           href="#operands">Operands</a></h2>
+<p>Input and output operands follow the same format: <code>:
+&quot;constraints1&quot;(expr1), &quot;constraints2&quot;(expr2), ...&quot;</code>. Output operand
+expressions must be mutable lvalues:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>, <span class='ident'>b</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='number'>0</span>;
+    <span class='kw'>unsafe</span> {
+        <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;add $2, $0&quot;</span>
+             : <span class='string'>&quot;=r&quot;</span>(<span class='ident'>c</span>)
+             : <span class='string'>&quot;0&quot;</span>(<span class='ident'>a</span>), <span class='string'>&quot;r&quot;</span>(<span class='ident'>b</span>)
+             );
+    }
+    <span class='ident'>c</span>
 }
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>();
-    <span class='ident'>takes_slice</span>(<span class='kw-2'>&amp;</span><span class='ident'>s</span>);
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>add</span>(<span class='number'>3</span>, <span class='number'>14159</span>), <span class='number'>14162</span>)
 }
 </pre>
 
-<p>Viewing a <code>String</code> as a <code>&amp;str</code> is cheap, but converting the <code>&amp;str</code> to a
-<code>String</code> involves allocating memory. No reason to do that unless you have to!</p>
+<h2 id="clobbers" class='section-header'><a
+                           href="#clobbers">Clobbers</a></h2>
+<p>Some instructions modify registers which might otherwise have held
+different values so we use the clobbers list to indicate to the
+compiler not to assume any values loaded into those registers will
+stay valid.</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='comment'>// Put the value 0x200 in eax</span>
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;mov $$0x200, %eax&quot;</span> : <span class='comment'>/* no outputs */</span> : <span class='comment'>/* no inputs */</span> : <span class='string'>&quot;eax&quot;</span>);
+</pre>
 
-<p>That&#39;s the basics of strings in Rust! They&#39;re probably a bit more complicated
-than you are used to, if you come from a scripting language, but when the
-low-level details matter, they really matter. Just remember that <code>String</code>s
-allocate memory and control their data, while <code>&amp;str</code>s are a reference to
-another string, and you&#39;ll be all set.</p>
+<p>Input and output registers need not be listed since that information
+is already communicated by the given constraints. Otherwise, any other
+registers used either implicitly or explicitly should be listed.</p>
+
+<p>If the assembly changes the condition code register <code>cc</code> should be
+specified as one of the clobbers. Similarly, if the assembly modifies
+memory, <code>memory</code> should also be specified.</p>
+
+<h2 id="options" class='section-header'><a
+                           href="#options">Options</a></h2>
+<p>The last section, <code>options</code> is specific to Rust. The format is comma
+separated literal strings (i.e. <code>:&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;</code>). It&#39;s used to
+specify some extra info about the inline assembly:</p>
+
+<p>Current valid options are:</p>
+
+<ol>
+<li><em>volatile</em> - specifying this is analogous to
+<code>__asm__ __volatile__ (...)</code> in gcc/clang.</li>
+<li><em>alignstack</em> - certain instructions expect the stack to be
+aligned a certain way (i.e. SSE) and specifying this indicates to
+the compiler to insert its usual stack alignment code</li>
+<li><em>intel</em> - use intel syntax instead of the default AT&amp;T.</li>
+</ol>
 
     <script type="text/javascript">
         window.playgroundUrl = "";
