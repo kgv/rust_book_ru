@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/testing.md b/fix_current_version:testing.md
-index 8fb08e1..0e9f0a0 100644
+index 8b2c145..c96da2d 100644
 --- a/rust/master:src/doc/trpl/testing.md
 +++ b/fix_current_version:testing.md
 @@ -1,27 +1,29 @@
@@ -27,7 +27,7 @@ index 8fb08e1..0e9f0a0 100644
 -At its simplest, a test in Rust is a function that's annotated with the `test`
 -attribute. Let's make a new project with Cargo called `adder`:
 +В самом простом случае, тест в Rust - это функция, аннотированная с помощью
-+атрибута `test`. Давайте создадим новый проект с помощью Cargo, который будет
++атрибута `test`. Давайте создадим новый проект при помощи Cargo, который будет
 +называться `adder`:
  
  ```bash
@@ -50,7 +50,7 @@ index 8fb08e1..0e9f0a0 100644
 -currently has no body. That's good enough to pass! We can run the tests with
 -`cargo test`:
 +Обратите внимание на `#[test]`. Этот аттрибут указывает, что это тестовая
-+функция. Сейчас она не имеет тела функции. Но такого вида функции достаточно,
++функция. В этом примере она не имеет тела. Но такого вида функции достаточно,
 +чтобы успешно выполнить тест. Запуск тестов осуществляется командой `cargo
 +test`.
  
@@ -63,7 +63,7 @@ index 8fb08e1..0e9f0a0 100644
 -Cargo compiled and ran our tests. There are two sets of output here: one
 -for the test we wrote, and another for documentation tests. We'll talk about
 -those later. For now, see this line:
-+Cargo компилирует и запускает ваши тесты. В результате мы получаем выходные
++Cargo скомпилировал и запустил наши тесты. В результате мы получили выходные
 +данные, поделенные на два раздела: один содержит информацию о тесте, который мы
 +написали, а другой - информацию о тестах из документации. Но об этом позже. А
 +сейчас посмотрим на эту строку:
@@ -81,7 +81,7 @@ index 8fb08e1..0e9f0a0 100644
  ```
  
 -We also get a summary line:
-+Мы также получаем итоговую строку:
++Мы также получили итоговую строку:
  
  ```text
  test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
@@ -91,30 +91,31 @@ index 8fb08e1..0e9f0a0 100644
 -and any test that does `panic!` fails. Let's make our test fail:
 +Так почему же наш ничего не делающий тест был выполнен успешно? Любой тест,
 +который не вызывает `panic!`, выполняется успешно, и любой тест, который
-+вызывает `panic!`, выполняется неудачно. Давайте сделаем тест, который
-+выполнится неудачно:
++вызывает `panic!`, выполняется ошибочно. Давайте сделаем тест, который
++выполнится ошибочно:
  
  ```rust
  #[test]
-@@ -81,9 +87,9 @@ fn it_works() {
+@@ -81,9 +87,10 @@ fn it_works() {
  }
  ```
  
 -`assert!` is a macro provided by Rust which takes one argument: if the argument
 -is `true`, nothing happens. If the argument is false, it `panic!`s. Let's run
 -our tests again:
-+`assert!` является макросом, который принимает один аргумент: если аргумент
-+имеет значение `true`, то ничего не происходит; если аргумент является `false`,
-+то вызывается `panic!`. Давайте запустим наши тесты снова:
++`assert!` является макросом, определенным в Rust, который принимает один
++аргумент: если аргумент имеет значение `true`, то ничего не происходит; если
++аргумент является `false`, то вызывается `panic!`. Давайте запустим наши тесты
++снова:
  
  ```bash
  $ cargo test
-@@ -108,28 +114,28 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
+@@ -108,28 +115,30 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
  thread '<main>' panicked at 'Some tests failed', /home/steve/src/rust/src/libtest/lib.rs:247
  ```
  
 -Rust indicates that our test failed:
-+Rust сообщает, что наш тест выполнен неудачно:
++Rust сообщает, что наш тест выполнен ошибочно:
  
  ```text
  test it_works ... FAILED
@@ -136,24 +137,26 @@ index 8fb08e1..0e9f0a0 100644
  ```
  
 -This is useful if you want to integrate `cargo test` into other tooling.
-+Это полезно, если вы хотите интегрировать `cargo test` в сторонний инструмент.
++Это бывает полезно, если вы хотите интегрировать `cargo test` в сторонний
++инструмент.
  
 -We can invert our test's failure with another attribute: `should_panic`:
-+Мы можем обратить ожидаемый результат теста с помощью атрибута: `should_panic`:
++Мы можем инвертировать ожидаемый результат теста с помощью атрибута:
++`should_panic`:
  
  ```rust
  #[test]
-@@ -139,7 +145,8 @@ fn it_works() {
+@@ -139,7 +148,8 @@ fn it_works() {
  }
  ```
  
 -This test will now succeed if we `panic!` and fail if we complete. Let's try it:
-+Теперь этот тест будет выполнен успешно, если вызывается `panic!`, и неудачно,
++Теперь этот тест будет выполнен успешно, если вызывается `panic!`, и ошибочно,
 +если `panic!` не вызывается. Давайте попробуем:
  
  ```bash
  $ cargo test
-@@ -158,8 +165,8 @@ running 0 tests
+@@ -158,8 +168,8 @@ running 0 tests
  test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
  ```
  
@@ -164,18 +167,18 @@ index 8fb08e1..0e9f0a0 100644
  
  ```rust
  #[test]
-@@ -169,8 +176,8 @@ fn it_works() {
+@@ -169,8 +179,8 @@ fn it_works() {
  }
  ```
  
 -Does this test pass or fail? Because of the `should_panic` attribute, it
 -passes:
-+А теперь этот тест будет выполнен успешно или неудачно? Из-за атрибута
++А теперь этот тест будет выполнен успешно или ошибочно? Из-за атрибута
 +`should_panic` он завершится успешно:
  
  ```bash
  $ cargo test
-@@ -189,11 +196,11 @@ running 0 tests
+@@ -189,11 +199,11 @@ running 0 tests
  test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
  ```
  
@@ -185,30 +188,31 @@ index 8fb08e1..0e9f0a0 100644
 -make sure that the failure message contains the provided text. A safer version
 -of the example above would be:
 +`should_panic` тесты могут быть хрупкими, потому как трудно гарантировать, что
-+тест не выдаст панику по неожиданной причине. Чтобы помочь в этом аспекте, к
++тест не вызовет панику по неожиданной причине. Чтобы помочь в этом аспекте, к
 +атрибуту `should_panic` может быть добавлен необязательный параметр `expected`.
 +Тогда тест также будет проверять, что сообщение об ошибке содержит ожидаемый
 +текст. Ниже представлен более безопасный вариант приведенного выше примера:
  
  ```
  #[test]
-@@ -203,7 +210,7 @@ fn it_works() {
+@@ -203,7 +213,7 @@ fn it_works() {
  }
  ```
  
 -That's all there is to the basics! Let's write one 'real' test:
-+Вот и все, что касается основ! Давайте напишем один "реальный" тест:
++Вот и все, что касается основ! Давайте напишем один 'реальный' тест:
  
  ```{rust,ignore}
  pub fn add_two(a: i32) -> i32 {
-@@ -216,14 +223,14 @@ fn it_works() {
+@@ -216,14 +226,15 @@ fn it_works() {
  }
  ```
  
 -This is a very common use of `assert_eq!`: call some function with
 -some known arguments and compare it to the expected output.
 +Это распространенное использование макроса `assert_eq!`: вызывать некоторую
-+функцию с известными аргументами и сравнить ее вызов с ожидаемыми результатом.
++функцию с известными аргументами и сравнить результат ее вызова с ожидаемыми
++результатом.
  
 -# The `test` module
 +# Тесты в модуле `test`
@@ -222,20 +226,20 @@ index 8fb08e1..0e9f0a0 100644
  
  ```{rust,ignore}
  pub fn add_two(a: i32) -> i32 {
-@@ -241,17 +248,19 @@ mod tests {
+@@ -241,17 +252,19 @@ mod test {
  }
  ```
  
--There's a few changes here. The first is the introduction of a `mod tests` with
+-There's a few changes here. The first is the introduction of a `mod test` with
 -a `cfg` attribute. The module allows us to group all of our tests together, and
 -to also define helper functions if needed, that don't become a part of the rest
 -of our crate. The `cfg` attribute only compiles our test code if we're
 -currently trying to run the tests. This can save compile time, and also ensures
 -that our tests are entirely left out of a normal build.
-+Здесь есть несколько изменений. Первое - это введение `mod tests` с атрибутом
++Здесь есть несколько изменений. Первое - это введение `mod test` с атрибутом
 +`cfg`. Модуль позволяет сгруппировать все наши тесты вместе, а также определить
 +вспомогательные функции, если это необходимо, которые будут отделены от
-+остальной части крейта. Атрибут `cfg` указывает на то, что тест будет
++остальной части контейнера. Атрибут `cfg` указывает на то, что тест будет
 +скомпилирован, только когда мы попытаемся запустить тесты. Это может сэкономить
 +время компиляции, а также гарантирует, что наши тесты полностью исключены из
 +обычного билда.
@@ -252,7 +256,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```{rust,ignore}
  
-@@ -270,7 +279,7 @@ mod tests {
+@@ -270,7 +283,7 @@ mod test {
  }
  ```
  
@@ -261,7 +265,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```bash
  $ cargo test
-@@ -290,17 +299,18 @@ running 0 tests
+@@ -290,17 +303,18 @@ running 0 tests
  test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
  ```
  
@@ -276,7 +280,7 @@ index 8fb08e1..0e9f0a0 100644
 +"юнит стиле". Любой код, задачей которого является только лишь тестирование
 +небольшего кусочка функциональности, имеет смысл перенести в этот модуль. Но что
 +если мы хотим использовать "интеграционный стиль" для создания тестов? Для этого
-+мы можем использовать директорию `tests`
++следует использовать директорию `tests`
  
 -# The `tests` directory
 +# Тесты в директории `tests`
@@ -284,11 +288,11 @@ index 8fb08e1..0e9f0a0 100644
 -To write an integration test, let's make a `tests` directory, and
 -put a `tests/lib.rs` file inside, with this as its contents:
 +Чтобы написать интеграционный тест, давайте создадим директорию `tests`, и
-+положим в нее файл `tests/lib.rs` со следующим содержимое:
++положим в нее файл `tests/lib.rs` со следующим содержимым:
  
  ```{rust,ignore}
  extern crate adder;
-@@ -311,13 +321,14 @@ fn it_works() {
+@@ -311,13 +325,14 @@ fn it_works() {
  }
  ```
  
@@ -299,17 +303,17 @@ index 8fb08e1..0e9f0a0 100644
 -they use the library like any other consumer of it would.
 +Выглядит примерно так же, как и наши предыдущие тесты, но есть некоторые
 +отличия. Теперь сверху у нас расположено `extern crate adder`. Это потому, что
-+тесты в директории `tests` - это отдельный крейт, и, следовательно, мы должны
-+импортировать нашу библиотеку. Это также объясняет, почему директория `tests`
-+наиболее подходящее место для написания интеграционных тестов: они используют
-+библиотеку, как это делал бы любой другой потребитель.
++тесты в директории `tests` - это отдельный контейнер, и, следовательно, мы
++должны импортировать нашу библиотеку. Это также объясняет, почему директория
++`tests` наиболее подходящее место для написания интеграционных тестов: они
++используют библиотеку, как это делал бы любой другой потребитель.
  
 -Let's run them:
-+Давайте запустим:
++Давайте запустим их:
  
  ```bash
  $ cargo test
-@@ -343,21 +354,20 @@ running 0 tests
+@@ -343,21 +358,20 @@ running 0 tests
  test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
  ```
  
@@ -341,7 +345,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```{rust,ignore}
  //! The `adder` crate provides functions that add numbers to other numbers.
-@@ -392,12 +402,12 @@ mod tests {
+@@ -392,12 +406,13 @@ mod tests {
  }
  ```
  
@@ -351,15 +355,16 @@ index 8fb08e1..0e9f0a0 100644
 -`# Examples` section, exactly like that, with examples following.
 +Обратите внимание на документацию уровня модуля, начинающуюся с `//!` и на
 +документацию уровня функции, начинающуюся с `///`. Документация Rust
-+поддерживает Markdown в комментариях, поэтому блоки кода помечают тройным \`.
-+Обычно включают раздел `# Examples`, содержащий примеры, такие как этот.
++поддерживает Markdown в комментариях, поэтому блоки кода помечают символами
++\`\`\`. В комментарии документации обычно включают раздел `# Examples`,
++содержащий примеры, такие как этот.
  
 -Let's run the tests again:
 +Давайте запустим тесты снова:
  
  ```bash
  $ cargo test
-@@ -425,15 +435,16 @@ test _0 ... ok
+@@ -425,15 +440,16 @@ test _0 ... ok
  test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured
  ```
  
@@ -367,8 +372,8 @@ index 8fb08e1..0e9f0a0 100644
 -documentation tests: the `_0` is generated for the module test, and `add_two_0`
 -for the function test. These will auto increment with names like `add_two_1` as
 -you add more examples.
-+Теперь у нас есть все три вида запущенных тестов! Обратите внимание на имена
-+тестов из документации: `_0` создается для модульных тестов, и `add_two_0` для
++Теперь у нас запускаются все три вида тестов! Обратите внимание на имена тестов
++из документации: `_0` создается для модульных тестов, и `add_two_0` - для
 +функцииональных тестов. Цифры на конце будут автоматически инкрементироваться,
 +например `add_two_1`, если вы добавите еще примеров.
  
@@ -383,7 +388,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```{rust,ignore}
  extern crate test;
-@@ -459,13 +470,15 @@ mod tests {
+@@ -459,13 +475,15 @@ mod tests {
  }
  ```
  
@@ -392,7 +397,7 @@ index 8fb08e1..0e9f0a0 100644
 -tests, which take no arguments, benchmark tests take a `&mut Bencher`. This
 -`Bencher` provides an `iter` method, which takes a closure. This closure
 -contains the code we'd like to benchmark.
-+Мы импортировали крейт `test`, который содержит поддержку измерения
++Мы импортировали контейнер `test`, который включает поддержку измерения
 +производительности. У нас есть новая функция, аннотированная с помощью атрибута
 +`bench`. В отличие от обычных тестов, которые не принимают никаких аргументов,
 +тесты производительности в качестве аргумента принимают `&mut Bencher`.
@@ -405,7 +410,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```bash
  $ cargo bench
-@@ -479,31 +492,34 @@ test tests::bench_add_two ... bench:         1 ns/iter (+/- 0)
+@@ -479,31 +497,35 @@ test tests::bench_add_two ... bench:         1 ns/iter (+/- 0)
  test result: ok. 0 passed; 0 failed; 1 ignored; 1 measured
  ```
  
@@ -424,17 +429,6 @@ index 8fb08e1..0e9f0a0 100644
 -Advice on writing benchmarks:
 +Советы по написанию тестов производительности:
  
-+* Внутри `iter` цикла пишите только тот код, производительность которой вы
-+  хотите измерить; инициализацию выполняйте за пределами `iter` цикла
-+* Внутри `iter` цикла пишите код, который будет идемпотентным (будет делать "то
-+  же самое" на каждой итерации); не накапливайте и не изменяйте состояние
-+* Вне `iter` цикла пишите код который также будет идемпотентным; скорее всего,
-+  он будет запущен много раз во время теста
-+* Внутри `iter` цикла пишите код, который будет коротким и быстрым, **так чтобы
-+  тестов работает быстро и калибратор можно настроить по длине прогона на четком
-+  разрешении**
-+* Внутри `iter` цикла пишите код, делающий что-то простое, чтобы помочь в
-+  выявлении улучшения (или уменьшения) производительности
  
 -* Move setup code outside the `iter` loop; only put the part you want to measure inside
 -* Make the code do "the same thing" on each iteration; do not accumulate or change state
@@ -444,10 +438,21 @@ index 8fb08e1..0e9f0a0 100644
 -   calibrator can adjust the run-length at fine resolution
 -* Make the code in the `iter` loop do something simple, to assist in pinpointing
 -  performance improvements (or regressions)
-+## Особенности оптимизации
++* Внутри `iter` цикла пишите только тот код, производительность которого вы
++  хотите измерить; инициализацию выполняйте за пределами `iter` цикла
++* Внутри `iter` цикла пишите код, который будет идемпотентным (будет делать "то
++  же самое" на каждой итерации); не накапливайте и не изменяйте состояние
++* Вне `iter` цикла пишите код который также будет идемпотентным; скорее всего,
++  он будет запущен много раз во время теста
++* Внутри `iter` цикла пишите код, который будет коротким и быстрым, так чтобы
++  запуски тестов происходили быстро и калибратор мог настроить длину пробега с
++  точным разрешением
++* Внутри `iter` цикла пишите код, делающий что-то простое, чтобы помочь в
++  выявлении улучшения (или уменьшения) производительности
  
 -## Gotcha: optimizations
--
++## Особенности оптимизации
+ 
 -There's another tricky part to writing benchmarks: benchmarks compiled with
 -optimizations activated can be dramatically changed by the optimizer so that
 -the benchmark is no longer benchmarking what one expects. For example, the
@@ -461,7 +466,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```{rust,ignore}
  extern crate test;
-@@ -517,7 +533,7 @@ fn bench_xor_1000_ints(b: &mut Bencher) {
+@@ -517,7 +539,7 @@ fn bench_xor_1000_ints(b: &mut Bencher) {
  }
  ```
  
@@ -470,7 +475,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```text
  running 1 test
-@@ -526,11 +542,12 @@ test bench_xor_1000_ints ... bench:         0 ns/iter (+/- 0)
+@@ -526,11 +548,12 @@ test bench_xor_1000_ints ... bench:         0 ns/iter (+/- 0)
  test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
  ```
  
@@ -488,7 +493,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```rust
  # struct X;
-@@ -541,9 +558,9 @@ b.iter(|| {
+@@ -541,9 +564,9 @@ b.iter(|| {
  });
  ```
  
@@ -501,7 +506,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```rust
  # #![feature(test)]
-@@ -561,11 +578,12 @@ b.iter(|| {
+@@ -561,11 +584,12 @@ b.iter(|| {
  # }
  ```
  
@@ -518,7 +523,7 @@ index 8fb08e1..0e9f0a0 100644
  
  ```text
  running 1 test
-@@ -574,5 +592,5 @@ test bench_xor_1000_ints ... bench:       131 ns/iter (+/- 3)
+@@ -574,5 +598,5 @@ test bench_xor_1000_ints ... bench:       131 ns/iter (+/- 3)
  test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
  ```
  

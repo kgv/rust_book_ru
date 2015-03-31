@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/arrays-vectors-and-slices.md b/fix_current_version:arrays-vectors-and-slices.md
-index fb56e4a..f7a9689 100644
+index 2916dca..0a5b16b 100644
 --- a/rust/master:src/doc/trpl/arrays-vectors-and-slices.md
 +++ b/fix_current_version:arrays-vectors-and-slices.md
-@@ -1,103 +1,109 @@
+@@ -1,102 +1,107 @@
 -% Arrays, Vectors, and Slices
 +% Массивы, вектора, срезы
  
@@ -151,9 +151,6 @@ index fb56e4a..f7a9689 100644
 +Вы также можете взять срез вектора, типа `String` или `&str`, потому что все они
 +реализованы через массивы. Срезы имеют тип `&[T]`, и мы поговорим о нём позже,
 +во время обсуждения обобщённых типов.
-+
-+Мы изучили все основные элементы языка Rust. Далее мы научимся получать ввод с
-+клавиатуры.
  
--We have now learned all of the most basic Rust concepts. Next, we learn how to
--get input from the keyboard.
+-We have now learned all of the most basic Rust concepts.
++Мы изучили все основные элементы языка Rust.
