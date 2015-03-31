@@ -14,7 +14,7 @@
     * [Строки](strings.md)
     * [Массивы, вектора, срезы](arrays-vectors-and-slices.md)
 * [Средний Rust](intermediate.md)
-    * [Крейты и модули](crates-and-modules.md)
+    * [Контейнеры и модули](crates-and-modules.md)
     * [Тестирование](testing.md)
     * [Указатели](pointers.md)
     * [Владение](ownership.md)
