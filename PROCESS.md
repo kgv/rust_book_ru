@@ -36,7 +36,7 @@
 * ~~ownership.md~~
 * ~~patterns.md~~
 * plugins.md
-* pointers.md
+* **pointers.md**
 * ~~README.md~~
 * ~~static-and-dynamic-dispatch.md~~
 * strings.md
