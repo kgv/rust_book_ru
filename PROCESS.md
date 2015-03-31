@@ -23,6 +23,7 @@
 * inline-assembly.md
 * ~~installing-rust.md~~
 * ~~intermediate.md~~
+* intrinsics.md
 * ~~iterators.md~~
 * lang-items.md
 * link-args.md
@@ -37,12 +38,10 @@
 * plugins.md
 * pointers.md
 * ~~README.md~~
-* standard-input.md
 * ~~static-and-dynamic-dispatch.md~~
 * strings.md
 * ~~SUMMARY.md~~
 * ~~testing.md~~
-* tracing-macros.md
 * ~~traits.md~~
 * unsafe.md
 * ~~unstable.md~~
