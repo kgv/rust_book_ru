@@ -13,7 +13,7 @@
 * ~~crates-and-modules.md~~
 * ~~documentation.md~~
 * ~~error-handling.md~~
-* **ffi.md**
+* ~~ffi.md~~
 * ~~functions.md~~
 * ~~generics.md~~
 * ~~glossary.md~~
