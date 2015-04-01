@@ -170,26 +170,27 @@ func main() {
 изменить исходную переменную. Это называется *передачей ссылки по значению*.
 Хитро!
 
-## Common pointer problems
+## Проблемы использования указателей
 
-We've talked about pointers, and we've sung their praises. So what's the
-downside? Well, Rust attempts to mitigate each of these kinds of problems,
-but here are problems with pointers in other languages:
+Мы поговорили о том, какие указатели классные. Но в чём же их недостатки?
+Давайте рассмотрим проблемы, возникающие при использовании указателей в других
+языках, и обсудим, как Rust решает их.
 
-Uninitialized pointers can cause a problem. For example, what does this program
-do?
+Неинициализированные указатели могут вызвать проблемы. К примеру, что сделает
+эта программа?
 
 ```{ignore}
 &int x;
-*x = 5; // whoops!
+*x = 5; // ой!
 ```
 
-Who knows? We just declare a pointer, but don't point it at anything, and then
-set the memory location that it points at to be `5`. But which location? Nobody
-knows. This might be harmless, and it might be catastrophic.
+Никто не знает. Мы объявляем указатель, который не указывает ни на один объект.
+Затем мы разыменовываем указатель и присваиваем этому месту в памяти значение
+`5`. Но что это за место в памяти? Неизвестно. Возможно, этот код выполнится без
+особых последствий, а возможно, случится катастрофа.
 
-When you combine pointers and functions, it's easy to accidentally invalidate
-the memory the pointer is pointing to. For example:
+Когда вы работаете с указателями в функциях, легко случайно испортить память,
+на которую указывает указатель. Например:
 
 ```text
 func make_pointer(): &int {
@@ -200,18 +201,17 @@ func make_pointer(): &int {
 
 func main() {
     &int i = make_pointer();
-    *i = 5; // uh oh!
+    *i = 5; // ох!
 }
 ```
 
-`x` is local to the `make_pointer` function, and therefore, is invalid as soon
-as `make_pointer` returns. But we return a pointer to its memory location, and
-so back in `main`, we try to use that pointer, and it's a very similar
-situation to our first one. Setting invalid memory locations is bad.
+`x` - это локальная переменная в функции `make_pointer`, и её значение
+неопределено после выхода из функции. Но мы возвращаем указатель на это место
+в памяти и пытаемся присвоить ему значение в `main`! Это похоже на предыдущий
+пример. Присваивание значений по неверным адресам до добра не доведёт!
 
-As one last example of a big problem with pointers, *aliasing* can be an
-issue. Two pointers are said to alias when they point at the same location
-in memory. Like this:
+Ещё одна большая проблема указателей - это *совпадение* указателей. Два
+указателя совпадают, если они указывают на одно и то же место в памяти. Вот так:
 
 ```text
 func mutate(&int i, int j) {
@@ -227,16 +227,16 @@ func main() {
   run_in_new_thread(mutate, y, 1);
   run_in_new_thread(mutate, z, 100);
 
-  // what is the value of x here?
+  // каково значение x здесь?
 }
 ```
 
-In this made-up example, `run_in_new_thread` spins up a new thread, and calls
-the given function name with its arguments. Since we have two threads, and
-they're both operating on aliases to `x`, we can't tell which one finishes
-first, and therefore, the value of `x` is actually non-deterministic. Worse,
-what if one of them had invalidated the memory location they pointed to? We'd
-have the same problem as before, where we'd be setting an invalid location.
+В этом придуманном примере, `run_in_new_thread` запускает вычисляет функцию в
+новом потоке. Поскольку у нас два потока, и они работают с совпадающими
+указателями, они будут пытаться изменить одно и то же место в памяти. Поэтому
+значение `x` в конце программы не детерминировано. К тому же, один из потоков
+мог испортить память, на которую указывал аргумент. Мы снова попытались бы
+записать значение в неправильное место в памяти.
 
 ## Conclusion
 
