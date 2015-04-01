@@ -1,0 +1,248 @@
+diff --git a/rust/master:src/doc/trpl/pointers.md b/fix_current_version:pointers.md
+index 107d7d9..8529573 100644
+--- a/rust/master:src/doc/trpl/pointers.md
++++ b/fix_current_version:pointers.md
+@@ -1,50 +1,51 @@
+-% Pointers
++% Указатели
+ 
+-Rust's pointers are one of its more unique and compelling features. Pointers
+-are also one of the more confusing topics for newcomers to Rust. They can also
+-be confusing for people coming from other languages that support pointers, such
+-as C++. This guide will help you understand this important topic.
++Rust уникален в своей реализации указателей. В то же время, эта черта языка -
++одна из наиболее непонятных для новичков. И даже люди, имеющие опыт с
++указателями в других языках, могут смутиться. Эта глава поможет вам разобраться
++с этой важной темой.
+ 
+-Be sceptical of non-reference pointers in Rust: use them for a deliberate
+-purpose, not just to make the compiler happy. Each pointer type comes with an
+-explanation about when they are appropriate to use. Default to references
+-unless you're in one of those specific situations.
++Не-ссылочные указатели в Rust надо использовать с умом - не применяйте их
++"просто, чтобы программа скомпилировалась". Каждый вид указателей имеет
++определённую область применения. По умолчанию, используйте обычные ссылки.
+ 
+-You may be interested in the [cheat sheet](#cheat-sheet), which gives a quick
+-overview of the types, names, and purpose of the various pointers.
++[Страница подсказок](#cheat-sheet) с обзором типов, имён и назначений различных
++указателей также может быть вам интересна.
+ 
+-# An introduction
++# Введение
+ 
+-If you aren't familiar with the concept of pointers, here's a short
+-introduction.  Pointers are a very fundamental concept in systems programming
+-languages, so it's important to understand them.
++Короткое введение для тех, кто не знаком с понятием "указатель".  Это
++основополагающая сущность в языках системного программирования.  Убедитесь в
++том, что вы понимаете данную тему.
+ 
+-## Pointer Basics
++## Основы указателей
+ 
+-When you create a new variable binding, you're giving a name to a value that's
+-stored at a particular location on the stack. (If you're not familiar with the
+-*heap* vs. *stack*, please check out [this Stack Overflow
+-question](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap),
+-as the rest of this guide assumes you know the difference.) Like this:
++Когда вы создаёте новое имя с помощью оператора `let`, вы называете значение,
++находящееся в определённом месте на стеке. (Если вы не знакомы с понятиями
++*стек* и *куча*, рассмотрите
++[данный вопрос на Stack Overflow](http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap).
++Текст далее подразумевает, что вы понимаете разницу.)
++
++Вот о чём мы говорим:
+ 
+ ```{rust}
+ let x = 5;
+ let y = 8;
+ ```
+ 
+-| location | value |
+-|----------|-------|
+-| 0xd3e030 | 5	   |
+-| 0xd3e028 | 8     |
++| адрес    | значение |
++|----------|----------|
++| 0xd3e030 | 5        |
++| 0xd3e028 | 8        |
+ 
+-We're making up memory locations here, they're just sample values. Anyway, the
+-point is that `x`, the name we're using for our variable, corresponds to the
+-memory location `0xd3e030`, and the value at that location is `5`. When we
+-refer to `x`, we get the corresponding value. Hence, `x` is `5`.
++Адреса в памяти в данном случае придуманы. Это просто значения для примера. Суть
++в том, что имя `x` соответствует адресу `0xd3e030`, и значение, хранящееся по
++этому адресу - это `5`. Когда мы обращаемся к `x`, мы получаем соответствующее
++значение. Таким образом, `x` - это `5`.
+ 
+-Let's introduce a pointer. In some languages, there is just one type of
+-'pointer,' but in Rust, we have many types. In this case, we'll use a Rust
+-*reference*, which is the simplest kind of pointer.
++Давайте введём указатель. В некоторых языках только один тип указателей, но в
++Rust их несколько. В данном случае мы используем *ссылку*. Это простейший вид
++указателей:
+ 
+ ```{rust}
+ let x = 5;
+@@ -52,16 +53,15 @@ let y = 8;
+ let z = &y;
+ ```
+ 
+-|location | value    |
++|адрес    | значение |
+ |-------- |----------|
+ |0xd3e030 | 5        |
+ |0xd3e028 | 8        |
+ |0xd3e020 | 0xd3e028 |
+ 
+-See the difference? Rather than contain a value, the value of a pointer is a
+-location in memory. In this case, the location of `y`. `x` and `y` have the
+-type `i32`, but `z` has the type `&i32`. We can print this location using the
+-`{:p}` format string:
++Видите разницу? Значение указателя - это адрес в памяти. В данном случае, это
++адрес `y`. `x` и `y` имеют тип `i32`, а вот `z` - `&i32`.  Мы можем распечатать
++адрес с помощью форматной строки `{:p}`:
+ 
+ ```{rust}
+ let x = 5;
+@@ -71,10 +71,9 @@ let z = &y;
+ println!("{:p}", z);
+ ```
+ 
+-This would print `0xd3e028`, with our fictional memory addresses.
++С нашими придуманными адресами, этот код напечатал бы `0xd3e028`.
+ 
+-Because `i32` and `&i32` are different types, we can't, for example, add them
+-together:
++Поскольку `i32` и `&i32` - разные типы, мы не можем складывать их:
+ 
+ ```{rust,ignore}
+ let x = 5;
+@@ -84,7 +83,7 @@ let z = &y;
+ println!("{}", x + z);
+ ```
+ 
+-This gives us an error:
++Такой код выдаёт ошибку:
+ 
+ ```text
+ hello.rs:6:24: 6:25 error: mismatched types: expected `_`, found `&_` (expected integral variable, found &-ptr)
+@@ -92,9 +91,9 @@ hello.rs:6     println!("{}", x + z);
+                                   ^
+ ```
+ 
+-We can *dereference* the pointer by using the `*` operator. Dereferencing a
+-pointer means accessing the value at the location stored in the pointer. This
+-will work:
++Мы можем *разыменовать* указатель с помощью операции `*`. Разыменовать
++указатель - значит получить значение, хранящееся по данному адресу в памяти. Вот
++пример рабочего кода:
+ 
+ ```{rust}
+ let x = 5;
+@@ -104,35 +103,34 @@ let z = &y;
+ println!("{}", x + *z);
+ ```
+ 
+-It prints `13`.
++Он напечатает `13`.
+ 
+-That's it! That's all pointers are: they point to some memory location. Not
+-much else to them. Now that we've discussed the *what* of pointers, let's
+-talk about the *why*.
++Вот и всё! Указатели просто указывают на некоторое место в памяти. Ничего
++особенного. Теперь, когда мы узнали, *что* такое указатели, обсудим, *зачем* они
++нужны.
+ 
+-## Pointer uses
++## Использование указателей
+ 
+-Rust's pointers are quite useful, but in different ways than in other systems
+-languages. We'll talk about best practices for Rust pointers later in
+-the guide, but here are some ways that pointers are useful in other languages:
++Указатели в Rust используются по-другому, нежели в других языках системного
++программирования. Позже мы поговорим о лучших способах их применения в Rust, а
++пока рассмотрим указатели в других языках.
+ 
+-In C, strings are a pointer to a list of `char`s, ending with a null byte.
+-The only way to use strings is to get quite familiar with pointers.
++В C, строки - это указатели на список `char`ов, закачивающийся нулевым
++байтом. Только поняв указатели, вы сможете пользоваться строками.
+ 
+-Pointers are useful to point to memory locations that are not on the stack. For
+-example, our example used two stack variables, so we were able to give them
+-names. But if we allocated some heap memory, we wouldn't have that name
+-available.  In C, `malloc` is used to allocate heap memory, and it returns a
+-pointer.
++Указатели используют для указания на места в памяти, которые не находятся на
++стеке. Наш предыдущий пример использовал две стековые переменные, и мы могли
++дать им имя. В C, функция `malloc` выделяет память в куче, и она возвращает
++указатель.
+ 
+-As a more general variant of the previous two points, any time you have a
+-structure that can change in size, you need a pointer. You can't tell at
+-compile time how much memory to allocate, so you've gotta use a pointer to
+-point at the memory where it will be allocated, and deal with it at run time.
++Как обобщение предыдущих двух случаев, указатели используют когда нужно хранить
++некие структуры переменного размера. Размер памяти, необходимый для хранения
++таких структур, нельзя определить во время компиляции. Поэтому память выделяют
++динамически, и сохраняют указатель на эту память.
+ 
+-Pointers are useful in languages that are pass-by-value, rather than
+-pass-by-reference. Basically, languages can make two choices (this is made
+-up syntax, it's not Rust):
++Указатели полезны в языках, в которых используется передача аргументов функциям
++по значению. По сути, языки следуют одной из двух моделей (пример дальше - на
++выдуманном языке, не Rust):
+ 
+ ```text
+ func foo(x) {
+@@ -142,17 +140,17 @@ func foo(x) {
+ func main() {
+     i = 1
+     foo(i)
+-    // what is the value of i here?
++    // каково значение i здесь?
+ }
+ ```
+ 
+-In languages that are pass-by-value, `foo` will get a copy of `i`, and so
+-the original version of `i` is not modified. At the comment, `i` will still be
+-`1`. In a language that is pass-by-reference, `foo` will get a reference to `i`,
+-and therefore, can change its value. At the comment, `i` will be `5`.
++В языках с передачей аргументов по значению `foo` получит свою копию `i`, так
++что исходная версия переменной не поменяется. В конце программы `i` всё равно
++будет равно `1`. А в языках, использующих передачу по ссылке, `foo` получит
++ссылку на `i` и сможет изменять её значение. В конце программы `i` будет `5`.
+ 
+-So what do pointers have to do with this? Well, since pointers point to a
+-location in memory...
++Так как всё это связано с указателями? Поскольку указатели указывают на место в
++памяти...
+ 
+ ```text
+ func foo(&i32 x) {
+@@ -162,15 +160,15 @@ func foo(&i32 x) {
+ func main() {
+     i = 1
+     foo(&i)
+-    // what is the value of i here?
++    // каково значение i здесь?
+ }
+ ```
+ 
+-Even in a language which is pass by value, `i` will be `5` at the comment. You
+-see, because the argument `x` is a pointer, we do send a copy over to `foo`,
+-but because it points at a memory location, which we then assign to, the
+-original value is still changed. This pattern is called
+-*pass-reference-by-value*. Tricky!
++Даже в языке, использующем передачу по значению, `i` будет равно `5` в конце.
++Аргумент функции `x` - это указатель, и хотя `foo` получит свою копию аргумента,
++это всё равно будет указатель на то же место в памяти! Поэтому мы сможем
++изменить исходную переменную. Это называется *передачей ссылки по значению*.
++Хитро!
+ 
+ ## Common pointer problems
+ 

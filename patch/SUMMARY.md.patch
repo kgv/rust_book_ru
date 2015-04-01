@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index d31348d..38e5b84 100644
+index 136e155..a0a8b17 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
-@@ -1,46 +1,46 @@
+@@ -1,47 +1,47 @@
 -# Summary
 +# Содержание
  
@@ -85,7 +85,9 @@ index d31348d..38e5b84 100644
      * [Intrinsics](intrinsics.md)
      * [Lang items](lang-items.md)
      * [Link args](link-args.md)
+-    * [Benchmark Tests](benchmark-tests.md)
 -* [Conclusion](conclusion.md)
 -* [Glossary](glossary.md)
++    * [Тесты производительности](benchmark-tests.md)
 +* [Заключение](conclusion.md)
 +* [Глоссарий](glossary.md)

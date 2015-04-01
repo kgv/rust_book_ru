@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/iterators.md b/fix_current_version:iterators.md
-index 8d7b1c3..54a2e9d 100644
+index 55776be..54a2e9d 100644
 --- a/rust/master:src/doc/trpl/iterators.md
 +++ b/fix_current_version:iterators.md
 @@ -1,8 +1,8 @@
@@ -346,19 +346,22 @@ index 8d7b1c3..54a2e9d 100644
  
  ```rust
  let nums = [1, 2, 3];
-@@ -242,35 +252,39 @@ for num in nums.iter() {
+@@ -242,36 +252,39 @@ for num in nums.iter() {
  }
  ```
  
 -These two basic iterators should serve you well. There are some more
--advanced iterators, including ones that are infinite. Like `count`:
+-advanced iterators, including ones that are infinite. Like using range syntax
+-and `step_by`:
 +Эти два основных итератора должны служить вам хорошо. Есть и более продвинутые
 +итераторы, в том числе и те, которые генерируют бесконечную последовательность.
 +Как, например, `count`:
  
  ```rust
- # #![feature(core)]
- std::iter::count(1, 5);
+-# #![feature(step_by)]
+-(1..).step_by(5);
++# #![feature(core)]
++std::iter::count(1, 5);
  ```
  
 -This iterator counts up from one, adding five each time. It will give
@@ -401,7 +404,7 @@ index 8d7b1c3..54a2e9d 100644
  
  ```text
  warning: unused result which must be used: iterator adaptors are lazy and
-@@ -279,8 +293,8 @@ warning: unused result which must be used: iterator adaptors are lazy and
+@@ -280,8 +293,8 @@ warning: unused result which must be used: iterator adaptors are lazy and
   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  ```
  
@@ -412,7 +415,7 @@ index 8d7b1c3..54a2e9d 100644
  
  ```{rust,ignore}
  (1..100).map(|x| println!("{}", x));
-@@ -288,11 +302,14 @@ doesn't print any numbers:
+@@ -289,20 +302,23 @@ doesn't print any numbers:
  
  If you are trying to execute a closure on an iterator for its side effects,
  just use `for` instead.
@@ -422,7 +425,7 @@ index 8d7b1c3..54a2e9d 100644
 -There are tons of interesting iterator adapters. `take(n)` will return an
 -iterator over the next `n` elements of the original iterator, note that this
 -has no side effect on the original iterator. Let's try it out with our infinite
--iterator from before, `count()`:
+-iterator from before:
 +Есть масса интересных адаптеров итераторов. `take(n)` вернет итератор,
 +представляющий следующие `n` элементов исходного итератора. Обратите внимание,
 +что это не оказывает никакого влияния на оригинальный итератор. Давайте
@@ -430,8 +433,11 @@ index 8d7b1c3..54a2e9d 100644
 +прежде:
  
  ```rust
- # #![feature(core)]
-@@ -301,7 +318,7 @@ for i in std::iter::count(1, 5).take(5) {
+-# #![feature(step_by)]
+-for i in (1..).step_by(5).take(5) {
++# #![feature(core)]
++for i in std::iter::count(1, 5).take(5) {
+     println!("{}", i);
  }
  ```
  
@@ -440,7 +446,7 @@ index 8d7b1c3..54a2e9d 100644
  
  ```text
  1
-@@ -311,9 +328,10 @@ This will print
+@@ -312,9 +328,10 @@ This will print
  21
  ```
  
@@ -454,7 +460,7 @@ index 8d7b1c3..54a2e9d 100644
  
  ```rust
  for i in (1..100).filter(|&x| x % 2 == 0) {
-@@ -321,14 +339,13 @@ for i in (1..100).filter(|&x| x % 2 == 0) {
+@@ -322,14 +339,13 @@ for i in (1..100).filter(|&x| x % 2 == 0) {
  }
  ```
  
@@ -475,7 +481,7 @@ index 8d7b1c3..54a2e9d 100644
  
  ```rust
  (1..1000)
-@@ -338,11 +355,13 @@ a few times, and then consume the result. Check it out:
+@@ -339,11 +355,13 @@ a few times, and then consume the result. Check it out:
      .collect::<Vec<i32>>();
  ```
  

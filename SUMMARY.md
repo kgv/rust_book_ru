@@ -42,5 +42,6 @@
     * [Intrinsics](intrinsics.md)
     * [Lang items](lang-items.md)
     * [Link args](link-args.md)
+    * [Тесты производительности](benchmark-tests.md)
 * [Заключение](conclusion.md)
 * [Глоссарий](glossary.md)

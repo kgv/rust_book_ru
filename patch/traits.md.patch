@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/traits.md b/fix_current_version:traits.md
-index 1e44076..ba15532 100644
+index 341c90a..2e7dee8 100644
 --- a/rust/master:src/doc/trpl/traits.md
 +++ b/fix_current_version:traits.md
 @@ -1,7 +1,7 @@
@@ -168,7 +168,7 @@ index 1e44076..ba15532 100644
  
  ```{rust}
  # #![feature(core)]
-@@ -263,25 +267,28 @@ fn main() {
+@@ -263,23 +267,27 @@ fn main() {
  }
  ```
  
@@ -200,6 +200,31 @@ index 1e44076..ba15532 100644
 +динамическая диспетчеризация](static-and-dynamic-dispatch.html), чтобы получить
 +больше информации.
  
+-## Multiple trait bounds
++## Множественные привязки к трейтам
+ 
+-You’ve seen that you can bound a generic type parameter with a trait:
++Вы уже видели как можно ограничить обобщенный параметр типа определенным
++трейтом:
+ 
+ ```rust
+ fn foo<T: Clone>(x: T) {
+@@ -287,7 +295,7 @@ fn foo<T: Clone>(x: T) {
+ }
+ ```
+ 
+-If you need more than one bound, you can use `+`:
++Если вам нужно более одной привязки, то вы можете использовать `+`:
+ 
+ ```rust
+ use std::fmt::Debug;
+@@ -298,13 +306,13 @@ fn foo<T: Clone + Debug>(x: T) {
+ }
+ ```
+ 
+-`T` now needs to be both `Clone` as well as `Debug`.
++Теперь тип `T` должен реализовавать как трейт `Clone`, так и трейт `Debug`.
+ 
 -## Where clause
 +## Утверждение where
  
@@ -212,7 +237,7 @@ index 1e44076..ba15532 100644
  
  ```
  use std::fmt::Debug;
-@@ -293,10 +300,10 @@ fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
+@@ -316,10 +324,10 @@ fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
  }
  ```
  
@@ -226,7 +251,7 @@ index 1e44076..ba15532 100644
  
  ```
  use std::fmt::Debug;
-@@ -319,10 +326,10 @@ fn main() {
+@@ -342,10 +350,10 @@ fn main() {
  }
  ```
  
@@ -241,7 +266,7 @@ index 1e44076..ba15532 100644
  
  ```
  use std::fmt::Debug;
-@@ -337,9 +344,9 @@ fn bar<T, K>(x: T, y: K)
+@@ -360,9 +368,9 @@ fn bar<T, K>(x: T, y: K)
  }
  ```
  
@@ -253,7 +278,7 @@ index 1e44076..ba15532 100644
  
  ```
  trait ConvertTo<Output> {
-@@ -363,13 +370,14 @@ fn inverse<T>() -> T
+@@ -386,13 +394,14 @@ fn inverse<T>() -> T
  }
  ```
  
@@ -273,7 +298,7 @@ index 1e44076..ba15532 100644
  
  ```{rust,ignore}
  fn inverse<T>(x: T) -> Result<T, String> {
-@@ -379,15 +387,15 @@ fn inverse<T>(x: T) -> Result<T, String> {
+@@ -402,15 +411,15 @@ fn inverse<T>(x: T) -> Result<T, String> {
  }
  ```
  
@@ -293,7 +318,7 @@ index 1e44076..ba15532 100644
  
  ```{rust,ignore}
  fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
-@@ -397,7 +405,7 @@ fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
+@@ -420,7 +429,7 @@ fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
  }
  ```
  
@@ -302,7 +327,7 @@ index 1e44076..ba15532 100644
  
  ```text
  error: mismatched types:
-@@ -407,9 +415,10 @@ error: mismatched types:
+@@ -430,9 +439,10 @@ error: mismatched types:
      found floating-point variable)
  ```
  
@@ -316,7 +341,7 @@ index 1e44076..ba15532 100644
  
  ```
  # #![feature(std_misc)]
-@@ -423,9 +432,9 @@ fn inverse<T: Float>(x: T) -> Result<T, String> {
+@@ -446,9 +456,9 @@ fn inverse<T: Float>(x: T) -> Result<T, String> {
  }
  ```
  
@@ -329,7 +354,7 @@ index 1e44076..ba15532 100644
  
  ```
  # #![feature(std_misc)]
-@@ -442,10 +451,10 @@ println!("the inverse of {} is {:?}", 0.0f32, inverse(0.0f32));
+@@ -465,10 +475,10 @@ println!("the inverse of {} is {:?}", 0.0f32, inverse(0.0f32));
  println!("the inverse of {} is {:?}", 0.0f64, inverse(0.0f64));
  ```
  
@@ -343,7 +368,7 @@ index 1e44076..ba15532 100644
  
  ```rust
  trait Foo {
-@@ -455,9 +464,9 @@ trait Foo {
+@@ -478,9 +488,9 @@ trait Foo {
  }
  ```
  
