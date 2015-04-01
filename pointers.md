@@ -410,39 +410,39 @@ test.rs:5         let y = &x;
 
 Такой анализ сложен не только для человека, но и для компилятора. У нас есть
 [отдельное руководство по ссылкам, владению и срокам жизни](ownership.html), и
-оно рассматривает эту тему гораздо более подробно.
+оно рассматривает эту тему гораздо подробнее.
 
-## Best practices
+## Лучшие техники
 
-In general, prefer stack allocation over heap allocation. Using references to
-stack allocated information is preferred whenever possible. Therefore,
-references are the default pointer type you should use, unless you have a
-specific reason to use a different type. The other types of pointers cover when
-they're appropriate to use in their own best practices sections.
+В общем случае предпочитайте выделение памяти на стеке, нежели на
+куче. Используйте ссылки на стековые данные, если это возможно. Таким образом,
+указатели, которые вы должны использовать по умолчанию - это ссылки. Используйте
+другие виды указателей в соответствующих ситуациях. Что это за ситуации, мы
+опишем далее.
 
-Use references when you want to use a pointer, but do not want to take ownership.
-References just borrow ownership, which is more polite if you don't need the
-ownership. In other words, prefer:
+Если вам нужен указатель, но вы не хотите принимать владение данными,
+используйте ссылку. Ссылки заимствуют данные, что более правильно, если
+владение вам не нужно. Другими словами, предпочитайте такой код:
 
 ```{rust}
 fn succ(x: &i32) -> i32 { *x + 1 }
 ```
 
-to
+такому
 
 ```{rust}
 fn succ(x: Box<i32>) -> i32 { *x + 1 }
 ```
 
-As a corollary to that rule, references allow you to accept a wide variety of
-other pointers, and so are useful so that you don't have to write a number
-of variants per pointer. In other words, prefer:
+Заодно вы получаете возможность принимать целую кучу разных указателей в
+качестве аргумента, а не только то, что вы явно прописали (`Box<i32>`). Так что
+этот код лучше:
 
 ```{rust}
 fn succ(x: &i32) -> i32 { *x + 1 }
 ```
 
-to
+чем этот
 
 ```{rust}
 use std::rc::Rc;
@@ -452,7 +452,8 @@ fn box_succ(x: Box<i32>) -> i32 { *x + 1 }
 fn rc_succ(x: Rc<i32>) -> i32 { *x + 1 }
 ```
 
-Note that the caller of your function will have to modify their calls slightly:
+Однако заметьте, что вам потребуется сделать небольшие изменения на
+вызывающей стороне:
 
 ```{rust}
 use std::rc::Rc;
@@ -464,51 +465,53 @@ let box_x = Box::new(5);
 let rc_x = Rc::new(5);
 
 succ(ref_x);
-succ(&*box_x);
-succ(&*rc_x);
+succ(&box_x);
+succ(&rc_x);
 ```
 
-The initial `*` dereferences the pointer, and then `&` takes a reference to
-those contents.
+`&` здесь получает из указателей (`Box` и `Rc`) обычную ссылку и передаёт её в
+качестве аргумента.
 
-# Boxes
+# Упакованные указатели
 
-`Box<T>` is Rust's *boxed pointer* type. Boxes provide the simplest form of
-heap allocation in Rust. Creating a box looks like this:
+`Box<T>` - это тип *упакованного указателя*. Упаковка - это простейший способ выделить
+память в куче. Создание упаковки выглядит так:
 
 ```{rust}
 let x = Box::new(5);
 ```
 
-Boxes are heap allocated and they are deallocated automatically by Rust when
-they go out of scope:
+Упакованные указатели выделяются на куче и освобождают память автоматически,
+когда выходят из области видимости:
 
 ```{rust}
 {
     let x = Box::new(5);
 
-    // stuff happens
+    // что-то происходит
 
-} // x is destructed and its memory is free'd here
+} // x уничтожается и освобождает память
 ```
 
-However, boxes do _not_ use reference counting or garbage collection. Boxes are
-what's called an *affine type*. This means that the Rust compiler, at compile
-time, determines when the box comes into and goes out of scope, and inserts the
-appropriate calls there.
+При этом, упакованные указатели _не_ используют подсчёт ссылок или сборку
+мусора. Они - представители так называемого *афинного типа*. Это значит, что
+компилятор Rust статически определяет, когда каждый упакованный указатель
+становится виден и когда - выходит из области видимости. Благодаря этому,
+компилятор может вставить соответствующие вызовы процедур деинициализации там,
+где это необходимо.
 
-You don't need to fully grok the theory of affine types to grok boxes, though.
-As a rough approximation, you can treat this Rust code:
+К счастью, вам не нужно быть гуру теории типов чтобы понять суть упакованных
+указателей. В принципе, вы можете воспринимать такой код на Rust:
 
 ```{rust}
 {
     let x = Box::new(5);
 
-    // stuff happens
+    // что-то происходит
 }
 ```
 
-As being similar to this C code:
+как аналогичный такому коду на C:
 
 ```c
 {
@@ -516,27 +519,28 @@ As being similar to this C code:
     x = (int *)malloc(sizeof(int));
     *x = 5;
 
-    // stuff happens
+    // что-то происходит
 
     free(x);
 }
 ```
 
-Of course, this is a 10,000 foot view. It leaves out destructors, for example.
-But the general idea is correct: you get the semantics of `malloc`/`free`, but
-with some improvements:
+Конечно, здесь мы утрируем - например, не говорим о вызовах деструкторов. Но в
+целом идея проста - вы получаете автоматический вызов `malloc` и `free`. Это
+даёт нам следующие преимущества:
 
-1. It's impossible to allocate the incorrect amount of memory, because Rust
-   figures it out from the types.
-2. You cannot forget to `free` memory you've allocated, because Rust does it
-   for you.
-3. Rust ensures that this `free` happens at the right time, when it is truly
-   not used. Use-after-free is not possible.
-4. Rust enforces that no other writeable pointers alias to this heap memory,
-   which means writing to an invalid pointer is not possible.
+1. Вы не можете выделить неправильное количество памяти для хранения объекта.
+   Rust определяет размер из типа выделяемых данных.
+2. Вы не можете забыть освободить выделенную память, потому что это происходит
+   само.
+3. Rust гарантирует, что `free` вызывается в правильный момент - когда данный
+   объект точно никем не используется. Типичная ошибка использования после
+   освобождения исключена.
+4. Rust проверяет, что нет других изменяемых указателей на эту память в куче.
+   Это означает, что запись по неверному указателю невозможна.
 
-See the section on references or the [ownership guide](ownership.html)
-for more detail on how lifetimes work.
+Более подробное обсуждение ссылок, упакованных указателей и сроков жизни можно
+найти в [руководстве по владению](ownership.html).
 
 Using boxes and references together is very common. For example:
 
