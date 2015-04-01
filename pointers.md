@@ -238,18 +238,15 @@ func main() {
 мог испортить память, на которую указывал аргумент. Мы снова попытались бы
 записать значение в неправильное место в памяти.
 
-## Conclusion
+## Заключение
 
-That's a basic overview of pointers as a general concept. As we alluded to
-before, Rust has different kinds of pointers, rather than just one, and
-mitigates all of the problems that we talked about, too. This does mean that
-Rust pointers are slightly more complicated than in other languages, but
-it's worth it to not have the problems that simple pointers have.
+Мы рассмотрели указатели в целом. Как мы упоминали ранее, в Rust есть несколько
+видов указателей. И в нашем языке все перечисленные проблемы решены. Это
+достигается путём некоторого усложнения понятия "указатель", но это того стоит.
 
-# References
+# Ссылки
 
-The most basic type of pointer that Rust has is called a *reference*. Rust
-references look like this:
+Самый простой вид указателя в Rust - это *ссылка*. Ссылки в Rust выглядят так:
 
 ```{rust}
 let x = 5;
@@ -260,20 +257,20 @@ println!("{:p}", y);
 println!("{}", y);
 ```
 
-We'd say "`y` is a reference to `x`." The first `println!` prints out the
-value of `y`'s referent by using the dereference operator, `*`. The second
-one prints out the memory location that `y` points to, by using the pointer
-format string. The third `println!` *also* prints out the value of `y`'s
-referent, because `println!` will automatically dereference it for us.
+Мы можем сказать, что `y` - это ссылка на `x`. Первый `println!` печатает
+значение, на которое ссылается `y`, с помощью разыменования (`*`). Второй
+печатает адрес в памяти, на который указывает `y`, используя форматную строку
+для указателей. Третий `println!` также печатает значение, на которое ссылается
+`y`, потому что `println!` выполнит разыменование автоматически.
 
-Here's a function that takes a reference:
+Вот функция, принимающая ссылку:
 
 ```{rust}
 fn succ(x: &i32) -> i32 { *x + 1 }
 ```
 
-You can also use `&` as an operator to create a reference, so we can
-call this function in two different ways:
+Вы также можете использовать операцию `&` для создания ссылки, поэтому мы можем
+вызвать данную функцию двумя разными способами:
 
 ```{rust}
 fn succ(x: &i32) -> i32 { *x + 1 }
@@ -288,16 +285,16 @@ fn main() {
 }
 ```
 
-Both of these `println!`s will print out `6`.
+Оба этих `println!` напечатают `6`.
 
-Of course, if this were real code, we wouldn't bother with the reference, and
-just write:
+Конечно, в настоящем коде мы бы не стали заморачиваться со ссылками и просто
+написали бы так:
 
 ```{rust}
 fn succ(x: i32) -> i32 { x + 1 }
 ```
 
-References are immutable by default:
+Ссылки неизменяемы по умолчанию:
 
 ```{rust,ignore}
 let x = 5;
@@ -306,22 +303,22 @@ let y = &x;
 *y = 5; // error: cannot assign to immutable borrowed content `*y`
 ```
 
-They can be made mutable with `mut`, but only if its referent is also mutable.
-This works:
+Вы можете сделать их изменяемыми с помощью ключевого слова `mut`, но для этого
+нужно, чтобы они сами ссылались на изменяемые объекты. Вот это работает:
 
 ```{rust}
 let mut x = 5;
 let y = &mut x;
 ```
 
-This does not:
+А это - нет:
 
 ```{rust,ignore}
 let x = 5;
 let y = &mut x; // error: cannot borrow immutable local variable `x` as mutable
 ```
 
-Immutable pointers are allowed to alias:
+Неизменяемые указатели могут совпадать:
 
 ```{rust}
 let x = 5;
@@ -329,7 +326,7 @@ let y = &x;
 let z = &x;
 ```
 
-Mutable ones, however, are not:
+А изменяемые - нет:
 
 ```{rust,ignore}
 let mut x = 5;
@@ -337,13 +334,14 @@ let y = &mut x;
 let z = &mut x; // error: cannot borrow `x` as mutable more than once at a time
 ```
 
-Despite their complete safety, a reference's representation at runtime is the
-same as that of an ordinary pointer in a C program. They introduce zero
-overhead. The compiler does all safety checks at compile time. The theory that
-allows for this was originally called *region pointers*. Region pointers
-evolved into what we know today as *lifetimes*.
+Во время исполнения ссылка представляется обычным указателем, как в C. Однако,
+ссылки полностью безопасны. И при этом, они не добавляют накладных расходов.
+Все проверки происходят во время компиляции, с помощью теории *указателей на
+области* (region pointers). Указатели на области эволюционировали в то, что
+теперь называется *сроками жизни*.
 
-Here's the simple explanation: would you expect this code to compile?
+Объясним суть данной методики на простом примере. Скажите, вы считаете, что
+такой код должен скомпилироваться?
 
 ```{rust,ignore}
 fn main() {
@@ -352,10 +350,12 @@ fn main() {
 }
 ```
 
-Probably not. That's because you know that the name `x` is valid from where
-it's declared to when it goes out of scope. In this case, that's the end of
-the `main` function. So you know this code will cause an error. We call this
-duration a *lifetime*. Let's try a more complex example:
+Скорее всего, нет. И это потому, что обращение к `x` допустимо с момента
+объявления до выхода этого имени из области видимости. В данном случае, область
+видимости заканчивается в конце функции `main`. Поэтому вы можете быть уверены,
+что такой код вызовет ошибку. Период с момента объявления некого имени до
+выхода его из области видимости называется *сроком жизни*. Давайте рассмотрим
+пример посложнее:
 
 ```{rust}
 fn main() {
@@ -364,19 +364,19 @@ fn main() {
     if x < 10 {
         let y = &x;
 
-        println!("Oh no: {}", y);
+        println!("О нет: {}", y);
         return;
     }
 
     x -= 1;
 
-    println!("Oh no: {}", x);
+    println!("О нет: {}", x);
 }
 ```
 
-Here, we're borrowing a pointer to `x` inside of the `if`. The compiler, however,
-is able to determine that that pointer will go out of scope without `x` being
-mutated, and therefore, lets us pass. This wouldn't work:
+Здесь мы заимствуем указатель на `x` внутри `if`. Но компилятор распознаёт, что
+сам `x` не будет изменён за время существования указателя, и компилирует такой
+код. А вот такой пример работать не будет:
 
 ```{rust,ignore}
 fn main() {
@@ -387,13 +387,13 @@ fn main() {
 
         x -= 1;
 
-        println!("Oh no: {}", y);
+        println!("О нет: {}", y);
         return;
     }
 
     x -= 1;
 
-    println!("Oh no: {}", x);
+    println!("О нет: {}", x);
 }
 ```
 
@@ -408,10 +408,9 @@ test.rs:5         let y = &x;
                            ^
 ```
 
-As you might guess, this kind of analysis is complex for a human, and therefore
-hard for a computer, too! There is an entire [guide devoted to references, ownership,
-and lifetimes](ownership.html) that goes into this topic in
-great detail, so if you want the full details, check that out.
+Такой анализ сложен не только для человека, но и для компилятора. У нас есть
+[отдельное руководство по ссылкам, владению и срокам жизни](ownership.html), и
+оно рассматривает эту тему гораздо более подробно.
 
 ## Best practices
 
