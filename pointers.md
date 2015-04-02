@@ -542,7 +542,8 @@ let x = Box::new(5);
 Более подробное обсуждение ссылок, упакованных указателей и сроков жизни можно
 найти в [руководстве по владению](ownership.html).
 
-Using boxes and references together is very common. For example:
+Использование упакованных указателей в комбинации со ссылками очень
+распространено. Например:
 
 ```{rust}
 fn add_one(x: &i32) -> i32 {
@@ -556,10 +557,11 @@ fn main() {
 }
 ```
 
-In this case, Rust knows that `x` is being *borrowed* by the `add_one()`
-function, and since it's only reading the value, allows it.
+В данном случае компилятор знает, что функция `add_one()` заимствует `x`, не
+производя изменений этого значения. Поэтому такой код допустим.
 
-We can borrow `x` as read-only multiple times, even simultaneously:
+Мы даже можем заимствовать `x` несколько раз одновременно, если не хотим его
+менять:
 
 ```{rust}
 fn add(x: &i32, y: &i32) -> i32 {
@@ -574,8 +576,9 @@ fn main() {
 }
 ```
 
-We can mutably borrow `x` multiple times, but only if x itself is mutable, and
-it may not be *simultaneously* borrowed: 
+Мы можем несколько раз позаимствовать `x` с возможностью изменения, но только
+если сам `x` изменяем. В таком случае мы не можем получить несколько ссылок
+*одновременно*:
 
 ```{rust,ignore}
 fn increment(x: &mut i32) {
@@ -583,7 +586,7 @@ fn increment(x: &mut i32) {
 }
 
 fn main() {
-    // If variable x is not "mut", this will not compile
+    // Если имя не объявлено как "mut", это не скомпилируется
     let mut x = Box::new(5);
 
     increment(&mut x);
@@ -592,18 +595,17 @@ fn main() {
 }
 ```
 
-Notice the signature of `increment()` requests a mutable reference.
+Заметьте, что в сигнатуре `increment()` указана изменяемая ссылка.
 
-## Best practices
+## Лучшие техники
 
-Boxes are appropriate to use in two situations: Recursive data structures,
-and occasionally, when returning data.
+Упакованные указатели применяются в двух ситуациях: для реализации рекурсивных
+структур данных и, иногда, при возврате данных.
 
-### Recursive data structures
+### Рекурсивные структуры данных
 
-Sometimes, you need a recursive data structure. The simplest is known as a
-*cons list*:
-
+Иногда вам понадобятся рекурсивные структуры данных. Простейшая из них - это
+список в стиле Lisp (*cons list*):
 
 ```{rust}
 #[derive(Debug)]
@@ -618,53 +620,55 @@ fn main() {
 }
 ```
 
-This prints:
+Вот что напечатает код:
 
 ```text
 Cons(1, Box(Cons(2, Box(Cons(3, Box(Nil))))))
 ```
 
-The reference to another `List` inside of the `Cons` enum variant must be a box,
-because we don't know the length of the list. Because we don't know the length,
-we don't know the size, and therefore, we need to heap allocate our list.
+Ссылка на следующий `List` внутри варианта перечисления `Cons` должна быть
+упакованным указателем, потому что длина списка нам неизвестна. Из-за этого мы
+не знаем, сколько памяти выделять под список. Поэтому мы пользуемся выделением
+памяти в куче с помощью упакованных указателей.
 
-Working with recursive or other unknown-sized data structures is the primary
-use-case for boxes.
+Работа с рекурсивными структурами данных, а также работа с данными динамического
+размера - это основная область применения упакованных указателей.
 
-### Returning data
+### Возврат данных
 
-This is important enough to have its own section entirely. The TL;DR is this:
-you don't want to return pointers, even when you might in a language like C or
+Эта тема важна настолько, что мы выделили её в отдельный раздел. Вот в чём суть:
+обычно вам не нужно возвращать указатели, даже если бы вы сделали так в C или
 C++.
 
-See [Returning Pointers](#returning-pointers) below for more.
+Смотрите [возврат указателей](#returning-pointers) с более подробным описанием
+этого тонкого момента.
 
-# Rc and Arc
+# Ссылка с подсчётом и атомарная ссылка с подсчётом (Rc и Arc)
 
-This part is coming soon.
+Этот раздел в процессе написания.
 
-## Best practices
+## Лучшие техники
 
-This part is coming soon.
+Этот раздел в процессе написания.
 
-# Raw Pointers
+# Голые указатели
 
-This part is coming soon.
+Этот раздел в процессе написания.
 
-## Best practices
+## Лучшие практики
 
-This part is coming soon.
+Этот раздел в процессе написания.
 
-# Returning Pointers
+# Возврат указателей.
 
-In many languages with pointers, you'd return a pointer from a function
-so as to avoid copying a large data structure. For example:
+Во многих языках с указателями вы вернёте указатель из функции, когда
+хотите избежать копирования большой структуры данных. Например:
 
 ```{rust}
 struct BigStruct {
     one: i32,
     two: i32,
-    // etc
+    // и так далее
     one_hundred: i32,
 }
 
@@ -683,10 +687,10 @@ fn main() {
 }
 ```
 
-The idea is that by passing around a box, you're only copying a pointer, rather
-than the hundred `int`s that make up the `BigStruct`.
+Суть в том, что при передаче упакованного указателя копируется только сам
+указатель, а не сто `i32`, хранящихся в `BigStruct`.
 
-This is an antipattern in Rust. Instead, write this:
+В Rust так не делают. Пишут так:
 
 ```rust
 #![feature(box_syntax)]
@@ -694,7 +698,7 @@ This is an antipattern in Rust. Instead, write this:
 struct BigStruct {
     one: i32,
     two: i32,
-    // etc
+    // и так далее
     one_hundred: i32,
 }
 
@@ -713,70 +717,71 @@ fn main() {
 }
 ```
 
-Note that this uses the `box_syntax` feature gate, so this syntax may change in
-the future.
+Заметьте, что вам придётся включить огороженную возможность `box_syntax`. Данный
+синтаксис может измениться в будущем.
 
-This gives you flexibility without sacrificing performance.
+В этом варианте вы получаете гибкость без ущерба производительности.
 
-You may think that this gives us terrible performance: return a value and then
-immediately box it up ?! Isn't this pattern the worst of both worlds? Rust is
-smarter than that. There is no copy in this code. `main` allocates enough room
-for the `box`, passes a pointer to that memory into `foo` as `x`, and then
-`foo` writes the value straight into the `Box<T>`.
+Вы можете подумать, что это будет ужасно неэффективно: сначала вернуть большую
+структуру по значению (что должно было бы вызвать её копирование), а затем
+упаковать её, поместив в кучу. Выглядит как объединение худших черт возврата
+упакованного указателя и обычного значения. Но, к счастью, компилятор более
+умён, чем кажется. В таком коде не происходит копирования. `main` сразу выделяет
+достаточно памяти для упакованного указателя, передаёт указатель на эту память
+в `foo` в качестве `x`, и `foo` записывает значение прямо в `Box<T>`.
 
-This is important enough that it bears repeating: pointers are not for
-optimizing returning values from your code. Allow the caller to choose how they
-want to use your output.
+Это настолько важно, что мы повторим ещё раз: не надо использовать указатели
+для оптимизации возврата значений из вашего кода! Позвольте вызывающей стороне
+решить, куда они хотят поместить результат.
 
-# Creating your own Pointers
+# Создание ваших собственных указателей.
 
-This part is coming soon.
+Этот раздел в процессе написания.
 
-## Best practices
+## Лучшие техники
 
-This part is coming soon.
+Этот раздел в процессе написания.
 
-# Patterns and `ref`
+# Образцы (patterns) и `ref`
 
-When you're trying to match something that's stored in a pointer, there may be
-a situation where matching directly isn't the best option available. Let's see
-how to properly handle this:
+Когда вы сопоставляете с образцом нечто, доступное по указателю, прямое
+сопоставление - не всегда лучшее решение. Давайте посмотрим, как поступить
+правильно:
 
 ```{rust,ignore}
 fn possibly_print(x: &Option<String>) {
     match *x {
-        // BAD: cannot move out of a `&`
+        // ПЛОХО: перемещение значения из ссылки (`&`) невозможно
         Some(s) => println!("{}", s)
 
-        // GOOD: instead take a reference into the memory of the `Option`
+        // ХОРОШО: получите ссылку на значение внутри `Option`
         Some(ref s) => println!("{}", *s),
         None => {}
     }
 }
 ```
 
-The `ref s` here means that `s` will be of type `&String`, rather than type
-`String`.
+`ref s` означает, что мы сопоставляем с типом `&String`, а не `String`.
 
-This is important when the type you're trying to get access to has a destructor
-and you don't want to move it, you just want a reference to it.
+Это важно, когда у значения, к которому вы обращаетесь, есть деструктор и вы не
+хотите перемещать его. Достаточно простой ссылки.
 
-# Cheat Sheet
+# Страница подсказок
 
-Here's a quick rundown of Rust's pointer types:
+Вот краткий обзор указательных типов Rust:
 
-| Type         | Name                | Summary                                                             |
-|--------------|---------------------|---------------------------------------------------------------------|
-| `&T`         | Reference           | Allows one or more references to read `T`                           |
-| `&mut T`     | Mutable Reference   | Allows a single reference to read and write `T`                     |
-| `Box<T>`     | Box                 | Heap allocated `T` with a single owner that may read and write `T`. |
-| `Rc<T>`      | "arr cee" pointer   | Heap allocated `T` with many readers                                |
-| `Arc<T>`     | Arc pointer         | Same as above, but safe sharing across threads                      |
-| `*const T`   | Raw pointer         | Unsafe read access to `T`                                           |
-| `*mut T`     | Mutable raw pointer | Unsafe read and write access to `T`                                 |
+| Тип          | Название                      | Описание                                                                             |
+|--------------|-------------------------------|--------------------------------------------------------------------------------------|
+| `&T`         | Ссылка                        | Одна или более неизменяемая ссылка на `T`                                            |
+| `&mut T`     | Изменяемая ссылка             | Единственная ссылка для чтения и записи `T`                                          |
+| `Box<T>`     | Упакованный указатель         | `T`, выделенный на куче, с единственным владельцем, который может и читать, и писать |
+| `Rc<T>`      | Ссылка с подсчётом            | `T`, выделенный на куче, с множеством читателей                                      |
+| `Arc<T>`     | Атомарная ссылка с подсчётом  | То же, что и выше, но безопасно для передачи в другие потоки                         |
+| `*const T`   | Голый указатель               | Небезопасный доступ к `T` на чтение                                                  |
+| `*mut T`     | Изменяемый голый указатель    | Небезопасный доступ к `T` на чтение и запись                                         |
 
-# Related resources
+# Другие документы
 
-* [API documentation for Box](../std/boxed/index.html)
-* [Ownership guide](ownership.html)
-* [Cyclone paper on regions](http://www.cs.umd.edu/projects/cyclone/papers/cyclone-regions.pdf), which inspired Rust's lifetime system
+* [API упакованных указателей](../std/boxed/index.html)
+* [Руководство по владению](ownership.html)
+* [Статья про регионы в языке Cyclone](http://www.cs.umd.edu/projects/cyclone/papers/cyclone-regions.pdf), которая вдохновила систему сроков жизни Rust
