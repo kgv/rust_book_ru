@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/macros.md b/fix_current_version:macros.md
-index 7da3604..d8b4f57 100644
+index 7e19ec9..9243f64 100644
 --- a/rust/master:src/doc/trpl/macros.md
 +++ b/fix_current_version:macros.md
 @@ -1,37 +1,40 @@
@@ -71,7 +71,7 @@ index 7da3604..d8b4f57 100644
  [vector]: arrays-vectors-and-slices.html
  
 @@ -40,8 +43,9 @@ let x: Vec<u32> = vec![1, 2, 3];
- # assert_eq!(&[1,2,3], &x);
+ # assert_eq!(x, [1, 2, 3]);
  ```
  
 -This can't be an ordinary function, because it takes any number of arguments.
@@ -83,7 +83,7 @@ index 7da3604..d8b4f57 100644
  ```rust
  let x: Vec<u32> = {
 @@ -54,11 +58,12 @@ let x: Vec<u32> = {
- # assert_eq!(&[1,2,3], &x);
+ # assert_eq!(x, [1, 2, 3]);
  ```
  
 -We can implement this shorthand, using a macro: [^actual]

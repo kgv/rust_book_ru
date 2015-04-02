@@ -497,27 +497,26 @@ fn main() {
 `Arc<T>`, который использует более дорогие атомарные инструкции и является
 потоко-безопасным аналогом `Rc<T>`.
 
-## Элизия срока жизни
+## Cокрытие срока жизни
 
 Rust supports powerful local type inference in function bodies, but it’s
 forbidden in item signatures to allow reasoning about the types just based in
 the item signature alone. However, for ergonomic reasons a very restricted
 secondary inference algorithm called “lifetime elision” applies in function
 signatures. It infers only based on the signature components themselves and not
-based on the body of the function, only infers lifetime paramters, and does
+based on the body of the function, only infers lifetime parameters, and does
 this with only three easily memorizable and unambiguous rules. This makes
 lifetime elision a shorthand for writing an item signature, while not hiding
 away the actual types involved as full local inference would if applied to it.
-Rust поддерживает мощную систему вывода типов для локальных переменных в телах
-функций, но это запрещено в сигнатурах пункта, что позволит рассуждения о типах,
-основываясь только на пункт подписи в одиночку. Тем не менее, эргономических
-соображений очень ограничены вторичный алгоритм вывода, который называется
-"элизия срока жизни" относится сигнатуры функций. Он выводит только на основе
-компонентов подписи себя, а не на основе теле функции, только выводит параметры
-срока жизни, и делает это только исходя из трех легко запоминающихся и
-однозначных правил. Это делает неявные срок жизни лишь сокращением для написания
-сигратуры элемента, а не прячет конкретные типы в качестве полноправных
-местного вывода бы, если бы к нему применимы.
+В Rust есть мощный локальный вывод типов. Однако, сигнатуры объявлений верхнего
+уровня не выводятся, чтобы можно было рассуждать о типах на основании одних лишь
+сигнатур. Из соображений удобства, введён ограниченный механизм вывода типов
+сигнатур функций, называемый "сокрытие сроков жизни" (“lifetime elision”). Он
+выводит типы на основании только элементов сигнатуры - тело функции при этом не
+учитывается. При этом его назначение - это вывести лишь параметры срока жизни
+аргументов. Для этого он реализует три простых правила. Таким образом, сокрытие
+срока жизни упрощает написание сигнатур, одновременно не скрывая реальные типы
+аргументов.
 
 Когда речь идет о неявном сроке жизни, мы используем термины *входной срок
 жизни* (*input lifetime*) и *выходной срок жизни* (*output lifetime*). *Входной
