@@ -5,7 +5,7 @@
 * ~~arrays-vectors-and-slices.md~~
 * ~~associated-types.md~~
 * ~~basic.md~~
-* ~~closures.md~~
+* **closures.md**
 * ~~comments.md~~
 * ~~compound-data-types.md~~
 * ~~conclusion.md~~
