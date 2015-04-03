@@ -49,7 +49,6 @@ While specifying the full type for named functions is helpful with things like
 documentation and type inference, the types of closures are rarely documented
 since they’re anonymous, and they don’t cause the kinds of error-at-a-distance
 that inferring named function types can.
-
 Но мы не должны. Почему так? В основном, это было сделано из эргономических
 соображений (соображений удобства). В то время как для именованных функций
 указание полного типа является полезным для таких аспектов как документация и
@@ -236,7 +235,6 @@ strange: Using `()` to call a function, like `foo()`, is an overloadable
 operator. From this, everything else clicks into place. In Rust, we use the
 trait system to overload operators. Calling functions is no different. We have
 three separate traits to overload with:
-
 Ключ к пониманию того, как замыкания работают изнутри звучит немного странно:
 использование `()` для вызова функции, как например `foo()`, представляет собой
 перегрузку оператора. Исходя из этого, все остальное встанет на свои места. В

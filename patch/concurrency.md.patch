@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/concurrency.md b/fix_current_version:concurrency.md
-index 6b814a6..1f0a1a7 100644
+index 6b814a6..8dd94e0 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
 +++ b/fix_current_version:concurrency.md
 @@ -1,63 +1,73 @@
@@ -308,7 +308,7 @@ index 6b814a6..1f0a1a7 100644
  
  ```
  # #![feature(old_io, std_misc)]
-@@ -275,25 +293,26 @@ thread::spawn(move || {
+@@ -275,25 +293,27 @@ thread::spawn(move || {
  # }
  ```
  
@@ -328,17 +328,18 @@ index 6b814a6..1f0a1a7 100644
 -wait but it's more likely we'll either be waiting longer than
 -necessary or not long enough, depending on just how much time the
 -threads actually take to finish computing when the program runs.
-+Использовать в данном контексте `timer` не совсем правильно. Мы выбрали
-+оптимальное время ожидания. Но вполне возможно, что мы выбрали слишком высокое
-+время ожидания, в результате чего временные затраты на выполнение существенно
-+увеличиваются. Также возможно, что мы выбрали слишком низкое время ожидания, из-
-+за чего вычисления не будут выполнены до конца.
++Под конец мы запускаем короткий таймер, ожидающий некоторое время, отведенное
++для выполнения потоков. Но такой вариант не является идеальным: возможно, мы
++выбрали разумное время ожидания но, скорее всего, мы будем ждать либо больше чем
++нужно, либо меньше чем необходимо, в зависимости от того, сколько на самом деле
++времени потребуется потокам, чтобы закончить вычисления.
  
 -A more precise alternative to the timer would be to use one of the
 -mechanisms provided by the Rust standard library for synchronizing
 -threads with each other. Let's talk about one of them: channels.
-+Стандартная библиотека Rust предоставляет несколько механизмов для синхронизации
-+двух потоков друг с другом. Давайте поговорим об одном из них: каналах.
++Более точной альтернативой использованию таймера было бы использование одного из
++механизмов, предусмотренных стандартной библиотекой Rust для синхронизации
++потоков друг с другом. Давайте поговорим об одном из них: каналах.
  
 -## Channels
 +## Каналы
@@ -350,7 +351,7 @@ index 6b814a6..1f0a1a7 100644
  
  ```
  use std::sync::{Arc, Mutex};
-@@ -322,11 +341,13 @@ fn main() {
+@@ -322,11 +342,13 @@ fn main() {
  }
  ```
  
@@ -368,7 +369,7 @@ index 6b814a6..1f0a1a7 100644
  
  ```
  use std::thread;
-@@ -349,14 +370,15 @@ fn main() {
+@@ -349,14 +371,15 @@ fn main() {
  }
  ```
  
@@ -389,7 +390,7 @@ index 6b814a6..1f0a1a7 100644
  
  ```
  use std::thread;
-@@ -368,5 +390,5 @@ let result = thread::spawn(move || {
+@@ -368,5 +391,5 @@ let result = thread::spawn(move || {
  assert!(result.is_err());
  ```
  

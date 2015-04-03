@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/error-handling.md b/fix_current_version:error-handling.md
-index cf60bd8..84baee9 100644
+index b9e7bd7..157509d 100644
 --- a/rust/master:src/doc/trpl/error-handling.md
 +++ b/fix_current_version:error-handling.md
 @@ -1,52 +1,59 @@
@@ -202,14 +202,14 @@ index cf60bd8..84baee9 100644
 +# Преобразование неудачи в панику
  
 -In certain circumstances, even though a function may fail, we may want to treat
--it as a panic instead. For example, `io::stdin().read_line()` returns an
--`IoResult<String>`, a form of `Result`, when there is an error reading the
--line. This allows us to handle and possibly recover from this sort of error.
+-it as a panic instead. For example, `io::stdin().read_line(&mut buffer)` returns
+-an `Result<usize>`, when there is an error reading the line. This allows us to
+-handle and possibly recover from error.
 +В некоторых случаях, когда функция может потерпеть неудачу, нам может
 +понадобиться рассматривать эту неудачу как панику. Например,
-+`io::stdin().read_line()` возвращает `IoResult<String>`, один из видов `Result`,
-+если произошла ошибка при чтении строки. Это позволяет нам обработать такого
-+рода ошибку и, возможно, восстановить работоспособность программы.
++`io::stdin().read_line(&mut buffer)` возвращает `Result<usize>`, если произошла
++ошибка при чтении строки. Это позволяет нам обработать такого рода ошибку и,
++возможно, восстановить работоспособность программы.
  
 -If we don't want to handle this error, and would rather just abort the program,
 -we can use the `unwrap()` method:
@@ -217,7 +217,7 @@ index cf60bd8..84baee9 100644
 +мы можем использовать метод `unwrap()`:
  
  ```{rust,ignore}
- io::stdin().read_line().unwrap();
+ io::stdin().read_line(&mut buffer).unwrap();
  ```
  
 -`unwrap()` will `panic!` if the `Option` is `None`. This basically says "Give
@@ -235,15 +235,15 @@ index cf60bd8..84baee9 100644
 +Вот еще один способ распаковки ошибок, который немного лучше, чем `unwrap()`:
  
  ```{rust,ignore}
- let input = io::stdin().read_line()
-@@ -224,17 +240,17 @@ let input = io::stdin().read_line()
+ let mut buffer = String::new();
+@@ -225,17 +241,17 @@ let input = io::stdin().read_line(&mut buffer)
                         .expect("Failed to read line");
  ```
  
--`ok()` converts the `IoResult` into an `Option`, and `expect()` does the same
+-`ok()` converts the `Result` into an `Option`, and `expect()` does the same
 -thing as `unwrap()`, but takes a message. This message is passed along to the
 -underlying `panic!`, providing a better error message if the code errors.
-+`ok()` преобразует `IoResult` в `Option`, а `expect()` делает то же самое, что и
++`ok()` преобразует `Result` в `Option`, а `expect()` делает то же самое, что и
 +`unwrap()`, но принимает сообщение. Это сообщение передается в нижележащий вызов
 +`panic!`, обеспечивая лучшее сообщение об ошибке, если ошибок в коде.
  
@@ -262,7 +262,7 @@ index cf60bd8..84baee9 100644
  
  ```rust
  use std::fs::File;
-@@ -264,7 +280,7 @@ fn write_info(info: &Info) -> io::Result<()> {
+@@ -265,7 +281,7 @@ fn write_info(info: &Info) -> io::Result<()> {
  }
  ```
  
@@ -271,7 +271,7 @@ index cf60bd8..84baee9 100644
  
  ```rust
  use std::fs::File;
-@@ -288,13 +304,13 @@ fn write_info(info: &Info) -> io::Result<()> {
+@@ -289,13 +305,13 @@ fn write_info(info: &Info) -> io::Result<()> {
  }
  ```
  

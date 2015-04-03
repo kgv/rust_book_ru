@@ -43,5 +43,6 @@
     * [Lang items](lang-items.md)
     * [Link args](link-args.md)
     * [Тесты производительности](benchmark-tests.md)
+    * [Box Syntax and Patterns](box-syntax-and-patterns.md)
 * [Заключение](conclusion.md)
 * [Глоссарий](glossary.md)

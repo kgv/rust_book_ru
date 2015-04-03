@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index 136e155..a0a8b17 100644
+index 11e62af..a36935a 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
-@@ -1,47 +1,47 @@
+@@ -1,48 +1,48 @@
 -# Summary
 +# Содержание
  
@@ -86,8 +86,9 @@ index 136e155..a0a8b17 100644
      * [Lang items](lang-items.md)
      * [Link args](link-args.md)
 -    * [Benchmark Tests](benchmark-tests.md)
++    * [Тесты производительности](benchmark-tests.md)
+     * [Box Syntax and Patterns](box-syntax-and-patterns.md)
 -* [Conclusion](conclusion.md)
 -* [Glossary](glossary.md)
-+    * [Тесты производительности](benchmark-tests.md)
 +* [Заключение](conclusion.md)
 +* [Глоссарий](glossary.md)
