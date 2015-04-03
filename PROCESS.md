@@ -41,7 +41,7 @@
 * **pointers.md**
 * ~~README.md~~
 * ~~static-and-dynamic-dispatch.md~~
-* strings.md
+* **strings.md**
 * ~~SUMMARY.md~~
 * ~~testing.md~~
 * ~~traits.md~~
