@@ -5,6 +5,7 @@
 * ~~arrays-vectors-and-slices.md~~
 * ~~associated-types.md~~
 * ~~basic.md~~
+* ~~benchmark-tests.md~~
 * box-syntax-and-patterns.md
 * ~~closures.md~~
 * ~~comments.md~~
