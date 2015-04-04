@@ -45,7 +45,7 @@
 * ~~SUMMARY.md~~
 * ~~testing.md~~
 * ~~traits.md~~
-* unsafe.md
+* **unsafe.md**
 * ~~unstable.md~~
 * ~~variable-bindings.md~~
 
