@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/installing-rust.md b/fix_current_version:installing-rust.md
-index 288a4a1..3890389 100644
+index c839688..1d5c025 100644
 --- a/rust/master:src/doc/trpl/installing-rust.md
 +++ b/fix_current_version:installing-rust.md
-@@ -1,93 +1,64 @@
+@@ -1,93 +1,84 @@
 -% Installing Rust
 +% Установка Rust
  
@@ -10,18 +10,22 @@ index 288a4a1..3890389 100644
 -install Rust, but the easiest is to use the `rustup` script. If you're on
 -Linux or a Mac, all you need to do is this (note that you don't need to type
 -in the `$`s, they just indicate the start of each command):
-+Для работы с Rust нужно сделать первый шаг - установить его! В этой главе мы покажем как это можно сделать.
++Для работы с Rust нужно сделать первый шаг - установить его! В этой главе мы
++покажем как это можно сделать.
 +
 +Официально поддерживаемые платформы:
 +* Windows (7, 8, Server 2008 R2)
 +* Linux (2.6.18 или позже, разные дистрибутивы), x86 и x86-64
 +* OSX 10.7 (Lion) и новее, x86 и x86-64
 +
-+Rust активно тестируется на этих платформах, а также на остальных, например на Android.
++Rust активно тестируется на этих платформах, а также на остальных, например на
++Android.
 +
 +## Linux и Mac
 +
-+Самый простой способ установить Rust - использовать скрипт `rustup`. Вам нужно ввести эту команду в консоль (вам не нужно вводить символ `$`, он лишь показывает приглашение командной строки к вводу новой команды):
++Самый простой способ установить Rust - использовать скрипт `rustup`. Вам нужно
++ввести эту команду в консоль (вам не нужно вводить символ `$`, он лишь
++показывает приглашение командной строки к вводу новой команды):
  
  ```bash
  $ curl -sf -L https://static.rust-lang.org/rustup.sh | sudo sh
@@ -29,7 +33,8 @@ index 288a4a1..3890389 100644
  
 -If you're concerned about the [potential insecurity](http://curlpipesh.tumblr.com/) of using `curl | sudo sh`,
 -please keep reading and see our disclaimer below. And feel free to use a two-step version of the installation and examine our installation script:
-+Если вы беспокоитесь о безопасности использования данной команды, то продолжайте читать далее. Также можете скачать наш установочный скрипт и изучить его:
++Если вы беспокоитесь о безопасности использования данной команды, то продолжайте
++читать далее. Также можете скачать наш установочный скрипт и изучить его:
  
  ```bash
  $ curl -f -L https://static.rust-lang.org/rustup.sh -O
@@ -37,9 +42,9 @@ index 288a4a1..3890389 100644
  ```
  
 -If you're on Windows, please download either the [32-bit
--installer](https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe)
+-installer](https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.exe)
 -or the [64-bit
--installer](https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe)
+-installer](https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.exe)
 -and run it.
 -
 -If you decide you don't want Rust anymore, we'll be a bit sad, but that's okay.
@@ -53,12 +58,18 @@ index 288a4a1..3890389 100644
  
 -If you used the Windows installer, just re-run the `.exe` and it will give you
 -an uninstall option.
-+Вы можете повторно запускать скрипт для того, чтобы обновить Rust. На данный момент Rust находится в стадии alpha и очень часто обновляется.
++Вы можете повторно запускать скрипт для того, чтобы обновить Rust. На данный
++момент Rust находится в стадии alpha и очень часто обновляется.
  
 -You can re-run this script any time you want to update Rust. Which, at this
 -point, is often. Rust is still pre-1.0, and so people assume that you're using
 -a very recent Rust.
-+Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки запускается с правами администратора, что может нарушить безопасность системы. Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha. Для безопасной установки Rust предлагаем изучить документацию по [установке Rust из исходных кодов](https://github.com/rust-lang/rust#building-from-source) или скачать уже [скомпилированный Rust](http://www.rust-lang.org/install.html).
++Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки
++запускается с правами администратора, что может нарушить безопасность системы.
++Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha.
++Для безопасной установки Rust предлагаем изучить документацию по [установке Rust
++из исходных кодов](https://github.com/rust-lang/rust#building-from-source) или
++скачать уже [скомпилированный Rust](http://www.rust-lang.org/install.html).
  
 -This brings me to one other point: some people, and somewhat rightfully so, get
 -very upset when we tell you to `curl | sudo sh`. And they should be! Basically,
@@ -72,12 +83,16 @@ index 288a4a1..3890389 100644
 +## Windows
  
 -Oh, we should also mention the officially supported platforms:
-+Если вы пользуетесь *Windows*, то пожалуйста скачайте установочный пакет: [32-битный](https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe) или [64-битный](https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe) и затем запустите его.
++Если вы пользуетесь *Windows*, то пожалуйста скачайте установочный пакет:
++[32-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.exe)
++или [64-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.exe)
++и затем запустите его.
  
 -* Windows (7, 8, Server 2008 R2)
 -* Linux (2.6.18 or later, various distributions), x86 and x86-64
 -* OSX 10.7 (Lion) or greater, x86 and x86-64
-+Удалить Rust можно через `Панель управления` -> `Программы` -> `Удаление программы`, а затем выбираем Rust в списке и нажимаем кнопку `Удалить`.
++Удалить Rust можно через `Панель управления` -> `Программы` -> `Удаление
++программы`, а затем выбираем Rust в списке и нажимаем кнопку `Удалить`.
  
 -We extensively test Rust on these platforms, and a few others, too, like
 -Android. But these are the ones most likely to work, as they have the most
@@ -111,7 +126,9 @@ index 288a4a1..3890389 100644
 -read it offline. On UNIX systems, `/usr/local/share/doc/rust` is the location.
 -On Windows, it's in a `share/doc` directory, inside wherever you installed Rust
 -to.
-+Установщик также устанавливает документацию, которая доступна без подключения к сети. На Linux и Mac она располагается в каталоге `/usr/local/share/doc/rust`. В Windows - в каталоге `share/doc` там, куда вы установили Rust.
++Установщик также устанавливает документацию, которая доступна без подключения к
++сети. На Linux и Mac она располагается в каталоге `/usr/local/share/doc/rust`. В
++Windows - в каталоге `share/doc` там, куда вы установили Rust.
  
 -If not, there are a number of places where you can get help. The easiest is
 -[the #rust IRC channel on irc.mozilla.org](irc://irc.mozilla.org/#rust), which
@@ -122,6 +139,9 @@ index 288a4a1..3890389 100644
 -/r/rust subreddit](http://www.reddit.com/r/rust), and [Stack
 -Overflow](http://stackoverflow.com/questions/tagged/rust).
 +Но не только там вы можете найти помощь, а также еще здесь:
-+* IRC чат: [канал #rust на irc.mozilla.org](irc://irc.mozilla.org/#rust) к которому можно подключиться через [Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
++
++* IRC чат: [канал #rust на irc.mozilla.org](irc://irc.mozilla.org/#rust) к
++которому можно подключиться через
++[Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
 +* Reddit: [/r/rust subreddit](http://www.reddit.com/r/rust)
 +* [Stack Overflow](http://stackoverflow.com/questions/tagged/rust)

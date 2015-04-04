@@ -100,17 +100,14 @@ fn main() {
 хотели такого поведения, то могли бы использовать метод `thread::spawn()`:
 
 ```
-# #![feature(old_io, std_misc)]
 use std::thread;
-use std::old_io::timer;
-use std::time::Duration;
 
 fn main() {
     thread::spawn(|| {
         println!("Hello from a thread!");
     });
 
-    timer::sleep(Duration::milliseconds(50));
+    thread::sleep_ms(50);
 }
 ```
 
@@ -163,10 +160,7 @@ fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
 гонки данных на многих языках. На Rust она не будет компилироваться:
 
 ```ignore
-# #![feature(old_io, std_misc)]
 use std::thread;
-use std::old_io::timer;
-use std::time::Duration;
 
 fn main() {
     let mut data = vec![1u32, 2, 3];
@@ -177,14 +171,14 @@ fn main() {
         });
     }
 
-    timer::sleep(Duration::milliseconds(50));
+    thread::sleep_ms(50);
 }
 ```
 
 Она выдает ошибку:
 
 ```text
-12:17 error: capture of moved value: `data`
+8:17 error: capture of moved value: `data`
         data[i] += 1;
         ^~~~
 ```
@@ -205,10 +199,7 @@ fn main() {
 вторая версия нашего кода. Она по-прежнему не работает, но по другой причине:
 
 ```ignore
-# #![feature(old_io, std_misc)]
 use std::thread;
-use std::old_io::timer;
-use std::time::Duration;
 use std::sync::Mutex;
 
 fn main() {
@@ -221,17 +212,17 @@ fn main() {
         });
     }
 
-    timer::sleep(Duration::milliseconds(50));
+    thread::sleep_ms(50);
 }
 ```
 
 Вот ошибка:
 
 ```text
-<anon>:11:9: 11:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` [E0277]
+<anon>:9:9: 9:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` [E0277]
 <anon>:11         thread::spawn(move || {
                   ^~~~~~~~~~~~~
-<anon>:11:9: 11:22 note: `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` cannot be sent between threads safely
+<anon>:9:9: 9:22 note: `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` cannot be sent between threads safely
 <anon>:11         thread::spawn(move || {
                   ^~~~~~~~~~~~~
 ```
@@ -250,11 +241,8 @@ fn lock(&self) -> LockResult<MutexGuard<T>>
 Мы можем использовать `Arc<T>`, чтобы исправить это. Вот рабочая версия:
 
 ```
-# #![feature(old_io, std_misc)]
 use std::sync::{Arc, Mutex};
 use std::thread;
-use std::old_io::timer;
-use std::time::Duration;
 
 fn main() {
     let data = Arc::new(Mutex::new(vec![1u32, 2, 3]));
@@ -267,7 +255,7 @@ fn main() {
         });
     }
 
-    timer::sleep(Duration::milliseconds(50));
+    thread::sleep_ms(50);
 }
 ```
 
@@ -275,12 +263,9 @@ fn main() {
 счетчик. Затем эта ручка перемещается в новый поток. Давайте более подробно
 рассмотрим тело потока:
 
-```
-# #![feature(old_io, std_misc)]
+```rust
 # use std::sync::{Arc, Mutex};
 # use std::thread;
-# use std::old_io::timer;
-# use std::time::Duration;
 # fn main() {
 #     let data = Arc::new(Mutex::new(vec![1u32, 2, 3]));
 #     for i in 0..2 {
@@ -290,6 +275,7 @@ thread::spawn(move || {
     data[i] += 1;
 });
 #     }
+#     thread::sleep_ms(50);
 # }
 ```
 

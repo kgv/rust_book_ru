@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/closures.md b/fix_current_version:closures.md
-index 01b8163..5ba23a4 100644
+index 52d07ae..463845f 100644
 --- a/rust/master:src/doc/trpl/closures.md
 +++ b/fix_current_version:closures.md
 @@ -1,13 +1,13 @@
@@ -53,16 +53,21 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  let plus_one = |x: i32| -> i32 { x + 1 };
-@@ -49,9 +49,15 @@ While specifying the full type for named functions is helpful with things like
- documentation and type inference, the types of closures are rarely documented
- since they’re anonymous, and they don’t cause the kinds of error-at-a-distance
- that inferring named function types can.
+@@ -44,14 +44,15 @@ let plus_one = |x: i32| -> i32 { x + 1 };
+ assert_eq!(2, plus_one(1));
+ ```
+ 
+-But we don't have to. Why is this? Basically, it was chosen for ergonomic reasons.
+-While specifying the full type for named functions is helpful with things like
+-documentation and type inference, the types of closures are rarely documented
+-since they’re anonymous, and they don’t cause the kinds of error-at-a-distance
+-that inferring named function types can.
 +Но мы не должны. Почему так? В основном, это было сделано из эргономических
-+соображений (соображений удобства). В то время как для именованных функций
-+указание полного типа является полезным для таких аспектов как документация и
-+вывод типа, типы замыканий редко документируют, поскольку они анонимны, и они не
-+вызывают виды ошибок на расстояния (отлрженных ошибок) (error-at-a-distance),
-+которое могут выдавать типы именованных функций.
++соображений (соображений удобства). В то время как для именованных функций явное
++указание типа является полезным для таких аспектов как документация и вывод
++типа, типы замыканий редко документируют, поскольку они анонимны. К тому же они
++не вызывают такой тип ошибок как "ошибка на расстоянии" ("отложенная ошибка")
++(error- at-a-distance), который могут вызывать типы именованных функций.
  
 -The second is that the syntax is similar, but a bit different. I've added spaces
 -here to make them look a little closer:
@@ -71,7 +76,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  fn  plus_one_v1 (  x: i32 ) -> i32 { x + 1 }
-@@ -59,12 +65,12 @@ let plus_one_v2 = |x: i32 | -> i32 { x + 1 };
+@@ -59,12 +60,12 @@ let plus_one_v2 = |x: i32 | -> i32 { x + 1 };
  let plus_one_v3 = |x: i32 |          x + 1  ;
  ```
  
@@ -88,7 +93,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  let num = 5;
-@@ -73,9 +79,10 @@ let plus_num = |x: i32| x + num;
+@@ -73,9 +74,10 @@ let plus_num = |x: i32| x + num;
  assert_eq!(10, plus_num(5));
  ```
  
@@ -102,7 +107,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust,ignore
  let mut num = 5;
-@@ -84,7 +91,7 @@ let plus_num = |x: i32| x + num;
+@@ -84,7 +86,7 @@ let plus_num = |x: i32| x + num;
  let y = &mut num;
  ```
  
@@ -111,20 +116,21 @@ index 01b8163..5ba23a4 100644
  
  ```text
  error: cannot borrow `num` as mutable because it is also borrowed as immutable
-@@ -105,9 +112,9 @@ fn main() {
+@@ -105,9 +107,10 @@ fn main() {
  ^
  ```
  
 -A verbose yet helpful error message! As it says, we can't take a mutable borrow
 -on `num` because the closure is already borrowing it. If we let the closure go
 -out of scope, we can:
-+Подробные сообщения, но полезно ошибка! Как говорится в сообщении, мы не можем
-+получить изменяемый заем переменной `num` потому что замыкание уже заимствует
-+его. Если же мы обеспечим выход замыкания из области видимости, то мы сможем:
++Подробное и к тому же полезное сообщение об ошибке! Как говорится в этом
++сообщении, мы не можем получить изменяемый заем переменной `num` потому что
++замыкание уже заимствует его. Если же мы обеспечим выход замыкания из области
++видимости, то мы сможем:
  
  ```rust
  let mut num = 5;
-@@ -119,8 +126,8 @@ let mut num = 5;
+@@ -119,8 +122,8 @@ let mut num = 5;
  let y = &mut num;
  ```
  
@@ -135,7 +141,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust,ignore
  let nums = vec![1, 2, 3];
-@@ -130,7 +137,7 @@ let takes_nums = || nums;
+@@ -130,7 +133,7 @@ let takes_nums = || nums;
  println!("{:?}", nums);
  ```
  
@@ -144,7 +150,7 @@ index 01b8163..5ba23a4 100644
  
  ```text
  note: `nums` moved into closure environment here because it has type
-@@ -139,14 +146,15 @@ let takes_nums = || nums;
+@@ -139,14 +142,15 @@ let takes_nums = || nums;
                      ^~~~~~~
  ```
  
@@ -166,17 +172,20 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  let num = 5;
-@@ -157,6 +165,9 @@ let owns_num = move |x: i32| x + num;
- Now, even though the keyword is `move`, the variables follow normal move semantics.
- In this case, `5` implements `Copy`, and so `owns_num` takes ownership of a copy
- of `num`. So what's the difference?
+@@ -154,9 +158,9 @@ let num = 5;
+ let owns_num = move |x: i32| x + num;
+ ```
+ 
+-Now, even though the keyword is `move`, the variables follow normal move semantics.
+-In this case, `5` implements `Copy`, and so `owns_num` takes ownership of a copy
+-of `num`. So what's the difference?
 +Теперь, когда указано ключевое слово `move`, переменные следуют нормальной
-+семантике перемещения. В данном примере, `5` реализует `Copy`, поэтому
-+`owns_num` становится владельцем копии `num`. Так в чем же разница?
++семантике перемещения. В данном примере `5` реализует `Copy`, поэтому `owns_num`
++становится владельцем копии `num`. Так в чем же разница?
  
  ```rust
  let mut num = 5;
-@@ -170,15 +181,15 @@ let mut num = 5;
+@@ -170,12 +174,12 @@ let mut num = 5;
  assert_eq!(10, num);
  ```
  
@@ -189,17 +198,12 @@ index 01b8163..5ba23a4 100644
 +изменяет значение внутри. Нам также необходимо объявить `owns_num` как `mut`,
 +потому что оно изменяет свое окружение.
  
--We also had to declare `add_num` as mut, since we will be modifying its
--environment.
-+Мы также должны были объявить `add_num` как `mut`, так как оно будет изменять
-+свое окружение.
- 
 -If we change to a `move` closure, it's different:
-+Если же мы изменим на `move` замыкание, то получим следующие отличия:
++Если же мы будем использовать `move` замыкание, то получим следующие отличия:
  
  ```rust
  let mut num = 5;
-@@ -192,35 +203,43 @@ let mut num = 5;
+@@ -189,35 +193,38 @@ let mut num = 5;
  assert_eq!(5, num);
  ```
  
@@ -213,7 +217,7 @@ index 01b8163..5ba23a4 100644
 -it, while a `move` closure is self-contained. This means that you cannot
 -generally return a non-`move` closure from a function, for example.
 +Вот еще один способ думать о `move` замыканиях: они предоставляют замыкание со
-+своим собственным фреймом стека. Без `move`, замыкание может быть связано с
++своим собственным фреймом стека. Без `move` замыкание может быть связано с
 +фреймом стека, который его создал, в то время как `move` замыкание содержит свой
 +собственный фрейм стека. Это означает, например, что вы не можете вернуть не
 +`move` замыкание из функции.
@@ -235,30 +239,30 @@ index 01b8163..5ba23a4 100644
 -and dynamic dispatch][dispatch], which talks about trait objects.
 +Реализация замыканий в Rust немного отличается от других языков. Фактически, она
 +представляет из себя просто синтаксисический сахар для трейтов. Перед тем как
-+читать дальше, настоятельно рекомендуем прочитать главу [Трейты][traits], а
-+также главу о [статической и динамической диспетчеризации][dispatch], в которой
++читать дальше, настоятельно рекомендуем изучить главу [Трейты][traits], а также
++главу [Статическая и динамическая диспетчеризация][dispatch], в которой
 +говорится об трейт объектах.
  
  [traits]: traits.html
  [dispatch]: static-and-dynamic-dispatch.html
  
 -Got all that? Good.
-+Прочитали? Хорошо.
++Изучили? Хорошо.
  
- The key to understanding how closures work under the hood is something a bit
- strange: Using `()` to call a function, like `foo()`, is an overloadable
- operator. From this, everything else clicks into place. In Rust, we use the
- trait system to overload operators. Calling functions is no different. We have
- three separate traits to overload with:
+-The key to understanding how closures work under the hood is something a bit
+-strange: Using `()` to call a function, like `foo()`, is an overloadable
+-operator. From this, everything else clicks into place. In Rust, we use the
+-trait system to overload operators. Calling functions is no different. We have
+-three separate traits to overload with:
 +Ключ к пониманию того, как замыкания работают изнутри звучит немного странно:
 +использование `()` для вызова функции, как например `foo()`, представляет собой
-+перегрузку оператора. Исходя из этого, все остальное встанет на свои места. В
-+Rust мы используем трейт систему для перегрузки операторов. Вызов функций не
-+является исключением. Существуют три отдельных трейта для перегрузки:
++перегружаемую операцию. Исходя из этого, все остальное встает на свои места. В
++Rust мы используем трейт систему для перегрузки операций. Вызов функций не
++является исключением. Существуют три отдельных трейта для их перегрузки:
  
  ```rust
  # mod foo {
-@@ -240,24 +259,25 @@ pub trait FnOnce<Args> {
+@@ -237,24 +244,25 @@ pub trait FnOnce<Args> {
  # }
  ```
  
@@ -298,22 +302,22 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  fn call_with_one<F>(some_closure: F) -> i32
-@@ -271,10 +291,11 @@ let answer = call_with_one(|x| x + 2);
+@@ -268,10 +276,11 @@ let answer = call_with_one(|x| x + 2);
  assert_eq!(3, answer);
  ```
  
 -We pass our closure, `|x| x + 2`, to `call_with_one`. It just does what it
 -suggests: it calls the closure, giving it `1` as an argument.
 +Мы передаем наше замыкание, `|x| x + 2`, в функцию `call_with_one`. Она же
-+делает то, что написано у нее в названии: вызывает замыкание, передавая ему `1`
-+в качестве аргумента.
++делает то, о чем говорит ее название: вызывает замыкание, передавая ему `1` в
++качестве аргумента.
  
 -Let's examine the signature of `call_with_one` in more depth:
 +Давайте рассмотрим сигнатуру функции `call_with_one` более подробно:
  
  ```rust
  fn call_with_one<F>(some_closure: F) -> i32
-@@ -282,8 +303,8 @@ fn call_with_one<F>(some_closure: F) -> i32
+@@ -279,8 +288,8 @@ fn call_with_one<F>(some_closure: F) -> i32
  #    some_closure(1) }
  ```
  
@@ -324,7 +328,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  # fn call_with_one<F>(some_closure: F) -> i32
-@@ -291,20 +312,22 @@ isn't interesting. The next part is:
+@@ -288,20 +297,22 @@ isn't interesting. The next part is:
  #   some_closure(1) }
  ```
  
@@ -333,8 +337,8 @@ index 01b8163..5ba23a4 100644
 -is `Fn(i32) -> i32`.
 +Так как `Fn` является трейтом, мы можем связать с ним наш дженерик (обобщенный)
 +параметр. В этом примере, замыкание принимает `i32` в качестве аргумента и
-+возвращает `i32`, поэтому дженерик привязка, которую мы используем, выглядит:
-+`Fn(i32) -> i32`.
++возвращает `i32`, поэтому дженерик привязка, которую мы используем, выглядит
++так: `Fn(i32) -> i32`.
  
 -There's one other key point here: because we're bounding a generic with a
 -trait, this will get monomorphized, and therefore, we'll be doing static
@@ -359,7 +363,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust
  fn call_with_one(some_closure: &Fn(i32) -> i32) -> i32 {
-@@ -316,15 +339,16 @@ let answer = call_with_one(&|x| x + 2);
+@@ -313,15 +324,16 @@ let answer = call_with_one(&|x| x + 2);
  assert_eq!(3, answer);
  ```
  
@@ -383,7 +387,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust,ignore
  fn factory() -> (Fn(i32) -> Vec<i32>) {
-@@ -339,7 +363,7 @@ let answer = f(4);
+@@ -336,7 +348,7 @@ let answer = f(4);
  assert_eq!(vec![1, 2, 3, 4], answer);
  ```
  
@@ -392,7 +396,7 @@ index 01b8163..5ba23a4 100644
  
  ```text
  error: the trait `core::marker::Sized` is not implemented for the type
-@@ -360,11 +384,12 @@ fa ctory() -> (Fn(i32) -> Vec<i32>) {
+@@ -357,11 +369,12 @@ fa ctory() -> (Fn(i32) -> Vec<i32>) {
  
  ```
  
@@ -410,7 +414,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust,ignore
  fn factory() -> &(Fn(i32) -> Vec<i32>) {
-@@ -379,7 +404,7 @@ let answer = f(4);
+@@ -376,7 +389,7 @@ let answer = f(4);
  assert_eq!(vec![1, 2, 3, 4], answer);
  ```
  
@@ -419,7 +423,7 @@ index 01b8163..5ba23a4 100644
  
  ```text
  error: missing lifetime specifier [E0106]
-@@ -387,9 +412,9 @@ fn factory() -> &(Fn(i32) -> i32) {
+@@ -384,9 +397,9 @@ fn factory() -> &(Fn(i32) -> i32) {
                  ^~~~~~~~~~~~~~~~~
  ```
  
@@ -432,7 +436,7 @@ index 01b8163..5ba23a4 100644
  
  ```rust,ignore
  fn factory() -> &'static (Fn(i32) -> i32) {
-@@ -404,7 +429,7 @@ let answer = f(1);
+@@ -401,7 +414,7 @@ let answer = f(1);
  assert_eq!(6, answer);
  ```
  
@@ -441,24 +445,24 @@ index 01b8163..5ba23a4 100644
  
  ```text
  error: mismatched types:
-@@ -417,22 +442,27 @@ error: mismatched types:
+@@ -414,22 +427,23 @@ error: mismatched types:
  
  ```
  
 -This error is letting us know that we don't have a `&'static Fn(i32) -> i32`,
 -we have a `[closure <anon>:7:9: 7:20]`. Wait, what?
 +Эта ошибка сообщает нам, что ожидается использование `&'static Fn(i32) -> i32`,
-+а у используется `[closure <anon>:7:9: 7:20]`. Подождите, что?
++а используется `[closure <anon>:7:9: 7:20]`. Подождите, что?
  
- Because each closure generates its own environment `struct` and implementation
- of `Fn` and friends, these types are anonymous. They exist just solely for
- this closure. So Rust shows them as `closure <anon>`, rather than some
- autogenerated name.
+-Because each closure generates its own environment `struct` and implementation
+-of `Fn` and friends, these types are anonymous. They exist just solely for
+-this closure. So Rust shows them as `closure <anon>`, rather than some
+-autogenerated name.
 +Поскольку каждое замыкание (в индивидуальном порядке) генерирует свою
 +собственную `struct` для окружения и реализует `Fn` и друзей, то эти типы
 +являются анонимными. Они существуют исключительно для этого замыкания. Поэтому
-+Rust показывает их как `closure <anon>`, а не в виде какого-то сгенерированного
-+имени.
++Rust показывает их как `closure <anon>`, а не в виде какого-то автоматически
++сгенерированного имени.
  
 -But why doesn't our closure implement `&'static Fn`? Well, as we discussed before,
 -closures borrow their environment. And in this case, our environment is based
@@ -467,43 +471,46 @@ index 01b8163..5ba23a4 100644
 -over, the stack frame would go away, and our closure is capturing an environment
 -of garbage memory!
 +Но почему же наше замыкание не реализует `&'static Fn`? Как мы обсуждали ранее,
-+замыкание занимает свое окружение. И в этом случае, наше окружение представляет
-+собой выделеную в стеке память, содержащую значени связанной переменной `num` -
-+`5`. Из-за этого заем имеет срок жизни кадра стека. Так что, когда мы вернем это
-+замыкание, то вызов функции будет завершен, а кадр стека уйдет, и наше замыкание
-+захватит окружение, содержащее в памяти мусор!
++замыкание заимствует свое окружение. И в этом случае наше окружение представляет
++собой выделеную в стеке память, содержащую значение связанной переменной `num` -
++`5`. Из-за этого заем имеет срок жизни фрейма стека. Так что, когда мы вернем
++это замыкание, то вызов функции будет завершен, а фрейм стека уйдет, и наше
++замыкание захватит окружение, содержащее в памяти мусор!
  
 -So what to do? This _almost_ works:
 +Так что же делать? Этот код _почти_ работает:
  
  ```rust,ignore
  fn factory() -> Box<Fn(i32) -> i32> {
-@@ -448,7 +478,8 @@ assert_eq!(6, answer);
+@@ -445,7 +459,8 @@ assert_eq!(6, answer);
  # }
  ```
  
 -We use a trait object, by `Box`ing up the `Fn`. There's just one last problem:
-+Мы используем трейт объект, представляющий собой упакованный (`Box`) трейт `Fn`.
-+И остаётся только одна, последняя проблема:
++Мы используем трейт объект, полученный в результате упаковки (`Box`) трейта
++`Fn`. И остаётся только одна, последняя проблема:
  
  ```text
  error: `num` does not live long enough
-@@ -456,8 +487,8 @@ Box::new(|x| x + num)
+@@ -453,8 +468,8 @@ Box::new(|x| x + num)
           ^~~~~~~~~~~
  ```
  
 -We still have a reference to the parent stack frame. With one last fix, we can
 -make this work:
 +Но мы все еще по-прежнему ссылаемся на родительский фрейм стека. С этии
-+последним исправлением мы сможем наконец сделать эту работу:
++последним исправлением мы сможем наконец выполнить эту работу:
  
  ```rust
  fn factory() -> Box<Fn(i32) -> i32> {
-@@ -476,3 +507,7 @@ assert_eq!(6, answer);
- By making the inner closure a `move Fn`, we create a new stack frame for our
- closure. By `Box`ing it up, we've given it a known size, and allowing it to
- escape our stack frame.
+@@ -470,6 +485,7 @@ assert_eq!(6, answer);
+ # }
+ ```
+ 
+-By making the inner closure a `move Fn`, we create a new stack frame for our
+-closure. By `Box`ing it up, we've given it a known size, and allowing it to
+-escape our stack frame.
 +Благодаря изменению внутреннего замыкания на `move Fn` будет создаваться новый
-+кадр стека для нашего замыкания. А благодаря его упаковке (`Box`),
-+обеспечивается известный размер возвращаемого значения, и позволяет ему избежать
-+нашей стека.
++фрейм стека для нашего замыкания. А благодаря упаковке (`Box`) замыкания,
++получается известный размер возвращаемого значения, и позволяет ему избежать
++(быть независимым от) нашего фрейма стека.

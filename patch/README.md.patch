@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/README.md b/fix_current_version:README.md
-index 4a866d6..1698d6c 100644
+diff --git a/rust/master:src/doc/trpl/README.md b/master:introduction.md
+index 4a866d6..4e32c54 100644
 --- a/rust/master:src/doc/trpl/README.md
-+++ b/fix_current_version:README.md
-@@ -1,39 +1,68 @@
++++ b/master:introduction.md
+@@ -1,39 +1,44 @@
 -% The Rust Programming Language
 +% Язык программирования Rust
  
@@ -73,27 +73,3 @@ index 4a866d6..1698d6c 100644
 -This chapter contains things that are only available on the nightly channel of
 -Rust.
 +Эти подразделы содержат вещи, которые доступны только в nightly сборках Rust.
-+
-+## От переводчика
-+
-+В переводе принимали участие:
-+ - [kgv](https://github.com/kgv)
-+ - [ithamsteri](https://github.com/ithamsteri)
-+ - [funkill](https://github.com/funkill)
-+ - [mkpankov](https://github.com/mkpankov)
-+
-+Помощь в переводе приветствуется. ^_^
-+
-+**ВНИМАНИЕ!** Перевод не окончен, поэтому могут встречаться ошибки.
-+
-+Если вы встретили ошибку или неточность в переводе, пожалуйста, напишите о ней
-+[сюда](https://github.com/kgv/rust_book_ru/issues).
-+
-+----
-+
-+Перевод книги (текущий вариант):
-+
-+ * Вариант gitbook расположен [здесь](https://www.gitbook.com/book/kgv/rust_book_ru).
-+ * Вариант rustbook расположен [здесь](http://kgv.github.io/rust_book_ru/)
-+
-+Оригинал книги расположен [здесь](https://doc.rust-lang.org/book).

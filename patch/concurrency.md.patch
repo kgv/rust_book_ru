@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/concurrency.md b/fix_current_version:concurrency.md
-index 6b814a6..8dd94e0 100644
+index f9358f2..5846b3e 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
 +++ b/fix_current_version:concurrency.md
 @@ -1,63 +1,73 @@
@@ -139,8 +139,8 @@ index 6b814a6..8dd94e0 100644
 +хотели такого поведения, то могли бы использовать метод `thread::spawn()`:
  
  ```
- # #![feature(old_io, std_misc)]
-@@ -102,11 +114,12 @@ fn main() {
+ use std::thread;
+@@ -99,11 +111,12 @@ fn main() {
  }
  ```
  
@@ -157,7 +157,7 @@ index 6b814a6..8dd94e0 100644
  
  ```text
  fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
-@@ -115,36 +128,39 @@ fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
+@@ -112,36 +125,39 @@ fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
            F: Send + 'a
  ```
  
@@ -219,8 +219,8 @@ index 6b814a6..8dd94e0 100644
 +гонки данных на многих языках. На Rust она не будет компилироваться:
  
  ```ignore
- # #![feature(old_io, std_misc)]
-@@ -165,7 +181,7 @@ fn main() {
+ use std::thread;
+@@ -159,7 +175,7 @@ fn main() {
  }
  ```
  
@@ -228,8 +228,8 @@ index 6b814a6..8dd94e0 100644
 +Она выдает ошибку:
  
  ```text
- 12:17 error: capture of moved value: `data`
-@@ -173,18 +189,20 @@ This gives us an error:
+ 8:17 error: capture of moved value: `data`
+@@ -167,18 +183,20 @@ This gives us an error:
          ^~~~
  ```
  
@@ -260,8 +260,8 @@ index 6b814a6..8dd94e0 100644
 +вторая версия нашего кода. Она по-прежнему не работает, но по другой причине:
  
  ```ignore
- # #![feature(old_io, std_misc)]
-@@ -207,7 +225,7 @@ fn main() {
+ use std::thread;
+@@ -198,7 +216,7 @@ fn main() {
  }
  ```
  
@@ -269,8 +269,8 @@ index 6b814a6..8dd94e0 100644
 +Вот ошибка:
  
  ```text
- <anon>:11:9: 11:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` [E0277]
-@@ -218,18 +236,18 @@ Here's the error:
+ <anon>:9:9: 9:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard<'_, collections::vec::Vec<u32>>` [E0277]
+@@ -209,18 +227,18 @@ Here's the error:
                    ^~~~~~~~~~~~~
  ```
  
@@ -294,8 +294,8 @@ index 6b814a6..8dd94e0 100644
 +Мы можем использовать `Arc<T>`, чтобы исправить это. Вот рабочая версия:
  
  ```
- # #![feature(old_io, std_misc)]
-@@ -253,9 +271,9 @@ fn main() {
+ use std::sync::{Arc, Mutex};
+@@ -241,9 +259,9 @@ fn main() {
  }
  ```
  
@@ -306,9 +306,9 @@ index 6b814a6..8dd94e0 100644
 +счетчик. Затем эта ручка перемещается в новый поток. Давайте более подробно
 +рассмотрим тело потока:
  
- ```
- # #![feature(old_io, std_misc)]
-@@ -275,25 +293,27 @@ thread::spawn(move || {
+ ```rust
+ # use std::sync::{Arc, Mutex};
+@@ -261,25 +279,27 @@ thread::spawn(move || {
  # }
  ```
  
@@ -351,7 +351,7 @@ index 6b814a6..8dd94e0 100644
  
  ```
  use std::sync::{Arc, Mutex};
-@@ -322,11 +342,13 @@ fn main() {
+@@ -308,11 +328,13 @@ fn main() {
  }
  ```
  
@@ -369,7 +369,7 @@ index 6b814a6..8dd94e0 100644
  
  ```
  use std::thread;
-@@ -349,14 +371,15 @@ fn main() {
+@@ -335,14 +357,15 @@ fn main() {
  }
  ```
  
@@ -390,7 +390,7 @@ index 6b814a6..8dd94e0 100644
  
  ```
  use std::thread;
-@@ -368,5 +391,5 @@ let result = thread::spawn(move || {
+@@ -354,5 +377,5 @@ let result = thread::spawn(move || {
  assert!(result.is_err());
  ```
  

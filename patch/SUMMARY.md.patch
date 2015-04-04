@@ -1,13 +1,14 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/fix_current_version:SUMMARY.md
-index 11e62af..a36935a 100644
+index 11e62af..a371a4a 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/fix_current_version:SUMMARY.md
-@@ -1,48 +1,48 @@
+@@ -1,48 +1,49 @@
 -# Summary
 +# Содержание
  
 -* [The Basics](basic.md)
 -    * [Installing Rust](installing-rust.md)
++* [Введение](introduction.md)
 +* [Начальный Rust](basic.md)
 +    * [Установка Rust](installing-rust.md)
      * [Hello, world!](hello-world.md)

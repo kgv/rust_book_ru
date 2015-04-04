@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/conclusion.md b/fix_current_version:conclusion.md
-index 9afddb1..a495a86 100644
+index 9afddb1..a00bf33 100644
 --- a/rust/master:src/doc/trpl/conclusion.md
 +++ b/fix_current_version:conclusion.md
 @@ -1,11 +1,12 @@
@@ -19,7 +19,7 @@ index 9afddb1..a495a86 100644
 +изучения Rust. Вы можете изучить многие вопросы глубже, например, читая API
 +документацию к [стандартной библиотеке](http://doc.rust-lang.org/std/), или
 +изучая решения для общих проблем в [Rust by Example](http://rustbyexample.com/),
-+или просматривая крейты, написанные сообществом на
++или просматривая контейнеры, написанные сообществом, на
 +[crates.io](https://crates.io/).
  
 -Happy hacking!
