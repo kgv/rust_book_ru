@@ -1,5 +1,6 @@
 # Содержание
 
+* [Введение](introduction.md)
 * [Начальный Rust](basic.md)
     * [Установка Rust](installing-rust.md)
     * [Hello, world!](hello-world.md)
