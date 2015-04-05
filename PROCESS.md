@@ -21,7 +21,7 @@
 * ~~glossary.md~~
 * ~~hello-cargo.md~~
 * ~~hello-world.md~~
-* *if.md*
+* ~~if.md~~
 * inline-assembly.md
 * ~~installing-rust.md~~
 * ~~intermediate.md~~
