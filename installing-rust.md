@@ -21,8 +21,8 @@ $ sudo sh rustup.sh
 ```
 
 Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
-пакетов: [32-битный](https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.exe)
-или [64-битный](https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.exe)
+пакетов: [32-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.exe)
+или [64-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.exe)
 и запустите его.
 
 Если вы решили, что Rust вам больше не нужен, то мы будем чуть-чуть огорчены, но

@@ -14,7 +14,7 @@ pub fn add_two(a: i32) -> i32 {
 }
 
 #[cfg(test)]
-mod tests {
+mod test {
     use super::*;
     use test::Bencher;
 

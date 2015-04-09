@@ -233,8 +233,6 @@ error: type `shapes::Circle` does not implement any method in scope named `area`
 
 ```{rust}
 # #![feature(core)]
-use shapes::HasArea;
-
 mod shapes {
     use std::f64::consts;
 
@@ -255,6 +253,7 @@ mod shapes {
     }
 }
 
+use shapes::HasArea;
 
 fn main() {
     let c = shapes::Circle {
