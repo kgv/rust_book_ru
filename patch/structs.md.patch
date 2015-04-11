@@ -1,0 +1,75 @@
+diff --git a/rust/master:src/doc/trpl/structs.md b/HEAD:structs.md
+index eff1a47..dca5358 100644
+--- a/rust/master:src/doc/trpl/structs.md
++++ b/HEAD:structs.md
+@@ -1,49 +1,53 @@
+-% Structs
++% Структуры
+ 
+-A struct is another form of a *record type*, just like a tuple. There's a
+-difference: structs give each element that they contain a name, called a
+-*field* or a *member*. Check it out:
++Структура - это другой вид *агрегатного типа*, как и кортеж. Разница в том, что
++в структурах у каждого элемента есть имя. Элемент структуры называется *полем*
++или *членом структуры*. Смотрите:
+ 
+ ```rust
+ struct Point {
+     x: i32,
+     y: i32,
+ }
+ 
+ fn main() {
+     let origin = Point { x: 0, y: 0 }; // origin: Point
+ 
+-    println!("The origin is at ({}, {})", origin.x, origin.y);
++    println!("Начало координат находится в ({}, {})", origin.x, origin.y);
+ }
+ ```
+ 
+-There's a lot going on here, so let's break it down. We declare a struct with
+-the `struct` keyword, and then with a name. By convention, structs begin with a
+-capital letter and are also camel cased: `PointInSpace`, not `Point_In_Space`.
++Этот код делает много разных вещей, поэтому давайте разберём его по порядку. Мы
++объявляем структуру с помощью ключевого слова `struct`, за которым следует имя
++объявляемой структуры. Обычно, имена типов-структур начинаются с заглавной буквы
++и используют чередующийся регистр букв: название `PointInSpace` выглядит
++привычно, а `Point_In_Space` - нет.
+ 
+-We can create an instance of our struct via `let`, as usual, but we use a `key:
+-value` style syntax to set each field. The order doesn't need to be the same as
+-in the original declaration.
++Как всегда, мы можем создать экземпляр нашей структуры с помощью оператора
++`let`. Однако в данном случае мы используем синтаксис вида `ключ: значение` для
++установки значения каждого поля. Порядок инициализации полей не обязательно
++должен совпадать с порядком их объявления.
+ 
+-Finally, because fields have names, we can access the field through dot
+-notation: `origin.x`.
++Наконец, поскольку у полей есть имена, мы можем получить поле с помощью операции
++`точка`: `origin.x`.
+ 
+-The values in structs are immutable by default, like other bindings in Rust.
+-Use `mut` to make them mutable:
++Значения, хранимые в структурах, неизменяемы по умолчанию. В этом плане они не
++отличаются от других именованных сущностей. Чтобы они стали изменяемы,
++используйте ключевое слово `mut`:
+ 
+ ```{rust}
+ struct Point {
+     x: i32,
+     y: i32,
+ }
+ 
+ fn main() {
+     let mut point = Point { x: 0, y: 0 };
+ 
+     point.x = 5;
+ 
+-    println!("The point is at ({}, {})", point.x, point.y);
++    println!("Точка находится в ({}, {})", point.x, point.y);
+ }
+ ```
+ 
+-This will print `The point is at (5, 0)`.
++Этот код напечатает `Точка находится в (5, 0)`.

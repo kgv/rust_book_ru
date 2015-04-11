@@ -1,0 +1,38 @@
+diff --git a/rust/master:src/doc/trpl/slices.md b/HEAD:slices.md
+index a31c0ac..173611a 100644
+--- a/rust/master:src/doc/trpl/slices.md
++++ b/HEAD:slices.md
+@@ -1,21 +1,21 @@
+-% Slices
++% Срезы
+ 
+-A *slice* is a reference to (or "view" into) an array. They are useful for
+-allowing safe, efficient access to a portion of an array without copying. For
+-example, you might want to reference just one line of a file read into memory.
+-By nature, a slice is not created directly, but from an existing variable.
+-Slices have a length, can be mutable or not, and in many ways behave like
+-arrays:
++*Срез* - это ссылка на (или "проекция" в) массив. Они полезны, когда нужно
++обеспечить безопасный, эффективный доступ к части массива без копирования.
++Например, возможно вам нужно сослаться на единственную строку файла, считанного
++в память. Из-за своей ссылочной природы, срезы создаются не напрямую, а из
++существующих переменных. У срезов есть длина, они могут быть изменяемы или нет,
++и во многих случаях они ведут себя как массивы:
+ 
+ ```{rust}
+ let a = [0, 1, 2, 3, 4];
+-let middle = &a[1..4]; // A slice of a: just the elements 1, 2, and 3
++let middle = &a[1..4]; // Срез a: только элементы 1, 2, и 3
+ 
+ for e in middle.iter() {
+-    println!("{}", e); // Prints 1, 2, 3
++    println!("{}", e); // Печатает 1, 2, 3
+ }
+ ```
+ 
+-You can also take a slice of a vector, `String`, or `&str`, because they are
+-backed by arrays. Slices have type `&[T]`, which we'll talk about when we cover
+-generics.
++Вы также можете взять срез вектора, типа `String` или `&str`, потому что все они
++реализованы через массивы. Срезы имеют тип `&[T]`, и мы поговорим о нём позже,
++во время обсуждения обобщённых типов.
