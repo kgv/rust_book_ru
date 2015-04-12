@@ -1,3 +1,3 @@
-% Conditional Compilation
+% Условная компиляция
 
-Coming Soon!
+Скоро!

@@ -1,0 +1,9 @@
+diff --git a/rust/master:src/doc/trpl/const.md b/HEAD:const.md
+index 9234c4f..eaf6620 100644
+--- a/rust/master:src/doc/trpl/const.md
++++ b/HEAD:const.md
+@@ -1,3 +1,3 @@
+ % `const`
+ 
+-Coming soon!
++Скоро!

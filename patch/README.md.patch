@@ -1,75 +1,304 @@
 diff --git a/rust/master:src/doc/trpl/README.md b/HEAD:INTRODUCTION.md
-index 6e8d394..4e32c54 100644
+index 8d3a6ec..e12e205 100644
 --- a/rust/master:src/doc/trpl/README.md
 +++ b/HEAD:INTRODUCTION.md
-@@ -1,39 +1,44 @@
+@@ -1,192 +1,214 @@
 -% The Rust Programming Language
 +% Язык программирования Rust
  
--Welcome! This book will teach you about [the Rust Programming
--Language](http://www.rust-lang.org/). Rust is a modern systems programming
--language focusing on safety and speed. It accomplishes these goals by being
--memory safe without using garbage collection.
+-Welcome! This book will teach you about the [Rust Programming Language][rust].
+-Rust is a systems programming language focused on three goals: safety, speed,
+-and concurrency. It maintains these goals without having a garbage collector,
+-making it a useful language for a number of use cases other languages aren’t
+-good at: embedding in other languages, programs with specific space and time
+-requirements, and writing low-level code, like device drivers and operating
+-systems. It improves on current languages targeting this space by having a
+-number of compile-time safety checks that produce no runtime overhead, while
+-eliminating all data races. Rust also aims to achieve ‘zero-cost abstrations’
+-even though some of these abstractions feel like those of a high-level
+-language. Even then, Rust still allows precise control like a low-level
+-language would.
 +Добро пожаловать! Эта книга обучает основным принципам работы с языком
-+программирования [Rust](http://www.rust-lang.org/). Rust - современный системный
-+язык программирования с упором на безопасность и скорость. Он решает эти задачи,
-+используя концепции безопасного управления памятью без использования сборщика
-+мусора.
++программирования [Rust][rust]. Rust - это системный язык программирования,
++внимание которого сосредоточено на трех задачах: безопасность, скорость и
++параллелизм. Он решает эти задачи без сборщика мусора, что делает его полезным в
++ряде случаев, когда использование других языков было бы не целесообразно: при
++встраивании в другие языки, при написании программ с конкретными
++пространственными и временными требованиями, при написании низкоуровневого кода,
++такого как драйверы устройств и операционные системы. Это улучшает текущие
++языки, имеющие аналогичную направленность, тем что имеет ряд проверок
++безопасности во время компиляции, которые не создают накладных расходов во время
++выполнения, но устраняют при этом гонки данных. Rust также направлен ​​на
++достижение ‘абстракции с нулевой стоимостью‘, хотя некоторые из этих абстракций
++ведут себя как в языках высокого уровня. Даже тогда Rust по-прежнему
++обеспечивает точный контроль как делал бы язык низкого уровня.
  
--"The Rust Programming Language" is split into three sections, which you can
--navigate through the menu on the left.
-+Книга "Язык программирования Rust" делится на три раздела, перемещаться к
-+которым вы можете по меню слева.
+ [rust]: http://rust-lang.org
  
--<h2 class="section-header"><a href="basic.html">Basics</a></h2>
-+<h2 class="section-header"><a href="basic.html">Начальный Rust</a></h2>
+-“The Rust Programming Language” is split into seven sections. This introduction
+-is the first. After this:
++Книга "Язык программирования Rust" делится на семь разделов. Это введение
++является первым из них. Затем:
  
--This section is a linear introduction to the basic syntax and semantics of
--Rust. It has individual sections on each part of Rust's syntax.
-+Этот раздел просто описывает основной синтаксис и семантику Rust. Он поделен на
-+подразделы, в каждом из которых описана определенная часть синтаксиса Rust.
-+Завершается раздел небольшим проектом: игрой в догадки.
+-* [Getting started][gs] - Set up your computer for Rust development.
+-* [Learn Rust][lr] - Learn Rust programming through small projects.
+-* [Effective Rust][er] - Higher-level concepts for writing excellent Rust code.
+-* [Syntax and Semantics][ss] - Each bit of Rust, broken down into small chunks.
+-* [Nightly Rust][nr] - Cutting-edge features that aren’t in stable builds yet.
+-* [Glossary][gl] - A reference of terms used in the book.
++* [C чего начать][gs] - Настройка компьютера для разработки на Rust.
++* [Изучение Rust][lr] - Обучение программированию на Rust на примере небольших проектов.
++* [Эффективное использование Rust][er] - Понятия более высокого уровня для написания качественного код на Rust.
++* [Синтаксис и семантика][ss] - Каждая концепция Rust разбивается на небольшие кусочки.
++* [Нестабильные фичи Rust][nr] - Передовые фичи, которые пока не добавлены в стабильную сборку.
++* [Глоссарий][gl] - Ссылки на термины, используемые в книге.
  
--After reading "Basics," you will have a good foundation to learn more about
--Rust, and can write very simple programs.
-+После прочтения раздела "Начальный Rust" вы будете иметь базовые знания,
-+необходимые для дальнейшего изучения Rust, и сможете писать очень простые
-+программы.
+ [gs]: getting-started.html
+ [lr]: learn-rust.html
+ [er]: effective-rust.html
+ [ss]: syntax-and-semantics.html
+ [nr]: nightly-rust.html
+ [gl]: glossary.html
  
--<h2 class="section-header"><a href="intermediate.html">Intermediate</a></h2>
-+<h2 class="section-header"><a href="intermediate.html">Средний Rust</a></h2>
+-After reading this introduction, you’ll want to dive into either ‘Learn Rust’
+-or ‘Syntax and Semantics’, depending on your preference: ‘Learn Rust’ if you
+-want to dive in with a project, or ‘Syntax and Semantics’ if you prefer to
+-start small, and learn a single concept thoroughly before moving onto the next.
+-Copious cross-linking connects these parts together.
++После прочтения этого введения, вы можете продлжить дальнейшее изучение либо в
++направлении ’Изучение Rust’, либо в направлении ’Синтаксис и семантика’, в
++зависимости от ваших предпочтений. ’Изучение Rust’ - если вы предпочитаете
++изучить язык на примере реального проекта. ’Синтаксис и семантика’ - если вы
++предпочитаете тщательно изучить каждую концепцию языка отдельно, перед тем как
++двигаться дальше. Множество кросс-ссылок соединяет эти части воедино.
  
--This section contains individual chapters, which are self-contained. They focus
--on specific topics, and can be read in any order.
-+Этот раздел содержит отдельные подразделы, каждый из которых является
-+самодостаточным. Они сосредоточены на конкретных темах и могут быть прочитаны в
-+любом порядке.
+-## A brief introduction to Rust
++## Краткое введение в Rust
  
--After reading "Intermediate," you will have a solid understanding of Rust,
--and will be able to understand most Rust code and write more complex programs.
-+После прочтения раздела "Средний Rust" вы будете иметь четкое представление о
-+концепциях Rust, будете в состоянии понять большую часть кода на Rust и сможете
-+писать более сложные программы.
+-Is Rust a language you might be interested in? Let’s examine a few small code
+-samples to show off a few of its strengths.
++Rust - это язык, который мог бы заинтересовать вас? Давайте рассмотрим несколько
++небольших примеров кода, чтобы продемонстрировать некоторые из его сильных
++сторон.
  
--<h2 class="section-header"><a href="advanced.html">Advanced</a></h2>
-+<h2 class="section-header"><a href="advanced.html">Продвинутый Rust</a></h2>
+-The main concept that makes Rust unique is called ‘ownership’. Consider this
+-small example:
++Основная концепция, которое делает Rust уникальным, называется ‘владение’.
++Рассмотрим этот небольшой пример:
  
--In a similar fashion to "Intermediate," this section is full of individual,
--deep-dive chapters, which stand alone and can be read in any order. These
--chapters focus on Rust's most complex features.
-+Аналогично разделу "Средний Rust", этот раздел содержит самодостаточные
-+подразделы, которые так же могут быть прочитаны в любом порядке. Эти подразделы
-+содержат материалы для углубленного изучения концепций Rust. Они посвящены
-+наиболее сложным особенносям Rust.
+ ```rust
+ fn main() {
+     let mut x = vec!["Hello", "world"];
+ }
+ ```
  
--<h2 class="section-header"><a href="unstable.html">Unstable</a></h2>
-+<h2 class="section-header"><a href="unstable.html">Нестабильный Rust</a></h2>
+-This program makes a [variable binding][var] named `x`. The value of this
+-binding is a `Vec<T>`, a ‘vector’, that we create through a [macro][macro]
+-defined in the standard library. This macro is called `vec`, and we invoke
+-macros with a `!`. This follows a general principle of Rust: make things
+-explicit. Macros can do significantly more complicated things than function
+-calls, and so they’re visually distinct. The `!` also helps with parsing,
+-making tooling easier to write, which is also important.
++Эта программа создает [привязку переменной][var] с именем `x`. Значением этого
++связывания является `Vec<T>`, ‘вектор‘, который мы создаем с помощью
++[макроса][macro], определенного в стандартной библиотеке. Этот макрос называется
++`vec`, и при его вызове используется символ `!`. Это следует из общего принципа
++Rust: делать вещи ясными. Макрос может делать значительно более сложные вещи,
++чем вызовов функций, и поэтому они визуально отличаются. Символ `!` также
++помогает при парсинге, делая написание инструментов легче, что тоже важно.
  
--In a similar fashion to "Intermediate," this section is full of individual,
--deep-dive chapters, which stand alone and can be read in any order.
-+Аналогично разделу "Средний Rust", этот раздел содержит самодостаточные
-+подразделы, которые так же могут быть прочитаны в любом порядке.
+-We used `mut` to make `x` mutable: bindings are immutable by default in Rust.
+-We’ll be mutating this vector later in the example.
++Мы использовали `mut`, чтобы сделать `x` изменяемой: по умолчанию привязки
++являются неизменяемыми в Rust. Мы будем изменять этот вектор в примере дальше.
  
--This chapter contains things that are only available on the nightly channel of
--Rust.
-+Эти подразделы содержат вещи, которые доступны только в nightly сборках Rust.
+-It’s also worth noting that we didn’t need a type annotation here: while Rust
+-is statically typed, we didn’t need to explicitly annotate the type. Rust has
+-type inference to balance out the power of static typing with the verbosity of
+-annotating types.
++Стоит также отметить, что мы не должны указывать тип здесь: несмотря на то что
++Rust является статически типизированным, мы не должны явно указывать тип. Rust
++обладает выводом типов, чтобы сбалансировать мощь статической типизации с
++многословным указанием типов.
+ 
+-Rust prefers stack allocation to heap allocation: `x` is placed directly on the
+-stack. However, the `Vec<T>` type allocates space for the elements of the
+-vector on the heap. If you’re not familiar with this distinction, you can
+-ignore it for now, or check out [‘The Stack and the Heap’][heap]. As a systems
+-programming language, Rust gives you the ability to control how your memory is
+-allocated, but when we’re getting started, it’s less of a big deal.
++Rust предпочитает выделение памяти в стеке выделению памяти в куче: `x`
++находится непосредственно в стеке. Однако тип `Vec<T>` выделяет пространство для
++элементов вектора в куче. Если вы не знакомы с различиями этих двух видов
++выделения памяти, вы можете пока просто проигнорировать эту информацию или же
++ознакомиться с разделом [‘Стек и Куча‘][heap]. Как системный язык
++программирования, Rust дает вам возможность контролировать выделение памяти, но
++когда мы, как начать, это менее крупной сделки.
+ 
+ [var]: variable-bindings.html
+ [macro]: macros.html
+ [heap]: the-stack-and-the-heap.html
+ 
+-Earlier, we mentioned that ‘ownership’ is the key new concept in Rust. In Rust
+-parlance, `x` is said to ‘own’ the vector. This means that when `x` goes out of
+-scope, the vector’s memory will be de-allocated. This is done deterministically
+-by the Rust compiler, rather than through a mechanism such as a garbage
+-collector. In other words, in Rust, you don’t call functions like `malloc` and
+-`free` yourself: the compiler statically determines when you need to allocate
+-or deallocate memory, and inserts those calls itself. To err is to be human,
+-but compilers never forget.
++Ранее мы упоминали, что ‘владение‘ является ключевой новой концепцией в Rust. В
++терминологиии Rust, `x` ‘владеет‘ вектором. Это означает, что как только `x`
++выходит из области видимости, выделенная для вектора память будет освобождена.
++Это делается детерминированно средствами компилятора Rust, а не через механизм
++сборки мусора. Другими словами, в Rust вы не вызываете функции, такие как
++`malloc` и `free`, самостоятельно: компилятор статически определяет, когда нужно
++выделить или освободить память, и вставляет эти вызовы самостоятельно. Человек
++может совершить ошибку при использовании этих вызовов, а компилятор - никогда.
+ 
+-Let’s add another line to our example:
++Давайте добавим еще одну строку в наш пример:
+ 
+ ```rust
+ fn main() {
+     let mut x = vec!["Hello", "world"];
+ 
+     let y = &x[0];
+ }
+ ```
+ 
+ We’ve introduced another binding, `y`. In this case, `y` is a ‘reference’ to
+ the first element of the vector. Rust’s references are similar to pointers in
+ other languages, but with additional compile-time safety checks. References
+ interact with the ownership system by [‘borrowing’][borrowing] what they point
+ to, rather than owning it. The difference is, when the reference goes out of
+ scope, it will not deallocate the underlying memory. If it did, we’d
+ de-allocate twice, which is bad!
+ 
++Мы создаем еще одну привязку, `y`. В этом случае, `y` является ‘ссылкой‘ на
++первый элемент вектора. Ссылки в Rust похожи на указатели в других языках, но с
++дополнительными проверками безопасности во время компиляции. Ссылки
++взаимодействуют с системой прав владения следующим образом: они
++[‘заимствуют’][borrowing] то, на что указывают, а не владеют этим. Разница в
++том, что когда ссылка выходит за пределы области видимости, она не освобождает
++основную память. Если бы это было не так, то память освобождалась бы два раза,
++что плохо!
++
+ [borrowing]: references-and-borrowing.html
+ 
+-Let’s add a third line. It looks innocent enough, but causes a compiler error:
++Давайте добавим третью строку. На первый взгляд в коде нет ничего такого, но он
++вызывает ошибку компилятора:
+ 
+ ```rust,ignore
+ fn main() {
+     let mut x = vec!["Hello", "world"];
+ 
+     let y = &x[0];
+ 
+     x.push("foo");
+ }
+ ```
+ 
+-`push` is a method on vectors that appends another element to the end of the
+-vector. When we try to compile this program, we get an error:
++`push` - это метод, который добавляет еще один элемент в конец вектора. Когда мы
++пытаемся скомпилировать эту программу, то получаем ошибку:
+ 
+ ```text
+ error: cannot borrow `x` as mutable because it is also borrowed as immutable
+     x.push(4);
+     ^
+ note: previous borrow of `x` occurs here; the immutable borrow prevents
+ subsequent moves or mutable borrows of `x` until the borrow ends
+     let y = &x[0];
+              ^
+ note: previous borrow ends here
+ fn main() {
+ 
+ }
+ ^
+ ```
+ 
+-Whew! The Rust compiler gives quite detailed errors at times, and this is one
+-of those times. As the error explains, while we made our binding mutable, we
+-still cannot call `push`. This is because we already have a reference to an
+-element of the vector, `y`. Mutating something while another reference exists
+-is dangerous, because we may invalidate the reference. In this specific case,
+-when we create the vector, we may have only allocated space for three elements.
+-Adding a fourth would mean allocating a new chunk of memory for all those elements,
+-copying the old values over, and updating the internal pointer to that memory.
+-That all works just fine. The problem is that `y` wouldn’t get updated, and so
+-we’d have a ‘dangling pointer’. That’s bad. Any use of `y` would be an error in
+-this case, and so the compiler has caught this for us.
++Вот так! Компилятор Rust в некоторых случаях выдает достаточно подробные ошибки,
++и это как раз один из тех случаев. Как объясняется в ошибке, мы не можем создать
++изменяемое связывание (не можем вызвать метод `push`), так как у нас уже есть
++неизменяемое связывание. Это потому, что у нас уже есть ссылка на элемент
++вектора, `y`. Выполнять изменение вектора, пока существует другая ссылка на
++него, опасно, потому что можно сделать ссылку недействительной. В данном
++конкретном случае, когда мы создаем вектор, то у нас есть выделенное
++пространство памяти только для трех элементов. Добавление четвертого элемента
++будет означать: выделение нового блока памяти для всех этих элементов,
++копирование старых значений и обновление внутреннего указателя на эту память.
++Все это работает просто отлично. Проблема заключается в том, что `y` не будет
++обновлена, из-за чего мы получим ‘зависший указатель‘. И это плохо. Любое
++использование `y` в этом случае будет означать ошибку, и поэтому компилятор
++поймал ее для нас.
+ 
+-So how do we solve this problem? There are two approaches we can take. The first
+-is making a copy rather than using a reference:
++Так как же нам решить эту проблему? Есть два подхода, которые мы можем
++использовать. Первый заключается в создании копии вместо ссылки:
+ 
+ ```rust
+ fn main() {
+     let mut x = vec!["Hello", "world"];
+ 
+     let y = x[0].clone();
+ 
+     x.push("foo");
+ }
+ ```
+ 
+-Rust has [move semantics][move] by default, so if we want to make a copy of some
+-data, we call the `clone()` method. In this example, `y` is no longer a reference
+-to the vector stored in `x`, but a copy of its first element, `"hello"`. Now
+-that we don’t have a reference, our `push()` works just fine.
++Rust использует [семантику перемещения][move] по умолчанию, поэтому, если мы
++хотим сделать копию некоторых данных, мы должны вызывать метод `clone()`. В этом
++примере `y` больше не является ссылкой на вектор, хранящейся в `x`, но является
++копией его первого элемента, `"hello"`. Теперь, когда у нас больше нет ссылки,
++метод `push()` работает просто отлично.
+ 
+ [move]: move-semantics.html
+ 
+-If we truly want a reference, we need the other option: ensure that our reference
+-goes out of scope before we try to do the mutation. That looks like this:
++Если мы все же хотим ссылку, то следует использовать другой вариант: убедиться,
++что наша ссылка выходит из области видимости прежде чем мы попытаемся сделать
++изменения. Это выглядит примерно так:
+ 
+ ```rust
+ fn main() {
+     let mut x = vec!["Hello", "world"];
+ 
+     {
+         let y = &x[0];
+     }
+ 
+     x.push("foo");
+ }
+ ```
+ 
+-We created an inner scope with an additional set of curly braces. `y` will go out of
+-scope before we call `push()`, and so we’re all good.
++Мы создали внутреннюю область видимости с помощью дополнительных фигурных
++скобок. `y` выйдет за пределы этой области видимости до вызова метода `push()`,
++и поэтому все будет хорошо.
+ 
+-This concept of ownership isn’t just good for preventing danging pointers, but an
+-entire set of related problems, like iterator invalidation, concurrency, and more.
++Концепция права владения хороша не только для предотвращения повисших
++указателей, но также всей совокупности связанных с этим проблем, таких как:
++недействительность итератора, параллелизм и многое другое.

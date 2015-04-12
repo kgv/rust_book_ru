@@ -1,4 +1,4 @@
-%  Box Syntax and Patterns
+% Box Syntax and Patterns
 
 Currently the only stable way to create a `Box` is via the `Box::new` method.
 Also it is not possible in stable Rust to destructure a `Box` in a match

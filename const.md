@@ -1,3 +1,3 @@
 % `const`
 
-Coming soon!
+Скоро!

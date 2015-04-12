@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/deref-coercions.md b/HEAD:deref-coercions.md
+index afacd30..f5ba7a7 100644
+--- a/rust/master:src/doc/trpl/deref-coercions.md
++++ b/HEAD:deref-coercions.md
+@@ -1,3 +1,3 @@
+-% `Deref` coercions
++% Трейт `Deref` (приведение типов)
+ 
+-Coming soon!
++Скоро!

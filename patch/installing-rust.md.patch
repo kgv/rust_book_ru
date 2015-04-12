@@ -1,15 +1,15 @@
 diff --git a/rust/master:src/doc/trpl/installing-rust.md b/HEAD:installing-rust.md
-index c839688..c3ceebd 100644
+index e4054a0..c3ceebd 100644
 --- a/rust/master:src/doc/trpl/installing-rust.md
 +++ b/HEAD:installing-rust.md
-@@ -1,93 +1,90 @@
+@@ -1,99 +1,90 @@
 -% Installing Rust
 +% Установка Rust
  
 -The first step to using Rust is to install it! There are a number of ways to
--install Rust, but the easiest is to use the `rustup` script. If you're on
--Linux or a Mac, all you need to do is this (note that you don't need to type
--in the `$`s, they just indicate the start of each command):
+-install Rust, but the easiest is to use the `rustup` script. If you're on Linux
+-or a Mac, all you need to do is this (note that you don't need to type in the
+-`$`s, they just indicate the start of each command):
 +Первым шагом к использованию Rust является его установка! Есть несколько
 +способов установить Rust, но самый простой из них - использовать скрипт
 +`rustup`. Если вы используете Linux или Mac, то все, что вам нужно сделать - это
@@ -20,8 +20,9 @@ index c839688..c3ceebd 100644
  $ curl -sf -L https://static.rust-lang.org/rustup.sh | sudo sh
  ```
  
--If you're concerned about the [potential insecurity](http://curlpipesh.tumblr.com/) of using `curl | sudo sh`,
--please keep reading and see our disclaimer below. And feel free to use a two-step version of the installation and examine our installation script:
+-If you're concerned about the [potential insecurity][insecurity] of using `curl
+-| sudo sh`, please keep reading and see our disclaimer below. And feel free to
+-use a two-step version of the installation and examine our installation script:
 +Если вы беспокоитесь о [потенциальной безопасности](http://curlpipesh.tumblr.com/)
 +использования данной команды `curl | sudo sh`, то продолжайте читать далее. Вы
 +также можете использовать двухступенчатый вариант установки и изучить наш
@@ -32,16 +33,20 @@ index c839688..c3ceebd 100644
  $ sudo sh rustup.sh
  ```
  
--If you're on Windows, please download either the [32-bit
--installer](https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.exe)
--or the [64-bit
--installer](https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.exe)
--and run it.
+-[insecurity]: http://curlpipesh.tumblr.com
 +Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
 +пакетов: [32-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.exe)
 +или [64-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.exe)
 +и запустите его.
  
+-If you're on Windows, please download either the [32-bit installer][win32] or
+-the [64-bit installer][win64] and run it.
+-
+-[win32]: https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi
+-[win64]: https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi
+-
+-## Uninstalling
+-
 -If you decide you don't want Rust anymore, we'll be a bit sad, but that's okay.
 -Not every programming language is great for everyone. Just run the uninstall
 -script:
@@ -55,26 +60,24 @@ index c839688..c3ceebd 100644
  $ sudo /usr/local/lib/rustlib/uninstall.sh
  ```
  
--If you used the Windows installer, just re-run the `.exe` and it will give you
+-If you used the Windows installer, just re-run the `.msi` and it will give you
 -an uninstall option.
 +Если вы использовали установщик Windows, то просто повторно запустите `.exe`, и
 +это даст вам возможность удаления.
  
--You can re-run this script any time you want to update Rust. Which, at this
--point, is often. Rust is still pre-1.0, and so people assume that you're using
--a very recent Rust.
+-Some people, and somewhat rightfully so, get very upset when we tell you to
+-`curl | sudo sh`. Basically, when you do this, you are trusting that the good
+-people who maintain Rust aren't going to hack your computer and do bad things.
+-That's a good instinct! If you're one of those people, please check out the
+-documentation on [building Rust from Source][from source], or [the official
+-binary downloads][install page]. And we promise that this method will not be
+-the way to install Rust forever: it's just the easiest way to keep people
+-updated while Rust is in its alpha state.
 +Для того, чтобы обновить Rust, вы можете повторно запустить этот скрипт. На
 +данный момент Rust все еще находится в стадии pre-1.0 и очень часто обновляется.
  
--This brings me to one other point: some people, and somewhat rightfully so, get
--very upset when we tell you to `curl | sudo sh`. And they should be! Basically,
--when you do this, you are trusting that the good people who maintain Rust
--aren't going to hack your computer and do bad things. That's a good instinct!
--If you're one of those people, please check out the documentation on [building
--Rust from Source](https://github.com/rust-lang/rust#building-from-source), or
--[the official binary downloads](http://www.rust-lang.org/install.html). And we
--promise that this method will not be the way to install Rust forever: it's just
--the easiest way to keep people updated while Rust is in its alpha state.
+-[from source]: https://github.com/rust-lang/rust#building-from-source
+-[install page]: http://www.rust-lang.org/install.html
 +Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки
 +запускается с правами администратора, что может нарушить безопасность системы.
 +Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha.
@@ -120,7 +123,8 @@ index c839688..c3ceebd 100644
 +Вы должны увидеть версию, хэш коммита, дату коммита и дату сборки:
  
  ```bash
- rustc 1.0.0-nightly (f11f3e7ba 2015-01-04) (built 2015-01-06)
+-rustc 1.0.0-beta (9854143cb 2015-04-02) (built 2015-04-02)
++rustc 1.0.0-nightly (f11f3e7ba 2015-01-04) (built 2015-01-06)
  ```
  
 -If you did, Rust has been installed successfully! Congrats!
@@ -135,13 +139,16 @@ index c839688..c3ceebd 100644
 +В Windows - в директории `share/doc`, относительно того куда вы установили Rust.
  
 -If not, there are a number of places where you can get help. The easiest is
--[the #rust IRC channel on irc.mozilla.org](irc://irc.mozilla.org/#rust), which
--you can access through
--[Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust). Click
--that link, and you'll be chatting with other Rustaceans (a silly nickname we
--call ourselves), and we can help you out. Other great resources include [the
--/r/rust subreddit](http://www.reddit.com/r/rust), and [Stack
--Overflow](http://stackoverflow.com/questions/tagged/rust).
+-[the #rust IRC channel on irc.mozilla.org][irc], which you can access through
+-[Mibbit][mibbit]. Click that link, and you'll be chatting with other Rustaceans
+-(a silly nickname we call ourselves), and we can help you out. Other great
+-resources include [the user’s forum][users], and [Stack Overflow][stack
+-overflow].
+-
+-[irc]: irc://irc.mozilla.org/#rust
+-[mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust
+-[users]: http://users.rust-lang.org/ 
+-[stack overflow]: http://stackoverflow.com/questions/tagged/rust
 +Или же есть еще ряд мест, где можно получить помощь. [Канал #rust на irc.mozilla.org](irc://irc.mozilla.org/#rust),
 +к которому вы можете подключиться через [Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
 +Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это

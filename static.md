@@ -1,3 +1,3 @@
 % `static`
 
-Coming soon!
+Скоро!

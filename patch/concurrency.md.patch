@@ -1,10 +1,10 @@
 diff --git a/rust/master:src/doc/trpl/concurrency.md b/HEAD:concurrency.md
-index f9358f2..8b7dbe8 100644
+index f9358f2..aaa3fea 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
 +++ b/HEAD:concurrency.md
 @@ -1,358 +1,378 @@
 -% Concurrency
-+% Многозадачность (параллелизм)
++% Многозадачность
  
 -Concurrency and parallelism are incredibly important topics in computer
 -science, and are also a hot topic in industry today. Computers are gaining more

@@ -1,3 +1,3 @@
-% Operators and Overloading
+% Перегрузка операций (Operators and Overloading)
 
-Coming soon!
+Скоро!

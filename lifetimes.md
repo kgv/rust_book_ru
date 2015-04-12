@@ -1,3 +1,3 @@
-% Lifetimes
+% Время жизни
 
-Coming soon!
+Скоро!

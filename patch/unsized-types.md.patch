@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/unsized-types.md b/HEAD:unsized-types.md
+index f307f23..d5872f4 100644
+--- a/rust/master:src/doc/trpl/unsized-types.md
++++ b/HEAD:unsized-types.md
+@@ -1,3 +1,3 @@
+-% Unsized Types
++% Безразмерные типы
+ 
+-Coming Soon!
++Скоро!

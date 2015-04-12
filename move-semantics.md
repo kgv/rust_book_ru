@@ -1,3 +1,3 @@
-% Move Semantics
+% Семантика перемещения
 
-Coming Soon
+Скоро!

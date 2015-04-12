@@ -1,3 +1,3 @@
 % `type` Aliases
 
-Coming soon
+Скоро!

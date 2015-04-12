@@ -1,3 +1,3 @@
-% Unsized Types
+% Безразмерные типы
 
-Coming Soon!
+Скоро!

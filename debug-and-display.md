@@ -1,3 +1,3 @@
-% `Debug` and `Display`
+% Трейты `Debug` и `Display`
 
-Coming soon!
+Скоро!

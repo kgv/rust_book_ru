@@ -1,3 +1,3 @@
-% The Stack and the Heap
+% Стек и Куча
 
-Coming Soon
+Скоро!

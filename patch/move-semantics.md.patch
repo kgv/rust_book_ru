@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/move-semantics.md b/HEAD:move-semantics.md
+index 6917d7f..2c986af 100644
+--- a/rust/master:src/doc/trpl/move-semantics.md
++++ b/HEAD:move-semantics.md
+@@ -1,3 +1,3 @@
+-% Move Semantics
++% Семантика перемещения
+ 
+-Coming Soon
++Скоро!

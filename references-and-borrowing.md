@@ -1,3 +1,3 @@
-% References and Borrowing
+% Ссылки и Заимствование
 
-Coming Soon!
+Скоро!

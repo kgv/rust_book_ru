@@ -1,3 +1,3 @@
-% Attributes
+% Атрибуты
 
-Coming Soon!
+Скоро!

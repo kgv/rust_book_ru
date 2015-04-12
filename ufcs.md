@@ -1,3 +1,3 @@
-% Universal Function Call Syntax
+% Универсальный синтаксис вызова функций (Universal Function Call Syntax)
 
-Coming soon
+Скоро!

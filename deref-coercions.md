@@ -1,3 +1,3 @@
-% `Deref` coercions
+% Трейт `Deref` (приведение типов)
 
-Coming soon!
+Скоро!

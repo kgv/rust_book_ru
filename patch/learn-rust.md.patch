@@ -1,0 +1,12 @@
+diff --git a/rust/master:src/doc/trpl/learn-rust.md b/HEAD:learn-rust.md
+index 3d8ef80..95104d3 100644
+--- a/rust/master:src/doc/trpl/learn-rust.md
++++ b/HEAD:learn-rust.md
+@@ -1,4 +1,4 @@
+-% Learn Rust
++% Изучение Rust
+ 
+-This section is coming soon! It will eventually have a few tutorials with
+-building real Rust projects, but they are under development.
++Этот раздел скоро будет! В итоге он будет содержать несколько туториалов по
++сборке реальных проектов на Rust, но сейчас они находятся на стадии разработки.

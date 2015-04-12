@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/references-and-borrowing.md b/HEAD:references-and-borrowing.md
+index 6acb326..ad9007d 100644
+--- a/rust/master:src/doc/trpl/references-and-borrowing.md
++++ b/HEAD:references-and-borrowing.md
+@@ -1,3 +1,3 @@
+-% References and Borrowing
++% Ссылки и Заимствование
+ 
+-Coming Soon!
++Скоро!

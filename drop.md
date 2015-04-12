@@ -1,3 +1,3 @@
-% `Drop`
+% Трейт `Drop`
 
-Coming soon!
+Скоро!

@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/lifetimes.md b/HEAD:lifetimes.md
+index c6eee97..887d5b3 100644
+--- a/rust/master:src/doc/trpl/lifetimes.md
++++ b/HEAD:lifetimes.md
+@@ -1,3 +1,3 @@
+-% Lifetimes
++% Время жизни
+ 
+-Coming soon!
++Скоро!

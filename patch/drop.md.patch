@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/drop.md b/HEAD:drop.md
+index af58e23..d441121 100644
+--- a/rust/master:src/doc/trpl/drop.md
++++ b/HEAD:drop.md
+@@ -1,3 +1,3 @@
+-% `Drop`
++% Трейт `Drop`
+ 
+-Coming soon!
++Скоро!

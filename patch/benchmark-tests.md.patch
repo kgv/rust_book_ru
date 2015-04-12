@@ -1,10 +1,10 @@
 diff --git a/rust/master:src/doc/trpl/benchmark-tests.md b/HEAD:benchmark-tests.md
-index 890a2f8..338ba9e 100644
+index 890a2f8..e333ae7 100644
 --- a/rust/master:src/doc/trpl/benchmark-tests.md
 +++ b/HEAD:benchmark-tests.md
 @@ -1,152 +1,162 @@
 -% Benchmark tests
-+# Тесты производительности
++% Тесты производительности
  
 -Rust supports benchmark tests, which can test the performance of your
 -code. Let's make our `src/lib.rs` look like this (comments elided):

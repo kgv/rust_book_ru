@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/casting-between-types.md b/HEAD:casting-between-types.md
+index 8bb0ec6..8b4dce2 100644
+--- a/rust/master:src/doc/trpl/casting-between-types.md
++++ b/HEAD:casting-between-types.md
+@@ -1,3 +1,3 @@
+-% Casting Between Types
++% Приведение типов
+ 
+-Coming Soon
++Скоро!

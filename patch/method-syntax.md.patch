@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/method-syntax.md b/HEAD:method-syntax.md
-index f6eacd0..a098627 100644
+index ae83a93..a098627 100644
 --- a/rust/master:src/doc/trpl/method-syntax.md
 +++ b/HEAD:method-syntax.md
 @@ -1,232 +1,236 @@
@@ -12,7 +12,8 @@ index f6eacd0..a098627 100644
 +каких-либо данных, то это может быть неудобно. Рассмотрим этот код:
  
  ```{rust,ignore}
- baz(bar(foo(x)));
+-baz(bar(foo)));
++baz(bar(foo(x)));
  ```
  
 -We would read this left-to right, and so we see "baz bar foo." But this isn't the
@@ -24,7 +25,8 @@ index f6eacd0..a098627 100644
 +нечто вроде нижеприведенного синтаксиса вызова?
  
  ```{rust,ignore}
- x.foo().bar().baz();
+-foo.bar().baz();
++x.foo().bar().baz();
  ```
  
 -Luckily, as you may have guessed with the leading question, you can! Rust provides
@@ -65,8 +67,8 @@ index f6eacd0..a098627 100644
 -We've made a struct that represents a circle. We then write an `impl` block,
 -and inside it, define a method, `area`. Methods take a  special first
 -parameter, of which there are three variants: `self`, `&self`, and `&mut self`.
--You can think of this first parameter as being the `x` in `x.foo()`. The three
--variants correspond to the three kinds of thing `x` could be: `self` if it's
+-You can think of this first parameter as being the `foo` in `foo.bar()`. The three
+-variants correspond to the three kinds of things `foo` could be: `self` if it's
 -just a value on the stack, `&self` if it's a reference, and `&mut self` if it's
 -a mutable reference. We should default to using `&self`, as you should prefer
 -borrowing over taking ownership, as well as taking immutable references

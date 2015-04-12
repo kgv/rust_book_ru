@@ -1,0 +1,10 @@
+diff --git a/rust/master:src/doc/trpl/the-stack-and-the-heap.md b/HEAD:the-stack-and-the-heap.md
+index cc0941b..d44dabc 100644
+--- a/rust/master:src/doc/trpl/the-stack-and-the-heap.md
++++ b/HEAD:the-stack-and-the-heap.md
+@@ -1,3 +1,3 @@
+-% The Stack and the Heap
++% Стек и Куча
+ 
+-Coming Soon
++Скоро!
