@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/primitive-types.md b/HEAD:primitive-types.md
-index fcbe2b2..b2161de 100644
+index fcbe2b2..fd9aa14 100644
 --- a/rust/master:src/doc/trpl/primitive-types.md
 +++ b/HEAD:primitive-types.md
 @@ -1,268 +1,271 @@
@@ -312,8 +312,7 @@ index fcbe2b2..b2161de 100644
 +имеют одинаковую [арность][arity]. Арность кортежей одинакова, когда их длина
 +совпадает.
  
--[arity]: glossary.html#arity
-+[arity]: ./glossary.html#arity
+ [arity]: glossary.html#arity
  
  ```rust
  let mut x = (1, 2); // x: (i32, i32)

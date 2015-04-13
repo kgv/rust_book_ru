@@ -243,7 +243,7 @@ println!("x это {}", x);
 имеют одинаковую [арность][arity]. Арность кортежей одинакова, когда их длина
 совпадает.
 
-[arity]: ./glossary.html#arity
+[arity]: glossary.html#arity
 
 ```rust
 let mut x = (1, 2); // x: (i32, i32)
