@@ -1,29 +1,32 @@
 diff --git a/rust/master:src/doc/trpl/patterns.md b/HEAD:patterns.md
-index c88e3a0..e536534 100644
+index c88e3a0..545b448 100644
 --- a/rust/master:src/doc/trpl/patterns.md
 +++ b/HEAD:patterns.md
-@@ -1,196 +1,206 @@
+@@ -1,196 +1,204 @@
 -% Patterns
 +% Шаблоны `match`
  
 -Patterns are quite common in Rust. We use them in [variable
 -bindings][bindings], [match statements][match], and other places, too. Let’s go
 -on a whirlwind tour of all of the things patterns can do!
-+Мы уже использовали шаблоны несколько раз в этом руководстве: сначала при
-+рассмотрении оператора `let`, а затем при изучении конструкции `match`. Давайте
-+коротко пробежимся по всем возможностям, которые можно реализовать с помощью
-+шаблонов!
++-Patterns are quite common in Rust. We use them in [variable
++-bindings][bindings], [match statements][match], and other places, too. Let’s go
++-on a whirlwind tour of all of the things patterns can do!
++
++Шаблоны достаточно часто используются в Rust. Мы уже использовали их в разделе
++[Связывание переменных][bindings], в разделе [Конструкция `match`][match] и в
++некоторых других местах. Давайте коротко пробежимся по всем возможностям,
++которые можно реализовать с помощью шаблонов!
  
--[bindings]: variable-bindings.html
--[match]: match.html
-+Быстро освежим в памяти: сопоставлять с образцами литералы можно либо напрямую,
-+либо с помощью символа `_`, который означает *любой* случай:
+ [bindings]: variable-bindings.html
+ [match]: match.html
  
 -A quick refresher: you can match against literals directly, and `_` acts as an
 -‘any’ case:
--
--```rust
-+```{rust}
++Быстро освежим в памяти: сопоставлять с шаблоном литералы можно либо напрямую,
++либо с использованием символа `_`, который означает *любой* случай:
+ 
+ ```rust
  let x = 1;
  
  match x {
@@ -35,12 +38,12 @@ index c88e3a0..e536534 100644
  ```
  
 -# Multiple patterns
-+Вы можете сопоставлять с несколькими шаблонами, используя `|`:
++# Сопоставление с несколькими шаблонами
  
 -You can match multiple patterns with `|`:
--
--```rust
-+```{rust}
++Вы можете сопоставлять с несколькими шаблонами, используя `|`:
+ 
+ ```rust
  let x = 1;
  
  match x {
@@ -51,12 +54,12 @@ index c88e3a0..e536534 100644
  ```
  
 -# Ranges
-+Вы можете сопоставлять с диапазоном значений, используя `...`:
++# Сопоставление с диапазоном
  
 -You can match a range of values with `...`:
--
--```rust
-+```{rust}
++Вы можете сопоставлять с диапазоном значений, используя `...`:
+ 
+ ```rust
  let x = 1;
  
  match x {
@@ -69,14 +72,14 @@ index c88e3a0..e536534 100644
 +Диапазоны в основном используются с числами или одиночными символами.
  
 -# Bindings
-+Если вы используете множественное сопоставление, с помощью `|` или `...`, вы
-+можете присвоить значение переменной с именем `@`:
++# Связывание
  
 -If you’re matching multiple things, via a `|` or a `...`, you can bind
 -the value to a name with `@`:
--
--```rust
-+```{rust}
++Если вы используете множественное сопоставление, с помощью `|` или `...`, вы
++можете связать значение с именем с помощью символа `@`:
+ 
+ ```rust
  let x = 1;
  
  match x {
@@ -86,14 +89,14 @@ index c88e3a0..e536534 100644
  ```
  
 -# Ignoring variants
-+Если при сопоставлении вы используете перечисление, содержащее варианты, то вы
-+можете указать `..`, чтобы проигнорировать значение и тип в варианте:
++# Игнорирование вариантов
  
 -If you’re matching on an enum which has variants, you can use `..` to
 -ignore the value and type in the variant:
--
--```rust
-+```{rust}
++Если при сопоставлении вы используете перечисление, содержащее варианты, то вы
++можете указать `..`, чтобы проигнорировать значение и тип в варианте:
+ 
+ ```rust
  enum OptionalInt {
      Value(i32),
      Missing,
@@ -108,13 +111,12 @@ index c88e3a0..e536534 100644
  ```
  
 -# Guards
-+Вы можете ввести *ограничители шаблонов сопоставления* (*match guards*) с
-+помощью `if`:
++# Ограничители шаблонов
  
 -You can introduce ‘match guards’ with `if`:
--
--```rust
-+```{rust}
++Вы можете ввести *ограничители шаблонов* (*match guards*) с помощью `if`:
+ 
+ ```rust
  enum OptionalInt {
      Value(i32),
      Missing,
@@ -130,26 +132,12 @@ index c88e3a0..e536534 100644
  ```
  
 -# ref and ref mut
-+Если вы сопоставляете с указателем, то вы можете использовать тот же синтаксис,
-+что и при его объявлении. Во-первых, `&`:
++# ref и ref mut
  
 -If you want to get a [reference][ref], use the `ref` keyword:
-+```{rust}
-+let x = &5;
++Если вы хотите получить [ссылку][ref], то используйте ключевое слово `ref`:
  
--```rust
-+match x {
-+    &val => println!("Got a value: {}", val),
-+}
-+```
-+
-+Здесь `val` внутри `match` имеет тип `i32`. Другими словами, в левой части
-+шаблона сопоставления значение деструктурируется. Если `&val` соответствует
-+`&5`, то `val` будет `5`.
-+
-+Если же вы хотите получить ссылку, то используйте ключевое слово `ref`:
-+
-+```{rust}
+ ```rust
  let x = 5;
  
  match x {
@@ -157,17 +145,16 @@ index c88e3a0..e536534 100644
  }
  ```
  
--[ref]: references-and-borrowing.html
-+Здесь `r` внутри `match` имеет тип `&i32`. Другими словами, ключевое слово `ref`
-+_создает_ ссылку, для использования в шаблоне. Если вам нужна изменяемая ссылка,
-+то `ref mut` будет работать аналогичным образом:
+ [ref]: references-and-borrowing.html
  
 -Here, the `r` inside the `match` has the type `&i32`. In other words, the `ref`
 -keyword _creates_ a reference, for use in the pattern. If you need a mutable
 -reference, `ref mut` will work in the same way:
--
--```rust
-+```{rust}
++Здесь `r` внутри `match` имеет тип `&i32`. Другими словами, ключевое слово `ref`
++_создает_ ссылку, для использования в шаблоне. Если вам нужна изменяемая ссылка,
++то `ref mut` будет работать аналогичным образом:
+ 
+ ```rust
  let mut x = 5;
  
  match x {
@@ -176,14 +163,14 @@ index c88e3a0..e536534 100644
  ```
  
 -# Destructuring
-+Если у вас есть структура, вы можете деструктурировать ее внутри шаблона:
++# Деструктуризация
  
 -If you have a compound data type, like a `struct`, you can destructure it
 -inside of a pattern:
--
--```rust
-+```{rust}
-+# #![allow(non_shorthand_field_patterns)]
++Если у вас есть сложный тип данных, например структура, вы можете
++деструктурировать его внутри шаблона:
+ 
+ ```rust
  struct Point {
      x: i32,
      y: i32,
@@ -200,9 +187,7 @@ index c88e3a0..e536534 100644
 +Если нам нужны значения только некоторых из полей структуры, то мы можем не
 +присваивать им всем имена:
  
--```rust
-+```{rust}
-+# #![allow(non_shorthand_field_patterns)]
+ ```rust
  struct Point {
      x: i32,
      y: i32,
@@ -218,9 +203,7 @@ index c88e3a0..e536534 100644
 -You can do this kind of match on any member, not just the first:
 +Вы можете сделать это для любого поля, а не только для первого:
  
--```rust
-+```{rust}
-+# #![allow(non_shorthand_field_patterns)]
+ ```rust
  struct Point {
      x: i32,
      y: i32,
@@ -235,23 +218,13 @@ index c88e3a0..e536534 100644
  
 -This ‘destructuring’ behavior works on any compound data type, like
 -[tuples][tuples] or [enums][enums].
-+Если вы хотите использовать сопоставление со срезом или массивом, то вы можете
-+указать `&`:
++Такое ‘деструктурирование‘ работает для любых сложных типов данных, таких как
++[кортежи][tuples] или [перечисления][enums].
  
--[tuples]: primitive-types.html#tuples
--[enums]: enums.html
-+```{rust}
-+# #![feature(slice_patterns)]
-+fn main() {
-+    let v = vec!["match_this", "1"];
+ [tuples]: primitive-types.html#tuples
+ [enums]: enums.html
  
--# Mix and Match
-+    match &v[..] {
-+        ["match_this", second] => println!("The second element is {}", second),
-+        _ => {},
-+    }
-+}
-+```
+ # Mix and Match
  
 -Whew! That’s a lot of different ways to match things, and they can all be
 -mixed and matched, depending on what you’re doing:
