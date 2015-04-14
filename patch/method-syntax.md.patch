@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/method-syntax.md b/HEAD:method-syntax.md
-index ae83a93..a098627 100644
+index ae83a93..3079a85 100644
 --- a/rust/master:src/doc/trpl/method-syntax.md
 +++ b/HEAD:method-syntax.md
 @@ -1,232 +1,236 @@
@@ -12,8 +12,7 @@ index ae83a93..a098627 100644
 +каких-либо данных, то это может быть неудобно. Рассмотрим этот код:
  
  ```{rust,ignore}
--baz(bar(foo)));
-+baz(bar(foo(x)));
+ baz(bar(foo)));
  ```
  
 -We would read this left-to right, and so we see "baz bar foo." But this isn't the
@@ -25,8 +24,7 @@ index ae83a93..a098627 100644
 +нечто вроде нижеприведенного синтаксиса вызова?
  
  ```{rust,ignore}
--foo.bar().baz();
-+x.foo().bar().baz();
+ foo.bar().baz();
  ```
  
 -Luckily, as you may have guessed with the leading question, you can! Rust provides
