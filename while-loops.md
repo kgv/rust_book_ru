@@ -8,8 +8,12 @@ let mut done = false; // mut done: bool
 
 while !done {
     x += x - 3;
+
     println!("{}", x);
-    if x % 5 == 0 { done = true; }
+
+    if x % 5 == 0 {
+        done = true;
+    }
 }
 ```
 
@@ -19,13 +23,13 @@ while !done {
 
 Если вам нужен бесконечный цикл, то можете сделать условие всегда истинным:
 
-```{rust,ignore}
+```rust,ignore
 while true {
 ```
 
 Однако, в Rust имеется ключевое слово `loop` для такого случая:
 
-```{rust,ignore}
+```rust,ignore
 loop {
 ```
 
@@ -39,14 +43,18 @@ loop {
 
 Давайте посмотрим на цикл `while` снова:
 
-```{rust}
+```rust
 let mut x = 5;
 let mut done = false;
 
 while !done {
     x += x - 3;
+
     println!("{}", x);
-    if x % 5 == 0 { done = true; }
+
+    if x % 5 == 0 {
+        done = true;
+    }
 }
 ```
 
@@ -57,23 +65,25 @@ while !done {
 Можем переписать цикл более лучшим способом с помощью `break`, чтобы избавиться
 от переменной `done`:
 
-```{rust}
+```rust
 let mut x = 5;
 
 loop {
     x += x - 3;
+
     println!("{}", x);
+
     if x % 5 == 0 { break; }
 }
 ```
 
-Теперь мы исользуем бесконечный цикл `loop` и для выхода из цикла `break`.
+Теперь мы используем бесконечный цикл `loop` и `break` для выхода из цикла.
 
 `continue` похож на `break`, но вместо выхода из цикла переходит к следующей
 итерации. Следующий пример отобразит только нечетные числа:
 
-```{rust}
-for x in 0u32..10 {
+```rust
+for x in 0..10 {
     if x % 2 == 0 { continue; }
 
     println!("{}", x);
@@ -81,4 +91,6 @@ for x in 0u32..10 {
 ```
 
 Использовать `continue` и `break` можно как в циклах `while`, так и в циклах
-`for`.
+[`for`][for].
+
+[for]: for-loops.html

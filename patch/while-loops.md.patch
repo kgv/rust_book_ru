@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/while-loops.md b/HEAD:while-loops.md
-index f2e2f6b..a869e40 100644
+index f2e2f6b..d3ac08e 100644
 --- a/rust/master:src/doc/trpl/while-loops.md
 +++ b/HEAD:while-loops.md
-@@ -1,93 +1,84 @@
+@@ -1,93 +1,96 @@
 -% while loops
 +% Циклы `while`
  
@@ -15,13 +15,12 @@ index f2e2f6b..a869e40 100644
  
  while !done {
      x += x - 3;
--
+ 
      println!("{}", x);
--
--    if x % 5 == 0 {
--        done = true;
--    }
-+    if x % 5 == 0 { done = true; }
+ 
+     if x % 5 == 0 {
+         done = true;
+     }
  }
  ```
  
@@ -34,16 +33,14 @@ index f2e2f6b..a869e40 100644
 -If you need an infinite loop, you may be tempted to write this:
 +Если вам нужен бесконечный цикл, то можете сделать условие всегда истинным:
  
--```rust,ignore
-+```{rust,ignore}
+ ```rust,ignore
  while true {
  ```
  
 -However, Rust has a dedicated keyword, `loop`, to handle this case:
 +Однако, в Rust имеется ключевое слово `loop` для такого случая:
  
--```rust,ignore
-+```{rust,ignore}
+ ```rust,ignore
  loop {
  ```
  
@@ -64,20 +61,18 @@ index f2e2f6b..a869e40 100644
 -Let’s take a look at that `while` loop we had earlier:
 +Давайте посмотрим на цикл `while` снова:
  
--```rust
-+```{rust}
+ ```rust
  let mut x = 5;
  let mut done = false;
  
  while !done {
      x += x - 3;
--
+ 
      println!("{}", x);
--
--    if x % 5 == 0 {
--        done = true;
--    }
-+    if x % 5 == 0 { done = true; }
+ 
+     if x % 5 == 0 {
+         done = true;
+     }
  }
  ```
  
@@ -92,31 +87,28 @@ index f2e2f6b..a869e40 100644
 +Можем переписать цикл более лучшим способом с помощью `break`, чтобы избавиться
 +от переменной `done`:
  
--```rust
-+```{rust}
+ ```rust
  let mut x = 5;
  
  loop {
      x += x - 3;
--
+ 
      println!("{}", x);
--
+ 
      if x % 5 == 0 { break; }
  }
  ```
  
 -We now loop forever with `loop` and use `break` to break out early.
-+Теперь мы исользуем бесконечный цикл `loop` и для выхода из цикла `break`.
++Теперь мы используем бесконечный цикл `loop` и `break` для выхода из цикла.
  
 -`continue` is similar, but instead of ending the loop, goes to the next
 -iteration. This will only print the odd numbers:
 +`continue` похож на `break`, но вместо выхода из цикла переходит к следующей
 +итерации. Следующий пример отобразит только нечетные числа:
  
--```rust
--for x in 0..10 {
-+```{rust}
-+for x in 0u32..10 {
+ ```rust
+ for x in 0..10 {
      if x % 2 == 0 { continue; }
  
      println!("{}", x);
@@ -124,7 +116,7 @@ index f2e2f6b..a869e40 100644
  ```
  
 -Both `continue` and `break` are valid in both `while` loops and [`for` loops][for].
--
--[for]: for-loops.html
 +Использовать `continue` и `break` можно как в циклах `while`, так и в циклах
-+`for`.
++[`for`][for].
+ 
+ [for]: for-loops.html

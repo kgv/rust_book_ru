@@ -1,10 +1,10 @@
 diff --git a/rust/master:src/doc/trpl/match.md b/HEAD:match.md
-index 33d603f..65b6c41 100644
+index 33d603f..259afd0 100644
 --- a/rust/master:src/doc/trpl/match.md
 +++ b/HEAD:match.md
-@@ -1,62 +1,160 @@
+@@ -1,62 +1,65 @@
 -% Match
-+% Конструкция `match` (Сопоставление с шаблоном (образцом))
++% Конструкция `match` (Сопоставление с шаблоном)
  
 -Often, a simple `if`/`else` isn’t enough, because you have more than two
 -possible options. Also, `else` conditions can get incredibly complicated, so
@@ -18,8 +18,7 @@ index 33d603f..65b6c41 100644
 +В Rust есть ключевое слово `match`, позволяющее заменить группы операторов
 +`if`/`else` чем-то более удобным. Смотрите:
  
--```rust
-+```{rust}
+ ```rust
  let x = 5;
  
  match x {
@@ -48,10 +47,11 @@ index 33d603f..65b6c41 100644
 +вычисляется, когда значение данной ветви совпадает со значением, принятым
 +оператором `match` (в данном случае, `x`). Эта конструкция называется `match`
 +(сопоставление), потому что она выполняет сопоставление значения неким
-+"образцам".
++"шаблонам". Раздел [Шаблоны][patterns], идущий далее, охватывает все варианты,
++которые были затронуты здесь.
  
--[patterns]: patterns.html
--
+ [patterns]: patterns.html
+ 
 -So what’s the big advantage here? Well, there are a few. First of all, `match`
 -enforces *exhaustiveness checking*. Do you see that last arm, the one with the
 -underscore (`_`)? If we remove that arm, Rust will give us an error:
@@ -72,136 +72,28 @@ index 33d603f..65b6c41 100644
 +Другими словами, компилятор сообщает нам, что мы забыли сопоставить какие-то
 +значения. Поскольку `x` - это целое число, оно может принимать разные значения -
 +например, `6`. Однако, если мы убираем ветвь `_`, ни одна ветвь не совпадёт,
-+поэтому такой код не скомпилируется. `_` - это *совпадение с любым значением*.
++поэтому такой код не скомпилируется. `_` - это ‘совпадение с любым значением‘.
 +Если ни одна другая ветвь не совпала, совпадёт ветвь с `_`. Поскольку в примере
 +выше есть ветвь с `_`, мы покрываем всё множество значений `x`, и наша программа
 +скомпилируется.
  
 -`match` is also an expression, which means we can use it on the right-hand
 -side of a `let` binding or directly where an expression is used:
-+Оператор `match` также осуществляет разбор перечислений. Помните этот код из
-+раздела про перечисления?
++`match` также является выражением. Это значит, что мы можем использовать его в
++правой части оператора `let` или непосредственно как выражение:
  
--```rust
--let x = 5;
-+```{rust}
-+use std::cmp::Ordering;
+ ```rust
+ let x = 5;
  
--let numer = match x {
--    1 => "one",
--    2 => "two",
--    3 => "three",
--    4 => "four",
--    5 => "five",
--    _ => "something else",
--};
-+fn cmp(a: i32, b: i32) -> Ordering {
-+    if a < b { Ordering::Less }
-+    else if a > b { Ordering::Greater }
-+    else { Ordering::Equal }
-+}
-+
-+fn main() {
-+    let x = 5;
-+    let y = 10;
-+
-+    let ordering = cmp(x, y);
-+
-+    if ordering == Ordering::Less {
-+        println!("меньше");
-+    } else if ordering == Ordering::Greater {
-+        println!("больше");
-+    } else if ordering == Ordering::Equal {
-+        println!("равно");
-+    }
-+}
+ let numer = match x {
+     1 => "one",
+     2 => "two",
+     3 => "three",
+     4 => "four",
+     5 => "five",
+     _ => "something else",
+ };
  ```
  
 -Sometimes, it’s a nice way of converting things.
-+Мы можем переписать его с использованием `match`:
-+
-+```{rust}
-+use std::cmp::Ordering;
-+
-+fn cmp(a: i32, b: i32) -> Ordering {
-+    if a < b { Ordering::Less }
-+    else if a > b { Ordering::Greater }
-+    else { Ordering::Equal }
-+}
-+
-+fn main() {
-+    let x = 5;
-+    let y = 10;
-+
-+    match cmp(x, y) {
-+        Ordering::Less => println!("меньше"),
-+        Ordering::Greater => println!("больше"),
-+        Ordering::Equal => println!("равно"),
-+    }
-+}
-+```
-+
-+Такой код не только чище, но и проверяет полноту сопоставления вариантов
-+перечисления `Ordering`. Если бы мы забыли случай `Greater` в примере с
-+`if`/`else`, наша программа всё равно скомпилировалась бы. А вот если мы забудем
-+сопоставить вариант перечисления в операторе `match`, то компилятор выдаст
-+ошибку. Rust помогает нам удостовериться, что перечисление обрабатывается верно.
-+
-+Оператор `match` также позволяет извлекать значения, содержащихся в
-+перечислении. Это по-другому называется "деконструкцией" или "разбором".
-+
-+```{rust}
-+enum OptionalInt {
-+    Value(i32),
-+    Missing,
-+}
-+
-+fn main() {
-+    let x = OptionalInt::Value(5);
-+    let y = OptionalInt::Missing;
-+
-+    match x {
-+        OptionalInt::Value(n) => println!("x равен {}", n),
-+        OptionalInt::Missing => println!("x отсутствует!"),
-+    }
-+
-+    match y {
-+        OptionalInt::Value(n) => println!("y равен {}", n),
-+        OptionalInt::Missing => println!("y отсутствует!"),
-+    }
-+}
-+```
-+
-+Вот так вы можете получить и использовать значения из перечислений. Это также
-+позволяет нам организовать обработку ошибок или непредвиденных ситуаций.
-+Например, функция, которая не всегда может вычислить результат (в данном случае
-+типа `i32`), может возвращать `OptionalInt`. Такое значение затем можно
-+обработать с помощью `match`. Как вы можете видеть, `enum` и `match` отлично
-+дополняют друг друга!
-+
-+`match` также является выражением. Это значит, что мы можем использовать его в
-+правой части оператора `let` или прямо как результат. Мы могли бы реализовать
-+предыдущий пример так:
-+
-+```{rust}
-+use std::cmp::Ordering;
-+
-+fn cmp(a: i32, b: i32) -> Ordering {
-+    if a < b { Ordering::Less }
-+    else if a > b { Ordering::Greater }
-+    else { Ordering::Equal }
-+}
-+
-+fn main() {
-+    let x = 5;
-+    let y = 10;
-+
-+    println!("{}", match cmp(x, y) {
-+        Ordering::Less => "меньше",
-+        Ordering::Greater => "больше",
-+        Ordering::Equal => "равно",
-+    });
-+}
-+```
-+
-+Иногда это очень удобно.
++Иногда это очень удобный вариант преобразования.

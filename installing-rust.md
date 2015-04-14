@@ -10,43 +10,47 @@
 $ curl -sf -L https://static.rust-lang.org/rustup.sh | sudo sh
 ```
 
-Если вы беспокоитесь о [потенциальной безопасности](http://curlpipesh.tumblr.com/)
-использования данной команды `curl | sudo sh`, то продолжайте читать далее. Вы
-также можете использовать двухступенчатый вариант установки и изучить наш
-установочный скрипт:
+Если вы беспокоитесь о [потенциальной безопасности][insecurity] использования
+данной команды `curl | sudo sh`, то продолжайте читать далее. Вы также можете
+использовать двухступенчатый вариант установки и изучить наш установочный
+скрипт:
 
 ```bash
 $ curl -f -L https://static.rust-lang.org/rustup.sh -O
 $ sudo sh rustup.sh
 ```
 
+[insecurity]: http://curlpipesh.tumblr.com
+
 Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
-пакетов: [32-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.exe)
-или [64-битный](https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.exe)
-и запустите его.
+пакетов: [32-битный][win32] или [64-битный][win64] и запустите его.
+
+[win32]: https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi
+[win64]: https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi
+
+## Удаление
 
 Если вы решили, что Rust вам больше не нужен, то мы будем чуть-чуть огорчены, но
 это нормально. Не каждый язык программирования отлично подходит для всех. Просто
-запустите скрипт деинсталляции (примечание переводчика: Удалить Rust можно через
-`Панель управления` -> `Программы` -> `Удаление программы`, а затем выбираем
-Rust в списке и нажимаем кнопку `Удалить`.):
+запустите скрипт деинсталляции:
 
 ```bash
 $ sudo /usr/local/lib/rustlib/uninstall.sh
 ```
 
-Если вы использовали установщик Windows, то просто повторно запустите `.exe`, и
+Если вы использовали установщик Windows, то просто повторно запустите `.msi`, и
 это даст вам возможность удаления.
-
-Для того, чтобы обновить Rust, вы можете повторно запустить этот скрипт. На
-данный момент Rust все еще находится в стадии pre-1.0 и очень часто обновляется.
 
 Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки
 запускается с правами администратора, что может нарушить безопасность системы.
-Скрипт был сделан для быстрого обновления пока Rust находится в стадии alpha.
 Для безопасной установки Rust предлагаем изучить документацию по [установке Rust
-из исходных кодов](https://github.com/rust-lang/rust#building-from-source) или
-скачать уже [скомпилированный Rust](http://www.rust-lang.org/install.html).
+из исходных кодов][from source] или скачать уже [скомпилированный Rust][install
+page]. Мы обещаем, что данный способ не является окончательным для установки
+Rust: скрипт был сделан для быстрого обновления пока Rust находится в стадии
+alpha.
+
+[from source]: https://github.com/rust-lang/rust#building-from-source
+[install page]: http://www.rust-lang.org/install.html
 
 Официально поддерживаемые платформы:
 
@@ -73,7 +77,7 @@ $ rustc --version
 Вы должны увидеть версию, хэш коммита, дату коммита и дату сборки:
 
 ```bash
-rustc 1.0.0-nightly (f11f3e7ba 2015-01-04) (built 2015-01-06)
+rustc 1.0.0-beta (9854143cb 2015-04-02) (built 2015-04-02)
 ```
 
 Итак, теперь у вас есть установленный Rust! Поздравляем!
@@ -82,9 +86,19 @@ rustc 1.0.0-nightly (f11f3e7ba 2015-01-04) (built 2015-01-06)
 сети. На UNIX системах она располагается в каталоге `/usr/local/share/doc/rust`.
 В Windows - в директории `share/doc`, относительно того куда вы установили Rust.
 
-Или же есть еще ряд мест, где можно получить помощь. [Канал #rust на irc.mozilla.org](irc://irc.mozilla.org/#rust),
-к которому вы можете подключиться через [Mibbit](http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust).
+Или же есть еще ряд мест, где можно получить помощь. [Канал #rust на
+irc.mozilla.org][irc], к которому вы можете подключиться через [Mibbit][mibbit].
 Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это
 дурашливое прозвище, которым мы себя называем), и мы можем помочь вам. Другие
-полезные ресурсы, посвященные Rust: [/r/rust subreddit](http://www.reddit.com/r/rust) и
-[StackOverflow](http://stackoverflow.com/questions/tagged/rust).
+полезные ресурсы, посвященные Rust: [форум пользователей][users], [/r/rust
+subreddit][reddit], [stack overflow][stack overflow]. Русскоязычные ресурсы:
+[канал #rust-ru на irc.mozilla.org][irc ru], [google groups][google groups ru].
+
+[irc]: irc://irc.mozilla.org/#rust
+[mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust
+[users]: http://users.rust-lang.org/ 
+[reddit]: http://www.reddit.com/r/rust
+[stack overflow]: http://stackoverflow.com/questions/tagged/rust
+
+[irc ru]: irc://irc.mozilla.org/#rust-ru
+[google groups ru]: https://groups.google.com/forum/#!forum/rust-russian
