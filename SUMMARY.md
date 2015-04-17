@@ -18,7 +18,7 @@
     * [Трейт `Deref`](deref-coercions.md)
 * [Синтаксис и семантика](syntax-and-semantics.md)
     * [Связывание переменных](variable-bindings.md)
-    * [Постые типы](primitive-types.md)
+    * [Простые типы](primitive-types.md)
     * [Функции](functions.md)
     * [Комментарии](comments.md)
     * [Конструкция `if`](if.md)
