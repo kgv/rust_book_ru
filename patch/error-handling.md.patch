@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/error-handling.md b/HEAD:error-handling.md
-index b9e7bd7..ee30192 100644
+index e261eb0..7dbce1c 100644
 --- a/rust/master:src/doc/trpl/error-handling.md
 +++ b/HEAD:error-handling.md
-@@ -1,301 +1,317 @@
+@@ -1,304 +1,318 @@
 -% Error Handling
 +% Обработка ошибок
  
@@ -31,7 +31,7 @@ index b9e7bd7..ee30192 100644
 +неудачи в панику.
  
 -# Failure vs. Panic
-+# Типы ошибок: неудача, паника
++# Неудача и Паника
  
 -Rust uses two terms to differentiate between two forms of error: failure, and
 -panic. A *failure* is an error that can be recovered from in some way. A
@@ -42,24 +42,23 @@ index b9e7bd7..ee30192 100644
 +работоспособность программы не может быть восстановлена.
  
 -What do we mean by "recover"? Well, in most cases, the possibility of an error
--is expected. For example, consider the `from_str` function:
+-is expected. For example, consider the `parse` function:
 +Что мы подразумеваем под понятием "восстановить"? В большинстве случаев,
-+возможность возникновения ошибок ожидаема. Например, рассмотрим функцию
-+`from_str`:
++возможность возникновения ошибок ожидаема. Например, рассмотрим функцию `parse`:
  
- ```{rust,ignore}
- from_str("5");
+ ```ignore
+ "5".parse();
  ```
  
--This function takes a string argument and converts it into another type. But
--because it's a string, you can't be sure that the conversion actually works.
--For example, what should this convert to?
-+Эта функция принимает строку в качестве аргумента и преобразует его в другой
-+тип. Но, так как это строка, вы не можете быть уверены, что преобразование
-+пройдет успешно. Например, во что должно быть преобразовано следующее?
+-This method converts a string into another type. But because it's a string, you
+-can't be sure that the conversion actually works. For example, what should this
+-convert to?
++Этот метод преобразует строку в другой тип. Но, так как это строка, вы не можете
++быть уверены, что преобразование пройдет успешно. Например, во что должно быть
++преобразовано следующее?
  
- ```{rust,ignore}
- from_str("hello5world");
+ ```ignore
+ "hello5world".parse();
  ```
  
 -This won't work. So we know that this function will only work properly for some
@@ -74,7 +73,8 @@ index b9e7bd7..ee30192 100644
 +которых мы не можем восстановить работоспособность программы. Классическим
 +примером является `assert!`:
  
- ```{rust,ignore}
+ ```rust
+ # let x = 5;
  assert!(x == 5);
  ```
  
@@ -165,26 +165,27 @@ index b9e7bd7..ee30192 100644
 +# Обработка ошибок с помощью `Option` и `Result`
  
 -The simplest way to indicate that a function may fail is to use the `Option<T>`
--type. Remember our `from_str()` example? Here's its type signature:
+-type. For example, the `find` method on strings attempts to find a pattern
+-in a string, and returns an `Option`:
 +Простейший способ указать, что функция может потерпеть неудачу, это использовать
-+тип `Option<T>`. Помните наш пример с функцией `from_str()`? Вот ее сигнатура:
++тип `Option<T>`. Например, метод `find` для строк пытается найти шаблон в строке
++и возвращает `Option`:
  
- ```{rust,ignore}
- pub fn from_str<A: FromStr>(s: &str) -> Option<A>
+ ```rust
+ let s = "foo";
+ 
+ assert_eq!(s.find('f'), Some(0));
+ assert_eq!(s.find('z'), None);
  ```
  
--`from_str()` returns an `Option<A>`. If the conversion succeeds, it will return
--`Some(value)`, and if it fails, it will return `None`.
-+Функция `from_str()` возвращает `Option<A>`. Если преобразование успешно, то она
-+возвращает `Some(value)`, а если неудачно, то `None`.
- 
+-
 -This is appropriate for the simplest of cases, but doesn't give us a lot of
--information in the failure case. What if we wanted to know _why_ the conversion
+-information in the failure case. What if we wanted to know _why_ the function
 -failed? For this, we can use the `Result<T, E>` type. It looks like this:
 +Такой вариант подходит для простейших случаев, однако он не дает нам достаточно
 +информации в случае неудачи. Что же делать, если мы хотим знать причину,
-+_почему_ преобразование не удалось? Для этого мы можем использовать `Result<T,
-+E>`. Выглядит это следующим образом:
++_почему_ выполнение функции закончилось неудачей? Для этого мы можем
++использовать `Result<T, E>`. Выглядит это следующим образом:
  
  ```rust
  enum Result<T, E> {
@@ -398,7 +399,7 @@ index b9e7bd7..ee30192 100644
 +возвращает `Result`, что означает, что вы не можете использовать `try!` внутри
 +функции `main()`, потому что `main()` ничего не возвращают.
  
--`try!` makes use of [`FromError`](../std/error/#the-fromerror-trait) to determine
+-`try!` makes use of [`From<Error>`](../std/convert/trait.From.html) to determine
 -what to return in the error case.
-+`try!` использует [`FromError`](../std/error/#the-fromerror-trait), чтобы
++`try!` использует [`From<Error>`](../std/convert/trait.From.html), чтобы
 +определять, что следует вернуть в случае ошибки.

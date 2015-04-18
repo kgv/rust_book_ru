@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/traits.md b/HEAD:traits.md
-index 2986de4..52e250a 100644
+index 25f5c7c..52e250a 100644
 --- a/rust/master:src/doc/trpl/traits.md
 +++ b/HEAD:traits.md
 @@ -1,508 +1,518 @@
@@ -328,8 +328,8 @@ index 2986de4..52e250a 100644
  
 -One last thing about traits: generic functions with a trait bound use
 -*monomorphization* (*mono*: one, *morph*: form), so they are statically
--dispatched. What's that mean? Check out the chapter on [static and dynamic
--dispatch](static-and-dynamic-dispatch.html) for more.
+-dispatched. What's that mean? Check out the chapter on [trait
+-objects](trait-objects.html) for more.
 +Последнее, что нужно сказать о трейтах: дженерик функции с ограничением по
 +трейтам используют *мономорфизацию* (*mono*: один, *morph*: форма), поэтому они
 +диспетчеризуются статически. Что это значит? Посмотрите главу [Статическая и

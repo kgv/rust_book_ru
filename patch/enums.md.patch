@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/enums.md b/HEAD:enums.md
-index cbb74d9..77e7372 100644
+index 504bd09..77e7372 100644
 --- a/rust/master:src/doc/trpl/enums.md
 +++ b/HEAD:enums.md
-@@ -1,149 +1,157 @@
+@@ -1,147 +1,157 @@
 -% Enums
 +% Перечисления
  
@@ -197,13 +197,7 @@ index cbb74d9..77e7372 100644
 +Импорт вариантов удобен и компактен, но он может вызывать конфликты имён,
 +поэтому будьте осторожны при его использовании. Обычно стилистически лучше
 +импортировать перечисление, а не его варианты.
- 
--As you can see, `enum`s are quite a powerful tool for data representation, and
--are even more useful when they're [generic][generics] across types. Before we
--get to generics, though, let's talk about how to use enums with pattern
--matching, a tool that will let us deconstruct sum types (the type theory term
--for enums) like `Ordering` in a very elegant way that avoids all these messy
--and brittle `if`/`else`s.
++
 +Как видите, перечисления довольно удобны, и особенно полезны когда они
 +[обобщены][generics] относительно вложенных в них типов. Однако, прежде чем мы
 +перейдём к рассмотрению обобщённых типов, давайте поговорим об использовании
@@ -212,7 +206,12 @@ index cbb74d9..77e7372 100644
 +Данная техника позволит нам избежать всех этих хрупких сравнений с помощью
 +`if`/`else`.
  
+-As you can see, `enum`s are quite a powerful tool for data representation, and
+-are even more useful when they're [generic][generics] across types. Before we
+-get to generics, though, let's talk about how to use enums with pattern
+-matching, a tool that will let us deconstruct sum types (the type theory term
+-for enums) like `Ordering` in a very elegant way that avoids all these messy
+-and brittle `if`/`else`s.
  
--[arity]: ./glossary.html#arity
  [match]: ./match.html
  [generics]: ./generics.html

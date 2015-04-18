@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/nightly-rust.md b/HEAD:nightly-rust.md
-index da6985d..b0fb0f5 100644
+index 3b76cce..b0fb0f5 100644
 --- a/rust/master:src/doc/trpl/nightly-rust.md
 +++ b/HEAD:nightly-rust.md
 @@ -1,102 +1,47 @@
@@ -32,8 +32,7 @@ index da6985d..b0fb0f5 100644
  
  ```bash
  $ curl -f -L https://static.rust-lang.org/rustup.sh -O
--$ sudo sh rustup.sh
-+$ sudo sh rustup.sh --channel=nightly
+ $ sudo sh rustup.sh --channel=nightly
  ```
  
 -[insecurity]: http://curlpipesh.tumblr.com

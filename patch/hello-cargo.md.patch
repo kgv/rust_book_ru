@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/hello-cargo.md b/HEAD:hello-cargo.md
-index 8d8b173..c68c261 100644
+index 6967532..c68c261 100644
 --- a/rust/master:src/doc/trpl/hello-cargo.md
 +++ b/HEAD:hello-cargo.md
 @@ -1,198 +1,169 @@
@@ -145,7 +145,7 @@ index 8d8b173..c68c261 100644
 -made a modification, we would have seen it do both:
 -
 -```bash
--$ cargo build
+-$ cargo run
 -   Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
 -     Running `target/debug/hello_world`
 -Hello, world!

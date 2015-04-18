@@ -1,12 +1,12 @@
 diff --git a/rust/master:src/doc/trpl/comments.md b/HEAD:comments.md
-index 441496e..c77f98f 100644
+index fa27d1c..c77f98f 100644
 --- a/rust/master:src/doc/trpl/comments.md
 +++ b/HEAD:comments.md
-@@ -1,47 +1,47 @@
+@@ -1,45 +1,47 @@
 -% Comments
 +% Комментарии
  
--Now that we have some functions, it's a good idea to learn about comments.
+-Now that we have some functions, it’s a good idea to learn about comments.
 -Comments are notes that you leave to other programmers to help explain things
 -about your code. The compiler mostly ignores them.
 +Теперь, когда у нас есть несколько функций, неплохо бы узнать о комментариях.
@@ -18,15 +18,16 @@ index 441496e..c77f98f 100644
 -and *doc comments*.
 +В Rust есть два вида комментариев: `строчные комментарии` и `doc-комментарии`.
  
- ```{rust}
--// Line comments are anything after '//' and extend to the end of the line.
+-```rust
+-// Line comments are anything after ‘//’ and extend to the end of the line.
++```{rust}
 +// Строчные комментарии - это всё что угодно после '//' и до конца строки.
  
 -let x = 5; // this is also a line comment.
 +let x = 5; // это тоже строчный комментарий.
  
 -// If you have a long explanation for something, you can put line comments next
--// to each other. Put a space between the // and your comment so that it's
+-// to each other. Put a space between the // and your comment so that it’s
 -// more readable.
 +// Если у вас длинное объяснение для чего-либо, вы можете расположить строчные
 +// комментарии один за другим. Поместите пробел между '//' и вашим комментарием,
@@ -38,38 +39,43 @@ index 441496e..c77f98f 100644
 +Другое применение комментария - это doc-комментарий. Doc-комментарий использует
 +`///` вместо `//`, и поддерживает Markdown-разметку внутри:
  
- ```{rust}
--/// `hello` is a function that prints a greeting that is personalized based on
--/// the name given.
+-```rust
+-/// Adds one to the number given.
++```{rust}
 +/// `hello` - это функция, которая выводит на экран персональное приветствие
 +/// основанное на полученном имени
- ///
- /// # Arguments
- ///
--/// * `name` - The name of the person you'd like to greet.
++///
++/// # Arguments
++///
 +/// * `name` - Имя особы, которую вы хотите поприветствовать.
  ///
  /// # Examples
  ///
- /// ```rust
- /// let name = "Steve";
--/// hello(name); // prints "Hello, Steve!"
++/// ```rust
++/// let name = "Steve";
 +/// hello(name); // выведет "Привет, Steve!"
  /// ```
- fn hello(name: &str) {
--    println!("Hello, {}!", name);
+-/// let five = 5;
+-///
+-/// assert_eq!(6, add_one(5));
+-/// ```
+-fn add_one(x: i32) -> i32 {
+-    x + 1
++fn hello(name: &str) {
 +    println!("Привет, {}!", name);
  }
  ```
  
--When writing doc comments, adding sections for any arguments, return values,
--and providing some examples of usage is very, very helpful. Don't worry about
--the `&str`, we'll get to it soon.
+-When writing doc comments, providing some examples of usage is very, very
+-helpful. You’ll notice we’ve used a new macro here: `assert_eq!`. This compares
+-two values, and `panic!`s if they’re not equal to each other. It’s very helpful
+-in documentation. There’s another macro, `assert!`, which `panic!`s if the
+-value passed to it is `false`.
 +При написании doc-комментария, очень полезно добавлять разделы для любых
 +аргументов, возвращаемых значений и приводить некоторые примеры использования.
  
 -You can use the [`rustdoc`](documentation.html) tool to generate HTML documentation
--from these doc comments.
+-from these doc comments, and also to run the code examples as tests!
 +Вы можете использовать [`rustdoc`](documentation.html) для генерации HTML-
 +документации из этих doc-комментариев. Мы расскажем больше о `rustdoc` позже в
 +отдельной теме.

@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/concurrency.md b/HEAD:concurrency.md
-index f9358f2..aaa3fea 100644
+index 575dfc7..f5bb51e 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
 +++ b/HEAD:concurrency.md
-@@ -1,358 +1,378 @@
+@@ -1,325 +1,342 @@
 -% Concurrency
 +% Многозадачность
  
@@ -108,45 +108,11 @@ index f9358f2..aaa3fea 100644
 -## Threads
 +## Потоки
  
--Rust's standard library provides a library for 'threads', which allow you to
+-Rust's standard library provides a library for threads, which allow you to
 -run Rust code in parallel. Here's a basic example of using `std::thread`:
-+Стандартная библиотека Rust предоставляет библиотеку для 'потоков', которая
++Стандартная библиотека Rust предоставляет библиотеку для потоков, которая
 +позволяет запускать Rust код параллельно. Вот простой пример использования
 +`std::thread`:
- 
- ```
- use std::thread;
- 
- fn main() {
-     thread::scoped(|| {
-         println!("Hello from a thread!");
-     });
- }
- ```
- 
--The `thread::scoped()` method accepts a closure, which is executed in a new
--thread. It's called `scoped` because this thread returns a join guard:
-+Метод `Thread::scoped()` в качестве единственного аргумента принимает замыкание,
-+которое выполняется в новом потоке. Он называется `scoped`, потому что этот
-+поток возвращает присоединенного к нему гварда:
- 
- ```
- use std::thread;
- 
- fn main() {
-     let guard = thread::scoped(|| {
-         println!("Hello from a thread!");
-     });
- 
-     // guard goes out of scope here
- }
- ```
- 
--When `guard` goes out of scope, it will block execution until the thread is
--finished. If we didn't want this behaviour, we could use `thread::spawn()`:
-+Когда `guard` выходит из области видимости, он будет блокировать выполнение до
-+тех пор, пока присоединенный к нему поток не закончит выполняться. Если бы мы не
-+хотели такого поведения, то могли бы использовать метод `thread::spawn()`:
  
  ```
  use std::thread;
@@ -155,40 +121,28 @@ index f9358f2..aaa3fea 100644
      thread::spawn(|| {
          println!("Hello from a thread!");
      });
- 
-     thread::sleep_ms(50);
  }
  ```
  
--We need to `sleep` here because when `main()` ends, it kills all of the
--running threads.
-+Когда заканчивается функция `main()`, то завершается основной поток, в
-+результате чего убиваются все запущенные потоки. Для предотвращения этого мы
-+должны вызвать метод `sleep`.
+-The `thread::spawn()` method accepts a closure, which is executed in a
+-new thread. It returns a handle to the thread, that can be used to
+-wait for the child thread to finish and extract its result:
++Метод `thread::spawn()` в качестве единственного аргумента принимает замыкание,
++которое выполняется в новом потоке. Он возвращает дескриптор потока, который
++может быть использован для ожидания завершения этого потока и извлечения его
++результата:
  
--[`scoped`](std/thread/struct.Builder.html#method.scoped) has an interesting
--type signature:
-+[`scoped`](std/thread/struct.Builder.html#method.scoped) имеет интересную
-+сигнатуру типа:
- 
- ```text
- fn scoped<'a, T, F>(self, f: F) -> JoinGuard<'a, T>
-     where T: Send + 'a,
-           F: FnOnce() -> T,
-           F: Send + 'a
  ```
+ use std::thread;
  
--Specifically, `F`, the closure that we pass to execute in the new thread. It
--has two restrictions: It must be a `FnOnce` from `()` to `T`. Using `FnOnce`
--allows the closure to take ownership of any data it mentions from the parent
--thread. The other restriction is that `F` must be `Send`. We aren't allowed to
--transfer this ownership unless the type thinks that's okay.
-+А именно: `F`, замыкание, которое мы передаем для выполнения в новом потоке. Оно
-+имеет два ограничения: оно должно быть `FnOnce`, принимающей `()` и возвращающей
-+`T`. Ограничение `FnOnce` позволяет замыканию захватить право владения над теми
-+данными в родительском потоке, на которые оно ссылается (которые оно
-+использует). Другое ограничение состоит в том, что `F` должно быть `Send`. Мы не
-+можем перемещать право владения, если сам тип не думает, что это нормально.
+ fn main() {
+     let handle = thread::spawn(|| {
+         "Hello from a thread!"
+     });
+ 
+     println!("{}", handle.join().unwrap());
+ }
+ ```
  
 -Many languages have the ability to execute threads, but it's wildly unsafe.
 -There are entire books about how to prevent errors that occur from shared
@@ -316,12 +270,12 @@ index f9358f2..aaa3fea 100644
                    ^~~~~~~~~~~~~
  ```
  
--You see, [`Mutex`](std/sync/struct.Mutex.html) has a
--[`lock`](http://doc.rust-lang.org/nightly/std/sync/struct.Mutex.html#method.lock)
+-You see, [`Mutex`](../std/sync/struct.Mutex.html) has a
+-[`lock`](../std/sync/struct.Mutex.html#method.lock)
 -method which has this signature:
-+Вы можете видеть, что [`Mutex`](std/sync/struct.Mutex.html) содержит метод
-+[`lock`](http://doc.rust-lang.org/nightly/std/sync/struct.Mutex.html#method.lock),
-+который имеет следующую сигнатуру:
++Вы можете видеть, что [`Mutex`](../std/sync/struct.Mutex.html) содержит метод
++[`lock`](../std/sync/struct.Mutex.html#method.lock), который имеет следующую
++сигнатуру:
  
  ```ignore
  fn lock(&self) -> LockResult<MutexGuard<T>>

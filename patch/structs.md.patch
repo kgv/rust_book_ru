@@ -1,14 +1,21 @@
 diff --git a/rust/master:src/doc/trpl/structs.md b/HEAD:structs.md
-index eff1a47..dca5358 100644
+index 83d5a15..dca5358 100644
 --- a/rust/master:src/doc/trpl/structs.md
 +++ b/HEAD:structs.md
-@@ -1,49 +1,53 @@
+@@ -1,89 +1,53 @@
 -% Structs
 +% Структуры
  
--A struct is another form of a *record type*, just like a tuple. There's a
--difference: structs give each element that they contain a name, called a
--*field* or a *member*. Check it out:
+-Structs are a way of creating more complex datatypes. For example, if we were
+-doing calculations involving coordinates in 2D space, we would need both an `x`
+-and a `y` value:
+-
+-```rust
+-let origin_x = 0;
+-let origin_y = 0;
+-```
+-
+-A struct lets us combine these two into a single, unified datatype:
 +Структура - это другой вид *агрегатного типа*, как и кортеж. Разница в том, что
 +в структурах у каждого элемента есть имя. Элемент структуры называется *полем*
 +или *членом структуры*. Смотрите:
@@ -27,7 +34,7 @@ index eff1a47..dca5358 100644
  }
  ```
  
--There's a lot going on here, so let's break it down. We declare a struct with
+-There’s a lot going on here, so let’s break it down. We declare a struct with
 -the `struct` keyword, and then with a name. By convention, structs begin with a
 -capital letter and are also camel cased: `PointInSpace`, not `Point_In_Space`.
 +Этот код делает много разных вещей, поэтому давайте разберём его по порядку. Мы
@@ -55,7 +62,8 @@ index eff1a47..dca5358 100644
 +отличаются от других именованных сущностей. Чтобы они стали изменяемы,
 +используйте ключевое слово `mut`:
  
- ```{rust}
+-```rust
++```{rust}
  struct Point {
      x: i32,
      y: i32,
@@ -72,4 +80,37 @@ index eff1a47..dca5358 100644
  ```
  
 -This will print `The point is at (5, 0)`.
+-
+-Rust does not support field mutability at the language level, so you cannot
+-write something like this:
+-
+-```rust,ignore
+-struct Point {
+-    mut x: i32,
+-    y: i32,
+-}
+-```
+-
+-Mutability is a property of the binding, not of the structure itself. If you’re
+-used to field-level mutability, this may seem strange at first, but it
+-significantly simplifies things. It even lets you make things mutable for a short
+-time only:
+-
+-
+-```rust,ignore
+-struct Point {
+-    x: i32,
+-    y: i32,
+-}
+-
+-fn main() {
+-    let mut point = Point { x: 0, y: 0 };
+-
+-    point.x = 5;
+-
+-    let point = point; // this new binding can’t change now
+-
+-    point.y = 6; // this causes an error
+-}
+-```
 +Этот код напечатает `Точка находится в (5, 0)`.
