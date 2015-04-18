@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/closures.md b/HEAD:closures.md
-index e63331e..b4bb4e0 100644
+index e3de8eb..100ada3 100644
 --- a/rust/master:src/doc/trpl/closures.md
 +++ b/HEAD:closures.md
-@@ -1,475 +1,491 @@
+@@ -1,475 +1,490 @@
 -% Closures
 +% Замыкания
  
@@ -276,16 +276,15 @@ index e63331e..b4bb4e0 100644
  
 -Rust's implementation of closures is a bit different than other languages. They
 -are effectively syntax sugar for traits. You'll want to make sure to have read
--the [traits chapter][traits] before this one, as well as the chapter on [static
--and dynamic dispatch][dispatch], which talks about trait objects.
+-the [traits chapter][traits] before this one, as well as the chapter on [trait
+-objects][trait-objects].
 +Реализация замыканий в Rust немного отличается от других языков. Фактически, она
 +представляет из себя просто синтаксисический сахар для трейтов. Перед тем как
 +читать дальше, настоятельно рекомендуем изучить главу [Трейты][traits], а также
-+главу [Статическая и динамическая диспетчеризация][dispatch], в которой
-+говорится об трейт объектах.
++главу [Трейт объекты][trait-objects], в которой говорится об трейт объектах.
  
  [traits]: traits.html
- [dispatch]: static-and-dynamic-dispatch.html
+ [trait-objects]: trait-objects.html
  
 -Got all that? Good.
 +Изучили? Хорошо.

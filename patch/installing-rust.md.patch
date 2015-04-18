@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/installing-rust.md b/HEAD:installing-rust.md
-index e4054a0..a0afcd7 100644
+index 58d9e57..eb66b71 100644
 --- a/rust/master:src/doc/trpl/installing-rust.md
 +++ b/HEAD:installing-rust.md
 @@ -1,99 +1,104 @@
@@ -137,21 +137,22 @@ index e4054a0..a0afcd7 100644
 -[the #rust IRC channel on irc.mozilla.org][irc], which you can access through
 -[Mibbit][mibbit]. Click that link, and you'll be chatting with other Rustaceans
 -(a silly nickname we call ourselves), and we can help you out. Other great
--resources include [the user’s forum][users], and [Stack Overflow][stack
--overflow].
+-resources include [the user’s forum][users], and
+-[Stack Overflow][stackoverflow].
 +Или же есть еще ряд мест, где можно получить помощь. [Канал #rust на
 +irc.mozilla.org][irc], к которому вы можете подключиться через [Mibbit][mibbit].
 +Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это
 +дурашливое прозвище, которым мы себя называем), и мы можем помочь вам. Другие
 +полезные ресурсы, посвященные Rust: [форум пользователей][users], [/r/rust
-+subreddit][reddit], [stack overflow][stack overflow]. Русскоязычные ресурсы:
-+[канал #rust-ru на irc.mozilla.org][irc ru], [google groups][google groups ru].
++subreddit][reddit], [stack_overflow][stack overflow]. Русскоязычные ресурсы:
++[канал #rust-ru на irc.mozilla.org][irc_ru], [google groups][google_groups_ru].
  
  [irc]: irc://irc.mozilla.org/#rust
  [mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust
  [users]: http://users.rust-lang.org/ 
+-[stackoverflow]: http://stackoverflow.com/questions/tagged/rust
 +[reddit]: http://www.reddit.com/r/rust
- [stack overflow]: http://stackoverflow.com/questions/tagged/rust
++[stack_overflow]: http://stackoverflow.com/questions/tagged/rust
 +
-+[irc ru]: irc://irc.mozilla.org/#rust-ru
-+[google groups ru]: https://groups.google.com/forum/#!forum/rust-russian
++[irc_ru]: irc://irc.mozilla.org/#rust-ru
++[google_groups_ru]: https://groups.google.com/forum/#!forum/rust-russian

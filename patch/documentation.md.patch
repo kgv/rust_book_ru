@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/documentation.md b/HEAD:documentation.md
-index 06071a8..18ec50b 100644
+index 732521a..36a2793 100644
 --- a/rust/master:src/doc/trpl/documentation.md
 +++ b/HEAD:documentation.md
-@@ -1,562 +1,583 @@
+@@ -1,575 +1,597 @@
 -% Documentation
 +% Документация
  
@@ -501,8 +501,15 @@ index 06071a8..18ec50b 100644
  $ cargo test
  ```
  
--That's right, `cargo test` tests embedded documentation too.
-+Все верно, `cargo test` также выполняет тесты, встроенные в документацию.
+-That's right, `cargo test` tests embedded documentation too. However, 
+-`cargo test` will not test binary crates, only library ones. This is
+-due to the way `rustdoc` works: it links against the library to be tested,
+-but with a binary, there’s nothing to link to.
++Все верно, `cargo test` также выполняет тесты, встроенные в документацию. Тем не
++менее, `cargo test` не будет тестировать исполняемые контейнеры, только
++библиотечные. Это связано с тем, как работает `rustdoc`: он линкует библиотеку в
++зависимости от результата тестирования, но в случае с исполняемым файлом, его не
++к чему линковать.
  
 -There are a few more annotations that are useful to help `rustdoc` do the right
 -thing when testing your code:
@@ -742,3 +749,16 @@ index 06071a8..18ec50b 100644
 +  перед отображаемым содержимым (в том числе строки поиска).
 +- `--html-after-content FILE`: включить содержание FILE после всего
 +  отображаемого содержимого.
+ 
+-## Security note
++## Замечание по безопасности
+ 
+-The Markdown in documentation comments is placed without processing into
+-the final webpage. Be careful with literal HTML:
++Комментарии в Markdown документации помещаются в конечную веб-страницу без
++обработки. Будьте осторожны с HTML литералами:
+ 
+ ```rust
+ /// <script>alert(document.cookie)</script>
+ # fn foo() {}
+ ```

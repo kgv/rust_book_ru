@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/HEAD:SUMMARY.md
-index f2d1666..dddbe00 100644
+index f2d1666..35ca370 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/HEAD:SUMMARY.md
 @@ -1,69 +1,70 @@
@@ -59,7 +59,7 @@ index f2d1666..dddbe00 100644
 +    * [Трейт `Deref`](deref-coercions.md)
 +* [Синтаксис и семантика](syntax-and-semantics.md)
 +    * [Связывание переменных](variable-bindings.md)
-+    * [Постые типы](primitive-types.md)
++    * [Простые типы](primitive-types.md)
 +    * [Функции](functions.md)
 +    * [Комментарии](comments.md)
 +    * [Конструкция `if`](if.md)

@@ -91,14 +91,14 @@ irc.mozilla.org][irc], к которому вы можете подключит�
 Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это
 дурашливое прозвище, которым мы себя называем), и мы можем помочь вам. Другие
 полезные ресурсы, посвященные Rust: [форум пользователей][users], [/r/rust
-subreddit][reddit], [stack overflow][stack overflow]. Русскоязычные ресурсы:
-[канал #rust-ru на irc.mozilla.org][irc ru], [google groups][google groups ru].
+subreddit][reddit], [stack_overflow][stack overflow]. Русскоязычные ресурсы:
+[канал #rust-ru на irc.mozilla.org][irc_ru], [google groups][google_groups_ru].
 
 [irc]: irc://irc.mozilla.org/#rust
 [mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust
 [users]: http://users.rust-lang.org/ 
 [reddit]: http://www.reddit.com/r/rust
-[stack overflow]: http://stackoverflow.com/questions/tagged/rust
+[stack_overflow]: http://stackoverflow.com/questions/tagged/rust
 
-[irc ru]: irc://irc.mozilla.org/#rust-ru
-[google groups ru]: https://groups.google.com/forum/#!forum/rust-russian
+[irc_ru]: irc://irc.mozilla.org/#rust-ru
+[google_groups_ru]: https://groups.google.com/forum/#!forum/rust-russian
