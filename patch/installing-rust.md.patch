@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/installing-rust.md b/HEAD:installing-rust.md
-index 58d9e57..eb66b71 100644
+index 58d9e57..9a34115 100644
 --- a/rust/master:src/doc/trpl/installing-rust.md
 +++ b/HEAD:installing-rust.md
-@@ -1,99 +1,104 @@
+@@ -1,99 +1,107 @@
 -% Installing Rust
 +% Установка Rust
  
@@ -12,7 +12,7 @@ index 58d9e57..eb66b71 100644
 -`$`s, they just indicate the start of each command):
 +Первым шагом к использованию Rust является его установка! Есть несколько
 +способов установить Rust, но самый простой из них - использовать скрипт
-+`rustup`. Если вы используете Linux или Mac, то все, что вам нужно сделать - это
++`rustup`. Если вы используете Linux или Mac, то всё, что вам нужно сделать - это
 +ввести следующую команду в консоль (вам не нужно вводить символ `$`, он лишь
 +показывает приглашение командной строки к вводу новой команды):
  
@@ -24,7 +24,7 @@ index 58d9e57..eb66b71 100644
 -| sudo sh`, please keep reading and see our disclaimer below. And feel free to
 -use a two-step version of the installation and examine our installation script:
 +Если вы беспокоитесь о [потенциальной безопасности][insecurity] использования
-+данной команды `curl | sudo sh`, то продолжайте читать далее. Вы также можете
++команды `curl | sudo sh`, то продолжайте читать далее. Вы также можете
 +использовать двухступенчатый вариант установки и изучить наш установочный
 +скрипт:
  
@@ -59,8 +59,8 @@ index 58d9e57..eb66b71 100644
  
 -If you used the Windows installer, just re-run the `.msi` and it will give you
 -an uninstall option.
-+Если вы использовали установщик Windows, то просто повторно запустите `.msi`, и
-+это даст вам возможность удаления.
++Если вы использовали установщик Windows, то просто повторно запустите `.msi`, 
++который предложит вам возможность удаления.
  
 -Some people, and somewhat rightfully so, get very upset when we tell you to
 -`curl | sudo sh`. Basically, when you do this, you are trusting that the good
@@ -70,19 +70,21 @@ index 58d9e57..eb66b71 100644
 -binary downloads][install page]. And we promise that this method will not be
 -the way to install Rust forever: it's just the easiest way to keep people
 -updated while Rust is in its alpha state.
-+Команда установки `curl | sudo sh` потенциально опасна, т.к. скрипт установки
-+запускается с правами администратора, что может нарушить безопасность системы.
-+Для безопасной установки Rust предлагаем изучить документацию по [установке Rust
-+из исходных кодов][from source] или скачать уже [скомпилированный Rust][install
-+page]. Мы обещаем, что данный способ не является окончательным для установки
-+Rust: скрипт был сделан для быстрого обновления пока Rust находится в стадии
-+alpha.
++Некоторые люди, причём не безосновательно, насторожились, когда мы сказали 
++использовать `curl | sudo sh`. Когда вы делаете так, вы должны доверять тем
++хорошим людям, которые поддерживают Rust, и не бояться, что они попытаются
++взломать ваш компьютер и сделать какие-либо плохие вещи. Озабоченность своей
++безопасность - это очень хорошо. Если вы один из таких людей, пожалуйста 
++посмотрите в документации как [собрать Rust из исходных кодов][from source] или
++скачайте уже [скомпилированный Rust][install page]. Мы обещаем, что данный
++способ не будет использоваться для установки Rust'a всегда: скрипт был сделан 
++для быстрого обновления пока Rust находится в стадии alpha.
  
  [from source]: https://github.com/rust-lang/rust#building-from-source
  [install page]: http://www.rust-lang.org/install.html
  
 -Oh, we should also mention the officially supported platforms:
-+Официально поддерживаемые платформы:
++Мы так же должны упомянуть официально поддерживаемые платформы:
  
  * Windows (7, 8, Server 2008 R2)
 -* Linux (2.6.18 or later, various distributions), x86 and x86-64
@@ -94,19 +96,20 @@ index 58d9e57..eb66b71 100644
 -Android. But these are the ones most likely to work, as they have the most
 -testing.
 +Rust активно тестируется на всех этих платформах, а также на некоторых других,
-+например на Android.
++например на Android. Но мы указали те, на которых Rust точно должен работать, 
++ибо для этих платформ он тестируется больше всего.
  
 -Finally, a comment about Windows. Rust considers Windows to be a first-class
 -platform upon release, but if we're honest, the Windows experience isn't as
 -integrated as the Linux/OS X experience is. We're working on it! If anything
 -does not work, it is a bug. Please let us know if that happens. Each and every
 -commit is tested against Windows just like any other platform.
-+Напоследок, замечание о Windows. Rust рассматривает возможность, что на момент
-+релиза Windows будет первоклассной платформой, но если быть честными, то опыт
-+разработки для Windows не настолько хорош как для Linux/OS X. Мы работаем над
-+этим! Если что-то не работает, то это ошибка. Пожалуйста, дайте нам знать, если
-+такое произойдет. Каждый коммит тестируется на Windows, впрочем так же, как и на
-+любой другой платформе.
++Напоследок, замечание о Windows. Rust считает, что Windows - это первоклассная 
++платформа для релиза, но если быть честными, то опыт разработки для Windows не 
++на столько хорош, как для Linux/OS X. Мы работаем над этим! Если что-то не 
++работает, то это ошибка. Пожалуйста, дайте нам знать, если такое произойдёт. 
++Каждый коммит тестируется на Windows, впрочем так же, как и на любой другой
++платформе.
  
 -If you've got Rust installed, you can open up a shell, and type this:
 +Если вы уже установили Rust, то откройте терминал и введите это:
@@ -139,11 +142,11 @@ index 58d9e57..eb66b71 100644
 -(a silly nickname we call ourselves), and we can help you out. Other great
 -resources include [the user’s forum][users], and
 -[Stack Overflow][stackoverflow].
-+Или же есть еще ряд мест, где можно получить помощь. [Канал #rust на
++Также есть ещё ряд мест, где можно получить помощь. [Канал #rust на
 +irc.mozilla.org][irc], к которому вы можете подключиться через [Mibbit][mibbit].
 +Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это
-+дурашливое прозвище, которым мы себя называем), и мы можем помочь вам. Другие
-+полезные ресурсы, посвященные Rust: [форум пользователей][users], [/r/rust
++дурашливое прозвище, которым мы себя называем), и мы поможем вам. Другие
++полезные ресурсы, посвящённые Rust: [форум пользователей][users], [/r/rust
 +subreddit][reddit], [stack_overflow][stack overflow]. Русскоязычные ресурсы:
 +[канал #rust-ru на irc.mozilla.org][irc_ru], [google groups][google_groups_ru].
  
