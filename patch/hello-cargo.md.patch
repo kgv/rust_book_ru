@@ -1,48 +1,48 @@
 diff --git a/rust/master:src/doc/trpl/hello-cargo.md b/HEAD:hello-cargo.md
-index 6967532..c68c261 100644
+index 6967532..44b3319 100644
 --- a/rust/master:src/doc/trpl/hello-cargo.md
 +++ b/HEAD:hello-cargo.md
-@@ -1,198 +1,169 @@
+@@ -1,198 +1,204 @@
  % Hello, Cargo!
  
 -[Cargo][cratesio] is a tool that Rustaceans use to help manage their Rust
 -projects. Cargo is currently in a pre-1.0 state, and so it is still a work in
 -progress. However, it is already good enough to use for many Rust projects, and
 -so it is assumed that Rust projects will use Cargo from the beginning.
-+[Cargo](http://crates.io/) - это инструмент, который используют разработчики для
-+управления своими Rust проектами. Cargo, как и сам Rust, сейчас находится в
-+состоянии pre-1.0, и работа над ним ещё продолжается. Тем не менее, он уже
++[Cargo][crates.io] - это инструмент, который используют разработчики для
++управления своими Rust проектами. Работа над Cargo пока ещё не закончена.
++Сейчас он находится в состоянии pre-1.0. Тем не менее, он уже
 +достаточно хорош для использования во многих Rust проектах, и поэтому
 +предполагается, что проекты на Rust будут использовать Cargo с самого начала.
  
--[cratesio]: https://doc.crates.io
-+Cargo делает три вещи: собирает ваш код, скачивает нужные вашему коду
-+зависимости и собирает их. Поначалу, вашей программе не понадобится никаких
-+зависимостей, поэтому будем использовать только первую часть его функционала. Со
-+временем нам понадобится добавить несколько зависимостей, и нам не составит
-+труда сделать это, поскольку мы начали использовать Cargo.
+ [cratesio]: https://doc.crates.io
  
 -Cargo manages three things: building your code, downloading the dependencies
 -your code needs, and building those dependencies. At first, your
 -program doesn’t have any dependencies, so we’ll only be using the first part of
 -its functionality. Eventually, we’ll add more. Since we started off by using
 -Cargo, it'll be easy to add later.
-+Cargo установился вместе с Rust'ом, если вы использовали официальный установщик.
-+Если нет, прочтите [как его установить](https://github.com/rust-lang/cargo#installing-cargo-from-nightlies)
-+отдельно от Rust.
++Cargo делает три вещи: собирает ваш код, скачивает нужные вашему коду
++зависимости и собирает их. Поначалу, вашей программе не понадобится никаких
++зависимостей, поэтому будем использовать только первую часть его функционала. Со
++временем нам понадобится добавить несколько зависимостей, и нам не составит
++труда сделать это, поскольку мы начали использовать Cargo.
  
 -If you installed Rust via the official installers you will also have Cargo. If
 -you installed Rust some other way, you may want to [check the Cargo
 -README][cargoreadme] for specific instructions about installing it.
-+## Переходим на Cargo
++Если вы использовали официальный установщик, то Cargo установился вместе с
++Rust'ом. Если же вы установили Rust каким-либо другим образом, вы можете
++посмотреть [инструкции по установке Cargo][cargoreadme].
  
--[cargoreadme]: https://github.com/rust-lang/cargo#installing-cargo-from-nightlies
-+Давайте начнём использовать Cargo для сборки кода нашей программы "Hello World".
+ [cargoreadme]: https://github.com/rust-lang/cargo#installing-cargo-from-nightlies
  
 -## Converting to Cargo
--
++## Переходим на Cargo
+ 
 -Let’s convert Hello World to Cargo.
--
++Давайте начнём использовать Cargo для сборки кода нашей программы "Hello World".
+ 
 -To Cargo-ify our project, we need to do two things: Make a `Cargo.toml`
 -configuration file, and put our source file in the right place. Let's
 -do that part first:
@@ -91,8 +91,7 @@ index 6967532..c68c261 100644
  ```
  
 -This file is in the [TOML][toml] format. Let’s let it explain itself to you:
-+Этот файл в формате [TOML](https://github.com/toml-lang/toml). Позволим ему
-+самому рассказать о себе:
++Этот файл в формате [TOML][toml]. Позволим ему самому рассказать о себе:
  
 -> TOML aims to be a minimal configuration file format that's easy to read due
 -> to obvious semantics. TOML is designed to map unambiguously to a hash table.
@@ -106,13 +105,14 @@ index 6967532..c68c261 100644
 -TOML is very similar to INI, but with some extra goodies.
 +TOML очень похож на INI, но с некоторыми дополнительными возможностями.
  
--[toml]: https://github.com/toml-lang/toml
+ [toml]: https://github.com/toml-lang/toml
+ 
+-Once you have this file in place, we should be ready to build! Try this:
 +В любом случае, в этом файле есть две *таблицы*: `package` и `bin`. Первая
 +сообщает Cargo метаданные вашего пакета. Вторая говорит, что мы заинтересованы в
 +сборке исполняемого файла, а не библиотеки (хотя мы могли бы сделать и то, и
 +другое!), и как его следует назвать.
- 
--Once you have this file in place, we should be ready to build! Try this:
++
 +Итак, мы с этим закончили и готовы к сборке! Попробуйте собрать:
  
  ```bash
@@ -125,40 +125,46 @@ index 6967532..c68c261 100644
 -Bam! We build our project with `cargo build`, and run it with
 -`./target/debug/hello_world`. We can do both in one step with `cargo run`:
 +Та-да! Мы собрали наш проект вызвав `cargo build` и запустили его с помощью
-+`./target/debug/hello_world`. На первый взгляд это кажется сложнее, по сравнению
-+с более простым использованием `rustc`, но подумаем о будущем: если бы в нашем
-+проекте было больше одного файла, мы бы должны были вызвать `rustc` для каждого
-+и передать ему кучу параметров, что бы собрать их все вместе. С Cargo, когда наш
-+проект вырастет, нам понадобится вызвать только команду `cargo build` и она всё
-+сделает за нас. Когда вы закончите работать над проектом, и он окончательно
-+будет готов к релизу, то можете использовать команду `cargo build --release` для
-+компиляции ваших крэйтов с оптимизацией.
++`./target/debug/hello_world`. Мы можем сделать это в один шаг используя `cargo
++run`:
  
--```bash
--$ cargo run
--     Running `target/debug/hello_world`
--Hello, world!
--```
--
+ ```bash
+ $ cargo run
+      Running `target/debug/hello_world`
+ Hello, world!
+ ```
+ 
 -Notice that we didn’t re-build the project this time. Cargo figured out that
 -we hadn’t changed the source file, and so it just ran the binary. If we had
 -made a modification, we would have seen it do both:
--
--```bash
--$ cargo run
--   Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
++Заметьте, что сейчас мы не пересобирали наш проект. Cargo понял, что мы не
++изменили файл с исходным кодом и только лишь запустил исполняемый файл. Если бы
++мы изменили файл, мы бы увидели оба шага:
+ 
+ ```bash
+ $ cargo run
+    Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
 -     Running `target/debug/hello_world`
--Hello, world!
--```
--
++        Running `target/debug/hello_world`
+ Hello, world!
+ ```
+ 
 -This hasn’t bought us a whole lot over our simple use of `rustc`, but think
 -about the future: when our project gets more complex, we would need to do more
 -things to get all of the parts to properly compile. With Cargo, as our project
 -grows, we can just `cargo build`, and it’ll work the right way.
--
++На первый взгляд это кажется сложнее, по сравнению с более простым использованием
++`rustc`, но подумаем о будущем: если бы в нашем проекте было больше одного
++файла, мы бы должны были вызвать `rustc` для каждого и передать ему кучу
++параметров, что бы собрать их все вместе. С Cargo, когда наш проект вырастет,
++нам понадобится вызвать только команду `cargo build` и она всё сделает за нас.
+ 
 -When your project is finally ready for release, you can use
 -`cargo build --release` to compile your project with optimizations.
--
++Когда вы закончите работать над проектом, и он окончательно будет готов к релизу,
++то можете использовать команду `cargo build --release` для компиляции ваших
++контейнеров (crates) с оптимизацией.
+ 
 -You'll also notice that Cargo has created a new file: `Cargo.lock`.
 +Так же вы должны были заметить, что Cargo создал новый файл: `Cargo.lock`.
  
@@ -181,24 +187,25 @@ index 6967532..c68c261 100644
 -virtually all Rust projects:
 +Так! Мы успешно собрали `hello_world` с помощью Cargo. Несмотря на то, что наша
 +программа проста, мы использовали большую часть реальных инструментов, которые
-+вы будете использовать в своём дальнейшем пути Rust программиста.
++вы будете использовать в своём дальнейшем пути Rust программиста. Вы можете
++использовать их во всех Rust проектах:
  
--```bash
--$ git clone someurl.com/foo
--$ cd foo
--$ cargo build
--```
-+## Новый проект
+ ```bash
+ $ git clone someurl.com/foo
+ $ cd foo
+ $ cargo build
+ ```
  
 -## A New Project
-+Вам не нужно повторять вышеприведённые шаги каждый раз, когда вы хотите создать
-+новый проект! Cargo может создать директорию проекта, в котором вы сразу сможете
-+приступить к разработке.
++## Новый проект
  
 -You don’t have to go through this whole process every time you want to start a
 -new project! Cargo has the ability to make a bare-bones project directory in
 -which you can start developing right away.
--
++Вам не нужно повторять вышеприведённые шаги каждый раз, когда вы хотите создать
++новый проект! Cargo может создать директорию проекта, в котором вы сразу сможете
++приступить к разработке.
+ 
 -To start a new project with Cargo, use `cargo new`:
 +Чтобы создать новый проект с помощью Cargo, нужно ввести команду `cargo new`:
  
@@ -228,9 +235,9 @@ index 6967532..c68c261 100644
  
 -If you don't have the `tree` command, you can probably get it from your
 -distribution’s package manager. It’s not necessary, but it’s certainly useful.
-+>Если у вас нет команды `tree`, то скорее всего эта программа не установлена в
-+>вашей системе. Попробуйте установить её через менеджер пакетов вашего
-+>дистрибутива. Это не обязательно, но данная утилита очень полезна.
++Если у вас нет команды `tree`, то скорее всего эта программа не установлена в
++вашей системе. Попробуйте установить её через менеджер пакетов вашего
++дистрибутива. Это не обязательно, но данная утилита очень полезна.
  
 -This is all we need to get started. First, let’s check out `Cargo.toml`:
 +Все файлы и директории уже на месте. Теперь можем начинать. Для начала проверим
@@ -263,12 +270,12 @@ index 6967532..c68c261 100644
  
 -Cargo has generated a "Hello World!" for us, and you’re ready to start coding! Cargo
 -has its own [guide][guide] which covers Cargo’s features in much more depth.
-+Cargo сгенерировал "Hello World!" для нас и вы можете уже приступить к
-+программированию! Больше информации о Cargo вы можете получить
-+[здесь](http://doc.crates.io/guide.html).
++Cargo создал "Hello World!" для нас и вы уже можете приступить к
++программированию! У Cargo есть собственное [руководство][guide] в котором
++про него рассказано более полно.
  
--[guide]: http://doc.crates.io/guide.html
--
+ [guide]: http://doc.crates.io/guide.html
+ 
 -Now that you’ve got the tools down, let’s actually learn more about the Rust
 -language itself. These are the basics that will serve you well through the rest
 -of your time with Rust.

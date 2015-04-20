@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/hello-world.md b/HEAD:hello-world.md
-index e58bac6..6754f017 100644
+index eec6fe6..2f63b17 100644
 --- a/rust/master:src/doc/trpl/hello-world.md
 +++ b/HEAD:hello-world.md
-@@ -1,166 +1,170 @@
+@@ -1,166 +1,172 @@
  % Hello, world!
  
 -Now that you have Rust installed, let’s write your first Rust program. It’s
@@ -11,10 +11,10 @@ index e58bac6..6754f017 100644
 -simple program is that you can verify that your compiler isn’t just installed,
 -but also working properly. And printing information to the screen is a pretty
 -common thing to do.
-+Теперь, когда вы установили Rust, напишем первую вашу программу на Rust.
++Теперь, когда вы установили Rust, давайте напишем первую программу на Rust.
 +Традиционно, в любом новом изучаемом языке программирования, первая программа
 +только выводит на экран текст "Hello, World!". Хорошо начинать с такой простой
-+программы, т.к. вы можете убедиться что ваш компилятор не только установлен, но
++программы, т.к. вы можете убедиться, что ваш компилятор не только установлен, но
 +и работает правильно. Вывод информации на экран будет замечательным способом
 +проверить это.
  
@@ -36,18 +36,22 @@ index e58bac6..6754f017 100644
 -for your setup, specifically.
 +На самом деле это приводит к ещё одной проблеме о которой мы должны
 +предупредить: данное руководство предполагает, что у вас есть базовые навыки
-+работы с командной строкой. Rust не требует от вас великих познаний о командной
-+строке, но до тех пор пока язык не будет в более завершённом, чем сейчас, виде,
-+его поддержка в IDE затруднительна. У Rust нет специфичных требований к вашей
-+среде разработки или к тому, где вы храните свой код.
++работы в командной строке. У Rust нет специфичных требований к вашей среде
++разработки или тому, где вы храните свой код. Если вы больше предпочитаете
++использовать IDE, можно посмотреть на проект [SolidOak][solidoak], или на плагины
++к вашей любимой IDE. Существует множество расширений разного качества, созданные
++сообществом. Команда разработчиков Rust'a так же предоставила [плагины для
++различных редакторов][plugins]. Настройка вашего редактора или IDE выходит за
++пределы данного руководства. Посмотрите руководство по использованию выбранного
++вами плагина.
  
--[solidoak]: https://github.com/oakes/SolidOak
--[plugins]: https://github.com/rust-lang/rust/blob/master/src/etc/CONFIGS.md
+ [solidoak]: https://github.com/oakes/SolidOak
+ [plugins]: https://github.com/rust-lang/rust/blob/master/src/etc/CONFIGS.md
+ 
+-With that said, let’s make a directory in our projects directory.
 +С учётом вышесказанного, давайте сделаем каталог для нашей программы в
 +директории с проектами.
  
--With that said, let’s make a directory in our projects directory.
--
 -```bash
 +```{bash}
  $ mkdir ~/projects
@@ -64,22 +68,15 @@ index e58bac6..6754f017 100644
 -Let’s make a new source file next. We’ll call our file `main.rs`. Rust files
 -always end in a `.rs` extension. If you’re using more than one word in your
 -filename, use an underscore: `hello_world.rs` rather than `helloworld.rs`.
-+Теперь создадим новый файл для текста программы. Я буду использовать синтаксис
-+`editor имя_файла` для обозначения редактируемого файла в этих примерах, но вы
-+можете создать и сохранить файл сами как угодно. Назовём наш файл `main.rs`:
++Теперь создадим новый файл для текста программы. Назовём наш файл `main.rs`.
++Файлы с исходными текстами на Rust'е всегда имеют расширение `.rs`. Если вы
++хотите использовать в имени вашего файла больше одного слова, разделяйте их
++подчёркиванием: `hello_world.rs`, а не `helloworld.rs`.
  
 -Now that you’ve got your file open, type this in:
-+```{bash}
-+$ editor main.rs
-+```
++Теперь когда файл открыт, добавьте в него следующий код:
  
 -```rust
-+Rust файлы всегда имеют расширение `.rs`. Если вы хотите использовать в имени
-+вашего файла больше одного слова, разделяйте их подчёркиванием:
-+`hello_world.rs`, а не `helloworld.rs`.
-+
-+Теперь когда файл открыт, добавьте в него следующий код:
-+
 +```{rust}
  fn main() {
      println!("Hello, world!");
@@ -98,11 +95,9 @@ index e58bac6..6754f017 100644
  ```
  
 -Success! Let’s go over what just happened in detail.
-+Вы также можете запустить эти примеры на сайте [play.rust-lang.org](http://play.rust-lang.org/).
++Работает! Разберём подробнее что же произошло.
  
 -```rust
-+Работает! Разберём подробнее что же произошло.
-+
 +```{rust}
  fn main() {
  
@@ -115,7 +110,7 @@ index e58bac6..6754f017 100644
 -were arguments, they would go inside the parentheses (`(` and `)`), and because
 -we aren’t returning anything from this function, we can omit the return type
 -entirely. We’ll get to it later.
-+Эти строки определяют *функцию* в Rust'е. Функция `main` особенна: это начало
++Эти строки определяют ‘функцию‘ в Rust'е. Функция `main` особенна: это начало
 +каждой программы на Rust. Первая строка говорит: "Я объявляю функцию именуемую
 +`main`, которая не получает параметров и ничего не возвращает". Если бы мы
 +хотели передать в функцию параметры, то указали бы их в скобках (`(` и `)`). Так
@@ -145,7 +140,7 @@ index e58bac6..6754f017 100644
 -with the tab key. We provide some [sample configurations for various
 -editors][configs].
 +Эта строка делает всю работу в нашей маленькой программе. Тут есть несколько
-+деталей, которые имеют существенное значение. Во-первых, отступ в четыре
++нюансов, которые имеют существенное значение. Во-первых, отступ в четыре
 +пробела, а не табуляция. Пожалуйста, настройте выбранный вами редактор так,
 +чтобы вставлять четыре пробела при помощи клавиши табуляции. Мы предоставляем
 +некоторые [примеры настроек для различных редакторов][configs].
@@ -161,23 +156,18 @@ index e58bac6..6754f017 100644
 -advanced topic. One last thing to mention: Rust’s macros are significantly
 -different from C macros, if you’ve used those. Don’t be scared of using macros.
 -We’ll get to the details eventually, you’ll just have to trust us for now.
-+Теперь разберёмся с `println!()`. Это вызов *макроса*, которым представлено
-+метапрограммирование в Rust'e. Если бы вместо макроса была функция, это бы
-+выглядело следующим образом: `println()`. Для достижения нашей цели, нас не
-+должна волновать эта разница. Просто знайте, что иногда вы будете видеть `!`, по
-+которому можно понять, что вы вызываете макрос вместо нормальной функции. Rust
-+реализует `println!` как макрос вместо функции по веским причинам, но это
++Теперь разберёмся с `println!()`. Это вызов [макроса][macro], которыми
++представлено метапрограммирование в Rust'e. Если бы вместо макроса была функция,
++это бы выглядело следующим образом: `println()`. Для достижения нашей цели, нас
++не должна волновать эта разница. Просто знайте, что иногда вы будете видеть `!`,
++по которому можно понять, что вы вызываете макрос вместо обычной функции.
++Rust реализует `println!` как макрос вместо функции по веским причинам, но это
 +достаточно глубокая тема о которой мы поговорим позже. И последнее, что нужно
 +отметить: макросы Rust'a значительно отличаются от макросов C, если вы их
 +использовали. Не бойтесь использовать макросы. В конце концов мы вернёмся к
 +деталям, а сейчас просто доверьтесь нам.
  
--[macro]: macros.html
-+Идём дальше. `"Hello, world!"` - это *строка*. Строки удивительно сложная тема в
-+системном языке программирования, и это статически расположенная в памяти
-+строка. Мы расскажем больше о различных видах распределения памяти позже.
-+Передадим эту строку в качестве аргумента в `println!`, который выводит строки
-+на экран. Это достаточно просто!
+ [macro]: macros.html
  
 -Next, `"Hello, world!"` is a ‘string’. Strings are a surprisingly complicated
 -topic in a systems programming language, and this is a ‘statically allocated’
@@ -185,25 +175,30 @@ index e58bac6..6754f017 100644
 -[the stack and the heap][allocation], but you don’t need to right now if you
 -don’t want to. We pass this string as an argument to `println!`, which prints the
 -string to the screen. Easy enough!
-+В завершение, строка заканчивается точкой с запятой (`;`). Rust `выражение-
-+ориентированный язык`, что означает, что в нём большая часть вещей является
-+выражением. `;` используется для указания, что выражение закончилось и
-+начинается следующее. Большинство строк кода на Rust заканчивается `;`. Мы
-+рассмотрим это позже в отдельном разделе руководства.
++Идём дальше. `"Hello, world!"` - это ‘строка‘. Строки удивительно сложная тема в
++системном языке программирования. Это ‘статически расположенная в памяти‘
++строка. Если вы хотите больше узнать про расположении в памяти, рекомендуем
++посмотреть про [стек и кучу][allocation], но если вы не хотите этого, вы можете
++этого и не делать. Мы передаём строку в качестве аргумента в `println!`, который
++выводит строки на экран. Это достаточно просто!
  
--[allocation]: the-stack-and-the-heap.html
-+На самом деле, завершением будет *сборка* и *запуск* нашей программы. Соберём
-+программу компилятором `rustc`, передав ему в качестве аргумента название нашего
-+файла с кодом:
+ [allocation]: the-stack-and-the-heap.html
  
 -Finally, the line ends with a semicolon (`;`). Rust is an ‘expression oriented’
 -language, which means that most things are expressions, rather than statements.
 -The `;` is used to indicate that this expression is over, and the next one is
 -ready to begin. Most lines of Rust code end with a `;`.
--
++В завершение, строка заканчивается точкой с запятой (`;`). Rust `выражение-
++ориентированный язык`, а это означает, что в нём большая часть вещей является
++выражением. `;` используется для указания, что выражение закончилось и
++начинается следующее. Большинство строк кода на Rust заканчивается на `;`.
+ 
 -Finally, actually compiling and running our program. We can compile with our
 -compiler, `rustc`, by passing it the name of our source file:
--
++На самом деле, завершением будет сборка и запуск нашей программы. Соберём
++программу компилятором `rustc`, передав ему в качестве аргумента название нашего
++файла с кодом:
+ 
 -```bash
 +```{bash}
  $ rustc main.rs
@@ -212,7 +207,7 @@ index e58bac6..6754f017 100644
 -This is similar to `gcc` or `clang`, if you come from a C or C++ background. Rust
 -will output a binary executable. You can see it with `ls`:
 +Это похоже на `gcc` или `clang`, если вы программировали раньше на C или C++.
-+Rust выдаст двоичный исполняемый файл. Вы можете убедиться в этом с помощью
++Rust создаст двоичный исполняемый файл. Вы можете убедиться в этом с помощью
 +`ls`:
  
 -```bash
@@ -244,7 +239,7 @@ index e58bac6..6754f017 100644
 -This prints out our `Hello, world!` text to our terminal.
 +Мы получили выведенный в окне терминала текст `"Hello, world!"`.
  
--If you come from a dynamically typed language like Ruby, Python, or JavaScript,
+-If you come from a dynamic language like Ruby, Python, or JavaScript,
 -you may not be used to these two steps being separate. Rust is an
 -‘ahead-of-time compiled language’, which means that you can compile a program,
 -give it to someone else, and they don't need to have Rust installed. If you
@@ -271,8 +266,8 @@ index e58bac6..6754f017 100644
 -your project grows, you'll want something to help you manage all of the options
 -that it has, and to make it easy to share your code with other people and
 -projects.
-+Дальше мы познакомимся с новым инструментом `cargo`, который используется для
++Дальше мы познакомимся с новым инструментом `Cargo`, который используется для
 +написания настоящих программ в Rust. Использовать `rustc` удобно лишь для
-+небольших программ, но по мере роста проекта потребуется инструмент, помогающий
++небольших программ, но по мере роста проекта, потребуется инструмент, помогающий
 +управлять настройками проекта, а также облегчит обмен кода с другими людьми и
 +проектами.
