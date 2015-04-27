@@ -1,7 +1,7 @@
-% `Deref` coercions
+% Преобразования при разыменовании (`Deref` coercions)
 
-The standard library provides a special trait, [`Deref`][deref]. It’s normally
-used to overload `*`, the dereference operator:
+Стандартная библиотека Rust реализует особый типаж, [`Deref`][deref]. Обычно его
+используют, чтобы перегрузить `*`, операцию разыменования:
 
 ```rust
 use std::ops::Deref;
@@ -26,20 +26,20 @@ fn main() {
 
 [deref]: ../std/ops/trait.Deref.html
 
-This is useful for writing custom pointer types. However, there’s a language
-feature related to `Deref`: ‘deref coercions’. Here’s the rule: If you have a
-type `U`, and it implements `Deref<Target=T>`, values of `&U` will
-automatically coerce to a `&T`. Here’s an example:
+Это полезно при написании своих указательных типов. Однако, в языке есть
+возможность, связанная с `Deref`: преобразования при разыменовании. Вот правило:
+если есть тип `U`, и он реализует `Deref<Target=T>`, значения `&U` будут
+автоматически преобразованы в `&T`, когда это необходимо. Вот пример:
 
 ```rust
 fn foo(s: &str) {
-    // borrow a string for a second
+    // позаимствуем строку на секунду
 }
 
-// String implements Deref<Target=str>
+// Строка реализует Deref<Target=str>
 let owned = "Hello".to_string();
 
-// therefore, this works:
+// Поэтому, такой код работает:
 foo(&owned);
 ```
 
