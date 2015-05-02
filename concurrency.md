@@ -201,7 +201,7 @@ fn lock(&self) -> LockResult<MutexGuard<T>>
 
 Мы можем использовать `Arc<T>`, чтобы исправить это. Вот рабочая версия:
 
-```
+```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
 
