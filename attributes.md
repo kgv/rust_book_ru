@@ -16,11 +16,8 @@
 # }
 ```
 
-The difference between the two is the `!`, which changes what the attribute
-applies to:
-
-Разница между ними состоит в символе `!`, который изменяет цель, к которой
-применяется атрибут:
+Разница между ними состоит в символе `!`, который изменяет его поведение,
+определяющее к какому элементу применяется атрибут:
 
 ```rust,ignore
 #[foo]
@@ -30,11 +27,6 @@ mod bar {
     #![bar]
 }
 ```
-
-The `#[foo]` attribute applies to the next item, which is the `struct`
-declaration. The `#![bar]` attribute applies to the item enclosing it, which is
-the `mod` declaration. Otherwise, they’re the same. Both change the meaning of
-the item they’re attached to somehow.
 
 Атрибут `#[foo]` относится к следующему за ним элементу, который является
 объявлением `struct`. Атрибут `#![bar]` относится к элементу охватывающему его,
@@ -71,10 +63,6 @@ fn super_fast_fn() {
 mod macos_only {
 # }
 ```
-
-Rust attributes are used for a number of different things. There is a full list
-of attributes [in the reference][reference]. Currently, you are not allowed to
-create your own attributes, the Rust compiler defines them.
 
 Атрибуты в Rust используются для ряда различных вещей. Вот [ссылка][reference]
 на полный список атрибутов. В настоящее время вы не можете создавать свои
