@@ -40,7 +40,7 @@
 * [Composing High-Performance Memory Allocators](http://people.cs.umass.edu/~emery/pubs/berger-pldi2001.pdf)
 * [Reconsidering Custom Memory Allocation](http://people.cs.umass.edu/~emery/pubs/berger-oopsla2002.pdf)
 
-### Научный доклады *о* Rust
+### Научные доклады *о* Rust
 
 * [GPU programming in Rust](http://www.cs.indiana.edu/~eholk/papers/hips2013.pdf)
 * [Parallel closures: a new twist on an old idea](https://www.usenix.org/conference/hotpar12/parallel-closures-new-twist-old-idea) - not exactly about rust, but by nmatsakis
