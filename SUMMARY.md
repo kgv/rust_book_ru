@@ -53,6 +53,7 @@
     * [Operators and Overloading](operators-and-overloading.md)
     * [Трейт `Deref`](deref-coercions.md)
     * [Макросы](macros.md)
+    * [Сырые указатели](raw-pointers.md)
     * [`unsafe` код](unsafe.md)
 * [Нестабильные фичи Rust](nightly-rust.md)
     * [Плагины компилятора](compiler-plugins.md)
