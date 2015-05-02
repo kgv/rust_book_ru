@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/testing.md b/HEAD:testing.md
-index 8cf126c..16d27cd 100644
+index 45f87a6..16d27cd 100644
 --- a/rust/master:src/doc/trpl/testing.md
 +++ b/HEAD:testing.md
 @@ -1,432 +1,445 @@
@@ -275,11 +275,11 @@ index 8cf126c..16d27cd 100644
 +функцию с известными аргументами и сравнить результат ее вызова с ожидаемыми
 +результатом.
  
--# The `test` module
+-# The `tests` module
 +# Тесты в модуле `test`
  
 -There is one way in which our existing example is not idiomatic: it's
--missing the test module. The idiomatic way of writing our example
+-missing the `tests` module. The idiomatic way of writing our example
 -looks like this:
 +Есть один нюанс, из-за которого наш пример нельзя назвать идиоматическим:
 +отсутствует модуль тестирования. Идиоматический вариант написания нашего примера
@@ -291,7 +291,8 @@ index 8cf126c..16d27cd 100644
  }
  
  #[cfg(test)]
- mod test {
+-mod tests {
++mod test {
      use super::add_two;
  
      #[test]
@@ -301,7 +302,7 @@ index 8cf126c..16d27cd 100644
  }
  ```
  
--There's a few changes here. The first is the introduction of a `mod test` with
+-There's a few changes here. The first is the introduction of a `mod tests` with
 -a `cfg` attribute. The module allows us to group all of our tests together, and
 -to also define helper functions if needed, that don't become a part of the rest
 -of our crate. The `cfg` attribute only compiles our test code if we're
@@ -332,7 +333,8 @@ index 8cf126c..16d27cd 100644
  }
  
  #[cfg(test)]
- mod test {
+-mod tests {
++mod test {
      use super::*;
  
      #[test]
@@ -352,7 +354,8 @@ index 8cf126c..16d27cd 100644
       Running target/adder-91b3e234d4ed382a
  
  running 1 test
- test test::it_works ... ok
+-test tests::it_works ... ok
++test test::it_works ... ok
  
  test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
  
@@ -366,7 +369,7 @@ index 8cf126c..16d27cd 100644
 -It works!
 +Работает!
  
--The current convention is to use the `test` module to hold your "unit-style"
+-The current convention is to use the `tests` module to hold your "unit-style"
 -tests. Anything that just tests one small bit of functionality makes sense to
 -go here. But what about "integration-style" tests instead? For that, we have
 -the `tests` directory
@@ -414,7 +417,8 @@ index 8cf126c..16d27cd 100644
       Running target/adder-91b3e234d4ed382a
  
  running 1 test
- test test::it_works ... ok
+-test tests::it_works ... ok
++test test::it_works ... ok
  
  test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
  
@@ -437,7 +441,7 @@ index 8cf126c..16d27cd 100644
 +Теперь у нас появилось три раздела: запускается предыдущий тест, а также
 +запускается наш новый тест.
  
--That's all there is to the `tests` directory. The `test` module isn't needed
+-That's all there is to the `tests` directory. The `tests` module isn't needed
 -here, since the whole thing is focused on tests.
 +Это все, что касается директории `tests`. Модуль `test` здесь не нужен, так как
 +все здесь ориентировано на тесты.
@@ -481,7 +485,8 @@ index 8cf126c..16d27cd 100644
  }
  
  #[cfg(test)]
- mod test {
+-mod tests {
++mod test {
      use super::*;
  
      #[test]
@@ -510,7 +515,8 @@ index 8cf126c..16d27cd 100644
       Running target/adder-91b3e234d4ed382a
  
  running 1 test
- test test::it_works ... ok
+-test tests::it_works ... ok
++test test::it_works ... ok
  
  test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
  

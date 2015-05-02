@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/if.md b/HEAD:if.md
-index a532dab..b20caac 100644
+index a532dab..20ff66c 100644
 --- a/rust/master:src/doc/trpl/if.md
 +++ b/HEAD:if.md
 @@ -1,73 +1,75 @@
@@ -99,6 +99,6 @@ index a532dab..b20caac 100644
 -This works because `if` is an expression. The value of the expression is the
 -value of the last expression in whichever branch was chosen. An `if` without an
 -`else` always results in `()` as the value.
-+Это Работает, потому что `if` является выражением. Значеним этого выражения
++Это работает, потому что `if` является выражением. Значением этого выражения
 +является значение последнего выражения в зависимости от того какая ветвь была
 +выбрана. `if` без `else` всегда возвращает `()` в качестве значения.

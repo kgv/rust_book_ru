@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/glossary.md b/HEAD:glossary.md
-index 9789832..8d9268a 100644
+index 9845fcb..8d9268a 100644
 --- a/rust/master:src/doc/trpl/glossary.md
 +++ b/HEAD:glossary.md
 @@ -1,39 +1,41 @@
@@ -32,7 +32,7 @@ index 9789832..8d9268a 100644
  
 -When a compiler is compiling your program, it does a number of different
 -things. One of the things that it does is turn the text of your program into an
--'abstract syntax tree,' or 'AST.' This tree is a representation of the
+-‘abstract syntax tree’, or‘AST’. This tree is a representation of the
 -structure of your program. For example, `2 + 3` can be turned into a tree:
 +Когда компилятор компилирует программу, он делает целый ряд различных вещей.
 +Одна из вещей, которые он делает, это преобразует текст вашей программы в

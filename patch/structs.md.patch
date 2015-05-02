@@ -1,12 +1,12 @@
 diff --git a/rust/master:src/doc/trpl/structs.md b/HEAD:structs.md
-index 83d5a15..dca5358 100644
+index fcf928e..dca5358 100644
 --- a/rust/master:src/doc/trpl/structs.md
 +++ b/HEAD:structs.md
-@@ -1,89 +1,53 @@
+@@ -1,119 +1,53 @@
 -% Structs
 +% Структуры
  
--Structs are a way of creating more complex datatypes. For example, if we were
+-Structs are a way of creating more complex data types. For example, if we were
 -doing calculations involving coordinates in 2D space, we would need both an `x`
 -and a `y` value:
 -
@@ -34,9 +34,9 @@ index 83d5a15..dca5358 100644
  }
  ```
  
--There’s a lot going on here, so let’s break it down. We declare a struct with
--the `struct` keyword, and then with a name. By convention, structs begin with a
--capital letter and are also camel cased: `PointInSpace`, not `Point_In_Space`.
+-There’s a lot going on here, so let’s break it down. We declare a `struct` with
+-the `struct` keyword, and then with a name. By convention, `struct`s begin with
+-a capital letter and are camel cased: `PointInSpace`, not `Point_In_Space`.
 +Этот код делает много разных вещей, поэтому давайте разберём его по порядку. Мы
 +объявляем структуру с помощью ключевого слова `struct`, за которым следует имя
 +объявляемой структуры. Обычно, имена типов-структур начинаются с заглавной буквы
@@ -44,7 +44,7 @@ index 83d5a15..dca5358 100644
 +привычно, а `Point_In_Space` - нет.
  
 -We can create an instance of our struct via `let`, as usual, but we use a `key:
--value` style syntax to set each field. The order doesn't need to be the same as
+-value` style syntax to set each field. The order doesn’t need to be the same as
 -in the original declaration.
 +Как всегда, мы можем создать экземпляр нашей структуры с помощью оператора
 +`let`. Однако в данном случае мы используем синтаксис вида `ключ: значение` для
@@ -112,5 +112,35 @@ index 83d5a15..dca5358 100644
 -
 -    point.y = 6; // this causes an error
 -}
+-```
+-
+-# Update syntax
+-
+-A `struct` can include `..` to indicate that you want to use a copy of some
+-other struct for some of the values. For example:
+-
+-```rust
+-struct Point3d {
+-    x: i32,
+-    y: i32,
+-    z: i32,
+-}
+-
+-let mut point = Point3d { x: 0, y: 0, z: 0 };
+-point = Point3d { y: 1, .. point };
+-```
+-
+-This gives `point` a new `y`, but keeps the old `x` and `z` values. It doesn’t
+-have to be the same `struct` either, you can use this syntax when making new
+-ones, and it will copy the values you don’t specify:
+-
+-```rust
+-# struct Point3d {
+-#     x: i32,
+-#     y: i32,
+-#     z: i32,
+-# }
+-let origin = Point3d { x: 0, y: 0, z: 0 };
+-let point = Point3d { z: 1, x: 2, .. origin };
 -```
 +Этот код напечатает `Точка находится в (5, 0)`.

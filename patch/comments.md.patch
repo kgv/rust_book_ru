@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/comments.md b/HEAD:comments.md
-index fa27d1c..c77f98f 100644
+index fa27d1c..a641df0 100644
 --- a/rust/master:src/doc/trpl/comments.md
 +++ b/HEAD:comments.md
 @@ -1,45 +1,47 @@
@@ -16,7 +16,7 @@ index fa27d1c..c77f98f 100644
  
 -Rust has two kinds of comments that you should care about: *line comments*
 -and *doc comments*.
-+В Rust есть два вида комментариев: `строчные комментарии` и `doc-комментарии`.
++В Rust есть два вида комментариев: *строчные комментарии* и *doc-комментарии*.
  
 -```rust
 -// Line comments are anything after ‘//’ and extend to the end of the line.
@@ -39,30 +39,20 @@ index fa27d1c..c77f98f 100644
 +Другое применение комментария - это doc-комментарий. Doc-комментарий использует
 +`///` вместо `//`, и поддерживает Markdown-разметку внутри:
  
--```rust
+ ```rust
 -/// Adds one to the number given.
-+```{rust}
-+/// `hello` - это функция, которая выводит на экран персональное приветствие
-+/// основанное на полученном имени
-+///
-+/// # Arguments
-+///
-+/// * `name` - Имя особы, которую вы хотите поприветствовать.
++/// Прибавляем единицу к заданному числу.
  ///
- /// # Examples
+-/// # Examples
++/// # Примеры
  ///
-+/// ```rust
-+/// let name = "Steve";
-+/// hello(name); // выведет "Привет, Steve!"
  /// ```
--/// let five = 5;
--///
--/// assert_eq!(6, add_one(5));
--/// ```
--fn add_one(x: i32) -> i32 {
--    x + 1
-+fn hello(name: &str) {
-+    println!("Привет, {}!", name);
+ /// let five = 5;
+ ///
+ /// assert_eq!(6, add_one(5));
+ /// ```
+ fn add_one(x: i32) -> i32 {
+     x + 1
  }
  ```
  
@@ -73,9 +63,13 @@ index fa27d1c..c77f98f 100644
 -value passed to it is `false`.
 +При написании doc-комментария, очень полезно добавлять разделы для любых
 +аргументов, возвращаемых значений и приводить некоторые примеры использования.
++Вы заметили, что здесь мы использовали новый макрос: `assert_eq!`. Он сравнивает
++два значения и вызывает `panic!`, если они не равны. Для документации такие 
++примеры очень полезны. Так же есть и другой макрос, `assert!`, который вызывает
++`panic!` когда значение равно `false`.
  
 -You can use the [`rustdoc`](documentation.html) tool to generate HTML documentation
 -from these doc comments, and also to run the code examples as tests!
 +Вы можете использовать [`rustdoc`](documentation.html) для генерации HTML-
-+документации из этих doc-комментариев. Мы расскажем больше о `rustdoc` позже в
-+отдельной теме.
++документации из этих doc-комментариев, а так же запуска кода из примеров как 
++тестов.

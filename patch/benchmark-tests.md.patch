@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/benchmark-tests.md b/HEAD:benchmark-tests.md
-index 890a2f8..e333ae7 100644
+index 8879653..470d599 100644
 --- a/rust/master:src/doc/trpl/benchmark-tests.md
 +++ b/HEAD:benchmark-tests.md
 @@ -1,152 +1,162 @@
@@ -22,7 +22,7 @@ index 890a2f8..e333ae7 100644
  }
  
  #[cfg(test)]
- mod test {
+ mod tests {
      use super::*;
      use test::Bencher;
  

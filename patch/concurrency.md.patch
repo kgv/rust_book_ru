@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/concurrency.md b/HEAD:concurrency.md
-index 575dfc7..f5bb51e 100644
+index 575dfc7..496fd84 100644
 --- a/rust/master:src/doc/trpl/concurrency.md
 +++ b/HEAD:concurrency.md
 @@ -1,325 +1,342 @@
@@ -289,7 +289,8 @@ index 575dfc7..f5bb51e 100644
 -We can use `Arc<T>` to fix this. Here's the working version:
 +Мы можем использовать `Arc<T>`, чтобы исправить это. Вот рабочая версия:
  
- ```
+-```
++```rust
  use std::sync::{Arc, Mutex};
  use std::thread;
  

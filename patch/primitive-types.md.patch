@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/primitive-types.md b/HEAD:primitive-types.md
-index 811080c..80a49ec 100644
+index e017e22..4694a7b 100644
 --- a/rust/master:src/doc/trpl/primitive-types.md
 +++ b/HEAD:primitive-types.md
-@@ -1,284 +1,294 @@
+@@ -1,293 +1,295 @@
 -% Primitive Types
 +% Простые типы
  
@@ -16,11 +16,11 @@ index 811080c..80a49ec 100644
 +базе этих простых типов, но это самые простые.
  
 -# Booleans
-+# Логические типы (`bool`)
++# Логический тип (`bool`)
  
 -Rust has a built in boolean type, named `bool`. It has two values, `true` and `false`:
 +Rust имеет встроенный логический тип, называемый `bool`. Он может принимать два
-+значения, `true` и `false` :
++значения, `true` и `false`:
  
  ```rust
  let x = true;
@@ -36,9 +36,10 @@ index 811080c..80a49ec 100644
 -You can find more documentation for `bool`s [in the standard library
 -documentation][bool].
 +Вы можете найти больше информации о логических типах (`bool`) в [документации к
-+стандартной библиотеке][bool].
++стандартной библиотеке (англ.)][bool].
  
- [bool]: ../std/primitive.bool.html
+-[bool]: ../std/primitive.bool.html
++[bool]: http://doc.rust-lang.org/nightly/std/primitive.bool.html
  
 -# `char`
 +# Символы (`char`)
@@ -56,21 +57,22 @@ index 811080c..80a49ec 100644
 -Unlike some other languages, this means that Rust’s `char` is not a single byte,
 -but four.
 +Это означает, что в отличие от некоторых других языков, `char` в Rust
-+представлен не одним байтом, а четырмя.
++представлен не одним байтом, а четырьмя.
  
 -You can find more documentation for `char`s [in the standard library
 -documentation][char].
 +Вы можете найти больше информации о символах (`char`) в [документации к
-+стандартной библиотеке][char].
++стандартной библиотеке (англ.)][char].
  
- [char]: ../std/primitive.char.html
+-[char]: ../std/primitive.char.html
++[char]: http://doc.rust-lang.org/nightly/std/primitive.char.html
  
 -# Numeric types
 +# Числовые типы
  
 -Rust has a variety of numeric types in a few categories: signed and unsigned,
 -fixed and variable, floating-point and integer.
-+Rust имеет целый ряд числовых типов, поделенных на несколько категорий: знаковые
++Rust имеет целый ряд числовых типов, разделённых на несколько категорий: знаковые
 +и беззнаковые, фиксированного и переменного размера, числа с плавающей точкой и
 +целые числа.
  
@@ -78,8 +80,8 @@ index 811080c..80a49ec 100644
 -`u16` is an unsigned type with sixteen bits of size. More bits lets you have
 -bigger numbers.
 +Эти типы состоят из двух частей: категория и размер. Например, `u16`
-+представляет собой тип без знака с размером в шестнадцать бит. Большее
-+количетсво бит позволяет задавать большие числа.
++представляет собой тип без знака с размером в шестнадцать бит. Чем большим
++количеством бит представлен тип, тем большее число мы можем задать.
  
 -If a number literal has nothing to cause its type to be inferred, it defaults:
 +Если для числового литерала не указан тип, то он будет выведен по умолчанию:
@@ -95,21 +97,33 @@ index 811080c..80a49ec 100644
 +Ниже представлен список различных числовых типов, со ссылками на их документацию
 +в стандартной библиотеке:
  
- * [i16](../std/primitive.i16.html)
- * [i32](../std/primitive.i32.html)
- * [i64](../std/primitive.i64.html)
- * [i8](../std/primitive.i8.html)
- * [u16](../std/primitive.u16.html)
- * [u32](../std/primitive.u32.html)
- * [u64](../std/primitive.u64.html)
- * [u8](../std/primitive.u8.html)
- * [isize](../std/primitive.isize.html)
- * [usize](../std/primitive.usize.html)
- * [f32](../std/primitive.f32.html)
- * [f64](../std/primitive.f64.html)
+-* [i8](../std/primitive.i8.html)
+-* [i16](../std/primitive.i16.html)
+-* [i32](../std/primitive.i32.html)
+-* [i64](../std/primitive.i64.html)
+-* [u8](../std/primitive.u8.html)
+-* [u16](../std/primitive.u16.html)
+-* [u32](../std/primitive.u32.html)
+-* [u64](../std/primitive.u64.html)
+-* [isize](../std/primitive.isize.html)
+-* [usize](../std/primitive.usize.html)
+-* [f32](../std/primitive.f32.html)
+-* [f64](../std/primitive.f64.html)
++* [i8](http://doc.rust-lang.org/nightly/std/primitive.i8.html)
++* [i16](http://doc.rust-lang.org/nightly/std/primitive.i16.html)
++* [i32](http://doc.rust-lang.org/nightly/std/primitive.i32.html)
++* [i64](http://doc.rust-lang.org/nightly/std/primitive.i64.html)
++* [u8](http://doc.rust-lang.org/nightly/std/primitive.u8.html)
++* [u16](http://doc.rust-lang.org/nightly/std/primitive.u16.html)
++* [u32](http://doc.rust-lang.org/nightly/std/primitive.u32.html)
++* [u64](http://doc.rust-lang.org/nightly/std/primitive.u64.html)
++* [isize](http://doc.rust-lang.org/nightly/std/primitive.isize.html)
++* [usize](http://doc.rust-lang.org/nightly/std/primitive.usize.html)
++* [f32](http://doc.rust-lang.org/nightly/std/primitive.f32.html)
++* [f64](http://doc.rust-lang.org/nightly/std/primitive.f64.html)
  
 -Let’s go over them by category:
-+Давайте пройдемся по их категориям:
++Давайте пройдёмся по их категориям:
  
 -## Signed and Unsigned
 +## Знаковые и беззнаковые
@@ -117,36 +131,36 @@ index 811080c..80a49ec 100644
 -Integer types come in two varieties: signed and unsigned. To understand the
 -difference, let’s consider a number with four bits of size. A signed, four-bit
 -number would let you store numbers from `-8` to `+7`. Signed numbers use
--‘two’s compliment representation’. An unsigned four bit number, since it does
+-“two’s compliment representation”. An unsigned four bit number, since it does
 -not need to store negatives, can store values from `0` to `+15`.
 +Целые типы бывают двух видов: знаковые и беззнаковые. Чтобы понять разницу,
-+давайте рассмотрим число с размером в четыре бита. Знаковые четырехбитные числа,
++давайте рассмотрим число с размером в четыре бита. Знаковые четырёхбитные числа,
 +позволяют хранить значения от `-8` до `+7`. Знаковые цифры используют
-+представление ’дополнение до двух’. Беззнаковые четырехбитные числа, ввиду того
++представление ’дополнение до двух’. Беззнаковые четырёхбитные числа, ввиду того
 +что не нужно хранить отрицательные значения, позволяют хранить значения от `0`
 +до `+15`.
  
 -Unsigned types use a `u` for their category, and signed types use `i`. The `i`
 -is for ‘integer’. So `u8` is an eight-bit unsigned number, and `i8` is an
--eight-bit signed number. 
+-eight-bit signed number.
 +Беззнаковые типы используют `u` для своей категории, а знаковые типы используют
 +`i`. `i` означает ‘integer’. Так `u8` представляет собой число без знака с
 +размером восемь бит, а `i8` представляет собой число со знаком с размером восемь
 +бит.
  
 -## Fixed size types
-+## Постоянного размера
++## Типы фиксированного размера
  
 -Fixed size types have a specific number of bits in their representation. Valid
 -bit sizes are `8`, `16`, `32`, and `64`. So, `u32` is an unsigned, 32-bit integer,
 -and `i64` is a signed, 64-bit integer.
-+Типы с постоянным размером соответственно имеют фиксированное количество битов в
-+своем представлении. Допустимыми размерами являются `8`, `16`, `32`, `64`. Таким
-+образом, `u32` представляет собой целое число без знака с размером 32 бита, а
++Типы с фиксированным размером соответственно имеют фиксированное количество бит
++в своём представлении. Допустимыми размерами являются `8`, `16`, `32`, `64`.
++Таким образом, `u32` представляет собой целое число без знака с размером 32 бита, а
 +`i64` - целое число со знаком с размером 64 бита.
  
 -## Variable sized types
-+## Переменного размера
++## Типы переменного размера
  
 -Rust also provides types whose size depends on the size of a pointer of the
 -underlying machine. These types have ‘size’ as the category, and come in signed
@@ -159,7 +173,7 @@ index 811080c..80a49ec 100644
 -## Floating-point types
 +## С плавающей точкой
  
--Rust also two floating point types: `f32` and `f64`. These correspond to 
+-Rust also has two floating point types: `f32` and `f64`. These correspond to
 -IEEE-754 single and double precision numbers.
 +В Rust также есть два типа с плавающей точкой: `f32` и `f64`. Они соответствуют
 +IEEE-754 числам с плавающей точкой одинарной и двойной точности соответственно.
@@ -184,8 +198,8 @@ index 811080c..80a49ec 100644
 -section][generics]. The `N` is a compile-time constant, for the length of the
 -array.
 +Массивы имеют тип `[T; N]`. О значении `T` мы поговорим позже, когда будем
-+рассматривать дженерики. `N` - это константа времени компиляции, задающая длину
-+массива.
++рассматривать [дженерики][generics]. `N` - это константа времени компиляции,
++представляющая собой длину массива.
  
 -There’s a shorthand for initializing each element of an array to the same
 -value. In this example, each element of `a` will be initialized to `0`:
@@ -234,9 +248,10 @@ index 811080c..80a49ec 100644
 -You can find more documentation for `array`s [in the standard library
 -documentation][array].
 +Вы можете найти больше информации о массивах (`array`) в [документации к
-+стандартной библиотеке][array].
++стандартной библиотеке (англ.)][array].
  
- [array]: ../std/primitive.array.html
+-[array]: ../std/primitive.array.html
++[array]: http://doc.rust-lang.org/nightly/std/primitive.array.html
  
 -# Slices
 +# Срезы
@@ -247,17 +262,19 @@ index 811080c..80a49ec 100644
 -into memory. By nature, a slice is not created directly, but from an existing
 -variable. Slices have a length, can be mutable or not, and in many ways behave
 -like arrays:
-+*Срез* - это ссылка на (или "проекция" в) массив. Они полезны, когда нужно
-+обеспечить безопасный, эффективный доступ к части массива без копирования.
-+Например, возможно вам нужно сослаться на единственную строку файла, считанного
-+в память. Из-за своей ссылочной природы, срезы создаются не напрямую, а из
++*Срез* - это ссылка на (или "проекция" в) другую структуру данных. Они полезны,
++когда нужно обеспечить безопасный, эффективный доступ к части массива без
++копирования. Например, возможно вам нужно сослаться на единственную строку файла,
++считанного в память. Из-за своей ссылочной природы, срезы создаются не напрямую, а из
 +существующих переменных. У срезов есть длина, они могут быть изменяемы или нет,
 +и во многих случаях они ведут себя как массивы:
  
  ```rust
  let a = [0, 1, 2, 3, 4];
 -let middle = &a[1..4]; // A slice of a: just the elements 1, 2, and 3
-+let middle = &a[1..4]; // Срез a: только элементы 1, 2, и 3
+-let complete = &a[..]; // A slice containing all of the elements in a
++let middle = &a[1..4]; // Срез `a`: только элементы 1, 2, и 3
++let complete = &a[..]; // Срез, содержащий все элементы массива `a`
  ```
  
 -Slices have type `&[T]`. We’ll talk about that `T` when we cover
@@ -270,16 +287,17 @@ index 811080c..80a49ec 100644
 -You can find more documentation for `slices`s [in the standard library
 -documentation][slice].
 +Вы можете найти больше информации о срезах (`slice`) в [документации к
-+стандартной библиотеке][slice].
++стандартной библиотеке (англ.)][slice].
  
- [slice]: ../std/primitive.slice.html
+-[slice]: ../std/primitive.slice.html
++[slice]: http://doc.rust-lang.org/nightly/std/primitive.slice.html
  
  # `str`
  
 -Rust’s `str` type is the most primitive string type. As an [unsized type][dst],
 -it’s not very useful by itself, but becomes useful when placed behind a reference,
 -like [`&str`][strings]. As such, we’ll just leave it at that.
-+Тип `str` в Rust являются наиболее простым типом строк. Это [безразмерный
++Тип `str` в Rust является наиболее простым типом строк. Это [безразмерный
 +тип][dst], поэтому сам по себе он не очень полезен, но он становится полезным
 +при использовании ссылки, [`&str`][strings]. Таким образом, мы просто
 +остановимся на этом.
@@ -290,9 +308,10 @@ index 811080c..80a49ec 100644
 -You can find more documentation for `str` [in the standard library
 -documentation][str].
 +Вы можете найти больше информации о строках (`str`) в [документации к
-+стандартной библиотеке][str].
++стандартной библиотеке (англ.)][str].
  
- [str]: ../std/primitive.str.html
+-[str]: ../std/primitive.str.html
++[str]: http://doc.rust-lang.org/nightly/std/primitive.str.html
  
 -# Tuples
 +# Кортежи
@@ -357,22 +376,30 @@ index 811080c..80a49ec 100644
 -Remember [before][let] when I said the left-hand side of a `let` statement was more
 -powerful than just assigning a binding? Here we are. We can put a pattern on
 -the left-hand side of the `let`, and if it matches up to the right-hand side,
--we can assign multiple bindings at once. In this case, `let` "destructures,"
--or "breaks up," the tuple, and assigns the bits to three bindings.
+-we can assign multiple bindings at once. In this case, `let` “destructures”
+-or “breaks up” the tuple, and assigns the bits to three bindings.
 +Помните, я [говорил][let], что левая часть оператора `let` более полезна, чем
-+просто присваивание имени? Об этом я и говорил. Мы можем написать слева от `let`
-+образец, и, если он совпадает со значением справа, произойдёт присваивание имён
-+сразу нескольким значениям. В данном случае, `let` "деконструирует" или
-+"разбивает" кортеж, и присваивает его части трём именам.
++просто присваивание имени? О том, что мы здесь увидели, я и говорил. Мы можем
++написать слева от `let` образец, и, если он совпадает со значением справа,
++произойдёт присваивание имён сразу нескольким значениям. В данном случае, `let`
++"деконструирует" или "разбивает" кортеж, и присваивает его части трём именам.
  
  [let]: variable-bindings.html
  
 -This pattern is very powerful, and we’ll see it repeated more later.
 +Это очень удобный шаблон программирования, и мы ещё не раз увидим его.
  
--## Tuple Indexing
+-You can disambiguate a single-element tuple from a value in parentheses with a
+-comma:
 +## Индексация кортежей
  
+-```
+-(0,); // single-element tuple
+-(0); // zero in parentheses
+-```
+-
+-## Tuple Indexing
+-
 -You can also access fields of a tuple with indexing syntax:
 +Вы также можете получить доступ к полям кортежа с помощью индексации:
  
@@ -389,15 +416,16 @@ index 811080c..80a49ec 100644
  
 -Like array indexing, it starts at zero, but unlike array indexing, it uses a
 -`.`, rather than `[]`s.
-+Как и в случае индексации массивов, индексы начинаются с нуля, но, в отличае от
-+массивов, используется `.`, а не `[]`.
++Как и в случае индексации массивов, индексы начинаются с нуля, но здесь, в отличие
++от массивов, используется `.`, а не `[]`.
  
 -You can find more documentation for tuples [in the standard library
 -documentation][tuple].
 +Вы можете найти больше информации о кортежах (`tuple`) в [документации к
-+стандартной библиотеке][tuple].
++стандартной библиотеке (англ.)][tuple].
  
- [tuple]: ../std/primitive.tuple.html
+-[tuple]: ../std/primitive.tuple.html
++[tuple]: http://doc.rust-lang.org/nightly/std/primitive.tuple.html
  
 -# Functions
 +# Функции
@@ -413,5 +441,5 @@ index 811080c..80a49ec 100644
  
 -In this case, `x` is a ‘function pointer’ to a function that takes an `i32` and
 -returns an `i32`.
-+В данном примере `x` - ‘это указатель на функцию‘, которая принимает в качестве
++В данном примере `x` - это ‘указатель на функцию‘, которая принимает в качестве
 +аргумента `i32` и возвращает `i32`.

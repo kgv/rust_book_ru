@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/documentation.md b/HEAD:documentation.md
-index 732521a..36a2793 100644
+index b28343e..36a2793 100644
 --- a/rust/master:src/doc/trpl/documentation.md
 +++ b/HEAD:documentation.md
 @@ -1,575 +1,597 @@
@@ -734,7 +734,7 @@ index 732521a..36a2793 100644
 -## Generation options
 +## Опции генерации
  
--`rustdoc` also contains a few other options on the command line, for further customiziation:
+-`rustdoc` also contains a few other options on the command line, for further customization:
 +`rustdoc` также содержит несколько опций командной строки, для дальнейшей
 +кастомизации:
  

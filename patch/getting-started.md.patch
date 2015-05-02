@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/getting-started.md b/HEAD:getting-started.md
-index 555d40e..a9799ff 100644
+index d0825e5..a9799ff 100644
 --- a/rust/master:src/doc/trpl/getting-started.md
 +++ b/HEAD:getting-started.md
 @@ -1,5 +1,6 @@
@@ -7,7 +7,7 @@ index 555d40e..a9799ff 100644
 +% C чего начать
  
 -This first section of the book will get you going with Rust and its tooling.
--First, we’ll install Rust. Then: the classic ‘Hello World’ program. Finally,
+-First, we’ll install Rust. Then, the classic ‘Hello World’ program. Finally,
 -we’ll talk about Cargo, Rust’s build system and package manager.
 +Этот первый раздел книги, который позволит вам начать работать с Rust и его
 +инструментами. Сначала - мы установим Rust. Затем напишем классическую программу

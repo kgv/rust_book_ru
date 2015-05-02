@@ -1,27 +1,33 @@
 diff --git a/rust/master:src/doc/trpl/tuple-structs.md b/HEAD:tuple-structs.md
-index 8fba658..083a936 100644
+index bdaef70..083a936 100644
 --- a/rust/master:src/doc/trpl/tuple-structs.md
 +++ b/HEAD:tuple-structs.md
-@@ -1,56 +1,60 @@
+@@ -1,60 +1,60 @@
 -% Tuple Structs
 +% Кортежные структуры
-+
+ 
+-Rust has another data type that's like a hybrid between a [tuple][tuple] and a
+-[struct][struct], called a ‘tuple struct’. Tuple structs have a name, but
+-their fields don’t:
 +В Rust есть ещё один тип данных, который представляет собой нечто среднее между
 +кортежем и структурой. Он называется *кортежной структурой*. Кортежные структуры
 +именуются, а вот у их полей имён нет:
  
--Rust has another data type that's like a hybrid between a tuple and a struct,
--called a *tuple struct*. Tuple structs do have a name, but their fields don't:
- 
- ```{rust}
+-```rust
++
++```{rust}
  struct Color(i32, i32, i32);
  struct Point(i32, i32, i32);
  ```
  
--These two will not be equal, even if they have the same values:
+-[tuple]: primitive-types.html#tuples
+-[struct]: structs.html
 +Эти два объекта различны, несмотря на то, что у них одинаковые значения:
  
- ```{rust}
+-These two will not be equal, even if they have the same values:
+-
+-```rust
++```{rust}
  # struct Color(i32, i32, i32);
  # struct Point(i32, i32, i32);
  let black = Color(0, 0, 0);
@@ -33,7 +39,8 @@ index 8fba658..083a936 100644
 +Почти всегда, вместо кортежной структуры лучше использовать обычную структуру.
 +Мы бы скорее объявили типы `Color` и `Point` вот так:
  
- ```{rust}
+-```rust
++```{rust}
  struct Color {
      red: i32,
      blue: i32,
@@ -52,8 +59,8 @@ index 8fba658..083a936 100644
 +Теперь у нас есть настоящие имена, а не только позиции. Хорошие имена важны, и
 +при использовании структуры у нас есть эти имена.
  
--There _is_ one case when a tuple struct is very useful, though, and that's a
--tuple struct with only one element. We call this the *newtype* pattern, because
+-There _is_ one case when a tuple struct is very useful, though, and that’s a
+-tuple struct with only one element. We call this the ‘newtype’ pattern, because
 -it allows you to create a new type, distinct from that of its contained value
 -and expressing its own semantic meaning:
 +Однако, _есть_ один случай, когда кортежные структуры очень полезны. Это
@@ -62,7 +69,8 @@ index 8fba658..083a936 100644
 +значения, содержащегося в кортежной структуре. При этом новый тип обозначает
 +что-то другое:
  
- ```{rust}
+-```rust
++```{rust}
  struct Inches(i32);
  
  let length = Inches(10);
@@ -73,7 +81,7 @@ index 8fba658..083a936 100644
  ```
  
 -As you can see here, you can extract the inner integer type through a
--destructuring `let`, as we discussed previously in 'tuples.' In this case, the
+-destructuring `let`, as we discussed previously in ‘tuples’. In this case, the
 -`let Inches(integer_length)` assigns `10` to `integer_length`.
 +Как вы можете видеть в данном примере, извлечь вложенный целый тип можно с
 +помощью деконструирующего `let`. Мы обсуждали это выше, в разделе "кортежи". В

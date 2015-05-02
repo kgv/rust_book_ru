@@ -1,18 +1,19 @@
 diff --git a/rust/master:src/doc/trpl/traits.md b/HEAD:traits.md
-index 25f5c7c..52e250a 100644
+index ea5d2ed..52e250a 100644
 --- a/rust/master:src/doc/trpl/traits.md
 +++ b/HEAD:traits.md
-@@ -1,508 +1,518 @@
+@@ -1,420 +1,518 @@
 -% Traits
 +% Трейты
  
--Do you remember the `impl` keyword, used to call a function with method
--syntax?
+-Do you remember the `impl` keyword, used to call a function with [method
+-syntax][methodsyntax]?
 +Вы помните, ключевое слово `impl`, используемое для вызова функции с синтаксисом
 +метода?
  
- ```{rust}
- # #![feature(core)]
+-```rust
++```{rust}
++# #![feature(core)]
  struct Circle {
      x: f64,
      y: f64,
@@ -26,14 +27,17 @@ index 25f5c7c..52e250a 100644
  }
  ```
  
--Traits are similar, except that we define a trait with just the method
--signature, then implement the trait for that struct. Like this:
+-[methodsyntax]: method-syntax.html
 +Трейты схожи, за исключением того, что мы определяем трейт, содержащий лишь
 +сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например,
 +как показано ниже:
  
- ```{rust}
- # #![feature(core)]
+-Traits are similar, except that we define a trait with just the method
+-signature, then implement the trait for that struct. Like this:
+-
+-```rust
++```{rust}
++# #![feature(core)]
  struct Circle {
      x: f64,
      y: f64,
@@ -52,28 +56,27 @@ index 25f5c7c..52e250a 100644
  ```
  
 -As you can see, the `trait` block looks very similar to the `impl` block,
--but we don't define a body, just a type signature. When we `impl` a trait,
+-but we don’t define a body, just a type signature. When we `impl` a trait,
 -we use `impl Trait for Item`, rather than just `impl Item`.
 +Как вы можете видеть, блок `trait` очень похож на блок `impl`. Различие состоит
 +лишь в том, что тело метода не определяется, а определяется только его
 +сигнатура. Когда мы реализуем трейт, мы используем `impl Trait for Item`, а не
 +просто `impl Item`.
  
--So what's the big deal? Remember the error we were getting with our generic
--`inverse` function?
+-We can use traits to constrain our generics. Consider this function, which
+-does not compile, and gives us a similar error:
 +Так что же в этом такого грандиозного? Помните ошибку, которую мы получали для
 +нашей дженерик функции `inverse`?
  
- ```text
- error: binary operation `==` cannot be applied to type `T`
- ```
- 
--We can use traits to constrain our generics. Consider this function, which
--does not compile, and gives us a similar error:
+-```rust,ignore
++```text
++error: binary operation `==` cannot be applied to type `T`
++```
++
 +Мы можем использовать трейты для ограничения дженериков. Рассмотрим похожую
 +функцию, которая также не компилируется, и выводит ошибку:
- 
- ```{rust,ignore}
++
++```{rust,ignore}
  fn print_area<T>(shape: T) {
      println!("This shape has an area of {}", shape.area());
  }
@@ -86,14 +89,15 @@ index 25f5c7c..52e250a 100644
  error: type `T` does not implement any method in scope named `area`
  ```
  
--Because `T` can be any type, we can't be sure that it implements the `area`
--method. But we can add a *trait constraint* to our generic `T`, ensuring
+-Because `T` can be any type, we can’t be sure that it implements the `area`
+-method. But we can add a ‘trait constraint’ to our generic `T`, ensuring
 -that it does:
 +Поскольку `T` может быть любого типа, мы не можем быть уверены, что он реализует
 +метод `area`. Но мы можем добавить **ограничение по трейту** к нашему дженерику
 +`T`, гарантируя, что он будет соответствовать требованиям:
  
- ```{rust}
+-```rust
++```{rust}
  # trait HasArea {
  #     fn area(&self) -> f64;
  # }
@@ -109,11 +113,12 @@ index 25f5c7c..52e250a 100644
 +Так как трейты определяют сигнатуры типов функций, мы можем быть уверены, что
 +любой тип, который реализует `HasArea` будет иметь метод `.area()`.
  
--Here's an extended example of how this works:
+-Here’s an extended example of how this works:
 +Вот расширенный пример того, как это работает:
  
- ```{rust}
- # #![feature(core)]
+-```rust
++```{rust}
++# #![feature(core)]
  trait HasArea {
      fn area(&self) -> f64;
  }
@@ -172,13 +177,14 @@ index 25f5c7c..52e250a 100644
  This shape has an area of 1
  ```
  
--As you can see, `print_area` is now generic, but also ensures that we
--have passed in the correct types. If we pass in an incorrect type:
+-As you can see, `print_area` is now generic, but also ensures that we have
+-passed in the correct types. If we pass in an incorrect type:
 +Как вы можете видеть, теперь `print_area` не только является дженериком, но и
 +гарантирует, что будет получен корректный тип. Если же мы передадим некорректный
 +тип:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  print_area(5);
  ```
  
@@ -189,14 +195,15 @@ index 25f5c7c..52e250a 100644
  error: failed to find an implementation of trait main::HasArea for int
  ```
  
--So far, we've only added trait implementations to structs, but you can
--implement a trait for any type. So technically, we _could_ implement
--`HasArea` for `i32`:
+-So far, we’ve only added trait implementations to structs, but you can
+-implement a trait for any type. So technically, we _could_ implement `HasArea`
+-for `i32`:
 +До сих пор мы добавляли реализации трейтов лишь для структур, но реализовать
 +трейт возможно для любого типа. Технически, мы _могли бы_ реализовать `HasArea`
 +для `i32`:
  
- ```{rust}
+-```rust
++```{rust}
  trait HasArea {
      fn area(&self) -> f64;
  }
@@ -218,107 +225,117 @@ index 25f5c7c..52e250a 100644
 +считается плохим стилем программирования.
  
 -This may seem like the Wild West, but there are two other restrictions around
--implementing traits that prevent this from getting out of hand. First, traits
--must be `use`d in any scope where you wish to use the trait's method. So for
--example, this does not work:
+-implementing traits that prevent this from getting out of hand. The first is
+-that if the trait isn’t defined in your scope, it doesn’t apply. Here’s an
+-example: the standard library provides a [`Write`][write] trait which adds
+-extra functionality to `File`s, for doing file I/O. By default, a `File`
+-won’t have its methods:
 +Такой подход может показаться неконтролируемым, однако есть два ограничения,
 +связанные с реализацией трейтов, которые мешают коду выйти из-под контроля. Во-
 +первых, трейты должны быть объявлены используемыми, с помощью ключевого слова
 +`use`, в той области видимости, где вы хотите использовать методы этих трейтов.
 +Так, например, следующий код не будет работать:
  
- ```{rust,ignore}
- mod shapes {
-     use std::f64::consts;
+-[write]: ../std/io/trait.Write.html
++```{rust,ignore}
++mod shapes {
++    use std::f64::consts;
  
-     trait HasArea {
-         fn area(&self) -> f64;
-     }
- 
-     struct Circle {
-         x: f64,
-         y: f64,
-         radius: f64,
-     }
- 
-     impl HasArea for Circle {
-         fn area(&self) -> f64 {
-             consts::PI * (self.radius * self.radius)
-         }
-     }
- }
- 
- fn main() {
-     let c = shapes::Circle {
-         x: 0.0f64,
-         y: 0.0f64,
-         radius: 1.0f64,
-     };
- 
-     println!("{}", c.area());
- }
+-```rust,ignore
+-let mut f = std::fs::File::open("foo.txt").ok().expect("Couldn’t open foo.txt");
+-let result = f.write("whatever".as_bytes());
+-# result.unwrap(); // ignore the error
++    trait HasArea {
++        fn area(&self) -> f64;
++    }
++
++    struct Circle {
++        x: f64,
++        y: f64,
++        radius: f64,
++    }
++
++    impl HasArea for Circle {
++        fn area(&self) -> f64 {
++            consts::PI * (self.radius * self.radius)
++        }
++    }
++}
++
++fn main() {
++    let c = shapes::Circle {
++        x: 0.0f64,
++        y: 0.0f64,
++        radius: 1.0f64,
++    };
++
++    println!("{}", c.area());
++}
  ```
  
--Now that we've moved the structs and traits into their own module, we get an
--error:
+-Here’s the error:
 +Теперь, когда мы переместили структуры и трейты в свой собственный модуль, мы
 +получаем следующую ошибку:
  
  ```text
- error: type `shapes::Circle` does not implement any method in scope named `area`
+-error: type `std::fs::File` does not implement any method in scope named `write`
+-
+-let result = f.write(b”whatever”);
+-               ^~~~~~~~~~~~~~~~~~
++error: type `shapes::Circle` does not implement any method in scope named `area`
  ```
  
--If we add a `use` line right above `main` and make the right things public,
--everything is fine:
+-We need to `use` the `Write` trait first:
 +Если мы добавим строку с `use` над функцией `main` и сделаем нужные элементы
 +публичными, все будет в порядке:
  
- ```{rust}
- # #![feature(core)]
- mod shapes {
-     use std::f64::consts;
+-```rust,ignore
+-use std::io::Write;
++```{rust}
++# #![feature(core)]
++mod shapes {
++    use std::f64::consts;
  
-     pub trait HasArea {
-         fn area(&self) -> f64;
-     }
- 
-     pub struct Circle {
-         pub x: f64,
-         pub y: f64,
-         pub radius: f64,
-     }
- 
-     impl HasArea for Circle {
-         fn area(&self) -> f64 {
-             consts::PI * (self.radius * self.radius)
-         }
-     }
- }
- 
- use shapes::HasArea;
- 
- fn main() {
-     let c = shapes::Circle {
-         x: 0.0f64,
-         y: 0.0f64,
-         radius: 1.0f64,
-     };
- 
-     println!("{}", c.area());
- }
+-let mut f = std::fs::File::open("foo.txt").ok().expect("Couldn’t open foo.txt");
+-let result = f.write("whatever".as_bytes());
+-# result.unwrap(); // ignore the error
++    pub trait HasArea {
++        fn area(&self) -> f64;
++    }
++
++    pub struct Circle {
++        pub x: f64,
++        pub y: f64,
++        pub radius: f64,
++    }
++
++    impl HasArea for Circle {
++        fn area(&self) -> f64 {
++            consts::PI * (self.radius * self.radius)
++        }
++    }
++}
++
++use shapes::HasArea;
++
++fn main() {
++    let c = shapes::Circle {
++        x: 0.0f64,
++        y: 0.0f64,
++        radius: 1.0f64,
++    };
++
++    println!("{}", c.area());
++}
  ```
  
--This means that even if someone does something bad like add methods to `int`,
--it won't affect you, unless you `use` that trait.
+-This will compile without error.
 +Это означает, что даже если кто-то сделает что-то плохое, как например добавит
 +методы к `int`, на наш код это не окажет влияния, если вы не объявите `use` для
 +этого трейта.
  
--There's one more restriction on implementing traits. Either the trait or the
--type you're writing the `impl` for must be inside your crate. So, we could
--implement the `HasArea` type for `i32`, because `HasArea` is in our crate.  But
--if we tried to implement `Float`, a trait provided by Rust, for `i32`, we could
--not, because both the trait and the type aren't in our crate.
+-This means that even if someone does something bad like add methods to `int`,
+-it won’t affect you, unless you `use` that trait.
 +Вот еще одно ограничение, связанное с реализацией трейтов. Либо трейт, либо тип,
 +для которого вы пишете `impl`, должны находиться в вашем крейте. Таким образом,
 +мы могли бы реализовать трейт `HasArea` для `i32`, потому что `HasArea`
@@ -326,19 +343,26 @@ index 25f5c7c..52e250a 100644
 +предоставляемый самим Rust, для `i32`, мы не смогли бы этого сделать, потому что
 +оба: трейт и тип отсутствуют в нашем крейте.
  
--One last thing about traits: generic functions with a trait bound use
--*monomorphization* (*mono*: one, *morph*: form), so they are statically
--dispatched. What's that mean? Check out the chapter on [trait
--objects](trait-objects.html) for more.
+-There’s one more restriction on implementing traits. Either the trait or the
+-type you’re writing the `impl` for must be defined by you. So, we could
+-implement the `HasArea` type for `i32`, because `HasArea` is in our code. But
+-if we tried to implement `Float`, a trait provided by Rust, for `i32`, we could
+-not, because neither the trait nor the type are in our code.
 +Последнее, что нужно сказать о трейтах: дженерик функции с ограничением по
 +трейтам используют *мономорфизацию* (*mono*: один, *morph*: форма), поэтому они
 +диспетчеризуются статически. Что это значит? Посмотрите главу [Статическая и
 +динамическая диспетчеризация](static-and-dynamic-dispatch.html), чтобы получить
 +больше информации.
  
--## Multiple trait bounds
+-One last thing about traits: generic functions with a trait bound use
+-‘monomorphization’ (mono: one, morph: form), so they are statically dispatched.
+-What’s that mean? Check out the chapter on [trait objects][to] for more details.
 +## Множественные привязки к трейтам
  
+-[to]: trait-objects.html
+-
+-# Multiple trait bounds
+-
 -You’ve seen that you can bound a generic type parameter with a trait:
 +Вы уже видели как можно ограничить обобщенный параметр типа определенным
 +трейтом:
@@ -364,11 +388,11 @@ index 25f5c7c..52e250a 100644
 -`T` now needs to be both `Clone` as well as `Debug`.
 +Теперь тип `T` должен реализовавать как трейт `Clone`, так и трейт `Debug`.
  
--## Where clause
+-# Where clause
 +## Утверждение where
  
 -Writing functions with only a few generic types and a small number of trait
--bounds isn't too bad, but as the number increases, the syntax gets increasingly
+-bounds isn’t too bad, but as the number increases, the syntax gets increasingly
 -awkward:
 +Написание функций с несколькими дженерик типами и небольшим количеством
 +ограничений по трейтам выглядит не так уж плохо, но, с увеличением количества
@@ -389,7 +413,7 @@ index 25f5c7c..52e250a 100644
 +Имя функции находится слева, а список параметров - далеко справа. Привязки
 +загромождают место.
  
--Rust has a solution, and it's called a '`where` clause':
+-Rust has a solution, and it’s called a ‘`where` clause’:
 +Rust имеет решение на этот счет, и оно называется 'утверждение `where`':
  
  ```
@@ -471,100 +495,87 @@ index 25f5c7c..52e250a 100644
 +произвольный тип (в данном случае `i32`), а не только простой параметр типа (как
 +например `T`).
  
--## Our `inverse` Example
+-## Default methods
 +## Наш пример `inverse`
  
--Back in [Generics](generics.html), we were trying to write code like this:
+-There’s one last feature of traits we should cover: default methods. It’s
+-easiest just to show an example:
 +Вернемся к разделу [Дженерики](generics.html), мы пытались написать такой код:
- 
- ```{rust,ignore}
- fn inverse<T>(x: T) -> Result<T, String> {
-     if x == 0.0 { return Err("x cannot be zero!".to_string()); }
- 
-     Ok(1.0 / x)
- }
- ```
- 
--If we try to compile it, we get this error:
++
++```{rust,ignore}
++fn inverse<T>(x: T) -> Result<T, String> {
++    if x == 0.0 { return Err("x cannot be zero!".to_string()); }
++
++    Ok(1.0 / x)
++}
++```
++
 +Если мы попытаемся скомпилировать его, мы получим такую ошибку:
- 
- ```text
- error: binary operation `==` cannot be applied to type `T`
- ```
- 
--This is because `T` is too generic: we don't know if a random `T` can be
--compared. For that, we can use trait bounds. It doesn't quite work, but try
--this:
++
++```text
++error: binary operation `==` cannot be applied to type `T`
++```
++
 +Все потому, что тип `T` является слишком общим: мы не можем знать наверняка, что
 +любой случайный `T` можно сравнивать. Для конкретизации мы можем ограничить его
 +трейтом. Хотя этот код и не будет работать, но попробуйте сделать следующее:
- 
- ```{rust,ignore}
- fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
-     if x == 0.0 { return Err("x cannot be zero!".to_string()); }
- 
-     Ok(1.0 / x)
- }
- ```
- 
--You should get this error:
++
++```{rust,ignore}
++fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
++    if x == 0.0 { return Err("x cannot be zero!".to_string()); }
++
++    Ok(1.0 / x)
++}
++```
++
 +Вы получите ошибку:
- 
- ```text
- error: mismatched types:
-  expected `T`,
-     found `_`
- (expected type parameter,
-     found floating-point variable)
- ```
- 
--So this won't work. While our `T` is `PartialEq`, we expected to have another `T`,
--but instead, we found a floating-point variable. We need a different bound. `Float`
--to the rescue:
++
++```text
++error: mismatched types:
++ expected `T`,
++    found `_`
++(expected type parameter,
++    found floating-point variable)
++```
++
 +Как уже было сказано, этот код не будет работать. Это потому, что наш `T`
 +реализует `PartialEq`, который принимает на вход другой `T`, но, вместо этого,
 +мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С
 +помощью `Float` можно исправить ошибку:
- 
- ```
- # #![feature(std_misc)]
- use std::num::Float;
- 
- fn inverse<T: Float>(x: T) -> Result<T, String> {
-     if x == Float::zero() { return Err("x cannot be zero!".to_string()) }
- 
-     let one: T = Float::one();
-     Ok(one / x)
- }
- ```
- 
--We've had to replace our generic `0.0` and `1.0` with the appropriate methods
--from the `Float` trait. Both `f32` and `f64` implement `Float`, so our function
--works just fine:
++
++```
++# #![feature(std_misc)]
++use std::num::Float;
++
++fn inverse<T: Float>(x: T) -> Result<T, String> {
++    if x == Float::zero() { return Err("x cannot be zero!".to_string()) }
++
++    let one: T = Float::one();
++    Ok(one / x)
++}
++```
++
 +Нам следует заменить `0.0` и `1.0` соответствующими методами из трейта `Float`.
 +И `f32`, и `f64` реализуют трейт `Float`, так что наша функция будет работать
 +просто отлично:
- 
- ```
- # #![feature(std_misc)]
- # use std::num::Float;
- # fn inverse<T: Float>(x: T) -> Result<T, String> {
- #     if x == Float::zero() { return Err("x cannot be zero!".to_string()) }
- #     let one: T = Float::one();
- #     Ok(one / x)
- # }
- println!("the inverse of {} is {:?}", 2.0f32, inverse(2.0f32));
- println!("the inverse of {} is {:?}", 2.0f64, inverse(2.0f64));
- 
- println!("the inverse of {} is {:?}", 0.0f32, inverse(0.0f32));
- println!("the inverse of {} is {:?}", 0.0f64, inverse(0.0f64));
- ```
- 
--## Default methods
++
++```
++# #![feature(std_misc)]
++# use std::num::Float;
++# fn inverse<T: Float>(x: T) -> Result<T, String> {
++#     if x == Float::zero() { return Err("x cannot be zero!".to_string()) }
++#     let one: T = Float::one();
++#     Ok(one / x)
++# }
++println!("the inverse of {} is {:?}", 2.0f32, inverse(2.0f32));
++println!("the inverse of {} is {:?}", 2.0f64, inverse(2.0f64));
++
++println!("the inverse of {} is {:?}", 0.0f32, inverse(0.0f32));
++println!("the inverse of {} is {:?}", 0.0f64, inverse(0.0f64));
++```
++
 +## Методы по умолчанию
- 
--There's one last feature of traits we should cover: default methods. It's
--easiest just to show an example:
++
 +Есть еще одна особенность трейтов, которую мы должны охватывать: методы по
 +умолчанию. Проще всего это показать на примере:
  
@@ -576,8 +587,8 @@ index 25f5c7c..52e250a 100644
  }
  ```
  
--Implementors of the `Foo` trait need to implement `bar()`, but they don't
--need to implement `baz()`. They'll get this default behavior. They can
+-Implementors of the `Foo` trait need to implement `bar()`, but they don’t
+-need to implement `baz()`. They’ll get this default behavior. They can
 -override the default if they so choose:
 +При реализации трейта `Foo` необходимо реализовать метод `bar()`, но нет
 +необходимости в реализации метода `baz()`. Это поведение будет реализовано по
@@ -608,3 +619,43 @@ index 25f5c7c..52e250a 100644
  let over = OverrideDefault;
  over.baz(); // prints "Override baz!"
  ```
+-
+-# Inheritance
+-
+-Sometimes, implementing a trait requires implementing another trait:
+-
+-```rust
+-trait Foo {
+-    fn foo(&self);
+-}
+-
+-trait FooBar : Foo {
+-    fn foobar(&self);
+-}
+-```
+-
+-Implementors of `FooBar` must also implement `Foo`, like this:
+-
+-```rust
+-# trait Foo {
+-#     fn foo(&self);
+-# }
+-# trait FooBar : Foo {
+-#     fn foobar(&self);
+-# }
+-struct Baz;
+-
+-impl Foo for Baz {
+-    fn foo(&self) { println!("foo"); }
+-}
+-
+-impl FooBar for Baz {
+-    fn foobar(&self) { println!("foobar"); }
+-}
+-```
+-
+-If we forget to implement `Foo`, Rust will tell us:
+-
+-```text
+-error: the trait `main::Foo` is not implemented for the type `main::Baz` [E0277]
+-```

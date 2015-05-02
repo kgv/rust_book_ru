@@ -1,12 +1,12 @@
 diff --git a/rust/master:src/doc/trpl/variable-bindings.md b/HEAD:variable-bindings.md
-index d971e55..aa58fc6 100644
+index 2166c04..ff87dae 100644
 --- a/rust/master:src/doc/trpl/variable-bindings.md
 +++ b/HEAD:variable-bindings.md
-@@ -1,169 +1,173 @@
+@@ -1,169 +1,172 @@
 -% Variable Bindings
 +% Связывание переменных
  
--Vitually every non-’Hello World’ Rust program uses *variable bindings*. They
+-Virtually every non-'Hello World’ Rust program uses *variable bindings*. They
 -look like this:
 +Любая реальная не ’Hello World’ программа на Rust использует *связывание
 +переменных*. Это выглядит так:
@@ -31,7 +31,7 @@ index d971e55..aa58fc6 100644
 -can do things like:
 +Во многих языках программирования это называется *переменная*. Но у связывания
 +переменных в Rust есть пара трюков в рукаве. В левой стороне выражения `let`
-+располагается ‘[шаблон][pattern]’, а не просто имя переменной. Это значит, что
++располагается не просто имя переменной, а ‘[шаблон][pattern]’. Это значит, что
 +мы можем делать вещи вроде этой:
  
  ```rust
@@ -43,9 +43,8 @@ index d971e55..aa58fc6 100644
 -book. We don’t need those features for now, so we’ll just keep this in the back
 -of our minds as we go forward.
 +После завершения этого выражения `x` будет единицей, a `y` - двойкой. Шаблоны
-+очень мощны, и для них выделен отдельный [подраздел][pattern] в книге. Но в
-+настоящее время нам не нужны эти фичи, так что мы просто будем помнить об этом,
-+когда пойдем дальше.
++очень мощны, и для них выделена отдельная [глава][pattern]. Но на данный момент
++нам не нужны эти фичи, так что мы просто будем помнить о них и пойдём дальше.
  
  [pattern]: patterns.html
  
@@ -54,10 +53,10 @@ index d971e55..aa58fc6 100644
 -compile? Well, Rust has this thing called ‘type inference’. If it can figure
 -out what the type of something is, Rust doesn’t require you to actually type it
 -out.
-+Rust - статически типизированный язык программирования, что означает, что мы
-+должны указывать типы. Так почему же наш первый пример скомпилировался? В Rust'е
-+есть такая вещь, как *вывод типов*. Если Rust самостоятельно может понять какой
-+тип у переменной, то он не требует указывать его.
++Rust - статически типизированный язык программирования, и значит мы
++должны указывать типы и они будут проверяться во время сборки. Так почему же наш 
++первый пример собрался? В Rust'е есть такая вещь, как *вывод типов*. Если Rust 
++самостоятельно может понять какой тип у переменной, то он не требует указывать его.
  
 -We can add the type if we want to, though. Types come after a colon (`:`):
 +Тем не менее, мы можем указать желаемый тип. Он следует после двоеточия (`:`):
@@ -68,22 +67,22 @@ index d971e55..aa58fc6 100644
  
 -If I asked you to read this out loud to the rest of the class, you’d say “`x`
 -is a binding with the type `i32` and the value `five`.”
-+Если бы я попросил вас прочитать это вслух, то вы должны были бы сказать "`x`
-+связан с типом `int` и имеет значение `пять`".
++Если бы я попросил вас прочитать это вслух, то вы бы сказали "`x` связан с типом
++`int` и имеет значение `пять`".
  
 -In this case we chose to represent `x` as a 32-bit signed integer. Rust has
 -many different primitive integer types. They begin with `i` for signed integers
 -and `u` for unsigned integers. The possible integer sizes are 8, 16, 32, and 64
 -bits.
-+В этом случае мы указали что `x` у нас будет 32-битным целым числом со знаком. В
-+Rust есть и другие целочисленные типы. Они начинаются с `i` для целых чисел со
++В этом случае мы указали, что `x` у нас будет 32-битным целым числом со знаком. 
++В Rust есть и другие целочисленные типы. Они начинаются с `i` для целых чисел со
 +знаком и с `u` для целых чисел без знака. Размер целых чисел может составлять 8,
 +16, 32 и 64 бита.
  
 -In future examples, we may annotate the type in a comment. The examples will
 -look like this:
-+Далее в примерах этого руководства, мы будем указывать тип в комментариях. Это
-+будет выглядеть вот так:
++В дальнейших примерах мы будем указывать тип в комментариях. Это будет выглядеть
++вот так:
  
  ```rust
  fn main() {
@@ -118,7 +117,7 @@ index d971e55..aa58fc6 100644
  ```
  
 -If you want a binding to be mutable, you can use `mut`:
-+Если вы хотите что бы связывание было изменяемым, вы можете использовать
++Если вы хотите чтобы связывание было изменяемым, вы можете использовать
 +модификатор `mut`:
  
  ```rust
@@ -153,8 +152,8 @@ index d971e55..aa58fc6 100644
 -Let’s get back to bindings. Rust variable bindings have one more aspect that
 -differs from other languages: bindings are required to be initialized with a
 -value before you're allowed to use them.
-+Вернёмся к связыванию. При связывании переменных в Rust есть ещё одно отличие от
-+других языков: связывание требует инициализации перед использованием.
++Вернёмся к связыванию. Связывании переменных в Rust имеет ещё одно отличие от
++других языков: оно требует инициализации перед использованием.
  
 -Let’s try it out. Change your `src/main.rs` file to look like this:
 +Давайте приступим к рассмотрению вышесказаного. Измените ваш файл `src/main.rs`
@@ -242,7 +241,8 @@ index d971e55..aa58fc6 100644
 -print.
 +При вставке переменной в строку, Rust проверит её тип и попытается отобразить
 +осмысленное значение. Если вы хотите указать формат более детально, то можете
-+ознакомиться с [доступными опциями форматирования строк][format]. На данный
++ознакомиться с [доступными опциями форматирования строк (англ.)][format]. На данный
 +момент мы будем вставлять как есть: целые числа не очень сложны для печати.
  
- [format]: ../std/fmt/index.html
+-[format]: ../std/fmt/index.html
++[format]: http://doc.rust-lang.org/nightly/std/fmt/

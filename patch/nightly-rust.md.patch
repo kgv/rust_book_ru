@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/nightly-rust.md b/HEAD:nightly-rust.md
-index 3b76cce..b0fb0f5 100644
+index 1cb62e8..b0fb0f5 100644
 --- a/rust/master:src/doc/trpl/nightly-rust.md
 +++ b/HEAD:nightly-rust.md
-@@ -1,102 +1,47 @@
+@@ -1,101 +1,47 @@
 -% Nightly Rust
 +% Нестабильные фичи Rust
  
@@ -123,8 +123,7 @@ index 3b76cce..b0fb0f5 100644
 -[the #rust IRC channel on irc.mozilla.org][irc], which you can access through
 -[Mibbit][mibbit]. Click that link, and you'll be chatting with other Rustaceans
 -(a silly nickname we call ourselves), and we can help you out. Other great
--resources include [the user’s forum][users], and [Stack Overflow][stack
--overflow].
+-resources include [the user’s forum][users], and [Stack Overflow][stack overflow].
 -
 -[irc]: irc://irc.mozilla.org/#rust
 -[mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust

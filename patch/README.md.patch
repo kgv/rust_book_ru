@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/README.md b/HEAD:INTRODUCTION.md
-index 8d3a6ec..306c8dd 100644
+index 280665a..306c8dd 100644
 --- a/rust/master:src/doc/trpl/README.md
 +++ b/HEAD:INTRODUCTION.md
-@@ -1,192 +1,210 @@
+@@ -1,194 +1,210 @@
 -% The Rust Programming Language
 +% Язык программирования Rust
  
@@ -14,7 +14,7 @@ index 8d3a6ec..306c8dd 100644
 -requirements, and writing low-level code, like device drivers and operating
 -systems. It improves on current languages targeting this space by having a
 -number of compile-time safety checks that produce no runtime overhead, while
--eliminating all data races. Rust also aims to achieve ‘zero-cost abstrations’
+-eliminating all data races. Rust also aims to achieve ‘zero-cost abstractions’
 -even though some of these abstractions feel like those of a high-level
 -language. Even then, Rust still allows precise control like a low-level
 -language would.
@@ -47,6 +47,7 @@ index 8d3a6ec..306c8dd 100644
 -* [Syntax and Semantics][ss] - Each bit of Rust, broken down into small chunks.
 -* [Nightly Rust][nr] - Cutting-edge features that aren’t in stable builds yet.
 -* [Glossary][gl] - A reference of terms used in the book.
+-* [Academic Research][ar] - Literature that influenced Rust.
 +* [C чего начать][gs] - Настройка компьютера для разработки на Rust.
 +* [Изучение Rust][lr] - Обучение программированию на Rust на примере небольших
 +проектов.
@@ -64,6 +65,7 @@ index 8d3a6ec..306c8dd 100644
  [ss]: syntax-and-semantics.html
  [nr]: nightly-rust.html
  [gl]: glossary.html
+-[ar]: academic-research.html
  
 -After reading this introduction, you’ll want to dive into either ‘Learn Rust’
 -or ‘Syntax and Semantics’, depending on your preference: ‘Learn Rust’ if you
@@ -212,7 +214,8 @@ index 8d3a6ec..306c8dd 100644
  
  ```text
  error: cannot borrow `x` as mutable because it is also borrowed as immutable
-     x.push(4);
+-    x.push("foo");
++    x.push(4);
      ^
  note: previous borrow of `x` occurs here; the immutable borrow prevents
  subsequent moves or mutable borrows of `x` until the borrow ends
@@ -266,7 +269,7 @@ index 8d3a6ec..306c8dd 100644
  
 -Rust has [move semantics][move] by default, so if we want to make a copy of some
 -data, we call the `clone()` method. In this example, `y` is no longer a reference
--to the vector stored in `x`, but a copy of its first element, `"hello"`. Now
+-to the vector stored in `x`, but a copy of its first element, `"Hello"`. Now
 -that we don’t have a reference, our `push()` works just fine.
 +По умолчанию, Rust использует [семантику перемещения][move], поэтому, если мы
 +хотим сделать копию некоторых данных, мы должны вызывать метод `clone()`. В этом

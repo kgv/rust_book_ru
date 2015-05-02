@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/trait-objects.md b/HEAD:trait-objects.md
-index d008d30..abcab7f 100644
+index c011290..abcab7f 100644
 --- a/rust/master:src/doc/trpl/trait-objects.md
 +++ b/HEAD:trait-objects.md
 @@ -1,306 +1,316 @@
@@ -7,10 +7,10 @@ index d008d30..abcab7f 100644
 +% Трейт объекты
  
 -When code involves polymorphism, there needs to be a mechanism to determine
--which specific version is actually run. This is called 'dispatch.' There are
+-which specific version is actually run. This is called ‘dispatch’. There are
 -two major forms of dispatch: static dispatch and dynamic dispatch. While Rust
 -favors static dispatch, it also supports dynamic dispatch through a mechanism
--called 'trait objects.'
+-called ‘trait objects’.
 +Когда код включает в себя полиморфизм, то должен быть механизм, чтобы
 +определить, какая конкретная версия будет фактически вызвана. Это называется
 +'диспетчерезация.' Есть две основные формы диспетчерезации: статическая и
@@ -21,8 +21,8 @@ index d008d30..abcab7f 100644
 -## Background
 +## Подготовка
  
--For the rest of this chapter, we'll need a trait and some implementations.
--Let's make a simple one, `Foo`. It has one method that is expected to return a
+-For the rest of this chapter, we’ll need a trait and some implementations.
+-Let’s make a simple one, `Foo`. It has one method that is expected to return a
 +Для остальной части этой главы нам потребуется трейт и несколько его реализаций.
 +Давайте создадим простой трейт `Foo`. Он содержит один метод, который возвращает
  `String`.
@@ -33,7 +33,7 @@ index d008d30..abcab7f 100644
  }
  ```
  
--We'll also implement this trait for `u8` and `String`:
+-We’ll also implement this trait for `u8` and `String`:
 +Также мы реализуем этот трейт для `u8` и `String`:
  
  ```rust
@@ -72,7 +72,7 @@ index d008d30..abcab7f 100644
  }
  ```
  
--Rust uses 'monomorphization' to perform static dispatch here. This means that
+-Rust uses ‘monomorphization’ to perform static dispatch here. This means that
 -Rust will create a special version of `do_something()` for both `u8` and
 -`String`, and then replace the call sites with calls to these specialized
 -functions. In other words, Rust generates something like this:
@@ -105,7 +105,7 @@ index d008d30..abcab7f 100644
 -This has a great upside: static dispatch allows function calls to be
 -inlined because the callee is known at compile time, and inlining is
 -the key to good optimization. Static dispatch is fast, but it comes at
--a tradeoff: 'code bloat', due to many copies of the same function
+-a tradeoff: ‘code bloat’, due to many copies of the same function
 -existing in the binary, one for each type.
 +Статическая диспетчерезация имеет большой потенциал: она позволяет вызывать
 +функцию, которая будет встроена, потому что вызываемая версия этой функции
@@ -140,7 +140,7 @@ index d008d30..abcab7f 100644
 -## Dynamic dispatch
 +## Динамическая диспетчерезация
  
--Rust provides dynamic dispatch through a feature called 'trait objects.' Trait
+-Rust provides dynamic dispatch through a feature called ‘trait objects’. Trait
 -objects, like `&Foo` or `Box<Foo>`, are normal values that store a value of
 -*any* type that implements the given trait, where the precise type can only be
 -known at runtime.
@@ -158,15 +158,15 @@ index d008d30..abcab7f 100644
 +которая принимает `&Foo`).
  
 -These trait object coercions and casts also work for pointers like `&mut T` to
--`&mut Foo` and `Box<T>` to `Box<Foo>`, but that's all at the moment. Coercions
+-`&mut Foo` and `Box<T>` to `Box<Foo>`, but that’s all at the moment. Coercions
 -and casts are identical.
 +Явное и неявное приведение трейт объекта также работает для таких указателей,
 +как `&mut T` в `&mut Foo` и `Box<T>` в `Box<Foo>`, но это все на данный момент.
 +Явное и неявное приведение идентичны.
  
--This operation can be seen as "erasing" the compiler's knowledge about the
+-This operation can be seen as ‘erasing’ the compiler’s knowledge about the
 -specific type of the pointer, and hence trait objects are sometimes referred to
--as "type erasure".
+-as ‘type erasure’.
 +Эта операция может рассматриваться как "затирание" знания компилятора о
 +конкретном типе указателя, поэтому трейт объекты иногда называют как "затирание
 +типов".
@@ -214,7 +214,7 @@ index d008d30..abcab7f 100644
 -that implements `Foo`: only one copy is generated, often (but not always)
 -resulting in less code bloat. However, this comes at the cost of requiring
 -slower virtual function calls, and effectively inhibiting any chance of
--inlining and related optimisations from occurring.
+-inlining and related optimizations from occurring.
 +Функция, которая принимает трейт объект, не обладает специализированнми копиями
 +для каждого из типов, которые реализуют трейт `Foo`: генерируется только одна
 +копия. Часто (но не всегда), в результате происходит уменьшение раздувания кода.
@@ -239,7 +239,7 @@ index d008d30..abcab7f 100644
  
 -For `Foo`, we would need to have a value that could be at least either a
 -`String` (24 bytes) or a `u8` (1 byte), as well as any other type for which
--dependent crates may implement `Foo` (any number of bytes at all). There's no
+-dependent crates may implement `Foo` (any number of bytes at all). There’s no
 -way to guarantee that this last point can work if the values are stored without
 -a pointer, because those other types can be arbitrarily large.
 +Для `Foo` допускается иметь значение, которое может быть либо `String` (24
@@ -258,7 +258,7 @@ index d008d30..abcab7f 100644
 +### Representation Представление
  
 -The methods of the trait can be called on a trait object via a special record
--of function pointers traditionally called a 'vtable' (created and managed by
+-of function pointers traditionally called a ‘vtable’ (created and managed by
 -the compiler).
 +Методы трейта можно вызвать для трейт объекта с помощью специальной записи
 +указателей на функции, традиционно называемой 'виртуальная таблица' ('vtable')
@@ -271,7 +271,7 @@ index d008d30..abcab7f 100644
 +представление и устройство довольно прямолинейно, но есть некоторые тонкости
 +относительно обнаружения сообщений об ошибках и странного поведения.
  
--Let's start simple, with the runtime representation of a trait object. The
+-Let’s start simple, with the runtime representation of a trait object. The
 -`std::raw` module contains structs with layouts that are the same as the
 -complicated built-in types, [including trait objects][stdraw]:
 +Давайте начнем с простого, с рантайм представления трейт объекта. Модуль
@@ -289,14 +289,14 @@ index d008d30..abcab7f 100644
  
  [stdraw]: ../std/raw/struct.TraitObject.html
  
--That is, a trait object like `&Foo` consists of a "data" pointer and a "vtable"
+-That is, a trait object like `&Foo` consists of a ‘data’ pointer and a ‘vtable’
 -pointer.
 +То есть трейт объект, такой как `&Foo`, состоит из указателя на "данные" и
 +указателя на "виртуальную таблицу".
  
 -The data pointer addresses the data (of some unknown type `T`) that the trait
--object is storing, and the vtable pointer points to the vtable ("virtual method
--table") corresponding to the implementation of `Foo` for `T`.
+-object is storing, and the vtable pointer points to the vtable (‘virtual method
+-table’) corresponding to the implementation of `Foo` for `T`.
 +Указатель `data` адрессует данные (какого-то неизвестного типа `T`), которые
 +хранит трейт объект, а указатель `vtable` указывает на виртуальную таблицу
 +("таблица виртуальных методов"), которая соответствует реализации `Foo` для `T`.
@@ -312,7 +312,8 @@ index d008d30..abcab7f 100644
 +из виртуальной таблицы, а затем динамически вызывает метод по этому указателю.
 +Например:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  struct FooVtable {
      destructor: fn(*mut ()),
      size: usize,
@@ -361,7 +362,7 @@ index d008d30..abcab7f 100644
  ```
  
 -The `destructor` field in each vtable points to a function that will clean up
--any resources of the vtable's type, for `u8` it is trivial, but for `String` it
+-any resources of the vtable’s type, for `u8` it is trivial, but for `String` it
 -will free the memory. This is necessary for owning trait objects like
 -`Box<Foo>`, which need to clean-up both the `Box` allocation as well as the
 -internal type when they go out of scope. The `size` and `align` fields store
@@ -379,14 +380,15 @@ index d008d30..abcab7f 100644
 +информация встроенного в деструктор, но будет использоваться в будущем, так как
 +объекты отличительным признакам постепенно становится более гибким.
  
--Suppose we've got some values that implement `Foo`, then the explicit form of
+-Suppose we’ve got some values that implement `Foo`, then the explicit form of
 -construction and use of `Foo` trait objects might look a bit like (ignoring the
--type mismatches: they're all just pointers anyway):
+-type mismatches: they’re all just pointers anyway):
 +Предположим, у нас есть несколько значений, которые реализуют `Foo`, тогда явный
 +вид создания и использования трейт объектов `Foo` может выглядеть примерно как
 +(игнорируются несоответствия типов: в любом случае, они всего лишь указатели):
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  let a: String = "foo".to_string();
  let x: u8 = 1;
  

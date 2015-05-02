@@ -1,13 +1,13 @@
 diff --git a/rust/master:src/doc/trpl/functions.md b/HEAD:functions.md
-index 87af485..bc1bcc6 100644
+index 87af485..e85e102 100644
 --- a/rust/master:src/doc/trpl/functions.md
 +++ b/HEAD:functions.md
-@@ -1,227 +1,199 @@
+@@ -1,227 +1,230 @@
 -% Functions
 +% Функции
  
 -Every Rust program has at least one function, the `main` function:
-+К этому моменту вы уже видели одну функцию, `main`:
++Каждая программа на Rust имеет по крайней мере одну функцию - `main`:
  
  ```rust
  fn main() {
@@ -18,7 +18,7 @@ index 87af485..bc1bcc6 100644
 -`fn` says ‘this is a function’, followed by the name, some parentheses because
 -this function takes no arguments, and then some curly braces to indicate the
 -body. Here’s a function named `foo`:
-+Это - простейшее объявление функции. Как мы упоминали ранее, ключевое слово `fn`
++Это простейшее объявление функции. Как мы упоминали ранее, ключевое слово `fn`
 +объявляет функцию. За ним следует её имя, пустые круглые скобки (поскольку эта
 +функция не принимает аргументов), а затем тело функции, заключённое в фигурные
 +скобки. Вот функция `foo`:
@@ -81,10 +81,10 @@ index 87af485..bc1bcc6 100644
 +В отличие от `let`, вы _должны_ объявлять типы аргументов функции. Этот код не
 +скомпилируется:
  
--```rust,ignore
-+```{rust,ignore}
+ ```rust,ignore
  fn print_sum(x, y) {
-     println!("sum is: {}", x + y);
+-    println!("sum is: {}", x + y);
++    println!("сумма чисел: {}", x + y);
  }
  ```
  
@@ -92,10 +92,8 @@ index 87af485..bc1bcc6 100644
 +Вы увидите такую ошибку:
  
  ```text
--expected one of `!`, `:`, or `@`, found `)`
--fn print_number(x, y) {
-+hello.rs:5:18: 5:19 expected one of `!`, `:`, or `@`, found `)`
-+hello.rs:5 fn print_number(x, y) {
+ expected one of `!`, `:`, or `@`, found `)`
+ fn print_number(x, y) {
  ```
  
 -This is a deliberate design decision. While full-program inference is possible,
@@ -125,12 +123,10 @@ index 87af485..bc1bcc6 100644
 -semicolon here. If we added it in:
 +Функции в Rust возвращают ровно одно значение, тип которого объявляется после
 +"стрелки". "Стрелка" представляет собой дефис (`-`), за которым следует знак
-+"больше" (`>`).
++"больше" (`>`). Заметьте, что в функции выше нет точки с запятой. Если бы мы
++добавили её:
  
--```rust,ignore
-+Заметьте, что в функции выше нет точки с запятой. Если бы мы добавили этот знак:
-+
-+```{rust,ignore}
+ ```rust,ignore
  fn add_one(x: i32) -> i32 {
      x + 1;
  }
@@ -153,58 +149,70 @@ index 87af485..bc1bcc6 100644
 -This reveals two interesting things about Rust: it is an expression-based
 -language, and semicolons are different from semicolons in other ‘curly brace
 -and semicolon’-based languages. These two things are related.
-+Помните мы обсуждали точку с запятой и тривиальное значение `()` (unit)? Наша
-+функция объявлена, как возвращающая `i32`. Но если в конце есть точка с запятой,
-+функция вернёт тривиальное значение `()`. Компилятор Rust обрабатывает эту
-+ситуацию и предлагает удалить точку с запятой.
++Здесь показаны две интересные особенности Rust. Во-первых, это выражение-
++ориентированный язык, и во-вторых, смысл точки с запятой отличается от смысла
++аналогичного символа в других ’фигурные скобки и точка с запятой’-основанных
++языках. Эти две особенности связаны.
  
 -## Expressions vs. Statements
-+Это очень похоже на оператор `if`: результат блока (`{}`) это результат
-+выражения. Есть и другие языки программирования, в которых операторы возвращают
-+значение - например, Ruby; однако, такая логика немного непривычна в мире
-+системного программирования. Люди, впервые узнающие об этой возможности, часто
-+считают, что она приводит к появлению ошибок. Однако, во-первых, Rust реализует
-+строгую типизацию. Во-вторых, тривиальное значение `()` имеет уникальный тип.
-+Поэтому мы никогда не видели ситуации, в которой добавление или удаление точки с
-+запятой в позиции возвращаемого значения вызывало бы ошибку.
++## Выражения и операторы
  
 -Rust is primarily an expression-based language. There are only two kinds of
 -statements, and everything else is an expression.
--
++Rust - в первую очередь выражение-ориентированный язык. Есть только два типа
++операторов, а всё остальное является выражением.
+ 
 -So what's the difference? Expressions return a value, and statements do not.
 -That’s why we end up with ‘not all control paths return a value’ here: the
 -statement `x + 1;` doesn’t return a value. There are two kinds of statements in
 -Rust: ‘declaration statements’ and ‘expression statements’. Everything else is
 -an expression. Let’s talk about declaration statements first.
--
++А в чём же разница? Выражение возвращает значение, в то время как оператор -
++нет. Вот почему мы получаем здесь ‘not all control paths return a value‘:
++оператор `х + 1;` не возвращает значение. Есть два типа операторов в Rust:
++‘операторы объявления‘ и ‘операторов выражение‘. Все остальное - выражения.
++Давайте поговорим об операторах объявления в первую очередь.
+ 
 -In some languages, variable bindings can be written as expressions, not just
 -statements. Like Ruby:
--
--```ruby
--x = y = 5
--```
--
++Первым типом операторов в Rust является *оператор объявления* - связывание. В
++некоторых языках связывание переменных может быть записано как выражение, а не
++только как оператор. Например, в Ruby:
+ 
+ ```ruby
+ x = y = 5
+ ```
+ 
 -In Rust, however, using `let` to introduce a binding is _not_ an expression. The
 -following will produce a compile-time error:
--
--```ignore
--let x = (let y = 5); // expected identifier, found keyword `let`
--```
--
++Однако, в Rust использование `let` для связывания _не является_ выражением.
++Следующий код вызовет ошибку компиляции:
+ 
+ ```ignore
+ let x = (let y = 5); // expected identifier, found keyword `let`
+ ```
+ 
 -The compiler is telling us here that it was expecting to see the beginning of
 -an expression, and a `let` can only begin a statement, not an expression.
--
++Здесь компилятор сообщил нам, что ожидал увидеть выражение, но `let` является
++оператором, а не выражением.
+ 
 -Note that assigning to an already-bound variable (e.g. `y = 5`) is still an
 -expression, although its value is not particularly useful. Unlike other
 -languages where an assignment evaluates to the assigned value (e.g. `5` in the
 -previous example), in Rust the value of an assignment is an empty tuple `()`:
--
--```
--let mut y = 5;
--
++Обратите внимание, что присвоение уже связанной переменной (например: `y = 5`)
++является выражением, но его значение не особенно полезно. В отличие от других
++языков, где присвоение вычисляется в присваиваемое значение (например: `5` из
++предыдущего примера), в Rust значением присвоения является пустой кортеж `()`.
+ 
+ ```
+ let mut y = 5;
+ 
 -let x = (y = 6);  // x has the value `()`, not `6`
--```
--
++let x = (y = 6);  // x будет присвоено значение `()`, а не `6`
+ ```
+ 
 -The second kind of statement in Rust is the *expression statement*. Its
 -purpose is to turn any expression into a statement. In practical terms, Rust's
 -grammar expects statements to follow other statements. This means that you use
@@ -212,17 +220,19 @@ index 87af485..bc1bcc6 100644
 -looks a lot like most other languages that require you to use semicolons
 -at the end of every line, and you will see semicolons at the end of almost
 -every line of Rust code you see.
--
++Вторым типом операторов в Rust является *оператор выражения*. Его цель -
++превратить любое выражение в оператор. В практическом плане, грамматика Rust
++ожидает что за операторами будут идти другие операторы. Это означает, что вы
++используете точку с запятой для разделения выражений друг от друга. Rust
++выглядит как многие другие языки, которые требуют использовать точку с запятой в
++конце каждой строки и вы увидите её в конце почти каждой строки кода на Rust.
+ 
 -What is this exception that makes us say "almost"? You saw it already, in this
 -code:
-+А что насчёт раннего возврата из функции? У нас есть для этого ключевое слово
-+`return`:
++Из-за чего мы говорим "почти"? Вы это уже видели в этом примере:
  
  ```rust
--fn add_one(x: i32) -> i32 {
-+fn foo(x: i32) -> i32 {
-+    if x < 5 { return x; }
-+
+ fn add_one(x: i32) -> i32 {
      x + 1
  }
  ```
@@ -230,28 +240,34 @@ index 87af485..bc1bcc6 100644
 -Our function claims to return an `i32`, but with a semicolon, it would return
 -`()` instead. Rust realizes this probably isn’t what we want, and suggests
 -removing the semicolon in the error we saw before.
--
++Наша функция объявлена, как возвращающая `i32`. Но если в конце есть точка с
++запятой, то вместо этого функция вернёт `()`. Компилятор Rust обрабатывает эту
++ситуацию и предлагает удалить точку с запятой.
+ 
 -## Early returns
--
++## Досрочный возврат из функции
+ 
 -But what about early returns? Rust does have a keyword for that, `return`:
-+`return` можно написать и в последней строке тела функции, но это считается
++А что насчёт досрочного возврата из функции? У нас есть для этого ключевое слово
++`return`:
+ 
+ ```rust
+ fn foo(x: i32) -> i32 {
+     return x;
+ 
+-    // we never run this code!
++    // следующий код никогда не запустится!
+     x + 1
+ }
+ ```
+ 
+-Using a `return` as the last line of a function works, but is considered poor
+-style:
++`return` можно написать в последней строке тела функции, но это считается
 +плохим стилем:
  
  ```rust
  fn foo(x: i32) -> i32 {
--    return x;
-+    if x < 5 { return x; }
- 
--    // we never run this code!
--    x + 1
--}
--```
--
--Using a `return` as the last line of a function works, but is considered poor
--style:
--
--```rust
--fn foo(x: i32) -> i32 {
      return x + 1;
  }
  ```
@@ -261,51 +277,33 @@ index 87af485..bc1bcc6 100644
 -time.
 +Если вы никогда не работали с языком, в котором операторы являются выражениями,
 +предыдущее определение без `return` может показаться вам странным. Но со
-+временем вы просто перестанете замечать это. К тому же, если бы это был
-+настоящий код, мы бы всё равно не написали его так. Этот вариант лучше:
++временем вы просто перестанете замечать это.
  
 -## Diverging functions
--
++## Расходящиеся функции
+ 
 -Rust has some special syntax for ‘diverging functions’, which are functions that
 -do not return:
--
--```
--fn diverges() -> ! {
++Для функций, которые не возвращают управление ("расходящихся"), в Rust есть
++специальный синтаксис:
+ 
+ ```
+ fn diverges() -> ! {
 -    panic!("This function never returns!");
-+```rust
-+fn foo(x: i32) -> i32 {
-+    if x < 5 {
-+        x
-+    } else {
-+        x + 1
-+    }
++    panic!("Эта функция не возвращает управление!");
  }
  ```
  
 -`panic!` is a macro, similar to `println!()` that we’ve already seen. Unlike
 -`println!()`, `panic!()` causes the current thread of execution to crash with
 -the given message.
-+Поскольку оператор `if` является выражением, и это единственное выражение в этой
-+функции, значением `foo` будет результат оператора `if`.
++`panic!` - это макрос, как и `println!()`, который мы встречали ранее. В отличие
++от `println!()`, `panic!()` вызывает остановку текущего потока исполнения с
++заданным сообщением.
  
 -Because this function will cause a crash, it will never return, and so it has
 -the type ‘`!`’, which is read ‘diverges’. A diverging function can be used
 -as any type:
-+## Расходящиеся функции
-+
-+Для функций, которые не возвращают управление ("расходящихся"), в Rust есть
-+специальный синтаксис:
-+
-+```
-+fn diverges() -> ! {
-+    panic!("Эта функция не возвращает управление!");
-+}
-+```
-+
-+`panic!` - это макрос, как и `println!()`, который мы встречали ранее. В отличие
-+от `println!()`, `panic!()` вызывает остановку текущего потока исполнения с
-+заданным сообщением.
-+
 +Поскольку эта функция вызывает остановку исполнения, она никогда не вернёт
 +управление. Поэтому тип её возвращаемого значения обозначается знаком `!` и
 +читается как "расходится". Значение расходящейся функции может быть использовано
@@ -316,11 +314,6 @@ index 87af485..bc1bcc6 100644
 -#    panic!("This function never returns!");
 +#    panic!("Эта функция никогда не выходит!");
  # }
-+
  let x: i32 = diverges();
  let x: String = diverges();
  ```
-+
-+Пока эта возможность выглядит бесполезной. Она приобретает значение в сочетании
-+с другими возможностями Rust. Но по крайней мере, если вы увидите ` -> !`, вы
-+будете знать, что это такое.

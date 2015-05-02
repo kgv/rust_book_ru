@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/method-syntax.md b/HEAD:method-syntax.md
-index ae83a93..3079a85 100644
+index 1445d39..3079a85 100644
 --- a/rust/master:src/doc/trpl/method-syntax.md
 +++ b/HEAD:method-syntax.md
-@@ -1,232 +1,236 @@
+@@ -1,231 +1,236 @@
 -% Method Syntax
 +% Синтаксис методов
  
@@ -11,36 +11,39 @@ index ae83a93..3079a85 100644
 +Функции - это хорошо, но если вы хотите вызвать несколько связных функций для
 +каких-либо данных, то это может быть неудобно. Рассмотрим этот код:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  baz(bar(foo)));
  ```
  
--We would read this left-to right, and so we see "baz bar foo." But this isn't the
--order that the functions would get called in, that's inside-out: "foo bar baz."
--Wouldn't it be nice if we could do this instead?
+-We would read this left-to right, and so we see ‘baz bar foo’. But this isn’t the
+-order that the functions would get called in, that’s inside-out: ‘foo bar baz’.
+-Wouldn’t it be nice if we could do this instead?
 +Читать данную строку кода следует слева направо, поэтому мы наблюдаем такой
 +порядок: "baz bar foo." Но он противоположен порядку, в котором функции будут
 +вызываться: "foo bar baz." Не было бы неплохо, если бы мы могли использовать
 +нечто вроде нижеприведенного синтаксиса вызова?
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  foo.bar().baz();
  ```
  
 -Luckily, as you may have guessed with the leading question, you can! Rust provides
--the ability to use this *method call syntax* via the `impl` keyword.
+-the ability to use this ‘method call syntax’ via the `impl` keyword.
 +К счастью, как вы уже наверно догадались, это возможно! Rust предоставляет
 +возможность использовать такой *синтаксис вызова метода* с помощью ключевого
 +слова `impl`.
  
--## Method calls
+-# Method calls
 +## Вызов методов
  
--Here's how it works:
+-Here’s how it works:
 +Вот как это работает:
  
- ```{rust}
- # #![feature(core)]
+-```rust
++```{rust}
++# #![feature(core)]
  struct Circle {
      x: f64,
      y: f64,
@@ -62,15 +65,23 @@ index ae83a93..3079a85 100644
 -This will print `12.566371`.
 +Этот код напечатает `12.566371`.
  
--We've made a struct that represents a circle. We then write an `impl` block,
--and inside it, define a method, `area`. Methods take a  special first
--parameter, of which there are three variants: `self`, `&self`, and `&mut self`.
--You can think of this first parameter as being the `foo` in `foo.bar()`. The three
--variants correspond to the three kinds of things `foo` could be: `self` if it's
--just a value on the stack, `&self` if it's a reference, and `&mut self` if it's
--a mutable reference. We should default to using `&self`, as you should prefer
--borrowing over taking ownership, as well as taking immutable references
--over mutable ones. Here's an example of all three variants:
+-
+-
+-We’ve made a struct that represents a circle. We then write an `impl` block,
+-and inside it, define a method, `area`.
+-
+-Methods take a  special first parameter, of which there are three variants:
+-`self`, `&self`, and `&mut self`. You can think of this first parameter as
+-being the `foo` in `foo.bar()`. The three variants correspond to the three
+-kinds of things `foo` could be: `self` if it’s just a value on the stack,
+-`&self` if it’s a reference, and `&mut self` if it’s a mutable reference.
+-Because we took the `&self` parameter to `area`, we can use it just like any
+-other parameter. Because we know it’s a `Circle`, we can access the `radius`
+-just like we would with any other struct. 
+-
+-We should default to using `&self`, as you should prefer borrowing over taking
+-ownership, as well as taking immutable references over mutable ones. Here’s an
+-example of all three variants:
 +Мы создали структуру, которая представляет собой круг. Затем мы написали блок
 +`impl` и определили метод `area` внутри него. Методы принимают специальный
 +первый параметр, `&self`. Есть три возможных варианта: `self`, `&self` и `&mut
@@ -103,29 +114,24 @@ index ae83a93..3079a85 100644
  }
  ```
  
--Finally, as you may remember, the value of the area of a circle is `π*r²`.
--Because we took the `&self` parameter to `area`, we can use it just like any
--other parameter. Because we know it's a `Circle`, we can access the `radius`
--just like we would with any other struct. An import of π and some
--multiplications later, and we have our area.
+-# Chaining method calls
 +Наконец, как вы помните, значение площади круга `π*r²`. Мы передаем параметр
 +`&self` в метод `area`, поэтому мы можем использовать его так же, как и любой
 +другой параметр. Так как мы знаем, что это `Circle`, мы можем получить доступ к
 +полю `radius` так же, как если бы это была любая другая структура. Дальше идет
 +импорт π и операция умножения, в результате чего получаем площать.
  
--## Chaining method calls
-+## Цепочка вызовов методов
- 
 -So, now we know how to call a method, such as `foo.bar()`. But what about our
--original example, `foo.bar().baz()`? This is called 'method chaining', and we
+-original example, `foo.bar().baz()`? This is called ‘method chaining’, and we
 -can do it by returning `self`.
++## Цепочка вызовов методов
++
 +Итак, теперь мы знаем, как вызвать метод, например `foo.bar()`. Но что насчет
 +нашего первоначального примера, `foo.bar().baz()`? Это называется 'цепочка
 +вызовов', и мы можем сделать это, вернув `self`.
  
  ```
- # #![feature(core)]
++# #![feature(core)]
  struct Circle {
      x: f64,
      y: f64,
@@ -161,16 +167,16 @@ index ae83a93..3079a85 100644
  # Circle } }
  ```
  
--We just say we're returning a `Circle`. With this method, we can grow a new
+-We just say we’re returning a `Circle`. With this method, we can grow a new
 -circle to any arbitrary size.
 +Мы просто указываем, что возвращается `Circle`. С помощью этого метода мы можем
 +создать новый круг, площадь которого будет в 100 раз больше, чем у старого.
  
--## Static methods
+-# Static methods
 +## Статические методы
  
--You can also define methods that do not take a `self` parameter. Here's a
--pattern that's very common in Rust code:
+-You can also define methods that do not take a `self` parameter. Here’s a
+-pattern that’s very common in Rust code:
 +Вы также можете определить методы, которые не принимают параметр `self`. Вот
 +паттерн, который очень распространен в Rust коде:
  
@@ -196,19 +202,19 @@ index ae83a93..3079a85 100644
  }
  ```
  
--This *static method* builds a new `Circle` for us. Note that static methods
+-This ‘static method’ builds a new `Circle` for us. Note that static methods
 -are called with the `Struct::method()` syntax, rather than the `ref.method()`
 -syntax.
 +Этот *статический метод*, который создает новый `Circle`. Обратите внимание, что
 +статические методы вызываются с помощью синтаксиса: `Struct::method()`, а не
 +`ref.method()`.
  
--## Builder Pattern
+-# Builder Pattern
 +## Паттерн строитель
  
--Let's say that we want our users to be able to create Circles, but we will
+-Let’s say that we want our users to be able to create Circles, but we will
 -allow them to only set the properties they care about. Otherwise, the `x`
--and `y` attributes will be `0.0`, and the `radius` will be `1.0`. Rust doesn't
+-and `y` attributes will be `0.0`, and the `radius` will be `1.0`. Rust doesn’t
 -have method overloading, named arguments, or variable arguments. We employ
 -the builder pattern instead. It looks like this:
 +Давайте предположим, что нам нужно, чтобы наши пользователи могли создавать
@@ -219,7 +225,7 @@ index ae83a93..3079a85 100644
 +Он выглядит следующим образом:
  
  ```
- # #![feature(core)]
++# #![feature(core)]
  struct Circle {
      x: f64,
      y: f64,
@@ -276,10 +282,10 @@ index ae83a93..3079a85 100644
  }
  ```
  
--What we've done here is make another struct, `CircleBuilder`. We've defined our
--builder methods on it. We've also defined our `area()` method on `Circle`. We
+-What we’ve done here is make another struct, `CircleBuilder`. We’ve defined our
+-builder methods on it. We’ve also defined our `area()` method on `Circle`. We
 -also made one more method on `CircleBuilder`: `finalize()`. This method creates
--our final `Circle` from the builder. Now, we've used the type system to enforce
+-our final `Circle` from the builder. Now, we’ve used the type system to enforce
 -our concerns: we can use the methods on `CircleBuilder` to constrain making
 -`Circle`s in any way we choose.
 +Все, что мы сделали здесь, это создали еще одну структуру, `CircleBuilder`. В

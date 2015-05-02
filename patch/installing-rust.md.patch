@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/installing-rust.md b/HEAD:installing-rust.md
-index 58d9e57..9a34115 100644
+index 58d9e57..8fc1802 100644
 --- a/rust/master:src/doc/trpl/installing-rust.md
 +++ b/HEAD:installing-rust.md
 @@ -1,99 +1,107 @@
@@ -147,15 +147,14 @@ index 58d9e57..9a34115 100644
 +Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это
 +дурашливое прозвище, которым мы себя называем), и мы поможем вам. Другие
 +полезные ресурсы, посвящённые Rust: [форум пользователей][users], [/r/rust
-+subreddit][reddit], [stack_overflow][stack overflow]. Русскоязычные ресурсы:
++subreddit][reddit], [stack overflow][stackoverflow]. Русскоязычные ресурсы:
 +[канал #rust-ru на irc.mozilla.org][irc_ru], [google groups][google_groups_ru].
  
  [irc]: irc://irc.mozilla.org/#rust
  [mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust
  [users]: http://users.rust-lang.org/ 
--[stackoverflow]: http://stackoverflow.com/questions/tagged/rust
 +[reddit]: http://www.reddit.com/r/rust
-+[stack_overflow]: http://stackoverflow.com/questions/tagged/rust
+ [stackoverflow]: http://stackoverflow.com/questions/tagged/rust
 +
 +[irc_ru]: irc://irc.mozilla.org/#rust-ru
 +[google_groups_ru]: https://groups.google.com/forum/#!forum/rust-russian
