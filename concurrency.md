@@ -126,7 +126,7 @@ use std::thread;
 fn main() {
     let mut data = vec![1u32, 2, 3];
 
-    for i in 0..2 {
+    for i in 0..3 {
         thread::spawn(move || {
             data[i] += 1;
         });
@@ -166,7 +166,7 @@ use std::sync::Mutex;
 fn main() {
     let mut data = Mutex::new(vec![1u32, 2, 3]);
 
-    for i in 0..2 {
+    for i in 0..3 {
         let data = data.lock().unwrap();
         thread::spawn(move || {
             data[i] += 1;
@@ -208,7 +208,7 @@ use std::thread;
 fn main() {
     let data = Arc::new(Mutex::new(vec![1u32, 2, 3]));
 
-    for i in 0..2 {
+    for i in 0..3 {
         let data = data.clone();
         thread::spawn(move || {
             let mut data = data.lock().unwrap();
@@ -229,7 +229,7 @@ fn main() {
 # use std::thread;
 # fn main() {
 #     let data = Arc::new(Mutex::new(vec![1u32, 2, 3]));
-#     for i in 0..2 {
+#     for i in 0..3 {
 #         let data = data.clone();
 thread::spawn(move || {
     let mut data = data.lock().unwrap();
