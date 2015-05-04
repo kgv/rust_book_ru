@@ -65,5 +65,6 @@
     * [Тесты производительности](benchmark-tests.md)
     * [Синтаксис упаковки и шаблоны `match`](box-syntax-and-patterns.md)
     * [Шаблоны `match` для срезов](slice-patterns.md)
+    * [Ассоциированные константы](associated-constants.md)
 * [Глоссарий](glossary.md)
 * [Академические исследования](academic-research.md)
