@@ -266,7 +266,7 @@ struct Info {
 }
 
 fn write_info(info: &Info) -> io::Result<()> {
-    let mut file = File::open("my_best_friends.txt").unwrap();
+    let mut file = File::create("my_best_friends.txt").unwrap();
 
     if let Err(e) = writeln!(&mut file, "name: {}", info.name) {
         return Err(e)
@@ -296,7 +296,7 @@ struct Info {
 }
 
 fn write_info(info: &Info) -> io::Result<()> {
-    let mut file = try!(File::open("my_best_friends.txt"));
+    let mut file = try!(File::create("my_best_friends.txt"));
 
     try!(writeln!(&mut file, "name: {}", info.name));
     try!(writeln!(&mut file, "age: {}", info.age));
