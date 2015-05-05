@@ -1,17 +1,17 @@
 diff --git a/rust/master:src/doc/trpl/for-loops.md b/HEAD:for-loops.md
-index 1e3f2fa..a0a565e 100644
+index 1e3f2fa..92c3875 100644
 --- a/rust/master:src/doc/trpl/for-loops.md
 +++ b/HEAD:for-loops.md
-@@ -1,43 +1,46 @@
+@@ -1,43 +1,45 @@
 -% for Loops
 +% Циклы `for`
  
 -The `for` loop is used to loop a particular number of times. Rust’s `for` loops
 -work a bit differently than in other systems languages, however. Rust’s `for`
 -loop doesn’t look like this “C-style” `for` loop:
-+Цикл `for` нужен для повторения блока кода определенного количества раз. Циклы
++Цикл `for` нужен для повторения блока кода определённого количества раз. Циклы
 +`for` в Rust работают немного иначе, чем в других языках программирования.
-+Например в Си подобном языке цикл `for` выглядит так:
++Например в Си-подобном языке цикл `for` выглядит так:
  
  ```c
  for (x = 0; x < 10; x++) {
@@ -29,7 +29,7 @@ index 1e3f2fa..a0a565e 100644
  ```
  
 -In slightly more abstract terms,
-+Можно показать цикл более абстрактнее:
++Можно представить цикл более абстрактно:
  
  ```ignore
 -for var in expression {
@@ -44,11 +44,11 @@ index 1e3f2fa..a0a565e 100644
 -to the name `var`, which is valid for the loop body. Once the body is over, the
 -next value is fetched from the iterator, and we loop another time. When there
 -are no more values, the `for` loop is over.
-+Выражение это [итератор][iterator], который мы будем рассматривать позже в этом
++Выражение - это [итератор][iterator]. Их мы будем рассматривать позже в этом
 +руководстве. Итератор возвращает серию элементов, где каждый элемент будет
 +являться одной итерацией цикла. Значение этого элемента затем присваивается
 +переменной `var`, которая будет доступна в теле цикла. После окончания тела
-+цикла, берется следующее значение итератора и снова выполняется тело цикла.
++цикла, берётся следующее значение итератора и снова выполняется тело цикла.
 +Когда в итераторе закончатся значения, то цикл `for` завершается.
  
  [iterator]: iterators.html
@@ -56,15 +56,14 @@ index 1e3f2fa..a0a565e 100644
 -In our example, `0..10` is an expression that takes a start and an end position,
 -and gives an iterator over those values. The upper bound is exclusive, though,
 -so our loop will print `0` through `9`, not `10`.
-+В нашем примере `0..10` это выражение, где задается начальное и конечное
-+значение, и возвращает итератор, который будет возвращать серию значений
-+последовательно, начиная с начального значения и заканчивая конечным значением
-+не включая его самого. В нашем примере будет напечатано от `0` до `9`, но не
++В нашем примере, `0..10` - это выражение, которое задаёт начальное и конечное
++значение, и возвращает итератор. Обратите внимание, что конечное значение не
++включается в него. В нашем примере будут напечатаны числа от `0`  до `9`, но не
 +будет напечатано `10`.
  
 -Rust does not have the “C-style” `for` loop on purpose. Manually controlling
 -each element of the loop is complicated and error prone, even for experienced C
 -developers.
 +В Rust нет цикла `for` как в Си-подобном синтаксисе, т.к. управлять каждым
-+элементом цикла вручную сложно и приводит к ошибкам даже у опытных программистов
-+на Си.
++элементом цикла вручную сложно и это может привести к ошибкам даже у опытных 
++программистов на Си.

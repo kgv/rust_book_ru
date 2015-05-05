@@ -1,22 +1,18 @@
 diff --git a/rust/master:src/doc/trpl/patterns.md b/HEAD:patterns.md
-index 97a3dfe..545b448 100644
+index 266c1ca..c59ff1b 100644
 --- a/rust/master:src/doc/trpl/patterns.md
 +++ b/HEAD:patterns.md
-@@ -1,228 +1,204 @@
+@@ -1,256 +1,260 @@
 -% Patterns
-+% Шаблоны `match`
++% Шаблоны сопоставления `match`
  
 -Patterns are quite common in Rust. We use them in [variable
 -bindings][bindings], [match statements][match], and other places, too. Let’s go
 -on a whirlwind tour of all of the things patterns can do!
-+-Patterns are quite common in Rust. We use them in [variable
-+-bindings][bindings], [match statements][match], and other places, too. Let’s go
-+-on a whirlwind tour of all of the things patterns can do!
-+
 +Шаблоны достаточно часто используются в Rust. Мы уже использовали их в разделе
-+[Связывание переменных][bindings], в разделе [Конструкция `match`][match] и в
-+некоторых других местах. Давайте коротко пробежимся по всем возможностям,
-+которые можно реализовать с помощью шаблонов!
++[Связывание переменных][bindings], в разделе [Конструкция `match`][match], а
++также в некоторых других местах. Давайте коротко пробежимся по всем
++возможностям, которые можно реализовать с помощью шаблонов!
  
  [bindings]: variable-bindings.html
  [match]: match.html
@@ -38,10 +34,11 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `one`.
-+# Сопоставление с несколькими шаблонами
++Этот код напечатает `one`.
  
 -# Multiple patterns
--
++# Сопоставление с несколькими шаблонами
+ 
 -You can match multiple patterns with `|`:
 +Вы можете сопоставлять с несколькими шаблонами, используя `|`:
  
@@ -56,10 +53,11 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `one or two`.
-+# Сопоставление с диапазоном
++Этот код напечатает `one or two`.
  
 -# Ranges
--
++# Сопоставление с диапазоном
+ 
 -You can match a range of values with `...`:
 +Вы можете сопоставлять с диапазоном значений, используя `...`:
  
@@ -73,29 +71,29 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `one through five`.
-+Диапазоны в основном используются с числами или одиночными символами.
++Этот код напечатает `one through five`.
  
 -Ranges are mostly used with integers and `char`s:
++Диапазоны в основном используются с числами или одиночными символами (`char`).
+ 
+ ```rust
+ let x = '💅';
+ 
+ match x {
+     'a' ... 'j' => println!("early letter"),
+     'k' ... 'z' => println!("late letter"),
+     _ => println!("something else"),
+ }
+ ```
+ 
+-This prints `something else`
++Этот код напечатает `something else`.
+ 
+-# Bindings
 +# Связывание
  
--```rust
--let x = '💅';
--
--match x {
--    'a' ... 'j' => println!("early letter"),
--    'k' ... 'z' => println!("late letter"),
--    _ => println!("something else"),
--}
--```
--
--This prints `something else`
--
--# Bindings
--
--If you’re matching multiple things, via a `|` or a `...`, you can bind
--the value to a name with `@`:
-+Если вы используете множественное сопоставление, с помощью `|` или `...`, вы
-+можете связать значение с именем с помощью символа `@`:
+-You can bind values to names with `@`:
++Вы можете связать значение с именем с помощью символа `@`:
  
  ```rust
  let x = 1;
@@ -106,11 +104,45 @@ index 97a3dfe..545b448 100644
  }
  ```
  
--This prints `got a range element 1`.
-+# Игнорирование вариантов
+-This prints `got a range element 1`. This is useful when you want to
+-do a complicated match of part of a data structure:
++Этот код напечатает `got a range element 1`. Это полезно, когда вы хотите
++сделать сложное сопоставление для части структуры данных:
+ 
+ ```rust
+ #[derive(Debug)]
+ struct Person {
+     name: Option<String>,
+ }
+ 
+ let name = "Steve".to_string();
+ let mut x: Option<Person> = Some(Person { name: Some(name) });
+ match x {
+     Some(Person { name: ref a @ Some(_), .. }) => println!("{:?}", a),
+     _ => {}
+ }
+ ```
+ 
+-This prints `Some("Steve")`: We’ve bound the inner `name` to `a`.
++Этот код напечатает `Some("Steve")`: мы связали внутреннюю `name` с `a`.
+ 
+-If you use `@` with `|`, you need to make sure the name is bound in each part
+-of the pattern:
++Если вы используете `@` совместно с `|`, то вы должны убедиться, что имя
++связывается в каждой из частей шаблона:
+ 
+ ```rust
+ let x = 5;
+ 
+ match x {
+     e @ 1 ... 5 | e @ 8 ... 10 => println!("got a range element {}", e),
+     _ => println!("anything"),
+ }
+ ```
  
 -# Ignoring variants
--
++# Игнорирование вариантов
+ 
 -If you’re matching on an enum which has variants, you can use `..` to
 -ignore the value and type in the variant:
 +Если при сопоставлении вы используете перечисление, содержащее варианты, то вы
@@ -131,10 +163,11 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `Got an int!`.
-+# Ограничители шаблонов
++Этот код напечатает `Got an int!`.
  
 -# Guards
--
++# Ограничители шаблонов
+ 
 -You can introduce ‘match guards’ with `if`:
 +Вы можете ввести *ограничители шаблонов* (*match guards*) с помощью `if`:
  
@@ -154,10 +187,11 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `Got an int!`
-+# ref и ref mut
++Этот код напечатает `Got an int!`.
  
 -# ref and ref mut
--
++# ref и ref mut
+ 
 -If you want to get a [reference][ref], use the `ref` keyword:
 +Если вы хотите получить [ссылку][ref], то используйте ключевое слово `ref`:
  
@@ -170,7 +204,8 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `Got a reference to 5`.
--
++Этот код напечатает `Got a reference to 5`.
+ 
  [ref]: references-and-borrowing.html
  
 -Here, the `r` inside the `match` has the type `&i32`. In other words, the `ref`
@@ -193,7 +228,7 @@ index 97a3dfe..545b448 100644
  
 -If you have a compound data type, like a [`struct`][struct], you can destructure it
 -inside of a pattern:
-+Если у вас есть сложный тип данных, например структура, вы можете
++Если у вас есть сложный тип данных, например [`struct`][struct], вы можете
 +деструктурировать его внутри шаблона:
  
  ```rust
@@ -209,8 +244,8 @@ index 97a3dfe..545b448 100644
  }
  ```
  
--[struct]: structs.html
--
+ [struct]: structs.html
+ 
 -If we only care about some of the values, we don’t have to give them all names:
 +Если нам нужны значения только некоторых из полей структуры, то мы можем не
 +присваивать им всем имена:
@@ -229,7 +264,8 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `x is 0`.
--
++Этот код напечатает `x is 0`.
+ 
 -You can do this kind of match on any member, not just the first:
 +Вы можете сделать это для любого поля, а не только для первого:
  
@@ -247,7 +283,8 @@ index 97a3dfe..545b448 100644
  ```
  
 -This prints `y is 0`.
--
++Этот код напечатает `y is 0`.
+ 
 -This ‘destructuring’ behavior works on any compound data type, like
 -[tuples][tuples] or [enums][enums].
 +Такое ‘деструктурирование‘ работает для любых сложных типов данных, таких как
@@ -264,8 +301,7 @@ index 97a3dfe..545b448 100644
 +сопоставления с шаблоном, и все они могут быть смешаны и состыкованы, в
 +зависимости от того, что вы хотите сделать:
  
--```rust,ignore
-+```{rust,ignore}
+ ```rust,ignore
  match x {
      Foo { x: Some(ref name), y: None } => ...
  }

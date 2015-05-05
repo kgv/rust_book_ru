@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/primitive-types.md b/HEAD:primitive-types.md
-index e017e22..4694a7b 100644
+index e017e22..b160bfa 100644
 --- a/rust/master:src/doc/trpl/primitive-types.md
 +++ b/HEAD:primitive-types.md
-@@ -1,293 +1,295 @@
+@@ -1,293 +1,303 @@
 -% Primitive Types
 +% Простые типы
  
@@ -391,15 +391,17 @@ index e017e22..4694a7b 100644
  
 -You can disambiguate a single-element tuple from a value in parentheses with a
 -comma:
++Вы можете устранить неоднозначность трактовки для кортежа, состоящего из одного
++элемента, и значения в скобках с помощью запятой:
+ 
+ ```
+ (0,); // single-element tuple
+ (0); // zero in parentheses
+ ```
+ 
+-## Tuple Indexing
 +## Индексация кортежей
  
--```
--(0,); // single-element tuple
--(0); // zero in parentheses
--```
--
--## Tuple Indexing
--
 -You can also access fields of a tuple with indexing syntax:
 +Вы также можете получить доступ к полям кортежа с помощью индексации:
  

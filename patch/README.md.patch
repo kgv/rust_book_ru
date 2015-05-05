@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/README.md b/HEAD:INTRODUCTION.md
-index 280665a..306c8dd 100644
+index 89f0db8..306c8dd 100644
 --- a/rust/master:src/doc/trpl/README.md
 +++ b/HEAD:INTRODUCTION.md
-@@ -1,194 +1,210 @@
+@@ -1,199 +1,210 @@
 -% The Rust Programming Language
 +% Язык программирования Rust
  
@@ -80,14 +80,19 @@ index 280665a..306c8dd 100644
 +каждую концепцию языка отдельно, перед тем как двигаться дальше.
 +Большое количество перекрёстных ссылок соединяет эти части воедино.
  
--## A brief introduction to Rust
+-### Contributing
 +## Краткое введение в Rust
  
--Is Rust a language you might be interested in? Let’s examine a few small code
--samples to show off a few of its strengths.
+-The source files from which this book is generated can be found on Github:
+-[github.com/rust-lang/rust/tree/master/src/doc/trpl](https://github.com/rust-lang/rust/tree/master/src/doc/trpl)
 +Чем же Rust может заинтересовать вас? Давайте рассмотрим несколько небольших
 +примеров кода, чтобы продемонстрировать некоторые из его сильных сторон.
  
+-## A brief introduction to Rust
+-
+-Is Rust a language you might be interested in? Let’s examine a few small code
+-samples to show off a few of its strengths.
+-
 -The main concept that makes Rust unique is called ‘ownership’. Consider this
 -small example:
 +Основная концепция, которая делает Rust уникальным, называется ‘владение’.
@@ -303,7 +308,7 @@ index 280665a..306c8dd 100644
 +скобок. `y` выйдет за пределы этой области видимости до вызова метода `push()`,
 +и поэтому все будет хорошо.
  
--This concept of ownership isn’t just good for preventing danging pointers, but an
+-This concept of ownership isn’t just good for preventing dangling pointers, but an
 -entire set of related problems, like iterator invalidation, concurrency, and more.
 +Концепция права владения хороша не только для предотвращения повисших
 +указателей, но также всей совокупности связанных с этим проблем, таких как:

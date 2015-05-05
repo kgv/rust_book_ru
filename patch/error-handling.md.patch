@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/error-handling.md b/HEAD:error-handling.md
-index e261eb0..7dbce1c 100644
+index e480921..f907c62 100644
 --- a/rust/master:src/doc/trpl/error-handling.md
 +++ b/HEAD:error-handling.md
 @@ -1,304 +1,318 @@
@@ -344,7 +344,7 @@ index e261eb0..7dbce1c 100644
  }
  
  fn write_info(info: &Info) -> io::Result<()> {
-     let mut file = File::open("my_best_friends.txt").unwrap();
+     let mut file = File::create("my_best_friends.txt").unwrap();
  
      if let Err(e) = writeln!(&mut file, "name: {}", info.name) {
          return Err(e)
@@ -375,7 +375,7 @@ index e261eb0..7dbce1c 100644
  }
  
  fn write_info(info: &Info) -> io::Result<()> {
-     let mut file = try!(File::open("my_best_friends.txt"));
+     let mut file = try!(File::create("my_best_friends.txt"));
  
      try!(writeln!(&mut file, "name: {}", info.name));
      try!(writeln!(&mut file, "age: {}", info.age));

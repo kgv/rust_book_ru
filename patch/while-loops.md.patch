@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/while-loops.md b/HEAD:while-loops.md
-index f2e2f6b..d3ac08e 100644
+index f2e2f6b..e3dbdc5 100644
 --- a/rust/master:src/doc/trpl/while-loops.md
 +++ b/HEAD:while-loops.md
 @@ -1,93 +1,96 @@
@@ -7,7 +7,7 @@ index f2e2f6b..d3ac08e 100644
 +% Циклы `while`
  
 -Rust also has a `while` loop. It looks like this:
-+Цикл `while` это еще один вид конструкции цикла в Rust. Выглядит он так:
++Цикл `while` это ещё один вид конструкции цикла в Rust. Выглядит он так:
  
  ```{rust}
  let mut x = 5; // mut x: u32
@@ -26,9 +26,9 @@ index f2e2f6b..d3ac08e 100644
  
 -`while` loops are the correct choice when you’re not sure how many times
 -you need to loop.
-+этот цикл применяется, если неизвестно сколько раз нужно выполнить тело цикла,
-+чтобы получть результат. При каждой итерации цикла проверяется условие, если оно
-+истино, то запускается следующая итерация, иначе цикл `while` завершается.
++Он применяется, если неизвестно сколько раз нужно выполнить тело цикла,
++чтобы получить результат. При каждой итерации цикла проверяется условие, если оно
++истинно, то запускается следующая итерация, иначе цикл `while` завершается.
  
 -If you need an infinite loop, you may be tempted to write this:
 +Если вам нужен бесконечный цикл, то можете сделать условие всегда истинным:
@@ -38,7 +38,7 @@ index f2e2f6b..d3ac08e 100644
  ```
  
 -However, Rust has a dedicated keyword, `loop`, to handle this case:
-+Однако, в Rust имеется ключевое слово `loop` для такого случая:
++Однако, для такого случая в Rust имеется ключевое слово `loop`:
  
  ```rust,ignore
  loop {
@@ -84,8 +84,8 @@ index f2e2f6b..d3ac08e 100644
 +которые помогут нам работать с итерациями цикла: `break` и `continue`.
  
 -In this case, we can write the loop in a better way with `break`:
-+Можем переписать цикл более лучшим способом с помощью `break`, чтобы избавиться
-+от переменной `done`:
++Мы можем переписать цикл более хорошим способом с помощью `break`, чтобы 
++избавиться от переменной `done`:
  
  ```rust
  let mut x = 5;
@@ -105,7 +105,7 @@ index f2e2f6b..d3ac08e 100644
 -`continue` is similar, but instead of ending the loop, goes to the next
 -iteration. This will only print the odd numbers:
 +`continue` похож на `break`, но вместо выхода из цикла переходит к следующей
-+итерации. Следующий пример отобразит только нечетные числа:
++итерации. Следующий пример отобразит только нечётные числа:
  
  ```rust
  for x in 0..10 {

@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/HEAD:SUMMARY.md
-index 695dc42..bc09f91 100644
+index 4dc77aa..5e4c4a8 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/HEAD:SUMMARY.md
-@@ -1,68 +1,68 @@
+@@ -1,69 +1,70 @@
 -# Summary
 +# Содержание
  
@@ -115,6 +115,7 @@ index 695dc42..bc09f91 100644
 -    * [Intrinsics](intrinsics.md)
 +    * [Трейт `Deref`](deref-coercions.md)
 +    * [Макросы](macros.md)
++    * [Сырые указатели](raw-pointers.md)
 +    * [`unsafe` код](unsafe.md)
 +* [Нестабильные фичи Rust](nightly-rust.md)
 +    * [Плагины компилятора](compiler-plugins.md)
@@ -126,11 +127,13 @@ index 695dc42..bc09f91 100644
 -    * [Benchmark Tests](benchmark-tests.md)
 -    * [Box Syntax and Patterns](box-syntax-and-patterns.md)
 -    * [Slice Patterns](slice-patterns.md)
+-    * [Associated Constants](associated-constants.md)
 -* [Glossary](glossary.md)
 -* [Academic Research](academic-research.md)
 +    * [Аргументы линковки](link-args.md)
 +    * [Тесты производительности](benchmark-tests.md)
 +    * [Синтаксис упаковки и шаблоны `match`](box-syntax-and-patterns.md)
 +    * [Шаблоны `match` для срезов](slice-patterns.md)
++    * [Ассоциированные константы](associated-constants.md)
 +* [Глоссарий](glossary.md)
 +* [Академические исследования](academic-research.md)
