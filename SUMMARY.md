@@ -6,6 +6,7 @@
     * [Hello, world!](hello-world.md)
     * [Hello, Cargo!](hello-cargo.md)
 * [Изучение Rust](learn-rust.md)
+    * [Угадайка](guessing-game.md)
 * [Эффективное использование Rust](effective-rust.md)
     * [Стек и Куча](the-stack-and-the-heap.md)
     * [Тестирование](testing.md)
