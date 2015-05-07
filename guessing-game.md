@@ -1,8 +1,8 @@
 % Угадайка
 
 В качестве нашего первого проекта, мы решим классическую для начинающих 
-программстов задачу: игра-угадайка. Немного о том, как игра должна работать:
-наша программа генерирует случаное целое число из промежутка от 1 до 100. Затем
+программистов задачу: игра-угадайка. Немного о том, как игра должна работать:
+наша программа генерирует случайное целое число из промежутка от 1 до 100. Затем
 она просит ввести число, которое она "загадала". Для каждого введённого нами 
 числа, она говорит, больше ли оно, чем "загаданное", или меньше. Игра 
 заканчивается когда мы отгадываем число. Звучит не плохо, не так ли?
@@ -34,7 +34,7 @@ authors = ["Your Name <you@example.com>"]
 ```
 
 Cargo взял эту информацию из вашего рабочего окружения. Если информация не 
-корректа, исправте её.
+корректна, исправьте её.
 
 В завершение, Cargo создал программу `Hello, world!`. Посмотрите файл `src/main.rs`:
 
@@ -54,7 +54,7 @@ $ cargo build
 Замечательно! Снова откройте `src/main.rs`. Мы будем писать весь наш код в этом
 файле.
 
-Прежде, чем мы начали работу, давайте рассмотрим ещё одну команду Cargo: `run`.
+Прежде, чем мы начнём работу, давайте рассмотрим ещё одну команду Cargo: `run`.
 `cargo run` похожа на `cargo build`, но после завершения компиляции, она 
 запускает получившийся исполняемый файл:
 
@@ -92,7 +92,7 @@ fn main() {
 }
 ```
 
-Здесь много чего! Давайте разберём этот участок ьит за битом.
+Здесь много чего! Давайте разберём этот участок по частям.
 
 ```rust,ignore
 use std::io;
@@ -100,7 +100,7 @@ use std::io;
 
 Нам надо получить то, что ввёл пользователь, а затем вывести результат на экран.
 Значит нам понадобится библиотека `io` из стандартной библиотеки. Изначально Rust 
-импортирует лишь некоторые вещи в нашу программ, в так называемом [`вступлении`][prelude].
+импортирует лишь некоторые вещи в нашу программу, в так называемом [`вступлении`][prelude].
 Если чего-то нет по вступлении, мы должны указать при помощи `use`, что хотим их
 использовать.
 
@@ -114,18 +114,18 @@ fn main() {
 `fn` объявляет новую функцию. Пустые круглые скобки `()` показывают, что она не
 принимает аргументов. Открывающая фигурная скобка `{` начинает тело нашей 
 функции. Из-за того, что мы не указали тип возвращаемого значения, предполагается,
-что будет возвращаться `()` - пустой [кортэж][tuples].
+что будет возвращаться `()` - пустой [кортеж][tuples].
 
 [tuples]: primitive-types.html#tuples
 
 ```rust,ignore
-    println!("Guess the number!");
+    println!("Угадайте число!");
 
-    println!("Please input your guess.");
+    println!("Пожалуйста, введите предположение.");
 ```
 
-We previously learned that `println!()` is a [macro][macros] that
-prints a [string][strings] to the screen.
+Мы уже изучили, что `println!()` - это [макрос][macro], который выводит 
+[строки][strings] на экран.
 
 [macros]: macros.html
 [strings]: strings.html
@@ -134,7 +134,9 @@ prints a [string][strings] to the screen.
     let mut guess = String::new();
 ```
 
-Now we’re getting interesting! There’s a lot going on in this little line. The first thing to notice is that this is a [let statement][let], which is used to create ‘variable bindings’. They take this form:
+Теперь интереснее! Как же много всего происходит в этой строке! Первая вещь, на 
+которую следует обратить внимание - [выражение let][let], которое используется 
+для `создания связи`. Оно выглядит так:
 
 ```rust,ignore
 let foo = bar;
@@ -142,26 +144,25 @@ let foo = bar;
 
 [let]: variable-bindings.html
 
-This will create a new binding named `foo`, and bind it to the value `bar`. In
-many languages, this is called a ‘variable’, but Rust’s variable bindings have
-a few tricks up their sleeves.
+Это создаёт новую связь с именем `foo` и привязывает ей значение `bar`. Во 
+многих языках это называется `переменная`, но в Rust связывание переменных имеет
+несколько трюков в рукаве.
 
-For example, they’re [immutable][immutable] by default. That’s why our example
-uses `mut`: it makes a binding mutable, rather than immutable. `let` doesn’t
-take a name on the left hand side, it actually accepts a
-‘[pattern][patterns]’. We’ll use patterns more later. It’s easy enough
-to use for now:
+Например, по умолчанию, связи [неизменяемы][immutable]. По этой причине наш пример
+использует `mut`: этот модификатор разрешает менять связь. С стороны у `let` может
+быть не просто имя связи, а [образец][patterns]. Мы будет использовать и дальше.
+Их достаточно просто использовать:
 
 ```
-let foo = 5; // immutable.
-let mut bar = 5; // mutable
+let foo = 5; // неизменяемая связь
+let mut bar = 5; // изменяемая связь
 ```
 
 [immutable]: mutability.html
 [patterns]: patterns.html
 
-Oh, and `//` will start a comment, until the end of the line. Rust ignores
-everything in [comments][comments].
+Ах да, `//` начинает комментарий, который заканчивается в конце строки. Rust 
+игнорирует всё, что находится в [комментариях][comments].
 
 [comments]: comments.html
 
