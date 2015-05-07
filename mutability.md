@@ -1,7 +1,7 @@
 % Изменяемость (mutability)
 
 Изменяемость, то есть возможность изменить что-то, работает в Rust несколько
-особенно. Во-первых, по умолчанию связанные имена не изменяемы:
+иначе, чем в других языках. Во-первых, по умолчанию связанные имена не изменяемы:
 
 ```rust,ignore
 let x = 5;
@@ -16,9 +16,9 @@ let mut x = 5;
 x = 6; // нет проблем!
 ```
 
-Это изменяемое [связанное имя][vb]. Когда связанное имя изменяемо, значение, с
-которым имя связано, можно изменить. В примере выше не то, чтобы само значение
-`x` менялось, а просто имя `x` связывается уже с другим значением типа `i32`.
+Это изменяемое [связанное имя][vb]. Когда связанное имя изменяемо, мы можем 
+изменить привязанное к нему значение. В примере выше не то, чтобы само значение
+`x` менялось, просто имя `x` связывается с другим значением типа `i32`.
 
 [vb]: variable-bindings.html
 
@@ -57,11 +57,11 @@ fn foo(mut x: i32) {
 
 [pattern]: patterns.html
 
-# Interior vs. Exterior Mutability
+# Внутренняя и внешняя изменяемость
 
-However, when we say something is ‘immutable’ in Rust, that doesn’t mean that
-it’s not able to be changed: We mean something has ‘exterior mutability’. Consider,
-for example, [`Arc<T>`][arc]:
+Однако, когда мы говорим, что что-либо `неизменяемо` в Rust, это не означает,
+что оно не может измениться. Здесь мы хотим рассказать про `внешнюю изменяемость`.
+Для примера рассмотрим [`Arc<T>`][arc]:
 
 ```rust
 use std::sync::Arc;
@@ -70,32 +70,32 @@ let x = Arc::new(5);
 let y = x.clone();
 ```
 
-[arc]: ../std/sync/struct.Arc.html
+[arc]: http://doc.rust-lang.org/nightly/std/sync/struct.Arc.html 
 
-When we call `clone()`, the `Arc<T>` needs to update the reference count. Yet
-we’ve not used any `mut`s here, `x` is an immutable binding, and we didn’t take
-`&mut 5` or anything. So what gives?
+Когда мы вызываем `clone()`, `Arc<T>` должна обновить счётчик ссылок. Мы не 
+использовали модификатор `mut`, а значит `x` - неизменяемая связь и мы не можем
+получить ссылку (`&mut 5`) или что-то подобное. Так что же это даёт?
 
-To this, we have to go back to the core of Rust’s guiding philosophy, memory
-safety, and the mechanism by which Rust guarantees it, the
-[ownership][ownership] system, and more specifically, [borrowing][borrowing]:
+Для этого, мы должны вернуться назад к основам философии Rust'a, к сохранности 
+памяти и механизму, гарантирующему это, к системе [владения][ownership], и в 
+частности, к [заимствованию][borrowing]:
 
-> You may have one or the other of these two kinds of borrows, but not both at
-> the same time:
-> 
-> * 0 to N references (`&T`) to a resource.
-> * exactly one mutable reference (`&mut T`)
+> Одновременно у вас может быть только один из двух перечисленных ниже типов 
+> заимствования:
+> * от 0 до N неизменяемых ссылок (`&T`) на ресурс.
+> * только одна изменяемая ссылка (`&mut T`).
 
 [ownership]: ownership.html
 [borrowing]: borrowing.html#The-Rules
 
-So, that’s the real definition of ‘immutability’: is this safe to have two
-pointers to? In `Arc<T>`’s case, yes: the mutation is entirely contained inside
-the structure itself. It’s not user facing. For this reason, it hands out `&T`
-with `clone()`. If it handed out `&mut T`s, though, that would be a problem.
+Итак, что же здесь на самом деле является `неизменяемым`: безопасно ли иметь два
+указателя на один объект? В случае с `Arc<T>`, да: изменяемый объект полностью 
+находится внутри самой структуры. По этим причинам, при помощи метода `clone()` 
+мы получаем не изменяемую ссылку `&T`. Если бы она была изменяемой (`&mut T`), 
+у нас были бы проблемы.
 
-Other types, like the ones in the [`std::cell`][stdcell] module, have the
-opposite: interior mutability. For example:
+Другие типы, например одни из тех, что определены в модуле [`std::cell`][stdcell],
+напротив, имеют внутреннюю изменяемость. Например:
 
 ```rust
 use std::cell::RefCell;
@@ -105,10 +105,10 @@ let x = RefCell::new(42);
 let y = x.borrow_mut();
 ```
 
-[stdcell]: ../std/cell/index.html
+[stdcell]: http://doc.rust-lang.org/nightly/std/cell/index.html
 
-RefCell hands out `&mut` references to what’s inside of it with the
-`borrow_mut()` method. Isn’t that dangerous? What if we do:
+RefCell возвращает изменяемую ссылку `&mut` при помощи метода `borrow_mut()`.
+А не опасно ли это? Что, если мы сделаем так:
 
 ```rust,ignore
 use std::cell::RefCell;
@@ -120,25 +120,25 @@ let z = x.borrow_mut();
 # (y, z);
 ```
 
-This will in fact panic, at runtime. This is what `RefCell` does: it enforces
-Rust’s borrowing rules at runtime, and `panic!`s if they’re violated. This
-allows us to get around another aspect of Rust’s mutability rules. Let’s talk
-about it first.
+Это приведёт к краху во время исполнения. Вот что делает `RefCell`: оно изменяет
+правила заимствования во время исполнения и вызывает `panic!`, если они будут 
+нарушены. Это подводит нас к другим аспектам правил изменяемости Rust'а.
+Давайте сначала поговорим о них.
 
-## Field-level mutability
+## Изменяемость на уровне полей
 
-Mutability is a property of either a borrow (`&mut`) or a binding (`let mut`).
-This means that, for example, you cannot have a [`struct`][struct] with
-some fields mutable and some immutable:
+Изменяемость - это свойство либо заимствования (`&mut`), либо связывания 
+(`let mut`). Это значит, что, например, у вас не может быть [`структуры`][struct],
+часть полей которой изменяется, а другая часть - нет:
 
 ```rust,ignore
 struct Point {
     x: i32,
-    mut y: i32, // nope
+    mut y: i32, // нельзя
 }
 ```
 
-The mutability of a struct is in its binding:
+Изменяемость структуры определяется при её связывании:
 
 ```rust,ignore
 struct Point {
@@ -157,7 +157,7 @@ b.x = 10; // error: cannot assign to immutable field `b.x`
 
 [struct]: structs.html
 
-However, by using `Cell<T>`, you can emulate field-level mutability:
+Однако, используя `Cell<T>`, вы можете эмулировать изменяемость на уровне полей:
 
 ```
 use std::cell::Cell;
@@ -174,4 +174,4 @@ point.y.set(7);
 println!("y: {:?}", point.y);
 ```
 
-This will print `y: Cell { value: 7 }`. We’ve successfully updated `y`.
+Это выведет на экран `y: Cell { value: 7 }`. Мы успешно изменили значение `y`.
