@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Тесты производительности</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+</ul>
+</li>
+<li><a href='syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Тесты производительности</h1>
+    <p>Rust поддерживает тесты производительности, которые помогают измерить
+производительность вашего кода. Давайте изменим наш <code>src/lib.rs</code>, чтобы он
+выглядел следующим образом (комментарии опущены):</p>
+<span class='rusttest'>#![feature(test)]
+
+fn main() {
+    extern crate test;
+    
+    pub fn add_two(a: i32) -&gt; i32 {
+        a + 2
+    }
+    
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use test::Bencher;
+    
+        #[test]
+        fn it_works() {
+            assert_eq!(4, add_two(2));
+        }
+    
+        #[bench]
+        fn bench_add_two(b: &amp;mut Bencher) {
+            b.iter(|| add_two(2));
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>test</span>)]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>tests</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>test</span>::<span class='ident'>Bencher</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+
+    <span class='attribute'>#[<span class='ident'>bench</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>bench_add_two</span>(<span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bencher</span>) {
+        <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Обратите внимание на включение фичи (feature gate) <code>test</code>, что включает эту
+нестабильную фичу.</p>
+
+<p>Мы импортировали контейнер <code>test</code>, который включает поддержку измерения
+производительности. У нас есть новая функция, аннотированная с помощью атрибута
+<code>bench</code>. В отличие от обычных тестов, которые не принимают никаких аргументов,
+тесты производительности в качестве аргумента принимают <code>&amp;mut Bencher</code>.
+<code>Bencher</code> предоставляет метод <code>iter</code>, который в качестве аргумента принимает
+замыкание. Это замыкание содержит код, производительность которого мы хотели бы
+протестировать.</p>
+
+<p>Запуск тестов производительности осуществляется командой <code>cargo bench</code>:</p>
+
+<pre><code class="language-bash">$ cargo bench
+   Compiling adder v0.0.1 (file:///home/steve/tmp/adder)
+     Running target/release/adder-91b3e234d4ed382a
+
+running 2 tests
+test tests::it_works ... ignored
+test tests::bench_add_two ... bench:         1 ns/iter (+/- 0)
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 1 measured
+</code></pre>
+
+<p>Все тесты, не относящиеся к тестам производительности, были проигнорированы. Вы,
+наверное, заметили, что выполнение <code>cargo bench</code> занимает немного больше времени
+чем <code>cargo test</code>. Это происходит потому, что Rust запускает наш тест несколько
+раз, а затем выдает среднее значение. Так как мы выполняем слишком мало полезной
+работы в этом примере, у нас получается <code>1 ns/iter (+/- 0)</code>, но была бы выведена
+дисперсия, если бы был один.</p>
+
+<p>Советы по написанию тестов производительности:</p>
+
+<ul>
+<li>Внутри <code>iter</code> цикла пишите только тот код, производительность которого вы
+хотите измерить; инициализацию выполняйте за пределами <code>iter</code> цикла</li>
+<li>Внутри <code>iter</code> цикла пишите код, который будет идемпотентным (будет делать &quot;то
+же самое&quot; на каждой итерации); не накапливайте и не изменяйте состояние</li>
+<li>Вне <code>iter</code> цикла пишите код который также будет идемпотентным; скорее всего,
+он будет запущен много раз во время теста</li>
+<li>Внутри <code>iter</code> цикла пишите код, который будет коротким и быстрым, так чтобы
+запуски тестов происходили быстро и калибратор мог настроить длину пробега с
+точным разрешением</li>
+<li>Внутри <code>iter</code> цикла пишите код, делающий что-то простое, чтобы помочь в
+выявлении улучшения (или уменьшения) производительности</li>
+</ul>
+
+<h2 id="Особенности-оптимизации" class='section-header'><a
+                           href="#Особенности-оптимизации">Особенности оптимизации</a></h2>
+<p>А вот другой сложный момент, относящийся к написанию тестов производительности:
+тесты, скомпилированные с оптимизацией, могут быть значительно изменены
+оптимизатором, после чего тест будет мерить производительность не так, как мы
+этого ожидаем. Например, компилятор может определить, что некоторые выражения не
+оказывают каких-либо внешних эффектов и просто удалит их полностью.</p>
+<span class='rusttest'>#![feature(test)]
+
+fn main() {
+    extern crate test;
+    use test::Bencher;
+    
+    #[bench]
+    fn bench_xor_1000_ints(b: &amp;mut Bencher) {
+        b.iter(|| {
+            (0..1000).fold(0, |old, new| old ^ new);
+        });
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>test</span>)]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
+<span class='kw'>use</span> <span class='ident'>test</span>::<span class='ident'>Bencher</span>;
+
+<span class='attribute'>#[<span class='ident'>bench</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>bench_xor_1000_ints</span>(<span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bencher</span>) {
+    <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
+        (<span class='number'>0</span>..<span class='number'>1000</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>old</span>, <span class='ident'>new</span><span class='op'>|</span> <span class='ident'>old</span> <span class='op'>^</span> <span class='ident'>new</span>);
+    });
+}
+</pre>
+
+<p>выведет следующие результаты</p>
+
+<pre><code class="language-text">running 1 test
+test bench_xor_1000_ints ... bench:         0 ns/iter (+/- 0)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
+</code></pre>
+
+<p>Движок для запуска тестов производительности оставляет две возможности,
+позволяющие этого избежать. Либо использовать замыкание, передаваемое в метод
+<code>iter</code>, которое возвращает какое-либо значение; тогда это заставит оптимизатор
+думать, что возвращаемое значение будет использовано, из-за чего удалить
+вычисления полностью будет не возможно. Для примера выше этого можно достигнуть,
+изменив вызова <code>b.iter</code></p>
+<span class='rusttest'>fn main() {
+    struct X;
+    impl X { fn iter&lt;T, F&gt;(&amp;self, _: F) where F: FnMut() -&gt; T {} } let b = X;
+    b.iter(|| {
+        // note lack of `;` (could also use an explicit `return`).
+        (0..1000).fold(0, |old, new| old ^ new)
+    });
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
+    <span class='comment'>// note lack of `;` (could also use an explicit `return`).</span>
+    (<span class='number'>0</span>..<span class='number'>1000</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>old</span>, <span class='ident'>new</span><span class='op'>|</span> <span class='ident'>old</span> <span class='op'>^</span> <span class='ident'>new</span>)
+});
+</pre>
+
+<p>Либо использовать вызов функции <code>test::black_box</code>, которая представляет собой
+&quot;черный ящик&quot;, непрозрачный для оптимизатора, тем самым заставляя его
+рассматривать любой аргумент как используемый.</p>
+<span class='rusttest'>#![feature(test)]
+
+extern crate test;
+
+fn main() {
+struct X;
+impl X { fn iter&lt;T, F&gt;(&amp;self, _: F) where F: FnMut() -&gt; T {} } let b = X;
+b.iter(|| {
+    let n = test::black_box(1000);
+
+    (0..n).fold(0, |a, b| a ^ b)
+})
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>test</span>)]</span>
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
+
+<span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
+    <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>test</span>::<span class='ident'>black_box</span>(<span class='number'>1000</span>);
+
+    (<span class='number'>0</span>..<span class='ident'>n</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>a</span>, <span class='ident'>b</span><span class='op'>|</span> <span class='ident'>a</span> <span class='op'>^</span> <span class='ident'>b</span>)
+})
+</pre>
+
+<p>В этом примере не происходит ни чтения, ни измения значения, что очень дешево
+для малых значений. Большие значения могут быть переданы косвенно для уменьшения
+издержек (например, <code>black_box(&amp;huge_struct)</code>).</p>
+
+<p>Выполнение одного из вышеперечисленных изменений дает следующие результаты
+измерения производительности</p>
+
+<pre><code class="language-text">running 1 test
+test bench_xor_1000_ints ... bench:       131 ns/iter (+/- 3)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
+</code></pre>
+
+<p>Тем не менее, оптимизатор все еще может вносить нежелательные изменения в
+определенных случаях, даже при использовании любого из вышеописанных приемов.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

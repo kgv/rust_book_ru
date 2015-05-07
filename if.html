@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>If</title>
+    <title>Конструкция `if`</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,101 +30,151 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
+<li><a href='INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='getting-started.html'><b>3.</b> C чего начать</a>
 <ul class='section'>
-<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+<li><a href='installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+<li><a href='hello-world.html'><b>3.2.</b> Hello, world!</a>
 </li>
-<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
-</li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
-</li>
-<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
-</li>
-<li><a href='functions.html'><b>2.6.</b> Функции</a>
-</li>
-<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
-</li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
-</li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
-</li>
-<li><a href='looping.html'><b>2.10.</b> Циклы</a>
-</li>
-<li><a href='strings.html'><b>2.11.</b> Строки</a>
-</li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
+<li><a href='hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
+<li><a href='learn-rust.html'><b>4.</b> Изучение Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
-</li>
-<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
-</li>
-<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
-</li>
-<li><a href='ownership.html'><b>3.4.</b> Владение</a>
-</li>
-<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
-</li>
-<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
-</li>
-<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
-</li>
-<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
-</li>
-<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
-</li>
-<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
-</li>
-<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
-</li>
-<li><a href='traits.html'><b>3.12.</b> Трейты</a>
-</li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
-</li>
-<li><a href='macros.html'><b>3.14.</b> Макросы</a>
-</li>
-<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
-</li>
-<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
-</li>
-<li><a href='documentation.html'><b>3.17.</b> Документация</a>
+<li><a href='guessing-game.html'><b>4.1.</b> Угадайка</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
+<li><a href='effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
+<li><a href='the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
 </li>
-<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+<li><a href='testing.html'><b>5.2.</b> Тестирование</a>
 </li>
-<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+<li><a href='conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 </ul>
 </li>
-<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<li><a href='syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
 <ul class='section'>
-<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+<li><a href='variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
 </li>
-<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+<li><a href='functions.html'><b>6.2.</b> Функции</a>
 </li>
-<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+<li><a href='primitive-types.html'><b>6.3.</b> Простые типы</a>
 </li>
-<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+<li><a href='comments.html'><b>6.4.</b> Комментарии</a>
 </li>
-<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+<li><a href='if.html'><b>6.5.</b> Конструкция `if`</a>
 </li>
-<li><a href='link-args.html'><b>5.6.</b> Link args</a>
+<li><a href='for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='unsafe.html'><b>6.38.</b> `unsafe` код</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>6.</b> Заключение</a>
+<li><a href='nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
 </li>
-<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
+<li><a href='inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='academic-research.html'><b>9.</b> Академические исследования</a>
 </li>
 </ul>
 </div>
@@ -132,54 +182,92 @@
 <div id='page'>
 
 
-    <h1 class="title">If</h1>
-    <p>Rust&#39;s take on <code>if</code> is not particularly complex, but it&#39;s much more like the
-<code>if</code> you&#39;ll find in a dynamically typed language than in a more traditional
-systems language. So let&#39;s talk about it, to make sure you grasp the nuances.</p>
+    <h1 class="title">Конструкция `if`</h1>
+    <p><code>if</code> в Rust&#39;е не сильно сложен и больше похож на <code>if</code> в динамически 
+типизированных языках, чем на более традиционный из системных. Давайте 
+поговорим о нём, чтобы вы поняли некоторые его нюансы.</p>
 
-<p><code>if</code> is a specific form of a more general concept, the <em>branch</em>. The name comes
-from a branch in a tree: a decision point, where depending on a choice,
-multiple paths can be taken.</p>
+<p><code>if</code> является одной из форм более общего понятия, именуемого <em>ветвлением</em>.
+Это название произошло от ветвей деревьев: конечный результат зависит от того, 
+какой из нескольких вариантов будет выбран.</p>
 
-<p>In the case of <code>if</code>, there is one choice that leads down two paths:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p><code>if</code> содержит одно условие, в зависимости от которого будет выполняться одна из 
+двух ветвей:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    
+    if x == 5 {
+        println!(&quot;x равняется пяти!&quot;);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is five!&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равняется пяти!&quot;</span>);
 }
 </pre>
 
-<p>If we changed the value of <code>x</code> to something else, this line would not print.
-More specifically, if the expression after the <code>if</code> evaluates to <code>true</code>, then
-the block is executed. If it&#39;s <code>false</code>, then it is not.</p>
+<p>При изменении значения <code>x</code> на какое-либо другое, эта строчка не будет выведена
+на экран. Если подробнее, то когда условие, будет иметь значение <code>true</code>,
+следующий после него блок кода, выполнится. В противном случае - нет.</p>
 
-<p>If you want something to happen in the <code>false</code> case, use an <code>else</code>:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Бывает нужно что-то выполнить, если условие не выполнится (выражение будет иметь 
+значение false). В таком случае можно использовать <code>else</code>:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    
+    if x == 5 {
+        println!(&quot;x равняется пяти!&quot;);
+    } else {
+        println!(&quot;x это не пять :(&quot;);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is five!&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равняется пяти!&quot;</span>);
 } <span class='kw'>else</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is not five :(&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это не пять :(&quot;</span>);
 }
 </pre>
 
-<p>If there is more than one case, use an <code>else if</code>:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Когда необходимо больше одного выбора, то можно использовать <code>else if</code>:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    
+    if x == 5 {
+        println!(&quot;x равняется пяти!&quot;);
+    } else if x == 6 {
+        println!(&quot;x это шесть!&quot;);
+    } else {
+        println!(&quot;x это ни пять, ни шесть :(&quot;);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is five!&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равняется пяти!&quot;</span>);
 } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>6</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is six!&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это шесть!&quot;</span>);
 } <span class='kw'>else</span> {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is not five or six :(&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это ни пять, ни шесть :(&quot;</span>);
 }
 </pre>
 
-<p>This is all pretty standard. However, you can also do this:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Всё это довольно прозаично. Однако, вы так же можете сделать такую штуку:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    
+    let y = if x == 5 {
+        10
+    } else {
+        15
+    }; // y: i32
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> {
@@ -189,95 +277,24 @@ the block is executed. If it&#39;s <code>false</code>, then it is not.</p>
 }; <span class='comment'>// y: i32</span>
 </pre>
 
-<p>Which we can (and probably should) write like this:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Которую мы можем (и должны) записать примерно следующим образом:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    
+    let y = if x == 5 { 10 } else { 15 }; // y: i32
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> { <span class='number'>10</span> } <span class='kw'>else</span> { <span class='number'>15</span> }; <span class='comment'>// y: i32</span>
 </pre>
 
-<p>This reveals two interesting things about Rust: it is an expression-based
-language, and semicolons are different from semicolons in other &#39;curly brace
-and semicolon&#39;-based languages. These two things are related.</p>
-
-<h2 id="expressions-vs.-statements" class='section-header'><a
-                           href="#expressions-vs.-statements">Expressions vs. Statements</a></h2>
-<p>Rust is primarily an expression based language. There are only two kinds of
-statements, and everything else is an expression.</p>
-
-<p>So what&#39;s the difference? Expressions return a value, and statements do not.
-In many languages, <code>if</code> is a statement, and therefore, <code>let x = if ...</code> would
-make no sense. But in Rust, <code>if</code> is an expression, which means that it returns
-a value. We can then use this value to initialize the binding.</p>
-
-<p>Speaking of which, bindings are a kind of the first of Rust&#39;s two statements.
-The proper name is a <em>declaration statement</em>. So far, <code>let</code> is the only kind
-of declaration statement we&#39;ve seen. Let&#39;s talk about that some more.</p>
-
-<p>In some languages, variable bindings can be written as expressions, not just
-statements. Like Ruby:</p>
-
-<pre><code class="language-{ruby}">x = y = 5
-</code></pre>
-
-<p>In Rust, however, using <code>let</code> to introduce a binding is <em>not</em> an expression. The
-following will produce a compile-time error:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>5</span>); <span class='comment'>// expected identifier, found keyword `let`</span>
-</pre>
-
-<p>The compiler is telling us here that it was expecting to see the beginning of
-an expression, and a <code>let</code> can only begin a statement, not an expression.</p>
-
-<p>Note that assigning to an already-bound variable (e.g. <code>y = 5</code>) is still an
-expression, although its value is not particularly useful. Unlike C, where an
-assignment evaluates to the assigned value (e.g. <code>5</code> in the previous example),
-in Rust the value of an assignment is the unit type <code>()</code> (which we&#39;ll cover later).</p>
-
-<p>The second kind of statement in Rust is the <em>expression statement</em>. Its
-purpose is to turn any expression into a statement. In practical terms, Rust&#39;s
-grammar expects statements to follow other statements. This means that you use
-semicolons to separate expressions from each other. This means that Rust
-looks a lot like most other languages that require you to use semicolons
-at the end of every line, and you will see semicolons at the end of almost
-every line of Rust code you see.</p>
-
-<p>What is this exception that makes us say &quot;almost&quot;? You saw it already, in this
-code:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-
-<span class='kw'>let</span> <span class='ident'>y</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> { <span class='number'>10</span> } <span class='kw'>else</span> { <span class='number'>15</span> };
-</pre>
-
-<p>Note that I&#39;ve added the type annotation to <code>y</code>, to specify explicitly that I
-want <code>y</code> to be an integer.</p>
-
-<p>This is not the same as this, which won&#39;t compile:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-
-<span class='kw'>let</span> <span class='ident'>y</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> { <span class='number'>10</span>; } <span class='kw'>else</span> { <span class='number'>15</span>; };
-</pre>
-
-<p>Note the semicolons after the 10 and 15. Rust will give us the following error:</p>
-
-<pre><code class="language-text">error: mismatched types: expected `i32`, found `()` (expected i32, found ())
-</code></pre>
-
-<p>We expected an integer, but we got <code>()</code>. <code>()</code> is pronounced <em>unit</em>, and is a
-special type in Rust&#39;s type system. In Rust, <code>()</code> is <em>not</em> a valid value for a
-variable of type <code>i32</code>. It&#39;s only a valid value for variables of the type <code>()</code>,
-which aren&#39;t very useful. Remember how we said statements don&#39;t return a value?
-Well, that&#39;s the purpose of unit in this case. The semicolon turns any
-expression into a statement by throwing away its value and returning unit
-instead.</p>
-
-<p>There&#39;s one more time in which you won&#39;t see a semicolon at the end of a line
-of Rust code. For that, we&#39;ll need our next concept: functions.</p>
+<p>Это работает, потому что <code>if</code> является выражением. Значением этого выражения
+является значение последнего выражения в зависимости от того какая ветвь была
+выбрана. <code>if</code> без <code>else</code> всегда возвращает <code>()</code> в качестве значения.</p>
 
     <script type="text/javascript">
-        window.playgroundUrl = "";
+        window.playgroundUrl = "http://play.rust-lang.org";
     </script>
     
 <script type="text/javascript">
@@ -321,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   for (var i = 0; i < toc.length; i++) {
-    if (toc[i].attributes['href'].value === href) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
       var nav = document.createElement('p');
       if (i > 0) {
         var prevNode = toc[i-1].cloneNode(true);
@@ -340,6 +357,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 </script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
 </div></div>
 
 

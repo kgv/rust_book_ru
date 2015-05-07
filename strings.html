@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Strings</title>
+    <title>Строки</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,101 +30,151 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
+<li><a href='INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='getting-started.html'><b>3.</b> C чего начать</a>
 <ul class='section'>
-<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+<li><a href='installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+<li><a href='hello-world.html'><b>3.2.</b> Hello, world!</a>
 </li>
-<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
-</li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
-</li>
-<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
-</li>
-<li><a href='functions.html'><b>2.6.</b> Функции</a>
-</li>
-<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
-</li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
-</li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
-</li>
-<li><a href='looping.html'><b>2.10.</b> Циклы</a>
-</li>
-<li><a href='strings.html'><b>2.11.</b> Строки</a>
-</li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
+<li><a href='hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
+<li><a href='learn-rust.html'><b>4.</b> Изучение Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
-</li>
-<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
-</li>
-<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
-</li>
-<li><a href='ownership.html'><b>3.4.</b> Владение</a>
-</li>
-<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
-</li>
-<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
-</li>
-<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
-</li>
-<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
-</li>
-<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
-</li>
-<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
-</li>
-<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
-</li>
-<li><a href='traits.html'><b>3.12.</b> Трейты</a>
-</li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
-</li>
-<li><a href='macros.html'><b>3.14.</b> Макросы</a>
-</li>
-<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
-</li>
-<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
-</li>
-<li><a href='documentation.html'><b>3.17.</b> Документация</a>
+<li><a href='guessing-game.html'><b>4.1.</b> Угадайка</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
+<li><a href='effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
+<li><a href='the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
 </li>
-<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+<li><a href='testing.html'><b>5.2.</b> Тестирование</a>
 </li>
-<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+<li><a href='conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 </ul>
 </li>
-<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<li><a href='syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
 <ul class='section'>
-<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+<li><a href='variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
 </li>
-<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+<li><a href='functions.html'><b>6.2.</b> Функции</a>
 </li>
-<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+<li><a href='primitive-types.html'><b>6.3.</b> Простые типы</a>
 </li>
-<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+<li><a href='comments.html'><b>6.4.</b> Комментарии</a>
 </li>
-<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+<li><a href='if.html'><b>6.5.</b> Конструкция `if`</a>
 </li>
-<li><a href='link-args.html'><b>5.6.</b> Link args</a>
+<li><a href='for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='unsafe.html'><b>6.38.</b> `unsafe` код</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>6.</b> Заключение</a>
+<li><a href='nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
 </li>
-<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
+<li><a href='inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='academic-research.html'><b>9.</b> Академические исследования</a>
 </li>
 </ul>
 </div>
@@ -132,36 +182,46 @@
 <div id='page'>
 
 
-    <h1 class="title">Strings</h1>
-    <p>Strings are an important concept for any programmer to master. Rust&#39;s string
-handling system is a bit different from other languages, due to its systems
-focus. Any time you have a data structure of variable size, things can get
-tricky, and strings are a re-sizable data structure. That being said, Rust&#39;s
-strings also work differently than in some other systems languages, such as C.</p>
+    <h1 class="title">Строки</h1>
+    <p>Строки являются важным понятием для любого ведущего программиста. Система
+обработки строк в Rust немного отличается от других языков, в связи с его
+фокусировкой на системный уровень. Всякий раз, когда вы имеете дело со
+структурой данных с переменным размером, все может стать слишком запутанным, и
+строки как раз являются структурой данных с переменным размером. Кроме того,
+работа со строками в Rust также отличается и от некоторых системных языков,
+таких как C.</p>
 
-<p>Let&#39;s dig into the details. A <em>string</em> is a sequence of Unicode scalar values
-encoded as a stream of UTF-8 bytes. All strings are guaranteed to be
-validly encoded UTF-8 sequences. Additionally, strings are not null-terminated
-and can contain null bytes.</p>
+<p>Давайте разбираться в деталях. <em>string</em> - это последовательность скалярных
+значений юникод, закодированных в виде потока UTF-8 байт. Все строки должны быть
+гарантированно валидными UTF-8 последовательностями. Кроме того, строки не
+оканчиваются нулем и могут содержать нулевые байты.</p>
 
-<p>Rust has two main types of strings: <code>&amp;str</code> and <code>String</code>.</p>
-
-<p>The first kind is a <code>&amp;str</code>. These are called <em>string slices</em>. String literals
-are of the type <code>&amp;str</code>:</p>
-<pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='string'>&quot;Hello there.&quot;</span>; <span class='comment'>// string: &amp;str</span>
+<p>В Rust есть два основных типа строк: <code>&amp;str</code> и <code>String</code>. Сперва поговорим о
+<code>&amp;str</code>. Это произносится как &#39;строковый срез (слайс)&#39;. Строковые литералы имеют
+тип <code>&amp;&#39;static str</code>:</p>
+<span class='rusttest'>fn main() {
+    let string = &quot;Hello there.&quot;; // string: &amp;&#39;static str
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='string'>&quot;Hello there.&quot;</span>; <span class='comment'>// string: &amp;&#39;static str</span>
 </pre>
 
-<p>This string is statically allocated, meaning that it&#39;s saved inside our
-compiled program, and exists for the entire duration it runs. The <code>string</code>
-binding is a reference to this statically allocated string. String slices
-have a fixed size, and cannot be mutated.</p>
+<p>Эта строка выделяется статически, что означает, что она сохраняется в нашей
+скомпилированной программе и существует в течение всего периода ее выполнения.
+<code>string</code> привязка представляет собой ссылку на эту статически размещенную
+строку. Строковые срезы имеют фиксированный размер и не могут быть изменены.</p>
 
-<p>A <code>String</code>, on the other hand, is a heap-allocated string. This string
-is growable, and is also guaranteed to be UTF-8. <code>String</code>s are
-commonly created by converting from a string slice using the
-<code>to_string</code> method.</p>
-<pre id='rust-example-rendered' class='rust '>
+<p><code>String</code> же, напротив, выделяется в куче. Эта строка расширяема, а также она
+гарантированно является UTF-8 последовательностью. <code>String</code> обычно создается
+путем преобразования из строкового среза с использованием метода <code>to_string</code>.</p>
+<span class='rusttest'>fn main() {
+    let mut s = &quot;Hello&quot;.to_string(); // mut s: String
+    println!(&quot;{}&quot;, s);
+    
+    s.push_str(&quot;, world.&quot;);
+    println!(&quot;{}&quot;, s);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>(); <span class='comment'>// mut s: String</span>
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
 
@@ -169,8 +229,16 @@ commonly created by converting from a string slice using the
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
 </pre>
 
-<p><code>String</code>s will coerce into <code>&amp;str</code> with an <code>&amp;</code>:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p><code>String</code> преобразуются в <code>&amp;str</code> с помощью <code>&amp;</code>:</p>
+<span class='rusttest'>fn takes_slice(slice: &amp;str) {
+    println!(&quot;Got: {}&quot;, slice);
+}
+
+fn main() {
+    let s = &quot;Hello&quot;.to_string();
+    takes_slice(&amp;s);
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>fn</span> <span class='ident'>takes_slice</span>(<span class='ident'>slice</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got: {}&quot;</span>, <span class='ident'>slice</span>);
 }
@@ -181,17 +249,117 @@ commonly created by converting from a string slice using the
 }
 </pre>
 
-<p>Viewing a <code>String</code> as a <code>&amp;str</code> is cheap, but converting the <code>&amp;str</code> to a
-<code>String</code> involves allocating memory. No reason to do that unless you have to!</p>
+<p>Представление <code>String</code> как <code>&amp;str</code> является дешевой операцией, но преобразование
+<code>&amp;str</code> в <code>String</code> предполагает выделение памяти. Нет причин делать это, если в
+этом нет необходимости!</p>
 
-<p>That&#39;s the basics of strings in Rust! They&#39;re probably a bit more complicated
-than you are used to, if you come from a scripting language, but when the
-low-level details matter, they really matter. Just remember that <code>String</code>s
-allocate memory and control their data, while <code>&amp;str</code>s are a reference to
-another string, and you&#39;ll be all set.</p>
+<h2 id="Индексация" class='section-header'><a
+                           href="#Индексация">Индексация</a></h2>
+<p>Поскольку строки являются валидными UTF-8 последовательностями, то они не
+поддерживают индексацию:</p>
+<span class='rusttest'>fn main() {
+    let s = &quot;hello&quot;;
+    
+    println!(&quot;The first letter of s is {}&quot;, s[0]); // ERROR!!!
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;hello&quot;</span>;
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The first letter of s is {}&quot;</span>, <span class='ident'>s</span>[<span class='number'>0</span>]); <span class='comment'>// ERROR!!!</span>
+</pre>
+
+<p>Как правило, доступ к вектору с помощью <code>[]</code> является очень быстрой операцией.
+Но поскольку каждый символ в строке, закодированной UTF-8, может быть
+представлен несколькими байтами, то при поиске вы должны перебрать n-ое
+количество литер в строке. Это значительно более дорогая операция, а мы не хотим
+вводить в заблуждение. Кроме того, ‘литера‘ - это не совсем то, что определено в
+Unicode. Мы можем выбрать как рассматиравать строку: как отдельные байты или как
+кодовые единицы:</p>
+<span class='rusttest'>fn main() {
+    let hachiko = &quot;忠犬ハチ公&quot;;
+    
+    for b in hachiko.as_bytes() {
+    print!(&quot;{}, &quot;, b);
+    }
+    
+    println!(&quot;&quot;);
+    
+    for c in hachiko.chars() {
+    print!(&quot;{}, &quot;, c);
+    }
+    
+    println!(&quot;&quot;);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>hachiko</span> <span class='op'>=</span> <span class='string'>&quot;忠犬ハチ公&quot;</span>;
+
+<span class='kw'>for</span> <span class='ident'>b</span> <span class='kw'>in</span> <span class='ident'>hachiko</span>.<span class='ident'>as_bytes</span>() {
+<span class='macro'>print</span><span class='macro'>!</span>(<span class='string'>&quot;{}, &quot;</span>, <span class='ident'>b</span>);
+}
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;&quot;</span>);
+
+<span class='kw'>for</span> <span class='ident'>c</span> <span class='kw'>in</span> <span class='ident'>hachiko</span>.<span class='ident'>chars</span>() {
+<span class='macro'>print</span><span class='macro'>!</span>(<span class='string'>&quot;{}, &quot;</span>, <span class='ident'>c</span>);
+}
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;&quot;</span>);
+</pre>
+
+<p>Этот код напечатает:</p>
+
+<pre><code class="language-text">229, 191, 160, 231, 138, 172, 227, 131, 143, 227, 131, 129, 229, 133, 172, 
+忠, 犬, ハ, チ, 公, 
+</code></pre>
+
+<p>Как вы можете видеть, количество байт больше, чем количество символов (<code>char</code>).</p>
+
+<p>Вы можете получить что-то наподобие индекса, как показано ниже:</p>
+<span class='rusttest'>fn main() {
+    let hachiko = &quot;忠犬ハチ公&quot;;
+    let dog = hachiko.chars().nth(1); // kinda like hachiko[1]
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>dog</span> <span class='op'>=</span> <span class='ident'>hachiko</span>.<span class='ident'>chars</span>().<span class='ident'>nth</span>(<span class='number'>1</span>); <span class='comment'>// kinda like hachiko[1]</span>
+</pre>
+
+<p>Это подчеркивает, что мы должны пройти через весь список <code>chars</code>.</p>
+
+<h2 id="Конкатенация" class='section-header'><a
+                           href="#Конкатенация">Конкатенация</a></h2>
+<p>Если у вас есть <code>String</code>, то вы можете присоединить к ней в конец <code>&amp;str</code>:</p>
+<span class='rusttest'>fn main() {
+    let hello = &quot;Hello &quot;.to_string();
+    let world = &quot;world!&quot;;
+    
+    let hello_world = hello + world;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>hello</span> <span class='op'>=</span> <span class='string'>&quot;Hello &quot;</span>.<span class='ident'>to_string</span>();
+<span class='kw'>let</span> <span class='ident'>world</span> <span class='op'>=</span> <span class='string'>&quot;world!&quot;</span>;
+
+<span class='kw'>let</span> <span class='ident'>hello_world</span> <span class='op'>=</span> <span class='ident'>hello</span> <span class='op'>+</span> <span class='ident'>world</span>;
+</pre>
+
+<p>Но если у вас есть две <code>String</code>, то необходимо использовать <code>&amp;</code>:</p>
+<span class='rusttest'>fn main() {
+    let hello = &quot;Hello &quot;.to_string();
+    let world = &quot;world!&quot;.to_string();
+    
+    let hello_world = hello + &amp;world;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>hello</span> <span class='op'>=</span> <span class='string'>&quot;Hello &quot;</span>.<span class='ident'>to_string</span>();
+<span class='kw'>let</span> <span class='ident'>world</span> <span class='op'>=</span> <span class='string'>&quot;world!&quot;</span>.<span class='ident'>to_string</span>();
+
+<span class='kw'>let</span> <span class='ident'>hello_world</span> <span class='op'>=</span> <span class='ident'>hello</span> <span class='op'>+</span> <span class='kw-2'>&amp;</span><span class='ident'>world</span>;
+</pre>
+
+<p>Это потому, что <code>&amp;String</code> может быть автоматически приведен к <code>&amp;str</code>. Эта фича
+называется ‘<a href="deref-coercions.html">Приведение при разыменовании</a>’.</p>
 
     <script type="text/javascript">
-        window.playgroundUrl = "";
+        window.playgroundUrl = "http://play.rust-lang.org";
     </script>
     
 <script type="text/javascript">
@@ -235,7 +403,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   for (var i = 0; i < toc.length; i++) {
-    if (toc[i].attributes['href'].value === href) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
       var nav = document.createElement('p');
       if (i > 0) {
         var prevNode = toc[i-1].cloneNode(true);
@@ -254,6 +422,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 </script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
 </div></div>
 
 

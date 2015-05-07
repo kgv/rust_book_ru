@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Intrinsics</title>
+    <title>Внутренние средства (Intrinsics)</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,101 +30,151 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
+<li><a href='INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='getting-started.html'><b>3.</b> C чего начать</a>
 <ul class='section'>
-<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+<li><a href='installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+<li><a href='hello-world.html'><b>3.2.</b> Hello, world!</a>
 </li>
-<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
-</li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
-</li>
-<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
-</li>
-<li><a href='functions.html'><b>2.6.</b> Функции</a>
-</li>
-<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
-</li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
-</li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
-</li>
-<li><a href='looping.html'><b>2.10.</b> Циклы</a>
-</li>
-<li><a href='strings.html'><b>2.11.</b> Строки</a>
-</li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
+<li><a href='hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
+<li><a href='learn-rust.html'><b>4.</b> Изучение Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
-</li>
-<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
-</li>
-<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
-</li>
-<li><a href='ownership.html'><b>3.4.</b> Владение</a>
-</li>
-<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
-</li>
-<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
-</li>
-<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
-</li>
-<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
-</li>
-<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
-</li>
-<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
-</li>
-<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
-</li>
-<li><a href='traits.html'><b>3.12.</b> Трейты</a>
-</li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
-</li>
-<li><a href='macros.html'><b>3.14.</b> Макросы</a>
-</li>
-<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
-</li>
-<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
-</li>
-<li><a href='documentation.html'><b>3.17.</b> Документация</a>
+<li><a href='guessing-game.html'><b>4.1.</b> Угадайка</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
+<li><a href='effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
+<li><a href='the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
 </li>
-<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+<li><a href='testing.html'><b>5.2.</b> Тестирование</a>
 </li>
-<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+<li><a href='conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 </ul>
 </li>
-<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<li><a href='syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
 <ul class='section'>
-<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+<li><a href='variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
 </li>
-<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+<li><a href='functions.html'><b>6.2.</b> Функции</a>
 </li>
-<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+<li><a href='primitive-types.html'><b>6.3.</b> Простые типы</a>
 </li>
-<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+<li><a href='comments.html'><b>6.4.</b> Комментарии</a>
 </li>
-<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+<li><a href='if.html'><b>6.5.</b> Конструкция `if`</a>
 </li>
-<li><a href='link-args.html'><b>5.6.</b> Link args</a>
+<li><a href='for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='unsafe.html'><b>6.38.</b> `unsafe` код</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>6.</b> Заключение</a>
+<li><a href='nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
 </li>
-<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
+<li><a href='inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='academic-research.html'><b>9.</b> Академические исследования</a>
 </li>
 </ul>
 </div>
@@ -132,19 +182,26 @@
 <div id='page'>
 
 
-    <h1 class="title">Intrinsics</h1>
+    <h1 class="title">Внутренние средства (Intrinsics)</h1>
     <blockquote>
-<p><strong>Note</strong>: intrinsics will forever have an unstable interface, it is
-recommended to use the stable interfaces of libcore rather than intrinsics
-directly.</p>
+<p><strong>Примечание</strong>: внутренние средства всегда будут иметь нестабильный интерфейс,
+рекомендуется использовать стабильные интерфейсы libcore, а не внутренние
+напрямую.</p>
 </blockquote>
 
-<p>These are imported as if they were FFI functions, with the special
-<code>rust-intrinsic</code> ABI. For example, if one was in a freestanding
-context, but wished to be able to <code>transmute</code> between types, and
-perform efficient pointer arithmetic, one would import those functions
-via a declaration like</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Они импортируются как если бы они были FFI функциями, со специальным <code>rust- intrinsic</code> ABI. Например, если, находясь в отдельныом (автономном) контексте,
+хочется иметь возможность <code>transmute</code> между типами, а также использовать
+эффективную арифметику указателей, то можно импортировать эти функции через
+объявление, такое как</p>
+<span class='rusttest'>#![feature(intrinsics)]
+fn main() {}
+
+extern &quot;rust-intrinsic&quot; {
+    fn transmute&lt;T, U&gt;(x: T) -&gt; U;
+
+    fn offset&lt;T&gt;(dst: *const T, offset: isize) -&gt; *const T;
+}
+</span><pre id='rust-example-rendered' class='rust '>
 
 <span class='kw'>extern</span> <span class='string'>&quot;rust-intrinsic&quot;</span> {
     <span class='kw'>fn</span> <span class='ident'>transmute</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>U</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>U</span>;
@@ -153,10 +210,10 @@ via a declaration like</p>
 }
 </pre>
 
-<p>As with any other FFI functions, these are always <code>unsafe</code> to call.</p>
+<p>Как и с любыми другими FFI функциями, их вызов всегда <code>unsafe</code>.</p>
 
     <script type="text/javascript">
-        window.playgroundUrl = "";
+        window.playgroundUrl = "http://play.rust-lang.org";
     </script>
     
 <script type="text/javascript">
@@ -200,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   for (var i = 0; i < toc.length; i++) {
-    if (toc[i].attributes['href'].value === href) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
       var nav = document.createElement('p');
       if (i > 0) {
         var prevNode = toc[i-1].cloneNode(true);
@@ -219,6 +276,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 </script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
 </div></div>
 
 

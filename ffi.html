@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Foreign Function Interface</title>
+    <title>Интерфейс внешних функций (Foreign Function Interface)</title>
 
     <link rel="stylesheet" type="text/css" href="rust-book.css">
 
@@ -30,101 +30,151 @@
 <ul class='chapter'>
 <li><a href='README.html'><b>1.</b> Introduction</a>
 </li>
-<li><a href='basic.html'><b>2.</b> Начальный Rust</a>
+<li><a href='INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='getting-started.html'><b>3.</b> C чего начать</a>
 <ul class='section'>
-<li><a href='installing-rust.html'><b>2.1.</b> Установка Rust</a>
+<li><a href='installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a href='hello-world.html'><b>2.2.</b> Hello, world!</a>
+<li><a href='hello-world.html'><b>3.2.</b> Hello, world!</a>
 </li>
-<li><a href='hello-cargo.html'><b>2.3.</b> Hello, Cargo!</a>
-</li>
-<li><a href='variable-bindings.html'><b>2.4.</b> Связывание переменных</a>
-</li>
-<li><a href='if.html'><b>2.5.</b> Условные переходы (If)</a>
-</li>
-<li><a href='functions.html'><b>2.6.</b> Функции</a>
-</li>
-<li><a href='comments.html'><b>2.7.</b> Комментарии</a>
-</li>
-<li><a href='compound-data-types.html'><b>2.8.</b> Агрегатные типы данных</a>
-</li>
-<li><a href='match.html'><b>2.9.</b> Сопоставление с образцом (Match)</a>
-</li>
-<li><a href='looping.html'><b>2.10.</b> Циклы</a>
-</li>
-<li><a href='strings.html'><b>2.11.</b> Строки</a>
-</li>
-<li><a href='arrays-vectors-and-slices.html'><b>2.12.</b> Массивы, вектора, срезы</a>
+<li><a href='hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
 </ul>
 </li>
-<li><a href='intermediate.html'><b>3.</b> Средний Rust</a>
+<li><a href='learn-rust.html'><b>4.</b> Изучение Rust</a>
 <ul class='section'>
-<li><a href='crates-and-modules.html'><b>3.1.</b> Крейты и модули</a>
-</li>
-<li><a href='testing.html'><b>3.2.</b> Тестирование</a>
-</li>
-<li><a href='pointers.html'><b>3.3.</b> Указатели</a>
-</li>
-<li><a href='ownership.html'><b>3.4.</b> Владение</a>
-</li>
-<li><a href='more-strings.html'><b>3.5.</b> Больше о строках</a>
-</li>
-<li><a href='patterns.html'><b>3.6.</b> Шаблоны</a>
-</li>
-<li><a href='method-syntax.html'><b>3.7.</b> Синтаксис методов</a>
-</li>
-<li><a href='associated-types.html'><b>3.8.</b> Ассоциированные типы</a>
-</li>
-<li><a href='closures.html'><b>3.9.</b> Замыкания</a>
-</li>
-<li><a href='iterators.html'><b>3.10.</b> Итераторы</a>
-</li>
-<li><a href='generics.html'><b>3.11.</b> Дженерики</a>
-</li>
-<li><a href='traits.html'><b>3.12.</b> Трейты</a>
-</li>
-<li><a href='static-and-dynamic-dispatch.html'><b>3.13.</b> Статическая и динамическая диспетчерезация</a>
-</li>
-<li><a href='macros.html'><b>3.14.</b> Макросы</a>
-</li>
-<li><a href='concurrency.html'><b>3.15.</b> Многозадачность</a>
-</li>
-<li><a href='error-handling.html'><b>3.16.</b> Обработка ошибок</a>
-</li>
-<li><a href='documentation.html'><b>3.17.</b> Документация</a>
+<li><a href='guessing-game.html'><b>4.1.</b> Угадайка</a>
 </li>
 </ul>
 </li>
-<li><a href='advanced.html'><b>4.</b> Продвинутый Rust</a>
+<li><a href='effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
 <ul class='section'>
-<li><a href='ffi.html'><b>4.1.</b> Интерфейс внешних функций (FFI)</a>
+<li><a href='the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
 </li>
-<li><a href='unsafe.html'><b>4.2.</b> Небезопасный код</a>
+<li><a href='testing.html'><b>5.2.</b> Тестирование</a>
 </li>
-<li><a href='advanced-macros.html'><b>4.3.</b> Продвинутые макросы</a>
+<li><a href='conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
 </li>
 </ul>
 </li>
-<li><a href='unstable.html'><b>5.</b> Нестабильный Rust</a>
+<li><a href='syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
 <ul class='section'>
-<li><a href='plugins.html'><b>5.1.</b> Плагины компилятора</a>
+<li><a href='variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
 </li>
-<li><a href='inline-assembly.html'><b>5.2.</b> Встроенный ассемблерный код</a>
+<li><a href='functions.html'><b>6.2.</b> Функции</a>
 </li>
-<li><a href='no-stdlib.html'><b>5.3.</b> Без stdlib</a>
+<li><a href='primitive-types.html'><b>6.3.</b> Простые типы</a>
 </li>
-<li><a href='intrinsics.html'><b>5.4.</b> Intrinsics</a>
+<li><a href='comments.html'><b>6.4.</b> Комментарии</a>
 </li>
-<li><a href='lang-items.html'><b>5.5.</b> Lang items</a>
+<li><a href='if.html'><b>6.5.</b> Конструкция `if`</a>
 </li>
-<li><a href='link-args.html'><b>5.6.</b> Link args</a>
+<li><a href='for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='unsafe.html'><b>6.38.</b> `unsafe` код</a>
 </li>
 </ul>
 </li>
-<li><a href='conclusion.html'><b>6.</b> Заключение</a>
+<li><a href='nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
 </li>
-<li><a href='glossary.html'><b>7.</b> Глоссарий</a>
+<li><a href='inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='academic-research.html'><b>9.</b> Академические исследования</a>
 </li>
 </ul>
 </div>
@@ -132,19 +182,33 @@
 <div id='page'>
 
 
-    <h1 class="title">Foreign Function Interface</h1>
+    <h1 class="title">Интерфейс внешних функций (Foreign Function Interface)</h1>
     
-<h1 id="introduction" class='section-header'><a
-                           href="#introduction">Introduction</a></h1>
-<p>This guide will use the <a href="https://github.com/google/snappy">snappy</a>
-compression/decompression library as an introduction to writing bindings for
-foreign code. Rust is currently unable to call directly into a C++ library, but
-snappy includes a C interface (documented in
+<h1 id="Введение" class='section-header'><a
+                           href="#Введение">Введение</a></h1>
+<p>В данном руководстве мы будем использовать
+<a href="https://github.com/google/snappy">snappy</a>, библиотеку для упаковки/распаковки
+данных, в качестве примера для написания привязок к внешнему коду. Rust в
+настоящее время не в состоянии делать вызовы напрямую из библиотеки C++, но
+snappy включает в себя интерфейс C (документирован в
 <a href="https://github.com/google/snappy/blob/master/snappy-c.h"><code>snappy-c.h</code></a>).</p>
 
-<p>The following is a minimal example of calling a foreign function which will
-compile if snappy is installed:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Ниже приведен минимальный пример вызова внешней функции, который будет
+скомпилирован при условии, что библиотека snappy установлена:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::size_t;
+
+#[link(name = &quot;snappy&quot;)]
+extern {
+    fn snappy_max_compressed_length(source_length: size_t) -&gt; size_t;
+}
+
+fn main() {
+    let x = unsafe { snappy_max_compressed_length(100) };
+    println!(&quot;max compressed length of a 100 byte buffer: {}&quot;, x);
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>size_t</span>;
 
@@ -159,24 +223,47 @@ compile if snappy is installed:</p>
 }
 </pre>
 
-<p>The <code>extern</code> block is a list of function signatures in a foreign library, in
-this case with the platform&#39;s C ABI. The <code>#[link(...)]</code> attribute is used to
-instruct the linker to link against the snappy library so the symbols are
-resolved.</p>
+<p>Блок <code>extern</code> содержит список сигнатур функций из внешней библиотеки, в данном
+случае для платформы C ABI. Атрибут <code>#[link(...)]</code> используется для указания
+линкеру линковать с библиотекой snappy, поэтому символы будут разрешены.</p>
 
-<p>Foreign functions are assumed to be unsafe so calls to them need to be wrapped
-with <code>unsafe {}</code> as a promise to the compiler that everything contained within
-truly is safe. C libraries often expose interfaces that aren&#39;t thread-safe, and
-almost any function that takes a pointer argument isn&#39;t valid for all possible
-inputs since the pointer could be dangling, and raw pointers fall outside of
-Rust&#39;s safe memory model.</p>
+<p>Предполагается, что внешние функции могут быть небезопасными, поэтому их вызовы
+должны быть обёрнуты в блок <code>unsafe {}</code> как обещание компилятору, что все
+содержимое внутри этого блока в действительности безопасно. C библиотеки часто
+предоставляют интерфейсы, которые не являются поточно-безопасным. И почти любая
+функция, которая принимает в качестве аргумента указатель, не может быть
+валидной для всех возможных входных значений, поскольку указатель может быть
+висячим, и сырые указатели выходят за пределы безопасной модели памяти в Rust.</p>
 
-<p>When declaring the argument types to a foreign function, the Rust compiler can
-not check if the declaration is correct, so specifying it correctly is part of
-keeping the binding correct at runtime.</p>
+<p>При объявлении типов аргументов для внешней функции, компилятор Rust не может
+проверить, является ли данное объявление корректным, поэтому эта проверка
+корректности является частью соблюдения (обеспечения) корректности привязки во
+время выполнения.</p>
 
-<p>The <code>extern</code> block can be extended to cover the entire snappy API:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Блок <code>extern</code> может быть распространён на весь snappy API:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{c_int, size_t};
+
+#[link(name = &quot;snappy&quot;)]
+extern {
+    fn snappy_compress(input: *const u8,
+                       input_length: size_t,
+                       compressed: *mut u8,
+                       compressed_length: *mut size_t) -&gt; c_int;
+    fn snappy_uncompress(compressed: *const u8,
+                         compressed_length: size_t,
+                         uncompressed: *mut u8,
+                         uncompressed_length: *mut size_t) -&gt; c_int;
+    fn snappy_max_compressed_length(source_length: size_t) -&gt; size_t;
+    fn snappy_uncompressed_length(compressed: *const u8,
+                                  compressed_length: size_t,
+                                  result: *mut size_t) -&gt; c_int;
+    fn snappy_validate_compressed_buffer(compressed: *const u8,
+                                         compressed_length: size_t) -&gt; c_int;
+}
+fn main() {}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>size_t</span>};
 
@@ -199,17 +286,30 @@ keeping the binding correct at runtime.</p>
 }
 </pre>
 
-<h1 id="creating-a-safe-interface" class='section-header'><a
-                           href="#creating-a-safe-interface">Creating a safe interface</a></h1>
-<p>The raw C API needs to be wrapped to provide memory safety and make use of higher-level concepts
-like vectors. A library can choose to expose only the safe, high-level interface and hide the unsafe
-internal details.</p>
+<h1 id="Создание-безопасного-интерфейса" class='section-header'><a
+                           href="#Создание-безопасного-интерфейса">Создание безопасного интерфейса</a></h1>
+<p>Сырой C API необходимо обернуть, чтобы обеспечить безопасность памяти, чтобы
+была возможность использовать концепции более высокого уровня, такие как
+векторы. Библиотека может выборочно открывать только безопасный, высокоуровневый
+интерфейс и скрывать небезопасные внутренние детали.</p>
 
-<p>Wrapping the functions which expect buffers involves using the <code>slice::raw</code> module to manipulate Rust
-vectors as pointers to memory. Rust&#39;s vectors are guaranteed to be a contiguous block of memory. The
-length is number of elements currently contained, and the capacity is the total size in elements of
-the allocated memory. The length is less than or equal to the capacity.</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Обёртывание функций, которые принимают в качестве входных параметров буферы,
+включает в себя использование модуля <code>slice::raw</code> для управления векторами Rust
+как указателями на память. Векторы Rust представляют собой гарантированно
+непрерывный блок памяти. Длина - это количество элементов, которое в настоящее
+время содержится в векторе, а мощность - общее количество выделенной памяти в
+элементах. Длина меньше или равна мощности.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{c_int, size_t};
+unsafe fn snappy_validate_compressed_buffer(_: *const u8, _: size_t) -&gt; c_int { 0 }
+fn main() {}
+pub fn validate_compressed_buffer(src: &amp;[u8]) -&gt; bool {
+    unsafe {
+        snappy_validate_compressed_buffer(src.as_ptr(), src.len() as size_t) == 0
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate_compressed_buffer</span>(<span class='ident'>src</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
     <span class='kw'>unsafe</span> {
         <span class='ident'>snappy_validate_compressed_buffer</span>(<span class='ident'>src</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>src</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>) <span class='op'>==</span> <span class='number'>0</span>
@@ -217,18 +317,40 @@ the allocated memory. The length is less than or equal to the capacity.</p>
 }
 </pre>
 
-<p>The <code>validate_compressed_buffer</code> wrapper above makes use of an <code>unsafe</code> block, but it makes the
-guarantee that calling it is safe for all inputs by leaving off <code>unsafe</code> from the function
-signature.</p>
+<p>Обертка <code>validate_compressed_buffer</code> использует блок <code>unsafe</code>, но это
+гарантирует, что ее вызов будет безопасен для всех входных данных, вследствие
+удаления модификатора <code>unsafe</code> из сигнатуры функции.</p>
 
-<p>The <code>snappy_compress</code> and <code>snappy_uncompress</code> functions are more complex, since a buffer has to be
-allocated to hold the output too.</p>
+<p>Функции <code>snappy_compress</code> и <code>snappy_uncompress</code> являются более сложными, так как
+должен быть выделен буфер для хранения выходных данных.</p>
 
-<p>The <code>snappy_max_compressed_length</code> function can be used to allocate a vector with the maximum
-required capacity to hold the compressed output. The vector can then be passed to the
-<code>snappy_compress</code> function as an output parameter. An output parameter is also passed to retrieve
-the true length after compression for setting the length.</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Функция <code>snappy_max_compressed_length</code> может быть использована для выделения
+вектора максимальной мощности, требуемой для хранения упакованных выходных
+данных. Затем этот вектор может быть передан в функцию <code>snappy_compress</code> в
+качестве выходного параметра. Выходной параметр передается также, чтобы получить
+истинную длину после сжатия, для установки длины.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{size_t, c_int};
+unsafe fn snappy_compress(a: *const u8, b: size_t, c: *mut u8,
+                          d: *mut size_t) -&gt; c_int { 0 }
+unsafe fn snappy_max_compressed_length(a: size_t) -&gt; size_t { a }
+fn main() {}
+pub fn compress(src: &amp;[u8]) -&gt; Vec&lt;u8&gt; {
+    unsafe {
+        let srclen = src.len() as size_t;
+        let psrc = src.as_ptr();
+
+        let mut dstlen = snappy_max_compressed_length(srclen);
+        let mut dst = Vec::with_capacity(dstlen as usize);
+        let pdst = dst.as_mut_ptr();
+
+        snappy_compress(psrc, srclen, pdst, &amp;mut dstlen);
+        dst.set_len(dstlen as usize);
+        dst
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compress</span>(<span class='ident'>src</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
     <span class='kw'>unsafe</span> {
         <span class='kw'>let</span> <span class='ident'>srclen</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>;
@@ -245,9 +367,40 @@ the true length after compression for setting the length.</p>
 }
 </pre>
 
-<p>Decompression is similar, because snappy stores the uncompressed size as part of the compression
-format and <code>snappy_uncompressed_length</code> will retrieve the exact buffer size required.</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Распаковка аналогична, потому что snappy хранит размер неупакованных данных как
+часть формата сжатия, и <code>snappy_uncompressed_length</code> будет возвращать точный
+размер необходимого буфера.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{size_t, c_int};
+unsafe fn snappy_uncompress(compressed: *const u8,
+                            compressed_length: size_t,
+                            uncompressed: *mut u8,
+                            uncompressed_length: *mut size_t) -&gt; c_int { 0 }
+unsafe fn snappy_uncompressed_length(compressed: *const u8,
+                                     compressed_length: size_t,
+                                     result: *mut size_t) -&gt; c_int { 0 }
+fn main() {}
+pub fn uncompress(src: &amp;[u8]) -&gt; Option&lt;Vec&lt;u8&gt;&gt; {
+    unsafe {
+        let srclen = src.len() as size_t;
+        let psrc = src.as_ptr();
+
+        let mut dstlen: size_t = 0;
+        snappy_uncompressed_length(psrc, srclen, &amp;mut dstlen);
+
+        let mut dst = Vec::with_capacity(dstlen as usize);
+        let pdst = dst.as_mut_ptr();
+
+        if snappy_uncompress(psrc, srclen, pdst, &amp;mut dstlen) == 0 {
+            dst.set_len(dstlen as usize);
+            Some(dst)
+        } else {
+            None // SNAPPY_INVALID_INPUT
+        }
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>uncompress</span>(<span class='ident'>src</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;&gt;</span> {
     <span class='kw'>unsafe</span> {
         <span class='kw'>let</span> <span class='ident'>srclen</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>;
@@ -269,32 +422,51 @@ format and <code>snappy_uncompressed_length</code> will retrieve the exact buffe
 }
 </pre>
 
-<p>For reference, the examples used here are also available as an <a href="https://github.com/thestinger/rust-snappy">library on
-GitHub</a>.</p>
+<p>Для справки, примеры, используемые здесь, также доступны в библиотеке на
+<a href="https://github.com/thestinger/rust-snappy">GitHub</a>.</p>
 
-<h1 id="destructors" class='section-header'><a
-                           href="#destructors">Destructors</a></h1>
-<p>Foreign libraries often hand off ownership of resources to the calling code.
-When this occurs, we must use Rust&#39;s destructors to provide safety and guarantee
-the release of these resources (especially in the case of panic).</p>
+<h1 id="Деструкторы" class='section-header'><a
+                           href="#Деструкторы">Деструкторы</a></h1>
+<p>Внешние библиотеки часто передают право собственности на ресурсы в вызовающий
+код. Когда это происходит, мы должны использовать деструкторы Rust, чтобы
+обеспечить безопасность и гарантировать освобождение этих ресурсов (особенно в
+случае паники).</p>
 
-<p>For more about destructors, see the <a href="../std/ops/trait.Drop.html">Drop trait</a>.</p>
+<p>Чтобы получить более подробную информацию о деструкторах, смотрите
+<a href="../std/ops/trait.Drop.html">Drop trait</a>.</p>
 
-<h1 id="callbacks-from-c-code-to-rust-functions" class='section-header'><a
-                           href="#callbacks-from-c-code-to-rust-functions">Callbacks from C code to Rust functions</a></h1>
-<p>Some external libraries require the usage of callbacks to report back their
-current state or intermediate data to the caller.
-It is possible to pass functions defined in Rust to an external library.
-The requirement for this is that the callback function is marked as <code>extern</code>
-with the correct calling convention to make it callable from C code.</p>
+<h1 id="Обратные-вызовы-rust-функций-из-c-кода" class='section-header'><a
+                           href="#Обратные-вызовы-rust-функций-из-c-кода">Обратные вызовы Rust функций из C кода</a></h1>
+<p>Некоторые внешние библиотеки требуют использование обратных вызовов для передачи
+вызывающей стороне отчета о своем текущем состоянии или промежуточных данных. Во
+внешнюю библиотеку можно передавать функции, которые были определены в Rust. При
+создании функции обратного вызова, которую можно вызывать из C кода, необходимо
+указать для нее спецификатор <code>extern</code>, за котороым следует правильное соглашение
+о вызове.</p>
 
-<p>The callback function can then be sent through a registration call
-to the C library and afterwards be invoked from there.</p>
+<p>Затем функция обратного вызова может быть передана в библиотеку C через
+регистрационный вызов, и уже затем может быть вызывана оттуда.</p>
 
-<p>A basic example is:</p>
+<p>Простой пример:</p>
 
-<p>Rust code:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Rust код:</p>
+<span class='rusttest'>extern fn callback(a: i32) {
+    println!(&quot;I&#39;m called from C with value {0}&quot;, a);
+}
+
+#[link(name = &quot;extlib&quot;)]
+extern {
+   fn register_callback(cb: extern fn(i32)) -&gt; i32;
+   fn trigger_callback();
+}
+
+fn main() {
+    unsafe {
+        register_callback(callback);
+        trigger_callback(); // Triggers the callback
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>callback</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;I&#39;m called from C with value {0}&quot;</span>, <span class='ident'>a</span>);
 }
@@ -313,7 +485,7 @@ to the C library and afterwards be invoked from there.</p>
 }
 </pre>
 
-<p>C code:</p>
+<p>C код:</p>
 
 <pre><code class="language-c">typedef void (*rust_callback)(int32_t);
 rust_callback cb;
@@ -328,23 +500,53 @@ void trigger_callback() {
 }
 </code></pre>
 
-<p>In this example Rust&#39;s <code>main()</code> will call <code>trigger_callback()</code> in C,
-which would, in turn, call back to <code>callback()</code> in Rust.</p>
+<p>В этом примере функция <code>main()</code> в Rust вызовет функцию <code>trigger_callback()</code> в C,
+которая, в свою очередь, выполнит обратный вызов функции <code>callback()</code> в Rust.</p>
 
-<h2 id="targeting-callbacks-to-rust-objects" class='section-header'><a
-                           href="#targeting-callbacks-to-rust-objects">Targeting callbacks to Rust objects</a></h2>
-<p>The former example showed how a global function can be called from C code.
-However it is often desired that the callback is targeted to a special
-Rust object. This could be the object that represents the wrapper for the
-respective C object.</p>
+<h2 id="Обратные-вызовы,-адресованные-объектам-rust-(targeting-callbacks-to-rust-objects)" class='section-header'><a
+                           href="#Обратные-вызовы,-адресованные-объектам-rust-(targeting-callbacks-to-rust-objects)">Обратные вызовы, адресованные объектам Rust (Targeting callbacks to Rust objects)</a></h2>
+<p>Предыдущий пример показал, как глобальная функция может быть вызвана из C кода.
+Однако зачастую желательно, чтобы обратный вызов был адресован специальному
+объекту в Rust. Это может быть объект, который представляет собой обертку для
+соответствующего объекта C.</p>
 
-<p>This can be achieved by passing an unsafe pointer to the object down to the
-C library. The C library can then include the pointer to the Rust object in
-the notification. This will allow the callback to unsafely access the
-referenced Rust object.</p>
+<p>Такое поведение может быть достигнуто путем передачи небезопасного указателя на
+объект в библиотеку C. После чего библиотека C сможет включать указатель на
+объект Rust при обратном вызове. Это позволит получить небезопасный доступ к
+ссылке на объект Rust в обратном вызове.</p>
 
-<p>Rust code:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Rust код:</p>
+<span class='rusttest'>#[repr(C)]
+struct RustObject {
+    a: i32,
+    // other members
+}
+
+extern &quot;C&quot; fn callback(target: *mut RustObject, a: i32) {
+    println!(&quot;I&#39;m called from C with value {0}&quot;, a);
+    unsafe {
+        // Update the value in RustObject with the value received from the callback
+        (*target).a = a;
+    }
+}
+
+#[link(name = &quot;extlib&quot;)]
+extern {
+   fn register_callback(target: *mut RustObject,
+                        cb: extern fn(*mut RustObject, i32)) -&gt; i32;
+   fn trigger_callback();
+}
+
+fn main() {
+    // Create the object that will be referenced in the callback
+    let mut rust_object = Box::new(RustObject { a: 5 });
+
+    unsafe {
+        register_callback(&amp;mut *rust_object, callback);
+        trigger_callback();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>struct</span> <span class='ident'>RustObject</span> {
     <span class='ident'>a</span>: <span class='ident'>i32</span>,
@@ -377,7 +579,7 @@ referenced Rust object.</p>
 }
 </pre>
 
-<p>C code:</p>
+<p>C код:</p>
 
 <pre><code class="language-c">typedef void (*rust_callback)(void*, int32_t);
 void* cb_target;
@@ -394,101 +596,121 @@ void trigger_callback() {
 }
 </code></pre>
 
-<h2 id="asynchronous-callbacks" class='section-header'><a
-                           href="#asynchronous-callbacks">Asynchronous callbacks</a></h2>
-<p>In the previously given examples the callbacks are invoked as a direct reaction
-to a function call to the external C library.
-The control over the current thread is switched from Rust to C to Rust for the
-execution of the callback, but in the end the callback is executed on the
-same thread that called the function which triggered the callback.</p>
+<h2 id="Асинхронные-обратные-вызовы" class='section-header'><a
+                           href="#Асинхронные-обратные-вызовы">Асинхронные обратные вызовы</a></h2>
+<p>В ранее приведенных примерах обратные вызовы выполняются как непосредственная
+реакция на вызов функции внешней C библиотеки. Для выполнения обратного вызова
+контроль над текущим потоком переключался из Rust в C, а затем снова в Rust, но,
+в конце концов, обратный вызов выполнялся в том же потоке, из которого была
+вызвана функция, инициировавшая обратный вызов.</p>
 
-<p>Things get more complicated when the external library spawns its own threads
-and invokes callbacks from there.
-In these cases access to Rust data structures inside the callbacks is
-especially unsafe and proper synchronization mechanisms must be used.
-Besides classical synchronization mechanisms like mutexes, one possibility in
-Rust is to use channels (in <code>std::comm</code>) to forward data from the C thread
-that invoked the callback into a Rust thread.</p>
+<p>Все становится более сложным, когда внешняя библиотека порождает свои
+собственные потоки и осуществляет обратные вызовы из них. В этих случаях доступ
+к структурам данных Rust внутри обратных вызовов особенно небезопасен, и поэтому
+должны быть использованы соответствующие механизмы синхронизации. Помимо
+классических механизмов синхронизации, таких как мьютексы, в Rust есть еще одна
+возможность: использовать каналы (в <code>std::comm</code> (<code>std::sync::mpsc::channel</code>)),
+чтобы направить данные из потока C, который выполнял обратный вызов, в поток
+Rust.</p>
 
-<p>If an asynchronous callback targets a special object in the Rust address space
-it is also absolutely necessary that no more callbacks are performed by the
-C library after the respective Rust object gets destroyed.
-This can be achieved by unregistering the callback in the object&#39;s
-destructor and designing the library in a way that guarantees that no
-callback will be performed after deregistration.</p>
+<p>Если асинхронный обратный вызов адресован конкретному объекту в адресном
+пространстве Rust, то необходимо потребовать, чтобы обратные вызовы больше не
+выполнялись библиотекой C после удаления этого Rust объекта. Это может быть
+достигнуто путем отмены регистрации обратного вызова в деструкторе объекта и
+проектирования библиотеки таким образом, чтобы гарантировалось, что после отмены
+регистрации обратного вызова он больше не будет выполняться.</p>
 
-<h1 id="linking" class='section-header'><a
-                           href="#linking">Linking</a></h1>
-<p>The <code>link</code> attribute on <code>extern</code> blocks provides the basic building block for
-instructing rustc how it will link to native libraries. There are two accepted
-forms of the link attribute today:</p>
+<h1 id="Линковка" class='section-header'><a
+                           href="#Линковка">Линковка</a></h1>
+<p>Атрибут <code>link</code> для блоков <code>extern</code> предоставляет основные инструкции rustc
+относительно того, как он будет линковать нативные библиотеки. На данный момент
+есть две общепринятых формы записи атрибута <code>link</code>:</p>
 
 <ul>
 <li><code>#[link(name = &quot;foo&quot;)]</code></li>
 <li><code>#[link(name = &quot;foo&quot;, kind = &quot;bar&quot;)]</code></li>
 </ul>
 
-<p>In both of these cases, <code>foo</code> is the name of the native library that we&#39;re
-linking to, and in the second case <code>bar</code> is the type of native library that the
-compiler is linking to. There are currently three known types of native
-libraries:</p>
+<p>В обоих этих случаях <code>foo</code> - это имя нативной библиотеки, которую мы линкуем. Во
+втором случае <code>bar</code> - это тип нативной библиотеки, которую компилятор линкует. В
+настоящее время известны три типа нативных библиотек:</p>
 
 <ul>
-<li>Dynamic - <code>#[link(name = &quot;readline&quot;)]</code></li>
-<li>Static - <code>#[link(name = &quot;my_build_dependency&quot;, kind = &quot;static&quot;)]</code></li>
-<li>Frameworks - <code>#[link(name = &quot;CoreFoundation&quot;, kind = &quot;framework&quot;)]</code></li>
+<li>Динамические - <code>#[link(name = &quot;readline&quot;)]</code></li>
+<li>Статические - <code>#[link(name = &quot;my_build_dependency&quot;, kind = &quot;static&quot;)]</code></li>
+<li>Фреймворки - <code>#[link(name = &quot;CoreFoundation&quot;, kind = &quot;framework&quot;)]</code></li>
 </ul>
 
-<p>Note that frameworks are only available on OSX targets.</p>
+<p>Обратите внимание, что фреймворки доступны только для OSX.</p>
 
-<p>The different <code>kind</code> values are meant to differentiate how the native library
-participates in linkage. From a linkage perspective, the rust compiler creates
-two flavors of artifacts: partial (rlib/staticlib) and final (dylib/binary).
-Native dynamic libraries and frameworks are propagated to the final artifact
-boundary, while static libraries are not propagated at all.</p>
+<p>Различные значения <code>kind</code> предназначены для дифференцирования нативных библиотек
+по способу участия в линковке. С точки зрения линковки, компилятор Rust создает
+две разновидности артефактов: промежуточный (rlib/staticlib) и конечный
+(dylib/binary). Нативные динамические библиотеки и фреймворки распространяют
+свое влияние только в рамках конечных артефактов, а статические библиотеки -
+всех видов артефактов.</p>
 
-<p>A few examples of how this model can be used are:</p>
+<p>Вот несколько примеров того, как эта модель может быть использована:</p>
 
 <ul>
-<li><p>A native build dependency. Sometimes some C/C++ glue is needed when writing
-some rust code, but distribution of the C/C++ code in a library format is just
-a burden. In this case, the code will be archived into <code>libfoo.a</code> and then the
-rust crate would declare a dependency via <code>#[link(name = &quot;foo&quot;, kind =
-&quot;static&quot;)]</code>.</p>
+<li><p>Нативная зависимость при сборке. Иногда написанный на Rust код необходимо
+состыковать с некоторым кодом на C/C++, но распранение C/C++ кода в формате
+библиотеки вызывает дополнительные трудности. В этом случае, код будут
+упакован в <code>libfoo.a</code>, а затем контейнер Rust должен будет объявить
+зависимость с помощью <code>#[link(name = &quot;foo&quot;, kind = &quot;static&quot;)]</code>.</p>
 
-<p>Regardless of the flavor of output for the crate, the native static library
-will be included in the output, meaning that distribution of the native static
-library is not necessary.</p></li>
-<li><p>A normal dynamic dependency. Common system libraries (like <code>readline</code>) are
-available on a large number of systems, and often a static copy of these
-libraries cannot be found. When this dependency is included in a rust crate,
-partial targets (like rlibs) will not link to the library, but when the rlib
-is included in a final target (like a binary), the native library will be
-linked in.</p></li>
+<p>Независимо от типа выхода (промежуточный или конечный) для контейнера,
+нативная статическая библиотека будет включена на выходе, что означает, что
+нет необходимости в распранении этой нативной статической библиотеки отдельно.</p></li>
+<li><p>Нормальная динамическая зависимость. Общие системные библиотеки (такие, как
+<code>readline</code>) доступны на большом количестве систем, и часто можно найти
+статическую копию этих библиотек. Когда такая зависимость была включена в
+контейнер Rust, промежуточные артефакты (например, rlibs) не будут линковать
+библиотеку, но когда rlib включается в состав конечного артефакта (например,
+исполняемый файл), нативная библиотека будет прилинкована.</p></li>
 </ul>
 
-<p>On OSX, frameworks behave with the same semantics as a dynamic library.</p>
+<p>На OSX, фреймворки ведут себя с той же семантикой, что и динамические
+библиотеки.</p>
 
-<h1 id="unsafe-blocks" class='section-header'><a
-                           href="#unsafe-blocks">Unsafe blocks</a></h1>
-<p>Some operations, like dereferencing unsafe pointers or calling functions that have been marked
-unsafe are only allowed inside unsafe blocks. Unsafe blocks isolate unsafety and are a promise to
-the compiler that the unsafety does not leak out of the block.</p>
+<h1 id="Небезопасные-блоки" class='section-header'><a
+                           href="#Небезопасные-блоки">Небезопасные блоки</a></h1>
+<p>Некоторые операции, такие как разыменование небезопасных указателей или вызов
+функций, которые были отмечены как небезопасные, разрешено использовать только
+внутри небезопасных блоков. Небезопасных блоки изолируют опасносные ситуации и
+дают гарантии компилятору, что опасности не вытекут за пределы блока.</p>
 
-<p>Unsafe functions, on the other hand, advertise it to the world. An unsafe function is written like
-this:</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Небезопасные функции же, наоборот, делают сильный акцент на этом. Небезопасная
+функция записывается в виде:</p>
+<span class='rusttest'>fn main() {
+    unsafe fn kaboom(ptr: *const i32) -&gt; i32 { *ptr }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>kaboom</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> { <span class='op'>*</span><span class='ident'>ptr</span> }
 </pre>
 
-<p>This function can only be called from an <code>unsafe</code> block or another <code>unsafe</code> function.</p>
+<p>Эта функция может быть вызвана только из блока <code>unsafe</code> или из другой <code>unsafe</code>
+функции.</p>
 
-<h1 id="accessing-foreign-globals" class='section-header'><a
-                           href="#accessing-foreign-globals">Accessing foreign globals</a></h1>
-<p>Foreign APIs often export a global variable which could do something like track
-global state. In order to access these variables, you declare them in <code>extern</code>
-blocks with the <code>static</code> keyword:</p>
-<pre id='rust-example-rendered' class='rust '>
+<h1 id="Доступ-к-внешним-глобальным-переменным" class='section-header'><a
+                           href="#Доступ-к-внешним-глобальным-переменным">Доступ к внешним глобальным переменным</a></h1>
+<p>Внешние API довольно часто экспортируют глобальные переменные, которые могут
+быть использованы, например, для отслеживание глобального состояния. Для того,
+чтобы получить доступ к этим переменным, нужно объявить их в блоке <code>extern</code>,
+используя ключевое слово <code>static</code>:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+
+#[link(name = &quot;readline&quot;)]
+extern {
+    static rl_readline_version: libc::c_int;
+}
+
+fn main() {
+    println!(&quot;You have readline version {} installed.&quot;,
+             rl_readline_version as i32);
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;readline&quot;</span>)]</span>
@@ -502,10 +724,32 @@ blocks with the <code>static</code> keyword:</p>
 }
 </pre>
 
-<p>Alternatively, you may need to alter global state provided by a foreign
-interface. To do this, statics can be declared with <code>mut</code> so we can mutate
-them.</p>
-<pre id='rust-example-rendered' class='rust '>
+<p>Кроме того, возможно вам потребуется изменить глобальное состояние,
+предоставленное внешним интерфейсом. Для этого при объявлении статических
+переменных может быть добавлен модификатор <code>mut</code>, чтобы была возможность
+изменять их.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+
+use std::ffi::CString;
+use std::ptr;
+
+#[link(name = &quot;readline&quot;)]
+extern {
+    static mut rl_prompt: *const libc::c_char;
+}
+
+fn main() {
+    let prompt = CString::new(&quot;[my-awesome-shell] $&quot;).unwrap();
+    unsafe {
+        rl_prompt = prompt.as_ptr();
+
+        println!(&quot;{:?}&quot;, rl_prompt);
+
+        rl_prompt = ptr::null();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CString</span>;
@@ -528,15 +772,28 @@ them.</p>
 }
 </pre>
 
-<p>Note that all interaction with a <code>static mut</code> is unsafe, both reading and
-writing. Dealing with global mutable state requires a great deal of care.</p>
+<p>Обратите внимание, что любое взаимодействие с <code>static mut</code> небезопасно, как
+чтение, так и запись. Работа с изменяемым глобальным состоянием требует
+значительно большей осторожности.</p>
 
-<h1 id="foreign-calling-conventions" class='section-header'><a
-                           href="#foreign-calling-conventions">Foreign calling conventions</a></h1>
-<p>Most foreign code exposes a C ABI, and Rust uses the platform&#39;s C calling convention by default when
-calling foreign functions. Some foreign functions, most notably the Windows API, use other calling
-conventions. Rust provides a way to tell the compiler which convention to use:</p>
-<pre id='rust-example-rendered' class='rust '>
+<h1 id="Соглашение-о-вызове-внешних-функций" class='section-header'><a
+                           href="#Соглашение-о-вызове-внешних-функций">Соглашение о вызове внешних функций</a></h1>
+<p>Большинство внешнего кода предоставляет C ABI (Двоичный Интерфейс Приложений). И
+Rust при вызове внешних функций по умолчанию использует C соглашение о вызове
+для данной платформы. Но некоторые внешние функции, в первую очередь Windows
+API, используют другое соглашение о вызове. Rust обеспечивает способ указать
+компилятору, какое именно соглашение использовать:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+
+#[cfg(all(target_os = &quot;win32&quot;, target_arch = &quot;x86&quot;))]
+#[link(name = &quot;kernel32&quot;)]
+#[allow(non_snake_case)]
+extern &quot;stdcall&quot; {
+    fn SetEnvironmentVariableA(n: *const u8, v: *const u8) -&gt; libc::c_int;
+}
+fn main() { }
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>all</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;win32&quot;</span>, <span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86&quot;</span>))]</span>
@@ -547,8 +804,8 @@ conventions. Rust provides a way to tell the compiler which convention to use:</
 }
 </pre>
 
-<p>This applies to the entire <code>extern</code> block. The list of supported ABI constraints
-are:</p>
+<p>Это указание относится ко всему блоку <code>extern</code>. Список поддерживаемых ABI
+ограничивается следующими:</p>
 
 <ul>
 <li><code>stdcall</code></li>
@@ -562,70 +819,78 @@ are:</p>
 <li><code>win64</code></li>
 </ul>
 
-<p>Most of the abis in this list are self-explanatory, but the <code>system</code> abi may
-seem a little odd. This constraint selects whatever the appropriate ABI is for
-interoperating with the target&#39;s libraries. For example, on win32 with a x86
-architecture, this means that the abi used would be <code>stdcall</code>. On x86_64,
-however, windows uses the <code>C</code> calling convention, so <code>C</code> would be used. This
-means that in our previous example, we could have used <code>extern &quot;system&quot; { ... }</code>
-to define a block for all windows systems, not just x86 ones.</p>
+<p>Большинство ABI в этом списке не требуют пояснений, но ABI <code>system</code> может
+показаться немного странным. Он выбирает такое ABI, которое подходит (уместно)
+для взаимодействия с целевыми библиотеками. Например, на платформе win32 с
+архитектурой x86, это означает, что будет использован <code>stdcall</code> ABI. Однако, на
+windows x86_64 используется <code>C</code> соглашение о вызовах, поэтому в этом случае
+будет использован <code>C</code> ABI. Это означает, что в нашем предыдущем примере мы могли
+бы использовать <code>extern &quot;system&quot; { ... }</code>, чтобы определить блок для всех
+windows систем, а не только для x86.</p>
 
-<h1 id="interoperability-with-foreign-code" class='section-header'><a
-                           href="#interoperability-with-foreign-code">Interoperability with foreign code</a></h1>
-<p>Rust guarantees that the layout of a <code>struct</code> is compatible with the platform&#39;s
-representation in C only if the <code>#[repr(C)]</code> attribute is applied to it.
-<code>#[repr(C, packed)]</code> can be used to lay out struct members without padding.
-<code>#[repr(C)]</code> can also be applied to an enum.</p>
+<h1 id="Взаимодействие-с-внешним-кодом" class='section-header'><a
+                           href="#Взаимодействие-с-внешним-кодом">Взаимодействие с внешним кодом</a></h1>
+<p>Rust гарантирует, что cхема размещения элементов для <code>struct</code> совместима с
+представлением платформы в C только в том случае, если к ней применяется атрибут
+<code>#[repr(C)]</code>. Атрибут <code>#[repr(C, packed)]</code> может быть использован для схемы
+размещения элементов структуры без выравнивания. Атрибут <code>#[repr(C)]</code> также
+может быть применен и к перечислениям.</p>
 
-<p>Rust&#39;s owned boxes (<code>Box&lt;T&gt;</code>) use non-nullable pointers as handles which point
-to the contained object. However, they should not be manually created because
-they are managed by internal allocators. References can safely be assumed to be
-non-nullable pointers directly to the type.  However, breaking the borrow
-checking or mutability rules is not guaranteed to be safe, so prefer using raw
-pointers (<code>*</code>) if that&#39;s needed because the compiler can&#39;t make as many
-assumptions about them.</p>
+<p>Боксы с правом владения в Rust (<code>Box&lt;T&gt;</code>) используют ненулевые (non-nullable)
+указатели, которые указывают на содержащийся в них объект, как ручки. Тем не
+менее, они не должны быть созданы вручную, так как они находятся под управлением
+внутренних средств выделения памяти. Ссылки можно без риска считать ненулевыми
+указателями непосредствено на тип. Однако нарушение правил проверки
+заимствования или изменяемости не гарантирует безопасность, поэтому предпочитают
+использовать сырые указатели (<code>*</code>), если это необходимо, так как компилятор не
+может сделать так много предположений о них.</p>
 
-<p>Vectors and strings share the same basic memory layout, and utilities are
-available in the <code>vec</code> and <code>str</code> modules for working with C APIs. However,
-strings are not terminated with <code>\0</code>. If you need a NUL-terminated string for
-interoperability with C, you should use the <code>CString</code> type in the <code>std::ffi</code>
-module.</p>
+<p>Векторы и строки совместно используют одну и ту же базовую cхему размещения
+памяти и утилиты, доступные в модулях <code>vec</code> и <code>str</code>, для работы с C API. Тем не
+менее, строки не завершаются нулевым байтом, <code>\0</code>. Если вам нужна строка,
+завершающаяся нулевым байтом для совместимости с C, вы должны использовать тип
+<code>CString</code> из модуля <code>std::ffi</code>.</p>
 
-<p>The standard library includes type aliases and function definitions for the C
-standard library in the <code>libc</code> module, and Rust links against <code>libc</code> and <code>libm</code>
-by default.</p>
+<p>Стандартная библиотека включает в себя псевдонимы типов и определения функций
+для стандартной библиотеки C в модуле <code>libc</code>, и Rust линкует <code>libc</code> и <code>libm</code> по
+умолчанию.</p>
 
-<h1 id="the-&quot;nullable-pointer-optimization&quot;" class='section-header'><a
-                           href="#the-&quot;nullable-pointer-optimization&quot;">The &quot;nullable pointer optimization&quot;</a></h1>
-<p>Certain types are defined to not be <code>null</code>. This includes references (<code>&amp;T</code>,
-<code>&amp;mut T</code>), boxes (<code>Box&lt;T&gt;</code>), and function pointers (<code>extern &quot;abi&quot; fn()</code>).
-When interfacing with C, pointers that might be null are often used.
-As a special case, a generic <code>enum</code> that contains exactly two variants, one of
-which contains no data and the other containing a single field, is eligible
-for the &quot;nullable pointer optimization&quot;. When such an enum is instantiated
-with one of the non-nullable types, it is represented as a single pointer,
-and the non-data variant is represented as the null pointer. So
-<code>Option&lt;extern &quot;C&quot; fn(c_int) -&gt; c_int&gt;</code> is how one represents a nullable
-function pointer using the C ABI.</p>
+<h1 id="Оптимизация-нулируемого-указателя-(the-&quot;nullable-pointer-optimization&quot;)" class='section-header'><a
+                           href="#Оптимизация-нулируемого-указателя-(the-&quot;nullable-pointer-optimization&quot;)">Оптимизация нулируемого указателя (The &quot;nullable pointer optimization&quot;)</a></h1>
+<p>Некоторые типы по определению не могут быть <code>null</code>. Это такие типы, как ссылки
+(<code>&amp;T</code>, <code>&amp;mut T</code>), боксы (<code>Box&lt;T&gt;</code>), указатели на функции (<code>extern &quot;abi&quot; fn()</code>).
+При взаимодействии же с С часто используются указатели, которые могут быть
+<code>null</code>. Как особый случай - обобщенный <code>enum</code>, который содержит ровно два
+варианта, один из которых не содержит данных, а другой содержит одно поле, имеет
+право на &quot;оптимизацию нулируемого указателя&quot;. Когда создан экземпляр такого
+перечисления с одним из ненулируемых типов, то он представляет собой: ненулевой
+указатель для варианта, содержащего данные, и нулевой - для варианта без данных.
+Так <code>Option&lt;extern &quot;C&quot; fn(c_int) -&gt; c_int&gt;</code> - как представляется нулируемый
+указатель на функцию с использованием C ABI.</p>
 
-<h1 id="calling-rust-code-from-c" class='section-header'><a
-                           href="#calling-rust-code-from-c">Calling Rust code from C</a></h1>
-<p>You may wish to compile Rust code in a way so that it can be called from C. This is
-fairly easy, but requires a few things:</p>
-<pre id='rust-example-rendered' class='rust '>
+<h1 id="Вызов-rust-кода-из-c-кода" class='section-header'><a
+                           href="#Вызов-rust-кода-из-c-кода">Вызов Rust кода из C кода</a></h1>
+<p>Вы можете скомпилировать Rust код таким образом, чтобы он мог быть вызван из C
+кода. Это довольно легко, но требует нескольких вещей:</p>
+<span class='rusttest'>#[no_mangle]
+pub extern fn hello_rust() -&gt; *const u8 {
+    &quot;Hello, world!\0&quot;.as_ptr()
+}
+fn main() {}
+</span><pre id='rust-example-rendered' class='rust '>
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
 <span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>hello_rust</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span> {
     <span class='string'>&quot;Hello, world!\0&quot;</span>.<span class='ident'>as_ptr</span>()
 }
 </pre>
 
-<p>The <code>extern</code> makes this function adhere to the C calling convention, as
-discussed above in &quot;<a href="ffi.html#foreign-calling-conventions">Foreign Calling
-Conventions</a>&quot;. The <code>no_mangle</code>
-attribute turns off Rust&#39;s name mangling, so that it is easier to link to.</p>
+<p><code>extern</code> указывает, что эта функцию придерживается C соглашения о вызове, как
+описано выше в разделе &quot;<a href="ffi.html#foreign-calling-conventions">Соглашение о вызове внешних функций</a>&quot;.
+Атрибут <code>no_mangle</code> выключает модификацию имени, применяемую в Rust, для того
+чтобы было легче линковать.</p>
 
     <script type="text/javascript">
-        window.playgroundUrl = "";
+        window.playgroundUrl = "http://play.rust-lang.org";
     </script>
     
 <script type="text/javascript">
@@ -669,7 +934,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   for (var i = 0; i < toc.length; i++) {
-    if (toc[i].attributes['href'].value === href) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
       var nav = document.createElement('p');
       if (i > 0) {
         var prevNode = toc[i-1].cloneNode(true);
@@ -688,6 +953,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 </script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
 </div></div>
 
 
