@@ -28,7 +28,6 @@
     * [Ссылки и Заимствование](references-and-borrowing.md)
     * [Время жизни](lifetimes.md)
     * [Изменяемость (Мутабельность)](mutability.md)
-    * [Семантика перемещения](move-semantics.md)
     * [Перечисления](enums.md)
     * [Конструкция `match`](match.md)
     * [Структуры](structs.md)
