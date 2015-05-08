@@ -66,7 +66,7 @@ if let Some(x) = option {
 loop {
     match option {
         Some(x) => println!("{}", x),
-    _ => break,
+        _ => break,
     }
 }
 ```
