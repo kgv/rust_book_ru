@@ -25,6 +25,7 @@
 * [ithamsteri](https://github.com/ithamsteri)
 * [funkill](https://github.com/funkill)
 * [mkpankov](https://github.com/mkpankov)
+* [suhr](https://github.com/suhr)
 
 ## Ошибки
 
