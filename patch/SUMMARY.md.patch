@@ -1,5 +1,5 @@
 diff --git a/rust/master:src/doc/trpl/SUMMARY.md b/HEAD:SUMMARY.md
-index 4dc77aa..5e4c4a8 100644
+index de7ded7..2201e0a 100644
 --- a/rust/master:src/doc/trpl/SUMMARY.md
 +++ b/HEAD:SUMMARY.md
 @@ -1,69 +1,70 @@
@@ -14,6 +14,7 @@ index 4dc77aa..5e4c4a8 100644
      * [Hello, world!](hello-world.md)
      * [Hello, Cargo!](hello-cargo.md)
 -* [Learn Rust](learn-rust.md)
+-    * [Guessing Game](guessing-game.md)
 -* [Effective Rust](effective-rust.md)
 -    * [The Stack and the Heap](the-stack-and-the-heap.md)
 -    * [Testing](testing.md)
@@ -35,7 +36,6 @@ index 4dc77aa..5e4c4a8 100644
 -    * [References and Borrowing](references-and-borrowing.md)
 -    * [Lifetimes](lifetimes.md)
 -    * [Mutability](mutability.md)
--    * [Move semantics](move-semantics.md)
 -    * [Enums](enums.md)
 -    * [Match](match.md)
 -    * [Structs](structs.md)
@@ -59,6 +59,7 @@ index 4dc77aa..5e4c4a8 100644
 -    * [Associated Types](associated-types.md)
 -    * [Unsized Types](unsized-types.md)
 +* [Изучение Rust](learn-rust.md)
++    * [Угадайка](guessing-game.md)
 +* [Эффективное использование Rust](effective-rust.md)
 +    * [Стек и Куча](the-stack-and-the-heap.md)
 +    * [Тестирование](testing.md)
@@ -80,7 +81,6 @@ index 4dc77aa..5e4c4a8 100644
 +    * [Ссылки и Заимствование](references-and-borrowing.md)
 +    * [Время жизни](lifetimes.md)
 +    * [Изменяемость (Мутабельность)](mutability.md)
-+    * [Семантика перемещения](move-semantics.md)
 +    * [Перечисления](enums.md)
 +    * [Конструкция `match`](match.md)
 +    * [Структуры](structs.md)
