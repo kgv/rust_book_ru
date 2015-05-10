@@ -84,11 +84,11 @@ fn main() {
 
     let mut guess = String::new();
 
-    let input = io::stdin().read_line(&mut guess)
+    io::stdin().read_line(&mut guess)
         .ok()
         .expect("Не удалось прочитать строку");
 
-    println!("Вы загадали: {}", input);
+    println!("Вы загадали: {}", guess);
 }
 ```
 
@@ -166,76 +166,75 @@ let mut bar = 5; // изменяемая связь
 
 [comments]: comments.html
 
-So now we know that `let mut guess` will introduce a mutable binding named
-`guess`, but we have to look at the other side of the `=` for what it’s
-bound to: `String::new()`.
+Теперь мы знаем, что `let mut guess` объявляет изменяемую связь с именем `guess`,
+но по другую сторону от `=` - это то, что будет привязано: `String::new()`.
 
-`String` is a string type, provided by the standard library. A
-[`String`][string] is a growable, UTF-8 encoded bit of text.
+`String` - это строковый тип, предоставляемый нам стандартной библиотекой.
+[`String`][string] - это текст в кодировке UTF-8 переменной длины.
 
 [string]: ../std/string/struct.String.html
 
-The `::new()` syntax is uses `::` because this is an ‘associated function’ of
-a particular type. That is to say, it’s associated with `String` itself,
-rather than a particular instance of a `String`. Some languages call this a
-‘static method’.
+Синтаксис `::new()` использует `::`, так как это привязанная к определённому 
+типу функция. То есть, она привязана к самому типу `String`, а не к определённой
+переменной типа `String`. Некоторые языки называют это "статическим методом".
 
-This function is named `new()`, because it creates a new, empty `String`.
-You’ll find a `new()` function on many types, as it’s a common name for making
-a new value of some kind.
+Имя этой функции - `new()`, так как она создаёт новый, пустой `String`. Вы 
+можете найти эту функцию у многих типов, потому что это общее имя для создания
+нового значения определённого типа.
 
-Let’s move forward:
+Давайте посмотри дальше:
 
 ```rust,ignore
     io::stdin().read_line(&mut guess)
         .ok()
-        .expect("Failed to read line");
+        .expect("Не удалось прочитать строку");
 ```
 
-That’s a lot more! Let’s go bit-by-bit. The first line has two parts. Here’s
-the first:
+Это уже побольше! Давайте это всё разберём. В первой строке есть две части.
+Это первая:
 
 ```rust,ignore
 io::stdin()
 ```
 
-Remember how we `use`d `std::io` on the first line of the program? We’re now
-calling an associated function on it. If we didn’t `use std::io`, we could
-have written this line as `std::io::stdin()`.
+Помните, как мы импортировали (`use`) `std::io` в самом начале нашей программы?
+Сейчас мы вызвали ассоциированную с ним функцию. Если бы мы не сделали `use std::io`,
+нам бы пришлось здесь написать `std::io::stdin()`.
 
-This particular function returns a handle to the standard input for your
-terminal. More specifically, a [std::io::Stdin][iostdin].
+Эта функция возвращает обработчик стандартного ввода нашего терминала. Более 
+подробно об это можно почитать в [std::io::Stdin][iostdin].
 
-[iostdin]: ../std/io/struct.Stdin.html
+[iostdin]: http://doc.rust-lang.org/std/io/struct.Stdin.html
 
-The next part will use this handle to get input from the user:
+Следующая часть использует этот обработчик для получения всего, что введёт 
+пользователь:
 
 ```rust,ignore
 .read_line(&mut guess)
 ```
 
-Here, we call the [`read_line()`][read_line] method on our handle.
-[Method][method]s are like associated functions, but are only available on a
-particular instance of a type, rather than the type itself. We’re also passing
-one argument to `read_line()`: `&mut guess`.
+Здесь мы вызвали метод [`read_line()`][read_line] обработчика. [Методы][methos]
+похожи на привязанные функции, но доступны только у определённого экземпляра
+типа, а не самого типа. Мы указали один аргумент функции `read_line()`: `&mut guess`.
 
-[read_line]: ../std/io/struct.Stdin.html#method.read_line
+[read_line]: http://doc.rust-lang.org/std/io/struct.Stdin.html#method.read_line
 [method]: methods.html
 
-Remember how we bound `guess` above? We said it was mutable. However,
-`read_line` doesn’t take a `String` as an argument: it takes a `&mut String`.
-Rust has a feature called ‘[references][references]’, which allows you to have
-multiple references to one piece of data, which can reduce copying. References
-are a complex feature, as one of Rust’s major selling points is how safe and
-easy it is to use references. We don’t need to know a lot of those details to
-finish our program right now, though. For now, all we need to know is that
-like `let` bindings, references are immutable by default. Hence, we need to
-write `&mut guess`, rather than `&guess`.
+Помните, как мы выше привязали `guess`? Мы сказали, что она изменяема. Однако,
+`read_line` не получает в качестве аргумента `String`: она получает `&mut String`.
+В Rust есть такая особенность, называемая ["ссылки"][references], которая
+позволяет нам иметь несколько ссылок на одни и так же данные, что позволяет 
+избежать излишнего их копирования. Ссылки - достаточно сложная особенность, и
+одним из основных подкупающих достоинств Rust является то, как он решает вопрос 
+безопасности и простоты их использования. Пока что мы не должны знать об этих 
+деталях, чтобы завершить нашу программу. Сейчас, всё, что нам нужно - это знать 
+что ссылки, как и связывание при помощи `let`, неизменяемо по умолчанию. 
+Следовательно, мы должны написать `&mut guess`, а не `&guess`.
 
-Why does `read_line()` take a mutable reference to a string? Its job is
-to take what the user types into standard input, and place that into a
-string. So it takes that string as an argument, and in order to add
-the input, it needs to be mutable.
+Почему `read_line()` получает изменяемую ссылку на строку? Его работа - это взять
+то, что пользователь написал в стандартный ввод, и положить это в строку. Итак,
+функция получает строку в качестве аргумента, и для того, чтобы добавить в эту 
+строку что-то, она должна быть изменяемой.
 
 [references]: references-and-borrowing.html
 
@@ -306,12 +305,12 @@ project.
 There’s just one line of this first example left:
 
 ```rust,ignore
-    println!("You guessed: {}", input);
+    println!("You guessed: {}", guess);
 }
 ```
 
 This prints out the string we saved our input in. The `{}`s are a placeholder,
-and so we pass it `input` as an argument. If we had multiple `{}`s, we would
+and so we pass it `guess` as an argument. If we had multiple `{}`s, we would
 pass multiple arguments:
 
 ```rust
@@ -362,11 +361,10 @@ rand="0.3.0"
 The `[dependencies]` section of `Cargo.toml` is like the `[package]` section:
 everything that follows it is part of it, until the next section starts.
 Cargo uses the dependencies section to know what dependencies on external
-crates you have, and what versions you require. In this case, we’ve used `*`,
-which means that we’ll use the latest version of `rand`. Cargo understands
-[Semantic Versioning][semver], which is a standard for writing version
-numbers. If we wanted a specific version or range of versions, we could be
-more specific here. [Cargo’s documentation][cargodoc] contains more details.
+crates you have, and what versions you require. In this case, we’ve used version `0.3.0`.
+Cargo understands [Semantic Versioning][semver], which is a standard for writing version
+numbers. If we wanted to use the latest version we could use `*` or we could use a range 
+of versions. [Cargo’s documentation][cargodoc] contains more details.
 
 [semver]: http://semver.org
 [cargodoc]: http://doc.crates.io/crates-io.html
@@ -414,11 +412,11 @@ $ cargo build
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
 
-So, we told Cargo we wanted any version of `rand`, and so it fetched the
-latest version at the time this was written, `v0.3.8`. But what happens
-when next week, version `v0.4.0` comes out, which changes something with
-`rand`, and it includes a breaking change? After all, a `v0.y.z` version
-in SemVer can change every release.
+So, we told Cargo we wanted any `0.3.x` version of `rand`, and so it fetched the latest
+version at the time this was written, `v0.3.8`. But what happens when next
+week, version `v0.3.9` comes out, with an important bugfix? While getting
+bugfixes is important, what if `0.3.9` contains a regression that breaks our
+code?
 
 The answer to this problem is the `Cargo.lock` file you’ll now find in your
 project directory. When you build your project for the first time, Cargo
@@ -426,12 +424,17 @@ figures out all of the versions that fit your criteria, and then writes them
 to the `Cargo.lock` file. When you build your project in the future, Cargo
 will see that the `Cargo.lock` file exists, and then use that specific version
 rather than do all the work of figuring out versions again. This lets you
-have a repeatable build automatically.
+have a repeatable build automatically. In other words, we’ll stay at `0.3.8`
+until we explicitly upgrade, and so will anyone who we share our code with,
+thanks to the lock file.
 
-What about when we _do_ want to use `v0.4.0`? Cargo has another command,
+What about when we _do_ want to use `v0.3.9`? Cargo has another command,
 `update`, which says ‘ignore the lock, figure out all the latest versions that
 fit what we’ve specified. If that works, write those versions out to the lock
-file’.
+file’. But, by default, Cargo will only look for versions larger than `0.3.0`
+and smaller than `0.4.0`. If we want to move to `0.4.x`, we’d have to update
+the `Cargo.toml` directly. When we do, the next time we `cargo build`, Cargo
+will update the index and re-evaluate our `rand` requirements.
 
 There’s a lot more to say about [Cargo][doccargo] and [its
 ecosystem][doccratesio], but for now, that’s all we need to know. Cargo makes
@@ -847,7 +850,7 @@ fn main() {
             Ordering::Less    => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal   => {
-                println!("You win!"),
+                println!("You win!");
                 break;
             }
         }
@@ -963,8 +966,6 @@ fn main() {
     println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
-
-    println!("The secret number is: {}", secret_number);
 
     loop {
         println!("Please input your guess.");
