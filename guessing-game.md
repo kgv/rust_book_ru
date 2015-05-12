@@ -238,45 +238,44 @@ io::stdin()
 
 [references]: references-and-borrowing.html
 
-But we’re not quite done with this line of code, though. While it’s
-a single line of text, it’s only the first part of the single logical line of
-code:
+Но мы пока что ещё не закончили с этой строкой кода. Пока это одна строка текста, 
+это только первая часть одной логической строки кода:
 
 ```rust,ignore
         .ok()
-        .expect("Failed to read line");
+        .expect("Не удалось прочитать строку");
 ```
 
-When you call a method with the `.foo()` syntax, you may introduce a newline
-and other whitespace. This helps you split up long lines. We _could_ have
-done:
+Когда мы вызываем метод, используя синтаксис `.foo()`, мы можем перенести вызов
+в новую строку и сделать для него отступ. Это помогает работать с длинными 
+строками. Мы могли бы стедалать и так:
 
 ```rust,ignore
-    io::stdin().read_line(&mut guess).ok().expect("failed to read line");
+    io::stdin().read_line(&mut guess).ok().expect("Не удалось прочитать строку");
 ```
 
-But that gets hard to read. So we’ve split it up, three lines for three
-method calls. We already talked about `read_line()`, but what about `ok()`
-and `expect()`? Well, we already mentioned that `read_line()` puts what
-the user types into the `&mut String` we pass it. But it also returns
-a value: in this case, an [`io::Result`][ioresult]. Rust has a number of
-types named `Result` in its standard library: a generic [`Result`][result],
-and then specific versions for sub-libraries, like `io::Result`.
+Но это достаточно трудно читать. Поэтому мы разделили строку: по строке на каждый
+вызов метода. Мы уже поговорили о `read_line()`, но ещё ничего не сказали про
+`ok()` и `expect()`. Мы узнали, что `read_line()` передаёт всё, что пользователь
+ввёл в `&mut String`, которую мы ему передали. Но этот метод так же и возвращает
+значение: в данном случае - [`io::Result`][ioresult]. В стандартной библиотеке 
+Rust есть несолько типов, с именем `Result`: общая версия [`Result`][result] и 
+несколько отдельных версий в подбиблиотеках, например `io::Result`.
 
 [ioresult]: ../std/io/type.Result.html
 [result]: ../std/result/enum.Result.html
 
-The purpose of these `Result` types is to encode error handling information.
-Values of the `Result` type, like any type, have methods defined on them. In
-this case, `io::Result` has an `ok()` method, which says ‘we want to assume
-this value is a successful one. If not, just throw away the error
-information’. Why throw it away? Well, for a basic program, we just want to
-print a generic error, as basically any issue means we can’t continue. The
-[`ok()` method][ok] returns a value which has another method defined on it:
-`expect()`. The [`expect()` method][expect] takes a value it’s called on, and
-if it isn’t a successful one, [`panic!`][panic]s with a message you passed you
-passed it. A `panic!` like this will cause our program to crash, displaying
-the message.
+Целью типов `Result` является преобразование информации об ошибках, полученных
+от обработчика. У значений типа `Result`, как и любого другого типа, есть 
+определённые для него методы. В данном случае, у `io::Result` имеется метод `ok()`,
+который говорит, что "мы хотим получить это значение, если всё прошло хорошо.
+Если это не так, выбрось сообщение об ошибке". Но зачем выбрасывать? Для небольших
+программ, мы можем захотеть только вывести сообщение об ошибке и прекратить 
+выполнение программы. [Метод `ok()`][ok] возвращает значение, у которого объявлен
+другой метод: `expect()`. [Метод `expect()`][expect] берёт значение, для которого
+он вызван, и если оно не удачное, выполняет [`panic!`][panic] со строкой, заданной
+методу в качестве аргумента. `panic!` остановит нашу программу и выведет сообщение
+об ошибке.
 
 [ok]: ../std/result/enum.Result.html#method.ok
 [expect]: ../std/option/enum.Option.html#method.expect
@@ -714,7 +713,7 @@ variety of numbers, we need to give Rust a hint as to the exact type of number
 we want. Hence, `let guess: u32`. The colon (`:`) after `guess` tells Rust
 we’re going to annotate its type. `u32` is an unsigned, thirty-two bit
 integer. Rust has [a number of built-in number types][number], but we’ve
-chosen `u32`. It’s a good default choice for a small positive numer.
+chosen `u32`. It’s a good default choice for a small positive number.
 
 [parse]: ../std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
@@ -923,7 +922,7 @@ failure. Each contains more information: the successful parsed integer, or an
 error type. In this case, we `match` on `Ok(num)`, which sets the inner value
 of the `Ok` to the name `num`, and then we just return it on the right-hand
 side. In the `Err` case, we don’t care what kind of error it is, so we just
-use `_` intead of a name. This ignores the error, and `continue` causes us
+use `_` instead of a name. This ignores the error, and `continue` causes us
 to go to the next iteration of the `loop`.
 
 Now we should be good! Let’s try:
