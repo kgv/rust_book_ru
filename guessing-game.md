@@ -262,8 +262,8 @@ io::stdin()
 Rust есть несолько типов, с именем `Result`: общая версия [`Result`][result] и 
 несколько отдельных версий в подбиблиотеках, например `io::Result`.
 
-[ioresult]: ../std/io/type.Result.html
-[result]: ../std/result/enum.Result.html
+[ioresult]: http://doc.rust-lang.org/std/io/type.Result.html
+[result]: http://doc.rust-lang.org/std/result/enum.Result.html
 
 Целью типов `Result` является преобразование информации об ошибках, полученных
 от обработчика. У значений типа `Result`, как и любого другого типа, есть 
@@ -277,12 +277,12 @@ Rust есть несолько типов, с именем `Result`: общая 
 методу в качестве аргумента. `panic!` остановит нашу программу и выведет сообщение
 об ошибке.
 
-[ok]: ../std/result/enum.Result.html#method.ok
-[expect]: ../std/option/enum.Option.html#method.expect
+[ok]: http://doc.rust-lang.org/std/result/enum.Result.html#method.ok
+[expect]: http://doc.rust-lang.org/std/option/enum.Option.html#method.expect
 [panic]: error-handling.html
 
-If we leave off calling these two methods, our program will compile, but
-we’ll get a warning:
+Если мы выйдем за пределы этих друх методов, наша программа скомпилируется, но
+мы получим следующее предупрежение:
 
 ```bash
 $ cargo build
@@ -293,6 +293,13 @@ src/main.rs:10     io::stdin().read_line(&mut guess);
                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
+Rust предупреждает, что мы не используем значение `Result`. Это предупреждение
+пришло из специальной аннотации, которая указана в `io::Result`. Rust пытается 
+сказать нам, что мне не обрабатываем ошибки, которые могут возникнуть. Наиболее
+правильным решением предотвращения ошибки будет её обработка. К счастью, если
+мы только хотим обрушить приложение, если есть проблема, мы можем использовать 
+эти два небольших метода. Если мы можем восстановить что-либо из ошибки, мы 
+должны сделать что-либо другое, но мы сохраним это для будущего проекта.
 Rust warns us that we haven’t used the `Result` value. This warning comes from
 a special annotation that `io::Result` has. Rust is trying to tell you that
 you haven’t handled a possible error. The right way to suppress the error is
@@ -301,52 +308,56 @@ a problem, we can use these two little methods. If we can recover from the
 error somehow, we’d do something else, but we’ll save that for a future
 project.
 
-There’s just one line of this first example left:
+Там всего одна строка из первого примера:
 
 ```rust,ignore
-    println!("You guessed: {}", guess);
+    println!("Вы загадали: {}", guess);
 }
 ```
 
-This prints out the string we saved our input in. The `{}`s are a placeholder,
-and so we pass it `guess` as an argument. If we had multiple `{}`s, we would
-pass multiple arguments:
+Здесь выводится на экран строка, которая была получена с нашего ввода. `{}` - это
+заполнитель. В качестве второго аргумента макроса `println!` мы указали `guess`.
+Если нам надо вывести несколько привязок, в самом простом случае, мы должны 
+указать несколько заполнителей, по одному на кажрую привязку:
 
 ```rust
 let x = 5;
 let y = 10;
 
-println!("x and y: {} and {}", x, y);
+println!("x и y: {} и {}", x, y);
 ```
 
-Easy.
+Просто.
 
+мы можем запустить то, что у нас есть при помощи `cargo run`:
 Anyway, that’s the tour. We can run what we have with `cargo run`:
 
 ```bash
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/debug/guessing_game`
-Guess the number!
-Please input your guess.
+Угадайте число!
+Пожалуйста, введите предположение.
 6
-You guessed: 6
+Вы загадали: 6
 ```
 
-All right! Our first part is done: we can get input from the keyboard,
-and then print it back out.
+Всё правильно! Наша первая часть завершена: мы можем получать данные с клавиатуры
+и потом печатать их на экран.
 
-# Generating a secret number
+# Генерация секретного числа
 
-Next, we need to generate a secret number. Rust does not yet include random
-number functionality in its standard library. The Rust team does, however,
-provide a [`rand` crate][randcrate]. A ‘crate’ is a package of Rust code.
-We’ve been building a ‘binary crate’, which is an executable. `rand` is a
-‘library crate’, which contains code that’s intended to be used with other
-programs.
+Далее, нам надо сгенерировать секретное число. В стандартной библиотеке Rust нет
+ничего, что могло бы нам предоставить функционал для генерации случаных чисел.
+Однако, разработчики Rust для этого предоставили [крэйт `rand`][randcrate].
+"Крэйт" - это пакет с кодом Rust. Наш проект - "бинарный крэйт", из которого 
+в итоге получится исполняемый файл. `rand` - "библиотечный крэйт", который 
+содержит код, предназначенный для использования с другими программами.
 
 [randcrate]: https://crates.io/crates/rand
 
+Прежде, чем мы начнём писать код с использованием `rand`, мы должны модифицировать
+наш `Cargo.toml`. Откроем его и добавим в конец следующие строчки:
 Using external crates is where Cargo really shines. Before we can write
 the code using `rand`, we need to modify our `Cargo.toml`. Open it up, and
 add these few lines at the bottom:
@@ -357,6 +368,14 @@ add these few lines at the bottom:
 rand="0.3.0"
 ```
 
+Секция `[dependencies]` похожа на секцию `[package]`: всё, что расположено после
+объявления секции и до начала следующей, является частью этой секции. Cargo
+использует секцию с зависимостями чтобы занать о том, какие и сторонние крэйты 
+потребуются, а так же какие их версии необходимы. В данном слечае, мы используем
+версию `0.3.0`. Cargo понимает [семантическое версионирование][semver], которое
+является стандартом нумерации версий. Если мы хотим использовать последнюю версию
+крэйта, мы можем использовать `*`. Так же мы можем указать необходимы промежуток
+версий. В [документации Cargo][cargodoc] есть больше информации.
 The `[dependencies]` section of `Cargo.toml` is like the `[package]` section:
 everything that follows it is part of it, until the next section starts.
 Cargo uses the dependencies section to know what dependencies on external
@@ -365,10 +384,10 @@ Cargo understands [Semantic Versioning][semver], which is a standard for writing
 numbers. If we wanted to use the latest version we could use `*` or we could use a range 
 of versions. [Cargo’s documentation][cargodoc] contains more details.
 
-[semver]: http://semver.org
+[semver]: http://semver.org/lang/ru
 [cargodoc]: http://doc.crates.io/crates-io.html
 
-Now, without changing any of our code, let’s build our project:
+Теперь, без каких-либо изменений в нашем коде, давайте соберём наш проект:
 
 ```bash
 $ cargo build
@@ -380,7 +399,7 @@ $ cargo build
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
 
-(You may see different versions, of course.)
+(Конечно же, вы можете видеть другие версии.)
 
 Lots of new output! Now that we have an external dependency, Cargo fetches the
 latest versions of everything from the registry, which is a copy of data from
