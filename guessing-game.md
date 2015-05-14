@@ -88,7 +88,7 @@ fn main() {
         .ok()
         .expect("Не удалось прочитать строку");
 
-    println!("Вы загадали: {}", input);
+    println!("Вы загадали: {}", guess);
 }
 ```
 
@@ -305,7 +305,7 @@ project.
 There’s just one line of this first example left:
 
 ```rust,ignore
-    println!("You guessed: {}", input);
+    println!("You guessed: {}", guees);
 }
 ```
 
