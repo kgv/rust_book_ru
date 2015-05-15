@@ -1,8 +1,8 @@
-% No stdlib
+% Без stdlib
 
-By default, `std` is linked to every Rust crate. In some contexts,
-this is undesirable, and can be avoided with the `#![no_std]`
-attribute attached to the crate.
+По умолчанию, `std` линкуется с каждым контейнером Rust. В некоторых случаях это
+нежелательно, и этого можно избежать с помощью атрибута `#![no_std]`,
+примененного (привязанного) к контейнеру.
 
 ```ignore
 // a minimal library
@@ -12,13 +12,13 @@ attribute attached to the crate.
 # // fn main() {} tricked you, rustdoc!
 ```
 
-Obviously there's more to life than just libraries: one can use
-`#[no_std]` with an executable, controlling the entry point is
-possible in two ways: the `#[start]` attribute, or overriding the
-default shim for the C `main` function with your own.
+Очевидно, должно быть нечто большее, чем просто библиотеки: `#[no_std]` можно
+использовать с исполняемыми контейнерами, а управлять точкой входа можно двумя
+способами: с помощью атрибута `#[start]`, или с помощью переопределения
+прокладки (shim) для C функции `main` по умолчанию на вашу собственную.
 
-The function marked `#[start]` is passed the command line parameters
-in the same format as C:
+В функцию, помеченную атрибутом `#[start]`, передаются параметры командной
+строки в том же формате, что и в C:
 
 ```
 #![feature(lang_items, start, no_std, libc)]
@@ -42,10 +42,10 @@ fn start(_argc: isize, _argv: *const *const u8) -> isize {
 # // fn main() {} tricked you, rustdoc!
 ```
 
-To override the compiler-inserted `main` shim, one has to disable it
-with `#![no_main]` and then create the appropriate symbol with the
-correct ABI and the correct name, which requires overriding the
-compiler's name mangling too:
+Чтобы переопределить вставленную компилятором прокладку `main`, нужно сначала
+отключить ее с помощью `#![no_main]`, а затем создать соответствующий символ с
+правильным ABI и правильным именем, что также потребует переопределение
+искажения (коверкания) имен компилятором (`#[no_mangle]`):
 
 ```ignore
 #![feature(no_std)]
@@ -55,7 +55,7 @@ compiler's name mangling too:
 
 extern crate libc;
 
-#[no_mangle] // ensure that this symbol is called `main` in the output
+#[no_mangle] // для уверенности в том, что этот символ будет называться `main` на выходе
 pub extern fn main(argc: i32, argv: *const *const u8) -> i32 {
     0
 }
@@ -67,43 +67,48 @@ pub extern fn main(argc: i32, argv: *const *const u8) -> i32 {
 ```
 
 
-The compiler currently makes a few assumptions about symbols which are available
-in the executable to call. Normally these functions are provided by the standard
-library, but without it you must define your own.
+В настоящее время компилятор делает определенные предположения о символах,
+которые доступны для вызова в исполняемом контейнере. Как правило, эти функции
+предоставляются стандартной библиотекой, но если она не используется, то вы
+должны определить их самостоятельно.
 
-The first of these three functions, `stack_exhausted`, is invoked whenever stack
-overflow is detected.  This function has a number of restrictions about how it
-can be called and what it must do, but if the stack limit register is not being
-maintained then a thread always has an "infinite stack" and this function
-shouldn't get triggered.
+Первая из этих трех функций, `stack_exhausted`, вызывается тогда, когда
+обнаруживается (происходит) переполнение стека. Эта функция имеет ряд
+ограничений, касающихся того, как она может быть вызывана и того, что она должна
+делать, но если регистр предела стека не поддерживается, то поток всегда имеет
+"бесконечный стек" и эта функция не должна быть вызвана (получить управление,
+срабатывать).
 
-The second of these three functions, `eh_personality`, is used by the
-failure mechanisms of the compiler. This is often mapped to GCC's
-personality function (see the
-[libstd implementation](../std/rt/unwind/index.html) for more
-information), but crates which do not trigger a panic can be assured
-that this function is never called. The final function, `panic_fmt`, is
-also used by the failure mechanisms of the compiler.
+Вторая из этих трех функций, `eh_personality`, используется в механизме
+обработки ошибок компилятора. Она часто отображается на функцию personality
+(специализации) GCC (для получения дополнительной информации смотри [реализацию
+libstd](../std/rt/unwind/index.html)), но можно с уверенностью сказать, что для
+контейнеров, которые не вызывают панику, эта функция никогда не будет вызвана.
+Последняя функция, `panic_fmt`, также используются в механизме обработки ошибок
+компилятора.
 
-## Using libcore
+## Использование основной библиотеки (libcore)
 
-> **Note**: the core library's structure is unstable, and it is recommended to
-> use the standard library instead wherever possible.
+> **Примечание**: структура основной библиотеки (core) является нестабильной, и
+> поэтому рекомендуется использовать стандартную библиотеку (std) там, где это
+> возможно.
 
-With the above techniques, we've got a bare-metal executable running some Rust
-code. There is a good deal of functionality provided by the standard library,
-however, that is necessary to be productive in Rust. If the standard library is
-not sufficient, then [libcore](../core/index.html) is designed to be used
-instead.
+С учетом указанных выше методов, у нас есть чисто-металлический исполняемый код
+работает Rust. Стандартная библиотека предоставляет немало функциональных
+возможностей, однако, для Rust также важна производительность. Если стандартная
+библиотека не соответствует этим требованиям, то вместо нее может быть
+использована [libcore](../core/index.html).
 
-The core library has very few dependencies and is much more portable than the
-standard library itself. Additionally, the core library has most of the
-necessary functionality for writing idiomatic and effective Rust code.
+Основная библиотека имеет очень мало зависимостей и гораздо более компактна, чем
+стандартная библиотека. Кроме того, основная библиотека имеет большую часть
+необходимой функциональности для написания идиоматического и эффективного кода
+на Rust.
 
-As an example, here is a program that will calculate the dot product of two
-vectors provided from C, using idiomatic Rust practices.
+В качестве примера приведем программу, которая вычисляет скалярное произведение
+двух векторов, предоставленных из кода C, и использует идиоматические практики
+Rust.
 
-```
+```ignore
 #![feature(lang_items, start, no_std, core, libc)]
 #![no_std]
 
@@ -154,15 +159,15 @@ extern fn panic_fmt(args: &core::fmt::Arguments,
 # fn main() {}
 ```
 
-Note that there is one extra lang item here which differs from the examples
-above, `panic_fmt`. This must be defined by consumers of libcore because the
-core library declares panics, but it does not define it. The `panic_fmt`
-lang item is this crate's definition of panic, and it must be guaranteed to
-never return.
+Обратите внимание, что здесь, в отличае от примеров, рассмотренных выше, есть
+один дополнительный "lang" элемент `panic_fmt`. Он должен быть определён
+потребителями "libcore", потому что основная библиотека объявляет панику, но не
+определяет её. "lang" элемент `panic_fmt` определяет панику для этого
+контейнера, и необходимо гарантировать, что он никогда не возвращает значение.
 
-As can be seen in this example, the core library is intended to provide the
-power of Rust in all circumstances, regardless of platform requirements. Further
-libraries, such as liballoc, add functionality to libcore which make other
-platform-specific assumptions, but continue to be more portable than the
-standard library itself.
+Как видно в этом примере, основная библиотека предназначена для предоставления
+всей мощи Rust при любых обстоятельствах, независимо от требований платформы.
+Дополнительные библиотеки, такие как "liballoc", добавляют функциональность для
+"libcore", из-за чего делаются другие платформно-зависимые предположения, но это
+по-прежнему является более компактным (переносимым), чем стандартная библиотека.
 
