@@ -1,8 +1,8 @@
 % Угадайка
 
 В качестве нашего первого проекта, мы решим классическую для начинающих 
-программстов задачу: игра-угадайка. Немного о том, как игра должна работать:
-наша программа генерирует случаное целое число из промежутка от 1 до 100. Затем
+программистов задачу: игра-угадайка. Немного о том, как игра должна работать:
+наша программа генерирует случайное целое число из промежутка от 1 до 100. Затем
 она просит ввести число, которое она "загадала". Для каждого введённого нами 
 числа, она говорит, больше ли оно, чем "загаданное", или меньше. Игра 
 заканчивается когда мы отгадываем число. Звучит не плохо, не так ли?
@@ -29,12 +29,12 @@ $ cd guessing_game
 [package]
 
 name = "guessing_game"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Your Name <you@example.com>"]
 ```
 
 Cargo взял эту информацию из вашего рабочего окружения. Если информация не 
-корректа, исправте её.
+корректна, исправьте её.
 
 В завершение, Cargo создал программу `Hello, world!`. Посмотрите файл `src/main.rs`:
 
@@ -48,19 +48,19 @@ fn main() {
 
 ```{bash}
 $ cargo build
-   Compiling guessing_game v0.0.1 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
 
 Замечательно! Снова откройте `src/main.rs`. Мы будем писать весь наш код в этом
 файле.
 
-Прежде, чем мы начали работу, давайте рассмотрим ещё одну команду Cargo: `run`.
+Прежде, чем мы начнём работу, давайте рассмотрим ещё одну команду Cargo: `run`.
 `cargo run` похожа на `cargo build`, но после завершения компиляции, она 
 запускает получившийся исполняемый файл:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.0.1 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/debug/guessing_game`
 Hello, world!
 ```
@@ -84,7 +84,7 @@ fn main() {
 
     let mut guess = String::new();
 
-    let input = io::stdin().read_line(&mut guess)
+    io::stdin().read_line(&mut guess)
         .ok()
         .expect("Не удалось прочитать строку");
 
@@ -92,7 +92,7 @@ fn main() {
 }
 ```
 
-Здесь много чего! Давайте разберём этот участок ьит за битом.
+Здесь много чего! Давайте разберём этот участок по частям.
 
 ```rust,ignore
 use std::io;
@@ -100,11 +100,11 @@ use std::io;
 
 Нам надо получить то, что ввёл пользователь, а затем вывести результат на экран.
 Значит нам понадобится библиотека `io` из стандартной библиотеки. Изначально Rust 
-импортирует лишь некоторые вещи в нашу программ, в так называемом [`вступлении`][prelude].
+импортирует лишь некоторые вещи в нашу программу, в так называемом [`вступлении`][prelude].
 Если чего-то нет по вступлении, мы должны указать при помощи `use`, что хотим их
 использовать.
 
-[prelude]: ../std/prelude/index.html
+[prelude]: http://doc.rust-lang.org/std/prelude/index.html
 
 ```rust,ignore
 fn main() {
@@ -114,18 +114,18 @@ fn main() {
 `fn` объявляет новую функцию. Пустые круглые скобки `()` показывают, что она не
 принимает аргументов. Открывающая фигурная скобка `{` начинает тело нашей 
 функции. Из-за того, что мы не указали тип возвращаемого значения, предполагается,
-что будет возвращаться `()` - пустой [кортэж][tuples].
+что будет возвращаться `()` - пустой [кортеж][tuples].
 
 [tuples]: primitive-types.html#tuples
 
 ```rust,ignore
-    println!("Guess the number!");
+    println!("Угадайте число!");
 
-    println!("Please input your guess.");
+    println!("Пожалуйста, введите предположение.");
 ```
 
-We previously learned that `println!()` is a [macro][macros] that
-prints a [string][strings] to the screen.
+Мы уже изучили, что `println!()` - это [макрос][macro], который выводит 
+[строки][strings] на экран.
 
 [macros]: macros.html
 [strings]: strings.html
@@ -134,7 +134,9 @@ prints a [string][strings] to the screen.
     let mut guess = String::new();
 ```
 
-Now we’re getting interesting! There’s a lot going on in this little line. The first thing to notice is that this is a [let statement][let], which is used to create ‘variable bindings’. They take this form:
+Теперь интереснее! Как же много всего происходит в этой строке! Первая вещь, на 
+которую следует обратить внимание - [выражение let][let], которое используется 
+для `создания связи`. Оно выглядит так:
 
 ```rust,ignore
 let foo = bar;
@@ -142,148 +144,145 @@ let foo = bar;
 
 [let]: variable-bindings.html
 
-This will create a new binding named `foo`, and bind it to the value `bar`. In
-many languages, this is called a ‘variable’, but Rust’s variable bindings have
-a few tricks up their sleeves.
+Это создаёт новую связь с именем `foo` и привязывает ей значение `bar`. Во 
+многих языках это называется `переменная`, но в Rust связывание переменных имеет
+несколько трюков в рукаве.
 
-For example, they’re [immutable][immutable] by default. That’s why our example
-uses `mut`: it makes a binding mutable, rather than immutable. `let` doesn’t
-take a name on the left hand side, it actually accepts a
-‘[pattern][patterns]’. We’ll use patterns more later. It’s easy enough
-to use for now:
+Например, по умолчанию, связи [неизменяемы][immutable]. По этой причине наш пример
+использует `mut`: этот модификатор разрешает менять связь. С левой стороны у `let`
+может быть не просто имя связи, а [образец][patterns]. Мы будем использовать их 
+дальше. Их достаточно просто использовать:
 
 ```
-let foo = 5; // immutable.
-let mut bar = 5; // mutable
+let foo = 5; // неизменяемая связь
+let mut bar = 5; // изменяемая связь
 ```
 
 [immutable]: mutability.html
 [patterns]: patterns.html
 
-Oh, and `//` will start a comment, until the end of the line. Rust ignores
-everything in [comments][comments].
+Ах да, `//` начинает комментарий, который заканчивается в конце строки. Rust 
+игнорирует всё, что находится в [комментариях][comments].
 
 [comments]: comments.html
 
-So now we know that `let mut guess` will introduce a mutable binding named
-`guess`, but we have to look at the other side of the `=` for what it’s
-bound to: `String::new()`.
+Теперь мы знаем, что `let mut guess` объявляет изменяемую связь с именем `guess`,
+а по другую сторону от `=` находится то, что будет привязано: `String::new()`.
 
-`String` is a string type, provided by the standard library. A
-[`String`][string] is a growable, UTF-8 encoded bit of text.
+`String` - это строковый тип, предоставляемый нам стандартной библиотекой.
+[`String`][string] - это текст в кодировке UTF-8 переменной длины.
 
-[string]: ../std/string/struct.String.html
+[string]: http://doc.rust-lang.org/std/string/struct.String.html
 
-The `::new()` syntax is uses `::` because this is an ‘associated function’ of
-a particular type. That is to say, it’s associated with `String` itself,
-rather than a particular instance of a `String`. Some languages call this a
-‘static method’.
+Синтаксис `::new()` использует `::`, так как это привязанная к определённому 
+типу функция. То есть, она привязана к самому типу `String`, а не к определённой
+переменной типа `String`. Некоторые языки называют это "статическим методом".
 
-This function is named `new()`, because it creates a new, empty `String`.
-You’ll find a `new()` function on many types, as it’s a common name for making
-a new value of some kind.
+Имя этой функции - `new()`, так как она создаёт новый, пустой `String`. Вы 
+можете найти эту функцию у многих типов, потому что это общее имя для создания
+нового значения определённого типа.
 
-Let’s move forward:
+Давайте посмотрим дальше:
 
 ```rust,ignore
     io::stdin().read_line(&mut guess)
         .ok()
-        .expect("Failed to read line");
+        .expect("Не удалось прочитать строку");
 ```
 
-That’s a lot more! Let’s go bit-by-bit. The first line has two parts. Here’s
-the first:
+Это уже побольше! Давайте это всё разберём. В первой строке есть две части.
+Это первая:
 
 ```rust,ignore
 io::stdin()
 ```
 
-Remember how we `use`d `std::io` on the first line of the program? We’re now
-calling an associated function on it. If we didn’t `use std::io`, we could
-have written this line as `std::io::stdin()`.
+Помните, как мы импортировали (`use`) `std::io` в самом начале нашей программы?
+Сейчас мы вызвали ассоциированную с ним функцию. Если бы мы не сделали `use std::io`,
+нам бы пришлось здесь написать `std::io::stdin()`.
 
-This particular function returns a handle to the standard input for your
-terminal. More specifically, a [std::io::Stdin][iostdin].
+Эта функция возвращает обработчик стандартного ввода нашего терминала. Более 
+подробно об это можно почитать в [std::io::Stdin][iostdin].
 
-[iostdin]: ../std/io/struct.Stdin.html
+[iostdin]: http://doc.rust-lang.org/std/io/struct.Stdin.html
 
-The next part will use this handle to get input from the user:
+Следующая часть использует этот обработчик для получения всего, что введёт 
+пользователь:
 
 ```rust,ignore
 .read_line(&mut guess)
 ```
 
-Here, we call the [`read_line()`][read_line] method on our handle.
-[Method][method]s are like associated functions, but are only available on a
-particular instance of a type, rather than the type itself. We’re also passing
-one argument to `read_line()`: `&mut guess`.
+Здесь мы вызвали метод [`read_line()`][read_line] обработчика. [Методы][methos]
+похожи на привязанные функции, но доступны только у определённого экземпляра
+типа, а не самого типа. Мы указали один аргумент функции `read_line()`: `&mut guess`.
 
-[read_line]: ../std/io/struct.Stdin.html#method.read_line
+[read_line]: http://doc.rust-lang.org/std/io/struct.Stdin.html#method.read_line
 [method]: methods.html
 
-Remember how we bound `guess` above? We said it was mutable. However,
-`read_line` doesn’t take a `String` as an argument: it takes a `&mut String`.
-Rust has a feature called ‘[references][references]’, which allows you to have
-multiple references to one piece of data, which can reduce copying. References
-are a complex feature, as one of Rust’s major selling points is how safe and
-easy it is to use references. We don’t need to know a lot of those details to
-finish our program right now, though. For now, all we need to know is that
-like `let` bindings, references are immutable by default. Hence, we need to
-write `&mut guess`, rather than `&guess`.
+Помните, как мы выше привязали `guess`? Мы сказали, что она изменяема. Однако,
+`read_line` не получает в качестве аргумента `String`: она получает `&mut String`.
+В Rust есть такая особенность, называемая ["ссылки"][references], которая
+позволяет нам иметь несколько ссылок на одни и так же данные, что позволяет 
+избежать излишнего их копирования. Ссылки - достаточно сложная особенность, и
+одним из основных подкупающих достоинств Rust является то, как он решает вопрос 
+безопасности и простоты их использования. Пока что мы не должны знать об этих 
+деталях, чтобы завершить нашу программу. Сейчас, всё, что нам нужно - это знать 
+что ссылки, как и связывание при помощи `let`, неизменяемо по умолчанию. 
+Следовательно, мы должны написать `&mut guess`, а не `&guess`.
 
-Why does `read_line()` take a mutable reference to a string? Its job is
-to take what the user types into standard input, and place that into a
-string. So it takes that string as an argument, and in order to add
-the input, it needs to be mutable.
+Почему `read_line()` получает изменяемую ссылку на строку? Его работа - это взять
+то, что пользователь написал в стандартный ввод, и положить это в строку. Итак,
+функция получает строку в качестве аргумента, и для того, чтобы добавить в эту 
+строку что-то, она должна быть изменяемой.
 
 [references]: references-and-borrowing.html
 
-But we’re not quite done with this line of code, though. While it’s
-a single line of text, it’s only the first part of the single logical line of
-code:
+Но мы пока что ещё не закончили с этой строкой кода. Пока это одна строка текста, 
+это только первая часть одной логической строки кода:
 
 ```rust,ignore
         .ok()
-        .expect("Failed to read line");
+        .expect("Не удалось прочитать строку");
 ```
 
-When you call a method with the `.foo()` syntax, you may introduce a newline
-and other whitespace. This helps you split up long lines. We _could_ have
-done:
+Когда мы вызываем метод, используя синтаксис `.foo()`, мы можем перенести вызов
+в новую строку и сделать для него отступ. Это помогает работать с длинными 
+строками. Мы могли бы сделать и так:
 
 ```rust,ignore
-    io::stdin().read_line(&mut guess).ok().expect("failed to read line");
+    io::stdin().read_line(&mut guess).ok().expect("Не удалось прочитать строку");
 ```
 
-But that gets hard to read. So we’ve split it up, three lines for three
-method calls. We already talked about `read_line()`, but what about `ok()`
-and `expect()`? Well, we already mentioned that `read_line()` puts what
-the user types into the `&mut String` we pass it. But it also returns
-a value: in this case, an [`io::Result`][ioresult]. Rust has a number of
-types named `Result` in its standard library: a generic [`Result`][result],
-and then specific versions for sub-libraries, like `io::Result`.
+Но это достаточно трудно читать. Поэтому мы разделили строку: по строке на каждый
+вызов метода. Мы уже поговорили о `read_line()`, но ещё ничего не сказали про
+`ok()` и `expect()`. Мы узнали, что `read_line()` передаёт всё, что пользователь
+ввёл в `&mut String`, которую мы ему передали. Но этот метод так же и возвращает
+значение: в данном случае - [`io::Result`][ioresult]. В стандартной библиотеке 
+Rust есть несколько типов с именем `Result`: общая версия [`Result`][result] и 
+несколько отдельных версий в подбиблиотеках, например `io::Result`.
 
-[ioresult]: ../std/io/type.Result.html
-[result]: ../std/result/enum.Result.html
+[ioresult]: http://doc.rust-lang.org/std/io/type.Result.html
+[result]: http://doc.rust-lang.org/std/result/enum.Result.html
 
-The purpose of these `Result` types is to encode error handling information.
-Values of the `Result` type, like any type, have methods defined on them. In
-this case, `io::Result` has an `ok()` method, which says ‘we want to assume
-this value is a successful one. If not, just throw away the error
-information’. Why throw it away? Well, for a basic program, we just want to
-print a generic error, as basically any issue means we can’t continue. The
-[`ok()` method][ok] returns a value which has another method defined on it:
-`expect()`. The [`expect()` method][expect] takes a value it’s called on, and
-if it isn’t a successful one, [`panic!`][panic]s with a message you passed you
-passed it. A `panic!` like this will cause our program to crash, displaying
-the message.
+Целью типов `Result` является преобразование информации об ошибках, полученных
+от обработчика. У значений типа `Result`, как и любого другого типа, есть 
+определённые для него методы. В данном случае, у `io::Result` имеется метод `ok()`,
+который говорит, что "мы хотим получить это значение, если всё прошло хорошо.
+Если это не так, выбрось сообщение об ошибке". Но зачем выбрасывать? Для небольших
+программ, мы можем захотеть только вывести сообщение об ошибке и прекратить 
+выполнение программы. [Метод `ok()`][ok] возвращает значение, у которого объявлен
+другой метод: `expect()`. [Метод `expect()`][expect] берёт значение, для которого
+он вызван, и если оно не удачное, выполняет [`panic!`][panic] со строкой, заданной
+методу в качестве аргумента. `panic!` остановит нашу программу и выведет сообщение
+об ошибке.
 
-[ok]: ../std/result/enum.Result.html#method.ok
-[expect]: ../std/option/enum.Option.html#method.expect
+[ok]: http://doc.rust-lang.org/std/result/enum.Result.html#method.ok
+[expect]: http://doc.rust-lang.org/std/option/enum.Option.html#method.expect
 [panic]: error-handling.html
 
-If we leave off calling these two methods, our program will compile, but
-we’ll get a warning:
+Если мы выйдем за пределы этих двух методов, наша программа скомпилируется, но
+мы получим следующее предупреждение:
 
 ```bash
 $ cargo build
@@ -294,63 +293,63 @@ src/main.rs:10     io::stdin().read_line(&mut guess);
                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-Rust warns us that we haven’t used the `Result` value. This warning comes from
-a special annotation that `io::Result` has. Rust is trying to tell you that
-you haven’t handled a possible error. The right way to suppress the error is
-to actually write error handling. Luckily, if we just want to crash if there’s
-a problem, we can use these two little methods. If we can recover from the
-error somehow, we’d do something else, but we’ll save that for a future
-project.
+Rust предупреждает, что мы не используем значение `Result`. Это предупреждение
+пришло из специальной аннотации, которая указана в `io::Result`. Rust пытается 
+сказать нам, что мне не обрабатываем ошибки, которые могут возникнуть. Наиболее
+правильным решением предотвращения ошибки будет её обработка. К счастью, если
+мы только хотим обрушить приложение, если есть проблема, мы можем использовать 
+эти два небольших метода. Если мы можем восстановить что-либо из ошибки, мы 
+должны сделать что-либо другое, но мы сохраним это для будущего проекта.
 
-There’s just one line of this first example left:
+Там всего одна строка из первого примера:
 
 ```rust,ignore
-    println!("You guessed: {}", guees);
+    println!("Вы загадали: {}", guess);
 }
 ```
 
-This prints out the string we saved our input in. The `{}`s are a placeholder,
-and so we pass it `input` as an argument. If we had multiple `{}`s, we would
-pass multiple arguments:
+Здесь выводится на экран строка, которая была получена с нашего ввода. `{}` - это
+указатель места заполнения. В качестве второго аргумента макроса `println!` 
+мы указали `guess`. Если нам надо вывести несколько привязок, в самом простом 
+случае, мы должны поставить несколько указателей, по одному на каждую привязку:
 
 ```rust
 let x = 5;
 let y = 10;
 
-println!("x and y: {} and {}", x, y);
+println!("x и y: {} и {}", x, y);
 ```
 
-Easy.
+Просто.
 
-Anyway, that’s the tour. We can run what we have with `cargo run`:
+Мы можем запустить то, что у нас есть при помощи `cargo run`:
 
 ```bash
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/debug/guessing_game`
-Guess the number!
-Please input your guess.
+Угадайте число!
+Пожалуйста, введите предположение.
 6
-You guessed: 6
+Вы загадали: 6
 ```
 
-All right! Our first part is done: we can get input from the keyboard,
-and then print it back out.
+Всё правильно! Наша первая часть завершена: мы можем получать данные с клавиатуры
+и потом печатать их на экран.
 
-# Generating a secret number
+# Генерация секретного числа
 
-Next, we need to generate a secret number. Rust does not yet include random
-number functionality in its standard library. The Rust team does, however,
-provide a [`rand` crate][randcrate]. A ‘crate’ is a package of Rust code.
-We’ve been building a ‘binary crate’, which is an executable. `rand` is a
-‘library crate’, which contains code that’s intended to be used with other
-programs.
+Далее, нам надо сгенерировать секретное число. В стандартной библиотеке Rust нет
+ничего, что могло бы нам предоставить функционал для генерации случайных чисел.
+Однако, разработчики Rust для этого предоставили [контейнер `rand`][randcrate].
+"Контейнер" - это пакет с кодом Rust. Наш проект - "бинарный контейнер", из которого 
+в итоге получится исполняемый файл. `rand` - "библиотечный контейнер", который 
+содержит код, предназначенный для использования с другими программами.
 
 [randcrate]: https://crates.io/crates/rand
 
-Using external crates is where Cargo really shines. Before we can write
-the code using `rand`, we need to modify our `Cargo.toml`. Open it up, and
-add these few lines at the bottom:
+Прежде, чем мы начнём писать код с использованием `rand`, мы должны модифицировать
+наш `Cargo.toml`. Откроем его и добавим в конец следующие строчки:
 
 ```toml
 [dependencies]
@@ -358,19 +357,19 @@ add these few lines at the bottom:
 rand="0.3.0"
 ```
 
-The `[dependencies]` section of `Cargo.toml` is like the `[package]` section:
-everything that follows it is part of it, until the next section starts.
-Cargo uses the dependencies section to know what dependencies on external
-crates you have, and what versions you require. In this case, we’ve used `*`,
-which means that we’ll use the latest version of `rand`. Cargo understands
-[Semantic Versioning][semver], which is a standard for writing version
-numbers. If we wanted a specific version or range of versions, we could be
-more specific here. [Cargo’s documentation][cargodoc] contains more details.
+Секция `[dependencies]` похожа на секцию `[package]`: всё, что расположено после
+объявления секции и до начала следующей, является частью этой секции. Cargo
+использует секцию с зависимостями чтобы знать о том, какие сторонние контейнеры 
+потребуются, а так же какие их версии необходимы. В данном случае, мы используем
+версию `0.3.0`. Cargo понимает [семантическое версионирование][semver], которое
+является стандартом нумерации версий. Если мы хотим использовать последнюю версию
+контейнера, мы можем использовать `*`. Так же мы можем указать необходимый 
+промежуток версий. В [документации Cargo][cargodoc] есть больше информации.
 
-[semver]: http://semver.org
+[semver]: http://semver.org/lang/ru
 [cargodoc]: http://doc.crates.io/crates-io.html
 
-Now, without changing any of our code, let’s build our project:
+Теперь, без каких-либо изменений в нашем коде, давайте соберём наш проект:
 
 ```bash
 $ cargo build
@@ -382,7 +381,7 @@ $ cargo build
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
 
-(You may see different versions, of course.)
+(Конечно же, вы можете видеть другие версии.)
 
 Lots of new output! Now that we have an external dependency, Cargo fetches the
 latest versions of everything from the registry, which is a copy of data from
@@ -413,11 +412,11 @@ $ cargo build
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
 
-So, we told Cargo we wanted any version of `rand`, and so it fetched the
-latest version at the time this was written, `v0.3.8`. But what happens
-when next week, version `v0.4.0` comes out, which changes something with
-`rand`, and it includes a breaking change? After all, a `v0.y.z` version
-in SemVer can change every release.
+So, we told Cargo we wanted any `0.3.x` version of `rand`, and so it fetched the latest
+version at the time this was written, `v0.3.8`. But what happens when next
+week, version `v0.3.9` comes out, with an important bugfix? While getting
+bugfixes is important, what if `0.3.9` contains a regression that breaks our
+code?
 
 The answer to this problem is the `Cargo.lock` file you’ll now find in your
 project directory. When you build your project for the first time, Cargo
@@ -425,12 +424,17 @@ figures out all of the versions that fit your criteria, and then writes them
 to the `Cargo.lock` file. When you build your project in the future, Cargo
 will see that the `Cargo.lock` file exists, and then use that specific version
 rather than do all the work of figuring out versions again. This lets you
-have a repeatable build automatically.
+have a repeatable build automatically. In other words, we’ll stay at `0.3.8`
+until we explicitly upgrade, and so will anyone who we share our code with,
+thanks to the lock file.
 
-What about when we _do_ want to use `v0.4.0`? Cargo has another command,
+What about when we _do_ want to use `v0.3.9`? Cargo has another command,
 `update`, which says ‘ignore the lock, figure out all the latest versions that
 fit what we’ve specified. If that works, write those versions out to the lock
-file’.
+file’. But, by default, Cargo will only look for versions larger than `0.3.0`
+and smaller than `0.4.0`. If we want to move to `0.4.x`, we’d have to update
+the `Cargo.toml` directly. When we do, the next time we `cargo build`, Cargo
+will update the index and re-evaluate our `rand` requirements.
 
 There’s a lot more to say about [Cargo][doccargo] and [its
 ecosystem][doccratesio], but for now, that’s all we need to know. Cargo makes
@@ -607,7 +611,7 @@ match guess.cmp(&secret_number) {
 }
 ```
 
-[ordering]: ../std/cmp/enum.Ordering.html
+[ordering]: http://doc.rust-lang.org/std/cmp/enum.Ordering.html
 
 If it’s `Less`, we print `Too small!`, if it’s `Greater`, `Too big!`, and if
 `Equal`, `You win!`. `match` is really useful, and is used often in Rust.
@@ -710,9 +714,9 @@ variety of numbers, we need to give Rust a hint as to the exact type of number
 we want. Hence, `let guess: u32`. The colon (`:`) after `guess` tells Rust
 we’re going to annotate its type. `u32` is an unsigned, thirty-two bit
 integer. Rust has [a number of built-in number types][number], but we’ve
-chosen `u32`. It’s a good default choice for a small positive numer.
+chosen `u32`. It’s a good default choice for a small positive number.
 
-[parse]: ../std/primitive.str.html#method.parse
+[parse]: http://doc.rust-lang.org/std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
 
 Just like `read_line()`, our call to `parse()` could cause an error. What if
@@ -724,7 +728,7 @@ Let’s try our program out!
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.0.1 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/guessing_game`
 Guess the number!
 The secret number is: 58
@@ -789,7 +793,7 @@ and quit. Observe:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.0.1 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/guessing_game`
 Guess the number!
 The secret number is: 59
@@ -919,14 +923,14 @@ failure. Each contains more information: the successful parsed integer, or an
 error type. In this case, we `match` on `Ok(num)`, which sets the inner value
 of the `Ok` to the name `num`, and then we just return it on the right-hand
 side. In the `Err` case, we don’t care what kind of error it is, so we just
-use `_` intead of a name. This ignores the error, and `continue` causes us
+use `_` instead of a name. This ignores the error, and `continue` causes us
 to go to the next iteration of the `loop`.
 
 Now we should be good! Let’s try:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.0.1 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/guessing_game`
 Guess the number!
 The secret number is: 61
@@ -962,8 +966,6 @@ fn main() {
     println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
-
-    println!("The secret number is: {}", secret_number);
 
     loop {
         println!("Please input your guess.");
