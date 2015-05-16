@@ -104,7 +104,7 @@ use std::io;
 Если чего-то нет по вступлении, мы должны указать при помощи `use`, что хотим их
 использовать.
 
-[prelude]: ../std/prelude/index.html
+[prelude]: http://doc.rust-lang.org/std/prelude/index.html
 
 ```rust,ignore
 fn main() {
@@ -172,7 +172,7 @@ let mut bar = 5; // изменяемая связь
 `String` - это строковый тип, предоставляемый нам стандартной библиотекой.
 [`String`][string] - это текст в кодировке UTF-8 переменной длины.
 
-[string]: ../std/string/struct.String.html
+[string]: http://doc.rust-lang.org/std/string/struct.String.html
 
 Синтаксис `::new()` использует `::`, так как это привязанная к определённому 
 типу функция. То есть, она привязана к самому типу `String`, а не к определённой
@@ -611,7 +611,7 @@ match guess.cmp(&secret_number) {
 }
 ```
 
-[ordering]: ../std/cmp/enum.Ordering.html
+[ordering]: http://doc.rust-lang.org/std/cmp/enum.Ordering.html
 
 If it’s `Less`, we print `Too small!`, if it’s `Greater`, `Too big!`, and if
 `Equal`, `You win!`. `match` is really useful, and is used often in Rust.
@@ -716,7 +716,7 @@ we’re going to annotate its type. `u32` is an unsigned, thirty-two bit
 integer. Rust has [a number of built-in number types][number], but we’ve
 chosen `u32`. It’s a good default choice for a small positive number.
 
-[parse]: ../std/primitive.str.html#method.parse
+[parse]: http://doc.rust-lang.org/std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
 
 Just like `read_line()`, our call to `parse()` could cause an error. What if
