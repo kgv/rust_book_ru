@@ -15,7 +15,7 @@
 
 [Ход выполнения перевода](https://github.com/kgv/rust_book_ru/issues/38).
 
-[Правила перевода](https://github.com/kgv/rust_book_ru/issues/37).
+[Правила перевода](https://github.com/kgv/rust_book_ru/wiki/Правила).
 
 Если вы беретесь за работу над каким-нибудь файлом, просьба отписаться
 [здесь](https://github.com/kgv/rust_book_ru/issues/38).
