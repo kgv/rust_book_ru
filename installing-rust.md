@@ -24,8 +24,8 @@ $ sh rustup.sh
 Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
 пакетов: [32-битный][win32] или [64-битный][win64] и запустите его.
 
-[win32]: https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi
-[win64]: https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi
+[win32]: https://static.rust-lang.org/dist/rust-1.0.0-i686-pc-windows-gnu.msi
+[win64]: https://static.rust-lang.org/dist/rust-1.0.0-x86_64-pc-windows-gnu.msi
 
 ## Удаление
 
@@ -79,7 +79,7 @@ $ rustc --version
 Вы должны увидеть версию, хэш коммита, дату коммита и дату сборки:
 
 ```bash
-rustc 1.0.0-beta (9854143cb 2015-04-02) (built 2015-04-02)
+rustc 1.0.0 (a59de37e9 2015-05-13) (built 2015-05-14)
 ```
 
 Итак, теперь у вас есть установленный Rust! Поздравляем!

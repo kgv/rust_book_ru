@@ -1,23 +1,37 @@
 diff --git a/rust/master:src/doc/trpl/ownership.md b/HEAD:ownership.md
-index 223085c..ec727a5 100644
+index 3003156..7279256 100644
 --- a/rust/master:src/doc/trpl/ownership.md
 +++ b/HEAD:ownership.md
-@@ -1,555 +1,593 @@
+@@ -1,207 +1,221 @@
 -% Ownership
 +% Владение
  
--This guide presents Rust's ownership system. This is one of Rust's most unique
--and compelling features, with which Rust developers should become quite
--acquainted. Ownership is how Rust achieves its largest goal, memory safety.
--The ownership system has a few distinct concepts: *ownership*, *borrowing*,
--and *lifetimes*. We'll talk about each one in turn.
-+Это руководство описывает систему владения ресурсами Rust. Она представляет
-+собой наиболее уникальную и привлекательную особенность Rust, о которой
-+разработчики на Rust должны иметь полное представление. Владение - это то, как
-+Rust достигает своей главной цели - безопасности памяти. Система владения несет
-+в себе следующие основные концепции: *владение* (*ownership*), *заимствование*
-+(*borrowing*), и *срок жизни* (*lifetimes*). Мы поговорим о каждой из них в
-+дальнейшем.
+-This guide is one of three presenting Rust’s ownership system. This is one of
+-Rust’s most unique and compelling features, with which Rust developers should
+-become quite acquainted. Ownership is how Rust achieves its largest goal,
+-memory safety. The there are a few distinct concepts, each with its own
+-chapter:
++Эта глава является одной из трех, описывающих систему владения ресурсами Rust.
++Эта система представляет собой наиболее уникальную и привлекательную фичу Rust,
++о которой разработчики на Rust должны иметь полное представление. Владение - это
++то, как Rust достигает своей главной цели - безопасности памяти. Система
++владения включает в себя несколько различных концепций, каждая из которых
++рассматривается в своей собственной главе:
+ 
+-* ownership, which you’re reading now.
+-* [borrowing][borrowing], and their associated feature ‘references’
+-* [lifetimes][lifetimes], an advanced concept of borrowing
++* владение, ее вы сейчас читаете
++* [заимствование][borrowing], и ассоциированная с ним фича ‘ссылки’
++* [время жизни][lifetimes], расширение концепции заимствования
+ 
+-These three chapters are related, and in order. You’ll need all three to fully
+-understand the ownership system.
++Эти три главы взаимосвязаны, и их порядок важен. Вы должны будете освоить все
++три главы, чтобы полностью понять систему владения.
+ 
+ [borrowing]: references-and-borrowing.html
+ [lifetimes]: lifetimes.html
  
 -# Meta
 +# Мета
@@ -26,31 +40,31 @@ index 223085c..ec727a5 100644
 +Прежде чем перейти к деталям, отметитм два важных нюанса о системе владения.
  
 -Rust has a focus on safety and speed. It accomplishes these goals through many
--*zero-cost abstractions*, which means that in Rust, abstractions cost as little
+-‘zero-cost abstractions’, which means that in Rust, abstractions cost as little
 -as possible in order to make them work. The ownership system is a prime example
--of a zero cost abstraction. All of the analysis we'll talk about in this guide
+-of a zero cost abstraction. All of the analysis we’ll talk about in this guide
 -is _done at compile time_. You do not pay any run-time cost for any of these
 -features.
-+Rust сфокусирован на безопасности и скорости. Это достигается за счет абстракций
-+с нулевой стоимостью (*zero-cost abstractions*), что означает, что в Rust
-+стоимость абстракций должна быть настолько минимальной, насколько это возможно,
-+без ущерба для работоспособности. Система владения ресурсами - это яркий пример
-+абстракции с нулевой стоимостью. Весь анализ, о котором мы будем говорить в этом
-+руководстве, происходит _во время компиляции_. Вы не платите хоть сколько-нибудь
-+времени рантайма за какую-либо из фич.
++Rust сфокусирован на безопасности и скорости. Это достигается за счет
++‘абстракций с нулевой стоимостью‘ (‘zero-cost abstractions‘), что означает, что
++в Rust стоимость абстракций должна быть настолько минимальной, насколько это
++возможно, без ущерба для работоспособности. Система владения ресурсами - это
++яркий пример абстракции с нулевой стоимостью. Весь анализ, о котором мы будем
++говорить в этом руководстве, выполняется _во время компиляции_. Вы не платите
++хоть сколько-нибудь времени рантайма за какую-либо из фич.
  
 -However, this system does have a certain cost: learning curve. Many new users
--to Rust experience something we like to call "fighting with the borrow
--checker," where the Rust compiler refuses to compile a program that the author
--thinks is valid. This often happens because the programmer's mental model of
--how ownership should work doesn't match the actual rules that Rust implements.
+-to Rust experience something we like to call ‘fighting with the borrow
+-checker’, where the Rust compiler refuses to compile a program that the author
+-thinks is valid. This often happens because the programmer’s mental model of
+-how ownership should work doesn’t match the actual rules that Rust implements.
 -You probably will experience similar things at first. There is good news,
 -however: more experienced Rust developers report that once they work with the
 -rules of the ownership system for a period of time, they fight the borrow
 -checker less and less.
 +Тем не менее, эта система все же имеет определенную стоимость: кривая обучения.
-+Многие новые пользователи Rust испытыват то, что мы называем "борьба с проверкой
-+заимствования", когда компилятор Rust отказывается компилировать программу,
++Многие новые пользователи Rust испытыват то, что мы называем ‘борьба с проверкой
++заимствования‘, когда компилятор Rust отказывается компилировать программу,
 +которая по мнению автора является абсолютно правильной. Это часто происходит
 +потому, что мысленное представление программиста о том, как должно работать
 +владение, не совпадает с реальными правилами, которыми оперирует Rust. Вы,
@@ -59,727 +73,235 @@ index 223085c..ec727a5 100644
 +они работают с правилами системы владения, тем меньше они борются с проверкой
 +заимствования.
  
--With that in mind, let's learn about ownership.
+-With that in mind, let’s learn about ownership.
 +Имея это в виду, давайте перейдем к изучению систему владения.
  
 -# Ownership
 +# Владение
  
--At its core, ownership is about *resources*. For the purposes of the vast
--majority of this guide, we will talk about a specific resource: memory. The
--concept generalizes to any kind of resource, like a file handle, but to make it
--more concrete, we'll focus on memory.
-+По своей сути, владение применяется к *ресурсам*. В подавляющем большинстве, для
-+данного руководства, мы будем говорить о конкретном ресурсе: памяти. Вообще, эта
-+концепция обобщает понятие ресурса, то есть в качестве ресурса может выступать и
-+дескриптор файла. Но, чтобы оперировать более конкретными понятиями, мы
-+сосредоточимся на памяти.
- 
--When your program allocates some memory, it needs some way to deallocate that
--memory. Imagine a function `foo` that allocates four bytes of memory, and then
--never deallocates that memory. We call this problem *leaking* memory, because
--each time we call `foo`, we're allocating another four bytes. Eventually, with
--enough calls to `foo`, we will run our system out of memory. That's no good. So
--we need some way for `foo` to deallocate those four bytes. It's also important
--that we don't deallocate too many times, either. Without getting into the
--details, attempting to deallocate memory multiple times can lead to problems.
--In other words, any time some memory is allocated, we need to make sure that we
--deallocate that memory once and only once. Too many times is bad, not enough
--times is bad. The counts must match.
-+Когда ваша программа выделяет некоторый объем памяти, то она также должна каким-
-+то образом освобождать эту память. Представьте себе функцию `foo`, которая
-+выделяет четыре байта памяти, а затем никогда не освобождает эту память. Мы
-+называем это проблемой *утечки* (*leaking*) памяти, потому что каждый раз, когда
-+мы называем `foo`, мы снова и снова выделяем четыре байта. В конце концов, при
-+достаточном количестве вызовов `foo`, мы получим системную ошибку, сообщающую о
-+нехватке памяти (out of memory). Это плохо. Так что мы должны каким-то образом
-+освобождать этих четыре байта при вызове `foo`. Важно также, чтобы память не
-+была освобождена слишком много раз. Не вдаваясь в детали, скажем, что попытка
-+освободить память более одного раза может привести к проблемам. Другими словами,
-+выделяя некоторый объем памяти, мы должны убедиться в дальнейшем, что мы
-+освободили эту память и освободили ее лишь один раз. Много - плохо, мало - тоже
-+плохо. Счетчики должны совпадать.
- 
--There's one other important detail with regards to allocating memory. Whenever
--we request some amount of memory, what we are given is a handle to that memory.
--This handle (often called a *pointer*, when we're referring to memory) is how
--we interact with the allocated memory. As long as we have that handle, we can
--do something with the memory. Once we're done with the handle, we're also done
--with the memory, as we can't do anything useful without a handle to it.
-+Вот еще одна важная деталь в отношении выделения памяти. Всякий раз, когда мы
-+выделяем некоторое количество памяти, мы получаем ручку (handle) для
-+взаимодействия с этой памятью. Эта ручка (часто называемая *указателем*
-+(*pointer*), если мы ссылаемся на память) необходима для взаимодействия с
-+выделенной памятью. До тех пор пока у нас есть ручка, мы можем делать с памятью
-+все что угодно. После того как мы закончили работать с ручкой, мы также
-+заканчиваем работать с и памятью, так как мы не сможем сделать что-либо полезное
-+без ручки.
- 
--Historically, systems programming languages require you to track these
--allocations, deallocations, and handles yourself. For example, if we want some
--memory from the heap in a language like C, we do this:
-+Исторически сложилось так, что системные языки программирования требуют от
-+разработчика самостоятельно отслеживать и обрабатывать выделение и освобождение
-+ресурсов. Например, если мы хотим выделить немного памяти из кучи в языке, таком
-+как C, мы делаем следующее:
- 
- ```c
- {
-     int *x = malloc(sizeof(int));
- 
-     // we can now do stuff with our handle x
-     *x = 5;
- 
-     free(x);
- }
- ```
- 
--The call to `malloc` allocates some memory. The call to `free` deallocates the
--memory. There's also bookkeeping about allocating the correct amount of memory.
-+Вызов `malloc` выделяет память. Тут же производится рассчет необходимого
-+количества памяти. Вызов `free` освобождает выделенную память.
- 
--Rust combines these two aspects of allocating memory (and other resources) into
--a concept called *ownership*. Whenever we request some memory, that handle we
--receive is called the *owning handle*. Whenever that handle goes out of scope,
--Rust knows that you cannot do anything with the memory anymore, and so
--therefore deallocates the memory for you. Here's the equivalent example in
--Rust:
-+Rust объединяет эти два аспекта выделения памяти (и других ресурсов) в концепции
-+под названием *владение*. Всякий раз, когда мы запрашиваем некоторую память, то
-+мы получаем ручку, которая называется *ручкой, владеющей ресурсом*. Всякий раз,
-+когда эта ручка выходит из области видимости, Rust знает, что мы больше ничего
-+не можем делать с этой памятью, и освобождает память за нас. Вот эквивалентный
-+пример в Rust:
+-[`Variable bindings`][bindings] have a property in Rust: they ‘have ownership’
+-of what they’re bound to. This means that when a binding goes out of scope, the
+-resource that they’re bound to are freed. For example:
++[`Связанные имена`][bindings] имеют одну особенность в Rust: они ‘обладают
++правом собственности‘ на то, с чем они связаны. Это означает, что, когда
++связывание выходит за пределы области видимости, ресурс, с которым оно связано,
++будут освобожден. Например:
  
  ```rust
- {
-     let x = Box::new(5);
+ fn foo() {
+     let v = vec![1, 2, 3];
  }
  ```
  
--The `Box::new` function creates a `Box<T>` (specifically `Box<i32>` in this
--case) by allocating a small segment of memory on the heap with enough space to
--fit an `i32`. But where in the code is the box deallocated? We said before that
--we must have a deallocation for each allocation. Rust handles this for you. It
--knows that our handle, `x`, is the owning reference to our box. Rust knows that
--`x` will go out of scope at the end of the block, and so it inserts a call to
--deallocate the memory at the end of the scope. Because the compiler does this
--for us, it's impossible to forget. We always have exactly one deallocation
--  paired with each of our allocations.
-+Функция `Box::new` создает `Box<T>` (в данном конкретньм случае - `Box<i32>`)
-+путем выделения небольшого сегмента памяти в куче, достаточного для хранения
-+`i32`. Но где же в коде освобождается бокс? Мы говорили, что для каждого
-+выделения памяти должно быть соответствующее освобождение памяти. Rust
-+освобождает память за нас. Он знает, что наша ручка, `x`, является владельцем
-+ссылки на бокс. Также Rust знает, что область определения `x` завершается в
-+конце блока, и поэтому он вставляет вызов, освобождающий память, после
-+завершения области определения. Так как компилятор делает это за нас, невозможно
-+забыть освободить память. У нас всегда есть ровно одно освобождение памяти в
-+паре с каждым выделением памяти.
+-When `v` comes into scope, a new [`Vec<T>`][vect] is created. In this case, the
+-vector also allocates space on [the heap][heap], for the three elements. When
+-`v` goes out of scope at the end of `foo()`, Rust will clean up everything
+-related to the vector, even the heap-allocated memory. This happens
+-deterministically, at the end of the scope.
++Когда `v` входит в область видимости, создается новый [`Vec<T>`][vect]. В данном
++случае вектор также выделяет из [кучи][heap] пространство для трех элементов.
++Когда `v` выходит из области видимости, в конце `foo()`, Rust очищает все,
++связанное с вектором, даже динамически выделенную память. Это происходит
++детерминировано, в конце области видимости.
  
--This is pretty straightforward, but what happens when we want to pass our box
--to a function? Let's look at some code:
-+Это довольно просто, но что будет, если мы передадим наш бокс в функцию? Давайте
-+посмотрим на код:
+ [vect]: ../std/vec/struct.Vec.html
+ [heap]: the-stack-and-the-heap.html
+ 
+-# Move semantics
++# Семантика перемещения
+ 
+-There’s some more subtlety here, though: Rust ensures that there is _exactly
+-one_ binding to any given resource. For example, if we have a vector, we can
+-assign it to another binding:
++Хотя тут есть некоторые тонкости: Rust гарантирует, что существует _ровно одна_
++привязка к какому-либо ресурсу. Например, если у нас есть вектор, то мы можем
++присвоить этот вектор другой привязке:
++Важным аспектом [владения][ownership] является ’семантика перемещения’.
++Семантика перемещения контролирует, как и когда право собственности перемещается
++между привязками (связываниями).
  
  ```rust
- fn main() {
-     let x = Box::new(5);
+ let v = vec![1, 2, 3];
  
-     add_one(x);
- }
- 
- fn add_one(mut num: Box<i32>) {
-     *num += 1;
- }
+ let v2 = v;
  ```
  
--This code works, but it's not ideal. For example, let's add one more line of
--code, where we print out the value of `x`:
-+Этот код работает, но он не идеален. Давайте добавим еще одну строку кода,
-+которая выводит значение `x`:
+-But, if we try to use `v` afterwards, we get an error:
++Но, если после этого мы попытаемся использовать `v`, то получим ошибку:
  
- ```{rust,ignore}
- fn main() {
-     let x = Box::new(5);
+ ```rust,ignore
+ let v = vec![1, 2, 3];
  
-     add_one(x);
+ let v2 = v;
  
-     println!("{}", x);
- }
- 
- fn add_one(mut num: Box<i32>) {
-     *num += 1;
- }
+ println!("v[0] is: {}", v[0]);
  ```
  
--This does not compile, and gives us an error:
-+Этот код не скомпилируется и выведет ошибку:
+-It looks like this:
++Ошибка выглядит следующим образом:
  
  ```text
- error: use of moved value: `x`
-    println!("{}", x);
-                   ^
+ error: use of moved value: `v`
+ println!("v[0] is: {}", v[0]);
+                         ^
  ```
  
--Remember, we need one deallocation for every allocation. When we try to pass
--our box to `add_one`, we would have two handles to the memory: `x` in `main`,
--and `num` in `add_one`. If we deallocated the memory when each handle went out
--of scope, we would have two deallocations and one allocation, and that's wrong.
--So when we call `add_one`, Rust defines `num` as the owner of the handle. And
--so, now that we've given ownership to `num`, `x` is invalid. `x`'s value has
--"moved" from `x` to `num`. Hence the error: use of moved value `x`.
-+Помните, что у нас должно быть лишь одно освобождение памяти для
-+соответствующего выделения памяти. Если мы попытаемся передать наш бокс в
-+`add_one`, то мы получим две ручки для управления памятью: `x` в `main`, и `num`
-+в `add_one`. Так как Rust освобождает память каждый раз, когда ручка выходит за
-+пределы области определения, то у нас получилось бы два освобождения и одно
-+выделение памяти, что неправильно. Поэтому, когда мы вызываем `add_one`, Rust
-+назначает ручку `num` владельцем. После того как мы передали право владения
-+`num`, `x` становится недействительным. Значение `x` "перемещается" из `x` в
-+`num`. Отсюда ошибка: использование перемещенного значения `x`.
+-A similar thing happens if we define a function which takes ownership, and
+-try to use something after we’ve passed it as an argument:
++То же самое произойдет, если мы определим функцию, которая принимает право
++владения, и попробуем использовать что-то после того как мы передали это что-то
++в качестве аргумента в эту функцию:
  
--To fix this, we can have `add_one` give ownership back when it's done with the
--box:
-+Чтобы исправить это, мы можем переписать функцию `add_one`, чтобы она возвращала
-+право владения обратно, когда закончит работать с боксом:
+ ```rust,ignore
+ fn take(v: Vec<i32>) {
+     // what happens here isn’t important.
+ }
+ 
+ let v = vec![1, 2, 3];
+ 
+ take(v);
+ 
+ println!("v[0] is: {}", v[0]);
+ ```
+ 
+-Same error: “use of moved value.” When we transfer ownership to something else,
+-we say that we’ve ‘moved’ the thing we refer to. You don’t need some sort of
+-special annotation here, it’s the default thing that Rust does.
++Та же самая ошибка: “use of moved value“ (“используется перемещенное значение“).
++Когда мы передаем право владения куда-то еще, мы как бы говорим, что мы
++‘перемещаем‘ то, на что ссылаемся. При этом не нужно указывать какую-либо
++специальную аннотацию, Rust делает это по-умолчанию.
+ 
+-## The details
++# Детали
+ 
+-The reason that we cannot use a binding after we’ve moved it is subtle, but
+-important. When we write code like this:
++Причина, по которой мы не можем использовать привязку после того как мы ее
++переместили, трудно заметная, но очень важная. Когда мы пишем код вроде этого:
  
  ```rust
- fn main() {
-     let x = Box::new(5);
+ let v = vec![1, 2, 3];
  
-     let y = add_one(x);
- 
-     println!("{}", y);
- }
- 
- fn add_one(mut num: Box<i32>) -> Box<i32> {
-     *num += 1;
- 
-     num
- }
+ let v2 = v;
  ```
  
--This code will compile and run just fine. Now, we return a `box`, and so the
--ownership is transferred back to `y` in `main`. We only have ownership for the
--duration of our function before giving it back. This pattern is very common,
--and so Rust introduces a concept to describe a handle which temporarily refers
--to something another handle owns. It's called *borrowing*, and it's done with
--*references*, designated by the `&` symbol.
-+Этот код будет скомпилирован и будет работать нормально. Теперь мы возвращаем
-+`box`, и поэтому право собственности возвращается обратно к `y` в функцию
-+`main`. Право собственности передается в функцию лишь на время, а затем
-+возвращается обратно. Этот паттерн является очень распространенным, и поэтому
-+Rust вводит понятие для описания ручки, которая временно ссылается на другую
-+ручку, владеющую правом собственности. Оно называется *заимствованием*, и
-+делается оно с использованием *ссылок*, которые обозначаются символом `&`.
+-The first line creates some data for the vector on the [stack][sh], `v`. The
+-vector’s data, however, is stored on the [heap][sh], and so it contains a
+-pointer to that data. When we move `v` to `v2`, it creates a copy of that data,
+-for `v2`. Which would mean two pointers to the contents of the vector on the
+-heap. That would be a problem: it would violate Rust’s safety guarantees by
+-introducing a data race. Therefore, Rust forbids using `v` after we’ve done the
+-move.
++Первая строка создает некоторые данные для вектора в [стеке][sh], `v`. Данные
++самого вектора, однако, сохраняются в [куче][sh], и поэтому стековые данные
++содержат указатель на данные в куче. Когда мы перемещаем `v` в `v2`, то
++создается копия стековых данных, для `v2`. Что будет означать, что два указателя
++ссылаются на расположенный в куче вектор. Такое поведение могло бы быть
++проблемой: оно нарушало бы гарантии безопасности Rust, привнося гонки данных.
++Поэтому Rust запрещает использование `v` после того как мы выполнили его
++перемещение.
  
--# Borrowing
-+# Заимствование
+ [sh]: the-stack-and-the-heap.html
  
--Here's the current state of our `add_one` function:
-+Вот текущее состояние нашей функции `add_one`:
+-It’s also important to note that optimizations may remove the actual copy of
+-the bytes, depending on circumstances. So it may not be as inefficient as it
+-initially seems.
++Важно также отметить, что оптимизация может удалить фактическую (точную) копию
++байтов, в зависимости от обстоятельств. Так что это может быть не так уж
++неэффективно, как выглядит на первый взгляд.
+ 
+-## `Copy` types
++# Типы, реализующие трейт `Copy`
+ 
+-We’ve established that when ownership is transferred to another binding, you
+-cannot use the original binding. However, there’s a [trait][traits] that changes this
+-behavior, and it’s called `Copy`. We haven’t discussed traits yet, but for now,
+-you can think of them as an annotation to a particular type that adds extra
+-behavior. For example:
++Мы установили, что, как только право собственности передается другой привязке,
++то вы больше не можете использовать оригинальную привязку. Тем не менее,
++существует [трейт][traits], который изменяет такое поведение, и он называется
++`Copy`. Мы еще не обсуждали трейты, но пока вы можете думать о них как об
++аннотациях к конкретному типу, которые придают дополнительное поведение.
++Например:
  
  ```rust
- fn add_one(mut num: Box<i32>) -> Box<i32> {
-     *num += 1;
+ let v = 1;
  
-     num
- }
+ let v2 = v;
+ 
+ println!("v is: {}", v);
  ```
  
--This function takes ownership, because it takes a `Box`, which owns its
--contents. But then we give ownership right back.
-+Эта функция принимает право владения, потому что она принимает `Box`, который
-+владеет своим содержимым. Но затем мы возвращаем право владения обратно.
+-In this case, `v` is an `i32`, which implements the `Copy` trait. This means
+-that, just like a move, when we assign `v` to `v2`, a copy of the data is made.
+-But, unlike a move, we can still use `v` afterward. This is because an `i32`
+-has no pointers to data somewhere else, copying it is a full copy.
++В этом примере `v` является` i32`, который реализует трейт `Copy`. Это означает,
++что, как и при перемещении, когда мы присваиваем привязку `v` привязке `v2`,
++будет создана копия данных. Но, в отличие от перемещения, мы можем использовать
++`v` в дальнейшем. Это потому, что в `i32` не имеет указателей на данные в каком-
++либо другом месте, поэтому копирование - это полная копия.
  
--In the physical world, you can give one of your possessions to someone for a
--short period of time. You still own your possession, you're just letting someone
--else use it for a while. We call that *lending* something to someone, and that
--person is said to be *borrowing* that something from you.
-+В физическом мире, вы можете передать какое-либо ваше имущество кому-то на
-+короткий период времени. Вы все еще будете владельцем переданного имущества, вы
-+просто позволите кому-то использовать его некоторое время. Это называется
-+*одолжить* что-то кому-то, или, если рассматривать это с другого ракурса,
-+*занять* что-то у кого-то.
+-We will discuss how to make your own types `Copy` in the [traits][traits]
+-section.
++Мы будем обсуждать, как сделать свои собственные типы, реализующие трейт `Copy`
++в разделе [Трейты][traits].
  
--Rust's ownership system also allows an owner to lend out a handle for a limited
--period. This is also called *borrowing*. Here's a version of `add_one` which
--borrows its argument rather than taking ownership:
-+Система владения Rust также позволяет владельцу одолжить ручку на определенный
-+период времени. Это также называется *заимствование*. Вот версия `add_one`,
-+которая заимствует свой аргумент, а не забирает право владения:
+ [traits]: traits.html
+ 
+-# More than ownership
++# Больше, чем владение
+ 
+-Of course, if we had to hand ownership back with every function we wrote:
++Конечно, если бы нам нужно было вернуть право владения обратно из функции, то мы
++бы написали:
  
  ```rust
- fn add_one(num: &mut i32) {
-     *num += 1;
+ fn foo(v: Vec<i32>) -> Vec<i32> {
+     // do stuff with v
+ 
+     // hand back ownership
+     v
  }
  ```
  
--This function borrows an `i32` from its caller, and then increments it. When
--the function is over, and `num` goes out of scope, the borrow is over.
-+Эта функция заимствует `i32` у вызвавшей ее функции, а затем увеличивает его.
-+Когда функция заканчивается, и `num` выходит из области определения, то заем
-+также заканчивается.
- 
--We have to change our `main` a bit too:
-+Мы должны немного изменить нашу функцию `main`:
+-This would get very tedius. It gets worse the more things we want to take ownership of:
++Это сильно утомляет. Функция становится тем хуже, чем больше прав владения она
++хочет забрать себе:
  
  ```rust
- fn main() {
-     let mut x = 5;
+ fn foo(v1: Vec<i32>, v2: Vec<i32>) -> (Vec<i32>, Vec<i32>, i32) {
+     // do stuff with v1 and v2
  
-     add_one(&mut x);
- 
-     println!("{}", x);
+     // hand back ownership, and the result of our function
+     (v1, v2, 42)
  }
  
- fn add_one(num: &mut i32) {
-     *num += 1;
- }
+ let v1 = vec![1, 2, 3];
+ let v2 = vec![1, 2, 3];
+ 
+ let (v1, v2, answer) = foo(v1, v2);
  ```
  
--We don't need to assign the result of `add_one()` anymore, because it doesn't
--return anything anymore. This is because we're not passing ownership back,
--since we just borrow, not take ownership.
-+Нам больше не нужно присваивать результат `add_one()` какой-либо переменной,
-+потому что она больше ничего не возвращает. Это потому, что мы не возвращаем
-+право владения обратно, так как мы использовали заимствование, а не забирали
-+себе право владения.
+-Ugh! The return type, return line, and calling the function gets way more
+-complicated.
++Брр! Возвращаемый тип, строка, возвращая значение, и вызов функции получается
++намного более сложный.
  
--# Lifetimes
-+# Срок жизни
+-Luckily, Rust offers a feature, borrowing, which helps us solve this problem.
+-It’s the topic of the next section!
++К счастью, Rust предлагает фичу, заимствование, которая помогает нам решить эту
++проблему. Это тема следующего раздела!
  
--Lending out a reference to a resource that someone else owns can be
--complicated, however. For example, imagine this set of operations:
-+Одалживание ссылки на ресурс, которым кто-то владеет может быть довольно
-+сложным. Например, представьте себе следующую последовательность операций:
  
--1. I acquire a handle to some kind of resource.
--2. I lend you a reference to the resource.
--3. I decide I'm done with the resource, and deallocate it, while you still have
--   your reference.
--4. You decide to use the resource.
-+1. Я получаю ручку на какой-то ресурс.
-+2. Я одалживаю вам ссылку на это ресурс.
-+3. Я решаю, что ресурс мне больше не требуется, и освобождаю его, в то время как
-+   у вас все еще есть на него ссылка.
-+4. Вы решаете использовать этот ресурс.
  
--Uh oh! Your reference is pointing to an invalid resource. This is called a
--*dangling pointer* or "use after free," when the resource is memory.
-+Ой-ой! Ваша ссылка указывает на недопустимый ресурс. Это называется *висячий
-+указатель* или "использование после освобождения", когда ресурсом является
-+память.
  
--To fix this, we have to make sure that step four never happens after step
--three. The ownership system in Rust does this through a concept called
--*lifetimes*, which describe the scope that a reference is valid for.
-+Чтобы исправить это, мы должны убедиться, что четвертый шаг никогда не
-+произойдет после третьего. Система владения в Rust делает это через концепцию
-+под названием *срок жизни*, которая описывает область определения, на протяжении
-+которой ссылка будет действительна.
  
--Remember the function that borrowed an `i32`? Let's look at it again.
-+Помните функцию, которая заимствовала `i32`? Давайте посмотрим на нее еще раз.
  
- ```rust
- fn add_one(num: &mut i32) {
-     *num += 1;
- }
- ```
  
--Rust has a feature called *lifetime elision*, which allows you to not write
--lifetime annotations in certain circumstances. This is one of them. We will
--cover the others later. Without eliding the lifetimes, `add_one` looks like
--this:
-+У Rust есть фича под названием *элизия срока жизни* (*lifetime elision*),
-+которая позволяет не писать аннотации срока жизни в определенных случаях. Это
-+один из них. Другие мы рассмотрим позже. Без элизии срока жизни, `add_one`
-+выглядит следующим образом:
  
- ```rust
- fn add_one<'a>(num: &'a mut i32) {
-     *num += 1;
- }
- ```
  
--The `'a` is called a *lifetime*. Most lifetimes are used in places where
--short names like `'a`, `'b` and `'c` are clearest, but it's often useful to
--have more descriptive names. Let's dig into the syntax in a bit more detail:
-+`'a` называется *сроком жизни*. В большинстве случаев использование коротких
-+имен для обозначения срока жизни, как например `'a`, `'b` и `'c`, является
-+наиболее правильным, но довольно часто бывает полезно использовать и более
-+говорящие имена. Давайте углубимся в синтаксис более подробно:
  
- ```{rust,ignore}
- fn add_one<'a>(...)
- ```
  
--This part _declares_ our lifetimes. This says that `add_one` has one lifetime,
--`'a`. If we had two, it would look like this:
-+Эта часть _объявляет_ срок жизни. Это говорит о том, что `add_one` имеет один
-+срок жизни, `'a`. Если у нас было бы два срока жизни, то это выглядело бы так:
- 
- ```{rust,ignore}
- fn add_two<'a, 'b>(...)
- ```
- 
--Then in our parameter list, we use the lifetimes we've named:
-+Затем в списке параметров, мы используем заданный срок жизни:
- 
- ```{rust,ignore}
- ...(num: &'a mut i32)
- ```
- 
--If you compare `&mut i32` to `&'a mut i32`, they're the same, it's just that the
--lifetime `'a` has snuck in between the `&` and the `mut i32`. We read `&mut i32` as "a
--mutable reference to an i32" and `&'a mut i32` as "a mutable reference to an i32 with the lifetime 'a.'"
-+Если вы сравните `&mut i32` с `&'a mut i32`, то увидите, что они отличаются
-+только определением срока жизни `'a`, написанным между `&` и `mut i32`. `&mut
-+i32` читается как "изменяемая ссылка на i32", а `&'a mut i32` - как "изменяемая
-+ссылка на i32 со сроком жизни 'a".
- 
--Why do lifetimes matter? Well, for example, here's some code:
-+Почему срок жизни имеет значение? Например, вот некоторый код:
- 
- ```rust
- struct Foo<'a> {
-     x: &'a i32,
- }
- 
- fn main() {
-     let y = &5; // this is the same as `let _y = 5; let y = &_y;`
-     let f = Foo { x: y };
- 
-     println!("{}", f.x);
- }
- ```
- 
--As you can see, `struct`s can also have lifetimes. In a similar way to functions,
-+Как вы можете заметить, структуры, `struct`, также могут иметь сроки жизни. Так
-+же как и функции
- 
- ```{rust}
- struct Foo<'a> {
- # x: &'a i32,
- # }
- ```
- 
--declares a lifetime, and
-+определяют срок жизни и
- 
- ```rust
- # struct Foo<'a> {
- x: &'a i32,
- # }
- ```
- 
--uses it. So why do we need a lifetime here? We need to ensure that any reference
--to a `Foo` cannot outlive the reference to an `i32` it contains.
-+используют его. Почему же мы должны определять срок жизни здесь? Мы должны
-+убедиться, что ссылка на `Foo` не может жить дольше, чем ссылка на `i32`,
-+содержащаяся в нем.
- 
--## Thinking in scopes
-+## Область определения
- 
--A way to think about lifetimes is to visualize the scope that a reference is
--valid for. For example:
-+Один из способов понять, что же такое срок жизни, это визуализировать область, в
-+которой ссылка является действительной. Например:
- 
- ```rust
- fn main() {
-     let y = &5;     // -+ y goes into scope
-                     //  |
-     // stuff        //  |
-                     //  |
- }                   // -+ y goes out of scope
- ```
- 
--Adding in our `Foo`:
-+Добавим нашу структуру `Foo`:
- 
- ```rust
- struct Foo<'a> {
-     x: &'a i32,
- }
- 
- fn main() {
-     let y = &5;           // -+ y goes into scope
-     let f = Foo { x: y }; // -+ f goes into scope
-     // stuff              //  |
-                           //  |
- }                         // -+ f and y go out of scope
- ```
- 
--Our `f` lives within the scope of `y`, so everything works. What if it didn't?
--This code won't work:
-+Наша `f` живет в области определения `y`, поэтому все работает. Что же будет,
-+если это не так? Этот код не будет работать:
- 
- ```{rust,ignore}
- struct Foo<'a> {
-     x: &'a i32,
- }
- 
- fn main() {
-     let x;                    // -+ x goes into scope
-                               //  |
-     {                         //  |
-         let y = &5;           // ---+ y goes into scope
-         let f = Foo { x: y }; // ---+ f goes into scope
-         x = &f.x;             //  | | error here
-     }                         // ---+ f and y go out of scope
-                               //  |
-     println!("{}", x);        //  |
- }                             // -+ x goes out of scope
- ```
- 
--Whew! As you can see here, the scopes of `f` and `y` are smaller than the scope
--of `x`. But when we do `x = &f.x`, we make `x` a reference to something that's
--about to go out of scope.
-+Вот так! Как вы можете видеть здесь, области определения `f` и `y` меньше, чем
-+область определения `x`. Но когда мы выполняем `x = &f.x`, мы присваиваем `x`
-+ссылку на что-то, что вот-вот выйдет из области определения.
- 
--Named lifetimes are a way of giving these scopes a name. Giving something a
--name is the first step towards being able to talk about it.
-+Присвоение имени сроку жизни - это способ задать имя его области определения.
-+Задание имени является первым шагом, чтобы иметь возможность оперировать этим
-+именованным понятием.
- 
- ## 'static
- 
--The lifetime named *static* is a special lifetime. It signals that something
--has the lifetime of the entire program. Most Rust programmers first come across
--`'static` when dealing with strings:
-+Срок жизни с именем *static* является специальным. Он обозначает, что что-то
-+имеет срок жизни равный сроку жизни всей программы. Большинство Rust
-+программистов впервые столкиваются с `'static`, когда имеют дело со строками:
- 
- ```rust
- let x: &'static str = "Hello, world.";
- ```
- 
--String literals have the type `&'static str` because the reference is always
--alive: they are baked into the data segment of the final binary. Another
--example are globals:
-+Строковые литералы имеют тип `&'static str`, потому что ссылка должна быть
-+действительна на протяжении работы всей программы: они располагаются в сегменте
-+данных конечного двоичного файла. Другой пример - глобальные переменные:
- 
- ```rust
- static FOO: i32 = 5;
- let x: &'static i32 = &FOO;
- ```
- 
--This adds an `i32` to the data segment of the binary, and `x` is a reference
--to it.
-+В этом примере `i32` добавляется в сегмент данных двоичного файла, а `x`
-+ссылается на него.
- 
--# Shared Ownership
-+# Распределенное владение
- 
--In all the examples we've considered so far, we've assumed that each handle has
--a singular owner. But sometimes, this doesn't work. Consider a car. Cars have
--four wheels. We would want a wheel to know which car it was attached to. But
--this won't work:
-+Во всех примерах, которые мы рассматривали до сих пор, мы предполагали, что
-+каждая ручка имеет лишь одного владельца. Но иногда, это не работает. Рассмотрим
-+автомобиль. Автомобили имеют четыре колеса. Мы бы хотели, чтобы колесо обладало
-+информацией, к какому автомобилю он было присоединено. Однако это не будет
-+работать:
- 
- ```{rust,ignore}
- struct Car {
-     name: String,
- }
- 
- struct Wheel {
-     size: i32,
-     owner: Car,
- }
- 
- fn main() {
-     let car = Car { name: "DeLorean".to_string() };
- 
-     for _ in 0..4 {
-         Wheel { size: 360, owner: car };
-     }
- }
- ```
- 
--We try to make four `Wheel`s, each with a `Car` that it's attached to. But the
--compiler knows that on the second iteration of the loop, there's a problem:
-+Попробуем создать четыре колеса, `Wheel`, каждое из которых содержит автомобиль,
-+`Car`, к которому оно присоединено. Но компилятор сообщит, что на второй
-+итерации цикла есть проблема:
- 
- ```text
- error: use of moved value: `car`
-     Wheel { size: 360, owner: car };
-                               ^~~
- note: `car` moved here because it has type `Car`, which is non-copyable
-     Wheel { size: 360, owner: car };
-                               ^~~
- ```
- 
--We need our `Car` to be pointed to by multiple `Wheel`s. We can't do that with
--`Box<T>`, because it has a single owner. We can do it with `Rc<T>` instead:
-+Нам нужно, чтобы на наш автомобиль, `Car`, ссылалось каждое из колес, `Wheel`.
-+Мы не в состоянии реализовать это с помощью `Box<T>`, потому что он может иметь
-+лишь одного владельца. Вместо этого, мы можем реализовать это с помощью `Rc<T>`:
- 
- ```rust
- use std::rc::Rc;
- 
- struct Car {
-     name: String,
- }
- 
- struct Wheel {
-     size: i32,
-     owner: Rc<Car>,
- }
- 
- fn main() {
-     let car = Car { name: "DeLorean".to_string() };
- 
-     let car_owner = Rc::new(car);
- 
-     for _ in 0..4 {
-         Wheel { size: 360, owner: car_owner.clone() };
-     }
- }
- ```
- 
--We wrap our `Car` in an `Rc<T>`, getting an `Rc<Car>`, and then use the
--`clone()` method to make new references. We've also changed our `Wheel` to have
--an `Rc<Car>` rather than just a `Car`.
-+Мы обернули наш автомобиль, `Car`, в `Rc<T>`, получив при этом `Rc<Car>`, а
-+затем использовали метод `clone()`, чтобы создавать новые ссылки. Мы также
-+изменили наше колесо, `Wheel`, чтобы оно содержало `Rc<Car>`, а не просто `Car`.
- 
--This is the simplest kind of multiple ownership possible. For example, there's
--also `Arc<T>`, which uses more expensive atomic instructions to be the
--thread-safe counterpart of `Rc<T>`.
-+Это простейший вид множественного владения из возможных. Например, есть также
-+`Arc<T>`, который использует более дорогие атомарные инструкции и является
-+потоко-безопасным аналогом `Rc<T>`.
- 
--## Lifetime Elision
-+## Cокрытие срока жизни
- 
- Rust supports powerful local type inference in function bodies, but it’s
- forbidden in item signatures to allow reasoning about the types just based in
- the item signature alone. However, for ergonomic reasons a very restricted
- secondary inference algorithm called “lifetime elision” applies in function
- signatures. It infers only based on the signature components themselves and not
- based on the body of the function, only infers lifetime parameters, and does
- this with only three easily memorizable and unambiguous rules. This makes
- lifetime elision a shorthand for writing an item signature, while not hiding
- away the actual types involved as full local inference would if applied to it.
-+В Rust есть мощный локальный вывод типов. Однако, сигнатуры объявлений верхнего
-+уровня не выводятся, чтобы можно было рассуждать о типах на основании одних лишь
-+сигнатур. Из соображений удобства, введён ограниченный механизм вывода типов
-+сигнатур функций, называемый "сокрытие сроков жизни" (“lifetime elision”). Он
-+выводит типы на основании только элементов сигнатуры - тело функции при этом не
-+учитывается. При этом его назначение - это вывести лишь параметры срока жизни
-+аргументов. Для этого он реализует три простых правила. Таким образом, сокрытие
-+срока жизни упрощает написание сигнатур, одновременно не скрывая реальные типы
-+аргументов.
- 
--When talking about lifetime elision, we use the term *input lifetime* and
--*output lifetime*. An *input lifetime* is a lifetime associated with a parameter
--of a function, and an *output lifetime* is a lifetime associated with the return
--value of a function. For example, this function has an input lifetime:
-+Когда речь идет о неявном сроке жизни, мы используем термины *входной срок
-+жизни* (*input lifetime*) и *выходной срок жизни* (*output lifetime*). *Входной
-+срок жизни* связан с передаваемыми в функцию параметрами, а *выходной срок
-+жизни* связан с возвращаемым функцией значением. Например, эта функция имеет
-+входной срок жизни:
- 
- ```{rust,ignore}
- fn foo<'a>(bar: &'a str)
- ```
- 
--This one has an output lifetime:
-+А эта имеет выходной срок жизни:
- 
- ```{rust,ignore}
- fn foo<'a>() -> &'a str
- ```
- 
--This one has a lifetime in both positions:
-+Эта же имеет как входной, так и выходной сроки жизни:
- 
- ```{rust,ignore}
- fn foo<'a>(bar: &'a str) -> &'a str
- ```
- 
--Here are the three rules:
-+Ниже представлены три правила:
- 
--* Each elided lifetime in a function's arguments becomes a distinct lifetime
--  parameter.
-+* Каждый неявный срок жизни в аргументах функции становится индивидуальным
-+  сроком жизни.
- 
--* If there is exactly one input lifetime, elided or not, that lifetime is
--  assigned to all elided lifetimes in the return values of that function.
-+* Если есть ровно один входной срок жизни, явный или неявный, то этот срок жизни
-+  присваивается всем неявным выходным срокам жизни.
- 
--* If there are multiple input lifetimes, but one of them is `&self` or `&mut
--  self`, the lifetime of `self` is assigned to all elided output lifetimes.
-+* Если есть несколько входных сроков жизней, но один из них это `&self` или
-+  `&mut self`, то всем неявным выходным срокам жизни назначается срок жизни
-+  `self`.
- 
--Otherwise, it is an error to elide an output lifetime.
-+В противном случае, неявное задание выходного срока жизни является ошибкой.
- 
--### Examples
-+### Примеры
- 
--Here are some examples of functions with elided lifetimes.  We've paired each
--example of an elided lifetime with its expanded form.
-+Вот некоторые примеры функций, представленные в 2 видах: с явно (развернутая
-+форма) и неявно заданным сроком жизни:
- 
- ```{rust,ignore}
- fn print(s: &str); // elided
- fn print<'a>(s: &'a str); // expanded
- 
- fn debug(lvl: u32, s: &str); // elided
- fn debug<'a>(lvl: u32, s: &'a str); // expanded
- 
- // In the preceding example, `lvl` doesn't need a lifetime because it's not a
- // reference (`&`). Only things relating to references (such as a `struct`
- // which contains a reference) need lifetimes.
- 
- fn substr(s: &str, until: u32) -> &str; // elided
- fn substr<'a>(s: &'a str, until: u32) -> &'a str; // expanded
- 
- fn get_str() -> &str; // ILLEGAL, no inputs
- 
- fn frob(s: &str, t: &str) -> &str; // ILLEGAL, two inputs
- fn frob<'a, 'b>(s: &'a str, t: &'b str) -> &str; // Expanded: Output lifetime is unclear
- 
- fn get_mut(&mut self) -> &mut T; // elided
- fn get_mut<'a>(&'a mut self) -> &'a mut T; // expanded
- 
- fn args<T:ToCStr>(&mut self, args: &[T]) -> &mut Command // elided
- fn args<'a, 'b, T:ToCStr>(&'a mut self, args: &'b [T]) -> &'a mut Command // expanded
- 
- fn new(buf: &mut [u8]) -> BufWriter; // elided
- fn new<'a>(buf: &'a mut [u8]) -> BufWriter<'a> // expanded
- ```
- 
- # Related Resources
- 
- Coming Soon.

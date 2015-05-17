@@ -1,8 +1,8 @@
 diff --git a/rust/master:src/doc/trpl/method-syntax.md b/HEAD:method-syntax.md
-index 1445d39..3819581 100644
+index ed4e9dd..3819581 100644
 --- a/rust/master:src/doc/trpl/method-syntax.md
 +++ b/HEAD:method-syntax.md
-@@ -1,231 +1,233 @@
+@@ -1,232 +1,233 @@
 -% Method Syntax
 +% Синтаксис методов
  
@@ -195,9 +195,10 @@ index 1445d39..3819581 100644
  }
  ```
  
--This ‘static method’ builds a new `Circle` for us. Note that static methods
--are called with the `Struct::method()` syntax, rather than the `ref.method()`
--syntax.
+-This ‘associated function’ builds a new `Circle` for us. Note that associated
+-functions are called with the `Struct::function()` syntax, rather than the
+-`ref.method()` syntax. Some other langauges call associated functions ‘static
+-methods’.
 +Этот *статический метод*, который создает новый `Circle`. Обратите внимание, что
 +статические методы вызываются с помощью синтаксиса: `Struct::method()`, а не
 +`ref.method()`.

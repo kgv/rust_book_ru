@@ -32,6 +32,8 @@
 * [funkill](https://github.com/funkill)
 * [mkpankov](https://github.com/mkpankov)
 * [suhr](https://github.com/suhr)
+* [dieu](https://github.com/dieu)
+* [D101101](https://github.com/D101101)
 
 ## Ошибки
 
