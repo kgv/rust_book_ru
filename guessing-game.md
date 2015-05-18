@@ -213,12 +213,12 @@ io::stdin()
 .read_line(&mut guess)
 ```
 
-Здесь мы вызвали метод [`read_line()`][read_line] обработчика. [Методы][methos]
+Здесь мы вызвали метод [`read_line()`][read_line] обработчика. [Методы][methods]
 похожи на привязанные функции, но доступны только у определённого экземпляра
 типа, а не самого типа. Мы указали один аргумент функции `read_line()`: `&mut guess`.
 
 [read_line]: http://doc.rust-lang.org/std/io/struct.Stdin.html#method.read_line
-[method]: methods.html
+[methods]: methods.html
 
 Помните, как мы выше привязали `guess`? Мы сказали, что она изменяема. Однако,
 `read_line` не получает в качестве аргумента `String`: она получает `&mut String`.
