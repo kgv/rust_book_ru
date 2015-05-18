@@ -16,6 +16,7 @@
     * [Многозадачность](concurrency.md)
     * [Обработка ошибок](error-handling.md)
     * [Интерфейс внешних функций (FFI)](ffi.md)
+    * [Каналы сборок](release-channels.md)
 * [Синтаксис и семантика](syntax-and-semantics.md)
     * [Связывание переменных](variable-bindings.md)
     * [Функции](functions.md)
