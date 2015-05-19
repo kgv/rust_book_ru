@@ -1,5 +1,7 @@
 # Обращение к читателям
 
+[![Join the chat at https://gitter.im/kgv/rust_book_ru](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kgv/rust_book_ru?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Эта книга представляет собой перевод "The Rust Programming Language". Оригинал
 книги расположен [здесь][original].
 
