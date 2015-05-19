@@ -1,0 +1,3 @@
+[submodule "additions/rustbook"]
+	path = additions/rustbook
+	url = https://github.com/steveklabnik/rustbook
