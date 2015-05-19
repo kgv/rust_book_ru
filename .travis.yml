@@ -1,0 +1,17 @@
+language: rust
+rust: nightly
+
+script:
+  - cd additions/rustbook && cargo build --release
+  - cp ./target/release/rustbook ./
+  - cd ../../ && ./additions/rustbook/rustbook build
+
+after_success:
+  - test $TRAVIS_BRANCH == "master" && bash additions/deploy.sh
+
+branches:
+  only: master
+
+env:
+  global:
+    - secure: ""
