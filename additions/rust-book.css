@@ -10,41 +10,14 @@
  * option. This file may not be copied, modified, or distributed
  * except according to those terms.
  */
-@font-face {
-    font-family: 'Fira Sans';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Fira Sans'), url("FiraSans-Regular.woff") format('woff');
-}
-@font-face {
-    font-family: 'Fira Sans';
-    font-style: normal;
-    font-weight: 500;
-    src: local('Fira Sans Medium'), url("FiraSans-Medium.woff") format('woff');
-}
-@font-face {
-    font-family: 'Source Serif Pro';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Source Serif Pro'), url("SourceSerifPro-Regular.woff") format('woff');
-}
+
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Source+Code+Pro|Source+Serif+Pro:400,700&subset=latin,cyrillic,cyrillic-ext);
+
 @font-face {
     font-family: 'Source Serif Pro';
     font-style: italic;
     font-weight: 400;
     src: url("Heuristica-Italic.woff") format('woff');
-}
-@font-face {
-    font-family: 'Source Serif Pro';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Source Serif Pro Bold'), url("SourceSerifPro-Bold.woff") format('woff');
-}
-@font-face {
-    font-family: 'Source Code Pro';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Source Code Pro'), url("SourceCodePro-Regular.woff") format('woff');
 }
 
 *:not(body) {
