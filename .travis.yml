@@ -4,7 +4,8 @@ rust: nightly
 script:
   - cd additions/rustbook && cargo build --release
   - cp ./target/release/rustbook ./
-  - cd ../../ && ./additions/rustbook/rustbook build
+  - cd ../../ && find . -maxdepth 1 -name '*.md' -exec sed -i 1s/#/%/ {} \;
+  - ./additions/rustbook/rustbook build
 
 after_success:
   - test $TRAVIS_BRANCH == "master" && bash additions/deploy.sh
