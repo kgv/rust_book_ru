@@ -8,7 +8,7 @@ script:
   - ./additions/rustbook/rustbook build
 
 after_success:
-  - test $TRAVIS_BRANCH == "master" && bash additions/deploy.sh
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash additions/deploy.sh
 
 branches:
   only: master
