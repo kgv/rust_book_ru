@@ -1,5 +1,5 @@
 language: rust
-rust: stable
+rust: nightly
 
 script:
   - cd additions/rustbook && cargo build --release
