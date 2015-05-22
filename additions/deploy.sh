@@ -11,7 +11,7 @@ cp ${ROOT}/additions/rust-book.min.css rust-book.css
 git init
 git config user.name "Travis CI"
 git config user.email "kgv@users.noreply.github.com"
-git remote add upstream "https://${GH_TOKEN}@github.com/kgv/rust_book_ru.git"
+git remote add upstream "https://${RUST_BOOK_RU}@github.com/kgv/rust_book_ru.git"
 git fetch upstream && git reset upstream/gh-pages
 
 touch .
