@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Ссылки и Заимствование</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../getting-started/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../getting-started/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../getting-started/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../learn-rust/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../effective-rust/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../effective-rust/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../effective-rust/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../effective-rust/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../effective-rust/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../effective-rust/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../effective-rust/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../effective-rust/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../effective-rust/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../syntax-and-semantics/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../syntax-and-semantics/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../syntax-and-semantics/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../syntax-and-semantics/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../syntax-and-semantics/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../syntax-and-semantics/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../syntax-and-semantics/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../syntax-and-semantics/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../syntax-and-semantics/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../syntax-and-semantics/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../syntax-and-semantics/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../syntax-and-semantics/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../syntax-and-semantics/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../syntax-and-semantics/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../syntax-and-semantics/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../syntax-and-semantics/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../syntax-and-semantics/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../syntax-and-semantics/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../syntax-and-semantics/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../syntax-and-semantics/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../syntax-and-semantics/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../syntax-and-semantics/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../syntax-and-semantics/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../syntax-and-semantics/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../syntax-and-semantics/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../syntax-and-semantics/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../syntax-and-semantics/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../syntax-and-semantics/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../syntax-and-semantics/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../syntax-and-semantics/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../syntax-and-semantics/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../syntax-and-semantics/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../syntax-and-semantics/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../syntax-and-semantics/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../syntax-and-semantics/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../syntax-and-semantics/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../syntax-and-semantics/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../syntax-and-semantics/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../nightly-rust/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../nightly-rust/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../nightly-rust/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../nightly-rust/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../nightly-rust/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../nightly-rust/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../nightly-rust/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../nightly-rust/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../nightly-rust/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../nightly-rust/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Ссылки и Заимствование</h1>
+    <p>Эта глава является одной из трех, описывающих систему владения ресурсами Rust.
+Эта система представляет собой наиболее уникальную и привлекательную фичу Rust,
+о которой разработчики на Rust должны иметь полное представление. Владение - это
+то, как Rust достигает своей главной цели - безопасности памяти. Система
+владения включает в себя несколько различных концепций, каждая из которых
+рассматривается в своей собственной главе:</p>
+
+<ul>
+<li><a href="ownership.html">владение</a>, ключевая концепция</li>
+<li>заимствование, ее вы сейчас читаете</li>
+<li><a href="lifetimes.html">время жизни</a>, расширение концепции заимствования</li>
+</ul>
+
+<p>Эти три главы взаимосвязаны, и их порядок важен. Вы должны будете освоить все
+три главы, чтобы полностью понять систему владения.</p>
+
+<h1 id="Мета" class='section-header'><a
+                           href="#Мета">Мета</a></h1>
+<p>Прежде чем перейти к деталям, отметитм два важных нюанса о системе владения.</p>
+
+<p>Rust сфокусирован на безопасности и скорости. Это достигается за счет
+‘абстракций с нулевой стоимостью‘ (‘zero-cost abstractions‘), что означает, что
+в Rust стоимость абстракций должна быть настолько минимальной, насколько это
+возможно, без ущерба для работоспособности. Система владения ресурсами - это
+яркий пример абстракции с нулевой стоимостью. Весь анализ, о котором мы будем
+говорить в этом руководстве, выполняется <em>во время компиляции</em>. Вы не платите
+хоть сколько-нибудь времени рантайма за какую-либо из фич.</p>
+
+<p>Тем не менее, эта система все же имеет определенную стоимость: кривая обучения.
+Многие новые пользователи Rust испытыват то, что мы называем ‘борьба с проверкой
+заимствования‘, когда компилятор Rust отказывается компилировать программу,
+которая по мнению автора является абсолютно правильной. Это часто происходит
+потому, что мысленное представление программиста о том, как должно работать
+владение, не совпадает с реальными правилами, которыми оперирует Rust. Вы,
+наверное, также будете испытывать подобные трудности поначалу. Однако существует
+и хорошая новость: более опытные разработчики на Rust сообщают, что чем больше
+они работают с правилами системы владения, тем меньше они борются с проверкой
+заимствования.</p>
+
+<p>Имея это в виду, давайте перейдем к изучению систему владения.</p>
+
+<h1 id="Заимствование" class='section-header'><a
+                           href="#Заимствование">Заимствование</a></h1>
+<p>В конце главы <a href="ownership.html">Владение</a>, у нас была скверная функция, которая
+выглядела так:</p>
+<span class='rusttest'>fn main() {
+    fn foo(v1: Vec&lt;i32&gt;, v2: Vec&lt;i32&gt;) -&gt; (Vec&lt;i32&gt;, Vec&lt;i32&gt;, i32) {
+        // do stuff with v1 and v2
+    
+        // hand back ownership, and the result of our function
+        (v1, v2, 42)
+    }
+    
+    let v1 = vec![1, 2, 3];
+    let v2 = vec![1, 2, 3];
+    
+    let (v1, v2, answer) = foo(v1, v2);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>v2</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> (<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>i32</span>) {
+    <span class='comment'>// do stuff with v1 and v2</span>
+
+    <span class='comment'>// hand back ownership, and the result of our function</span>
+    (<span class='ident'>v1</span>, <span class='ident'>v2</span>, <span class='number'>42</span>)
+}
+
+<span class='kw'>let</span> <span class='ident'>v1</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>let</span> (<span class='ident'>v1</span>, <span class='ident'>v2</span>, <span class='ident'>answer</span>) <span class='op'>=</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>, <span class='ident'>v2</span>);
+</pre>
+
+<p>Однако, этот код не является идиоматическим с точки зрения Rust, так как он не
+использует заимствование. Вот первый шаг:</p>
+<span class='rusttest'>fn main() {
+    fn foo(v1: &amp;Vec&lt;i32&gt;, v2: &amp;Vec&lt;i32&gt;) -&gt; i32 {
+        // do stuff with v1 and v2
+    
+        // return the answer
+        42
+    }
+    
+    let v1 = vec![1, 2, 3];
+    let v2 = vec![1, 2, 3];
+    
+    let answer = foo(&amp;v1, &amp;v2);
+    
+    // we can use v1 and v2 here!
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>: <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>v2</span>: <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='comment'>// do stuff with v1 and v2</span>
+
+    <span class='comment'>// return the answer</span>
+    <span class='number'>42</span>
+}
+
+<span class='kw'>let</span> <span class='ident'>v1</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>v1</span>, <span class='kw-2'>&amp;</span><span class='ident'>v2</span>);
+
+<span class='comment'>// we can use v1 and v2 here!</span>
+</pre>
+
+<p>Вместо того, чтобы принимать <code>Vec&lt;i32&gt;</code> в качестве аргументов, мы будем
+принимать ссылки: <code>&amp;Vec&lt;i32&gt;</code>. И вместо передачи <code>v1</code> и <code>v2</code> напрямую, мы будем
+передавать <code>&amp;v1</code> и <code>&amp;v2</code>. Мы называем тип <code>&amp;T</code> ‘ссылка‘, и вместо того, чтобы
+забирать право владения ресурсом, она его заимствует. Привязки, которые
+заимствуют что-то, не освобождают ресурс, когда они выходят из области
+видимости. Это означает, что, после вызова <code>foo()</code>, мы снова можем использовать
+наши оригинальные привязки.</p>
+
+<p>Ссылки являются неизменяемыми, как и привязки. Это означает, что внутри <code>foo()</code>,
+векторы не могут быть изменены:</p>
+<span class='rusttest'>fn main() {
+    fn foo(v: &amp;Vec&lt;i32&gt;) {
+         v.push(5);
+    }
+    
+    let v = vec![];
+    
+    foo(&amp;v);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>v</span>: <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) {
+     <span class='ident'>v</span>.<span class='ident'>push</span>(<span class='number'>5</span>);
+}
+
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[];
+
+<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>v</span>);
+</pre>
+
+<p>выдает ошибку:</p>
+
+<pre><code class="language-text">error: cannot borrow immutable borrowed content `*v` as mutable
+v.push(5);
+^
+</code></pre>
+
+<p>Добавление значения изменяет вектор, и поэтому компилятор не позволил нам это
+сделать.</p>
+
+<h1 id="&amp;mut-ссылки" class='section-header'><a
+                           href="#&amp;mut-ссылки">&amp;mut ссылки</a></h1>
+<p>Вот второй вид ссылок: <code>&amp;mut T</code>. Это ‘изменяемая ссылка‘, которая позволяет
+изменять ресурс, который вы заимствуете. Например:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    {
+        let y = &amp;mut x;
+        *y += 1;
+    }
+    println!(&quot;{}&quot;, x);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+{
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
+    <span class='op'>*</span><span class='ident'>y</span> <span class='op'>+=</span> <span class='number'>1</span>;
+}
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
+</pre>
+
+<p>Этот код напечатает <code>6</code>. Мы создали <code>y</code>, изменяемую ссылку на <code>x</code>, а затем
+добавили единицу к значению, на которое указывает <code>y</code>. Следует отметить, что <code>x</code>
+также должна быть помечена как <code>mut</code>, если бы этого не было, то мы не могли бы
+взять изменяемый заем неизменяемого значения.</p>
+
+<p>Во всем остальном изменяемые ссылки (<code>&amp;mut</code>) такие же, как и неизменяемые (<code>&amp;</code>).
+Однако, существует большая разница между этими двумя концепциями, и тем, как они
+взаимодействуют. Вы можете сказать, что в приведенном выше примере есть что-то
+подозрительное, потому что нам зачем-то понадобилась дополнительная область
+видимости, созданная с помощью <code>{</code> и <code>}</code>. Если мы уберем эти скобки, то получим
+ошибку:</p>
+
+<pre><code class="language-text">error: cannot borrow `x` as immutable because it is also borrowed as mutable
+    println!(&quot;{}&quot;, x);
+                   ^
+note: previous borrow of `x` occurs here; the mutable borrow prevents
+subsequent moves, borrows, or modification of `x` until the borrow ends
+        let y = &amp;mut x;
+                     ^
+note: previous borrow ends here
+fn main() {
+
+}
+^
+</code></pre>
+
+<p>Как оказалось, есть правила.</p>
+
+<h1 id="Правила" class='section-header'><a
+                           href="#Правила">Правила</a></h1>
+<p>Вот правила о заимствовании в Rust:</p>
+
+<p>Во-первых, область видимости любого заема должна находиться в пределах области
+видимости владельца. Во-вторых, одновременно у вас может быть только один из
+двух перечисленных ниже видов заимствования, но не оба сразу:</p>
+
+<ul>
+<li>от 0 до N неизменяемых ссылок (<code>&amp;T</code>) на ресурс,</li>
+<li>ровно одна изменяемая ссылка (<code>&amp;mut T</code>) на ресурс.</li>
+</ul>
+
+<p>Вы можете заметить, что они очень похожи, хотя и не совсем то же самое,
+относительно определения состояния гонки данных:</p>
+
+<blockquote>
+<p>Состояние ’гонки данных’ возникает, когда два или более указателей имеют
+доступ к одной и той же области памяти одновременно, и когда по крайней мере
+один из них производит запись, а операции не синхронизированы.</p>
+</blockquote>
+
+<p>Что касается неизменяемых ссылок, то вы можете иметь их столько, сколько хотите,
+так как ни одна из них не производит запись. Если же вы производите запись, и
+вам нужно два или больше указателей на одну и ту же область памяти, то вы можете
+иметь только один <code>&amp;mut</code> одновременно. Это то как Rust предотвращает
+возникновение состояния гонки данных во время компиляции: мы получим ошибки,
+если мы нарушим эти правила.</p>
+
+<p>Имея это в виду, давайте рассмотрим наш пример еще раз.</p>
+
+<h2 id="Мысли-об-областях-видимости-(thinking-in-scopes)" class='section-header'><a
+                           href="#Мысли-об-областях-видимости-(thinking-in-scopes)">Мысли об областях видимости (Thinking in scopes)</a></h2>
+<p>Вот код:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    let y = &amp;mut x;
+    
+    *y += 1;
+    
+    println!(&quot;{}&quot;, x);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
+
+<span class='op'>*</span><span class='ident'>y</span> <span class='op'>+=</span> <span class='number'>1</span>;
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
+</pre>
+
+<p>Этот код выдает нам такую ошибку:</p>
+
+<pre><code class="language-text">error: cannot borrow `x` as immutable because it is also borrowed as mutable
+    println!(&quot;{}&quot;, x);
+                   ^
+</code></pre>
+
+<p>Это потому, что мы нарушили правила: у нас есть изменяемая ссылка <code>&amp;mut T</code>,
+указывающая на <code>x</code>, и поэтому мы не можем создать какую-либо <code>&amp;T</code>. Одно из двух.
+Примечание подсказывает как следует рассматривать эту проблему:</p>
+
+<pre><code class="language-text">note: previous borrow ends here
+fn main() {
+
+}
+^
+</code></pre>
+
+<p>Другими словами, изменяемая ссылка сохраняется до конца нашего примера. А мы
+хотим, чтобы изменяемый заем заканчивался <em>до</em> того, как мы пытаемся вызвать
+<code>println!</code> и создать неизменяемый заем. В Rust заимствование привязано к области
+видимости, в которой оно является действительным. И эти области видимости
+выглядят следующим образом:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    
+    let y = &amp;mut x;    // -+ &amp;mut borrow of x starts here
+                       //  |
+    *y += 1;           //  |
+                       //  |
+    println!(&quot;{}&quot;, x); // -+ - try to borrow x here
+                       // -+ &amp;mut borrow of x ends here
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;    <span class='comment'>// -+ &amp;mut borrow of x starts here</span>
+                   <span class='comment'>//  |</span>
+<span class='op'>*</span><span class='ident'>y</span> <span class='op'>+=</span> <span class='number'>1</span>;           <span class='comment'>//  |</span>
+                   <span class='comment'>//  |</span>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>); <span class='comment'>// -+ - try to borrow x here</span>
+                   <span class='comment'>// -+ &amp;mut borrow of x ends here</span>
+</pre>
+
+<p>Конфликт областей видимости: мы не можем создать <code>&amp;x</code> до тех пор, пока <code>y</code>
+находится в области видимости.</p>
+
+<p>Поэтому, когда мы добавляем фигурные скобки:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    
+    {                   
+        let y = &amp;mut x; // -+ &amp;mut borrow starts here
+        *y += 1;        //  |
+    }                   // -+ ... and ends here
+    
+    println!(&quot;{}&quot;, x);  // &lt;- try to borrow x here
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+{                   
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>; <span class='comment'>// -+ &amp;mut borrow starts here</span>
+    <span class='op'>*</span><span class='ident'>y</span> <span class='op'>+=</span> <span class='number'>1</span>;        <span class='comment'>//  |</span>
+}                   <span class='comment'>// -+ ... and ends here</span>
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);  <span class='comment'>// &lt;- try to borrow x here</span>
+</pre>
+
+<p>Никаких проблем нет. Наш изменяемый заем выходит из области видимости до
+создания неизменяемого. Но область видимости является ключом к определению того,
+как долго длится заем.</p>
+
+<h2 id="Проблемы,-которые-предотвращает-заимствование" class='section-header'><a
+                           href="#Проблемы,-которые-предотвращает-заимствование">Проблемы, которые предотвращает заимствование</a></h2>
+<p>Почему нужны эти ограничивающие правила? Ну, как мы уже отметили, эти правила
+предотвращают гонки данных. Какие виды проблем могут привести к состоянию гонки
+данных? Вот некоторые из них.</p>
+
+<h3 id="Недействительный-итератор" class='section-header'><a
+                           href="#Недействительный-итератор">Недействительный итератор</a></h3>
+<p>Одним из примеров является ’недействительный итератор’, такое может произойти,
+когда вы пытаетесь изменить коллекцию, которую в данный момент итерируете.
+Проверка заимствования Rust предотвращает это:</p>
+<span class='rusttest'>fn main() {
+    let mut v = vec![1, 2, 3];
+    
+    for i in &amp;v {
+        println!(&quot;{}&quot;, i);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>v</span> {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>i</span>);
+}
+</pre>
+
+<p>Этот код печатает от одного до трех. Так как мы итерируем по вектору, мы
+получаем лишь ссылки на элементы. И сам <code>v</code> заимствован как неизменяемый, что
+означает, что мы не можем изменить его в процессе итерирования:</p>
+<span class='rusttest'>fn main() {
+    let mut v = vec![1, 2, 3];
+    
+    for i in &amp;v {
+        println!(&quot;{}&quot;, i);
+        v.push(34);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>v</span> {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>i</span>);
+    <span class='ident'>v</span>.<span class='ident'>push</span>(<span class='number'>34</span>);
+}
+</pre>
+
+<p>Вот ошибка:</p>
+
+<pre><code class="language-text">error: cannot borrow `v` as mutable because it is also borrowed as immutable
+    v.push(34);
+    ^
+note: previous borrow of `v` occurs here; the immutable borrow prevents
+subsequent moves or mutable borrows of `v` until the borrow ends
+for i in &amp;v {
+          ^
+note: previous borrow ends here
+for i in &amp;v {
+    println!(“{}”, i);
+    v.push(34);
+}
+^
+</code></pre>
+
+<p>Мы не можем изменить <code>v</code>, потому что он уже заимствован в цикле.</p>
+
+<h3 id="Использование-после-освобождения-(use-after-free)" class='section-header'><a
+                           href="#Использование-после-освобождения-(use-after-free)">Использование после освобождения (use after free)</a></h3>
+<p>Ссылки должны жить так же долго, как и ресурс, на который они ссылаются. Rust
+проверяет области видимоси ваших ссылок, чтобы удостовериться, что это правда.</p>
+
+<p>Если Rust не будет проверять это свойство, то мы можем случайно использовать
+ссылку, которая будет недействительна. Например:</p>
+<span class='rusttest'>fn main() {
+    let y: &amp;i32;
+    { 
+        let x = 5;
+        y = &amp;x;
+    }
+    
+    println!(&quot;{}&quot;, y);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>y</span>: <span class='kw-2'>&amp;</span><span class='ident'>i32</span>;
+{ 
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+    <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>x</span>;
+}
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>y</span>);
+</pre>
+
+<p>Мы получим следующую ошибку:</p>
+
+<pre><code class="language-text">error: `x` does not live long enough
+    y = &amp;x;
+         ^
+note: reference must be valid for the block suffix following statement 0 at
+2:16...
+let y: &amp;i32;
+{ 
+    let x = 5;
+    y = &amp;x;
+}
+
+note: ...but borrowed value is only valid for the block suffix following
+statement 0 at 4:18
+    let x = 5;
+    y = &amp;x;
+}
+</code></pre>
+
+<p>Другими словами, <code>y</code> действителен только для той области видимости, где
+существует <code>x</code>. Как только <code>x</code> выходит из области видимости, ссылка на него
+становится недействительной. Таким образом, ошибка сообщает, что заем ‘does not
+live long enough‘ (‘не живет достаточно долго‘), потому что он не является
+действительным столько времени, сколько требуется.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

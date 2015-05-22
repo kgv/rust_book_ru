@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Трейты</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../getting-started/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../getting-started/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../getting-started/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../learn-rust/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../effective-rust/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../effective-rust/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../effective-rust/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../effective-rust/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../effective-rust/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../effective-rust/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../effective-rust/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../effective-rust/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../effective-rust/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../syntax-and-semantics/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../syntax-and-semantics/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../syntax-and-semantics/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../syntax-and-semantics/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../syntax-and-semantics/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../syntax-and-semantics/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../syntax-and-semantics/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../syntax-and-semantics/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../syntax-and-semantics/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../syntax-and-semantics/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../syntax-and-semantics/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../syntax-and-semantics/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../syntax-and-semantics/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../syntax-and-semantics/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../syntax-and-semantics/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../syntax-and-semantics/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../syntax-and-semantics/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../syntax-and-semantics/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../syntax-and-semantics/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../syntax-and-semantics/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../syntax-and-semantics/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../syntax-and-semantics/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../syntax-and-semantics/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../syntax-and-semantics/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../syntax-and-semantics/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../syntax-and-semantics/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../syntax-and-semantics/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../syntax-and-semantics/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../syntax-and-semantics/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../syntax-and-semantics/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../syntax-and-semantics/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../syntax-and-semantics/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../syntax-and-semantics/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../syntax-and-semantics/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../syntax-and-semantics/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../syntax-and-semantics/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../syntax-and-semantics/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../syntax-and-semantics/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../nightly-rust/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../nightly-rust/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../nightly-rust/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../nightly-rust/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../nightly-rust/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../nightly-rust/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../nightly-rust/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../nightly-rust/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../nightly-rust/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../nightly-rust/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Трейты</h1>
+    <p>Вы помните, ключевое слово <code>impl</code>, используемое для вызова функции с синтаксисом
+метода?</p>
+<span class='rusttest'>#![feature(core)]
+fn main() {
+    struct Circle {
+        x: f64,
+        y: f64,
+        radius: f64,
+    }
+    
+    impl Circle {
+        fn area(&amp;self) -&gt; f64 {
+            std::f64::consts::PI * (self.radius * self.radius)
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Circle</span> {
+    <span class='ident'>x</span>: <span class='ident'>f64</span>,
+    <span class='ident'>y</span>: <span class='ident'>f64</span>,
+    <span class='ident'>radius</span>: <span class='ident'>f64</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>Circle</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
+    }
+}
+</pre>
+
+<p>Трейты схожи, за исключением того, что мы определяем трейт, содержащий лишь
+сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например,
+как показано ниже:</p>
+<span class='rusttest'>#![feature(core)]
+fn main() {
+    struct Circle {
+        x: f64,
+        y: f64,
+        radius: f64,
+    }
+    
+    trait HasArea {
+        fn area(&amp;self) -&gt; f64;
+    }
+    
+    impl HasArea for Circle {
+        fn area(&amp;self) -&gt; f64 {
+            std::f64::consts::PI * (self.radius * self.radius)
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Circle</span> {
+    <span class='ident'>x</span>: <span class='ident'>f64</span>,
+    <span class='ident'>y</span>: <span class='ident'>f64</span>,
+    <span class='ident'>radius</span>: <span class='ident'>f64</span>,
+}
+
+<span class='kw'>trait</span> <span class='ident'>HasArea</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
+}
+
+<span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Circle</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
+    }
+}
+</pre>
+
+<p>Как вы можете видеть, блок <code>trait</code> очень похож на блок <code>impl</code>. Различие состоит
+лишь в том, что тело метода не определяется, а определяется только его
+сигнатура. Когда мы реализуем трейт, мы используем <code>impl Trait for Item</code>, а не
+просто <code>impl Item</code>.</p>
+
+<p>Так что же в этом такого грандиозного? Помните ошибку, которую мы получали для
+нашей дженерик функции <code>inverse</code>?</p>
+
+<pre><code class="language-text">error: binary operation `==` cannot be applied to type `T`
+</code></pre>
+
+<p>Мы можем использовать трейты для ограничения дженериков. Рассмотрим похожую
+функцию, которая также не компилируется, и выводит ошибку:</p>
+<span class='rusttest'>fn main() {
+    fn print_area&lt;T&gt;(shape: T) {
+        println!(&quot;This shape has an area of {}&quot;, shape.area());
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
+}
+</pre>
+
+<p>Rust выводит:</p>
+
+<pre><code class="language-text">error: type `T` does not implement any method in scope named `area`
+</code></pre>
+
+<p>Поскольку <code>T</code> может быть любого типа, мы не можем быть уверены, что он реализует
+метод <code>area</code>. Но мы можем добавить <strong>ограничение по трейту</strong> к нашему дженерику
+<code>T</code>, гарантируя, что он будет соответствовать требованиям:</p>
+<span class='rusttest'>fn main() {
+    trait HasArea {
+        fn area(&amp;self) -&gt; f64;
+    }
+    fn print_area&lt;T: HasArea&gt;(shape: T) {
+        println!(&quot;This shape has an area of {}&quot;, shape.area());
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>HasArea</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
+}
+</pre>
+
+<p>Синтаксис <code>&lt;T: HasArea&gt;</code> означает <strong>любой тип, реализующий трейт <code>HasArea</code></strong>.
+Так как трейты определяют сигнатуры типов функций, мы можем быть уверены, что
+любой тип, который реализует <code>HasArea</code> будет иметь метод <code>.area()</code>.</p>
+
+<p>Вот расширенный пример того, как это работает:</p>
+<span class='rusttest'>#![feature(core)]
+trait HasArea {
+    fn area(&amp;self) -&gt; f64;
+}
+
+struct Circle {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+impl HasArea for Circle {
+    fn area(&amp;self) -&gt; f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+}
+
+struct Square {
+    x: f64,
+    y: f64,
+    side: f64,
+}
+
+impl HasArea for Square {
+    fn area(&amp;self) -&gt; f64 {
+        self.side * self.side
+    }
+}
+
+fn print_area&lt;T: HasArea&gt;(shape: T) {
+    println!(&quot;This shape has an area of {}&quot;, shape.area());
+}
+
+fn main() {
+    let c = Circle {
+        x: 0.0f64,
+        y: 0.0f64,
+        radius: 1.0f64,
+    };
+
+    let s = Square {
+        x: 0.0f64,
+        y: 0.0f64,
+        side: 1.0f64,
+    };
+
+    print_area(c);
+    print_area(s);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>trait</span> <span class='ident'>HasArea</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
+}
+
+<span class='kw'>struct</span> <span class='ident'>Circle</span> {
+    <span class='ident'>x</span>: <span class='ident'>f64</span>,
+    <span class='ident'>y</span>: <span class='ident'>f64</span>,
+    <span class='ident'>radius</span>: <span class='ident'>f64</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Circle</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
+    }
+}
+
+<span class='kw'>struct</span> <span class='ident'>Square</span> {
+    <span class='ident'>x</span>: <span class='ident'>f64</span>,
+    <span class='ident'>y</span>: <span class='ident'>f64</span>,
+    <span class='ident'>side</span>: <span class='ident'>f64</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Square</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='self'>self</span>.<span class='ident'>side</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>side</span>
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>HasArea</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>Circle</span> {
+        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>radius</span>: <span class='number'>1.0f64</span>,
+    };
+
+    <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>Square</span> {
+        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>side</span>: <span class='number'>1.0f64</span>,
+    };
+
+    <span class='ident'>print_area</span>(<span class='ident'>c</span>);
+    <span class='ident'>print_area</span>(<span class='ident'>s</span>);
+}
+</pre>
+
+<p>Ниже показан вывод программы:</p>
+
+<pre><code class="language-text">This shape has an area of 3.141593
+This shape has an area of 1
+</code></pre>
+
+<p>Как вы можете видеть, теперь <code>print_area</code> не только является дженериком, но и
+гарантирует, что будет получен корректный тип. Если же мы передадим некорректный
+тип:</p>
+<span class='rusttest'>fn main() {
+    print_area(5);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='ident'>print_area</span>(<span class='number'>5</span>);
+</pre>
+
+<p>Мы получим ошибку времени компиляции:</p>
+
+<pre><code class="language-text">error: failed to find an implementation of trait main::HasArea for int
+</code></pre>
+
+<p>До сих пор мы добавляли реализации трейтов лишь для структур, но реализовать
+трейт возможно для любого типа. Технически, мы <em>могли бы</em> реализовать <code>HasArea</code>
+для <code>i32</code>:</p>
+<span class='rusttest'>fn main() {
+    trait HasArea {
+        fn area(&amp;self) -&gt; f64;
+    }
+    
+    impl HasArea for i32 {
+        fn area(&amp;self) -&gt; f64 {
+            println!(&quot;this is silly&quot;);
+    
+            *self as f64
+        }
+    }
+    
+    5.area();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>trait</span> <span class='ident'>HasArea</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
+}
+
+<span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>i32</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;this is silly&quot;</span>);
+
+        <span class='op'>*</span><span class='self'>self</span> <span class='kw'>as</span> <span class='ident'>f64</span>
+    }
+}
+
+<span class='number'>5</span>.<span class='ident'>area</span>();
+</pre>
+
+<p>Хотя технически это возможно, но реализация методов для таких примитивных типов
+считается плохим стилем программирования.</p>
+
+<p>Такой подход может показаться неконтролируемым, однако есть два ограничения,
+связанные с реализацией трейтов, которые мешают коду выйти из-под контроля. Во-
+первых, трейты должны быть объявлены используемыми, с помощью ключевого слова
+<code>use</code>, в той области видимости, где вы хотите использовать методы этих трейтов.
+Так, например, следующий код не будет работать:</p>
+<span class='rusttest'>mod shapes {
+    use std::f64::consts;
+
+    trait HasArea {
+        fn area(&amp;self) -&gt; f64;
+    }
+
+    struct Circle {
+        x: f64,
+        y: f64,
+        radius: f64,
+    }
+
+    impl HasArea for Circle {
+        fn area(&amp;self) -&gt; f64 {
+            consts::PI * (self.radius * self.radius)
+        }
+    }
+}
+
+fn main() {
+    let c = shapes::Circle {
+        x: 0.0f64,
+        y: 0.0f64,
+        radius: 1.0f64,
+    };
+
+    println!(&quot;{}&quot;, c.area());
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>mod</span> <span class='ident'>shapes</span> {
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
+
+    <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
+        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
+    }
+
+    <span class='kw'>struct</span> <span class='ident'>Circle</span> {
+        <span class='ident'>x</span>: <span class='ident'>f64</span>,
+        <span class='ident'>y</span>: <span class='ident'>f64</span>,
+        <span class='ident'>radius</span>: <span class='ident'>f64</span>,
+    }
+
+    <span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Circle</span> {
+        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+            <span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
+        }
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>shapes</span>::<span class='ident'>Circle</span> {
+        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>radius</span>: <span class='number'>1.0f64</span>,
+    };
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
+}
+</pre>
+
+<p>Теперь, когда мы переместили структуры и трейты в свой собственный модуль, мы
+получаем следующую ошибку:</p>
+
+<pre><code class="language-text">error: type `shapes::Circle` does not implement any method in scope named `area`
+</code></pre>
+
+<p>Если мы добавим строку с <code>use</code> над функцией <code>main</code> и сделаем нужные элементы
+публичными, все будет в порядке:</p>
+<span class='rusttest'>#![feature(core)]
+mod shapes {
+    use std::f64::consts;
+
+    pub trait HasArea {
+        fn area(&amp;self) -&gt; f64;
+    }
+
+    pub struct Circle {
+        pub x: f64,
+        pub y: f64,
+        pub radius: f64,
+    }
+
+    impl HasArea for Circle {
+        fn area(&amp;self) -&gt; f64 {
+            consts::PI * (self.radius * self.radius)
+        }
+    }
+}
+
+use shapes::HasArea;
+
+fn main() {
+    let c = shapes::Circle {
+        x: 0.0f64,
+        y: 0.0f64,
+        radius: 1.0f64,
+    };
+
+    println!(&quot;{}&quot;, c.area());
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>mod</span> <span class='ident'>shapes</span> {
+    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
+
+    <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
+        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Circle</span> {
+        <span class='kw'>pub</span> <span class='ident'>x</span>: <span class='ident'>f64</span>,
+        <span class='kw'>pub</span> <span class='ident'>y</span>: <span class='ident'>f64</span>,
+        <span class='kw'>pub</span> <span class='ident'>radius</span>: <span class='ident'>f64</span>,
+    }
+
+    <span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Circle</span> {
+        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+            <span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
+        }
+    }
+}
+
+<span class='kw'>use</span> <span class='ident'>shapes</span>::<span class='ident'>HasArea</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>shapes</span>::<span class='ident'>Circle</span> {
+        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>radius</span>: <span class='number'>1.0f64</span>,
+    };
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
+}
+</pre>
+
+<p>Это означает, что даже если кто-то сделает что-то плохое, как например добавит
+методы к <code>int</code>, на наш код это не окажет влияния, если вы не объявите <code>use</code> для
+этого трейта.</p>
+
+<p>Вот еще одно ограничение, связанное с реализацией трейтов. Либо трейт, либо тип,
+для которого вы пишете <code>impl</code>, должны находиться в вашем крейте. Таким образом,
+мы могли бы реализовать трейт <code>HasArea</code> для <code>i32</code>, потому что <code>HasArea</code>
+находится в нашем крейте. Но если бы мы попытались реализовать трейт <code>Float</code>,
+предоставляемый самим Rust, для <code>i32</code>, мы не смогли бы этого сделать, потому что
+оба: трейт и тип отсутствуют в нашем крейте.</p>
+
+<p>Последнее, что нужно сказать о трейтах: дженерик функции с ограничением по
+трейтам используют <em>мономорфизацию</em> (<em>mono</em>: один, <em>morph</em>: форма), поэтому они
+диспетчеризуются статически. Что это значит? Посмотрите главу <a href="static-and-dynamic-dispatch.html">Статическая и
+динамическая диспетчеризация</a>, чтобы получить
+больше информации.</p>
+
+<h2 id="Множественные-привязки-к-трейтам" class='section-header'><a
+                           href="#Множественные-привязки-к-трейтам">Множественные привязки к трейтам</a></h2>
+<p>Вы уже видели как можно ограничить обобщенный параметр типа определенным
+трейтом:</p>
+<span class='rusttest'>fn main() {
+    fn foo&lt;T: Clone&gt;(x: T) {
+        x.clone();
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
+    <span class='ident'>x</span>.<span class='ident'>clone</span>();
+}
+</pre>
+
+<p>Если вам нужно более одной привязки, то вы можете использовать <code>+</code>:</p>
+<span class='rusttest'>fn main() {
+    use std::fmt::Debug;
+    
+    fn foo&lt;T: Clone + Debug&gt;(x: T) {
+        x.clone();
+        println!(&quot;{:?}&quot;, x);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
+
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
+    <span class='ident'>x</span>.<span class='ident'>clone</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>Теперь тип <code>T</code> должен реализовавать как трейт <code>Clone</code>, так и трейт <code>Debug</code>.</p>
+
+<h2 id="Утверждение-where" class='section-header'><a
+                           href="#Утверждение-where">Утверждение where</a></h2>
+<p>Написание функций с несколькими дженерик типами и небольшим количеством
+ограничений по трейтам выглядит не так уж плохо, но, с увеличением количества
+зависимостей, синтаксис получается более неуклюжим:</p>
+<span class='rusttest'>fn main() {
+    use std::fmt::Debug;
+    
+    fn foo&lt;T: Clone, K: Clone + Debug&gt;(x: T, y: K) {
+        x.clone();
+        y.clone();
+        println!(&quot;{:?}&quot;, y);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
+
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span>, <span class='ident'>K</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>) {
+    <span class='ident'>x</span>.<span class='ident'>clone</span>();
+    <span class='ident'>y</span>.<span class='ident'>clone</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
+}
+</pre>
+
+<p>Имя функции находится слева, а список параметров - далеко справа. Привязки
+загромождают место.</p>
+
+<p>Rust имеет решение на этот счет, и оно называется &#39;утверждение <code>where</code>&#39;:</p>
+<span class='rusttest'>use std::fmt::Debug;
+
+fn foo&lt;T: Clone, K: Clone + Debug&gt;(x: T, y: K) {
+    x.clone();
+    y.clone();
+    println!(&quot;{:?}&quot;, y);
+}
+
+fn bar&lt;T, K&gt;(x: T, y: K) where T: Clone, K: Clone + Debug {
+    x.clone();
+    y.clone();
+    println!(&quot;{:?}&quot;, y);
+}
+
+fn main() {
+    foo(&quot;Hello&quot;, &quot;world&quot;);
+    bar(&quot;Hello&quot;, &quot;workd&quot;);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
+
+<span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span>, <span class='ident'>K</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>) {
+    <span class='ident'>x</span>.<span class='ident'>clone</span>();
+    <span class='ident'>y</span>.<span class='ident'>clone</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>bar</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>K</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>) <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Clone</span>, <span class='ident'>K</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span> {
+    <span class='ident'>x</span>.<span class='ident'>clone</span>();
+    <span class='ident'>y</span>.<span class='ident'>clone</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>foo</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
+    <span class='ident'>bar</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;workd&quot;</span>);
+}
+</pre>
+
+<p><code>foo()</code> использует синтаксис, показанный ранее, а <code>bar()</code> использует утверждение
+<code>where</code>. Все, что нам нужно сделать, это убрать ограничения при определении
+типов параметров, а затем добавить <code>where</code> после списка параметров. Для более
+длинного списка, могут быть добавлены пробельные символы:</p>
+<span class='rusttest'>fn main() {
+    use std::fmt::Debug;
+    
+    fn bar&lt;T, K&gt;(x: T, y: K)
+        where T: Clone,
+              K: Clone + Debug {
+    
+        x.clone();
+        y.clone();
+        println!(&quot;{:?}&quot;, y);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
+
+<span class='kw'>fn</span> <span class='ident'>bar</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>K</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>)
+    <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Clone</span>,
+          <span class='ident'>K</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span> {
+
+    <span class='ident'>x</span>.<span class='ident'>clone</span>();
+    <span class='ident'>y</span>.<span class='ident'>clone</span>();
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
+}
+</pre>
+
+<p>Такая гибкость может добавить ясности в сложных ситуациях.</p>
+
+<p><code>where</code> является более мощным инструментом, чем просто синтаксис. Например:</p>
+<span class='rusttest'>fn main() {
+    trait ConvertTo&lt;Output&gt; {
+        fn convert(&amp;self) -&gt; Output;
+    }
+    
+    impl ConvertTo&lt;i64&gt; for i32 {
+        fn convert(&amp;self) -&gt; i64 { *self as i64 }
+    }
+    
+    // can be called with T == i32
+    fn normal&lt;T: ConvertTo&lt;i64&gt;&gt;(x: &amp;T) -&gt; i64 {
+        x.convert()
+    }
+    
+    // can be called with T == i64
+    fn inverse&lt;T&gt;() -&gt; T
+            // this is using ConvertTo as if it were &quot;ConvertFrom&lt;i32&gt;&quot;
+            where i32: ConvertTo&lt;T&gt; {
+        1i32.convert()
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>trait</span> <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>Output</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>convert</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Output</span>;
+}
+
+<span class='kw'>impl</span> <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>i32</span> {
+    <span class='kw'>fn</span> <span class='ident'>convert</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>i64</span> { <span class='op'>*</span><span class='self'>self</span> <span class='kw'>as</span> <span class='ident'>i64</span> }
+}
+
+<span class='comment'>// can be called with T == i32</span>
+<span class='kw'>fn</span> <span class='ident'>normal</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;&gt;</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>i64</span> {
+    <span class='ident'>x</span>.<span class='ident'>convert</span>()
+}
+
+<span class='comment'>// can be called with T == i64</span>
+<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='op'>-&gt;</span> <span class='ident'>T</span>
+        <span class='comment'>// this is using ConvertTo as if it were &quot;ConvertFrom&lt;i32&gt;&quot;</span>
+        <span class='kw'>where</span> <span class='ident'>i32</span>: <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='number'>1i32</span>.<span class='ident'>convert</span>()
+}
+</pre>
+
+<p>Этот код демонстрирует дополнительные преимущества использования утверждения
+<code>where</code>: оно позволяет задавать ограничение, где с левой стороны располагается
+произвольный тип (в данном случае <code>i32</code>), а не только простой параметр типа (как
+например <code>T</code>).</p>
+
+<h2 id="Наш-пример-inverse" class='section-header'><a
+                           href="#Наш-пример-inverse">Наш пример <code>inverse</code></a></h2>
+<p>Вернемся к разделу <a href="generics.html">Дженерики</a>, мы пытались написать такой код:</p>
+<span class='rusttest'>fn main() {
+    fn inverse&lt;T&gt;(x: T) -&gt; Result&lt;T, String&gt; {
+        if x == 0.0 { return Err(&quot;x cannot be zero!&quot;.to_string()); }
+    
+        Ok(1.0 / x)
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
+    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
+
+    <span class='prelude-val'>Ok</span>(<span class='number'>1.0</span> <span class='op'>/</span> <span class='ident'>x</span>)
+}
+</pre>
+
+<p>Если мы попытаемся скомпилировать его, мы получим такую ошибку:</p>
+
+<pre><code class="language-text">error: binary operation `==` cannot be applied to type `T`
+</code></pre>
+
+<p>Все потому, что тип <code>T</code> является слишком общим: мы не можем знать наверняка, что
+любой случайный <code>T</code> можно сравнивать. Для конкретизации мы можем ограничить его
+трейтом. Хотя этот код и не будет работать, но попробуйте сделать следующее:</p>
+<span class='rusttest'>fn main() {
+    fn inverse&lt;T: PartialEq&gt;(x: T) -&gt; Result&lt;T, String&gt; {
+        if x == 0.0 { return Err(&quot;x cannot be zero!&quot;.to_string()); }
+    
+        Ok(1.0 / x)
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialEq</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
+    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
+
+    <span class='prelude-val'>Ok</span>(<span class='number'>1.0</span> <span class='op'>/</span> <span class='ident'>x</span>)
+}
+</pre>
+
+<p>Вы получите ошибку:</p>
+
+<pre><code class="language-text">error: mismatched types:
+ expected `T`,
+    found `_`
+(expected type parameter,
+    found floating-point variable)
+</code></pre>
+
+<p>Как уже было сказано, этот код не будет работать. Это потому, что наш <code>T</code>
+реализует <code>PartialEq</code>, который принимает на вход другой <code>T</code>, но, вместо этого,
+мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С
+помощью <code>Float</code> можно исправить ошибку:</p>
+<span class='rusttest'>#![feature(std_misc)]
+fn main() {
+    use std::num::Float;
+    
+    fn inverse&lt;T: Float&gt;(x: T) -&gt; Result&lt;T, String&gt; {
+        if x == Float::zero() { return Err(&quot;x cannot be zero!&quot;.to_string()) }
+    
+        let one: T = Float::one();
+        Ok(one / x)
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>num</span>::<span class='ident'>Float</span>;
+
+<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Float</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
+    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='ident'>Float</span>::<span class='ident'>zero</span>() { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()) }
+
+    <span class='kw'>let</span> <span class='ident'>one</span>: <span class='ident'>T</span> <span class='op'>=</span> <span class='ident'>Float</span>::<span class='ident'>one</span>();
+    <span class='prelude-val'>Ok</span>(<span class='ident'>one</span> <span class='op'>/</span> <span class='ident'>x</span>)
+}
+</pre>
+
+<p>Нам следует заменить <code>0.0</code> и <code>1.0</code> соответствующими методами из трейта <code>Float</code>.
+И <code>f32</code>, и <code>f64</code> реализуют трейт <code>Float</code>, так что наша функция будет работать
+просто отлично:</p>
+<span class='rusttest'>#![feature(std_misc)]
+fn main() {
+    use std::num::Float;
+    fn inverse&lt;T: Float&gt;(x: T) -&gt; Result&lt;T, String&gt; {
+        if x == Float::zero() { return Err(&quot;x cannot be zero!&quot;.to_string()) }
+        let one: T = Float::one();
+        Ok(one / x)
+    }
+    println!(&quot;the inverse of {} is {:?}&quot;, 2.0f32, inverse(2.0f32));
+    println!(&quot;the inverse of {} is {:?}&quot;, 2.0f64, inverse(2.0f64));
+    
+    println!(&quot;the inverse of {} is {:?}&quot;, 0.0f32, inverse(0.0f32));
+    println!(&quot;the inverse of {} is {:?}&quot;, 0.0f64, inverse(0.0f64));
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f32</span>));
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f64</span>));
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f32</span>));
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f64</span>));
+</pre>
+
+<h2 id="Методы-по-умолчанию" class='section-header'><a
+                           href="#Методы-по-умолчанию">Методы по умолчанию</a></h2>
+<p>Есть еще одна особенность трейтов, которую мы должны охватывать: методы по
+умолчанию. Проще всего это показать на примере:</p>
+<span class='rusttest'>fn main() {
+    trait Foo {
+        fn bar(&amp;self);
+    
+        fn baz(&amp;self) { println!(&quot;We called baz.&quot;); }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>trait</span> <span class='ident'>Foo</span> {
+    <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
+
+    <span class='kw'>fn</span> <span class='ident'>baz</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called baz.&quot;</span>); }
+}
+</pre>
+
+<p>При реализации трейта <code>Foo</code> необходимо реализовать метод <code>bar()</code>, но нет
+необходимости в реализации метода <code>baz()</code>. Это поведение будет реализовано по
+умолчанию. По желанию, можно переопределить значение метода по умолчанию:</p>
+<span class='rusttest'>fn main() {
+    trait Foo {
+    fn bar(&amp;self);
+    fn baz(&amp;self) { println!(&quot;We called baz.&quot;); }
+    }
+    struct UseDefault;
+    
+    impl Foo for UseDefault {
+        fn bar(&amp;self) { println!(&quot;We called bar.&quot;); }
+    }
+    
+    struct OverrideDefault;
+    
+    impl Foo for OverrideDefault {
+        fn bar(&amp;self) { println!(&quot;We called bar.&quot;); }
+    
+        fn baz(&amp;self) { println!(&quot;Override baz!&quot;); }
+    }
+    
+    let default = UseDefault;
+    default.baz(); // prints &quot;We called baz.&quot;
+    
+    let over = OverrideDefault;
+    over.baz(); // prints &quot;Override baz!&quot;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>UseDefault</span>;
+
+<span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>UseDefault</span> {
+    <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called bar.&quot;</span>); }
+}
+
+<span class='kw'>struct</span> <span class='ident'>OverrideDefault</span>;
+
+<span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>OverrideDefault</span> {
+    <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called bar.&quot;</span>); }
+
+    <span class='kw'>fn</span> <span class='ident'>baz</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Override baz!&quot;</span>); }
+}
+
+<span class='kw'>let</span> <span class='ident'>default</span> <span class='op'>=</span> <span class='ident'>UseDefault</span>;
+<span class='ident'>default</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;We called baz.&quot;</span>
+
+<span class='kw'>let</span> <span class='ident'>over</span> <span class='op'>=</span> <span class='ident'>OverrideDefault</span>;
+<span class='ident'>over</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;Override baz!&quot;</span>
+</pre>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>
