@@ -450,74 +450,80 @@ expanded`. Вывод представляет собой целый конте�
   макрос развертывается. Используйте `trace_macros!(false)` в конце развертывания,
   чтобы выключить его.
 
-# Syntactic requirements
+# Требования синтаксиса
 
-Even when Rust code contains un-expanded macros, it can be parsed as a full
-[syntax tree][ast]. This property can be very useful for editors and other
-tools that process code. It also has a few consequences for the design of
-Rust's macro system.
+Код на Rust может быть разобран в [синтаксическое дерево][ast], даже когда он
+содержит неразвёрнутые макросы. Это свойство очень полезно для редакторов и
+других инструментов, обрабатывающих исходный код. Оно также влияет на вид
+системы макросов Rust.
 
 [ast]: glossary.html#abstract-syntax-tree
 
-One consequence is that Rust must determine, when it parses a macro invocation,
-whether the macro stands in for
+Как следствие, когда компилятор разбирает вызов макроса, ему необходимо знать,
+во что развернётся данный макрос. Макрос может разворачиваться в следующее:
 
-* zero or more items,
-* zero or more methods,
-* an expression,
-* a statement, or
-* a pattern.
+* ноль или больше элементов;
+* ноль или больше методов;
+* выражение;
+* оператор;
+* образец.
 
-A macro invocation within a block could stand for some items, or for an
-expression / statement. Rust uses a simple rule to resolve this ambiguity. A
-macro invocation that stands for items must be either
+Вызов макроса в блоке может представлять собой элементы, выражение, или
+оператор. Rust использует простое правило для разрешения этой
+неоднозначности. Вызов макроса, производящего элементы, должен либо
 
-* delimited by curly braces, e.g. `foo! { ... }`, or
-* terminated by a semicolon, e.g. `foo!(...);`
+* ограничиваться фигурными скобками, т.е. `foo! { ... }`;
+* завершаться точкой с запятой, т.е. `foo!(...);`.
 
-Another consequence of pre-expansion parsing is that the macro invocation must
-consist of valid Rust tokens. Furthermore, parentheses, brackets, and braces
-must be balanced within a macro invocation. For example, `foo!([)` is
-forbidden. This allows Rust to know where the macro invocation ends.
+Другое следствие разбора перед раскрытием макросов - это то, что вызов макроса
+должен состоять из допустимых лексем. Более того, скобки всех видов должны быть
+сбалансированы в месте вызова. Например, `foo!([)` не является разрешённым
+кодом. Такое поведение позволяет компилятору понимать где заканчивается вызов
+макроса.
 
-More formally, the macro invocation body must be a sequence of *token trees*.
-A token tree is defined recursively as either
+Говоря более формально, тело вызова макроса должно представлять собой
+последовательность *деревьев лексем*. Дерево лексем определяется рекурсивно и
+представляет собой либо:
 
-* a sequence of token trees surrounded by matching `()`, `[]`, or `{}`, or
-* any other single token.
+* последовательность деревьев лексем, окружённую согласованными круглыми,
+  квадратными или фигурными скобками (`()`, `[]`, `{}`);
+* любую другую одиночную лексему.
 
-Within a matcher, each metavariable has a *fragment specifier*, identifying
-which syntactic form it matches.
+Внутри сопоставления каждая метапеременная имеет *указатель фрагмента*,
+определяющий синтаксическую форму, с которой она совпадает. Вот список этих
+указателей:
 
-* `ident`: an identifier. Examples: `x`; `foo`.
-* `path`: a qualified name. Example: `T::SpecialA`.
-* `expr`: an expression. Examples: `2 + 2`; `if true then { 1 } else { 2 }`; `f(42)`.
-* `ty`: a type. Examples: `i32`; `Vec<(char, String)>`; `&T`.
-* `pat`: a pattern. Examples: `Some(t)`; `(17, 'a')`; `_`.
-* `stmt`: a single statement. Example: `let x = 3`.
-* `block`: a brace-delimited sequence of statements. Example:
-  `{ log(error, "hi"); return 12; }`.
-* `item`: an [item][]. Examples: `fn foo() { }`; `struct Bar;`.
-* `meta`: a "meta item", as found in attributes. Example: `cfg(target_os = "windows")`.
-* `tt`: a single token tree.
+* `ident`: идентификатор. Например: `x`; `foo`.
+* `path`: квалифицированное имя. Например: `T::SpecialA`.
+* `expr`: выражение. Например: `2 + 2`; `if true then { 1 } else { 2 }`;
+  `f(42)`.
+* `ty`: тип. Например: `i32`; `Vec<(char, String)>`; `&T`.
+* `pat`: образец. Например: `Some(t)`; `(17, 'a')`; `_`.
+* `stmt`: единственный оператор. Например: `let x = 3`.
+* `block`: последовательность операторов, ограниченная фигурными
+  скобками. Например: `{ log(error, "hi"); return 12; }`.
+* `item`: [элемент][item]. Например: `fn foo() { }`; `struct Bar;`.
+* `meta`: "мета-элемент", как в атрибутах. Например: `cfg(target_os =
+  "windows")`.
+* `tt`: единственное дерево лексем.
 
-There are additional rules regarding the next token after a metavariable:
+Есть дополнительные правила относительно лексем, следующих за метапеременной:
 
-* `expr` variables must be followed by one of: `=> , ;`
-* `ty` and `path` variables must be followed by one of: `=> , : = > as`
-* `pat` variables must be followed by one of: `=> , =`
-* Other variables may be followed by any token.
+* за `expr` должно быть что-то из этого: `=> , ;`;
+* за `ty` и `path` должно быть что-то из этого: `=> , : = > as`;
+* за `pat` должно быть что-то из этого : `=> , =`;
+* за другими лексемами могут следовать любые символы.
 
-These rules provide some flexibility for Rust's syntax to evolve without
-breaking existing macros.
+Приведённые правила обеспечивают развитие синтаксиса Rust без необходимости
+менять существующие макросы.
 
-The macro system does not deal with parse ambiguity at all. For example, the
-grammar `$($t:ty)* $e:expr` will always fail to parse, because the parser would
-be forced to choose between parsing `$t` and parsing `$e`. Changing the
-invocation syntax to put a distinctive token in front can solve the problem. In
-this case, you can write `$(T $t:ty)* E $e:exp`.
+И ещё: система макросов никак не обрабатывет неоднозначность разбора. Например,
+грамматика `$($t:ty)* $e:expr` всегда будет выдавать ошибку, потому что
+синтаксическому анализатору пришлось бы выбирать между разбором `$t` и разбором
+`$e`. Можно изменить синтаксис вызова так, чтобы грамматика отличалась в начале.
+В данном случае можно написать `$(T $t:ty)* E $e:exp`.
 
-[item]: ../reference.html#items
+[item]: http://doc.rust-lang.org/stable/reference.html#items
 
 # Scoping and macro import/export
 
