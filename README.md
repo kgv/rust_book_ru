@@ -24,18 +24,11 @@
 
 ## Благодарности
 
-Прежде всего хочу выразить благодарность моим родителям: **Тане** и **Володе**.
-Без них не было бы этой книги.
+Хочется выразить благодарность [всем, кто принимал участие в создании этой
+книги][authors].
 
-Также хочу выразить благодарность всем, кто принимал участие в создании этой
-книги:
-
-* [ithamsteri](https://github.com/ithamsteri)
-* [funkill](https://github.com/funkill)
-* [mkpankov](https://github.com/mkpankov)
-* [suhr](https://github.com/suhr)
-* [dieu](https://github.com/dieu)
-* [D101101](https://github.com/D101101)
+Хочу выразить благодарность моим родителям: **Тане** и **Володе**. Без них не
+было бы этой книги. @kgv
 
 ## Ошибки
 
@@ -48,6 +41,7 @@
 * gitbook расположен [здесь][gitbook]
 * github репозиторий расположен [здесь][github]
 
+[authors]: https://github.com/kgv/rust_book_ru/blob/master/AUTHORS.md
 [original]: https://doc.rust-lang.org/book
 [github]: https://github.com/kgv/rust_book_ru
 [error]: https://github.com/kgv/rust_book_ru/issues
