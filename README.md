@@ -7,7 +7,7 @@
 
 **ВНИМАНИЕ!** Перевод не окончен, поэтому могут встречаться [ошибки][error].
 
-* [Читать книгу](http://kgv.gitbooks.io/rust_book_ru/content/)
+* [Читать книгу](http://kgv.github.io/rust_book_ru/)
 * [Скачать в PDF](https://www.gitbook.com/download/pdf/book/kgv/rust_book_ru)
 * [Скачать в другом формате](https://www.gitbook.com/book/kgv/rust_book_ru/details)
 
