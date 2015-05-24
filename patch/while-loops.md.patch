@@ -1,16 +1,18 @@
-diff --git a/rust/master:src/doc/trpl/while-loops.md b/HEAD:while-loops.md
-index f2e2f6b..e3dbdc5 100644
---- a/rust/master:src/doc/trpl/while-loops.md
-+++ b/HEAD:while-loops.md
+diff --git a/rust/master:./src/doc/trpl/while-loops.md b/HEAD:./syntax-and-semantics/while-loops.md
+index 0f5c3c6..e3dbdc5 100644
+--- a/rust/master:./src/doc/trpl/while-loops.md
++++ b/HEAD:./syntax-and-semantics/while-loops.md
 @@ -1,93 +1,96 @@
--% while loops
+-% while Loops
 +% Циклы `while`
  
 -Rust also has a `while` loop. It looks like this:
 +Цикл `while` это ещё один вид конструкции цикла в Rust. Выглядит он так:
  
- ```{rust}
- let mut x = 5; // mut x: u32
+-```rust
+-let mut x = 5; // mut x: i32
++```{rust}
++let mut x = 5; // mut x: u32
  let mut done = false; // mut done: bool
  
  while !done {

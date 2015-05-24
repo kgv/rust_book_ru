@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/const-and-static.md b/HEAD:const-and-static.md
-index be0c873..0996239 100644
---- a/rust/master:src/doc/trpl/const-and-static.md
-+++ b/HEAD:const-and-static.md
-@@ -1,86 +1,93 @@
+diff --git a/rust/master:./src/doc/trpl/const-and-static.md b/HEAD:./syntax-and-semantics/const-and-static.md
+index f309dd0..0996239 100644
+--- a/rust/master:./src/doc/trpl/const-and-static.md
++++ b/HEAD:./syntax-and-semantics/const-and-static.md
+@@ -1,84 +1,93 @@
  % `const` and `static`
  
 -Rust has a way of defining constants with the `const` keyword:
@@ -49,12 +49,11 @@ index be0c873..0996239 100644
 -Unlike [`let`][let] bindings, you must annotate the type of a `static`.
 +[const]: const.html
  
--[let]: variable-bindings.html
+-Statics live for the entire lifetime of a program, and therefore any
+-reference stored in a constant has a [`'static` lifetime][lifetimes]:
 +Так же, как и в случае с постоянными, тип статического значения надо указывать
 +всегда.
- 
--Statics live for the entire lifetime of a program, and therefore any
--reference stored in a constant has a [`’static` lifetime][lifetimes]:
++
 +Статические значения живут в течение всего времени работы программы, и любая
 +ссылка на постоянную имеет [статическое время жизни][lifetimes] (`static`
 +lifetime):

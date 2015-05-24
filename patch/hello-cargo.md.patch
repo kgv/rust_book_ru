@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/hello-cargo.md b/HEAD:hello-cargo.md
+diff --git a/rust/master:./src/doc/trpl/hello-cargo.md b/HEAD:./getting-started/hello-cargo.md
 index cc8747d..292a6ce 100644
---- a/rust/master:src/doc/trpl/hello-cargo.md
-+++ b/HEAD:hello-cargo.md
+--- a/rust/master:./src/doc/trpl/hello-cargo.md
++++ b/HEAD:./getting-started/hello-cargo.md
 @@ -1,205 +1,215 @@
  % Hello, Cargo!
  

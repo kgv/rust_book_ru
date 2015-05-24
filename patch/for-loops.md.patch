@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/for-loops.md b/HEAD:for-loops.md
+diff --git a/rust/master:./src/doc/trpl/for-loops.md b/HEAD:./syntax-and-semantics/for-loops.md
 index 1e3f2fa..92c3875 100644
---- a/rust/master:src/doc/trpl/for-loops.md
-+++ b/HEAD:for-loops.md
+--- a/rust/master:./src/doc/trpl/for-loops.md
++++ b/HEAD:./syntax-and-semantics/for-loops.md
 @@ -1,43 +1,45 @@
 -% for Loops
 +% Циклы `for`

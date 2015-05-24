@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/error-handling.md b/HEAD:error-handling.md
-index e480921..f907c62 100644
---- a/rust/master:src/doc/trpl/error-handling.md
-+++ b/HEAD:error-handling.md
-@@ -1,304 +1,318 @@
+diff --git a/rust/master:./src/doc/trpl/error-handling.md b/HEAD:./effective-rust/error-handling.md
+index 7b47559..f907c62 100644
+--- a/rust/master:./src/doc/trpl/error-handling.md
++++ b/HEAD:./effective-rust/error-handling.md
+@@ -1,306 +1,318 @@
 -% Error Handling
 +% Обработка ошибок
  
@@ -86,7 +86,8 @@ index e480921..f907c62 100644
 +работу программы в текущем состоянии. Другой пример - использование макроса
 +`unreachable!()`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  enum Event {
      NewRelease,
  }
@@ -241,17 +242,20 @@ index e480921..f907c62 100644
 +В примере показана функция, которая использует перечисление `ParseError`, чтобы
 +определить ошибки, которые могут возникнуть.
  
--# Non-recoverable errors with `panic!`
+-The [`Debug`](../std/fmt/trait.Debug.html) trait is what lets us print the enum value using the `{:?}` format operation.
 +# Использование `panic!`
  
--In the case of an error that is unexpected and not recoverable, the `panic!`
--macro will induce a panic. This will crash the current thread, and give an error:
+-# Non-recoverable errors with `panic!`
 +В случае ошибки, которая является неожиданной, и после которой не может быть
 +восстановлена работоспособность программы, макрос `panic!` будет вызывать
 +панику. Это приведет к аварийному завершению текущего потока, и выдаст сообщение
 +об ошибке:
  
- ```{rust,ignore}
+-In the case of an error that is unexpected and not recoverable, the `panic!`
+-macro will induce a panic. This will crash the current thread, and give an error:
+-
+-```rust,ignore
++```{rust,ignore}
  panic!("boom");
  ```
  
@@ -274,7 +278,7 @@ index e480921..f907c62 100644
  
 -In certain circumstances, even though a function may fail, we may want to treat
 -it as a panic instead. For example, `io::stdin().read_line(&mut buffer)` returns
--an `Result<usize>`, when there is an error reading the line. This allows us to
+-a `Result<usize>`, when there is an error reading the line. This allows us to
 -handle and possibly recover from error.
 +В некоторых случаях, когда функция может потерпеть неудачу, нам может
 +понадобиться рассматривать эту неудачу как панику. Например,
@@ -287,11 +291,12 @@ index e480921..f907c62 100644
 +Если же нам не нужно обрабатывать ошибку, а нужно просто прервать программу, то
 +мы можем использовать метод `unwrap()`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  io::stdin().read_line(&mut buffer).unwrap();
  ```
  
--`unwrap()` will `panic!` if the `Option` is `None`. This basically says "Give
+-`unwrap()` will `panic!` if the `Result` is `Err`. This basically says "Give
 -me the value, and if something goes wrong, just crash." This is less reliable
 -than matching the error and attempting to recover, but is also significantly
 -shorter. Sometimes, just crashing is appropriate.
@@ -305,7 +310,8 @@ index e480921..f907c62 100644
 -There's another way of doing this that's a bit nicer than `unwrap()`:
 +Вот еще один способ распаковки ошибок, который немного лучше, чем `unwrap()`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  let mut buffer = String::new();
  let input = io::stdin().read_line(&mut buffer)
                         .ok()

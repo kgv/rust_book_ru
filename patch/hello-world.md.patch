@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/hello-world.md b/HEAD:hello-world.md
+diff --git a/rust/master:./src/doc/trpl/hello-world.md b/HEAD:./getting-started/hello-world.md
 index eec6fe6..2f63b17 100644
---- a/rust/master:src/doc/trpl/hello-world.md
-+++ b/HEAD:hello-world.md
+--- a/rust/master:./src/doc/trpl/hello-world.md
++++ b/HEAD:./getting-started/hello-world.md
 @@ -1,166 +1,172 @@
  % Hello, world!
  

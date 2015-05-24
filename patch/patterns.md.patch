@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/patterns.md b/HEAD:patterns.md
-index 266c1ca..c59ff1b 100644
---- a/rust/master:src/doc/trpl/patterns.md
-+++ b/HEAD:patterns.md
+diff --git a/rust/master:./src/doc/trpl/patterns.md b/HEAD:./syntax-and-semantics/patterns.md
+index 93df0f1..c59ff1b 100644
+--- a/rust/master:./src/doc/trpl/patterns.md
++++ b/HEAD:./syntax-and-semantics/patterns.md
 @@ -1,256 +1,260 @@
 -% Patterns
 +% Шаблоны сопоставления `match`
@@ -86,7 +86,7 @@ index 266c1ca..c59ff1b 100644
  }
  ```
  
--This prints `something else`
+-This prints `something else`.
 +Этот код напечатает `something else`.
  
 -# Bindings
@@ -186,7 +186,7 @@ index 266c1ca..c59ff1b 100644
  }
  ```
  
--This prints `Got an int!`
+-This prints `Got an int!`.
 +Этот код напечатает `Got an int!`.
  
 -# ref and ref mut

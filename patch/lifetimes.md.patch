@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/lifetimes.md b/HEAD:lifetimes.md
-index 981286c..db46302 100644
---- a/rust/master:src/doc/trpl/lifetimes.md
-+++ b/HEAD:lifetimes.md
+diff --git a/rust/master:./src/doc/trpl/lifetimes.md b/HEAD:./syntax-and-semantics/lifetimes.md
+index 0039f90..db46302 100644
+--- a/rust/master:./src/doc/trpl/lifetimes.md
++++ b/HEAD:./syntax-and-semantics/lifetimes.md
 @@ -1,297 +1,311 @@
 -% Lifetimes
 +% Время жизни
@@ -17,7 +17,7 @@ index 981286c..db46302 100644
 +владения включает в себя несколько различных концепций, каждая из которых
 +рассматривается в своей собственной главе:
  
--* [ownership][ownership], ownership, the key concept
+-* [ownership][ownership], the key concept
 -* [borrowing][borrowing], and their associated feature ‘references’
 -* lifetimes, which you’re reading now
 +* [владение][ownership], ключевая концепция
@@ -79,7 +79,7 @@ index 981286c..db46302 100644
 +# Время жизни
  
 -Lending out a reference to a resource that someone else owns can be
--complicated, however. For example, imagine this set of operations:
+-complicated. For example, imagine this set of operations:
 +Одалживание ссылки на ресурс, которым кто-то владеет может быть довольно
 +сложным. Например, представьте себе следующую последовательность операций:
  
@@ -186,7 +186,8 @@ index 981286c..db46302 100644
  }
  ```
  
- [struct]: structs.html
+-[structs]: structs.html
++[struct]: structs.html
  
 -As you can see, `struct`s can also have lifetimes. In a similar way to functions,
 +Как вы можете заметить, `struct` также могут иметь время жизни. Так же как и
@@ -316,7 +317,7 @@ index 981286c..db46302 100644
 +## Опускание времени жизни
  
 -Rust supports powerful local type inference in function bodies, but it’s
--forbidden in item signatures to allow reasoning about the types just based in
+-forbidden in item signatures to allow reasoning about the types based on
 -the item signature alone. However, for ergonomic reasons a very restricted
 -secondary inference algorithm called “lifetime elision” applies in function
 -signatures. It infers only based on the signature components themselves and not

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/associated-types.md b/HEAD:associated-types.md
+diff --git a/rust/master:./src/doc/trpl/associated-types.md b/HEAD:./syntax-and-semantics/associated-types.md
 index 55e2787..f09da74 100644
---- a/rust/master:src/doc/trpl/associated-types.md
-+++ b/HEAD:associated-types.md
+--- a/rust/master:./src/doc/trpl/associated-types.md
++++ b/HEAD:./syntax-and-semantics/associated-types.md
 @@ -1,202 +1,209 @@
 -% Associated Types
 +% Ассоциированные типы

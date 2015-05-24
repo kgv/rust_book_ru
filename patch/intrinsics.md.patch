@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/intrinsics.md b/HEAD:intrinsics.md
-index 25f7c54..b03c73c 100644
---- a/rust/master:src/doc/trpl/intrinsics.md
-+++ b/HEAD:intrinsics.md
+diff --git a/rust/master:./src/doc/trpl/intrinsics.md b/HEAD:./nightly-rust/intrinsics.md
+index e0a8bb5..b03c73c 100644
+--- a/rust/master:./src/doc/trpl/intrinsics.md
++++ b/HEAD:./nightly-rust/intrinsics.md
 @@ -1,25 +1,24 @@
 -% Intrinsics
 +% Внутренние средства (Intrinsics)
@@ -24,7 +24,8 @@ index 25f7c54..b03c73c 100644
 +эффективную арифметику указателей, то можно импортировать эти функции через
 +объявление, такое как
  
- ```
+-```rust
++```
  # #![feature(intrinsics)]
  # fn main() {}
  

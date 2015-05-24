@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/ufcs.md b/HEAD:ufcs.md
+diff --git a/rust/master:./src/doc/trpl/ufcs.md b/HEAD:./syntax-and-semantics/ufcs.md
 index 2353c63..7a0f8c6 100644
---- a/rust/master:src/doc/trpl/ufcs.md
-+++ b/HEAD:ufcs.md
+--- a/rust/master:./src/doc/trpl/ufcs.md
++++ b/HEAD:./syntax-and-semantics/ufcs.md
 @@ -1,127 +1,129 @@
 -% Universal Function Call Syntax
 +% Универсальный синтаксис вызова функций (Universal Function Call Syntax)

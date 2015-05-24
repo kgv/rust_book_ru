@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/operators-and-overloading.md b/HEAD:operators-and-overloading.md
+diff --git a/rust/master:./src/doc/trpl/operators-and-overloading.md b/HEAD:./syntax-and-semantics/operators-and-overloading.md
 index 6a59465..c0b92b6 100644
---- a/rust/master:src/doc/trpl/operators-and-overloading.md
-+++ b/HEAD:operators-and-overloading.md
+--- a/rust/master:./src/doc/trpl/operators-and-overloading.md
++++ b/HEAD:./syntax-and-semantics/operators-and-overloading.md
 @@ -1,83 +1,84 @@
 -% Operators and Overloading
 +% Перегрузка операций

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/slice-patterns.md b/HEAD:slice-patterns.md
+diff --git a/rust/master:./src/doc/trpl/slice-patterns.md b/HEAD:./nightly-rust/slice-patterns.md
 index de165b7..8b85669 100644
---- a/rust/master:src/doc/trpl/slice-patterns.md
-+++ b/HEAD:slice-patterns.md
+--- a/rust/master:./src/doc/trpl/slice-patterns.md
++++ b/HEAD:./nightly-rust/slice-patterns.md
 @@ -1,42 +1,18 @@
 -% Slice patterns
 +% Шаблоны `match` для срезов

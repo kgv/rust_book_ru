@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/testing.md b/HEAD:testing.md
-index 45f87a6..16d27cd 100644
---- a/rust/master:src/doc/trpl/testing.md
-+++ b/HEAD:testing.md
+diff --git a/rust/master:./src/doc/trpl/testing.md b/HEAD:./effective-rust/testing.md
+index 7595431..16d27cd 100644
+--- a/rust/master:./src/doc/trpl/testing.md
++++ b/HEAD:./effective-rust/testing.md
 @@ -1,432 +1,445 @@
 -% Testing
 +% Тестирование
@@ -247,7 +247,8 @@ index 45f87a6..16d27cd 100644
 +Тогда тест также будет проверять, что сообщение об ошибке содержит ожидаемый
 +текст. Ниже представлен более безопасный вариант приведенного выше примера:
  
- ```
+-```rust
++```
  #[test]
  #[should_panic(expected = "assertion failed")]
  fn it_works() {
@@ -258,7 +259,8 @@ index 45f87a6..16d27cd 100644
 -That's all there is to the basics! Let's write one 'real' test:
 +Вот и все, что касается основ! Давайте напишем один 'реальный' тест:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub fn add_two(a: i32) -> i32 {
      a + 2
  }
@@ -285,7 +287,8 @@ index 45f87a6..16d27cd 100644
 +отсутствует модуль тестирования. Идиоматический вариант написания нашего примера
 +будет выглядить примерно так:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub fn add_two(a: i32) -> i32 {
      a + 2
  }
@@ -326,7 +329,8 @@ index 45f87a6..16d27cd 100644
 +обычно используют фичу `glob`. Давайте, в соответствии с этим, изменим
 +`src/lib.rs`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  
  pub fn add_two(a: i32) -> i32 {
      a + 2
@@ -387,7 +391,8 @@ index 45f87a6..16d27cd 100644
 +Чтобы написать интеграционный тест, давайте создадим директорию `tests`, и
 +положим в нее файл `tests/lib.rs` со следующим содержимым:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  extern crate adder;
  
  #[test]
@@ -462,7 +467,8 @@ index 45f87a6..16d27cd 100644
 +документация была написана. Для этого, Rust поддерживает автоматический запуск
 +примеров в документации. Вот дополненный `src/lib.rs` с примерами:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  //! The `adder` crate provides functions that add numbers to other numbers.
  //!
  //! # Examples

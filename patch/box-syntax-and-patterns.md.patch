@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/box-syntax-and-patterns.md b/HEAD:box-syntax-and-patterns.md
-index 839f07d..615dd1c 100644
---- a/rust/master:src/doc/trpl/box-syntax-and-patterns.md
-+++ b/HEAD:box-syntax-and-patterns.md
+diff --git a/rust/master:./src/doc/trpl/box-syntax-and-patterns.md b/HEAD:./nightly-rust/box-syntax-and-patterns.md
+index 1cf84bf..615dd1c 100644
+--- a/rust/master:./src/doc/trpl/box-syntax-and-patterns.md
++++ b/HEAD:./nightly-rust/box-syntax-and-patterns.md
 @@ -1,100 +1,104 @@
 -%  Box Syntax and Patterns
 +% Синтаксис упаковки и образцы (шаблоны)
@@ -17,7 +17,8 @@ index 839f07d..615dd1c 100644
 +создания, так и для деструктуризации `Box`. Ниже представлен пример
 +использования:
  
- ```
+-```rust
++```
  #![feature(box_syntax, box_patterns)]
  
  fn main() {
@@ -53,7 +54,8 @@ index 839f07d..615dd1c 100644
 +Во многих языках с указателями, вы можете вернуть указатель из функции, чтобы
 +таким образом избежать копирования большой структуры данных. Например:
  
- ```{rust}
+-```rust
++```{rust}
  struct BigStruct {
      one: i32,
      two: i32,

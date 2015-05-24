@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/trait-objects.md b/HEAD:trait-objects.md
+diff --git a/rust/master:./src/doc/trpl/trait-objects.md b/HEAD:./syntax-and-semantics/trait-objects.md
 index c011290..abcab7f 100644
---- a/rust/master:src/doc/trpl/trait-objects.md
-+++ b/HEAD:trait-objects.md
+--- a/rust/master:./src/doc/trpl/trait-objects.md
++++ b/HEAD:./syntax-and-semantics/trait-objects.md
 @@ -1,306 +1,316 @@
 -% Trait Objects
 +% Трейт объекты

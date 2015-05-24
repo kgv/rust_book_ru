@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/installing-rust.md b/HEAD:installing-rust.md
-index b8230f0..7b81209 100644
---- a/rust/master:src/doc/trpl/installing-rust.md
-+++ b/HEAD:installing-rust.md
+diff --git a/rust/master:./src/doc/trpl/installing-rust.md b/HEAD:./getting-started/installing-rust.md
+index b182ac7..f50cb02 100644
+--- a/rust/master:./src/doc/trpl/installing-rust.md
++++ b/HEAD:./getting-started/installing-rust.md
 @@ -1,97 +1,106 @@
 -% Installing Rust
 +% Установка Rust
@@ -39,8 +39,8 @@ index b8230f0..7b81209 100644
 +Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
 +пакетов: [32-битный][win32] или [64-битный][win64] и запустите его.
  
- [win32]: https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi
- [win64]: https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi
+ [win32]: https://static.rust-lang.org/dist/rust-1.0.0-i686-pc-windows-gnu.msi
+ [win64]: https://static.rust-lang.org/dist/rust-1.0.0-x86_64-pc-windows-gnu.msi
  
 -## Uninstalling
 +## Удаление
@@ -119,7 +119,7 @@ index b8230f0..7b81209 100644
 +Вы должны увидеть версию, хэш коммита, дату коммита и дату сборки:
  
  ```bash
- rustc 1.0.0-beta (9854143cb 2015-04-02) (built 2015-04-02)
+ rustc 1.0.0 (a59de37e9 2015-05-13) (built 2015-05-14)
  ```
  
 -If you did, Rust has been installed successfully! Congrats!

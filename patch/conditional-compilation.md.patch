@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/conditional-compilation.md b/HEAD:conditional-compilation.md
+diff --git a/rust/master:./src/doc/trpl/conditional-compilation.md b/HEAD:./effective-rust/conditional-compilation.md
 index 73eb010..5579698 100644
---- a/rust/master:src/doc/trpl/conditional-compilation.md
-+++ b/HEAD:conditional-compilation.md
+--- a/rust/master:./src/doc/trpl/conditional-compilation.md
++++ b/HEAD:./effective-rust/conditional-compilation.md
 @@ -1,93 +1,97 @@
 -% Conditional Compilation
 +% Условная компиляция

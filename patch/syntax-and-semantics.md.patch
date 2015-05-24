@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/syntax-and-semantics.md b/HEAD:syntax-and-semantics.md
+diff --git a/rust/master:./src/doc/trpl/syntax-and-semantics.md b/HEAD:./syntax-and-semantics.md
 index cce985c..0b9f2f4 100644
---- a/rust/master:src/doc/trpl/syntax-and-semantics.md
-+++ b/HEAD:syntax-and-semantics.md
+--- a/rust/master:./src/doc/trpl/syntax-and-semantics.md
++++ b/HEAD:./syntax-and-semantics.md
 @@ -1,10 +1,11 @@
 -% Syntax and Semantics
 +% Синтаксис и семантика

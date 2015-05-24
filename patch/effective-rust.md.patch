@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/effective-rust.md b/HEAD:effective-rust.md
+diff --git a/rust/master:./src/doc/trpl/effective-rust.md b/HEAD:./effective-rust.md
 index 582ed3b..cbb9f11 100644
---- a/rust/master:src/doc/trpl/effective-rust.md
-+++ b/HEAD:effective-rust.md
+--- a/rust/master:./src/doc/trpl/effective-rust.md
++++ b/HEAD:./effective-rust.md
 @@ -1,8 +1,9 @@
 -% Effective Rust
 +% Эффективное использование Rust

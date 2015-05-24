@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/generics.md b/HEAD:generics.md
-index 517a6e6..ad22cb9 100644
---- a/rust/master:src/doc/trpl/generics.md
-+++ b/HEAD:generics.md
+diff --git a/rust/master:./src/doc/trpl/generics.md b/HEAD:./syntax-and-semantics/generics.md
+index f8f1962..ad22cb9 100644
+--- a/rust/master:./src/doc/trpl/generics.md
++++ b/HEAD:./syntax-and-semantics/generics.md
 @@ -1,124 +1,133 @@
 -% Generics
 +% Дженерики (обобщённые типы)
@@ -161,7 +161,8 @@ index 517a6e6..ad22cb9 100644
 -You can store a generic type in a `struct` as well:
 +Вы также можете задать дженерик тип для `struct`:
  
- ```
+-```rust
++```
  struct Point<T> {
      x: T,
      y: T,

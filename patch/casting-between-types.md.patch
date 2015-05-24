@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/casting-between-types.md b/HEAD:casting-between-types.md
+diff --git a/rust/master:./src/doc/trpl/casting-between-types.md b/HEAD:./syntax-and-semantics/casting-between-types.md
 index dbacd40..24882ad 100644
---- a/rust/master:src/doc/trpl/casting-between-types.md
-+++ b/HEAD:casting-between-types.md
+--- a/rust/master:./src/doc/trpl/casting-between-types.md
++++ b/HEAD:./syntax-and-semantics/casting-between-types.md
 @@ -1,89 +1,92 @@
 -% Casting Between Types
 +% Приведение типов

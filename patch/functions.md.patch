@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/functions.md b/HEAD:functions.md
-index 87af485..e85e102 100644
---- a/rust/master:src/doc/trpl/functions.md
-+++ b/HEAD:functions.md
+diff --git a/rust/master:./src/doc/trpl/functions.md b/HEAD:./syntax-and-semantics/functions.md
+index 21a29f0..e85e102 100644
+--- a/rust/master:./src/doc/trpl/functions.md
++++ b/HEAD:./syntax-and-semantics/functions.md
 @@ -1,227 +1,230 @@
 -% Functions
 +% Функции
@@ -206,7 +206,8 @@ index 87af485..e85e102 100644
 +языков, где присвоение вычисляется в присваиваемое значение (например: `5` из
 +предыдущего примера), в Rust значением присвоения является пустой кортеж `()`.
  
- ```
+-```rust
++```
  let mut y = 5;
  
 -let x = (y = 6);  // x has the value `()`, not `6`
@@ -287,7 +288,8 @@ index 87af485..e85e102 100644
 +Для функций, которые не возвращают управление ("расходящихся"), в Rust есть
 +специальный синтаксис:
  
- ```
+-```rust
++```
  fn diverges() -> ! {
 -    panic!("This function never returns!");
 +    panic!("Эта функция не возвращает управление!");

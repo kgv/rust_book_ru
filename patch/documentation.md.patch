@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/documentation.md b/HEAD:documentation.md
-index b28343e..36a2793 100644
---- a/rust/master:src/doc/trpl/documentation.md
-+++ b/HEAD:documentation.md
+diff --git a/rust/master:./src/doc/trpl/documentation.md b/HEAD:./effective-rust/documentation.md
+index 53754e2..36a2793 100644
+--- a/rust/master:./src/doc/trpl/documentation.md
++++ b/HEAD:./effective-rust/documentation.md
 @@ -1,575 +1,597 @@
 -% Documentation
 +% Документация
@@ -66,7 +66,8 @@ index b28343e..36a2793 100644
 +Rust отслеживает такие комментарии, и использует их при генерировании
 +документации. Что важно при документировании таких вещей, как перечисления:
  
- ```
+-```rust
++```
  /// The `Option` type. See [the module level documentation](../) for more.
  enum Option<T> {
      /// No value
@@ -112,7 +113,8 @@ index b28343e..36a2793 100644
 -Anyway, let's cover each part of this comment in detail:
 +Давайте рассмотрим каждую часть приведенного комментария в деталях:
  
- ```
+-```rust
++```
  /// Constructs a new `Rc<T>`.
  # fn foo() {}
  ```
@@ -123,7 +125,8 @@ index b28343e..36a2793 100644
 +информацию о функциональности. Одно предложение. Только самое основное.
 +Высокоуровневое.
  
- ```
+-```rust
++```
  ///
  /// Other details about constructing `Rc<T>`s, maybe describing complicated
  /// semantics, maybe additional options, all kinds of stuff.
@@ -140,7 +143,8 @@ index b28343e..36a2793 100644
 -#### Special sections
 +#### Специальные разделы
  
- ```
+-```rust
++```
  /// # Examples
  # fn foo() {}
  ```
@@ -153,7 +157,8 @@ index b28343e..36a2793 100644
 +являются каким-либо специальным синтаксисом, на данный момент это просто
 +соглашение.
  
- ```
+-```rust
++```
  /// # Panics
  # fn foo() {}
  ```
@@ -168,7 +173,8 @@ index b28343e..36a2793 100644
 +нетривиальное поведение, другими словами, обнаруживает/вызывает панику, то очень
 +важно задокументировать это.
  
- ```
+-```rust
++```
  /// # Failures
  # fn foo() {}
  ```
@@ -182,7 +188,8 @@ index b28343e..36a2793 100644
 +описание `Panics`, потому как неудача кодируется в системе типа, но это не
 +значит что стоит пренебрегать этим.
  
- ```
+-```rust
++```
  /// # Safety
  # fn foo() {}
  ```
@@ -192,7 +199,8 @@ index b28343e..36a2793 100644
 +Если ваша функция является `unsafe`, необходимо пояснить, какие инварианты
 +вызова должны поддерживаться.
  
- ```
+-```rust
++```
  /// # Examples
  ///
  /// ```
@@ -212,7 +220,8 @@ index b28343e..36a2793 100644
 +это. Примеры должны размещаться внутри блока кода, о чем мы сейчас и будем
 +говорить. Может быть более одного раздела `Examples`:
  
- ```
+-```rust
++```
  /// # Examples
  ///
  /// Simple `&str` patterns:
@@ -240,7 +249,8 @@ index b28343e..36a2793 100644
 -To write some Rust code in a comment, use the triple graves:
 +Чтобы написать код на Rust в комментарии, используйте символы ```:
  
- ```
+-```rust
++```
  /// ```
  /// println!("Hello, world");
  /// ```
@@ -251,7 +261,8 @@ index b28343e..36a2793 100644
 +Если вы хотите написать код на любом другом языке (не на Rust), вы можете
 +добавить аннотацию:
  
- ```
+-```rust
++```
  /// ```c
  /// printf("Hello, world\n");
  /// ```
@@ -282,7 +293,8 @@ index b28343e..36a2793 100644
 -Let's discuss our sample example documentation:
 +Давайте обсудим наш пример документации:
  
- ```
+-```rust
++```
  /// ```
  /// println!("Hello, world");
  /// ```
@@ -296,7 +308,8 @@ index b28343e..36a2793 100644
 +автоматически добавит main() обертку вокруг вашего кода в нужном месте.
 +Например:
  
- ```
+-```rust
++```
  /// ```
  /// use std::rc::Rc;
  ///
@@ -308,7 +321,8 @@ index b28343e..36a2793 100644
 -This will end up testing:
 +В конечном итоге это будет тест:
  
- ```
+-```rust
++```
  fn main() {
      use std::rc::Rc;
      let five = Rc::new(5);
@@ -351,7 +365,8 @@ index b28343e..36a2793 100644
 -looks different than the output:
 +выглядит иначе, чем после обработки `rustdoc`, в виде сгенерированного вывода:
  
- ```
+-```rust
++```
  /// Some documentation.
  # fn foo() {}
  ```
@@ -375,7 +390,8 @@ index b28343e..36a2793 100644
 +длинные примеры, сохраняя при этом тестируемость документации. Например, этот
 +код:
  
- ```
+-```rust
++```
  let x = 5;
  let y = 6;
  println!("{}", x + y);
@@ -387,7 +403,8 @@ index b28343e..36a2793 100644
 -First, we set `x` to five:
 +Сперва мы устанавливаем `x` равным пяти:
  
- ```
+-```rust
++```
  let x = 5;
  # let y = 6;
  # println!("{}", x + y);
@@ -396,7 +413,8 @@ index b28343e..36a2793 100644
 -Next, we set `y` to six:
 +Затем мы устанавливаем `y` равным шести:
  
- ```
+-```rust
++```
  # let x = 5;
  let y = 6;
  # println!("{}", x + y);
@@ -405,7 +423,8 @@ index b28343e..36a2793 100644
 -Finally, we print the sum of `x` and `y`:
 +В конце мы печатаем сумму `x` и `y`:
  
- ```
+-```rust
++```
  # let x = 5;
  # let y = 6;
  println!("{}", x + y);
@@ -454,7 +473,8 @@ index b28343e..36a2793 100644
 -Here’s an example of documenting a macro:
 +Вот пример документирования макроса:
  
- ```
+-```rust
++```
  /// Panic with a given message unless an expression evaluates to true.
  ///
  /// # Examples
@@ -516,7 +536,8 @@ index b28343e..36a2793 100644
 +Есть еще несколько полезных аннотаций, которые помогают `rustdoc` работать
 +правильно (корректно) при тестировании кода:
  
- ```
+-```rust
++```
  /// ```ignore
  /// fn foo() {
  /// ```
@@ -533,7 +554,8 @@ index b28343e..36a2793 100644
 +`#`, чтобы получить рабочий пример, отображающий только ту часть, которая вам
 +нужна.
  
- ```
+-```rust
++```
  /// ```should_panic
  /// assert!(false);
  /// ```
@@ -545,7 +567,8 @@ index b28343e..36a2793 100644
 +Аннотация `should_panic` указывает `rustdoc`, что код должен компилироваться, но
 +выполнение теста должно завершиться ошибкой.
  
- ```
+-```rust
++```
  /// ```no_run
  /// loop {
  ///     println!("Hello, world");
@@ -570,7 +593,8 @@ index b28343e..36a2793 100644
 +комментарий относится не к следующему за ним элементу, а к элементу, который его
 +включает. Другими словами:
  
- ```
+-```rust
++```
  mod foo {
      //! This is documentation for the `foo` module.
      //!
@@ -586,7 +610,8 @@ index b28343e..36a2793 100644
 +документирование модуля. Если же модуль расположен в файле `foo.rs`, то вы,
 +открывая его код, часто будете видеть следующее:
  
- ```
+-```rust
++```
  //! A module for using `foo`s.
  //!
  //! The `foo` module contains a lot of useful functionality blah blah blah
@@ -616,7 +641,8 @@ index b28343e..36a2793 100644
 +Когда вы пишете документацию в Markdown файлах, вам не нужно добавлять префикс
 +комментария документации, `///`. Например:
  
- ```
+-```rust
++```
  /// # Examples
  ///
  /// ```
@@ -661,7 +687,8 @@ index b28343e..36a2793 100644
 +На более глубоком уровне, комментарии документации - это синтаксический сахар
 +для атрибутов документации:
  
- ```
+-```rust
++```
  /// this
  # fn foo() {}
  
@@ -672,7 +699,8 @@ index b28343e..36a2793 100644
 -are the same, as are these:
 +представленные выше комментарии идентичны, также как и ниже:
  
- ```
+-```rust
++```
  //! this
  
  #![doc="/// this"]
@@ -721,10 +749,12 @@ index b28343e..36a2793 100644
 +Вы можете управлять некоторыми аспектами HTML, который генерируется `rustdoc`,
 +через атрибут `#![doc]`:
  
- ```
+-```rust
++```
  #![doc(html_logo_url = "http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png",
         html_favicon_url = "http://www.rust-lang.org/favicon.ico",
-        html_root_url = "http://doc.rust-lang.org/")];
+-       html_root_url = "http://doc.rust-lang.org/")]
++       html_root_url = "http://doc.rust-lang.org/")];
  ```
  
 -This sets a few different options, with a logo, favicon, and a root URL.

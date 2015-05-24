@@ -1,8 +1,8 @@
-diff --git a/rust/master:src/doc/trpl/macros.md b/HEAD:macros.md
-index d504fab..01fae95 100644
---- a/rust/master:src/doc/trpl/macros.md
-+++ b/HEAD:macros.md
-@@ -1,772 +1,689 @@
+diff --git a/rust/master:./src/doc/trpl/macros.md b/HEAD:./syntax-and-semantics/macros.md
+index a45d482..01fae95 100644
+--- a/rust/master:./src/doc/trpl/macros.md
++++ b/HEAD:./syntax-and-semantics/macros.md
+@@ -1,773 +1,689 @@
 -% Macros
 +% Макросы
  
@@ -641,9 +641,12 @@ index d504fab..01fae95 100644
  
  There are additional rules regarding the next token after a metavariable:
  
- * `expr` variables must be followed by one of: `=> , ;`
- * `ty` and `path` variables must be followed by one of: `=> , : = > as`
- * `pat` variables must be followed by one of: `=> , =`
+-* `expr` variables may only be followed by one of: `=> , ;`
+-* `ty` and `path` variables may only be followed by one of: `=> , : = > as`
+-* `pat` variables may only be followed by one of: `=> , =`
++* `expr` variables must be followed by one of: `=> , ;`
++* `ty` and `path` variables must be followed by one of: `=> , : = > as`
++* `pat` variables must be followed by one of: `=> , =`
  * Other variables may be followed by any token.
  
 -These rules provide some flexibility for Rust’s syntax to evolve without
@@ -856,9 +859,9 @@ index d504fab..01fae95 100644
 -
 -## assert! and assert_eq!
 -
--These two macros are used in tests. `assert!` takes a boolean, and `assert_eq!`
--takes two values and compares them. Truth passes, success `panic!`s. Like
--this:
+-These two macros are used in tests. `assert!` takes a boolean. `assert_eq!`
+-takes two values and checks them for equality. `true` passes, `false` `panic!`s.
+-Like this:
 -
 -```rust,no_run
 -// A-ok!
@@ -871,6 +874,7 @@ index d504fab..01fae95 100644
 -assert!(5 < 3);
 -assert_eq!(5, 3);
 -```
+-
 -## try!
 -
 -`try!` is used for error handling. It takes something that can return a

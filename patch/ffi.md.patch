@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/ffi.md b/HEAD:ffi.md
-index 2c5e6b2..6ac40b4 100644
---- a/rust/master:src/doc/trpl/ffi.md
-+++ b/HEAD:ffi.md
+diff --git a/rust/master:./src/doc/trpl/ffi.md b/HEAD:./effective-rust/ffi.md
+index 9ede835..6ac40b4 100644
+--- a/rust/master:./src/doc/trpl/ffi.md
++++ b/HEAD:./effective-rust/ffi.md
 @@ -1,530 +1,552 @@
 -% Foreign Function Interface
 +% Интерфейс внешних функций (Foreign Function Interface)
@@ -121,7 +121,8 @@ index 2c5e6b2..6ac40b4 100644
 +время содержится в векторе, а мощность - общее количество выделенной памяти в
 +элементах. Длина меньше или равна мощности.
  
- ```
+-```rust
++```
  # #![feature(libc)]
  # extern crate libc;
  # use libc::{c_int, size_t};
@@ -156,7 +157,8 @@ index 2c5e6b2..6ac40b4 100644
 +качестве выходного параметра. Выходной параметр передается также, чтобы получить
 +истинную длину после сжатия, для установки длины.
  
- ```
+-```rust
++```
  # #![feature(libc)]
  # extern crate libc;
  # use libc::{size_t, c_int};
@@ -186,7 +188,8 @@ index 2c5e6b2..6ac40b4 100644
 +часть формата сжатия, и `snappy_uncompressed_length` будет возвращать точный
 +размер необходимого буфера.
  
- ```
+-```rust
++```
  # #![feature(libc)]
  # extern crate libc;
  # use libc::{size_t, c_int};
@@ -523,7 +526,8 @@ index 2c5e6b2..6ac40b4 100644
 +Небезопасные функции же, наоборот, делают сильный акцент на этом. Небезопасная
 +функция записывается в виде:
  
- ```
+-```rust
++```
  unsafe fn kaboom(ptr: *const i32) -> i32 { *ptr }
  ```
  
@@ -607,7 +611,8 @@ index 2c5e6b2..6ac40b4 100644
 +API, используют другое соглашение о вызове. Rust обеспечивает способ указать
 +компилятору, какое именно соглашение использовать:
  
- ```
+-```rust
++```
  # #![feature(libc)]
  extern crate libc;
  
@@ -730,7 +735,8 @@ index 2c5e6b2..6ac40b4 100644
 +Вы можете скомпилировать Rust код таким образом, чтобы он мог быть вызван из C
 +кода. Это довольно легко, но требует нескольких вещей:
  
- ```
+-```rust
++```
  #[no_mangle]
  pub extern fn hello_rust() -> *const u8 {
      "Hello, world!\0".as_ptr()

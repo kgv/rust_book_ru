@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/variable-bindings.md b/HEAD:variable-bindings.md
+diff --git a/rust/master:./src/doc/trpl/variable-bindings.md b/HEAD:./syntax-and-semantics/variable-bindings.md
 index 2166c04..ff87dae 100644
---- a/rust/master:src/doc/trpl/variable-bindings.md
-+++ b/HEAD:variable-bindings.md
+--- a/rust/master:./src/doc/trpl/variable-bindings.md
++++ b/HEAD:./syntax-and-semantics/variable-bindings.md
 @@ -1,169 +1,172 @@
 -% Variable Bindings
 +% Связывание переменных

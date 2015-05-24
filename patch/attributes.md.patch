@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/attributes.md b/HEAD:attributes.md
+diff --git a/rust/master:./src/doc/trpl/attributes.md b/HEAD:./syntax-and-semantics/attributes.md
 index 6349647..037f6c5 100644
---- a/rust/master:src/doc/trpl/attributes.md
-+++ b/HEAD:attributes.md
+--- a/rust/master:./src/doc/trpl/attributes.md
++++ b/HEAD:./syntax-and-semantics/attributes.md
 @@ -1,70 +1,71 @@
 -% Attributes
 +% Атрибуты

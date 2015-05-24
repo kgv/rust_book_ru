@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/link-args.md b/HEAD:link-args.md
+diff --git a/rust/master:./src/doc/trpl/link-args.md b/HEAD:./nightly-rust/link-args.md
 index ee5159a..510d4e6 100644
---- a/rust/master:src/doc/trpl/link-args.md
-+++ b/HEAD:link-args.md
+--- a/rust/master:./src/doc/trpl/link-args.md
++++ b/HEAD:./nightly-rust/link-args.md
 @@ -1,25 +1,26 @@
 -% Link args
 +% Аргументы линковки (Link args)

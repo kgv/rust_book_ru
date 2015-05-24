@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/strings.md b/HEAD:strings.md
-index 61a6ec3..3f7fb39 100644
---- a/rust/master:src/doc/trpl/strings.md
-+++ b/HEAD:strings.md
+diff --git a/rust/master:./src/doc/trpl/strings.md b/HEAD:./syntax-and-semantics/strings.md
+index c354fd0..3f7fb39 100644
+--- a/rust/master:./src/doc/trpl/strings.md
++++ b/HEAD:./syntax-and-semantics/strings.md
 @@ -1,129 +1,134 @@
 -% Strings
 +% Строки
@@ -36,11 +36,12 @@ index 61a6ec3..3f7fb39 100644
 +тип `&'static str`:
  
  ```rust
- let string = "Hello there."; // string: &'static str
+-let greeting = "Hello there."; // greeting: &'static str
++let string = "Hello there."; // string: &'static str
  ```
  
 -This string is statically allocated, meaning that it’s saved inside our
--compiled program, and exists for the entire duration it runs. The `string`
+-compiled program, and exists for the entire duration it runs. The `greeting`
 -binding is a reference to this statically allocated string. String slices
 -have a fixed size, and cannot be mutated.
 +Эта строка выделяется статически, что означает, что она сохраняется в нашей
@@ -66,7 +67,8 @@ index 61a6ec3..3f7fb39 100644
 -`String`s will coerce into `&str` with an `&`:
 +`String` преобразуются в `&str` с помощью `&`:
  
- ```
+-```rust
++```
  fn takes_slice(slice: &str) {
      println!("Got: {}", slice);
  }
@@ -171,7 +173,7 @@ index 61a6ec3..3f7fb39 100644
  let hello_world = hello + &world;
  ```
  
--This is because `&String` can automatically coerece to a `&str`. This is a
+-This is because `&String` can automatically coerce to a `&str`. This is a
 -feature called ‘[`Deref` coercions][dc]’.
 +Это потому, что `&String` может быть автоматически приведен к `&str`. Эта фича
 +называется ‘[Приведение при разыменовании][dc]’.

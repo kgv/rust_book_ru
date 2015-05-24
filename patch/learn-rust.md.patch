@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/learn-rust.md b/HEAD:learn-rust.md
+diff --git a/rust/master:./src/doc/trpl/learn-rust.md b/HEAD:./learn-rust.md
 index 1a02bc9..95104d3 100644
---- a/rust/master:src/doc/trpl/learn-rust.md
-+++ b/HEAD:learn-rust.md
+--- a/rust/master:./src/doc/trpl/learn-rust.md
++++ b/HEAD:./learn-rust.md
 @@ -1,9 +1,4 @@
 -% Learn Rust
 +% Изучение Rust

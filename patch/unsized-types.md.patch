@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/unsized-types.md b/HEAD:unsized-types.md
+diff --git a/rust/master:./src/doc/trpl/unsized-types.md b/HEAD:./syntax-and-semantics/unsized-types.md
 index b1a2bb5d..acecf32 100644
---- a/rust/master:src/doc/trpl/unsized-types.md
-+++ b/HEAD:unsized-types.md
+--- a/rust/master:./src/doc/trpl/unsized-types.md
++++ b/HEAD:./syntax-and-semantics/unsized-types.md
 @@ -1,60 +1,62 @@
 -% Unsized Types
 +% Безразмерные типы

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/mutability.md b/HEAD:mutability.md
-index 816bfb1..beb568d 100644
---- a/rust/master:src/doc/trpl/mutability.md
-+++ b/HEAD:mutability.md
+diff --git a/rust/master:./src/doc/trpl/mutability.md b/HEAD:./syntax-and-semantics/mutability.md
+index fe41def..beb568d 100644
+--- a/rust/master:./src/doc/trpl/mutability.md
++++ b/HEAD:./syntax-and-semantics/mutability.md
 @@ -1,179 +1,182 @@
 -% Mutability
 +% Изменяемость (mutability)
@@ -52,7 +52,7 @@ index 816bfb1..beb568d 100644
  
 -`y` is an immutable binding to a mutable reference, which means that you can’t
 -bind `y` to something else (`y = &mut z`), but you can mutate the thing that’s
--bound to `y`. (`*y = 5`) A subtle distinction.
+-bound to `y` (`*y = 5`). A subtle distinction.
 +`y` - это неизменяемое имя для изменяемой ссылки. Это значит, что `y` нельзя
 +связать ещё с чем-то (`y = &mut z`), но можно изменить то, на что указывает
 +связанная ссылка (`*y = 5`). Тонкая разница.
@@ -113,8 +113,8 @@ index 816bfb1..beb568d 100644
 +не использовали модификатор `mut`, а значит `x` - неизменяемая привязка и мы не
 +можем получить ссылку (`&mut 5`) или что-то подобное. Так что же это даёт?
  
--To this, we have to go back to the core of Rust’s guiding philosophy, memory
--safety, and the mechanism by which Rust guarantees it, the
+-To understand this, we have to go back to the core of Rust’s guiding
+-philosophy, memory safety, and the mechanism by which Rust guarantees it, the
 -[ownership][ownership] system, and more specifically, [borrowing][borrowing]:
 +Для этого, мы должны вернуться назад к основам философии Rust'a, к сохранности
 +памяти и механизму, гарантирующему это, к системе [владения][ownership], и в
@@ -125,7 +125,7 @@ index 816bfb1..beb568d 100644
 +> Одновременно у вас может быть только один из двух перечисленных ниже видов
 +> заимствования, но не оба сразу:
  > 
--> * 0 to N references (`&T`) to a resource.
+-> * one or more references (`&T`) to a resource.
 -> * exactly one mutable reference (`&mut T`)
 +> * от 0 до N неизменяемых ссылок (`&T`) на ресурс.
 +> * ровно одна изменяемая ссылка (`&mut T`) на ресурс.
@@ -224,7 +224,8 @@ index 816bfb1..beb568d 100644
 -However, by using `Cell<T>`, you can emulate field-level mutability:
 +Однако, используя `Cell<T>`, вы можете эмулировать изменяемость на уровне полей:
  
- ```
+-```rust
++```
  use std::cell::Cell;
  
  struct Point {
@@ -232,7 +233,8 @@ index 816bfb1..beb568d 100644
      y: Cell<i32>,
  }
  
- let mut point = Point { x: 5, y: Cell::new(6) };
+-let point = Point { x: 5, y: Cell::new(6) };
++let mut point = Point { x: 5, y: Cell::new(6) };
  
  point.y.set(7);
  

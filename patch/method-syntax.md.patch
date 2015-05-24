@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/method-syntax.md b/HEAD:method-syntax.md
-index ed4e9dd..3819581 100644
---- a/rust/master:src/doc/trpl/method-syntax.md
-+++ b/HEAD:method-syntax.md
+diff --git a/rust/master:./src/doc/trpl/method-syntax.md b/HEAD:./syntax-and-semantics/method-syntax.md
+index e5f490e..3819581 100644
+--- a/rust/master:./src/doc/trpl/method-syntax.md
++++ b/HEAD:./syntax-and-semantics/method-syntax.md
 @@ -1,232 +1,233 @@
 -% Method Syntax
 +% Синтаксис методов
@@ -124,7 +124,8 @@ index ed4e9dd..3819581 100644
 +нашего первоначального примера, `foo.bar().baz()`? Это называется 'цепочка
 +вызовов', и мы можем сделать это, вернув `self`.
  
- ```
+-```rust
++```
  struct Circle {
      x: f64,
      y: f64,
@@ -153,7 +154,8 @@ index ed4e9dd..3819581 100644
 -Check the return type:
 +Проверьте тип возвращаемого значения:
  
- ```
+-```rust
++```
  # struct Circle;
  # impl Circle {
  fn grow(&self) -> Circle {
@@ -165,15 +167,16 @@ index ed4e9dd..3819581 100644
 +Мы просто указываем, что возвращается `Circle`. С помощью этого метода мы можем
 +создать новый круг, площадь которого будет в 100 раз больше, чем у старого.
  
--# Static methods
+-# Associated functions
 +# Статические методы
  
--You can also define methods that do not take a `self` parameter. Here’s a
--pattern that’s very common in Rust code:
+-You can also define associated functions that do not take a `self` parameter.
+-Here’s a pattern that’s very common in Rust code:
 +Вы также можете определить методы, которые не принимают параметр `self`. Вот
 +паттерн, который очень распространен в Rust коде:
  
- ```
+-```rust
++```
  struct Circle {
      x: f64,
      y: f64,
@@ -197,7 +200,7 @@ index ed4e9dd..3819581 100644
  
 -This ‘associated function’ builds a new `Circle` for us. Note that associated
 -functions are called with the `Struct::function()` syntax, rather than the
--`ref.method()` syntax. Some other langauges call associated functions ‘static
+-`ref.method()` syntax. Some other languages call associated functions ‘static
 -methods’.
 +Этот *статический метод*, который создает новый `Circle`. Обратите внимание, что
 +статические методы вызываются с помощью синтаксиса: `Struct::method()`, а не
@@ -218,7 +221,8 @@ index ed4e9dd..3819581 100644
 +переменное количество аргументов. Вместо этого мы используем паттерн строитель.
 +Он выглядит следующим образом:
  
- ```
+-```rust
++```
  struct Circle {
      x: f64,
      y: f64,
@@ -239,7 +243,8 @@ index ed4e9dd..3819581 100644
  
  impl CircleBuilder {
      fn new() -> CircleBuilder {
-         CircleBuilder { x: 0.0, y: 0.0, radius: 0.0, }
+-        CircleBuilder { x: 0.0, y: 0.0, radius: 1.0, }
++        CircleBuilder { x: 0.0, y: 0.0, radius: 0.0, }
      }
  
      fn x(&mut self, coordinate: f64) -> &mut CircleBuilder {

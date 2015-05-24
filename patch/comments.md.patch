@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/comments.md b/HEAD:comments.md
+diff --git a/rust/master:./src/doc/trpl/comments.md b/HEAD:./syntax-and-semantics/comments.md
 index fa27d1c..a641df0 100644
---- a/rust/master:src/doc/trpl/comments.md
-+++ b/HEAD:comments.md
+--- a/rust/master:./src/doc/trpl/comments.md
++++ b/HEAD:./syntax-and-semantics/comments.md
 @@ -1,45 +1,47 @@
 -% Comments
 +% Комментарии

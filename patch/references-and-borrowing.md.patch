@@ -1,15 +1,15 @@
-diff --git a/rust/master:src/doc/trpl/references-and-borrowing.md b/HEAD:references-and-borrowing.md
-index 21feff7..1aecf9b 100644
---- a/rust/master:src/doc/trpl/references-and-borrowing.md
-+++ b/HEAD:references-and-borrowing.md
-@@ -1,336 +1,352 @@
+diff --git a/rust/master:./src/doc/trpl/references-and-borrowing.md b/HEAD:./syntax-and-semantics/references-and-borrowing.md
+index bb5adac..1aecf9b 100644
+--- a/rust/master:./src/doc/trpl/references-and-borrowing.md
++++ b/HEAD:./syntax-and-semantics/references-and-borrowing.md
+@@ -1,371 +1,352 @@
 -% References and Borrowing
 +% Ссылки и Заимствование
  
 -This guide is one of three presenting Rust’s ownership system. This is one of
 -Rust’s most unique and compelling features, with which Rust developers should
 -become quite acquainted. Ownership is how Rust achieves its largest goal,
--memory safety. The there are a few distinct concepts, each with its own
+-memory safety. There are a few distinct concepts, each with its own
 -chapter:
 +Эта глава является одной из трех, описывающих систему владения ресурсами Rust.
 +Эта система представляет собой наиболее уникальную и привлекательную фичу Rust,
@@ -18,7 +18,7 @@ index 21feff7..1aecf9b 100644
 +владения включает в себя несколько различных концепций, каждая из которых
 +рассматривается в своей собственной главе:
  
--* [ownership][ownership], ownership, the key concept
+-* [ownership][ownership], the key concept
 -* borrowing, which you’re reading now
 -* [lifetimes][lifetimes], an advanced concept of borrowing
 +* [владение][ownership], ключевая концепция
@@ -417,7 +417,7 @@ index 21feff7..1aecf9b 100644
 +Ссылки должны жить так же долго, как и ресурс, на который они ссылаются. Rust
 +проверяет области видимоси ваших ссылок, чтобы удостовериться, что это правда.
  
--If Rust didn’t check that this property, we could accidentally use a reference
+-If Rust didn’t check this property, we could accidentally use a reference
 -which was invalid. For example:
 +Если Rust не будет проверять это свойство, то мы можем случайно использовать
 +ссылку, которая будет недействительна. Например:
@@ -435,7 +435,7 @@ index 21feff7..1aecf9b 100644
 -We get this error:
 +Мы получим следующую ошибку:
  
-+```text
+ ```text
  error: `x` does not live long enough
      y = &x;
           ^
@@ -458,6 +458,40 @@ index 21feff7..1aecf9b 100644
 -`x` goes away, it becomes invalid to refer to it. As such, the error says that
 -the borrow ‘doesn’t live long enough’ because it’s not valid for the right
 -amount of time.
+-
+-The same problem occurs when the reference is declared _before_ the variable it refers to:
+-
+-```rust,ignore
+-let y: &i32;
+-let x = 5;
+-y = &x;
+-
+-println!("{}", y);
+-```
+-
+-We get this error:
+-
+-```text
+-error: `x` does not live long enough
+-y = &x;
+-     ^
+-note: reference must be valid for the block suffix following statement 0 at
+-2:16...
+-    let y: &i32;
+-    let x = 5;
+-    y = &x;
+-    
+-    println!("{}", y);
+-}
+-
+-note: ...but borrowed value is only valid for the block suffix following
+-statement 1 at 3:14
+-    let x = 5;
+-    y = &x;
+-    
+-    println!("{}", y);
+-}
+-```
 +Другими словами, `y` действителен только для той области видимости, где
 +существует `x`. Как только `x` выходит из области видимости, ссылка на него
 +становится недействительной. Таким образом, ошибка сообщает, что заем ‘does not

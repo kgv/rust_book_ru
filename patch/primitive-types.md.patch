@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/primitive-types.md b/HEAD:primitive-types.md
-index e017e22..b160bfa 100644
---- a/rust/master:src/doc/trpl/primitive-types.md
-+++ b/HEAD:primitive-types.md
+diff --git a/rust/master:./src/doc/trpl/primitive-types.md b/HEAD:./syntax-and-semantics/primitive-types.md
+index 027909d..b160bfa 100644
+--- a/rust/master:./src/doc/trpl/primitive-types.md
++++ b/HEAD:./syntax-and-semantics/primitive-types.md
 @@ -1,293 +1,303 @@
 -% Primitive Types
 +% Простые типы
@@ -28,7 +28,7 @@ index e017e22..b160bfa 100644
  let y: bool = false;
  ```
  
--A common use of booleans is in [`if` statements][if].
+-A common use of booleans is in [`if` conditionals][if].
 +Логические типы часто используются в [конструкции `if`][if].
  
  [if]: if.html
@@ -131,7 +131,7 @@ index e017e22..b160bfa 100644
 -Integer types come in two varieties: signed and unsigned. To understand the
 -difference, let’s consider a number with four bits of size. A signed, four-bit
 -number would let you store numbers from `-8` to `+7`. Signed numbers use
--“two’s compliment representation”. An unsigned four bit number, since it does
+-“two’s complement representation”. An unsigned four bit number, since it does
 -not need to store negatives, can store values from `0` to `+15`.
 +Целые типы бывают двух видов: знаковые и беззнаковые. Чтобы понять разницу,
 +давайте рассмотрим число с размером в четыре бита. Знаковые четырёхбитные числа,
@@ -284,7 +284,7 @@ index e017e22..b160bfa 100644
  
  [generics]: generics.html
  
--You can find more documentation for `slices`s [in the standard library
+-You can find more documentation for slices [in the standard library
 -documentation][slice].
 +Вы можете найти больше информации о срезах (`slice`) в [документации к
 +стандартной библиотеке (англ.)][slice].
@@ -394,7 +394,8 @@ index e017e22..b160bfa 100644
 +Вы можете устранить неоднозначность трактовки для кортежа, состоящего из одного
 +элемента, и значения в скобках с помощью запятой:
  
- ```
+-```rust
++```
  (0,); // single-element tuple
  (0); // zero in parentheses
  ```
@@ -435,7 +436,8 @@ index e017e22..b160bfa 100644
 -Functions also have a type! They look like this:
 +Функции тоже имеют тип! Это выглядит следующим образом:
  
- ```
+-```rust
++```
  fn foo(x: i32) -> i32 { x }
  
  let x: fn(i32) -> i32 = foo;

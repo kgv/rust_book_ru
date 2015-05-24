@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/concurrency.md b/HEAD:concurrency.md
-index 3c64e0b..7597cf3 100644
---- a/rust/master:src/doc/trpl/concurrency.md
-+++ b/HEAD:concurrency.md
+diff --git a/rust/master:./src/doc/trpl/concurrency.md b/HEAD:./effective-rust/concurrency.md
+index ccd7690..7597cf3 100644
+--- a/rust/master:./src/doc/trpl/concurrency.md
++++ b/HEAD:./effective-rust/concurrency.md
 @@ -1,325 +1,342 @@
 -% Concurrency
 +% Многозадачность
@@ -114,7 +114,8 @@ index 3c64e0b..7597cf3 100644
 +позволяет запускать Rust код параллельно. Вот простой пример использования
 +`std::thread`:
  
- ```
+-```rust
++```
  use std::thread;
  
  fn main() {
@@ -132,7 +133,8 @@ index 3c64e0b..7597cf3 100644
 +может быть использован для ожидания завершения этого потока и извлечения его
 +результата:
  
- ```
+-```rust
++```
  use std::thread;
  
  fn main() {
@@ -289,8 +291,7 @@ index 3c64e0b..7597cf3 100644
 -We can use `Arc<T>` to fix this. Here's the working version:
 +Мы можем использовать `Arc<T>`, чтобы исправить это. Вот рабочая версия:
  
--```
-+```rust
+ ```rust
  use std::sync::{Arc, Mutex};
  use std::thread;
  
@@ -369,7 +370,8 @@ index 3c64e0b..7597cf3 100644
 +Вот версия нашего кода, которая использует каналы для синхронизации, вместо того
 +чтобы ждать в течение определенного времени:
  
- ```
+-```rust
++```
  use std::sync::{Arc, Mutex};
  use std::thread;
  use std::sync::mpsc;
@@ -408,7 +410,8 @@ index 3c64e0b..7597cf3 100644
 +В то время как по этому каналу послается просто общий сигнал, в общем случае мы
 +можем отправить по каналу любые данные, которые реализуют трейт `Send`!
  
- ```
+-```rust
++```
  use std::thread;
  use std::sync::mpsc;
  
@@ -444,7 +447,8 @@ index 3c64e0b..7597cf3 100644
 +`panic!` аварийно завершает выполняемый в данный момент поток. Вы можете
 +использовать потоки Rust, как простой механизм изоляции:
  
- ```
+-```rust
++```
  use std::thread;
  
  let result = thread::spawn(move || {

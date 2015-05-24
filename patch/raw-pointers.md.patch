@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/raw-pointers.md b/HEAD:raw-pointers.md
+diff --git a/rust/master:./src/doc/trpl/raw-pointers.md b/HEAD:./syntax-and-semantics/raw-pointers.md
 index 4a37af3..9ae77f4 100644
---- a/rust/master:src/doc/trpl/raw-pointers.md
-+++ b/HEAD:raw-pointers.md
+--- a/rust/master:./src/doc/trpl/raw-pointers.md
++++ b/HEAD:./syntax-and-semantics/raw-pointers.md
 @@ -1,122 +1,129 @@
 -% Raw Pointers
 +% Сырые указатели

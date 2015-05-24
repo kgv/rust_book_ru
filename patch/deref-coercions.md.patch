@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/deref-coercions.md b/HEAD:deref-coercions.md
+diff --git a/rust/master:./src/doc/trpl/deref-coercions.md b/HEAD:./syntax-and-semantics/deref-coercions.md
 index b701110..c401e4b 100644
---- a/rust/master:src/doc/trpl/deref-coercions.md
-+++ b/HEAD:deref-coercions.md
+--- a/rust/master:./src/doc/trpl/deref-coercions.md
++++ b/HEAD:./syntax-and-semantics/deref-coercions.md
 @@ -1,119 +1,122 @@
 -% `Deref` coercions
 +% Преобразования при разыменовании (`Deref` coercions)

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/academic-research.md b/HEAD:academic-research.md
+diff --git a/rust/master:./src/doc/trpl/academic-research.md b/HEAD:./academic-research.md
 index f4f066f..7eb8ec9 100644
---- a/rust/master:src/doc/trpl/academic-research.md
-+++ b/HEAD:academic-research.md
+--- a/rust/master:./src/doc/trpl/academic-research.md
++++ b/HEAD:./academic-research.md
 @@ -1,46 +1,46 @@
 -% Academic Research
 +% Академические исследования

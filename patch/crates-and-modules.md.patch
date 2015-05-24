@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/crates-and-modules.md b/HEAD:crates-and-modules.md
-index 3ab3401..b429773 100644
---- a/rust/master:src/doc/trpl/crates-and-modules.md
-+++ b/HEAD:crates-and-modules.md
+diff --git a/rust/master:./src/doc/trpl/crates-and-modules.md b/HEAD:./syntax-and-semantics/crates-and-modules.md
+index 63fdef0..b429773 100644
+--- a/rust/master:./src/doc/trpl/crates-and-modules.md
++++ b/HEAD:./syntax-and-semantics/crates-and-modules.md
 @@ -1,533 +1,552 @@
 -% Crates and Modules
 +% Контейнеры (crates) и модули (modules)
@@ -111,7 +111,8 @@ index 3ab3401..b429773 100644
 +Для объявления каждого из наших модулей, мы используем ключевое слово `mod`.
 +Давайте сделаем, чтобы наш `src/lib.rs` выглядел следующим образом:
  
- ```
+-```rust
++```
  mod english {
      mod greetings {
      }
@@ -182,7 +183,8 @@ index 3ab3401..b429773 100644
 -Instead of declaring a module like this:
 +Вместо объявления модуля наподобие:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  mod english {
      // contents of our module go here
  }
@@ -191,7 +193,8 @@ index 3ab3401..b429773 100644
 -We can instead declare our module like this:
 +Мы можем объявить наш модуль в виде:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  mod english;
  ```
  
@@ -237,7 +240,8 @@ index 3ab3401..b429773 100644
 -`src/lib.rs` is our crate root, and looks like this:
 +`src/lib.rs` - корень нашего контейнера, и выглядит он следующим образом:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  mod english;
  mod japanese;
  ```
@@ -253,7 +257,8 @@ index 3ab3401..b429773 100644
 +наши модули содержат суб-модули. И `src/english/mod.rs` и `src/japanese/mod.rs`
 +выглядят следующим образом:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  mod greetings;
  mod farewells;
  ```
@@ -412,7 +417,8 @@ index 3ab3401..b429773 100644
 +сначала сосредоточимся на модуле `english`, для чего сократим файл `src/main.rs`
 +до этого:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  extern crate phrases;
  
  fn main() {
@@ -425,7 +431,8 @@ index 3ab3401..b429773 100644
 +В файле `src/lib.rs` в объявлении модуля `english` давайте добавим модификатор
 +`pub`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub mod english;
  mod japanese;
  ```
@@ -433,7 +440,8 @@ index 3ab3401..b429773 100644
 -And in our `src/english/mod.rs`, let’s make both `pub`:
 +В файле `src/english/mod.rs` давайте сделаем оба модуля с модификатором `pub`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub mod greetings;
  pub mod farewells;
  ```
@@ -442,7 +450,8 @@ index 3ab3401..b429773 100644
 +В файле `src/english/greetings.rs` давайте добавим модификатор `pub` к
 +объявлению нашей функции `fn`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub fn hello() -> String {
      "Hello!".to_string()
  }
@@ -451,7 +460,8 @@ index 3ab3401..b429773 100644
 -And also in `src/english/farewells.rs`:
 +А также в файле `src/english/farewells.rs`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub fn goodbye() -> String {
      "Goodbye.".to_string()
  }
@@ -497,7 +507,8 @@ index 3ab3401..b429773 100644
 +нашу локальную область видимости. Давайте изменим файл `src/main.rs`, чтобы он
 +выглядел следующим образом:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  extern crate phrases;
  
  use phrases::english::greetings;
@@ -519,7 +530,8 @@ index 3ab3401..b429773 100644
 +импортировать модуль, а не функцию непосредственно. Другими словами, вы _могли
 +бы_ сделать следующее:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  extern crate phrases;
  
  use phrases::english::greetings::hello;
@@ -542,7 +554,8 @@ index 3ab3401..b429773 100644
 +имен, то Rust выдает ошибку компиляции. Например, если мы сделаем функции
 +`japanese` публичными, и пытаемся скомпилировать этот код:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  extern crate phrases;
  
  use phrases::english::greetings::hello;
@@ -571,7 +584,8 @@ index 3ab3401..b429773 100644
 +Если мы импортируем несколько имен из одного модуля, то нам совсем не
 +обязательно писать одно и то же много раз. Вместо этого кода:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  use phrases::english::greetings;
  use phrases::english::farewells;
  ```
@@ -579,7 +593,8 @@ index 3ab3401..b429773 100644
 -We can use this shortcut:
 +Вы можете использовать сокращение:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  use phrases::english::{greetings, farewells};
  ```
  
@@ -597,7 +612,8 @@ index 3ab3401..b429773 100644
 -Let’s look at an example. Modify your `src/main.rs` to read like this:
 +Давайте посмотрим на примере. Измените файл `src/main.rs` следующим образом:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  extern crate phrases;
  
  use phrases::english::{greetings,farewells};
@@ -615,7 +631,8 @@ index 3ab3401..b429773 100644
 -Then, modify your `src/lib.rs` to make the `japanese` mod public:
 +Затем измените файл `src/lib.rs`, чтобы сделать модуль `japanese` с публичным:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub mod english;
  pub mod japanese;
  ```
@@ -624,7 +641,8 @@ index 3ab3401..b429773 100644
 +Далее, убедитесь, что обе функции публичные, сперва в
 +`src/japanese/greetings.rs`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub fn hello() -> String {
      "こんにちは".to_string()
  }
@@ -633,7 +651,8 @@ index 3ab3401..b429773 100644
 -And then in `src/japanese/farewells.rs`:
 +А затем в `src/japanese/farewells.rs`:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub fn goodbye() -> String {
      "さようなら".to_string()
  }
@@ -642,7 +661,8 @@ index 3ab3401..b429773 100644
 -Finally, modify your `src/japanese/mod.rs` to read like this:
 +Наконец, измените файл `src/japanese/mod.rs` вот так:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  pub use self::greetings::hello;
  pub use self::farewells::goodbye;
  

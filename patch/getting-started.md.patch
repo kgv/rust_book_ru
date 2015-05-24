@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/getting-started.md b/HEAD:getting-started.md
+diff --git a/rust/master:./src/doc/trpl/getting-started.md b/HEAD:./getting-started.md
 index d0825e5..a9799ff 100644
---- a/rust/master:src/doc/trpl/getting-started.md
-+++ b/HEAD:getting-started.md
+--- a/rust/master:./src/doc/trpl/getting-started.md
++++ b/HEAD:./getting-started.md
 @@ -1,5 +1,6 @@
 -% Getting Started
 +% C чего начать

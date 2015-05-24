@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/associated-constants.md b/HEAD:associated-constants.md
+diff --git a/rust/master:./src/doc/trpl/associated-constants.md b/HEAD:./nightly-rust/associated-constants.md
 index 1c097be..abcf5d1 100644
---- a/rust/master:src/doc/trpl/associated-constants.md
-+++ b/HEAD:associated-constants.md
+--- a/rust/master:./src/doc/trpl/associated-constants.md
++++ b/HEAD:./nightly-rust/associated-constants.md
 @@ -1,79 +1,81 @@
 -% Associated Constants
 +% Ассоциированные константы

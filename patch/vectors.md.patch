@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/vectors.md b/HEAD:vectors.md
-index 6170bdb..4c71f33 100644
---- a/rust/master:src/doc/trpl/vectors.md
-+++ b/HEAD:vectors.md
+diff --git a/rust/master:./src/doc/trpl/vectors.md b/HEAD:./syntax-and-semantics/vectors.md
+index d8b894a..4c71f33 100644
+--- a/rust/master:./src/doc/trpl/vectors.md
++++ b/HEAD:./syntax-and-semantics/vectors.md
 @@ -1,60 +1,38 @@
 -% Vectors
 +% Вектора
@@ -34,10 +34,11 @@ index 6170bdb..4c71f33 100644
 +с `vec!` используются квадратные скобки `[]`. Rust разрешает использование и
 +круглых, и квадратных скобок в обеих ситуациях - это просто стилистическое
 +соглашение.)
-+
-+Для создания вектора из повторяющихся значений есть другая форма `vec!`:
  
- ```
+-```rust
++Для создания вектора из повторяющихся значений есть другая форма `vec!`:
++
++```
  let v = vec![0; 10]; // ten zeroes
  ```
  

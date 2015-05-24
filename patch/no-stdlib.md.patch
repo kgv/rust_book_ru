@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/no-stdlib.md b/HEAD:no-stdlib.md
-index 67db919..553f70b 100644
---- a/rust/master:src/doc/trpl/no-stdlib.md
-+++ b/HEAD:no-stdlib.md
+diff --git a/rust/master:./src/doc/trpl/no-stdlib.md b/HEAD:./nightly-rust/no-stdlib.md
+index 0a98533..553f70b 100644
+--- a/rust/master:./src/doc/trpl/no-stdlib.md
++++ b/HEAD:./nightly-rust/no-stdlib.md
 @@ -1,168 +1,173 @@
 -% No stdlib
 +% Без stdlib
@@ -35,7 +35,8 @@ index 67db919..553f70b 100644
 +В функцию, помеченную атрибутом `#[start]`, передаются параметры командной
 +строки в том же формате, что и в C:
  
- ```
+-```rust
++```
  #![feature(lang_items, start, no_std, libc)]
  #![no_std]
  

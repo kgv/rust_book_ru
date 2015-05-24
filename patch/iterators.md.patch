@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/iterators.md b/HEAD:iterators.md
-index 76f6a42..a1afa2b 100644
---- a/rust/master:src/doc/trpl/iterators.md
-+++ b/HEAD:iterators.md
+diff --git a/rust/master:./src/doc/trpl/iterators.md b/HEAD:./effective-rust/iterators.md
+index 80c0def..a1afa2b 100644
+--- a/rust/master:./src/doc/trpl/iterators.md
++++ b/HEAD:./effective-rust/iterators.md
 @@ -1,338 +1,366 @@
 -% Iterators
 +% Итераторы
@@ -183,7 +183,8 @@ index 76f6a42..a1afa2b 100644
 +Наиболее распространенным потребителем является `collect()`. Этот код не
 +компилируется, но он демонстрирует концепцию:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  let one_to_one_hundred = (1..101).collect();
  ```
  
@@ -325,9 +326,9 @@ index 76f6a42..a1afa2b 100644
 -As we've said before, an iterator is something that we can call the
 -`.next()` method on repeatedly, and it gives us a sequence of things.
 -Because you need to call the method, this means that iterators
--are *lazy* and don't need to generate all of the values upfront.
--This code, for example, does not actually generate the numbers
--`1-100`, and just creates a value that represents the sequence:
+-can be *lazy* and not generate all of the values upfront. This code,
+-for example, does not actually generate the numbers `1-100`, instead
+-creating a value that merely represents the sequence:
 +Как мы уже говорили ранее, итератор являются сущностью, для которой мы можем
 +неоднократно вызвать метод `.next()`, в результате чего мы получим
 +последовательность элементов. Для получения каждого следующего элемента нужно
@@ -396,13 +397,14 @@ index 76f6a42..a1afa2b 100644
 +Это все, что касается итераторов. Адаптеры итераторов - последнее понятие
 +имеющее отношение к итераторам, о котором мы хотели бы рассказать. Давайте
 +перейдем к нему!
-+
+ 
+-```rust,ignore
 +## Адаптеры итераторов
 +
 +*Адаптеры итераторов* получают итератор и изменяют его каким-то образом, выдавая
 +новый итератор. Самый простейший из них называется `map`:
- 
- ```{rust,ignore}
++
++```{rust,ignore}
  (1..100).map(|x| x + 1);
  ```
  
@@ -428,7 +430,8 @@ index 76f6a42..a1afa2b 100644
 +Лень наносит еще один удар! Следующее замыкание никогда не будет выполнено.
 +Пример ниже не напечатает ни одного значения:
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  (1..100).map(|x| println!("{}", x));
  ```
  

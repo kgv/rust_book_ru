@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/nightly-rust.md b/HEAD:nightly-rust.md
-index 2f3055d..c0f05ac 100644
---- a/rust/master:src/doc/trpl/nightly-rust.md
-+++ b/HEAD:nightly-rust.md
+diff --git a/rust/master:./src/doc/trpl/nightly-rust.md b/HEAD:./nightly-rust.md
+index 7d60041..c0f05ac 100644
+--- a/rust/master:./src/doc/trpl/nightly-rust.md
++++ b/HEAD:./nightly-rust.md
 @@ -1,99 +1,109 @@
 -% Nightly Rust
 +% Нестабильные фичи Rust
@@ -42,8 +42,10 @@ index 2f3055d..c0f05ac 100644
 +Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
 +пакетов: [32-битный][win32] или [64-битный][win64] и запустите его.
  
- [win32]: https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi
- [win64]: https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi
+-[win32]: https://static.rust-lang.org/dist/rust-nightly-i686-pc-windows-gnu.msi
+-[win64]: https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-gnu.msi
++[win32]: https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi
++[win64]: https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi
  
 -## Uninstalling
 +## Удаление

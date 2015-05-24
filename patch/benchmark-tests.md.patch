@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/benchmark-tests.md b/HEAD:benchmark-tests.md
-index 8879653..470d599 100644
---- a/rust/master:src/doc/trpl/benchmark-tests.md
-+++ b/HEAD:benchmark-tests.md
+diff --git a/rust/master:./src/doc/trpl/benchmark-tests.md b/HEAD:./nightly-rust/benchmark-tests.md
+index 797ec94..470d599 100644
+--- a/rust/master:./src/doc/trpl/benchmark-tests.md
++++ b/HEAD:./nightly-rust/benchmark-tests.md
 @@ -1,152 +1,162 @@
 -% Benchmark tests
 +% Тесты производительности
@@ -12,7 +12,8 @@ index 8879653..470d599 100644
 +производительность вашего кода. Давайте изменим наш `src/lib.rs`, чтобы он
 +выглядел следующим образом (комментарии опущены):
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  #![feature(test)]
  
  extern crate test;
@@ -120,7 +121,8 @@ index 8879653..470d599 100644
 +этого ожидаем. Например, компилятор может определить, что некоторые выражения не
 +оказывают каких-либо внешних эффектов и просто удалит их полностью.
  
- ```{rust,ignore}
+-```rust,ignore
++```{rust,ignore}
  #![feature(test)]
  
  extern crate test;

@@ -1,7 +1,7 @@
-diff --git a/rust/master:src/doc/trpl/if-let.md b/HEAD:if-let.md
+diff --git a/rust/master:./src/doc/trpl/if-let.md b/HEAD:./syntax-and-semantics/if-let.md
 index 4872ed6..30ca3b9 100644
---- a/rust/master:src/doc/trpl/if-let.md
-+++ b/HEAD:if-let.md
+--- a/rust/master:./src/doc/trpl/if-let.md
++++ b/HEAD:./syntax-and-semantics/if-let.md
 @@ -1,82 +1,83 @@
  % if let
  
