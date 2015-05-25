@@ -744,80 +744,85 @@ fn main() {
 чтобы выключить его.</p></li>
 </ul>
 
-<h1 id="syntactic-requirements" class='section-header'><a
-                           href="#syntactic-requirements">Syntactic requirements</a></h1>
-<p>Even when Rust code contains un-expanded macros, it can be parsed as a full
-<a href="glossary.html#abstract-syntax-tree">syntax tree</a>. This property can be very useful for editors and other
-tools that process code. It also has a few consequences for the design of
-Rust&#39;s macro system.</p>
+<h1 id="Требования-синтаксиса" class='section-header'><a
+                           href="#Требования-синтаксиса">Требования синтаксиса</a></h1>
+<p>Код на Rust может быть разобран в <a href="glossary.html#abstract-syntax-tree">синтаксическое дерево</a>, даже когда он
+содержит неразвёрнутые макросы. Это свойство очень полезно для редакторов и
+других инструментов, обрабатывающих исходный код. Оно также влияет на вид
+системы макросов Rust.</p>
 
-<p>One consequence is that Rust must determine, when it parses a macro invocation,
-whether the macro stands in for</p>
-
-<ul>
-<li>zero or more items,</li>
-<li>zero or more methods,</li>
-<li>an expression,</li>
-<li>a statement, or</li>
-<li>a pattern.</li>
-</ul>
-
-<p>A macro invocation within a block could stand for some items, or for an
-expression / statement. Rust uses a simple rule to resolve this ambiguity. A
-macro invocation that stands for items must be either</p>
+<p>Как следствие, когда компилятор разбирает вызов макроса, ему необходимо знать,
+во что развернётся данный макрос. Макрос может разворачиваться в следующее:</p>
 
 <ul>
-<li>delimited by curly braces, e.g. <code>foo! { ... }</code>, or</li>
-<li>terminated by a semicolon, e.g. <code>foo!(...);</code></li>
+<li>ноль или больше элементов;</li>
+<li>ноль или больше методов;</li>
+<li>выражение;</li>
+<li>оператор;</li>
+<li>образец.</li>
 </ul>
 
-<p>Another consequence of pre-expansion parsing is that the macro invocation must
-consist of valid Rust tokens. Furthermore, parentheses, brackets, and braces
-must be balanced within a macro invocation. For example, <code>foo!([)</code> is
-forbidden. This allows Rust to know where the macro invocation ends.</p>
-
-<p>More formally, the macro invocation body must be a sequence of <em>token trees</em>.
-A token tree is defined recursively as either</p>
+<p>Вызов макроса в блоке может представлять собой элементы, выражение, или
+оператор. Rust использует простое правило для разрешения этой
+неоднозначности. Вызов макроса, производящего элементы, должен либо</p>
 
 <ul>
-<li>a sequence of token trees surrounded by matching <code>()</code>, <code>[]</code>, or <code>{}</code>, or</li>
-<li>any other single token.</li>
+<li>ограничиваться фигурными скобками, т.е. <code>foo! { ... }</code>;</li>
+<li>завершаться точкой с запятой, т.е. <code>foo!(...);</code>.</li>
 </ul>
 
-<p>Within a matcher, each metavariable has a <em>fragment specifier</em>, identifying
-which syntactic form it matches.</p>
+<p>Другое следствие разбора перед раскрытием макросов - это то, что вызов макроса
+должен состоять из допустимых лексем. Более того, скобки всех видов должны быть
+сбалансированы в месте вызова. Например, <code>foo!([)</code> не является разрешённым
+кодом. Такое поведение позволяет компилятору понимать где заканчивается вызов
+макроса.</p>
+
+<p>Говоря более формально, тело вызова макроса должно представлять собой
+последовательность <em>деревьев лексем</em>. Дерево лексем определяется рекурсивно и
+представляет собой либо:</p>
 
 <ul>
-<li><code>ident</code>: an identifier. Examples: <code>x</code>; <code>foo</code>.</li>
-<li><code>path</code>: a qualified name. Example: <code>T::SpecialA</code>.</li>
-<li><code>expr</code>: an expression. Examples: <code>2 + 2</code>; <code>if true then { 1 } else { 2 }</code>; <code>f(42)</code>.</li>
-<li><code>ty</code>: a type. Examples: <code>i32</code>; <code>Vec&lt;(char, String)&gt;</code>; <code>&amp;T</code>.</li>
-<li><code>pat</code>: a pattern. Examples: <code>Some(t)</code>; <code>(17, &#39;a&#39;)</code>; <code>_</code>.</li>
-<li><code>stmt</code>: a single statement. Example: <code>let x = 3</code>.</li>
-<li><code>block</code>: a brace-delimited sequence of statements. Example:
-<code>{ log(error, &quot;hi&quot;); return 12; }</code>.</li>
-<li><code>item</code>: an <a href="../reference.html#items">item</a>. Examples: <code>fn foo() { }</code>; <code>struct Bar;</code>.</li>
-<li><code>meta</code>: a &quot;meta item&quot;, as found in attributes. Example: <code>cfg(target_os = &quot;windows&quot;)</code>.</li>
-<li><code>tt</code>: a single token tree.</li>
+<li>последовательность деревьев лексем, окружённую согласованными круглыми,
+квадратными или фигурными скобками (<code>()</code>, <code>[]</code>, <code>{}</code>);</li>
+<li>любую другую одиночную лексему.</li>
 </ul>
 
-<p>There are additional rules regarding the next token after a metavariable:</p>
+<p>Внутри сопоставления каждая метапеременная имеет <em>указатель фрагмента</em>,
+определяющий синтаксическую форму, с которой она совпадает. Вот список этих
+указателей:</p>
 
 <ul>
-<li><code>expr</code> variables must be followed by one of: <code>=&gt; , ;</code></li>
-<li><code>ty</code> and <code>path</code> variables must be followed by one of: <code>=&gt; , : = &gt; as</code></li>
-<li><code>pat</code> variables must be followed by one of: <code>=&gt; , =</code></li>
-<li>Other variables may be followed by any token.</li>
+<li><code>ident</code>: идентификатор. Например: <code>x</code>; <code>foo</code>.</li>
+<li><code>path</code>: квалифицированное имя. Например: <code>T::SpecialA</code>.</li>
+<li><code>expr</code>: выражение. Например: <code>2 + 2</code>; <code>if true then { 1 } else { 2 }</code>;
+<code>f(42)</code>.</li>
+<li><code>ty</code>: тип. Например: <code>i32</code>; <code>Vec&lt;(char, String)&gt;</code>; <code>&amp;T</code>.</li>
+<li><code>pat</code>: образец. Например: <code>Some(t)</code>; <code>(17, &#39;a&#39;)</code>; <code>_</code>.</li>
+<li><code>stmt</code>: единственный оператор. Например: <code>let x = 3</code>.</li>
+<li><code>block</code>: последовательность операторов, ограниченная фигурными
+скобками. Например: <code>{ log(error, &quot;hi&quot;); return 12; }</code>.</li>
+<li><code>item</code>: <a href="http://doc.rust-lang.org/stable/reference.html#items">элемент</a>. Например: <code>fn foo() { }</code>; <code>struct Bar;</code>.</li>
+<li><code>meta</code>: &quot;мета-элемент&quot;, как в атрибутах. Например: <code>cfg(target_os = &quot;windows&quot;)</code>.</li>
+<li><code>tt</code>: единственное дерево лексем.</li>
 </ul>
 
-<p>These rules provide some flexibility for Rust&#39;s syntax to evolve without
-breaking existing macros.</p>
+<p>Есть дополнительные правила относительно лексем, следующих за метапеременной:</p>
 
-<p>The macro system does not deal with parse ambiguity at all. For example, the
-grammar <code>$($t:ty)* $e:expr</code> will always fail to parse, because the parser would
-be forced to choose between parsing <code>$t</code> and parsing <code>$e</code>. Changing the
-invocation syntax to put a distinctive token in front can solve the problem. In
-this case, you can write <code>$(T $t:ty)* E $e:exp</code>.</p>
+<ul>
+<li>за <code>expr</code> должно быть что-то из этого: <code>=&gt; , ;</code>;</li>
+<li>за <code>ty</code> и <code>path</code> должно быть что-то из этого: <code>=&gt; , : = &gt; as</code>;</li>
+<li>за <code>pat</code> должно быть что-то из этого : <code>=&gt; , =</code>;</li>
+<li>за другими лексемами могут следовать любые символы.</li>
+</ul>
+
+<p>Приведённые правила обеспечивают развитие синтаксиса Rust без необходимости
+менять существующие макросы.</p>
+
+<p>И ещё: система макросов никак не обрабатывет неоднозначность разбора. Например,
+грамматика <code>$($t:ty)* $e:expr</code> всегда будет выдавать ошибку, потому что
+синтаксическому анализатору пришлось бы выбирать между разбором <code>$t</code> и разбором
+<code>$e</code>. Можно изменить синтаксис вызова так, чтобы грамматика отличалась в начале.
+В данном случае можно написать <code>$(T $t:ty)* E $e:exp</code>.</p>
 
 <h1 id="scoping-and-macro-import/export" class='section-header'><a
                            href="#scoping-and-macro-import/export">Scoping and macro import/export</a></h1>
