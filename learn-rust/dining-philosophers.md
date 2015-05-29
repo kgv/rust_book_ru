@@ -7,7 +7,7 @@
 
 [CSP]: http://www.usingcsp.com/cspbook.pdf
 
->В древние времена, богатые филантропы пригласили пятерых выдающихся
+>В древние времена, богатые филантропы пригласили погостить пятерых выдающихся
 философов. Им выделили каждому по комнате, в которой они могли заниматься
 своей профессиональной деятельностью - мышлением. Также была общая столовая,
 где стоял большой круглый стол, а вокруг него пять стульев. Каждый стул имел
@@ -28,9 +28,9 @@
 безвыходное состояние. Давайте рассмотрим простой пример решения этой проблемы:
 
 1. Философ берет вилку в свою левую руку.
-2. Философ берет вилку в свою правую руку.
-3. Они едят.
-4. Они кладут вилки на место.
+2. Затем берет вилку в свою правую руку.
+3. Он ест.
+4. Кладет вилки на место.
 
 Теперь представим это как последовательность действий философов:
 
@@ -58,11 +58,11 @@ impl Philosopher {
 }
 
 fn main() {
-    let p1 = Philosopher::new("Judith Butler");
-    let p2 = Philosopher::new("Gilles Deleuze");
-    let p3 = Philosopher::new("Karl Marx");
-    let p4 = Philosopher::new("Emma Goldman");
-    let p5 = Philosopher::new("Michel Foucault");
+    let p1 = Philosopher::new("Джудит Батлер");
+    let p2 = Philosopher::new("Жиль Делёз");
+    let p3 = Philosopher::new("Карл Маркс");
+    let p4 = Philosopher::new("Эмма Гольдман");
+    let p5 = Philosopher::new("Мишель Фуко");
 }
 ```
 
@@ -129,11 +129,11 @@ Philosopher {
 
 ```rust
 fn main() {
-    let p1 = Philosopher::new("Judith Butler");
-    let p2 = Philosopher::new("Gilles Deleuze");
-    let p3 = Philosopher::new("Karl Marx");
-    let p4 = Philosopher::new("Emma Goldman");
-    let p5 = Philosopher::new("Michel Foucault");
+    let p1 = Philosopher::new("Джудит Батлер");
+    let p2 = Philosopher::new("Жиль Делёз");
+    let p3 = Philosopher::new("Карл Маркс");
+    let p4 = Philosopher::new("Эмма Гольдман");
+    let p5 = Philosopher::new("Мишель Фуко");
 }
 ```
 
@@ -143,11 +143,11 @@ _не объявили_ свою реализацию функции `new()`, т
 
 ```rust
 fn main() {
-    let p1 = Philosopher { name: "Judith Butler".to_string() };
-    let p2 = Philosopher { name: "Gilles Deleuze".to_string() };
-    let p3 = Philosopher { name: "Karl Marx".to_string() };
-    let p4 = Philosopher { name: "Emma Goldman".to_string() };
-    let p5 = Philosopher { name: "Michel Foucault".to_string() };
+    let p1 = Philosopher { name: "Джудит Батлер".to_string() };
+    let p2 = Philosopher { name: "Жиль Делёз".to_string() };
+    let p3 = Philosopher { name: "Карл Маркс".to_string() };
+    let p4 = Philosopher { name: "Эмма Гольдман".to_string() };
+    let p5 = Philosopher { name: "Мишель Фуко".to_string() };
 }
 ```
 
@@ -179,11 +179,11 @@ impl Philosopher {
 
 fn main() {
     let philosophers = vec![
-        Philosopher::new("Judith Butler"),
-        Philosopher::new("Gilles Deleuze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Emma Goldman"),
-        Philosopher::new("Michel Foucault"),
+        Philosopher::new("Джудит Батлер"),
+        Philosopher::new("Жиль Делёз"),
+        Philosopher::new("Карл Маркс"),
+        Philosopher::new("Эмма Гольдман"),
+        Philosopher::new("Мишель Фуко"),
     ];
 
     for p in &philosophers {
@@ -214,11 +214,11 @@ fn eat(&self) {
 том, что он закончил есть. Запустив эту программу вы получите:
 
 ```text
-Judith Butler закончил есть.
-Gilles Deleuze закончил есть.
-Karl Marx закончил есть.
-Emma Goldman закончил есть.
-Michel Foucault закончил есть.
+Джудит Батлер закончил есть.
+Жиль Делёз закончил есть.
+Карл Маркс закончил есть.
+Эмма Гольдман закончил есть.
+Мишель Фуко закончил есть.
 ```
 
 Это было не сложно! Осталось чуть-чуть и приступим к самой задаче.
@@ -251,11 +251,11 @@ impl Philosopher {
 
 fn main() {
     let philosophers = vec![
-        Philosopher::new("Judith Butler"),
-        Philosopher::new("Gilles Deleuze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Emma Goldman"),
-        Philosopher::new("Michel Foucault"),
+        Philosopher::new("Джудит Батлер"),
+        Philosopher::new("Жиль Делёз"),
+        Philosopher::new("Карл Маркс"),
+        Philosopher::new("Эмма Гольдман"),
+        Philosopher::new("Мишель Фуко"),
     ];
 
     for p in &philosophers {
@@ -291,16 +291,16 @@ use std::thread;
 очереди начинает есть и затем заканчивает:
 
 ```text
-Judith Butler начал есть.
-Judith Butler закончил есть.
-Gilles Deleuze начал есть.
-Gilles Deleuze закончил есть.
-Karl Marx начал есть.
-Karl Marx закончил есть.
-Emma Goldman начал есть.
-Emma Goldman закончил есть.
-Michel Foucault начал есть.
-Michel Foucault закончил есть.
+Джудит Батлер начал есть.
+Джудит Батлер закончил есть.
+Жиль Делёз начал есть.
+Жиль Делёз закончил есть.
+Карл Маркс начал есть.
+Карл Маркс закончил есть.
+Эмма Гольдман начал есть.
+Эмма Гольдман закончил есть.
+Мишель Фуко начал есть.
+Мишель Фуко закончил есть.
 ```
 
 Превосходно! Теперь у нас осталась проблема: наши философы едят по очереди, а
@@ -334,11 +334,11 @@ impl Philosopher {
 
 fn main() {
     let philosophers = vec![
-        Philosopher::new("Judith Butler"),
-        Philosopher::new("Gilles Deleuze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Emma Goldman"),
-        Philosopher::new("Michel Foucault"),
+        Philosopher::new("Джудит Батлер"),
+        Philosopher::new("Жиль Делёз"),
+        Philosopher::new("Карл Маркс"),
+        Philosopher::new("Эмма Гольдман"),
+        Philosopher::new("Мишель Фуко"),
     ];
 
     let handles: Vec<_> = philosophers.into_iter().map(|p| {
@@ -424,16 +424,16 @@ for h in handles {
 своей очереди! У нас многопоточность!
 
 ```text
-Gilles Deleuze начал есть.
-Gilles Deleuze закончил есть.
-Emma Goldman начал есть.
-Emma Goldman закончил есть.
-Michel Foucault начал есть.
-Judith Butler начал есть.
-Judith Butler закончил есть.
-Karl Marx начал есть.
-Karl Marx закончил есть.
-Michel Foucault закончил есть.
+Жиль Делёз начал есть.
+Жиль Делёз закончил есть.
+Эмма Гольдман начал есть.
+Эмма Гольдман закончил есть.
+Мишель Фуко начал есть.
+Джудит Батлер начал есть.
+Джудит Батлер закончил есть.
+Карл Маркс начал есть.
+Карл Маркс закончил есть.
+Мишель Фуко закончил есть.
 ```
 
 Но где же вилки? Они пока ещё не смоделированы у нас.
@@ -501,11 +501,11 @@ fn main() {
     ]});
 
     let philosophers = vec![
-        Philosopher::new("Judith Butler", 0, 1),
-        Philosopher::new("Gilles Deleuze", 1, 2),
-        Philosopher::new("Karl Marx", 2, 3),
-        Philosopher::new("Emma Goldman", 3, 4),
-        Philosopher::new("Michel Foucault", 0, 4),
+        Philosopher::new("Джудит Батлер", 0, 1),
+        Philosopher::new("Жиль Делёз", 1, 2),
+        Philosopher::new("Карл Маркс", 2, 3),
+        Philosopher::new("Эмма Гольдман", 3, 4),
+        Philosopher::new("Мишель Фуко", 0, 4),
     ];
 
     let handles: Vec<_> = philosophers.into_iter().map(|p| {
@@ -611,11 +611,11 @@ _не планируем использовать_. Таким образом Ru
 
 ```rust
 let philosophers = vec![
-    Philosopher::new("Judith Butler", 0, 1),
-    Philosopher::new("Gilles Deleuze", 1, 2),
-    Philosopher::new("Karl Marx", 2, 3),
-    Philosopher::new("Emma Goldman", 3, 4),
-    Philosopher::new("Michel Foucault", 0, 4),
+    Philosopher::new("Джудит Батлер", 0, 1),
+    Philosopher::new("Жиль Делёз", 1, 2),
+    Philosopher::new("Карл Маркс", 2, 3),
+    Philosopher::new("Эмма Гольдман", 3, 4),
+    Philosopher::new("Мишель Фуко", 0, 4),
 ];
 ```
 
@@ -647,16 +647,16 @@ let handles: Vec<_> = philosophers.into_iter().map(|p| {
 и после запуска программы вы можете получить такой результат.
 
 ```text
-Gilles Deleuze начал есть.
-Emma Goldman начал есть.
-Emma Goldman закончил есть.
-Gilles Deleuze закончил есть.
-Judith Butler начал есть.
-Karl Marx начал есть.
-Judith Butler закончил есть.
-Michel Foucault начал есть.
-Karl Marx закончил есть.
-Michel Foucault закончил есть.
+Жиль Делёз начал есть.
+Эмма Гольдман начал есть.
+Эмма Гольдман закончил есть.
+Жиль Делёз закончил есть.
+Джудит Батлер начал есть.
+Карл Маркс начал есть.
+Джудит Батлер закончил есть.
+Мишель Фуко начал есть.
+Карл Маркс закончил есть.
+Мишель Фуко закончил есть.
 ```
 
 Поздравляем! Вы реализовали классическую задачу параллелизма на языке Rust.
