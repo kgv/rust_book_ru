@@ -241,7 +241,7 @@ match origin {
 Такое ‘деструктурирование‘ работает для любых сложных типов данных, таких как
 [кортежи][tuples] или [перечисления][enums].
 
-[tuples]: primitive-types.html#tuples
+[tuples]: primitive-types.html#%D0%9A%D0%BE%D1%80%D1%82%D0%B5%D0%B6%D0%B8
 [enums]: enums.html
 
 # Mix and Match

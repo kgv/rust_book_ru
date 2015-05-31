@@ -118,7 +118,8 @@ fn main() {
 функции. Из-за того, что мы не указали тип возвращаемого значения,
 предполагается, что будет возвращаться `()` - пустой [кортеж][tuples].
 
-[tuples]: primitive-types.html#tuples
+<!-- #tuples -->
+[tuples]: primitive-types.html#%D0%9A%D0%BE%D1%80%D1%82%D0%B5%D0%B6%D0%B8
 
 ```rust,ignore
     println!("Угадайте число!");
@@ -724,7 +725,8 @@ integer. Rust has [a number of built-in number types][number], but we’ve
 chosen `u32`. It’s a good default choice for a small positive number.
 
 [parse]: http://doc.rust-lang.org/std/primitive.str.html#method.parse
-[number]: primitive-types.html#numeric-types
+<!-- #numeric-types -->
+[number]: primitive-types.html#%23%D0%A7%D0%B8%D1%81%D0%BB%D0%BE%D0%B2%D1%8B%D0%B5-%D1%82%D0%B8%D0%BF%D1%8B
 
 Just like `read_line()`, our call to `parse()` could cause an error. What if
 our string contained `A👍%`? There’d be no way to convert that to a number. As
