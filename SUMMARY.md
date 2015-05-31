@@ -1,6 +1,5 @@
 # Содержание
 
-<<<<<<< HEAD
 * [Введение](src/INTRODUCTION.md)
 * [C чего начать](src/getting-started.md)
     * [Установка Rust](src/installing-rust.md)
@@ -71,7 +70,6 @@
     * [Ассоциированные константы](src/associated-constants.md)
 * [Глоссарий](src/glossary.md)
 * [Академические исследования](src/academic-research.md)
-=======
 * [Введение](INTRODUCTION.md)
 * [C чего начать](getting-started.md)
     * [Установка Rust](getting-started/installing-rust.md)
@@ -142,4 +140,3 @@
     * [Ассоциированные константы](nightly-rust/associated-constants.md)
 * [Глоссарий](glossary.md)
 * [Академические исследования](academic-research.md)
->>>>>>> Add translate dining-philosophers.md and learn-rust.md
