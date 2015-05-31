@@ -122,7 +122,9 @@ a more involved macro example, see
 
 ## Tips and tricks
 
-Some of the [macro debugging tips](macros.html#debugging-macro-code) are applicable.
+Some of the
+[macro debugging tips](macros.html#%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BA%D0%B0-%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D0%BE%D0%B2)
+are applicable.
 
 You can use [`syntax::parse`](../syntax/parse/index.html) to turn token trees into
 higher-level syntax elements like expressions:
