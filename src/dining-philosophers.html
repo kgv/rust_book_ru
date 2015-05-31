@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Обедающие философы</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+<li><a href='../src/dining-philosophers.html'><b>4.2.</b> Обедающие философы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Обедающие философы</h1>
+    <p>Для нашего второго проекта мы выбрали классическую задачу с параллелизмом. Она
+называется &quot;Обедающие философы&quot;. Задача была сформулирована в 1965 году
+Эдсгером Дейкстрой, но мы будем использовать версию задачи,
+<a href="http://www.usingcsp.com/cspbook.pdf">адаптированную</a> в 1985 году Ричардом Хоаром.</p>
+
+<blockquote>
+<p>В древние времена, богатые филантропы пригласили погостить пятерых выдающихся
+философов. Им выделили каждому по комнате, в которой они могли заниматься
+своей профессиональной деятельностью - мышлением. Также была общая столовая,
+где стоял большой круглый стол, а вокруг него пять стульев. Каждый стул имел
+табличку с именем философа, который должен был сидеть на нем. Слева от каждого
+философа лежала золотая вилка и в центре стола стояла большая миска со
+спагетти, которая постоянно пополняется. Как подобает философам, они большую
+часть своего времени проводят в раздумьях. Но однажды они почувствовали голод
+и отправились в столовую. Каждый сел на свой стул, взял по вилке и воткнул её
+в миску со спагетти. Но из-за запутанной сущности спагетти потребовалась
+вторая вилка, которая бы отправляла спагетти в рот. Для этого требовалась бы
+вилка справа от каждого философа. Философы положили свои вилки и встали из-за
+стола, продолжая думать. Вилка может быть использована только одним философом
+одновременно. Если другой философ захочет её взять, то ему придется ждать
+когда она освободится.</p>
+</blockquote>
+
+<p>Эта классическая задача показывает различные элементы параллелизма. Сложность
+реализации задачи состоит в том, что простая реализация может зайти в
+безвыходное состояние. Давайте рассмотрим простой пример решения этой проблемы:</p>
+
+<ol>
+<li>Философ берет вилку в свою левую руку.</li>
+<li>Затем берет вилку в свою правую руку.</li>
+<li>Он ест.</li>
+<li>Кладет вилки на место.</li>
+</ol>
+
+<p>Теперь представим это как последовательность действий философов:</p>
+
+<ol>
+<li>Философ 1 начинает выполнять алгоритм, берет вилку в левую руку.</li>
+<li>Философ 2 начинает выполнять алгоритм, берет вилку в левую руку.</li>
+<li>Философ 3 начинает выполнять алгоритм, берет вилку в левую руку.</li>
+<li>Философ 4 начинает выполнять алгоритм, берет вилку в левую руку.</li>
+<li>Философ 5 начинает выполнять алгоритм, берет вилку в левую руку.</li>
+<li>...? Все вилки заняты и никто не может начать есть! Безвыходное состояние.</li>
+</ol>
+
+<p>Есть различные пути решения этой задачи. Мы в этом руководстве покажем свое
+решение. Сначала давайте начнем с моделирования задачи. Начнем с философов:</p>
+<span class='rusttest'>struct Philosopher {
+    name: String,
+}
+
+impl Philosopher {
+    fn new(name: &amp;str) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+        }
+    }
+}
+
+fn main() {
+    let p1 = Philosopher::new(&quot;Джудит Батлер&quot;);
+    let p2 = Philosopher::new(&quot;Рая Дунаевская&quot;);
+    let p3 = Philosopher::new(&quot;Зарубина Наталья&quot;);
+    let p4 = Philosopher::new(&quot;Эмма Гольдман&quot;);
+    let p5 = Philosopher::new(&quot;Шмидт Анна&quot;);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>Philosopher</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+        <span class='ident'>Philosopher</span> {
+            <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+        }
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>p1</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p2</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>);
+}
+</pre>
+
+<p>Здесь мы создаем <a href="structs.html">структуру</a> представляющую философа. На данный
+момент, нам нужно всего лишь имя. Мы выбрали тип <a href="strings.html"><code>String</code></a> для
+хранения имени вместо <code>&amp;str</code>. Обычно проще работать с типом, владеющим
+данными, чем с типом, использующим ссылки.</p>
+
+<p>Посмотрим на это:</p>
+<span class='rusttest'>fn main() {
+    impl Philosopher {
+        fn new(name: &amp;str) -&gt; Philosopher {
+            Philosopher {
+                name: name.to_string(),
+            }
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>impl</span> <span class='ident'>Philosopher</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+        <span class='ident'>Philosopher</span> {
+            <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+        }
+    }
+}
+</pre>
+
+<p>Этот блок <code>impl</code> позволяет объявлять что-нибудь для структуры <code>Philosopher</code>. В
+нашем случае мы объявляем &quot;статическую функцию&quot; <code>new</code>. Первая строка этой
+функции выглядит так:</p>
+<span class='rusttest'>fn main() {
+    fn new(name: &amp;str) -&gt; Philosopher {
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+</pre>
+
+<p>Она принимает один аргумент <code>name</code> типа <code>&amp;str</code>. Это ссылка на другую строку.
+Возвращает новый экземпляр нашей структуры <code>Philosopher</code>.</p>
+<span class='rusttest'>fn main() {
+    Philosopher {
+        name: name.to_string(),
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+}
+</pre>
+
+<p>Это создаст новый экземпляр <code>Philosopher</code> и присвоит полю <code>name</code> значение
+переданного аргумента <code>name</code>. Но не сам аргумент, а результат его вызова
+<code>.to_string()</code>. Это создаст копию строки нашего указателя <code>&amp;str</code> и даст новый
+экземпляр <code>String</code>, который будет присвоен полю <code>name</code> структуры <code>Philosopher</code>.</p>
+
+<p>Почему бы сразу не передавать строку типа <code>String</code> напрямую? Так легче ее
+вызывать. Если мы принимали бы тип <code>String</code>, а тот кто вызывает функцию имеет
+ссылку на строку <code>&amp;str</code>, то должен был бы приводить ее к типу <code>String</code> перед
+каждым вызовом. Это уменьшит гибкость кода и придется <em>каждый раз</em> делать
+копию строки. Для этой небольшой программы это не очень важно, т.к. мы знаем
+что будем использовать только короткие строки.</p>
+
+<p>И последнее на что вы обратите внимание: мы просто объявляем структуру
+<code>Philosopher</code> и кажется, что ничего больше не делаем. Rust это expression
+ориентированный язык программирования, означающее, что каждое выражение
+возвращает значение. Это применяется для функций у которых автоматически
+возвращается последнее выражение. В нашем случае мы создаем структуру
+<code>Philosopher</code> в последнем выражении функции, которое возвращается функцией.</p>
+
+<p>Имя функции <code>new()</code> не является особенным в Rust, но негласным соглашением
+принято так называть функции, которые возвращают новые экземпляры структур.
+Давайте посмотрим на функцию <code>main()</code>:</p>
+<span class='rusttest'>fn main() {
+    let p1 = Philosopher::new(&quot;Джудит Батлер&quot;);
+    let p2 = Philosopher::new(&quot;Рая Дунаевская&quot;);
+    let p3 = Philosopher::new(&quot;Зарубина Наталья&quot;);
+    let p4 = Philosopher::new(&quot;Эмма Гольдман&quot;);
+    let p5 = Philosopher::new(&quot;Шмидт Анна&quot;);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>p1</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p2</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>);
+}
+</pre>
+
+<p>Здесь, мы связываем пять переменных с пятью новыми философами. Здесь указаны
+имена некоторых известных философов, но вы можете указать любые другие. Если
+бы мы <em>не объявили</em> свою реализацию функции <code>new()</code>, то наш код выглядел бы
+так:</p>
+<span class='rusttest'>fn main() {
+    let p1 = Philosopher { name: &quot;Джудит Батлер&quot;.to_string() };
+    let p2 = Philosopher { name: &quot;Рая Дунаевская&quot;.to_string() };
+    let p3 = Philosopher { name: &quot;Зарубина Наталья&quot;.to_string() };
+    let p4 = Philosopher { name: &quot;Эмма Гольдман&quot;.to_string() };
+    let p5 = Philosopher { name: &quot;Шмидт Анна&quot;.to_string() };
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>p1</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Джудит Батлер&quot;</span>.<span class='ident'>to_string</span>() };
+    <span class='kw'>let</span> <span class='ident'>p2</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Рая Дунаевская&quot;</span>.<span class='ident'>to_string</span>() };
+    <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Зарубина Наталья&quot;</span>.<span class='ident'>to_string</span>() };
+    <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Эмма Гольдман&quot;</span>.<span class='ident'>to_string</span>() };
+    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Шмидт Анна&quot;</span>.<span class='ident'>to_string</span>() };
+}
+</pre>
+
+<p>Это было бы очень не очень изящно и трудно читаемо. Использование
+статической функции <code>new</code> имеет много плюсов, в нашем простом случае даст
+более элегантный код.</p>
+
+<p>Сейчас у нас уже есть каркас программы и теперь можно заняться решением задачи
+с обедающими философами. Начнем с конца: сделаем так, чтобы философ сообщал
+нам когда он закончит есть. Для этого потребуется метод, сообщающий нам об
+окончании обеда, и цикл, запускающий этот метод для каждого философа.</p>
+<span class='rusttest'>struct Philosopher {
+    name: String,
+}   
+
+impl Philosopher { 
+    fn new(name: &amp;str) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+        }
+    }
+    
+    fn eat(&amp;self) {
+        println!(&quot;{} закончила обедать.&quot;, self.name);
+    }
+}
+
+fn main() {
+    let philosophers = vec![
+        Philosopher::new(&quot;Джудит Батлер&quot;),
+        Philosopher::new(&quot;Рая Дунаевская&quot;),
+        Philosopher::new(&quot;Зарубина Наталья&quot;),
+        Philosopher::new(&quot;Эмма Гольдман&quot;),
+        Philosopher::new(&quot;Шмидт Анна&quot;),
+    ];
+
+    for p in &amp;philosophers {
+        p.eat();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}   
+
+<span class='kw'>impl</span> <span class='ident'>Philosopher</span> { 
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+        <span class='ident'>Philosopher</span> {
+            <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+        }
+    }
+    
+    <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила обедать.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>philosophers</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>),
+    ];
+
+    <span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>philosophers</span> {
+        <span class='ident'>p</span>.<span class='ident'>eat</span>();
+    }
+}
+</pre>
+
+<p>Давайте сначала рассмотрим на <code>main()</code>. Вместо того чтобы каждого философа
+привязывать к отдельной переменной, мы создаем <code>Vec&lt;T&gt;</code> c ними. <code>Vec&lt;T&gt;</code>
+называют &quot;вектор&quot; и он является расширенной версией массива. Затем в цикле
+<a href="for-loops.html"><code>for</code></a> мы перебираем вектор, получая ссылку на каждого философа за
+каждую итерацию.</p>
+
+<p>В теле цикла мы вызываем <code>p.eat()</code>, который объявлен выше:</p>
+<span class='rusttest'>fn main() {
+    fn eat(&amp;self) {
+        println!(&quot;{} закончила есть.&quot;, self.name);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+}
+</pre>
+
+<p>В Rust методы явно получают параметр self. Вот почему <code>eat()</code> является
+методом, а <code>new</code> статической функцией: <code>new()</code> не получает параметр <code>self</code>.
+Для нашей первой версии <code>eat()</code>, мы только выводим имя философа и сообщение о
+том, что он закончил есть. Запустив эту программу вы получите:</p>
+
+<pre><code class="language-text">Джудит Батлер закончила есть.
+Рая Дунаевская закончила есть.
+Зарубина Наталья закончила есть.
+Эмма Гольдман закончила есть.
+Шмидт Анна закончила есть.
+</code></pre>
+
+<p>Это было не сложно! Осталось чуть-чуть и приступим к самой задаче.</p>
+
+<p>Дальше нам надо сделать так, чтобы философы не только заканчивали есть, но
+также и начинали. Это новая версия программы:</p>
+<span class='rusttest'>use std::thread;
+
+struct Philosopher {
+    name: String,
+}   
+
+impl Philosopher { 
+    fn new(name: &amp;str) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+        }
+    }
+    
+    fn eat(&amp;self) {
+        println!(&quot;{} начала есть.&quot;, self.name);
+
+        thread::sleep_ms(1000);
+
+        println!(&quot;{} закончила есть.&quot;, self.name);
+    }
+}
+
+fn main() {
+    let philosophers = vec![
+        Philosopher::new(&quot;Джудит Батлер&quot;),
+        Philosopher::new(&quot;Рая Дунаевская&quot;),
+        Philosopher::new(&quot;Зарубина Наталья&quot;),
+        Philosopher::new(&quot;Эмма Гольдман&quot;),
+        Philosopher::new(&quot;Шмидт Анна&quot;),
+    ];
+
+    for p in &amp;philosophers {
+        p.eat();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}   
+
+<span class='kw'>impl</span> <span class='ident'>Philosopher</span> { 
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+        <span class='ident'>Philosopher</span> {
+            <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+        }
+    }
+    
+    <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} начала есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>philosophers</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>),
+    ];
+
+    <span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>philosophers</span> {
+        <span class='ident'>p</span>.<span class='ident'>eat</span>();
+    }
+}
+</pre>
+
+<p>Появилось немного изменений. Давайте посмотрим что изменилось:</p>
+<span class='rusttest'>fn main() {
+    use std::thread;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+</pre>
+
+<p>Конструкция <code>use</code> предоставляет доступ к области видимости модуля <code>thread</code> из
+стандартной библиотеки, т.к. мы хотим использовать этот модуль далее в коде.</p>
+<span class='rusttest'>fn main() {
+        fn eat(&amp;self) {
+            println!(&quot;{} начала есть.&quot;, self.name);
+    
+            thread::sleep_ms(1000);
+    
+            println!(&quot;{} закончила есть.&quot;, self.name);
+        }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+    <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} начала есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+    }
+</pre>
+
+<p>Здесь мы выводим на экран два сообщения и используем функцию <code>sleep_ms</code> между
+выводом. Эта функция останавливает рабочий поток на 1000 миллисекунд и мы её
+используем для симуляции процесса обеда философа.</p>
+
+<p>Если вы запустите теперь программу, то увидите что теперь каждый философ по
+очереди начинает есть и затем заканчивает:</p>
+
+<pre><code class="language-text">Джудит Батлер начала есть.
+Джудит Батлер закончила есть.
+Рая Дунаевская начала есть.
+Рая Дунаевская закончила есть.
+Зарубина Наталья начала есть.
+Зарубина Наталья закончила есть.
+Эмма Гольдман начала есть.
+Эмма Гольдман закончила есть.
+Шмидт Анна начала есть.
+Шмидт Анна закончила есть.
+</code></pre>
+
+<p>Превосходно! Теперь у нас осталась проблема: наши философы едят по очереди, а
+не одновременно, т.е. мы пока не решили задачу параллелизма.</p>
+
+<p>Для того, чтобы наши философы начали есть одновременно, нам надо внести
+немного изменений в код:</p>
+<span class='rusttest'>use std::thread;
+
+struct Philosopher {
+    name: String,
+}   
+
+impl Philosopher { 
+    fn new(name: &amp;str) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+        }
+    }
+
+    fn eat(&amp;self) {
+        println!(&quot;{} начала есть.&quot;, self.name);
+
+        thread::sleep_ms(1000);
+
+        println!(&quot;{} закончила есть.&quot;, self.name);
+    }
+}
+
+fn main() {
+    let philosophers = vec![
+        Philosopher::new(&quot;Джудит Батлер&quot;),
+        Philosopher::new(&quot;Рая Дунаевская&quot;),
+        Philosopher::new(&quot;Зарубина Наталья&quot;),
+        Philosopher::new(&quot;Эмма Гольдман&quot;),
+        Philosopher::new(&quot;Шмидт Анна&quot;),
+    ];
+
+    let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
+        thread::spawn(move || {
+            p.eat();
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+}   
+
+<span class='kw'>impl</span> <span class='ident'>Philosopher</span> { 
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+        <span class='ident'>Philosopher</span> {
+            <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+        }
+    }
+
+    <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} начала есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>philosophers</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>),
+    ];
+
+    <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='ident'>p</span>.<span class='ident'>eat</span>();
+        })
+    }).<span class='ident'>collect</span>();
+
+    <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
+        <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>();
+    }
+}
+</pre>
+
+<p>Мы добавили еще один цикл в функцию <code>main()</code>. Теперь она выглядит так:</p>
+<span class='rusttest'>fn main() {
+    let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
+        thread::spawn(move || {
+            p.eat();
+        })
+    }).collect();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
+    <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+        <span class='ident'>p</span>.<span class='ident'>eat</span>();
+    })
+}).<span class='ident'>collect</span>();
+</pre>
+
+<p>Тут добавились трудные к пониманию пять строк кода. Давайте разбираться.</p>
+<span class='rusttest'>fn main() {
+    let handles: Vec&lt;_&gt; = 
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> 
+</pre>
+
+<p>Объявляем новое связывание с именем <code>handles</code>. Мы дали ему такое имя, т.к.
+собираемся создать несколько потоков и для контролирования их работы нужно
+получить дескрипторы каждого из них. Нам надо явно указать здесь тип, а для
+чего это надо мы скажем чуть позже. <code>_</code> это заполнитель типа. Мы говорим
+компилятору &quot;<code>handles</code> это вектор тип которого ты можешь самостоятельно
+вычислить&quot;.</p>
+<span class='rusttest'>fn main() {
+    philosophers.into_iter().map(|p| {
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
+</pre>
+
+<p>Мы берем наш список философов и вызываем <code>into_iter()</code>. Это создаст итератор,
+который заберёт право владения (ownership) для каждого философа. Нам надо
+сделать это для передачи в поток. Мы берем этот итератор и вызываем <code>map</code>,
+который принимает замыкание как аргумент и вызывает это замыкание для каждого
+элемента итерации.</p>
+<span class='rusttest'>fn main() {
+        thread::spawn(move || {
+            p.eat();
+        })
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+    <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+        <span class='ident'>p</span>.<span class='ident'>eat</span>();
+    })
+</pre>
+
+<p>Вот здесь происходит сам параллелизм. Функция <code>thread::spawn</code> берет замыкание
+в качестве аргумента и исполняет это замыкание в новом потоке. Это замыкание
+нуждается дополнительном указании ключевого слова <code>move</code>, которое сообщает что
+это замыкание получает право владения (ownership) значениями которое оно
+захватывает. В данном случае переменную <code>p</code> функции <code>map</code>.</p>
+
+<p>Внутри потока мы всего лишь вызываем функцию <code>eat()</code> у <code>p</code>.</p>
+<span class='rusttest'>fn main() {
+    }).collect();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+}).<span class='ident'>collect</span>();
+</pre>
+
+<p>И в завершении мы получаем результат этих вызовов <code>map</code> и собираем полученный
+результат в в коллекцию с помощью функции <code>collect()</code>. Для того чтобы Rust
+понял какой тип коллекции хотим получить, мы указали для <code>handle</code> тип
+принимаемого значения <code>Vec&lt;T&gt;</code>. Элементы коллекции будут возвращаемые значения
+типа <code>thread::spawn</code>, которые являются ручками их потоков. Вот так!</p>
+<span class='rusttest'>fn main() {
+    for h in handles {
+        h.join().unwrap();
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
+    <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>();
+}
+</pre>
+
+<p>В конце функции <code>main()</code> мы в цикле перебираем каждую ручку и вызываем функцию
+<code>join()</code> для каждой ручки, которая блокирует дальнейшее исполнение основного
+потока, пока не завершится дочерний поток. Это позволяет нам быть уверенными,
+что потоки завершат работу до того как произойдет выход их программы.</p>
+
+<p>Если вы запустите эту программу, то вы увидите, что философы едят не дожидаясь
+своей очереди! У нас многопоточность!</p>
+
+<pre><code class="language-text">Рая Дунаевская начала есть.
+Рая Дунаевская закончила есть.
+Эмма Гольдман начала есть.
+Эмма Гольдман закончила есть.
+Шмидт Анна начала есть.
+Джудит Батлер начала есть.
+Джудит Батлер закончила есть.
+Зарубина Наталья начала есть.
+Зарубина Наталья закончила есть.
+Шмидт Анна закончила есть.
+</code></pre>
+
+<p>Но где же вилки? Они пока ещё не смоделированы у нас.</p>
+
+<p>Давайте же начнем. Сначала сделаем новую структуру:</p>
+<span class='rusttest'>fn main() {
+    use std::sync::Mutex;
+    
+    struct Table {
+        forks: Vec&lt;Mutex&lt;()&gt;&gt;,
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Mutex</span>;
+
+<span class='kw'>struct</span> <span class='ident'>Table</span> {
+    <span class='ident'>forks</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Mutex</span><span class='op'>&lt;</span>()<span class='op'>&gt;&gt;</span>,
+}
+</pre>
+
+<p>Структура <code>Table</code> имеет вектор мьютексов (<code>Mutex</code>). Мьютекс позволяет
+управлять одновременно выполняющимися потоками, давая доступ к содержимому
+только одному потоку. Это свойство нужно для реализации наших вилок. Мы в коде
+используем пустой кортеж <code>()</code> внутри мьютекса, т.к. мы не собираемся
+использовать значение, а мьютекс использовать только для приостановки потока.</p>
+
+<p>Давайте изменим программу используя структуру <code>Table</code>:</p>
+<span class='rusttest'>use std::thread;
+use std::sync::{Mutex, Arc};
+
+struct Philosopher {
+    name: String,
+    left: usize,
+    right: usize,
+}
+
+impl Philosopher {
+    fn new(name: &amp;str, left: usize, right: usize) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+            left: left,
+            right: right,
+        }
+    }
+
+    fn eat(&amp;self, table: &amp;Table) {
+        let _left = table.forks[self.left].lock().unwrap();
+        let _right = table.forks[self.right].lock().unwrap();
+
+        println!(&quot;{} начала есть.&quot;, self.name);
+
+        thread::sleep_ms(1000);
+
+        println!(&quot;{} закончила есть.&quot;, self.name);
+    }
+}
+
+struct Table {
+    forks: Vec&lt;Mutex&lt;()&gt;&gt;,
+}
+
+fn main() {
+    let table = Arc::new(Table { forks: vec![
+        Mutex::new(()),
+        Mutex::new(()),
+        Mutex::new(()),
+        Mutex::new(()),
+        Mutex::new(()),
+    ]});
+
+    let philosophers = vec![
+        Philosopher::new(&quot;Джудит Батлер&quot;, 0, 1),
+        Philosopher::new(&quot;Рая Дунаевская&quot;, 1, 2),
+        Philosopher::new(&quot;Зарубина Наталья&quot;, 2, 3),
+        Philosopher::new(&quot;Эмма Гольдман&quot;, 3, 4),
+        Philosopher::new(&quot;Шмидт Анна&quot;, 0, 4),
+    ];
+
+    let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
+        let table = table.clone();
+
+        thread::spawn(move || {
+            p.eat(&amp;table);
+        })
+    }).collect();
+
+    for h in handles {
+        h.join().unwrap();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Mutex</span>, <span class='ident'>Arc</span>};
+
+<span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+    <span class='ident'>left</span>: <span class='ident'>usize</span>,
+    <span class='ident'>right</span>: <span class='ident'>usize</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>Philosopher</span> {
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>left</span>: <span class='ident'>usize</span>, <span class='ident'>right</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+        <span class='ident'>Philosopher</span> {
+            <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+            <span class='ident'>left</span>: <span class='ident'>left</span>,
+            <span class='ident'>right</span>: <span class='ident'>right</span>,
+        }
+    }
+
+    <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>table</span>: <span class='kw-2'>&amp;</span><span class='ident'>Table</span>) {
+        <span class='kw'>let</span> <span class='ident'>_left</span> <span class='op'>=</span> <span class='ident'>table</span>.<span class='ident'>forks</span>[<span class='self'>self</span>.<span class='ident'>left</span>].<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>_right</span> <span class='op'>=</span> <span class='ident'>table</span>.<span class='ident'>forks</span>[<span class='self'>self</span>.<span class='ident'>right</span>].<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} начала есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+    }
+}
+
+<span class='kw'>struct</span> <span class='ident'>Table</span> {
+    <span class='ident'>forks</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Mutex</span><span class='op'>&lt;</span>()<span class='op'>&gt;&gt;</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>table</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='ident'>Table</span> { <span class='ident'>forks</span>: <span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+    ]});
+
+    <span class='kw'>let</span> <span class='ident'>philosophers</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>, <span class='number'>0</span>, <span class='number'>1</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>, <span class='number'>1</span>, <span class='number'>2</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>, <span class='number'>2</span>, <span class='number'>3</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>, <span class='number'>3</span>, <span class='number'>4</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
+    ];
+
+    <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
+        <span class='kw'>let</span> <span class='ident'>table</span> <span class='op'>=</span> <span class='ident'>table</span>.<span class='ident'>clone</span>();
+
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='ident'>p</span>.<span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='ident'>table</span>);
+        })
+    }).<span class='ident'>collect</span>();
+
+    <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
+        <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>();
+    }
+}
+</pre>
+
+<p>Много изменений! Однако эта версия является корректно работающей версией.
+Приступим к рассмотрению:</p>
+<span class='rusttest'>fn main() {
+    use std::sync::{Mutex, Arc};
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Mutex</span>, <span class='ident'>Arc</span>};
+</pre>
+
+<p>Нам далее понадобится структура <code>Arc&lt;T&gt;</code> из модуля стандартной библиотеки
+<code>std::sync</code>. Мы поговорим о ней чуть позже.</p>
+<span class='rusttest'>fn main() {
+    struct Philosopher {
+        name: String,
+        left: usize,
+        right: usize,
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>name</span>: <span class='ident'>String</span>,
+    <span class='ident'>left</span>: <span class='ident'>usize</span>,
+    <span class='ident'>right</span>: <span class='ident'>usize</span>,
+}
+</pre>
+
+<p>Нам понадобилось добавить еще два поля в нашу структуру <code>Philosopher</code>. Каждый
+философ должен иметь две вилки: одну для левой руки, другую для правой руки.
+Мы используем тип <code>usize</code> для идентификации каждой вилки. Мы используем его
+при при создании философа, передавая идентификаторы двух вилок. Эти два
+значения будут использоваться полем <code>forks</code> структуры <code>Table</code>.</p>
+<span class='rusttest'>fn main() {
+    fn new(name: &amp;str, left: usize, right: usize) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+            left: left,
+            right: right,
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>left</span>: <span class='ident'>usize</span>, <span class='ident'>right</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
+    <span class='ident'>Philosopher</span> {
+        <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
+        <span class='ident'>left</span>: <span class='ident'>left</span>,
+        <span class='ident'>right</span>: <span class='ident'>right</span>,
+    }
+}
+</pre>
+
+<p>Используем функцию <code>new()</code> для задания значений <code>left</code> и <code>right</code>.</p>
+<span class='rusttest'>fn main() {
+    fn eat(&amp;self, table: &amp;Table) {
+        let _left = table.forks[self.left].lock().unwrap();
+        let _right = table.forks[self.right].lock().unwrap();
+    
+        println!(&quot;{} начала есть.&quot;, self.name);
+    
+        thread::sleep_ms(1000);
+    
+        println!(&quot;{} закончила есть.&quot;, self.name);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>table</span>: <span class='kw-2'>&amp;</span><span class='ident'>Table</span>) {
+    <span class='kw'>let</span> <span class='ident'>_left</span> <span class='op'>=</span> <span class='ident'>table</span>.<span class='ident'>forks</span>[<span class='self'>self</span>.<span class='ident'>left</span>].<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+    <span class='kw'>let</span> <span class='ident'>_right</span> <span class='op'>=</span> <span class='ident'>table</span>.<span class='ident'>forks</span>[<span class='self'>self</span>.<span class='ident'>right</span>].<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} начала есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+}
+</pre>
+
+<p>Здесь появились две новые строки, а также добавили один аргумент <code>table</code>. У
+нас есть доступ к вилкам через структуру <code>Table</code>, передавая в нее
+идентификаторы вилок <code>self.left</code> и <code>self.right</code>. Она хранит в себе <code>Mutex</code> для
+каждой вилки и вызываем <code>lock()</code>, блокируя к ней доступ.</p>
+
+<p>Вызов <code>lock()</code> может быть неудачным и если это случится, то нужно будет
+аварийно завершить работу программы. Это может произойти, если вдруг поток
+аварийно завершит работу, а мьютекс останется заблокирован. Такой мьютекс
+называется <a href="https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#poisoning">&quot;отравленным&quot;</a>. Но в нашем случае это не может произойти,
+то мы просто используем <code>unwarp()</code>.</p>
+
+<p>В этих двух строках мы результат сохраняем в <code>_left</code> и <code>_right</code>. Зачем мы
+используем знаки подчеркивания в начале идентификаторов имен? Это для того
+чтобы сказать компилятору, что хотим получить значения, которые далее
+<em>не планируем использовать</em>. Таким образом Rust не будет выводить
+предупреждение о неиспользуемых идентификаторов имен.</p>
+
+<p>Когда же освободится мьютекс? Это произойдет когда <code>_left</code> и <code>_right</code> выйдут
+из области видимости, т.е. по окончанию работы функции.</p>
+<span class='rusttest'>fn main() {
+        let table = Arc::new(Table { forks: vec![
+            Mutex::new(()),
+            Mutex::new(()),
+            Mutex::new(()),
+            Mutex::new(()),
+            Mutex::new(()),
+        ]});
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+    <span class='kw'>let</span> <span class='ident'>table</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='ident'>Table</span> { <span class='ident'>forks</span>: <span class='macro'>vec</span><span class='macro'>!</span>[
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+        <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
+    ]});
+</pre>
+
+<p>Далее в <code>main()</code> мы создаем <code>Table</code> и оборачиваем его в <code>Arc&lt;T&gt;</code>. Это
+&quot;атомарный счетчик ссылок&quot; и нам он нужен для использования нашей структуры
+<code>Table</code> получения доступа в нескольких потоках. Когда мы его будем передавать
+в поток, то будет счетчик увеличиваться, а если поток завершит работу, то
+счетчик уменьшится.</p>
+<span class='rusttest'>fn main() {
+    let philosophers = vec![
+        Philosopher::new(&quot;Джудит Батлер&quot;, 0, 1),
+        Philosopher::new(&quot;Рая Дунаевская&quot;, 1, 2),
+        Philosopher::new(&quot;Зарубина Наталья&quot;, 2, 3),
+        Philosopher::new(&quot;Эмма Гольдман&quot;, 3, 4),
+        Philosopher::new(&quot;Шмидт Анна&quot;, 0, 4),
+    ];
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>philosophers</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
+    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Джудит Батлер&quot;</span>, <span class='number'>0</span>, <span class='number'>1</span>),
+    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>, <span class='number'>1</span>, <span class='number'>2</span>),
+    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>, <span class='number'>2</span>, <span class='number'>3</span>),
+    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>, <span class='number'>3</span>, <span class='number'>4</span>),
+    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
+];
+</pre>
+
+<p>Здесь мы добавили наши значения <code>left</code> и <code>right</code> при создании структуры
+<code>Philosopher</code>. Здесь есть <em>очень важная</em> деталь на которую следует обратить
+внимание. Посмотрите на последнюю строку создания <code>Philosopher</code>. У Анны Шмидт
+должны бы иметь значения <code>4</code> и <code>0</code> в качестве аргументов, но у нас
+имеют <code>0</code> и <code>4</code>. Это помешает нашей программе попасть в безвыходное состояние,
+если все одновременно возьмут вилки одновременно. Так что давайте представим,
+что один из философов у нас левша!</p>
+<span class='rusttest'>fn main() {
+    let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
+        let table = table.clone();
+    
+        thread::spawn(move || {
+            p.eat(&amp;table);
+        })
+    }).collect();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
+    <span class='kw'>let</span> <span class='ident'>table</span> <span class='op'>=</span> <span class='ident'>table</span>.<span class='ident'>clone</span>();
+
+    <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+        <span class='ident'>p</span>.<span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='ident'>table</span>);
+    })
+}).<span class='ident'>collect</span>();
+</pre>
+
+<p>Внутри нашего цикла  <code>map()</code>/<code>collect()</code> мы вызываем <code>table.clone()</code>. Метод
+<code>clone()</code> структуры <code>Arc&lt;T&gt;</code> инкрементирует счетчик и когда покинет область
+видимости декрементирует. Вы можете заметить, что мы делаем новое связывание с
+<code>table</code> здесь, затеняя оригинальную <code>table</code>. Это позволяет нам не вводить
+новый уникальный идентификатор.</p>
+
+<p>Теперь наша программа работает! Только два философа могут обедать одновременно
+и после запуска программы вы можете получить такой результат.</p>
+
+<pre><code class="language-text">Рая Дунаевская начала есть.
+Эмма Гольдман начала есть.
+Эмма Гольдман закончила есть.
+Рая Дунаевская закончила есть.
+Джудит Батлер начала есть.
+Зарубина Наталья начала есть.
+Джудит Батлер закончила есть.
+Шмидт Анна начала есть.
+Зарубина Наталья закончила есть.
+Шмидт Анна закончила есть.
+</code></pre>
+
+<p>Поздравляем! Вы реализовали классическую задачу параллелизма на языке Rust.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>
