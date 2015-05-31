@@ -525,80 +525,82 @@ expanded`. Вывод представляет собой целый конте�
 
 [item]: http://doc.rust-lang.org/stable/reference.html#items
 
-# Scoping and macro import/export
+# Области видимости, импорт и экспорт макросов
 
-Macros are expanded at an early stage in compilation, before name resolution.
-One downside is that scoping works differently for macros, compared to other
-constructs in the language.
+Макросы разворачиваются на ранней стадии компиляции, перед разрешением имён.
+Один из недостатков такого подхода в том, что правила видимости для макросов
+отличны от правил для других конструкций языка.
 
-Definition and expansion of macros both happen in a single depth-first,
-lexical-order traversal of a crate's source. So a macro defined at module scope
-is visible to any subsequent code in the same module, which includes the body
-of any subsequent child `mod` items.
+Компилятор определяет и разворачивает макросы при обходе графа исходного кода
+контейнера в глубину. При этом определения макросов включаются в граф в порядке
+их встречи компилятором. Поэтому макрос, определённый на уровне модуля, виден
+во всём далее следующем коде модуля, включая тела всех вложенных модулей
+(`mod`).
 
-A macro defined within the body of a single `fn`, or anywhere else not at
-module scope, is visible only within that item.
+Макрос, определённый в теле функции, или где-то ещё не на уровне модуля, виден
+только внутри этого элемента (например, внутри одной функции).
 
-If a module has the `macro_use` attribute, its macros are also visible in its
-parent module after the child's `mod` item. If the parent also has `macro_use`
-then the macros will be visible in the grandparent after the parent's `mod`
-item, and so forth.
+Если модуль имеет атрибут `macro_use`, то его макросы также видны в его
+родительском модуле после элемента `mod` данного модуля. Если родитель тоже
+имеет атрибут `macro_use`, макросы также будут видны в модуле-родителе родителя,
+после элемента `mod` родителя. Это распространяется на любое число уровней.
 
-The `macro_use` attribute can also appear on `extern crate`. In this context
-it controls which macros are loaded from the external crate, e.g.
+Атрибут `macro_use` также можно поставить на подключение контейнера `extern
+crate`. В этом контексте оно управляет тем, какие макросы будут загружены из
+внешнего контейнера, т.е.
 
 ```rust,ignore
 #[macro_use(foo, bar)]
 extern crate baz;
 ```
 
-If the attribute is given simply as `#[macro_use]`, all macros are loaded. If
-there is no `#[macro_use]` attribute then no macros are loaded. Only macros
-defined with the `#[macro_export]` attribute may be loaded.
+Если атрибут записан просто как `#[macro_use]`, будут загружены все
+макросы. Если атрибута нет, никакие макросы не будут загружены. Загружены могут
+быть только макросы, объявленные с атрибутом `#[macro_export]`.
 
-To load a crate's macros *without* linking it into the output, use `#[no_link]`
-as well.
+Чтобы загрузить макросы из контейнера *без* линковки контейнера в выходной
+артефакт, можно использовать атрибут `#[no_link]`.
 
-An example:
+Например:
 
 ```rust
 macro_rules! m1 { () => (()) }
 
-// visible here: m1
+// здесь видны: m1
 
 mod foo {
-    // visible here: m1
+    // здесь видны: m1
 
     #[macro_export]
     macro_rules! m2 { () => (()) }
 
-    // visible here: m1, m2
+    // здесь видны: m1, m2
 }
 
-// visible here: m1
+// здесь видны: m1
 
 macro_rules! m3 { () => (()) }
 
-// visible here: m1, m3
+// здесь видны: m1, m3
 
 #[macro_use]
 mod bar {
-    // visible here: m1, m3
+    // здесь видны: m1, m3
 
     macro_rules! m4 { () => (()) }
 
-    // visible here: m1, m3, m4
+    // здесь видны: m1, m3, m4
 }
 
-// visible here: m1, m3, m4
+// здесь видны: m1, m3, m4
 # fn main() { }
 ```
 
-When this library is loaded with `#[macro_use] extern crate`, only `m2` will
-be imported.
+Когда эта библиотека загружается с помощью `#[macro_use] extern crate`, виден
+только макрос `m2`.
 
-The Rust Reference has a [listing of macro-related
-attributes](../reference.html#macro--and-plugin-related-attributes).
+Атрибуты, относящиеся к макросам,
+[перечислены в справочнике Rust](https://doc.rust-lang.org/stable/reference.html#macro--and-plugin-related-attributes).
 
 # The variable `$crate`
 
