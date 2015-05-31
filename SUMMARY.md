@@ -7,6 +7,7 @@
     * [Hello, Cargo!](src/hello-cargo.md)
 * [Изучение Rust](src/learn-rust.md)
     * [Угадайка](src/guessing-game.md)
+    * [Обедающие философы](src/dining-philosophers.md)
 * [Эффективное использование Rust](src/effective-rust.md)
     * [Стек и Куча](src/the-stack-and-the-heap.md)
     * [Тестирование](src/testing.md)
