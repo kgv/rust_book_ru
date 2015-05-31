@@ -110,7 +110,7 @@ macro_rules! vec { ... }
 (*matcher*). Он имеет [свою собственную грамматику][their own little grammar] в
 рамках языка.
 
-[their own little grammar]: ../reference.html#macros
+[their own little grammar]: https://doc.rust-lang.org/stable/reference.html#macros
 
 Образец `$x:expr` будет соответствовать любому выражению Rust, связывая его
 дерево синтаксиса с *метапеременной* `$x`. Идентификатор `expr` является
@@ -389,7 +389,7 @@ fn main() {
 }
 ```
 
-[items]: ../reference.html#items
+[items]: https://doc.rust-lang.org/stable/reference.html#items
 
 # Рекурсия макросов
 
@@ -457,7 +457,8 @@ expanded`. Вывод представляет собой целый конте�
 других инструментов, обрабатывающих исходный код. Оно также влияет на вид
 системы макросов Rust.
 
-[ast]: glossary.html#abstract-syntax-tree
+<!-- #abstract-syntax-tree -->
+[ast]: glossary.html#%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%BE%D0%B5-%D1%81%D0%B8%D0%BD%D1%82%D0%B0%D0%BA%D1%81%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%28%D0%94%D0%B5%D1%80%D0%B5%D0%B2%D0%BE-%D0%B0%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-%D1%81%D0%B8%D0%BD%D1%82%D0%B0%D0%BA%D1%81%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%29
 
 Как следствие, когда компилятор разбирает вызов макроса, ему необходимо знать,
 во что развернётся данный макрос. Макрос может разворачиваться в следующее:
@@ -598,7 +599,7 @@ When this library is loaded with `#[macro_use] extern crate`, only `m2` will
 be imported.
 
 The Rust Reference has a [listing of macro-related
-attributes](../reference.html#macro--and-plugin-related-attributes).
+attributes](https://doc.rust-lang.org/stable/reference.html#macro--and-plugin-related-attributes).
 
 # The variable `$crate`
 

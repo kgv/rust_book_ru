@@ -10,7 +10,8 @@
 let v = vec![1, 2, 3]; // v: Vec<i32>
 ```
 
-[slices]: primitive-types.html#slices
+<!-- #slices -->
+[slices]: primitive-types.html#%23%D0%A1%D1%80%D0%B5%D0%B7%D1%8B
 [string]: strings.html
 
 (Заметьте, что, в отличие от макроса `println!`, который мы использовали ранее,

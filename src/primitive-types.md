@@ -230,7 +230,8 @@ let x: (i32, &str) = (1, "привет");
 типов и имеют одинаковую [арность][arity]. Арность кортежей одинакова, когда их
 длина совпадает.
 
-[arity]: glossary.html#arity
+<!-- #arity -->
+[arity]: glossary.html#%D0%90%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C
 
 ```rust
 let mut x = (1, 2); // x: (i32, i32)

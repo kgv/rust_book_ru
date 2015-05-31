@@ -91,7 +91,7 @@ let y = x.clone();
 > * ровно одна изменяемая ссылка (`&mut T`) на ресурс.
 
 [ownership]: ownership.html
-[borrowing]: borrowing.html#The-Rules
+[borrowing]: references-and-borrowing.html#%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0
 
 Итак, что же здесь на самом деле является "неизменяемым": безопасно ли иметь два
 указателя на один объект? В случае с `Arc<T>`, да: изменяемый объект полностью

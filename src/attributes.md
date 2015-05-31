@@ -68,4 +68,4 @@ mod macos_only {
 на полный список атрибутов. В настоящее время вы не можете создавать свои
 собственные атрибуты, компилятор Rust определяет их.
 
-[reference]: ../reference.html#attributes
+[reference]: https://doc.rust-lang.org/stable/reference.html#attributes
