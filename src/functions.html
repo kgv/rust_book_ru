@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Функции</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Функции</h1>
+    <p>Каждая программа на Rust имеет по крайней мере одну функцию - <code>main</code>:</p>
+<span class='rusttest'>fn main() {
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+}
+</pre>
+
+<p>Это простейшее объявление функции. Как мы упоминали ранее, ключевое слово <code>fn</code>
+объявляет функцию. За ним следует её имя, пустые круглые скобки (поскольку эта
+функция не принимает аргументов), а затем тело функции, заключённое в фигурные
+скобки. Вот функция <code>foo</code>:</p>
+<span class='rusttest'>fn main() {
+    fn foo() {
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() {
+}
+</pre>
+
+<p>Итак, что насчёт аргументов, принимаемых функцией? Вот функция, печатающая
+число:</p>
+<span class='rusttest'>fn main() {
+    fn print_number(x: i32) {
+        println!(&quot;x равен: {}&quot;, x);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print_number</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равен: {}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>Вот полная программа, использующая функцию <code>print_number</code>:</p>
+<span class='rusttest'>fn main() {
+    print_number(5);
+}
+
+fn print_number(x: i32) {
+    println!(&quot;x равен: {}&quot;, x);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>print_number</span>(<span class='number'>5</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>print_number</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равен: {}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>Как видите, аргументы функций похожи на операторы <code>let</code>: вы можете объявить тип
+аргумента после двоеточия.</p>
+
+<p>Вот полная программа, которая складывает два числа и печатает их:</p>
+<span class='rusttest'>fn main() {
+    print_sum(5, 6);
+}
+
+fn print_sum(x: i32, y: i32) {
+    println!(&quot;сумма чисел: {}&quot;, x + y);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>print_sum</span>(<span class='number'>5</span>, <span class='number'>6</span>);
+}
+
+<span class='kw'>fn</span> <span class='ident'>print_sum</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>, <span class='ident'>y</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;сумма чисел: {}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
+}
+</pre>
+
+<p>Аргументы разделяются запятой - и при вызове функции, и при её объявлении.</p>
+
+<p>В отличие от <code>let</code>, вы <em>должны</em> объявлять типы аргументов функции. Этот код не
+скомпилируется:</p>
+<span class='rusttest'>fn main() {
+    fn print_sum(x, y) {
+        println!(&quot;сумма чисел: {}&quot;, x + y);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>print_sum</span>(<span class='ident'>x</span>, <span class='ident'>y</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;сумма чисел: {}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
+}
+</pre>
+
+<p>Вы увидите такую ошибку:</p>
+
+<pre><code class="language-text">expected one of `!`, `:`, or `@`, found `)`
+fn print_number(x, y) {
+</code></pre>
+
+<p>Это осознанное решение при проектировании языка. Бесспорно, вывод типов во всей
+программе возможен. Однако даже в Haskell считается хорошим стилем явно
+документировать типы функций, хотя в этом языке и возможен полный вывод типов.
+Мы считаем, что принудительное объявление типов функций при сохранении
+локального вывода типов - это хороший компромисс.</p>
+
+<p>Как насчёт возвращаемого значения? Вот функция, которая прибавляет один к
+целому:</p>
+<span class='rusttest'>fn main() {
+    fn add_one(x: i32) -&gt; i32 {
+        x + 1
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
+}
+</pre>
+
+<p>Функции в Rust возвращают ровно одно значение, тип которого объявляется после
+&quot;стрелки&quot;. &quot;Стрелка&quot; представляет собой дефис (<code>-</code>), за которым следует знак
+&quot;больше&quot; (<code>&gt;</code>). Заметьте, что в функции выше нет точки с запятой. Если бы мы
+добавили её:</p>
+<span class='rusttest'>fn main() {
+    fn add_one(x: i32) -&gt; i32 {
+        x + 1;
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Мы бы получили ошибку:</p>
+
+<pre><code class="language-text">error: not all control paths return a value
+fn add_one(x: i32) -&gt; i32 {
+     x + 1;
+}
+
+help: consider removing this semicolon:
+     x + 1;
+          ^
+</code></pre>
+
+<p>Здесь показаны две интересные особенности Rust. Во-первых, это выражение-
+ориентированный язык, и во-вторых, смысл точки с запятой отличается от смысла
+аналогичного символа в других ’фигурные скобки и точка с запятой’-основанных
+языках. Эти две особенности связаны.</p>
+
+<h2 id="Выражения-и-операторы" class='section-header'><a
+                           href="#Выражения-и-операторы">Выражения и операторы</a></h2>
+<p>Rust - в первую очередь выражение-ориентированный язык. Есть только два типа
+операторов, а всё остальное является выражением.</p>
+
+<p>А в чём же разница? Выражение возвращает значение, в то время как оператор -
+нет. Вот почему мы получаем здесь ‘not all control paths return a value‘:
+оператор <code>х + 1;</code> не возвращает значение. Есть два типа операторов в Rust:
+‘операторы объявления‘ и ‘операторов выражение‘. Все остальное - выражения.
+Давайте поговорим об операторах объявления в первую очередь.</p>
+
+<p>Первым типом операторов в Rust является <em>оператор объявления</em> - связывание. В
+некоторых языках связывание переменных может быть записано как выражение, а не
+только как оператор. Например, в Ruby:</p>
+
+<pre><code class="language-ruby">x = y = 5
+</code></pre>
+
+<p>Однако, в Rust использование <code>let</code> для связывания <em>не является</em> выражением.
+Следующий код вызовет ошибку компиляции:</p>
+<span class='rusttest'>fn main() {
+    let x = (let y = 5); // expected identifier, found keyword `let`
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>5</span>); <span class='comment'>// expected identifier, found keyword `let`</span>
+</pre>
+
+<p>Здесь компилятор сообщил нам, что ожидал увидеть выражение, но <code>let</code> является
+оператором, а не выражением.</p>
+
+<p>Обратите внимание, что присвоение уже связанной переменной (например: <code>y = 5</code>)
+является выражением, но его значение не особенно полезно. В отличие от других
+языков, где присвоение вычисляется в присваиваемое значение (например: <code>5</code> из
+предыдущего примера), в Rust значением присвоения является пустой кортеж <code>()</code>.</p>
+<span class='rusttest'>fn main() {
+    let mut y = 5;
+    
+    let x = (y = 6);  // x будет присвоено значение `()`, а не `6`
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>);  <span class='comment'>// x будет присвоено значение `()`, а не `6`</span>
+</pre>
+
+<p>Вторым типом операторов в Rust является <em>оператор выражения</em>. Его цель -
+превратить любое выражение в оператор. В практическом плане, грамматика Rust
+ожидает что за операторами будут идти другие операторы. Это означает, что вы
+используете точку с запятой для разделения выражений друг от друга. Rust
+выглядит как многие другие языки, которые требуют использовать точку с запятой в
+конце каждой строки и вы увидите её в конце почти каждой строки кода на Rust.</p>
+
+<p>Из-за чего мы говорим &quot;почти&quot;? Вы это уже видели в этом примере:</p>
+<span class='rusttest'>fn main() {
+    fn add_one(x: i32) -&gt; i32 {
+        x + 1
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
+}
+</pre>
+
+<p>Наша функция объявлена, как возвращающая <code>i32</code>. Но если в конце есть точка с
+запятой, то вместо этого функция вернёт <code>()</code>. Компилятор Rust обрабатывает эту
+ситуацию и предлагает удалить точку с запятой.</p>
+
+<h2 id="Досрочный-возврат-из-функции" class='section-header'><a
+                           href="#Досрочный-возврат-из-функции">Досрочный возврат из функции</a></h2>
+<p>А что насчёт досрочного возврата из функции? У нас есть для этого ключевое слово
+<code>return</code>:</p>
+<span class='rusttest'>fn main() {
+    fn foo(x: i32) -&gt; i32 {
+        return x;
+    
+        // следующий код никогда не запустится!
+        x + 1
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>return</span> <span class='ident'>x</span>;
+
+    <span class='comment'>// следующий код никогда не запустится!</span>
+    <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
+}
+</pre>
+
+<p><code>return</code> можно написать в последней строке тела функции, но это считается
+плохим стилем:</p>
+<span class='rusttest'>fn main() {
+    fn foo(x: i32) -&gt; i32 {
+        return x + 1;
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='kw'>return</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
+}
+</pre>
+
+<p>Если вы никогда не работали с языком, в котором операторы являются выражениями,
+предыдущее определение без <code>return</code> может показаться вам странным. Но со
+временем вы просто перестанете замечать это.</p>
+
+<h2 id="Расходящиеся-функции" class='section-header'><a
+                           href="#Расходящиеся-функции">Расходящиеся функции</a></h2>
+<p>Для функций, которые не возвращают управление (&quot;расходящихся&quot;), в Rust есть
+специальный синтаксис:</p>
+<span class='rusttest'>fn main() {
+    fn diverges() -&gt; ! {
+        panic!(&quot;Эта функция не возвращает управление!&quot;);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>diverges</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> {
+    <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Эта функция не возвращает управление!&quot;</span>);
+}
+</pre>
+
+<p><code>panic!</code> - это макрос, как и <code>println!()</code>, который мы встречали ранее. В отличие
+от <code>println!()</code>, <code>panic!()</code> вызывает остановку текущего потока исполнения с
+заданным сообщением.</p>
+
+<p>Поскольку эта функция вызывает остановку исполнения, она никогда не вернёт
+управление. Поэтому тип её возвращаемого значения обозначается знаком <code>!</code> и
+читается как &quot;расходится&quot;. Значение расходящейся функции может быть использовано
+как значение любого типа:</p>
+<span class='rusttest'>fn main() {
+    fn diverges() -&gt; ! {
+       panic!(&quot;Эта функция никогда не выходит!&quot;);
+    }
+    let x: i32 = diverges();
+    let x: String = diverges();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='ident'>diverges</span>();
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>String</span> <span class='op'>=</span> <span class='ident'>diverges</span>();
+</pre>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

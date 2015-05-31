@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Нестабильные фичи Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Нестабильные фичи Rust</h1>
+    <p>Rust обеспечивает три канала распространения для Rust: nightly, beta и stable.
+Нестабильные функции доступны только в nightly Rust. Для более подробной
+информации об этом процессе смотрите ‘<a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Стабильность как результат</a>’.</p>
+
+<p>Чтобы установить nightly Rust, вы можете использовать <code>rustup.sh</code>:</p>
+
+<pre><code class="language-bash">$ curl -s https://static.rust-lang.org/rustup.sh | sh -s -- --channel=nightly
+</code></pre>
+
+<p>Если вы беспокоитесь о <a href="http://curlpipesh.tumblr.com">потенциальной безопасности</a> использования
+данной команды <code>curl | sh</code>, то продолжайте читать далее. Вы также можете
+использовать двухступенчатый вариант установки и изучить наш установочный
+скрипт:</p>
+
+<pre><code class="language-bash">$ curl -f -L https://static.rust-lang.org/rustup.sh -O
+$ sh rustup.sh --channel=nightly
+</code></pre>
+
+<p>Если же вы используете Windows, то, пожалуйста, скачайте один из установочных
+пакетов: <a href="https://static.rust-lang.org/dist/rust-1.0.0-beta-i686-pc-windows-gnu.msi">32-битный</a> или <a href="https://static.rust-lang.org/dist/rust-1.0.0-beta-x86_64-pc-windows-gnu.msi">64-битный</a> и запустите его.</p>
+
+<h2 id="Удаление" class='section-header'><a
+                           href="#Удаление">Удаление</a></h2>
+<p>Если вы решили, что Rust вам больше не нужен, то мы будем чуть-чуть огорчены, но
+это нормально. Не каждый язык программирования отлично подходит для всех. Просто
+запустите скрипт деинсталляции:</p>
+
+<pre><code class="language-bash">$ sudo /usr/local/lib/rustlib/uninstall.sh
+</code></pre>
+
+<p>Если вы использовали установщик Windows, то просто повторно запустите <code>.msi</code>, 
+который предложит вам возможность удаления.</p>
+
+<p>Некоторые люди, причём не безосновательно, насторожились, когда мы сказали
+использовать <code>curl | sh</code>. Когда вы делаете так, вы должны доверять тем хорошим
+людям, которые поддерживают Rust, и не бояться, что они попытаются взломать ваш
+компьютер и сделать какие-либо плохие вещи. Озабоченность своей безопасностью -
+это очень хорошо. Если вы один из таких людей, пожалуйста посмотрите в
+документации как <a href="https://github.com/rust-lang/rust#building-from-source">собрать Rust из исходных кодов</a> или скачайте уже
+<a href="http://www.rust-lang.org/install.html">скомпилированный Rust</a>. Мы обещаем, что данный способ не будет
+использоваться для установки Rust&#39;a всегда: скрипт был сделан для быстрого
+обновления пока Rust находится в стадии alpha.</p>
+
+<p>Мы так же должны упомянуть официально поддерживаемые платформы:</p>
+
+<ul>
+<li>Windows (7, 8, Server 2008 R2)</li>
+<li>Linux (2.6.18 и более новые, разные дистрибутивы), x86 и x86-64</li>
+<li>OSX 10.7 (Lion) и более новые, x86 и x86-64</li>
+</ul>
+
+<p>Rust активно тестируется на всех этих платформах, а также на некоторых других,
+например на Android. Но мы указали те, на которых Rust точно должен работать, 
+ибо для этих платформ он тестируется больше всего.</p>
+
+<p>Напоследок, замечание о Windows. Rust считает, что Windows - это первоклассная 
+платформа для релиза, но если быть честными, то опыт разработки для Windows не 
+на столько хорош, как для Linux/OS X. Мы работаем над этим! Если что-то не 
+работает, то это ошибка. Пожалуйста, дайте нам знать, если такое произойдёт. 
+Каждый коммит тестируется на Windows, впрочем так же, как и на любой другой
+платформе.</p>
+
+<p>Если вы уже установили Rust, то откройте терминал и введите это:</p>
+
+<pre><code class="language-bash">$ rustc --version
+</code></pre>
+
+<p>Вы должны увидеть версию, хэш коммита, дату коммита и дату сборки:</p>
+
+<pre><code class="language-bash">rustc 1.0.0-nightly (f11f3e7ba 2015-01-04) (built 2015-01-06)
+</code></pre>
+
+<p>Итак, теперь у вас есть установленный Rust! Поздравляем!</p>
+
+<p>Установщик также устанавливает документацию, которая доступна без подключения к
+сети. На UNIX системах она располагается в каталоге <code>/usr/local/share/doc/rust</code>.
+В Windows - в директории <code>share/doc</code>, относительно того куда вы установили Rust.</p>
+
+<p>Также есть ещё ряд мест, где можно получить помощь. <a href="irc://irc.mozilla.org/#rust">Канал #rust на
+irc.mozilla.org</a>, к которому вы можете подключиться через <a href="http://chat.mibbit.com/?server=irc.mozilla.org&amp;channel=%23rust">Mibbit</a>.
+Нажмите на эту ссылку, и вы будете общаться в чате с другими Rustaceans (это
+дурашливое прозвище, которым мы себя называем), и мы поможем вам. Другие
+полезные ресурсы, посвящённые Rust: <a href="http://users.rust-lang.org/">форум пользователей</a>, <a href="http://www.reddit.com/r/rust">/r/rust
+subreddit</a>, <a href="http://stackoverflow.com/questions/tagged/rust">stack overflow</a>. Русскоязычные ресурсы:
+<a href="irc://irc.mozilla.org/#rust-ru">канал #rust-ru на irc.mozilla.org</a>, <a href="https://groups.google.com/forum/#!forum/rust-russian">google groups</a>.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

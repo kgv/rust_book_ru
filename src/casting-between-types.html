@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Приведение типов</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Приведение типов</h1>
+    <p>Rust, со своим акцентом на безопасность, обеспечивает два различных способа
+преобразования различных типов между собой. Первый - <code>as</code>, для безопасного
+приведения. Второй - <code>transmute</code>, в отличие от первого, позволяет произвольное
+приведение типов и является одной из самых опасных фич Rust!</p>
+
+<h1 id="as" class='section-header'><a
+                           href="#as"><code>as</code></a></h1>
+<p>Ключевое слово <code>as</code> выполняет обычное приведение типов:</p>
+<span class='rusttest'>fn main() {
+    let x: i32 = 5;
+    
+    let y = x as i64;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span> <span class='kw'>as</span> <span class='ident'>i64</span>;
+</pre>
+
+<p>Оно допускает только определенные виды приведения типов:</p>
+<span class='rusttest'>fn main() {
+    let a = [0u8, 0u8, 0u8, 0u8];
+    
+    let b = a as u32; // four eights makes 32
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0u8</span>, <span class='number'>0u8</span>, <span class='number'>0u8</span>, <span class='number'>0u8</span>];
+
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>a</span> <span class='kw'>as</span> <span class='ident'>u32</span>; <span class='comment'>// four eights makes 32</span>
+</pre>
+
+<p>Это приведет к ошибке:</p>
+
+<pre><code class="language-text">error: non-scalar cast: `[u8; 4]` as `u32`
+let b = a as u32; // four eights makes 32
+        ^~~~~~~~
+</code></pre>
+
+<p>Это ’нескалярное преобразование’, потому что у нас здесь преобразуются
+множественные значения: четыре элемента массива. Такие виды преобразований очень
+опасны, потому что они делают предположения о том, как реализованы множественные
+нижележащие структуры. Поэтому нам нужно что-то более опасное.</p>
+
+<h1 id="transmute" class='section-header'><a
+                           href="#transmute"><code>transmute</code></a></h1>
+<p>Функция <code>transmute</code> предоставляется <a href="intrinsics.html">внутренними средствами компилятора</a>, и то, что она делает, является очень простым, но в то же время
+очень опасным. Она сообщает Rust, чтобы он воспринимал значение одного типа, как
+будто это значение другого типа. Это делается независимо от системы проверки
+типов, и поэтому полностью на ваш страх и риск.</p>
+
+<p>В предыдущем примере, мы знаем, что массив из четырех <code>u8</code> отображается в массив
+<code>u32</code> должным образом, и поэтому мы хотим выполнить приведение. Если вместо <code>as</code>
+использовать <code>transmute</code>, то Rust позволит это сделать:</p>
+<span class='rusttest'>fn main() {
+    use std::mem;
+    
+    unsafe {
+        let a = [0u8, 0u8, 0u8, 0u8];
+    
+        let b = mem::transmute::&lt;[u8; 4], u32&gt;(a);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
+
+<span class='kw'>unsafe</span> {
+    <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0u8</span>, <span class='number'>0u8</span>, <span class='number'>0u8</span>, <span class='number'>0u8</span>];
+
+    <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span>[<span class='ident'>u8</span>; <span class='number'>4</span>], <span class='ident'>u32</span><span class='op'>&gt;</span>(<span class='ident'>a</span>);
+}
+</pre>
+
+<p>Для того чтобы компиляция прошла успешно, мы должны обернуть эту операцию в
+<code>unsafe</code> блок. Технически, только вызов <code>mem::transmute</code> должен быть выполнен в
+небезопасном блоке, но в данном случае хорошо было бы поместить в этот блок все
+необходимое, связаное с этим вызовом, чтобы было удобнее искать. В данном
+примере связаной необходимой переменной является <code>a</code>, и поэтому она находится в
+блоке. Код может быть в любом стиле, иногда контекст расположен слишком далеко,
+и тогда упаковка всего кода в <code>unsafe</code> не будет такой уж хорошей идеей.</p>
+
+<p>Хотя при использовании <code>transmute</code> и выполняется очень мало проверок, но как
+минимум будет проверяться, что типы имеют одинаковый размер. Нижеприведенный код
+завершится ошибкой:</p>
+<span class='rusttest'>fn main() {
+    use std::mem;
+    
+    unsafe {
+        let a = [0u8, 0u8, 0u8, 0u8];
+    
+        let b = mem::transmute::&lt;[u8; 4], u64&gt;(a);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
+
+<span class='kw'>unsafe</span> {
+    <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0u8</span>, <span class='number'>0u8</span>, <span class='number'>0u8</span>, <span class='number'>0u8</span>];
+
+    <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span>[<span class='ident'>u8</span>; <span class='number'>4</span>], <span class='ident'>u64</span><span class='op'>&gt;</span>(<span class='ident'>a</span>);
+}
+</pre>
+
+<p>со следующим описанием:</p>
+
+<pre><code class="language-text">error: transmute called on types with different sizes: [u8; 4] (32 bits) to u64
+(64 bits)
+</code></pre>
+
+<p>Все, кроме этой одной проверки, на ваш страх и риск!</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

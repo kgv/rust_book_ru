@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Интерфейс внешних функций (Foreign Function Interface)</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Интерфейс внешних функций (Foreign Function Interface)</h1>
+    
+<h1 id="Введение" class='section-header'><a
+                           href="#Введение">Введение</a></h1>
+<p>В данном руководстве мы будем использовать
+<a href="https://github.com/google/snappy">snappy</a>, библиотеку для упаковки/распаковки
+данных, в качестве примера для написания привязок к внешнему коду. Rust в
+настоящее время не в состоянии делать вызовы напрямую из библиотеки C++, но
+snappy включает в себя интерфейс C (документирован в
+<a href="https://github.com/google/snappy/blob/master/snappy-c.h"><code>snappy-c.h</code></a>).</p>
+
+<p>Ниже приведен минимальный пример вызова внешней функции, который будет
+скомпилирован при условии, что библиотека snappy установлена:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::size_t;
+
+#[link(name = &quot;snappy&quot;)]
+extern {
+    fn snappy_max_compressed_length(source_length: size_t) -&gt; size_t;
+}
+
+fn main() {
+    let x = unsafe { snappy_max_compressed_length(100) };
+    println!(&quot;max compressed length of a 100 byte buffer: {}&quot;, x);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>size_t</span>;
+
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;snappy&quot;</span>)]</span>
+<span class='kw'>extern</span> {
+    <span class='kw'>fn</span> <span class='ident'>snappy_max_compressed_length</span>(<span class='ident'>source_length</span>: <span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='ident'>size_t</span>;
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>snappy_max_compressed_length</span>(<span class='number'>100</span>) };
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;max compressed length of a 100 byte buffer: {}&quot;</span>, <span class='ident'>x</span>);
+}
+</pre>
+
+<p>Блок <code>extern</code> содержит список сигнатур функций из внешней библиотеки, в данном
+случае для платформы C ABI. Атрибут <code>#[link(...)]</code> используется для указания
+линкеру линковать с библиотекой snappy, поэтому символы будут разрешены.</p>
+
+<p>Предполагается, что внешние функции могут быть небезопасными, поэтому их вызовы
+должны быть обёрнуты в блок <code>unsafe {}</code> как обещание компилятору, что все
+содержимое внутри этого блока в действительности безопасно. C библиотеки часто
+предоставляют интерфейсы, которые не являются поточно-безопасным. И почти любая
+функция, которая принимает в качестве аргумента указатель, не может быть
+валидной для всех возможных входных значений, поскольку указатель может быть
+висячим, и сырые указатели выходят за пределы безопасной модели памяти в Rust.</p>
+
+<p>При объявлении типов аргументов для внешней функции, компилятор Rust не может
+проверить, является ли данное объявление корректным. Поэтому важно правильно
+указать тип привязываемой функции - иначе ошибка обнаружится только во время
+исполнения.</p>
+
+<p>Блок <code>extern</code> может быть распространён на весь snappy API:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{c_int, size_t};
+
+#[link(name = &quot;snappy&quot;)]
+extern {
+    fn snappy_compress(input: *const u8,
+                       input_length: size_t,
+                       compressed: *mut u8,
+                       compressed_length: *mut size_t) -&gt; c_int;
+    fn snappy_uncompress(compressed: *const u8,
+                         compressed_length: size_t,
+                         uncompressed: *mut u8,
+                         uncompressed_length: *mut size_t) -&gt; c_int;
+    fn snappy_max_compressed_length(source_length: size_t) -&gt; size_t;
+    fn snappy_uncompressed_length(compressed: *const u8,
+                                  compressed_length: size_t,
+                                  result: *mut size_t) -&gt; c_int;
+    fn snappy_validate_compressed_buffer(compressed: *const u8,
+                                         compressed_length: size_t) -&gt; c_int;
+}
+fn main() {}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>size_t</span>};
+
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;snappy&quot;</span>)]</span>
+<span class='kw'>extern</span> {
+    <span class='kw'>fn</span> <span class='ident'>snappy_compress</span>(<span class='ident'>input</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>,
+                       <span class='ident'>input_length</span>: <span class='ident'>size_t</span>,
+                       <span class='ident'>compressed</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>,
+                       <span class='ident'>compressed_length</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>fn</span> <span class='ident'>snappy_uncompress</span>(<span class='ident'>compressed</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>,
+                         <span class='ident'>compressed_length</span>: <span class='ident'>size_t</span>,
+                         <span class='ident'>uncompressed</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>,
+                         <span class='ident'>uncompressed_length</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>fn</span> <span class='ident'>snappy_max_compressed_length</span>(<span class='ident'>source_length</span>: <span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='ident'>size_t</span>;
+    <span class='kw'>fn</span> <span class='ident'>snappy_uncompressed_length</span>(<span class='ident'>compressed</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>,
+                                  <span class='ident'>compressed_length</span>: <span class='ident'>size_t</span>,
+                                  <span class='ident'>result</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+    <span class='kw'>fn</span> <span class='ident'>snappy_validate_compressed_buffer</span>(<span class='ident'>compressed</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>,
+                                         <span class='ident'>compressed_length</span>: <span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
+}
+</pre>
+
+<h1 id="Создание-безопасного-интерфейса" class='section-header'><a
+                           href="#Создание-безопасного-интерфейса">Создание безопасного интерфейса</a></h1>
+<p>Сырой C API необходимо обернуть, чтобы обеспечить безопасность памяти, чтобы
+была возможность использовать концепции более высокого уровня, такие как
+векторы. Библиотека может выборочно открывать только безопасный, высокоуровневый
+интерфейс и скрывать небезопасные внутренние детали.</p>
+
+<p>Обёртывание функций, которые принимают в качестве входных параметров буферы,
+включает в себя использование модуля <code>slice::raw</code> для управления векторами Rust
+как указателями на память. Векторы Rust представляют собой гарантированно
+непрерывный блок памяти. Длина - это количество элементов, которое в настоящее
+время содержится в векторе, а мощность - общее количество выделенной памяти в
+элементах. Длина меньше или равна мощности.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{c_int, size_t};
+unsafe fn snappy_validate_compressed_buffer(_: *const u8, _: size_t) -&gt; c_int { 0 }
+fn main() {}
+pub fn validate_compressed_buffer(src: &amp;[u8]) -&gt; bool {
+    unsafe {
+        snappy_validate_compressed_buffer(src.as_ptr(), src.len() as size_t) == 0
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate_compressed_buffer</span>(<span class='ident'>src</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+    <span class='kw'>unsafe</span> {
+        <span class='ident'>snappy_validate_compressed_buffer</span>(<span class='ident'>src</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>src</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>) <span class='op'>==</span> <span class='number'>0</span>
+    }
+}
+</pre>
+
+<p>Обертка <code>validate_compressed_buffer</code> использует блок <code>unsafe</code>, но это
+гарантирует, что ее вызов будет безопасен для всех входных данных, вследствие
+удаления модификатора <code>unsafe</code> из сигнатуры функции.</p>
+
+<p>Функции <code>snappy_compress</code> и <code>snappy_uncompress</code> являются более сложными, так как
+должен быть выделен буфер для хранения выходных данных.</p>
+
+<p>Функция <code>snappy_max_compressed_length</code> может быть использована для выделения
+вектора максимальной мощности, требуемой для хранения упакованных выходных
+данных. Затем этот вектор может быть передан в функцию <code>snappy_compress</code> в
+качестве выходного параметра. Выходной параметр передается также, чтобы получить
+истинную длину после сжатия, для установки длины.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{size_t, c_int};
+unsafe fn snappy_compress(a: *const u8, b: size_t, c: *mut u8,
+                          d: *mut size_t) -&gt; c_int { 0 }
+unsafe fn snappy_max_compressed_length(a: size_t) -&gt; size_t { a }
+fn main() {}
+pub fn compress(src: &amp;[u8]) -&gt; Vec&lt;u8&gt; {
+    unsafe {
+        let srclen = src.len() as size_t;
+        let psrc = src.as_ptr();
+
+        let mut dstlen = snappy_max_compressed_length(srclen);
+        let mut dst = Vec::with_capacity(dstlen as usize);
+        let pdst = dst.as_mut_ptr();
+
+        snappy_compress(psrc, srclen, pdst, &amp;mut dstlen);
+        dst.set_len(dstlen as usize);
+        dst
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>compress</span>(<span class='ident'>src</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
+    <span class='kw'>unsafe</span> {
+        <span class='kw'>let</span> <span class='ident'>srclen</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>;
+        <span class='kw'>let</span> <span class='ident'>psrc</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>as_ptr</span>();
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dstlen</span> <span class='op'>=</span> <span class='ident'>snappy_max_compressed_length</span>(<span class='ident'>srclen</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dst</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>dstlen</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+        <span class='kw'>let</span> <span class='ident'>pdst</span> <span class='op'>=</span> <span class='ident'>dst</span>.<span class='ident'>as_mut_ptr</span>();
+
+        <span class='ident'>snappy_compress</span>(<span class='ident'>psrc</span>, <span class='ident'>srclen</span>, <span class='ident'>pdst</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>dstlen</span>);
+        <span class='ident'>dst</span>.<span class='ident'>set_len</span>(<span class='ident'>dstlen</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+        <span class='ident'>dst</span>
+    }
+}
+</pre>
+
+<p>Распаковка аналогична, потому что snappy хранит размер неупакованных данных как
+часть формата сжатия, и <code>snappy_uncompressed_length</code> будет возвращать точный
+размер необходимого буфера.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+use libc::{size_t, c_int};
+unsafe fn snappy_uncompress(compressed: *const u8,
+                            compressed_length: size_t,
+                            uncompressed: *mut u8,
+                            uncompressed_length: *mut size_t) -&gt; c_int { 0 }
+unsafe fn snappy_uncompressed_length(compressed: *const u8,
+                                     compressed_length: size_t,
+                                     result: *mut size_t) -&gt; c_int { 0 }
+fn main() {}
+pub fn uncompress(src: &amp;[u8]) -&gt; Option&lt;Vec&lt;u8&gt;&gt; {
+    unsafe {
+        let srclen = src.len() as size_t;
+        let psrc = src.as_ptr();
+
+        let mut dstlen: size_t = 0;
+        snappy_uncompressed_length(psrc, srclen, &amp;mut dstlen);
+
+        let mut dst = Vec::with_capacity(dstlen as usize);
+        let pdst = dst.as_mut_ptr();
+
+        if snappy_uncompress(psrc, srclen, pdst, &amp;mut dstlen) == 0 {
+            dst.set_len(dstlen as usize);
+            Some(dst)
+        } else {
+            None // SNAPPY_INVALID_INPUT
+        }
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>uncompress</span>(<span class='ident'>src</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>unsafe</span> {
+        <span class='kw'>let</span> <span class='ident'>srclen</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>len</span>() <span class='kw'>as</span> <span class='ident'>size_t</span>;
+        <span class='kw'>let</span> <span class='ident'>psrc</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>as_ptr</span>();
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dstlen</span>: <span class='ident'>size_t</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='ident'>snappy_uncompressed_length</span>(<span class='ident'>psrc</span>, <span class='ident'>srclen</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>dstlen</span>);
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dst</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>dstlen</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+        <span class='kw'>let</span> <span class='ident'>pdst</span> <span class='op'>=</span> <span class='ident'>dst</span>.<span class='ident'>as_mut_ptr</span>();
+
+        <span class='kw'>if</span> <span class='ident'>snappy_uncompress</span>(<span class='ident'>psrc</span>, <span class='ident'>srclen</span>, <span class='ident'>pdst</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>dstlen</span>) <span class='op'>==</span> <span class='number'>0</span> {
+            <span class='ident'>dst</span>.<span class='ident'>set_len</span>(<span class='ident'>dstlen</span> <span class='kw'>as</span> <span class='ident'>usize</span>);
+            <span class='prelude-val'>Some</span>(<span class='ident'>dst</span>)
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>None</span> <span class='comment'>// SNAPPY_INVALID_INPUT</span>
+        }
+    }
+}
+</pre>
+
+<p>Для справки, примеры, используемые здесь, также доступны в библиотеке на
+<a href="https://github.com/thestinger/rust-snappy">GitHub</a>.</p>
+
+<h1 id="Деструкторы" class='section-header'><a
+                           href="#Деструкторы">Деструкторы</a></h1>
+<p>Внешние библиотеки часто передают право собственности на ресурсы в вызовающий
+код. Когда это происходит, мы должны использовать деструкторы Rust, чтобы
+обеспечить безопасность и гарантировать освобождение этих ресурсов (особенно в
+случае паники).</p>
+
+<p>Чтобы получить более подробную информацию о деструкторах, смотрите
+<a href="../std/ops/trait.Drop.html">Drop trait</a>.</p>
+
+<h1 id="Обратные-вызовы-rust-функций-из-c-кода" class='section-header'><a
+                           href="#Обратные-вызовы-rust-функций-из-c-кода">Обратные вызовы Rust функций из C кода</a></h1>
+<p>Некоторые внешние библиотеки требуют использование обратных вызовов для передачи
+вызывающей стороне отчета о своем текущем состоянии или промежуточных данных. Во
+внешнюю библиотеку можно передавать функции, которые были определены в Rust. При
+создании функции обратного вызова, которую можно вызывать из C кода, необходимо
+указать для нее спецификатор <code>extern</code>, за котороым следует правильное соглашение
+о вызове.</p>
+
+<p>Затем функция обратного вызова может быть передана в библиотеку C через
+регистрационный вызов, и уже затем может быть вызывана оттуда.</p>
+
+<p>Простой пример:</p>
+
+<p>Rust код:</p>
+<span class='rusttest'>extern fn callback(a: i32) {
+    println!(&quot;I&#39;m called from C with value {0}&quot;, a);
+}
+
+#[link(name = &quot;extlib&quot;)]
+extern {
+   fn register_callback(cb: extern fn(i32)) -&gt; i32;
+   fn trigger_callback();
+}
+
+fn main() {
+    unsafe {
+        register_callback(callback);
+        trigger_callback(); // Triggers the callback
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>callback</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;I&#39;m called from C with value {0}&quot;</span>, <span class='ident'>a</span>);
+}
+
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;extlib&quot;</span>)]</span>
+<span class='kw'>extern</span> {
+   <span class='kw'>fn</span> <span class='ident'>register_callback</span>(<span class='ident'>cb</span>: <span class='kw'>extern</span> <span class='kw'>fn</span>(<span class='ident'>i32</span>)) <span class='op'>-&gt;</span> <span class='ident'>i32</span>;
+   <span class='kw'>fn</span> <span class='ident'>trigger_callback</span>();
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>unsafe</span> {
+        <span class='ident'>register_callback</span>(<span class='ident'>callback</span>);
+        <span class='ident'>trigger_callback</span>(); <span class='comment'>// Triggers the callback</span>
+    }
+}
+</pre>
+
+<p>C код:</p>
+
+<pre><code class="language-c">typedef void (*rust_callback)(int32_t);
+rust_callback cb;
+
+int32_t register_callback(rust_callback callback) {
+    cb = callback;
+    return 1;
+}
+
+void trigger_callback() {
+  cb(7); // Will call callback(7) in Rust
+}
+</code></pre>
+
+<p>В этом примере функция <code>main()</code> в Rust вызовет функцию <code>trigger_callback()</code> в C,
+которая, в свою очередь, выполнит обратный вызов функции <code>callback()</code> в Rust.</p>
+
+<h2 id="Обратные-вызовы,-адресованные-объектам-rust-(targeting-callbacks-to-rust" class='section-header'><a
+                           href="#Обратные-вызовы,-адресованные-объектам-rust-(targeting-callbacks-to-rust">Обратные вызовы, адресованные объектам Rust (Targeting callbacks to Rust</a></h2>
+<h2 id="objects)" class='section-header'><a
+                           href="#objects)">objects)</a></h2>
+<p>Предыдущий пример показал, как глобальная функция может быть вызвана из C кода.
+Однако зачастую желательно, чтобы обратный вызов был адресован конкретному
+объекту в Rust. Это может быть объект, который представляет собой обертку для
+соответствующего объекта C.</p>
+
+<p>Такое поведение может быть достигнуто путем передачи небезопасного указателя на
+объект в библиотеку C. После чего библиотека C сможет включать указатель на
+объект Rust при обратном вызове. Это позволит получить небезопасный доступ к
+ссылке на объект Rust в обратном вызове.</p>
+
+<p>Rust код:</p>
+<span class='rusttest'>#[repr(C)]
+struct RustObject {
+    a: i32,
+    // other members
+}
+
+extern &quot;C&quot; fn callback(target: *mut RustObject, a: i32) {
+    println!(&quot;I&#39;m called from C with value {0}&quot;, a);
+    unsafe {
+        // Update the value in RustObject with the value received from the callback
+        (*target).a = a;
+    }
+}
+
+#[link(name = &quot;extlib&quot;)]
+extern {
+   fn register_callback(target: *mut RustObject,
+                        cb: extern fn(*mut RustObject, i32)) -&gt; i32;
+   fn trigger_callback();
+}
+
+fn main() {
+    // Create the object that will be referenced in the callback
+    let mut rust_object = Box::new(RustObject { a: 5 });
+
+    unsafe {
+        register_callback(&amp;mut *rust_object, callback);
+        trigger_callback();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+<span class='kw'>struct</span> <span class='ident'>RustObject</span> {
+    <span class='ident'>a</span>: <span class='ident'>i32</span>,
+    <span class='comment'>// other members</span>
+}
+
+<span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span> <span class='ident'>callback</span>(<span class='ident'>target</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>RustObject</span>, <span class='ident'>a</span>: <span class='ident'>i32</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;I&#39;m called from C with value {0}&quot;</span>, <span class='ident'>a</span>);
+    <span class='kw'>unsafe</span> {
+        <span class='comment'>// Update the value in RustObject with the value received from the callback</span>
+        (<span class='op'>*</span><span class='ident'>target</span>).<span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>a</span>;
+    }
+}
+
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;extlib&quot;</span>)]</span>
+<span class='kw'>extern</span> {
+   <span class='kw'>fn</span> <span class='ident'>register_callback</span>(<span class='ident'>target</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>RustObject</span>,
+                        <span class='ident'>cb</span>: <span class='kw'>extern</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>RustObject</span>, <span class='ident'>i32</span>)) <span class='op'>-&gt;</span> <span class='ident'>i32</span>;
+   <span class='kw'>fn</span> <span class='ident'>trigger_callback</span>();
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='comment'>// Create the object that will be referenced in the callback</span>
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>rust_object</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>RustObject</span> { <span class='ident'>a</span>: <span class='number'>5</span> });
+
+    <span class='kw'>unsafe</span> {
+        <span class='ident'>register_callback</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>rust_object</span>, <span class='ident'>callback</span>);
+        <span class='ident'>trigger_callback</span>();
+    }
+}
+</pre>
+
+<p>C код:</p>
+
+<pre><code class="language-c">typedef void (*rust_callback)(void*, int32_t);
+void* cb_target;
+rust_callback cb;
+
+int32_t register_callback(void* callback_target, rust_callback callback) {
+    cb_target = callback_target;
+    cb = callback;
+    return 1;
+}
+
+void trigger_callback() {
+  cb(cb_target, 7); // Will call callback(&amp;rustObject, 7) in Rust
+}
+</code></pre>
+
+<h2 id="Асинхронные-обратные-вызовы" class='section-header'><a
+                           href="#Асинхронные-обратные-вызовы">Асинхронные обратные вызовы</a></h2>
+<p>В ранее приведенных примерах обратные вызовы выполняются как непосредственная
+реакция на вызов функции внешней C библиотеки. Для выполнения обратного вызова
+контроль над текущим потоком переключался из Rust в C, а затем снова в Rust, но,
+в конце концов, обратный вызов выполнялся в том же потоке, из которого была
+вызвана функция, инициировавшая обратный вызов.</p>
+
+<p>Все становится более сложным, когда внешняя библиотека порождает свои
+собственные потоки и осуществляет обратные вызовы из них. В этих случаях доступ
+к структурам данных Rust внутри обратных вызовов особенно небезопасен, и поэтому
+должны быть использованы соответствующие механизмы синхронизации. Помимо
+классических механизмов синхронизации, таких как мьютексы, в Rust есть еще одна
+возможность: использовать каналы (в <code>std::comm</code> (<code>std::sync::mpsc::channel</code>)),
+чтобы направить данные из потока C, который выполнял обратный вызов, в поток
+Rust.</p>
+
+<p>Если асинхронный обратный вызов адресован конкретному объекту в адресном
+пространстве Rust, то необходимо потребовать, чтобы обратные вызовы больше не
+выполнялись библиотекой C после удаления этого Rust объекта. Это может быть
+достигнуто путем отмены регистрации обратного вызова в деструкторе объекта и
+проектирования библиотеки таким образом, чтобы гарантировалось, что после отмены
+регистрации обратного вызова он больше не будет выполняться.</p>
+
+<h1 id="Линковка" class='section-header'><a
+                           href="#Линковка">Линковка</a></h1>
+<p>Атрибут <code>link</code> для блоков <code>extern</code> предоставляет основные инструкции rustc
+относительно того, как он будет линковать нативные библиотеки. На данный момент
+есть две общепринятых формы записи атрибута <code>link</code>:</p>
+
+<ul>
+<li><code>#[link(name = &quot;foo&quot;)]</code></li>
+<li><code>#[link(name = &quot;foo&quot;, kind = &quot;bar&quot;)]</code></li>
+</ul>
+
+<p>В обоих этих случаях <code>foo</code> - это имя нативной библиотеки, которую мы линкуем. Во
+втором случае <code>bar</code> - это тип нативной библиотеки, которую компилятор линкует. В
+настоящее время известны три типа нативных библиотек:</p>
+
+<ul>
+<li>Динамические - <code>#[link(name = &quot;readline&quot;)]</code></li>
+<li>Статические - <code>#[link(name = &quot;my_build_dependency&quot;, kind = &quot;static&quot;)]</code></li>
+<li>Фреймворки - <code>#[link(name = &quot;CoreFoundation&quot;, kind = &quot;framework&quot;)]</code></li>
+</ul>
+
+<p>Обратите внимание, что фреймворки доступны только для OSX.</p>
+
+<p>Различные значения <code>kind</code> нужны, чтобы определить, как линкуется нативная
+библиотека. С точки зрения линковки, компилятор Rust создает две разновидности
+артефактов: промежуточный (rlib/staticlib) и конечный
+(dylib/binary). Зависимости от нативных динамических библиотек и фреймворков
+распространяются дальше, пока не дойдут до конечного артефакта, а от статических
+библиотек - нет.</p>
+
+<p>Вот несколько примеров того, как эта модель может быть использована:</p>
+
+<ul>
+<li><p>Нативная зависимость при сборке. Иногда написанный на Rust код необходимо
+состыковать с некоторым кодом на C/C++, но распранение C/C++ кода в формате
+библиотеки вызывает дополнительные трудности. В этом случае, код будут
+упакован в <code>libfoo.a</code>, а затем контейнер Rust должен будет объявить
+зависимость с помощью <code>#[link(name = &quot;foo&quot;, kind = &quot;static&quot;)]</code>.</p>
+
+<p>Независимо от типа выхода (промежуточный или конечный) для контейнера,
+нативная статическая библиотека будет включена на выходе, что означает, что
+нет необходимости в распранении этой нативной статической библиотеки отдельно.</p></li>
+<li><p>Нормальная динамическая зависимость. Общие системные библиотеки (такие, как
+<code>readline</code>) доступны на большом количестве систем, и часто можно найти
+статическую копию этих библиотек. Когда такая зависимость была включена в
+контейнер Rust, промежуточные артефакты (например, rlibs) не будут линковать
+библиотеку, но когда rlib включается в состав конечного артефакта (например,
+исполняемый файл), нативная библиотека будет прилинкована.</p></li>
+</ul>
+
+<p>На OSX, фреймворки ведут себя с той же семантикой, что и динамические
+библиотеки.</p>
+
+<h1 id="Небезопасные-блоки" class='section-header'><a
+                           href="#Небезопасные-блоки">Небезопасные блоки</a></h1>
+<p>Некоторые операции, такие как разыменование небезопасных указателей или вызов
+функций, которые были отмечены как небезопасные, разрешено использовать только
+внутри небезопасных блоков. Небезопасных блоки изолируют опасносные ситуации и
+дают гарантии компилятору, что опасности не вытекут за пределы блока.</p>
+
+<p>Небезопасные функции же, наоборот, делают сильный акцент на этом. Небезопасная
+функция записывается в виде:</p>
+<span class='rusttest'>fn main() {
+    unsafe fn kaboom(ptr: *const i32) -&gt; i32 { *ptr }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>kaboom</span>(<span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> { <span class='op'>*</span><span class='ident'>ptr</span> }
+</pre>
+
+<p>Эта функция может быть вызвана только из блока <code>unsafe</code> или из другой <code>unsafe</code>
+функции.</p>
+
+<h1 id="Доступ-к-внешним-глобальным-переменным" class='section-header'><a
+                           href="#Доступ-к-внешним-глобальным-переменным">Доступ к внешним глобальным переменным</a></h1>
+<p>Внешние API довольно часто экспортируют глобальные переменные, которые могут
+быть использованы, например, для отслеживание глобального состояния. Для того,
+чтобы получить доступ к этим переменным, нужно объявить их в блоке <code>extern</code>,
+используя ключевое слово <code>static</code>:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+
+#[link(name = &quot;readline&quot;)]
+extern {
+    static rl_readline_version: libc::c_int;
+}
+
+fn main() {
+    println!(&quot;You have readline version {} installed.&quot;,
+             rl_readline_version as i32);
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;readline&quot;</span>)]</span>
+<span class='kw'>extern</span> {
+    <span class='kw'>static</span> <span class='ident'>rl_readline_version</span>: <span class='ident'>libc</span>::<span class='ident'>c_int</span>;
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;You have readline version {} installed.&quot;</span>,
+             <span class='ident'>rl_readline_version</span> <span class='kw'>as</span> <span class='ident'>i32</span>);
+}
+</pre>
+
+<p>Кроме того, возможно вам потребуется изменить глобальное состояние,
+предоставленное внешним интерфейсом. Для этого при объявлении статических
+переменных может быть добавлен модификатор <code>mut</code>, чтобы была возможность
+изменять их.</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+
+use std::ffi::CString;
+use std::ptr;
+
+#[link(name = &quot;readline&quot;)]
+extern {
+    static mut rl_prompt: *const libc::c_char;
+}
+
+fn main() {
+    let prompt = CString::new(&quot;[my-awesome-shell] $&quot;).unwrap();
+    unsafe {
+        rl_prompt = prompt.as_ptr();
+
+        println!(&quot;{:?}&quot;, rl_prompt);
+
+        rl_prompt = ptr::null();
+    }
+}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CString</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>;
+
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;readline&quot;</span>)]</span>
+<span class='kw'>extern</span> {
+    <span class='kw'>static</span> <span class='kw-2'>mut</span> <span class='ident'>rl_prompt</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>prompt</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='string'>&quot;[my-awesome-shell] $&quot;</span>).<span class='ident'>unwrap</span>();
+    <span class='kw'>unsafe</span> {
+        <span class='ident'>rl_prompt</span> <span class='op'>=</span> <span class='ident'>prompt</span>.<span class='ident'>as_ptr</span>();
+
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>rl_prompt</span>);
+
+        <span class='ident'>rl_prompt</span> <span class='op'>=</span> <span class='ident'>ptr</span>::<span class='ident'>null</span>();
+    }
+}
+</pre>
+
+<p>Обратите внимание, что любое взаимодействие с <code>static mut</code> небезопасно, как
+чтение, так и запись. Работа с изменяемым глобальным состоянием требует
+значительно большей осторожности.</p>
+
+<h1 id="Соглашение-о-вызове-внешних-функций" class='section-header'><a
+                           href="#Соглашение-о-вызове-внешних-функций">Соглашение о вызове внешних функций</a></h1>
+<p>Большинство внешнего кода предоставляет C ABI (Двоичный Интерфейс Приложений). И
+Rust при вызове внешних функций по умолчанию использует C соглашение о вызове
+для данной платформы. Но некоторые внешние функции, в первую очередь Windows
+API, используют другое соглашение о вызове. Rust обеспечивает способ указать
+компилятору, какое именно соглашение использовать:</p>
+<span class='rusttest'>#![feature(libc)]
+extern crate libc;
+
+#[cfg(all(target_os = &quot;win32&quot;, target_arch = &quot;x86&quot;))]
+#[link(name = &quot;kernel32&quot;)]
+#[allow(non_snake_case)]
+extern &quot;stdcall&quot; {
+    fn SetEnvironmentVariableA(n: *const u8, v: *const u8) -&gt; libc::c_int;
+}
+fn main() { }
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>all</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;win32&quot;</span>, <span class='ident'>target_arch</span> <span class='op'>=</span> <span class='string'>&quot;x86&quot;</span>))]</span>
+<span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;kernel32&quot;</span>)]</span>
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_snake_case</span>)]</span>
+<span class='kw'>extern</span> <span class='string'>&quot;stdcall&quot;</span> {
+    <span class='kw'>fn</span> <span class='ident'>SetEnvironmentVariableA</span>(<span class='ident'>n</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>, <span class='ident'>v</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>) <span class='op'>-&gt;</span> <span class='ident'>libc</span>::<span class='ident'>c_int</span>;
+}
+</pre>
+
+<p>Это указание относится ко всему блоку <code>extern</code>. Список поддерживаемых ABI
+ограничивается следующими:</p>
+
+<ul>
+<li><code>stdcall</code></li>
+<li><code>aapcs</code></li>
+<li><code>cdecl</code></li>
+<li><code>fastcall</code></li>
+<li><code>Rust</code></li>
+<li><code>rust-intrinsic</code></li>
+<li><code>system</code></li>
+<li><code>C</code></li>
+<li><code>win64</code></li>
+</ul>
+
+<p>Большинство ABI в этом списке не требуют пояснений, но ABI <code>system</code> может
+показаться немного странным. Он выбирает такое ABI, которое подходит (уместно)
+для взаимодействия с целевыми библиотеками. Например, на платформе win32 с
+архитектурой x86, это означает, что будет использован <code>stdcall</code> ABI. Однако, на
+windows x86_64 используется <code>C</code> соглашение о вызовах, поэтому в этом случае
+будет использован <code>C</code> ABI. Это означает, что в нашем предыдущем примере мы могли
+бы использовать <code>extern &quot;system&quot; { ... }</code>, чтобы определить блок для всех
+windows систем, а не только для x86.</p>
+
+<h1 id="Взаимодействие-с-внешним-кодом" class='section-header'><a
+                           href="#Взаимодействие-с-внешним-кодом">Взаимодействие с внешним кодом</a></h1>
+<p>Rust гарантирует, что cхема размещения элементов для <code>struct</code> совместима с
+представлением платформы в C только в том случае, если к ней применяется атрибут
+<code>#[repr(C)]</code>. Атрибут <code>#[repr(C, packed)]</code> может быть использован для схемы
+размещения элементов структуры без выравнивания. Атрибут <code>#[repr(C)]</code> также
+может быть применен и к перечислениям.</p>
+
+<p>Боксы с правом владения в Rust (<code>Box&lt;T&gt;</code>) используют ненулевые (non-nullable)
+указатели, которые указывают на содержащийся в них объект, как ручки. Тем не
+менее, они не должны быть созданы вручную, так как они находятся под управлением
+внутренних средств выделения памяти. Ссылки можно без риска считать ненулевыми
+указателями непосредствено на тип. Однако нарушение правил проверки
+заимствования или изменяемости не гарантирует безопасность, поэтому предпочитают
+использовать сырые указатели (<code>*</code>), если это необходимо, так как компилятор не
+может сделать так много предположений о них.</p>
+
+<p>Векторы и строки совместно используют одну и ту же базовую cхему размещения
+памяти и утилиты, доступные в модулях <code>vec</code> и <code>str</code>, для работы с C API. Тем не
+менее, строки не завершаются нулевым байтом, <code>\0</code>. Если вам нужна строка,
+завершающаяся нулевым байтом для совместимости с C, вы должны использовать тип
+<code>CString</code> из модуля <code>std::ffi</code>.</p>
+
+<p>Стандартная библиотека включает в себя псевдонимы типов и определения функций
+для стандартной библиотеки C в модуле <code>libc</code>, и Rust линкует <code>libc</code> и <code>libm</code> по
+умолчанию.</p>
+
+<h1 id="Оптимизация-указателей,-допускающих-нулевое-значение" class='section-header'><a
+                           href="#Оптимизация-указателей,-допускающих-нулевое-значение">Оптимизация указателей, допускающих нулевое значение</a></h1>
+<h1 id="(the-&quot;nullable-pointer-optimization&quot;)" class='section-header'><a
+                           href="#(the-&quot;nullable-pointer-optimization&quot;)">(The &quot;nullable pointer optimization&quot;)</a></h1>
+<p>Некоторые типы по определению не могут быть <code>null</code>. Это ссылки (<code>&amp;T</code>, <code>&amp;mut T</code>),
+упаковки (<code>Box&lt;T&gt;</code>), указатели на функции (<code>extern &quot;abi&quot; fn()</code>).  При
+взаимодействии же с С часто используются указатели, которые могут быть
+<code>null</code>. Как особый случай - обобщенный <code>enum</code>, который содержит ровно два
+варианта, один из которых не содержит данных, а другой содержит одно поле. Такое
+использование перечисления имеет право на &quot;оптимизацию указателя, допускающего
+нулевое значение&quot;. Когда создан экземпляр такого перечисления с одним из
+не-обнуляемых типов, то он представляет собой ненулевой указатель для варианта,
+содержащего данные, и нулевой - для варианта без данных.  Таким образом,
+<code>Option&lt;extern &quot;C&quot; fn(c_int) -&gt; c_int&gt;</code> - это представление указателя,
+на функцию, допускающего нулевое значение, и совместимого с C ABI.</p>
+
+<h1 id="Вызов-rust-кода-из-c-кода" class='section-header'><a
+                           href="#Вызов-rust-кода-из-c-кода">Вызов Rust кода из C кода</a></h1>
+<p>Вы можете скомпилировать Rust код таким образом, чтобы он мог быть вызван из C
+кода. Это довольно легко, но требует нескольких вещей:</p>
+<span class='rusttest'>#[no_mangle]
+pub extern fn hello_rust() -&gt; *const u8 {
+    &quot;Hello, world!\0&quot;.as_ptr()
+}
+fn main() {}
+</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>hello_rust</span>() <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span> {
+    <span class='string'>&quot;Hello, world!\0&quot;</span>.<span class='ident'>as_ptr</span>()
+}
+</pre>
+
+<p><code>extern</code> указывает, что эта функцию придерживается C соглашения о вызове, как
+описано выше в разделе
+&quot;<a href="ffi.html#foreign-calling-conventions">Соглашение о вызове внешних функций</a>&quot;.
+Атрибут <code>no_mangle</code> выключает модификацию имени, применяемую в Rust, для того
+чтобы было легче линковать.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

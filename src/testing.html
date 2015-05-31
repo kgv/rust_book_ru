@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Тестирование</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Тестирование</h1>
+    <blockquote>
+<p>Program testing can be a very effective way to show the presence of bugs, but
+it is hopelessly inadequate for showing their absence.</p>
+
+<p>Edsger W. Dijkstra, &quot;The Humble Programmer&quot; (1972)</p>
+</blockquote>
+
+<p>Давайте поговорим о том, как тестировать Rust код. Мы не будем рассказывать о
+том, какой подход к тестированию Rust кода является верным. Есть много подходов,
+каждый из которых имеет свое представление о правильном написании тестов. Но все
+эти подходы используют одни и те же основные инструменты, и мы покажем вам
+синтаксис их использования.</p>
+
+<blockquote>
+<p>Предупреждение: если вы читаете книгу в формате PDF, ePub или Mobi, в этом
+разделе вы можете встретиться с сломанной разметкой. Если это произошло,
+пожалуйста, используйте HTML-версию. Сожалеем о неудобствах.</p>
+</blockquote>
+
+<h1 id="Тесты-с-атрибутом-test" class='section-header'><a
+                           href="#Тесты-с-атрибутом-test">Тесты с атрибутом <code>test</code></a></h1>
+<p>В самом простом случае, тест в Rust - это функция, аннотированная с помощью
+атрибута <code>test</code>. Давайте создадим новый проект при помощи Cargo, который будет
+называться <code>adder</code>:</p>
+
+<pre><code class="language-bash">$ cargo new adder
+$ cd adder
+</code></pre>
+
+<p>При создании нового проекта, Cargo автоматически сгенерирует простой тест. Ниже
+представлено содержимое <code>src/lib.rs</code>:</p>
+<span class='rusttest'>fn main() {
+    #[test]
+    fn it_works() {
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+}
+</pre>
+
+<p>Обратите внимание на <code>#[test]</code>. Этот атрибут указывает, что это тестовая
+функция. В этом примере она не имеет тела. Но такого вида функции достаточно,
+чтобы удачно выполнить тест. Запуск тестов осуществляется командой <code>cargo test</code>.</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Cargo скомпилировал и запустил наши тесты. В результате мы получили выходные
+данные, поделенные на два раздела: один содержит информацию о тесте, который мы
+написали, а другой - информацию о тестах из документации. Но об этом позже. А
+сейчас посмотрим на эту строку:</p>
+
+<pre><code class="language-text">test it_works ... ok
+</code></pre>
+
+<p>Обратите внимание на <code>it_works</code>. Это название нашей функции:</p>
+<span class='rusttest'>fn main() {
+    fn it_works() {
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+</pre>
+
+<p>Мы также получили итоговую строку:</p>
+
+<pre><code class="language-text">test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Так почему же наш ничего не делающий тест был выполнен удачно? Любой тест,
+который не вызывает <code>panic!</code>, выполняется удачно, и любой тест, который вызывает
+<code>panic!</code>, выполняется неудачно. Давайте сделаем тест, который выполнится
+неудачно:</p>
+<span class='rusttest'>fn main() {
+    #[test]
+    fn it_works() {
+        assert!(false);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='boolval'>false</span>);
+}
+</pre>
+
+<p><code>assert!</code> является макросом, определенным в Rust, который принимает один
+аргумент: если аргумент имеет значение <code>true</code>, то ничего не происходит; если
+аргумент является <code>false</code>, то вызывается <code>panic!</code>. Давайте запустим наши тесты
+снова:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... FAILED
+
+failures:
+
+---- it_works stdout ----
+        thread &#39;it_works&#39; panicked at &#39;assertion failed: false&#39;, /home/steve/tmp/adder/src/lib.rs:3
+
+
+
+failures:
+    it_works
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
+
+thread &#39;&lt;main&gt;&#39; panicked at &#39;Some tests failed&#39;, /home/steve/src/rust/src/libtest/lib.rs:247
+</code></pre>
+
+<p>Rust сообщает, что наш тест выполнен неудачно:</p>
+
+<pre><code class="language-text">test it_works ... FAILED
+</code></pre>
+
+<p>Это же отражается в итоговой строке:</p>
+
+<pre><code class="language-text">test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Мы также получаем ненулевой код состояния:</p>
+
+<pre><code class="language-bash">$ echo $?
+101
+</code></pre>
+
+<p>Это бывает полезно, если вы хотите интегрировать <code>cargo test</code> в сторонний
+инструмент.</p>
+
+<p>Мы можем инвертировать ожидаемый результат теста с помощью атрибута:
+<code>should_panic</code>:</p>
+<span class='rusttest'>fn main() {
+    #[test]
+    #[should_panic]
+    fn it_works() {
+        assert!(false);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>should_panic</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='boolval'>false</span>);
+}
+</pre>
+
+<p>Теперь этот тест будет выполнен удачно, если вызывается <code>panic!</code>, и неудачно,
+если <code>panic!</code> не вызывается. Давайте попробуем:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Rust предоставляет и другой макрос, <code>assert_eq!</code>, который проверяет
+эквивалентность двух артументов:</p>
+<span class='rusttest'>fn main() {
+    #[test]
+    #[should_panic]
+    fn it_works() {
+        assert_eq!(&quot;Hello&quot;, &quot;world&quot;);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>should_panic</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
+}
+</pre>
+
+<p>А теперь этот тест будет выполнен удачно или неудачно? Из-за атрибута
+<code>should_panic</code> он завершится удачно:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p><code>should_panic</code> тесты могут быть хрупкими, потому как трудно гарантировать, что
+тест не вызовет панику по неожиданной причине. Чтобы помочь в этом аспекте, к
+атрибуту <code>should_panic</code> может быть добавлен необязательный параметр <code>expected</code>.
+Тогда тест также будет проверять, что сообщение об ошибке содержит ожидаемый
+текст. Ниже представлен более безопасный вариант приведенного выше примера:</p>
+<span class='rusttest'>fn main() {
+    #[test]
+    #[should_panic(expected = &quot;assertion failed&quot;)]
+    fn it_works() {
+        assert_eq!(&quot;Hello&quot;, &quot;world&quot;);
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>should_panic</span>(<span class='ident'>expected</span> <span class='op'>=</span> <span class='string'>&quot;assertion failed&quot;</span>)]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
+}
+</pre>
+
+<p>Вот и все, что касается основ! Давайте напишем один &#39;реальный&#39; тест:</p>
+<span class='rusttest'>fn main() {
+    pub fn add_two(a: i32) -&gt; i32 {
+        a + 2
+    }
+    
+    #[test]
+    fn it_works() {
+        assert_eq!(4, add_two(2));
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+}
+</pre>
+
+<p>Это распространенное использование макроса <code>assert_eq!</code>: вызывать некоторую
+функцию с известными аргументами и сравнить результат ее вызова с ожидаемыми
+результатом.</p>
+
+<h1 id="Тесты-в-модуле-test" class='section-header'><a
+                           href="#Тесты-в-модуле-test">Тесты в модуле <code>test</code></a></h1>
+<p>Есть один нюанс, из-за которого наш пример нельзя назвать идиоматическим:
+отсутствует модуль тестирования. Идиоматический вариант написания нашего примера
+будет выглядить примерно так:</p>
+<span class='rusttest'>fn main() {
+    pub fn add_two(a: i32) -&gt; i32 {
+        a + 2
+    }
+    
+    #[cfg(test)]
+    mod test {
+        use super::add_two;
+    
+        #[test]
+        fn it_works() {
+            assert_eq!(4, add_two(2));
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>test</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>add_two</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Здесь есть несколько изменений. Первое - это введение <code>mod test</code> с атрибутом
+<code>cfg</code>. Модуль позволяет сгруппировать все наши тесты вместе, а также определить
+вспомогательные функции, если это необходимо, которые будут отделены от
+остальной части контейнера. Атрибут <code>cfg</code> указывает на то, что тест будет
+скомпилирован, только когда мы попытаемся запустить тесты. Это может сэкономить
+время компиляции, а также гарантирует, что наши тесты полностью исключены из
+обычной сборки.</p>
+
+<p>Второе изменение заключается в объявлении <code>use</code>. Так как мы находимся во
+внутреннем модуле, то мы должны объявить использование тестируемой функции в его
+области видимости. Это может раздражать, если у вас большой модуль, и поэтому
+обычно используют фичу <code>glob</code>. Давайте, в соответствии с этим, изменим
+<code>src/lib.rs</code>:</p>
+<span class='rusttest'>
+fn main() {
+    pub fn add_two(a: i32) -&gt; i32 {
+        a + 2
+    }
+    
+    #[cfg(test)]
+    mod test {
+        use super::*;
+    
+        #[test]
+        fn it_works() {
+            assert_eq!(4, add_two(2));
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>test</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Обратите внимание на различие в строке с <code>use</code>. Теперь запустим наши тесты:</p>
+
+<pre><code class="language-bash">$ cargo test
+    Updating registry `https://github.com/rust-lang/crates.io-index`
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test test::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Работает!</p>
+
+<p>Данный подход представляет собой использование модуля <code>test</code> содержащего тесты в
+&quot;юнит стиле&quot;. Любой код, задачей которого является только лишь тестирование
+небольшего кусочка функциональности, имеет смысл перенести в этот модуль. Но что
+если мы хотим использовать &quot;интеграционный стиль&quot; для создания тестов? Для этого
+следует использовать директорию <code>tests</code></p>
+
+<h1 id="Тесты-в-директории-tests" class='section-header'><a
+                           href="#Тесты-в-директории-tests">Тесты в директории <code>tests</code></a></h1>
+<p>Чтобы написать интеграционный тест, давайте создадим директорию <code>tests</code>, и
+положим в нее файл <code>tests/lib.rs</code> со следующим содержимым:</p>
+<span class='rusttest'>fn main() {
+    extern crate adder;
+    
+    #[test]
+    fn it_works() {
+        assert_eq!(4, adder::add_two(2));
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>adder</span>;
+
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>adder</span>::<span class='ident'>add_two</span>(<span class='number'>2</span>));
+}
+</pre>
+
+<p>Выглядит примерно так же, как и наши предыдущие тесты, но есть некоторые
+отличия. Теперь сверху у нас расположено <code>extern crate adder</code>. Это потому, что
+тесты в директории <code>tests</code> - это отдельный контейнер, и, следовательно, мы
+должны импортировать нашу библиотеку. Это также объясняет, почему директория
+<code>tests</code> наиболее подходящее место для написания интеграционных тестов: они
+используют библиотеку, как это делал бы любой другой потребитель.</p>
+
+<p>Давайте запустим их:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test test::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+     Running target/lib-c18e7d3494509e74
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Теперь у нас появилось три раздела: запускается предыдущий тест, а также
+запускается наш новый тест.</p>
+
+<p>Это все, что касается директории <code>tests</code>. Модуль <code>test</code> здесь не нужен, так как
+все здесь ориентировано на тесты.</p>
+
+<p>Давайте, наконец, перейдем к третьей части: тесты из документации.</p>
+
+<h1 id="Тесты-в-документации" class='section-header'><a
+                           href="#Тесты-в-документации">Тесты в документации</a></h1>
+<p>Нет ничего лучше, чем документация с примерами. Нет ничего хуже, чем примеры,
+которые на самом деле не работают, потому что код изменился с тех пор, как
+документация была написана. Для этого, Rust поддерживает автоматический запуск
+примеров в документации. Вот дополненный <code>src/lib.rs</code> с примерами:</p>
+<span class='rusttest'>fn main() {
+    //! The `adder` crate provides functions that add numbers to other numbers.
+    //!
+    //! # Examples
+    //!
+    //! ```
+    //! assert_eq!(4, adder::add_two(2));
+    //! ```
+    
+    /// This function adds two to its argument.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use adder::add_two;
+    ///
+    /// assert_eq!(4, add_two(2));
+    /// ```
+    pub fn add_two(a: i32) -&gt; i32 {
+        a + 2
+    }
+    
+    #[cfg(test)]
+    mod test {
+        use super::*;
+    
+        #[test]
+        fn it_works() {
+            assert_eq!(4, add_two(2));
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='doccomment'>//! The `adder` crate provides functions that add numbers to other numbers.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! # Examples</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! ```</span>
+<span class='doccomment'>//! assert_eq!(4, adder::add_two(2));</span>
+<span class='doccomment'>//! ```</span>
+
+<span class='doccomment'>/// This function adds two to its argument.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Examples</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// use adder::add_two;</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// assert_eq!(4, add_two(2));</span>
+<span class='doccomment'>/// ```</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
+    <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>test</span> {
+    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+    }
+}
+</pre>
+
+<p>Обратите внимание на документацию уровня модуля, начинающуюся с <code>//!</code> и на
+документацию уровня функции, начинающуюся с <code>///</code>. Документация Rust
+поддерживает Markdown в комментариях, поэтому блоки кода помечают тройными
+символами `. В комментарии документации обычно включают раздел <code># Examples</code>,
+содержащий примеры, такие как этот.</p>
+
+<p>Давайте запустим тесты снова:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/steve/tmp/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test test::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+     Running target/lib-c18e7d3494509e74
+
+running 1 test
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 2 tests
+test add_two_0 ... ok
+test _0 ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Теперь у нас запускаются все три вида тестов! Обратите внимание на имена тестов
+из документации: <code>_0</code> генерируется для модульных тестов, и <code>add_two_0</code> - для
+функциональных тестов. Цифры на конце будут автоматически инкрементироваться,
+например <code>add_two_1</code>, если вы добавите еще примеров.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

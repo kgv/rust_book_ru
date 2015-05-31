@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Владение</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Владение</h1>
+    <p>Эта глава является одной из трёх, описывающих систему владения ресурсами Rust.
+Эта система представляет собой наиболее уникальную и привлекательную особенность
+Rust, о которой разработчики должны иметь полное представление. Владение - это
+то, как Rust достигает своей главной цели - безопасности памяти. Система
+владения включает в себя несколько различных концепций, каждая из которых
+рассматривается в своей собственной главе:</p>
+
+<ul>
+<li>владение, её вы сейчас читаете</li>
+<li><a href="references-and-borrowing.html">заимствование</a>, и ассоциированная с ним фича &quot;ссылки&quot;</li>
+<li><a href="lifetimes.html">время жизни</a>, расширение концепции заимствования</li>
+</ul>
+
+<p>Эти три главы взаимосвязаны, и их порядок важен. Вы должны будете освоить все
+три главы, чтобы полностью понять систему владения.</p>
+
+<h1 id="Мета" class='section-header'><a
+                           href="#Мета">Мета</a></h1>
+<p>Прежде чем перейти к деталям, отметим два важных нюанса о системе владения.</p>
+
+<p>Rust сфокусирован на безопасности и скорости. Это достигается за счёт
+&quot;абстракций с нулевой стоимостью&quot; (&quot;zero-cost abstractions&quot;), а значит, в Rust 
+стоимость абстракций должна быть настолько минимальной, насколько это
+возможно, без ущерба для работоспособности. Система владения ресурсами - это
+яркий пример абстракции с нулевой стоимостью. Весь анализ, о котором мы будем
+говорить в этом руководстве, выполняется <em>во время компиляции</em>. Вы не платите
+хоть сколько-нибудь времени исполнения за какую-либо из фич.</p>
+
+<p>Тем не менее, эта система всё же имеет определённую стоимость: кривая обучения.
+Многие новые пользователи Rust испытывает то, что мы называем &quot;борьба с проверкой
+заимствования&quot;, когда компилятор Rust отказывается компилировать программу,
+которая по мнению автора является абсолютно правильной. Это часто происходит
+потому, что мысленное представление программиста о том, как должно работать
+владение, не совпадает с реальными правилами, которыми оперирует Rust. Вы,
+наверное, поначалу также будете испытывать подобные трудности. Однако существует
+и хорошая новость: более опытные разработчики на Rust сообщают, что чем больше
+они работают с правилами системы владения, тем меньше они борются с проверкой
+заимствования.</p>
+
+<p>Имея это в виду, давайте перейдём к изучению системы владения.</p>
+
+<h1 id="Владение" class='section-header'><a
+                           href="#Владение">Владение</a></h1>
+<p><a href="variable-bindings.html">Связанные имена</a> имеют одну особенность в Rust: они &quot;обладают
+правом собственности&quot; на то, с чем они связаны. Это означает, что, когда
+связывание выходит за пределы области видимости, ресурс, с которым оно связано,
+будут освобождён. Например:</p>
+<span class='rusttest'>fn main() {
+    fn foo() {
+        let v = vec![1, 2, 3];
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>() {
+    <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+}
+</pre>
+
+<p>Когда <code>v</code> входит в область видимости, создаётся новый <a href="http://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a>. В данном
+случае вектор также выделяет из <a href="the-stack-and-the-heap.html">кучи</a> пространство для трёх элементов.
+Когда <code>v</code> выходит из области видимости, в конце <code>foo()</code>, Rust очищает все,
+связанное с вектором, даже динамически выделенную память. Это происходит
+детерминировано, в конце области видимости.</p>
+
+<h1 id="Семантика-перемещения" class='section-header'><a
+                           href="#Семантика-перемещения">Семантика перемещения</a></h1>
+<p>Хотя тут есть некоторые тонкости: Rust гарантирует, что существует <em>ровно одна</em>
+привязка к какому-либо ресурсу. Например, если у нас есть вектор, то мы можем
+присвоить этот вектор другой привязке:
+Важным аспектом [владения][ownership] является &quot;семантика перемещения&quot;.
+Семантика перемещения контролирует, как и когда право собственности перемещается
+между привязками (связываниями).</p>
+<span class='rusttest'>fn main() {
+    let v = vec![1, 2, 3];
+    
+    let v2 = v;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
+</pre>
+
+<p>Но, если после этого мы попытаемся использовать <code>v</code>, то получим ошибку:</p>
+<span class='rusttest'>fn main() {
+    let v = vec![1, 2, 3];
+    
+    let v2 = v;
+    
+    println!(&quot;v[0] = {}&quot;, v[0]);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v[0] = {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>0</span>]);
+</pre>
+
+<p>Ошибка выглядит следующим образом:</p>
+
+<pre><code class="language-text">error: use of moved value: `v`
+println!(&quot;v[0] = {}&quot;, v[0]);
+                        ^
+</code></pre>
+
+<p>То же самое произойдёт, если мы определим функцию, которая принимает право
+владения, и попробуем использовать что-то после того как мы передали это что-то
+в качестве аргумента в эту функцию:</p>
+<span class='rusttest'>fn main() {
+    fn take(v: Vec&lt;i32&gt;) {
+        // что будет здесь не очень важно
+    }
+    
+    let v = vec![1, 2, 3];
+    
+    take(v);
+    
+    println!(&quot;v[0] = {}&quot;, v[0]);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>take</span>(<span class='ident'>v</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) {
+    <span class='comment'>// что будет здесь не очень важно</span>
+}
+
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='ident'>take</span>(<span class='ident'>v</span>);
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v[0] = {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>0</span>]);
+</pre>
+
+<p>Та же самая ошибка: &quot;use of moved value&quot; (&quot;используется перемещённое значение&quot;).
+Когда мы передаём право владения куда-то ещё, мы как бы говорим, что мы
+&quot;перемещаем&quot; то, на что ссылаемся. При этом не нужно указывать какую-либо
+специальную аннотацию, Rust делает это по умолчанию.</p>
+
+<h2 id="Детали" class='section-header'><a
+                           href="#Детали">Детали</a></h2>
+<p>Причина, по которой мы не можем использовать привязку после того как мы её
+переместили, трудно заметная, но очень важная. Когда мы пишем код вроде этого:</p>
+<span class='rusttest'>fn main() {
+    let v = vec![1, 2, 3];
+    
+    let v2 = v;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
+</pre>
+
+<p>Первая строка создаёт некоторые данные для вектора в <a href="the-stack-and-the-heap.html">стеке</a>, <code>v</code>. Данные
+самого вектора, однако, сохраняются в <a href="the-stack-and-the-heap.html">куче</a>, и поэтому стековые данные
+содержат указатель на данные в куче. Когда мы перемещаем <code>v</code> в <code>v2</code>, то
+создаётся копия стековых данных, для <code>v2</code>. Что будет означать, что два указателя
+ссылаются на расположенный в куче вектор. Такое поведение могло бы быть
+проблемой: оно нарушало бы гарантии безопасности Rust, привнося гонки данных.
+Поэтому Rust запрещает использование <code>v</code> после того как мы выполнили его
+перемещение.</p>
+
+<p>Важно также отметить, что оптимизация может удалить фактическую (точную) копию
+байтов, в зависимости от обстоятельств. Так что это может быть не так уж
+неэффективно, как выглядит на первый взгляд.</p>
+
+<h2 id="Типы,-реализующие-типаж-copy" class='section-header'><a
+                           href="#Типы,-реализующие-типаж-copy">Типы, реализующие типаж <code>Copy</code></a></h2>
+<p>Мы установили, что, как только право собственности передаётся другой привязке,
+то вы больше не можете использовать оригинальную привязку. Тем не менее,
+существует <a href="traits.html">типаж</a>, который изменяет такое поведение, и он называется
+<code>Copy</code>. Мы ещё не обсуждали типажи, но пока вы можете думать о них как об
+аннотациях к конкретному типу, которые придают дополнительное поведение.
+Например:</p>
+<span class='rusttest'>fn main() {
+    let v = 1;
+    
+    let v2 = v;
+    
+    println!(&quot;v = {}&quot;, v);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='number'>1</span>;
+
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v = {}&quot;</span>, <span class='ident'>v</span>);
+</pre>
+
+<p>В этом примере <code>v</code> связан с типом <code>i32</code>. Этот тип реализует типаж <code>Copy</code>.
+Это означает, что когда мы присваиваем привязку <code>v</code> привязке <code>v2</code>, будет создана
+копия данных, как и при перемещении. Но, в отличие от перемещения, мы 
+можем использовать <code>v</code> в дальнейшем. Это происходит потому, что в <code>i32</code> нет 
+указателей на данные в каком-либо другом месте. При таком копировании 
+создаётся полная копия.</p>
+
+<p>Мы будем обсуждать, как сделать свои собственные типы, реализующие типаж <code>Copy</code>
+в разделе <a href="traits.html">Типажи</a>.</p>
+
+<h1 id="Больше,-чем-владение" class='section-header'><a
+                           href="#Больше,-чем-владение">Больше, чем владение</a></h1>
+<p>Конечно, если бы нам нужно было вернуть право владения обратно из функции, то мы
+бы написали:</p>
+<span class='rusttest'>fn main() {
+    fn foo(v: Vec&lt;i32&gt;) -&gt; Vec&lt;i32&gt; {
+        // делаем что-либо с v
+    
+        // возвращаем право владения
+        v
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>v</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> {
+    <span class='comment'>// делаем что-либо с v</span>
+
+    <span class='comment'>// возвращаем право владения</span>
+    <span class='ident'>v</span>
+}
+</pre>
+
+<p>Это сильно утомляет. Функция становится тем хуже, чем больше прав владения она
+хочет забрать себе:</p>
+<span class='rusttest'>fn main() {
+    fn foo(v1: Vec&lt;i32&gt;, v2: Vec&lt;i32&gt;) -&gt; (Vec&lt;i32&gt;, Vec&lt;i32&gt;, i32) {
+        // делаем что-нибудь с v1 и v2
+    
+        // возвращаем право владения и результат нашей функции
+        (v1, v2, 42)
+    }
+    
+    let v1 = vec![1, 2, 3];
+    let v2 = vec![1, 2, 3];
+    
+    let (v1, v2, answer) = foo(v1, v2);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>v2</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> (<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>, <span class='ident'>i32</span>) {
+    <span class='comment'>// делаем что-нибудь с v1 и v2</span>
+
+    <span class='comment'>// возвращаем право владения и результат нашей функции</span>
+    (<span class='ident'>v1</span>, <span class='ident'>v2</span>, <span class='number'>42</span>)
+}
+
+<span class='kw'>let</span> <span class='ident'>v1</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+<span class='kw'>let</span> (<span class='ident'>v1</span>, <span class='ident'>v2</span>, <span class='ident'>answer</span>) <span class='op'>=</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>, <span class='ident'>v2</span>);
+</pre>
+
+<p>Брр! Возвращаемый тип, возвращающая строка, и вызов функции получается намного 
+более сложным.</p>
+
+<p>К счастью, Rust предлагает такую фичу, как заимствование, которая помогает нам 
+решить эту проблему. Это тема следующего раздела!</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Изменяемость (mutability)</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/INTRODUCTION.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Изменяемость (mutability)</h1>
+    <p>Изменяемость, то есть возможность изменить что-то, работает в Rust несколько
+иначе, чем в других языках. Во-первых, по умолчанию связанные имена не
+изменяемы:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    x = 6; // ошибка!
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// ошибка!</span>
+</pre>
+
+<p>Изменяемость можно добавить с помощью ключевого слова <code>mut</code>:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    
+    x = 6; // нет проблем!
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// нет проблем!</span>
+</pre>
+
+<p>Это изменяемое <a href="variable-bindings.html">связанное имя</a>. Когда связанное имя изменяемо, это означает,
+что мы можем поменять связанное с ним значение. В примере выше не то, чтобы само
+значение <code>x</code> менялось, просто имя <code>x</code> связывается с другим значением типа <code>i32</code>.</p>
+
+<p>Если же вы хотите изменить само связанное значение, вам понадобится <a href="references-and-borrowing.html">изменяемая
+ссылка</a>:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    let y = &amp;mut x;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
+</pre>
+
+<p><code>y</code> - это неизменяемое имя для изменяемой ссылки. Это значит, что <code>y</code> нельзя
+связать ещё с чем-то (<code>y = &amp;mut z</code>), но можно изменить то, на что указывает
+связанная ссылка (<code>*y = 5</code>). Тонкая разница.</p>
+
+<p>Конечно, вы можете объявить и изменяемое имя для изменяемой ссылки:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    let mut y = &amp;mut x;
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
+</pre>
+
+<p>Теперь <code>y</code> можно связать с другим значением, и само это значение тоже можно
+менять.</p>
+
+<p>Стоит отметить, что <code>mut</code> - это часть <a href="patterns.html">образца</a>, поэтому можно делать
+такие вещи:</p>
+<span class='rusttest'>fn main() {
+    let (mut x, y) = (5, 6);
+    
+    fn foo(mut x: i32) {
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> (<span class='kw-2'>mut</span> <span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=</span> (<span class='number'>5</span>, <span class='number'>6</span>);
+
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span>) {
+</pre>
+
+<h1 id="Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость" class='section-header'><a
+                           href="#Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость">Внутренняя (interior) и внешняя (exterior) изменяемость</a></h1>
+<p>Однако, когда мы говорим, что что-либо &quot;неизменяемо&quot; в Rust, это не означает,
+что оно не может измениться: мы имеем ввиду что-то, что имеет &quot;внешнюю
+изменяемость&quot; (прим. переводчика: то есть, чтобы изменить элемент, нужно
+использовать внешний модификатор <code>&amp;mut</code>). Для примера рассмотрим
+<a href="http://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>:</p>
+<span class='rusttest'>fn main() {
+    use std::sync::Arc;
+    
+    let x = Arc::new(5);
+    let y = x.clone();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>clone</span>();
+</pre>
+
+<p>Когда мы вызываем метод <code>clone()</code>, <code>Arc&lt;T&gt;</code> должна обновить счётчик ссылок. Мы
+не использовали модификатор <code>mut</code>, а значит <code>x</code> - неизменяемая привязка и мы не
+можем получить ссылку (<code>&amp;mut 5</code>) или что-то подобное. Так что же это даёт?</p>
+
+<p>Для этого, мы должны вернуться назад к основам философии Rust&#39;a, к сохранности
+памяти и механизму, гарантирующему это, к системе <a href="ownership.html">владения</a>, и в
+частности, к <a href="borrowing.html#The-Rules">заимствованию</a>:</p>
+
+<blockquote>
+<p>Одновременно у вас может быть только один из двух перечисленных ниже видов
+заимствования, но не оба сразу:</p>
+
+<ul>
+<li>от 0 до N неизменяемых ссылок (<code>&amp;T</code>) на ресурс.</li>
+<li>ровно одна изменяемая ссылка (<code>&amp;mut T</code>) на ресурс.</li>
+</ul>
+</blockquote>
+
+<p>Итак, что же здесь на самом деле является &quot;неизменяемым&quot;: безопасно ли иметь два
+указателя на один объект? В случае с <code>Arc&lt;T&gt;</code>, да: изменяемый объект полностью
+находится внутри самой структуры. По этой причине, метод <code>clone()</code> возвращает
+неизменяемую ссылку (<code>&amp;T</code>). Если бы он возвращал изменяемую ссылку (<code>&amp;mut T</code>),
+то у нас были бы проблемы.</p>
+
+<p>Другие типы, например те, что определены в модуле <a href="http://doc.rust-lang.org/std/cell/index.html"><code>std::cell</code></a>,
+напротив, имеют &quot;внутреннюю изменяемость&quot;. Например:</p>
+<span class='rusttest'>fn main() {
+    use std::cell::RefCell;
+    
+    let x = RefCell::new(42);
+    
+    let y = x.borrow_mut();
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='number'>42</span>);
+
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();
+</pre>
+
+<p>RefCell возвращает изменяемую ссылку <code>&amp;mut</code> при помощи метода <code>borrow_mut()</code>. А
+не опасно ли это? Что, если мы сделаем так:</p>
+<span class='rusttest'>fn main() {
+    use std::cell::RefCell;
+    
+    let x = RefCell::new(42);
+    
+    let y = x.borrow_mut();
+    let z = x.borrow_mut();
+    (y, z);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='number'>42</span>);
+
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();
+<span class='kw'>let</span> <span class='ident'>z</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();
+</pre>
+
+<p>Это приведёт к панике во время исполнения. Вот что делает <code>RefCell</code>: он
+принудительно выполняет проверку правил заимствования во время исполнения и
+вызывает <code>panic!</code>, если они были нарушены. Это подводит нас к другим аспектам
+правил изменяемости Rust&#39;а. Давайте сначала поговорим о них.</p>
+
+<h2 id="Изменяемость-на-уровне-полей" class='section-header'><a
+                           href="#Изменяемость-на-уровне-полей">Изменяемость на уровне полей</a></h2>
+<p>Изменяемость - это свойство либо заимствования (<code>&amp;mut</code>), либо связывания (<code>let mut</code>). Это значит, что, например, у вас не может быть <a href="structs.html"><code>структуры</code></a>,
+часть полей которой изменяется, а другая часть - нет:</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        x: i32,
+        mut y: i32, // нельзя
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='kw-2'>mut</span> <span class='ident'>y</span>: <span class='ident'>i32</span>, <span class='comment'>// нельзя</span>
+}
+</pre>
+
+<p>Изменяемость структуры определяется при её связывании:</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    let mut a = Point { x: 5, y: 6 };
+    
+    a.x = 10;
+    
+    let b = Point { x: 5, y: 6};
+    
+    b.x = 10; // error: cannot assign to immutable field `b.x`
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>5</span>, <span class='ident'>y</span>: <span class='number'>6</span> };
+
+<span class='ident'>a</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
+
+<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>5</span>, <span class='ident'>y</span>: <span class='number'>6</span>};
+
+<span class='ident'>b</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>; <span class='comment'>// error: cannot assign to immutable field `b.x`</span>
+</pre>
+
+<p>Однако, используя <code>Cell&lt;T&gt;</code>, вы можете эмулировать изменяемость на уровне полей:</p>
+<span class='rusttest'>fn main() {
+    use std::cell::Cell;
+    
+    struct Point {
+        x: i32,
+        y: Cell&lt;i32&gt;,
+    }
+    
+    let mut point = Point { x: 5, y: Cell::new(6) };
+    
+    point.y.set(7);
+    
+    println!(&quot;y: {:?}&quot;, point.y);
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>Cell</span>;
+
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>,
+}
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>5</span>, <span class='ident'>y</span>: <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='number'>6</span>) };
+
+<span class='ident'>point</span>.<span class='ident'>y</span>.<span class='ident'>set</span>(<span class='number'>7</span>);
+
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y: {:?}&quot;</span>, <span class='ident'>point</span>.<span class='ident'>y</span>);
+</pre>
+
+<p>Это выведет на экран <code>y: Cell { value: 7 }</code>. Мы успешно изменили значение <code>y</code>.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>
