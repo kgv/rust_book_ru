@@ -826,27 +826,27 @@ fn main() {
 <code>$e</code>. Можно изменить синтаксис вызова так, чтобы грамматика отличалась в начале.
 В данном случае можно написать <code>$(T $t:ty)* E $e:exp</code>.</p>
 
-<h1 id="scoping-and-macro-import/export" class='section-header'><a
-                           href="#scoping-and-macro-import/export">Scoping and macro import/export</a></h1>
-<p>Macros are expanded at an early stage in compilation, before name resolution.
-One downside is that scoping works differently for macros, compared to other
-constructs in the language.</p>
+<h1 id="Области-видимости,-импорт-и-экспорт-макросов" class='section-header'><a
+                           href="#Области-видимости,-импорт-и-экспорт-макросов">Области видимости, импорт и экспорт макросов</a></h1>
+<p>Макросы разворачиваются на ранней стадии компиляции, перед разрешением имён.
+Один из недостатков такого подхода в том, что правила видимости для макросов
+отличны от правил для других конструкций языка.</p>
 
-<p>Definition and expansion of macros both happen in a single depth-first,
-lexical-order traversal of a crate&#39;s source. So a macro defined at module scope
-is visible to any subsequent code in the same module, which includes the body
-of any subsequent child <code>mod</code> items.</p>
+<p>Компилятор определяет и разворачивает макросы при обходе графа исходного кода
+контейнера в глубину. При этом определения макросов включаются в граф в порядке
+их встречи компилятором. Поэтому макрос, определённый на уровне модуля, виден во
+всём последующем коде модуля, включая тела всех вложенных модулей (<code>mod</code>).</p>
 
-<p>A macro defined within the body of a single <code>fn</code>, or anywhere else not at
-module scope, is visible only within that item.</p>
+<p>Макрос, определённый в теле функции, или где-то ещё не на уровне модуля, виден
+только внутри этого элемента (например, внутри одной функции).</p>
 
-<p>If a module has the <code>macro_use</code> attribute, its macros are also visible in its
-parent module after the child&#39;s <code>mod</code> item. If the parent also has <code>macro_use</code>
-then the macros will be visible in the grandparent after the parent&#39;s <code>mod</code>
-item, and so forth.</p>
+<p>Если модуль имеет атрибут <code>macro_use</code>, то его макросы также видны в его
+родительском модуле после элемента <code>mod</code> данного модуля. Если родитель тоже
+имеет атрибут <code>macro_use</code>, макросы также будут видны в модуле-родителе родителя,
+после элемента <code>mod</code> родителя. Это распространяется на любое число уровней.</p>
 
-<p>The <code>macro_use</code> attribute can also appear on <code>extern crate</code>. In this context
-it controls which macros are loaded from the external crate, e.g.</p>
+<p>Атрибут <code>macro_use</code> также можно поставить на подключение контейнера <code>extern crate</code>. В этом контексте оно управляет тем, какие макросы будут загружены из
+внешнего контейнера, т.е.</p>
 <span class='rusttest'>fn main() {
     #[macro_use(foo, bar)]
     extern crate baz;
@@ -856,81 +856,81 @@ it controls which macros are loaded from the external crate, e.g.</p>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>baz</span>;
 </pre>
 
-<p>If the attribute is given simply as <code>#[macro_use]</code>, all macros are loaded. If
-there is no <code>#[macro_use]</code> attribute then no macros are loaded. Only macros
-defined with the <code>#[macro_export]</code> attribute may be loaded.</p>
+<p>Если атрибут записан просто как <code>#[macro_use]</code>, будут загружены все
+макросы. Если атрибута нет, никакие макросы не будут загружены. Загружены могут
+быть только макросы, объявленные с атрибутом <code>#[macro_export]</code>.</p>
 
-<p>To load a crate&#39;s macros <em>without</em> linking it into the output, use <code>#[no_link]</code>
-as well.</p>
+<p>Чтобы загрузить макросы из контейнера <em>без</em> линковки контейнера в выходной
+артефакт, можно использовать атрибут <code>#[no_link]</code>.</p>
 
-<p>An example:</p>
+<p>Например:</p>
 <span class='rusttest'>macro_rules! m1 { () =&gt; (()) }
 
-// visible here: m1
+// здесь видны: m1
 
 mod foo {
-    // visible here: m1
+    // здесь видны: m1
 
     #[macro_export]
     macro_rules! m2 { () =&gt; (()) }
 
-    // visible here: m1, m2
+    // здесь видны: m1, m2
 }
 
-// visible here: m1
+// здесь видны: m1
 
 macro_rules! m3 { () =&gt; (()) }
 
-// visible here: m1, m3
+// здесь видны: m1, m3
 
 #[macro_use]
 mod bar {
-    // visible here: m1, m3
+    // здесь видны: m1, m3
 
     macro_rules! m4 { () =&gt; (()) }
 
-    // visible here: m1, m3, m4
+    // здесь видны: m1, m3, m4
 }
 
-// visible here: m1, m3, m4
+// здесь видны: m1, m3, m4
 fn main() { }
 </span><pre id='rust-example-rendered' class='rust '>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>m1</span> { () <span class='op'>=&gt;</span> (()) }
 
-<span class='comment'>// visible here: m1</span>
+<span class='comment'>// здесь видны: m1</span>
 
 <span class='kw'>mod</span> <span class='ident'>foo</span> {
-    <span class='comment'>// visible here: m1</span>
+    <span class='comment'>// здесь видны: m1</span>
 
     <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>m2</span> { () <span class='op'>=&gt;</span> (()) }
 
-    <span class='comment'>// visible here: m1, m2</span>
+    <span class='comment'>// здесь видны: m1, m2</span>
 }
 
-<span class='comment'>// visible here: m1</span>
+<span class='comment'>// здесь видны: m1</span>
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>m3</span> { () <span class='op'>=&gt;</span> (()) }
 
-<span class='comment'>// visible here: m1, m3</span>
+<span class='comment'>// здесь видны: m1, m3</span>
 
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>mod</span> <span class='ident'>bar</span> {
-    <span class='comment'>// visible here: m1, m3</span>
+    <span class='comment'>// здесь видны: m1, m3</span>
 
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>m4</span> { () <span class='op'>=&gt;</span> (()) }
 
-    <span class='comment'>// visible here: m1, m3, m4</span>
+    <span class='comment'>// здесь видны: m1, m3, m4</span>
 }
 
-<span class='comment'>// visible here: m1, m3, m4</span>
+<span class='comment'>// здесь видны: m1, m3, m4</span>
 </pre>
 
-<p>When this library is loaded with <code>#[macro_use] extern crate</code>, only <code>m2</code> will
-be imported.</p>
+<p>Когда эта библиотека загружается с помощью <code>#[macro_use] extern crate</code>, виден
+только макрос <code>m2</code>.</p>
 
-<p>The Rust Reference has a <a href="../reference.html#macro--and-plugin-related-attributes">listing of macro-related
-attributes</a>.</p>
+<p>Атрибуты, относящиеся к макросам,
+<a href="https://doc.rust-lang.org/stable/reference.html#macro--and-plugin-related-attributes">перечислены в справочнике Rust</a>.</p>
 
 <h1 id="the-variable-$crate" class='section-header'><a
                            href="#the-variable-$crate">The variable <code>$crate</code></a></h1>
