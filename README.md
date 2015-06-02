@@ -8,8 +8,9 @@
 **ВНИМАНИЕ!** Перевод не окончен, поэтому могут встречаться [ошибки][error].
 
 * [Читать книгу](http://kgv.github.io/rust_book_ru/)
-* [Скачать в PDF](https://www.gitbook.com/download/pdf/book/kgv/rust_book_ru)
-* [Скачать в другом формате](https://www.gitbook.com/book/kgv/rust_book_ru/details)
+* [Скачать в PDF](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.pdf)
+* [Скачать в EPUB](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.epub)
+* [Скачать в MOBI](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.mobi)
 
 [Помощь][github] в переводе приветствуется. ^_^
 
