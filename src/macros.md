@@ -110,7 +110,7 @@ macro_rules! vec { ... }
 (*matcher*). Он имеет [свою собственную грамматику][their own little grammar] в
 рамках языка.
 
-[their own little grammar]: ../reference.html#macros
+[their own little grammar]: https://doc.rust-lang.org/stable/reference.html#macros
 
 Образец `$x:expr` будет соответствовать любому выражению Rust, связывая его
 дерево синтаксиса с *метапеременной* `$x`. Идентификатор `expr` является
@@ -389,7 +389,7 @@ fn main() {
 }
 ```
 
-[items]: ../reference.html#items
+[items]: https://doc.rust-lang.org/stable/reference.html#items
 
 # Рекурсия макросов
 
