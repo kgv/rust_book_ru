@@ -43,7 +43,7 @@ let two_hearts = '💕';
 
 [char]: http://doc.rust-lang.org/nightly/std/primitive.char.html
 
-<a name="#numeric-types"></a>
+<a name="numeric-types"></a>
 # Числовые типы
 
 Rust имеет целый ряд числовых типов, разделённых на несколько категорий: знаковые
