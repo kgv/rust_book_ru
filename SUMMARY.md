@@ -1,6 +1,6 @@
 # Содержание
 
-* [Введение](src/INTRODUCTION.md)
+* [Введение](src/README.md)
 * [C чего начать](src/getting-started.md)
     * [Установка Rust](src/installing-rust.md)
     * [Hello, world!](src/hello-world.md)
