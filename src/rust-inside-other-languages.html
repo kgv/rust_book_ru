@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Вызов кода на Rust из других языков</title>
+
+    <link rel="stylesheet" type="text/css" href="../rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a href='../README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a href='../src/README.html'><b>2.</b> Введение</a>
+</li>
+<li><a href='../src/getting-started.html'><b>3.</b> C чего начать</a>
+<ul class='section'>
+<li><a href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
+</li>
+<li><a href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+</li>
+<li><a href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/learn-rust.html'><b>4.</b> Изучение Rust</a>
+<ul class='section'>
+<li><a href='../src/guessing-game.html'><b>4.1.</b> Угадайка</a>
+</li>
+<li><a href='../src/dining-philosophers.html'><b>4.2.</b> Обедающие философы</a>
+</li>
+<li><a href='../src/rust-inside-other-languages.html'><b>4.3.</b> Вызов кода на Rust из других языков</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/effective-rust.html'><b>5.</b> Эффективное использование Rust</a>
+<ul class='section'>
+<li><a href='../src/the-stack-and-the-heap.html'><b>5.1.</b> Стек и Куча</a>
+</li>
+<li><a href='../src/testing.html'><b>5.2.</b> Тестирование</a>
+</li>
+<li><a href='../src/conditional-compilation.html'><b>5.3.</b> Условная компиляция</a>
+</li>
+<li><a href='../src/documentation.html'><b>5.4.</b> Документация</a>
+</li>
+<li><a href='../src/iterators.html'><b>5.5.</b> Итераторы</a>
+</li>
+<li><a href='../src/concurrency.html'><b>5.6.</b> Многозадачность</a>
+</li>
+<li><a href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
+</li>
+<li><a href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+</li>
+<li><a href='../src/release-channels.html'><b>5.9.</b> Каналы сборок</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/syntax-and-semantics.html'><b>6.</b> Синтаксис и семантика</a>
+<ul class='section'>
+<li><a href='../src/variable-bindings.html'><b>6.1.</b> Связывание переменных</a>
+</li>
+<li><a href='../src/functions.html'><b>6.2.</b> Функции</a>
+</li>
+<li><a href='../src/primitive-types.html'><b>6.3.</b> Простые типы</a>
+</li>
+<li><a href='../src/comments.html'><b>6.4.</b> Комментарии</a>
+</li>
+<li><a href='../src/if.html'><b>6.5.</b> Конструкция `if`</a>
+</li>
+<li><a href='../src/for-loops.html'><b>6.6.</b> Циклы `for`</a>
+</li>
+<li><a href='../src/while-loops.html'><b>6.7.</b> Циклы `while`</a>
+</li>
+<li><a href='../src/ownership.html'><b>6.8.</b> Владение</a>
+</li>
+<li><a href='../src/references-and-borrowing.html'><b>6.9.</b> Ссылки и Заимствование</a>
+</li>
+<li><a href='../src/lifetimes.html'><b>6.10.</b> Время жизни</a>
+</li>
+<li><a href='../src/mutability.html'><b>6.11.</b> Изменяемость (Мутабельность)</a>
+</li>
+<li><a href='../src/enums.html'><b>6.12.</b> Перечисления</a>
+</li>
+<li><a href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
+</li>
+<li><a href='../src/structs.html'><b>6.14.</b> Структуры</a>
+</li>
+<li><a href='../src/patterns.html'><b>6.15.</b> Шаблоны `match`</a>
+</li>
+<li><a href='../src/method-syntax.html'><b>6.16.</b> Синтаксис методов</a>
+</li>
+<li><a href='../src/vectors.html'><b>6.17.</b> Вектора</a>
+</li>
+<li><a href='../src/strings.html'><b>6.18.</b> Строки</a>
+</li>
+<li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
+</li>
+<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+</li>
+<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+</li>
+<li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
+</li>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+</li>
+<li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
+</li>
+<li><a href='../src/ufcs.html'><b>6.25.</b> Универсальный синтаксис вызова функций (UFCS)</a>
+</li>
+<li><a href='../src/crates-and-modules.html'><b>6.26.</b> Контейнеры и Модули</a>
+</li>
+<li><a href='../src/const-and-static.html'><b>6.27.</b> `const` и `static`</a>
+</li>
+<li><a href='../src/tuple-structs.html'><b>6.28.</b> Кортежные структуры</a>
+</li>
+<li><a href='../src/attributes.html'><b>6.29.</b> Атрибуты</a>
+</li>
+<li><a href='../src/type-aliases.html'><b>6.30.</b> Псевдонимы типов</a>
+</li>
+<li><a href='../src/casting-between-types.html'><b>6.31.</b> Преобразование типов</a>
+</li>
+<li><a href='../src/associated-types.html'><b>6.32.</b> Ассоциированные типы</a>
+</li>
+<li><a href='../src/unsized-types.html'><b>6.33.</b> Безразмерные типы</a>
+</li>
+<li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
+</li>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+</li>
+<li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
+</li>
+<li><a href='../src/raw-pointers.html'><b>6.37.</b> Сырые указатели</a>
+</li>
+<li><a href='../src/unsafe.html'><b>6.38.</b> `unsafe` код</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<ul class='section'>
+<li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
+</li>
+<li><a href='../src/inline-assembly.html'><b>7.2.</b> Встроенный ассемблерный код</a>
+</li>
+<li><a href='../src/no-stdlib.html'><b>7.3.</b> Без stdlib</a>
+</li>
+<li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
+</li>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+</li>
+<li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
+</li>
+<li><a href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
+</li>
+<li><a href='../src/box-syntax-and-patterns.html'><b>7.8.</b> Синтаксис упаковки и шаблоны `match`</a>
+</li>
+<li><a href='../src/slice-patterns.html'><b>7.9.</b> Шаблоны `match` для срезов</a>
+</li>
+<li><a href='../src/associated-constants.html'><b>7.10.</b> Ассоциированные константы</a>
+</li>
+</ul>
+</li>
+<li><a href='../src/glossary.html'><b>8.</b> Глоссарий</a>
+</li>
+<li><a href='../src/academic-research.html'><b>9.</b> Академические исследования</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Вызов кода на Rust из других языков</h1>
+    <p>Для нашего третьего проекта мы собираемся выбрать что-то, что подчеркнёт одну из
+самых сильных сторон в Rust: фактическое отсутствие среды исполнения.</p>
+
+<p>По мере роста организации, программисты все больше полагаются на множество
+языков программирования. У каждого языка программирования есть свои сильные и
+слабые стороны, а знание нескольких языков позволяет позволяет использовать
+определенный язык там, где проявляется его сильные стороны, и использовать
+другой язык там, где он не очень хорош.</p>
+
+<p>Существует несколько областей, где многие языки программирования слабы в плане
+производительности выполнения программ. Часто компромисс заключается в том,
+чтобы использовать более медленный язык, который взамен способствует повышению
+производительности программиста. Чтобы решить эту проблему, часть кода системы
+можно написать на C, а затем вызвать этот код, написанный на C, как если бы он
+был написан на языке высокого уровня. Это называется &quot;интерфейс внешних функций&quot;
+(foreign function interface), часто сокращается до &quot;FFI&quot;.</p>
+
+<p>Rust включает поддержку FFI в обоих направлениях: он легко может вызвать C код,
+и он так же легко, как и C код, может быть вызван <em>извне</em>. Rust сочетает в себе
+отсутствие сборщика мусора и низкие требования к среде исполнения, что делает
+Rust отличным кандидатом на роль вызываемого из других языков, когда нужны
+некоторые дополнительные возможности.</p>
+
+<p>В этой книге есть целая <a href="ffi.html">глава, посвящённая FFI</a> и его специфике, а в этой
+главе мы рассмотрим именно конкретный частный случай FFI, с тремя примерами, на
+Ruby, Python и JavaScript.</p>
+
+<h1 id="Проблема" class='section-header'><a
+                           href="#Проблема">Проблема</a></h1>
+<p>Есть много различных проектов, которые мы могли бы выбрать, но мы хотим
+подобрать такой пример, который продемонстрирует явное преимущество Rust над
+многими другими языками: сложные вычисления и многопоточность.</p>
+
+<p>Во многих языках числа размещаются в куче, а не в стеке. Это обеспечивает
+целостность поведения языка при работе с числами и с другими объектами. Особенно
+в языках, которые сосредотачиваются на объектно-ориентированном программировании
+и использовании сборщика мусора, по умолчанию память выделяется из кучи. Иногда,
+при оптимизации, для конкретных чисел память может выделяться в стеке, но вместо
+того, чтобы полагаться на работу оптимизации, мы можем захотеть убедиться в том,
+что мы используем примитивные типы чисел, а не какой-либо тип объекта.</p>
+
+<p>Во-вторых, многие языки имеют &quot;глобальную блокировку интерпретатора&quot; (&quot;global
+interpreter lock&quot;), которая ограничивает параллелизм во многих ситуациях. Это
+делается во имя безопасности, что оказывает положительный эффект, но это также и
+ограничивает объем работ, который может быть выполнен одновременно, что, в свою
+очередь, оказывает большой отрицательный эффект.</p>
+
+<p>Чтобы подчеркнуть эти два аспекта, мы собираемся создать небольшой проект,
+который в значительной степени их использует. Поскольку внимание в этом примере
+сфокусировано на встраивание Rust в другие языки, а не самой проблеме, мы будем
+использовать игрушечный пример:</p>
+
+<blockquote>
+<p>Запустить десять потоков. Внутри каждого потока считать от одного до пяти
+миллионов. После того как все десять потоков завершатся, напечатать
+&quot;сделано!&quot;.</p>
+</blockquote>
+
+<p>Я выбрал пять миллионов, основываясь на моем конкретном компьютере. Вот пример
+этого кода на Ruby:</p>
+
+<pre><code class="language-ruby">threads = []
+
+10.times do
+  threads &lt;&lt; Thread.new do
+    count = 0
+
+    5_000_000.times do
+      count += 1
+    end
+  end
+end
+
+threads.each { |t| t.join }
+puts &quot;сделано!&quot;
+</code></pre>
+
+<p>Попробуйте запустить этот пример, и подберите число, которое обеспечит работу в
+течение нескольких секунд. В зависимости от аппаратного обеспечения компьютера,
+возможно, придется увеличить или уменьшить это число.</p>
+
+<p>На моей системе работа этой программы занимает <code>2.156</code> секунд. И если я
+воспользуюсь какой-нибудь утилитой для мониторинга процессов, например <code>top</code>, то
+увижу, что она использует только одно ядро на моей машине. Это GIL делает свое
+дело.</p>
+
+<p>Хотя это и игрушечная программа, на ее примере можно продемонстрировать много
+проблем, аналогичных этой, характерных для реального мира. Для наших целей,
+долго крутящиеся занятые потоки представляют собой параллельные, требующие
+больших затрат, вычисления.</p>
+
+<h1 id="Библиотека-на-rust" class='section-header'><a
+                           href="#Библиотека-на-rust">Библиотека на Rust</a></h1>
+<p>Давайте перепишем эту задачу на Rust. Во-первых, давайте сделаем новый проект с
+помощью Cargo:</p>
+
+<pre><code class="language-bash">$ cargo new embed
+$ cd embed
+</code></pre>
+
+<p>Эта программа переписывается на Rust довольно легко:</p>
+<span class='rusttest'>fn main() {
+    use std::thread;
+    
+    fn process() {
+        let handles: Vec&lt;_&gt; = (0..10).map(|_| {
+            thread::spawn(|| {
+                let mut _x = 0;
+                for _ in (0..5_000_000) {
+                    _x += 1
+                }
+            })
+        }).collect();
+    
+        for h in handles {
+            h.join().ok().expect(&quot;Could not join a thread!&quot;);
+        }
+    }
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>fn</span> <span class='ident'>process</span>() {
+    <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> (<span class='number'>0</span>..<span class='number'>10</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> {
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='op'>||</span> {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>_x</span> <span class='op'>=</span> <span class='number'>0</span>;
+            <span class='kw'>for</span> _ <span class='kw'>in</span> (<span class='number'>0</span>..<span class='number'>5_000_000</span>) {
+                <span class='ident'>_x</span> <span class='op'>+=</span> <span class='number'>1</span>
+            }
+        })
+    }).<span class='ident'>collect</span>();
+
+    <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
+        <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='string'>&quot;Could not join a thread!&quot;</span>);
+    }
+}
+</pre>
+
+<p>Часть из этого уже должно выглядеть знакомым из предыдущих примеров. Мы создаем
+десять потоков, собирая их в вектор <code>handles</code>. Внутри каждого потока мы создаем
+цикл из пяти миллионов повторений, и прибавляем к <code>_x</code> единицу каждый раз.
+Почему здесь подчеркивание? Ну, если мы удалим его и скомпилируем:</p>
+
+<pre><code class="language-bash">$ cargo build
+   Compiling embed v0.1.0 (file:///home/steve/src/embed)
+src/lib.rs:3:1: 16:2 warning: function is never used: `process`, #[warn(dead_code)] on by default
+src/lib.rs:3 fn process() {
+src/lib.rs:4     let handles: Vec&lt;_&gt; = (0..10).map(|_| {
+src/lib.rs:5         thread::spawn(|| {
+src/lib.rs:6             let mut x = 0;
+src/lib.rs:7             for _ in (0..5_000_000) {
+src/lib.rs:8                 x += 1
+             ...
+src/lib.rs:6:17: 6:22 warning: variable `x` is assigned to, but never used, #[warn(unused_variables)] on by default
+src/lib.rs:6             let mut x = 0;
+                             ^~~~~
+</code></pre>
+
+<p>Первое предупреждение происходит, потому что мы собираем библиотеку. Если бы у
+нас был тест для этой функции, то предупреждение бы пропало. Но сейчас, она
+никогда не вызывается.</p>
+
+<p>Второе предупреждение связано с использованием <code>x</code> вместо <code>_x</code>. Так как мы не
+выполняем каких-либо <em>действий</em> с <code>x</code>, то получаем предупреждение об этом. В
+нашем случае это вполне нормально, так как мы просто пытаемся тратить циклы
+процессора. Префикс подчеркивание перед <code>x</code> удаляет это предупреждение.</p>
+
+<p>В конце мы соединяем все потоки обратно</p>
+
+<p>Сейчас, однако, это просто библиотека Rust, которая не включает все необходимое
+для успешного вызова из другого языка. Если мы попытаемся подключить её к
+другому языку в том виде, в котором она сейчас, то это не будет работать. Нам
+нужно сделать два небольших изменения, чтобы исправить это. Первое, что мы
+должны сделать, это изменить начало нашего кода:</p>
+<span class='rusttest'>fn main() {
+    #[no_mangle]
+    pub extern fn process() {
+    
+}</span><pre id='rust-example-rendered' class='rust '>
+<span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>process</span>() {
+</pre>
+
+<p>Мы добавили новый атрибут, <code>no_mangle</code>. В процессе создания библиотеки Rust, в
+выходном скомпилированном файле происходит изменение имени функции. Причины
+этого выходят за рамки данного руководства, но для того, чтобы и другие языки
+знали, как вызвать функцию, мы должны не делать этого. Указанный атрибут
+выключает такое поведение.</p>
+
+<p>Другим изменением, которое мы добавили, является <code>pub extern</code>. <code>pub</code> означает,
+что эта функция может быть вызвана за пределами этого модуля, а <code>extern</code>
+говорит, что её возможно вызвать из С. Вот и все! Не так и много изменений.</p>
+
+<p>Второе, что мы должны сделать, это изменить настройки в <code>Cargo.toml</code>. Добавьте
+это в конец файла:</p>
+
+<pre><code class="language-toml">[lib]
+name = &quot;embed&quot;
+crate-type = [&quot;dylib&quot;]
+</code></pre>
+
+<p>Это говорит Rust, что мы хотим скомпилировать нашу библиотеку в виде стандартной
+динамической библиотеки. По умолчанию, Rust компилирует в &quot;rlib&quot;, Rust-
+специфичный формат.</p>
+
+<p>Давайте теперь соберем проект:</p>
+
+<pre><code class="language-bash">$ cargo build --release
+   Compiling embed v0.1.0 (file:///home/steve/src/embed)
+</code></pre>
+
+<p>Мы ввели команду <code>cargo build --release</code>, которая выполняет сборку с включенной
+оптимизацией. Мы хотим, чтобы код был как можно более быстрым! Вы можете найти
+собранную библиотеку в <code>target/release</code>:</p>
+
+<pre><code class="language-bash">$ ls target/release/
+build  deps  examples  libembed.so  native
+</code></pre>
+
+<p>Файл <code>libembed.so</code> и есть наша библиотека &quot;совместно используемых объектов&quot;
+(&quot;shared object&quot;). Мы можем использовать этот файл также как и любую другую
+динамическую библиотеку, написанную на C! Попутно следует отметить, это может
+быть <code>embed.dll</code> или <code>libembed.dylib</code>, в зависимости от платформы.</p>
+
+<p>Теперь, когда мы получили нашу собранную библиотеку Rust, давайте используем её
+из нашего кода на Ruby.</p>
+
+<h1 id="ruby" class='section-header'><a
+                           href="#ruby">Ruby</a></h1>
+<p>Откройте файл <code>embed.rb</code> внутри нашего проекта, и сделайте следующее:</p>
+
+<pre><code class="language-ruby">require &#39;ffi&#39;
+
+module Hello
+  extend FFI::Library
+  ffi_lib &#39;target/release/libembed.so&#39;
+  attach_function :process, [], :void
+end
+
+Hello.process
+
+puts &#39;сделано!&#39;
+</code></pre>
+
+<p>Прежде чем мы сможем запустить этот код, нам нужно установить пакет <code>ffi</code>:</p>
+
+<pre><code class="language-bash">$ gem install ffi # this may need sudo
+Fetching: ffi-1.9.8.gem (100%)
+Building native extensions.  This could take a while...
+Successfully installed ffi-1.9.8
+Parsing documentation for ffi-1.9.8
+Installing ri documentation for ffi-1.9.8
+Done installing documentation for ffi after 0 seconds
+1 gem installed
+</code></pre>
+
+<p>И, наконец, мы можем попробовать запустить его:</p>
+
+<pre><code class="language-bash">$ ruby embed.rb
+сделано!
+$
+</code></pre>
+
+<p>Ничего себе, это было быстро! На моей системе это заняло <code>0.086</code> секунд, а не
+две секунды как это было на чистом Ruby. Давайте разберем этот Ruby код:</p>
+
+<pre><code class="language-ruby">require &#39;ffi&#39;
+</code></pre>
+
+<p>Первый делом, нам надо объявить пакет <code>ffi</code>. Он предоставляет нам интерфейс для
+использования нашей библиотеки на Rust, как библиотеку на C.</p>
+
+<pre><code class="language-ruby">module Hello
+  extend FFI::Library
+  ffi_lib &#39;target/release/libembed.so&#39;
+</code></pre>
+
+<p>Автор пакета <code>ffi</code> рекомендует использовать модуль, чтобы ограничить область
+действия функции, которую мы импортировали из разделяемой библиотеки. Внутри мы
+указали <code>extend</code>, чтобы воспользоваться необходимым модулем <code>FFI::Library</code>, а
+затем вызвали <code>ffi_lib</code>, чтобы подгрузить нашу библиотеку. Мы просто передаем
+путь к библиотеке, который мы уже видели раньше, это
+<code>target/release/libembed.so</code>.</p>
+
+<pre><code class="language-ruby">attach_function :process, [], :void
+</code></pre>
+
+<p>Метод <code>attach_function</code> предоставляется пакетом <code>FFI</code>. Здесь соединяются наша
+функция <code>process()</code>, написанная на Rust, и одноименная функция на Ruby. Так как
+<code>process()</code> не принимает аргументов, второй параметр является пустым массивом, и
+поскольку функция ничего не возвращает, мы передаем <code>:void</code> в качестве
+завершающего аргумента.</p>
+
+<pre><code class="language-ruby">Hello.process
+</code></pre>
+
+<p>Здесь мы совершаем вызов нашей Rust функции. Сочетание нашего <code>module</code> и вызова
+к <code>attach_function</code> завершает подготовку. Это выглядит как функция Ruby, но на
+самом деле это Rust!</p>
+
+<pre><code class="language-ruby">puts &#39;сделано!&#39;
+</code></pre>
+
+<p>Наконец, в соответствие с нашими требованиями к проекту, мы пишем <code>сделано!</code> по
+окончанию работы программы.</p>
+
+<p>Вот и все! Как мы увидели, совместить два языка очень просто, и взамен мы
+получили большую производительность.</p>
+
+<p>Теперь давайте попробуем на Python!</p>
+
+<h1 id="python" class='section-header'><a
+                           href="#python">Python</a></h1>
+<p>Создайте файл <code>embed.py</code> в этой директории и поместите в него следующее:</p>
+
+<pre><code class="language-python">from ctypes import cdll
+
+lib = cdll.LoadLibrary(&quot;target/release/libembed.so&quot;)
+
+lib.process()
+
+print(&quot;сделано!&quot;)
+</code></pre>
+
+<p>Довольно просто! Мы импортируем <code>cdll</code> из модуля <code>ctypes</code>. Затем вызваем
+<code>LoadLibrary</code>. И теперь мы можем вызвать <code>process()</code>.</p>
+
+<p>На моей системе это заняло <code>0.017</code> секунд. Быстро!</p>
+
+<h1 id="node.js" class='section-header'><a
+                           href="#node.js">Node.js</a></h1>
+<p>Node не является языком, но, в настоящее время, это доминирующая реализация для
+выполнения JavaScript на стороне сервера.</p>
+
+<p>Для того, чтобы сделать FFI в Node, нам сначала надо установить библиотеку:</p>
+
+<pre><code class="language-bash">$ npm install ffi
+</code></pre>
+
+<p>После установки, мы можем ей воспользоваться:</p>
+
+<pre><code class="language-javascript">var ffi = require(&#39;ffi&#39;);
+
+var lib = ffi.Library(&#39;target/release/libembed&#39;, {
+  &#39;process&#39;: [&#39;void&#39;, []]
+});
+
+lib.process();
+
+console.log(&quot;сделано!&quot;);
+</code></pre>
+
+<p>Пример больше похож на Ruby, чем на Python. Мы используем модуль <code>ffi</code>, чтобы
+получить доступ к <code>ffi.Library()</code>, который загружает нашу библиотеку. Нам нужно
+указать тип возвращаемого значения и типы аргументов функции: ‘void’ для
+возвращаемого значения и пустой массив для указания отсутствия аргументов. После
+этого мы просто вызываем функцию и печатаем результат.</p>
+
+<p>На моей системе это заняло <code>0.092</code> секунды.</p>
+
+<h1 id="Заключение" class='section-header'><a
+                           href="#Заключение">Заключение</a></h1>
+<p>Как вы можете видеть, основы, рассмотренные здесь, являются <em>очень</em> простыми.
+Конечно, мы могли бы сделать куда больше того, что мы здесь показали. Посмотрите
+главу <a href="ffi.html">FFI</a> для более подробной информации.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>
