@@ -8,7 +8,6 @@
 * [Изучение Rust](src/learn-rust.md)
     * [Угадайка](src/guessing-game.md)
     * [Обедающие философы](src/dining-philosophers.md)
-    * [Вызов кода на Rust из других языков](src/rust-inside-other-languages.md)
 * [Эффективное использование Rust](src/effective-rust.md)
     * [Стек и Куча](src/the-stack-and-the-heap.md)
     * [Тестирование](src/testing.md)
