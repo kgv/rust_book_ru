@@ -178,6 +178,6 @@ point.y.set(7);
 println!("y: {:?}", point.y);
 ```
 
-[cell]: ../std/cell/struct.Cell.html
+[cell]: http://doc.rust-lang.org/stable/std/cell/struct.Cell.html
 
 Это выведет на экран `y: Cell { value: 7 }`. Мы успешно изменили значение `y`.
