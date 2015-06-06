@@ -208,7 +208,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 Тогда тест также будет проверять, что сообщение об ошибке содержит ожидаемый
 текст. Ниже представлен более безопасный вариант приведенного выше примера:
 
-```
+```rust
 #[test]
 #[should_panic(expected = "assertion failed")]
 fn it_works() {
@@ -218,7 +218,7 @@ fn it_works() {
 
 Вот и все, что касается основ! Давайте напишем один 'реальный' тест:
 
-```{rust,ignore}
+```rust,ignore
 pub fn add_two(a: i32) -> i32 {
     a + 2
 }
@@ -239,7 +239,7 @@ fn it_works() {
 отсутствует модуль тестирования. Идиоматический вариант написания нашего примера
 будет выглядить примерно так:
 
-```{rust,ignore}
+```rust,ignore
 pub fn add_two(a: i32) -> i32 {
     a + 2
 }
@@ -269,7 +269,7 @@ mod test {
 обычно используют фичу `glob`. Давайте, в соответствии с этим, изменим
 `src/lib.rs`:
 
-```{rust,ignore}
+```rust,ignore
 
 pub fn add_two(a: i32) -> i32 {
     a + 2
@@ -319,7 +319,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 Чтобы написать интеграционный тест, давайте создадим директорию `tests`, и
 положим в нее файл `tests/lib.rs` со следующим содержимым:
 
-```{rust,ignore}
+```rust,ignore
 extern crate adder;
 
 #[test]
@@ -376,7 +376,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 документация была написана. Для этого, Rust поддерживает автоматический запуск
 примеров в документации. Вот дополненный `src/lib.rs` с примерами:
 
-```{rust,ignore}
+```rust,ignore
 //! The `adder` crate provides functions that add numbers to other numbers.
 //!
 //! # Examples

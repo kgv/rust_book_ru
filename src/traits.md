@@ -3,7 +3,7 @@
 Вы помните, ключевое слово `impl`, используемое для вызова функции с синтаксисом
 метода?
 
-```{rust}
+```rust
 # #![feature(core)]
 struct Circle {
     x: f64,
@@ -22,7 +22,7 @@ impl Circle {
 сигнатуру метода, а затем реализуем этот трейт для нужной структуры. Например,
 как показано ниже:
 
-```{rust}
+```rust
 # #![feature(core)]
 struct Circle {
     x: f64,
@@ -56,7 +56,7 @@ error: binary operation `==` cannot be applied to type `T`
 Мы можем использовать трейты для ограничения дженериков. Рассмотрим похожую
 функцию, которая также не компилируется, и выводит ошибку:
 
-```{rust,ignore}
+```rust,ignore
 fn print_area<T>(shape: T) {
     println!("This shape has an area of {}", shape.area());
 }
@@ -72,7 +72,7 @@ error: type `T` does not implement any method in scope named `area`
 метод `area`. Но мы можем добавить **ограничение по трейту** к нашему дженерику
 `T`, гарантируя, что он будет соответствовать требованиям:
 
-```{rust}
+```rust
 # trait HasArea {
 #     fn area(&self) -> f64;
 # }
@@ -87,7 +87,7 @@ fn print_area<T: HasArea>(shape: T) {
 
 Вот расширенный пример того, как это работает:
 
-```{rust}
+```rust
 # #![feature(core)]
 trait HasArea {
     fn area(&self) -> f64;
@@ -150,7 +150,7 @@ This shape has an area of 1
 гарантирует, что будет получен корректный тип. Если же мы передадим некорректный
 тип:
 
-```{rust,ignore}
+```rust,ignore
 print_area(5);
 ```
 
@@ -164,7 +164,7 @@ error: failed to find an implementation of trait main::HasArea for int
 трейт возможно для любого типа. Технически, мы _могли бы_ реализовать `HasArea`
 для `i32`:
 
-```{rust}
+```rust
 trait HasArea {
     fn area(&self) -> f64;
 }
@@ -189,7 +189,7 @@ impl HasArea for i32 {
 `use`, в той области видимости, где вы хотите использовать методы этих трейтов.
 Так, например, следующий код не будет работать:
 
-```{rust,ignore}
+```rust,ignore
 mod shapes {
     use std::f64::consts;
 
@@ -231,7 +231,7 @@ error: type `shapes::Circle` does not implement any method in scope named `area`
 Если мы добавим строку с `use` над функцией `main` и сделаем нужные элементы
 публичными, все будет в порядке:
 
-```{rust}
+```rust
 # #![feature(core)]
 mod shapes {
     use std::f64::consts;
@@ -313,7 +313,7 @@ fn foo<T: Clone + Debug>(x: T) {
 ограничений по трейтам выглядит не так уж плохо, но, с увеличением количества
 зависимостей, синтаксис получается более неуклюжим:
 
-```
+```rust
 use std::fmt::Debug;
 
 fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
@@ -328,7 +328,7 @@ fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
 
 Rust имеет решение на этот счет, и оно называется 'утверждение `where`':
 
-```
+```rust
 use std::fmt::Debug;
 
 fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
@@ -354,7 +354,7 @@ fn main() {
 типов параметров, а затем добавить `where` после списка параметров. Для более
 длинного списка, могут быть добавлены пробельные символы:
 
-```
+```rust
 use std::fmt::Debug;
 
 fn bar<T, K>(x: T, y: K)
@@ -371,7 +371,7 @@ fn bar<T, K>(x: T, y: K)
 
 `where` является более мощным инструментом, чем просто синтаксис. Например:
 
-```
+```rust
 trait ConvertTo<Output> {
     fn convert(&self) -> Output;
 }
@@ -402,7 +402,7 @@ fn inverse<T>() -> T
 
 Вернемся к разделу [Дженерики](generics.html), мы пытались написать такой код:
 
-```{rust,ignore}
+```rust,ignore
 fn inverse<T>(x: T) -> Result<T, String> {
     if x == 0.0 { return Err("x cannot be zero!".to_string()); }
 
@@ -420,7 +420,7 @@ error: binary operation `==` cannot be applied to type `T`
 любой случайный `T` можно сравнивать. Для конкретизации мы можем ограничить его
 трейтом. Хотя этот код и не будет работать, но попробуйте сделать следующее:
 
-```{rust,ignore}
+```rust,ignore
 fn inverse<T: PartialEq>(x: T) -> Result<T, String> {
     if x == 0.0 { return Err("x cannot be zero!".to_string()); }
 
@@ -443,7 +443,7 @@ error: mismatched types:
 мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С
 помощью `Float` можно исправить ошибку:
 
-```
+```rust
 # #![feature(std_misc)]
 use std::num::Float;
 
@@ -459,7 +459,7 @@ fn inverse<T: Float>(x: T) -> Result<T, String> {
 И `f32`, и `f64` реализуют трейт `Float`, так что наша функция будет работать
 просто отлично:
 
-```
+```rust
 # #![feature(std_misc)]
 # use std::num::Float;
 # fn inverse<T: Float>(x: T) -> Result<T, String> {

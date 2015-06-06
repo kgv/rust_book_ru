@@ -55,7 +55,7 @@ assert!(x == 5);
 работу программы в текущем состоянии. Другой пример - использование макроса
 `unreachable!()`:
 
-```{rust,ignore}
+```rust,ignore
 enum Event {
     NewRelease,
 }
@@ -196,7 +196,7 @@ match version {
 панику. Это приведет к аварийному завершению текущего потока, и выдаст сообщение
 об ошибке:
 
-```{rust,ignore}
+```rust,ignore
 panic!("boom");
 ```
 
@@ -222,7 +222,7 @@ thread '<main>' panicked at 'boom', hello.rs:2
 Если же нам не нужно обрабатывать ошибку, а нужно просто прервать программу, то
 мы можем использовать метод `unwrap()`:
 
-```{rust,ignore}
+```rust,ignore
 io::stdin().read_line(&mut buffer).unwrap();
 ```
 
@@ -235,7 +235,7 @@ io::stdin().read_line(&mut buffer).unwrap();
 
 Вот еще один способ распаковки ошибок, который немного лучше, чем `unwrap()`:
 
-```{rust,ignore}
+```rust,ignore
 let mut buffer = String::new();
 let input = io::stdin().read_line(&mut buffer)
                        .ok()

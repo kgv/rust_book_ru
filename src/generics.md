@@ -119,7 +119,7 @@ fn takes_two_things<T, U>(x: T, y: U) {
 
 Вы также можете задать дженерик тип для `struct`:
 
-```
+```rust
 struct Point<T> {
     x: T,
     y: T,

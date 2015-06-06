@@ -54,7 +54,7 @@ String`.
 `&mut [T]`. Если мы хотим принимать оба этих типа, `Borrow` как раз для этого
 подходит:
 
-```
+```rust
 use std::borrow::Borrow;
 use std::fmt::Display;
 

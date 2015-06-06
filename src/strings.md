@@ -40,7 +40,7 @@ println!("{}", s);
 
 `String` преобразуются в `&str` с помощью `&`:
 
-```
+```rust
 fn takes_slice(slice: &str) {
     println!("Got: {}", slice);
 }

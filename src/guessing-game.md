@@ -47,7 +47,7 @@ fn main() {
 
 Давайте попробуем скомпилировать созданный Cargo проект:
 
-```{bash}
+```bash
 $ cargo build
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
@@ -155,7 +155,7 @@ let foo = bar;
 стороны у `let` может быть не просто имя связи, а [образец][patterns]. Мы будем
 использовать их дальше. Их достаточно просто использовать:
 
-```
+```rust
 let foo = 5; // неизменяемая связь
 let mut bar = 5; // изменяемая связь
 ```
