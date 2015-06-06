@@ -263,9 +263,7 @@
                            href="#Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость">Внутренняя (interior) и внешняя (exterior) изменяемость</a></h1>
 <p>Однако, когда мы говорим, что что-либо &quot;неизменяемо&quot; в Rust, это не означает,
 что оно не может измениться: мы имеем ввиду что-то, что имеет &quot;внешнюю
-изменяемость&quot; (прим. переводчика: то есть, чтобы изменить элемент, нужно
-использовать внешний модификатор <code>&amp;mut</code>). Для примера рассмотрим
-<a href="http://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>:</p>
+изменяемость&quot;. Для примера рассмотрим <a href="http://doc.rust-lang.org/stable/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>:</p>
 <span class='rusttest'>fn main() {
     use std::sync::Arc;
     
@@ -283,16 +281,16 @@
 не использовали модификатор <code>mut</code>, а значит <code>x</code> - неизменяемая привязка и мы не
 можем получить ссылку (<code>&amp;mut 5</code>) или что-то подобное. Так что же это даёт?</p>
 
-<p>Для этого, мы должны вернуться назад к основам философии Rust&#39;a, к сохранности
-памяти и механизму, гарантирующему это, к системе <a href="ownership.html">владения</a>, и в
-частности, к <a href="references-and-borrowing.html#The-Rules">заимствованию</a>:</p>
+<p>Для того чтобы понять это, мы должны вернуться назад к основам философии Rust&#39;a,
+к сохранности памяти и механизму, гарантирующему это, к системе
+<a href="ownership.html">владения</a>, и, в частности, к <a href="references-and-borrowing.html#borrowing">заимствованию</a>:</p>
 
 <blockquote>
 <p>Одновременно у вас может быть только один из двух перечисленных ниже видов
 заимствования, но не оба сразу:</p>
 
 <ul>
-<li>от 0 до N неизменяемых ссылок (<code>&amp;T</code>) на ресурс.</li>
+<li>одна или более неизменяемых ссылок (<code>&amp;T</code>) на ресурс,</li>
 <li>ровно одна изменяемая ссылка (<code>&amp;mut T</code>) на ресурс.</li>
 </ul>
 </blockquote>
@@ -303,7 +301,7 @@
 неизменяемую ссылку (<code>&amp;T</code>). Если бы он возвращал изменяемую ссылку (<code>&amp;mut T</code>),
 то у нас были бы проблемы.</p>
 
-<p>Другие типы, например те, что определены в модуле <a href="http://doc.rust-lang.org/std/cell/index.html"><code>std::cell</code></a>,
+<p>Другие типы, например те, что определены в модуле <a href="http://doc.rust-lang.org/stable/std/cell/index.html"><code>std::cell</code></a>,
 напротив, имеют &quot;внутреннюю изменяемость&quot;. Например:</p>
 <span class='rusttest'>fn main() {
     use std::cell::RefCell;
@@ -392,7 +390,8 @@
 <span class='ident'>b</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>; <span class='comment'>// error: cannot assign to immutable field `b.x`</span>
 </pre>
 
-<p>Однако, используя <code>Cell&lt;T&gt;</code>, вы можете эмулировать изменяемость на уровне полей:</p>
+<p>Однако, используя <a href="http://doc.rust-lang.org/stable/std/cell/struct.Cell.html"><code>Cell&lt;T&gt;</code></a>, вы можете эмулировать изменяемость на
+уровне полей:</p>
 <span class='rusttest'>fn main() {
     use std::cell::Cell;
     
@@ -401,7 +400,7 @@
         y: Cell&lt;i32&gt;,
     }
     
-    let mut point = Point { x: 5, y: Cell::new(6) };
+    let point = Point { x: 5, y: Cell::new(6) };
     
     point.y.set(7);
     
@@ -415,7 +414,7 @@
     <span class='ident'>y</span>: <span class='ident'>Cell</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>,
 }
 
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>5</span>, <span class='ident'>y</span>: <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='number'>6</span>) };
+<span class='kw'>let</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>5</span>, <span class='ident'>y</span>: <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='number'>6</span>) };
 
 <span class='ident'>point</span>.<span class='ident'>y</span>.<span class='ident'>set</span>(<span class='number'>7</span>);
 
