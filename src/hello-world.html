@@ -214,7 +214,7 @@
 <p>С учётом вышесказанного, давайте сделаем каталог для нашей программы в
 директории с проектами.</p>
 
-<pre><code class="language-{bash}">$ mkdir ~/projects
+<pre><code class="language-bash">$ mkdir ~/projects
 $ cd ~/projects
 $ mkdir hello_world
 $ cd hello_world
@@ -240,7 +240,7 @@ $ cd hello_world
 
 <p>Сохраните файл, а затем введите эти команды в ваше окно терминала:</p>
 
-<pre><code class="language-{bash}">$ rustc main.rs
+<pre><code class="language-bash">$ rustc main.rs
 $ ./main # или main.exe в Windows
 Hello, world!
 </code></pre>
@@ -307,27 +307,27 @@ Rust реализует <code>println!</code> как макрос вместо �
 программу компилятором <code>rustc</code>, передав ему в качестве аргумента название нашего
 файла с кодом:</p>
 
-<pre><code class="language-{bash}">$ rustc main.rs
+<pre><code class="language-bash">$ rustc main.rs
 </code></pre>
 
 <p>Это похоже на <code>gcc</code> или <code>clang</code>, если вы программировали раньше на C или C++.
 Rust создаст двоичный исполняемый файл. Вы можете убедиться в этом с помощью
 <code>ls</code>:</p>
 
-<pre><code class="language-{bash}">$ ls
+<pre><code class="language-bash">$ ls
 main  main.rs
 </code></pre>
 
 <p>Или в Windows:</p>
 
-<pre><code class="language-{bash}">$ dir
+<pre><code class="language-bash">$ dir
 main.exe  main.rs
 </code></pre>
 
 <p>У нас есть два файла: наш исходный код, с расширением <code>.rs</code> и исполняемый файл
 (<code>main.exe</code> в Windows, <code>main</code> в остальных случаях)</p>
 
-<pre><code class="language-{bash}">$ ./main  # или main.exe в Windows
+<pre><code class="language-bash">$ ./main  # или main.exe в Windows
 </code></pre>
 
 <p>Мы получили выведенный в окне терминала текст <code>&quot;Hello, world!&quot;</code>.</p>
