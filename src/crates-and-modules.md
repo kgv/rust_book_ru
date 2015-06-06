@@ -76,7 +76,7 @@ $ tree .
 Для объявления каждого из наших модулей, мы используем ключевое слово `mod`.
 Давайте сделаем, чтобы наш `src/lib.rs` выглядел следующим образом:
 
-```
+```rust
 mod english {
     mod greetings {
     }
@@ -128,7 +128,7 @@ Rust поддерживает это двумя способами.
 
 Вместо объявления модуля наподобие:
 
-```{rust,ignore}
+```rust,ignore
 mod english {
     // contents of our module go here
 }
@@ -136,7 +136,7 @@ mod english {
 
 Мы можем объявить наш модуль в виде:
 
-```{rust,ignore}
+```rust,ignore
 mod english;
 ```
 
@@ -175,7 +175,7 @@ $ tree .
 
 `src/lib.rs` - корень нашего контейнера, и выглядит он следующим образом:
 
-```{rust,ignore}
+```rust,ignore
 mod english;
 mod japanese;
 ```
@@ -186,7 +186,7 @@ mod japanese;
 наши модули содержат суб-модули. И `src/english/mod.rs` и `src/japanese/mod.rs`
 выглядят следующим образом:
 
-```{rust,ignore}
+```rust,ignore
 mod greetings;
 mod farewells;
 ```
@@ -305,7 +305,7 @@ Rust позволяет точно контролировать, какие эл
 сначала сосредоточимся на модуле `english`, для чего сократим файл `src/main.rs`
 до этого:
 
-```{rust,ignore}
+```rust,ignore
 extern crate phrases;
 
 fn main() {
@@ -317,14 +317,14 @@ fn main() {
 В файле `src/lib.rs` в объявлении модуля `english` давайте добавим модификатор
 `pub`:
 
-```{rust,ignore}
+```rust,ignore
 pub mod english;
 mod japanese;
 ```
 
 В файле `src/english/mod.rs` давайте сделаем оба модуля с модификатором `pub`:
 
-```{rust,ignore}
+```rust,ignore
 pub mod greetings;
 pub mod farewells;
 ```
@@ -332,7 +332,7 @@ pub mod farewells;
 В файле `src/english/greetings.rs` давайте добавим модификатор `pub` к
 объявлению нашей функции `fn`:
 
-```{rust,ignore}
+```rust,ignore
 pub fn hello() -> String {
     "Hello!".to_string()
 }
@@ -340,7 +340,7 @@ pub fn hello() -> String {
 
 А также в файле `src/english/farewells.rs`:
 
-```{rust,ignore}
+```rust,ignore
 pub fn goodbye() -> String {
     "Goodbye.".to_string()
 }
@@ -377,7 +377,7 @@ Rust предоставляет ключевое слово `use`, которо�
 нашу локальную область видимости. Давайте изменим файл `src/main.rs`, чтобы он
 выглядел следующим образом:
 
-```{rust,ignore}
+```rust,ignore
 extern crate phrases;
 
 use phrases::english::greetings;
@@ -395,7 +395,7 @@ fn main() {
 импортировать модуль, а не функцию непосредственно. Другими словами, вы _могли
 бы_ сделать следующее:
 
-```{rust,ignore}
+```rust,ignore
 extern crate phrases;
 
 use phrases::english::greetings::hello;
@@ -413,7 +413,7 @@ fn main() {
 имен, то Rust выдает ошибку компиляции. Например, если мы сделаем функции
 `japanese` публичными, и пытаемся скомпилировать этот код:
 
-```{rust,ignore}
+```rust,ignore
 extern crate phrases;
 
 use phrases::english::greetings::hello;
@@ -439,14 +439,14 @@ Could not compile `phrases`.
 Если мы импортируем несколько имен из одного модуля, то нам совсем не
 обязательно писать одно и то же много раз. Вместо этого кода:
 
-```{rust,ignore}
+```rust,ignore
 use phrases::english::greetings;
 use phrases::english::farewells;
 ```
 
 Вы можете использовать сокращение:
 
-```{rust,ignore}
+```rust,ignore
 use phrases::english::{greetings, farewells};
 ```
 
@@ -459,7 +459,7 @@ use phrases::english::{greetings, farewells};
 
 Давайте посмотрим на примере. Измените файл `src/main.rs` следующим образом:
 
-```{rust,ignore}
+```rust,ignore
 extern crate phrases;
 
 use phrases::english::{greetings,farewells};
@@ -476,7 +476,7 @@ fn main() {
 
 Затем измените файл `src/lib.rs`, чтобы сделать модуль `japanese` с публичным:
 
-```{rust,ignore}
+```rust,ignore
 pub mod english;
 pub mod japanese;
 ```
@@ -484,7 +484,7 @@ pub mod japanese;
 Далее, убедитесь, что обе функции публичные, сперва в
 `src/japanese/greetings.rs`:
 
-```{rust,ignore}
+```rust,ignore
 pub fn hello() -> String {
     "こんにちは".to_string()
 }
@@ -492,7 +492,7 @@ pub fn hello() -> String {
 
 А затем в `src/japanese/farewells.rs`:
 
-```{rust,ignore}
+```rust,ignore
 pub fn goodbye() -> String {
     "さようなら".to_string()
 }
@@ -500,7 +500,7 @@ pub fn goodbye() -> String {
 
 Наконец, измените файл `src/japanese/mod.rs` вот так:
 
-```{rust,ignore}
+```rust,ignore
 pub use self::greetings::hello;
 pub use self::farewells::goodbye;
 

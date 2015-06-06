@@ -222,7 +222,7 @@ pub struct TraitObject {
 из виртуальной таблицы, а затем динамически вызывает метод по этому указателю.
 Например:
 
-```{rust,ignore}
+```rust,ignore
 struct FooVtable {
     destructor: fn(*mut ()),
     size: usize,
@@ -284,7 +284,7 @@ static Foo_for_String_vtable: FooVtable = FooVtable {
 вид создания и использования трейт объектов `Foo` может выглядеть примерно как
 (игнорируются несоответствия типов: в любом случае, они всего лишь указатели):
 
-```{rust,ignore}
+```rust,ignore
 let a: String = "foo".to_string();
 let x: u8 = 1;
 

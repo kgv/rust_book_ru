@@ -164,7 +164,7 @@ b.x = 10; // error: cannot assign to immutable field `b.x`
 
 Однако, используя `Cell<T>`, вы можете эмулировать изменяемость на уровне полей:
 
-```
+```rust
 use std::cell::Cell;
 
 struct Point {

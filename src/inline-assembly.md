@@ -25,7 +25,7 @@ crate to allow) and of course requires an `unsafe` block.
 The `assembly template` is the only required parameter and must be a
 literal string (i.e. `""`)
 
-```
+```rust
 #![feature(asm)]
 
 #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
@@ -51,7 +51,7 @@ fn main() {
 Output operands, input operands, clobbers and options are all optional
 but you must add the right number of `:` if you skip them:
 
-```
+```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 # fn main() { unsafe {
@@ -65,7 +65,7 @@ asm!("xor %eax, %eax"
 
 Whitespace also doesn't matter:
 
-```
+```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 # fn main() { unsafe {
@@ -79,7 +79,7 @@ Input and output operands follow the same format: `:
 "constraints1"(expr1), "constraints2"(expr2), ..."`. Output operand
 expressions must be mutable lvalues:
 
-```
+```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 fn add(a: i32, b: i32) -> i32 {
@@ -107,7 +107,7 @@ different values so we use the clobbers list to indicate to the
 compiler not to assume any values loaded into those registers will
 stay valid.
 
-```
+```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 # fn main() { unsafe {
