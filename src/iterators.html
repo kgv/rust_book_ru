@@ -247,7 +247,7 @@
 
 <p>Однако, цикл <code>for</code> не является единственной конструкцией, которая использует
 итераторы. Написание своего собственного итератора заключаться в реализации
-трейта <code>Iterator</code>. Хотя эта тема и выходит за рамки данного руководства, Rust
+типажа <code>Iterator</code>. Хотя эта тема и выходит за рамки данного руководства, Rust
 предоставляет ряд полезных итераторов для выполнения различных задач. Прежде чем
 мы поговорим о них, мы должны рассказать о Rust анти-паттерне, связанном с
 использованием диапазонов, который продемонстрирован в примере ниже.</p>
@@ -485,8 +485,7 @@
 последовательность элементов. Для получения каждого следующего элемента нужно
 вызвать метод, а это означает, что итераторы <em>ленивы</em>, то есть им не требуется
 создавать все значения заранее. Этот код, например, на самом деле не генерирует
-номера <code>1-100</code>, а просто создает значение, представляющее эту
-последовательность:</p>
+номера <code>1-99</code>, а просто создает значение, представляющее эту последовательность:</p>
 <span class='rusttest'>fn main() {
     let nums = 1..100;
     
@@ -510,14 +509,14 @@
 Другим типом является <code>iter()</code>. <code>iter()</code> может преобразовать вектор в простой
 итератор, который выдает вам каждый элемент по очереди:</p>
 <span class='rusttest'>fn main() {
-    let nums = [1, 2, 3];
+    let nums = vec![1, 2, 3];
     
     for num in nums.iter() {
        println!(&quot;{}&quot;, num);
     }
     
 }</span><pre id='rust-example-rendered' class='rust '>
-<span class='kw'>let</span> <span class='ident'>nums</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+<span class='kw'>let</span> <span class='ident'>nums</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 
 <span class='kw'>for</span> <span class='ident'>num</span> <span class='kw'>in</span> <span class='ident'>nums</span>.<span class='ident'>iter</span>() {
    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>num</span>);
@@ -525,22 +524,7 @@
 </pre>
 
 <p>Эти два основных итератора должны служить вам хорошо. Есть и более продвинутые
-итераторы, в том числе и те, которые генерируют бесконечную последовательность.
-Например, такой итератор можно создать с помощью синтаксиса диапазона и
-<code>step_by</code>:</p>
-<span class='rusttest'>#![feature(step_by)]
-fn main() {
-    (1..).step_by(5);
-    
-}</span><pre id='rust-example-rendered' class='rust '>
-(<span class='number'>1</span>..).<span class='ident'>step_by</span>(<span class='number'>5</span>);
-</pre>
-
-<p>Это итератор считает, начиная с одного и добавляя пять каждый раз. Всякий раз он
-выдает вам новое целое число, и этот процесс может быть бесконечным (хотя,
-технически - пока он не достигнет максимального числа, которое может быть
-представлено <code>i32</code>). Но итераторы ленивы, и это хорошо! Вы, вероятно, не хотите
-испробовать <code>collect()</code> на нем, хотя...</p>
+итераторы, в том числе и те, которые генерируют бесконечную последовательность.</p>
 
 <p>Это все, что касается итераторов. Адаптеры итераторов - последнее понятие
 имеющее отношение к итераторам, о котором мы хотели бы рассказать. Давайте
@@ -569,7 +553,7 @@ fn main() {
  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </code></pre>
 
-<p>Лень наносит еще один удар! Следующее замыкание никогда не будет выполнено.
+<p>Лень является причиной этого! Следующее замыкание никогда не будет выполнено.
 Пример ниже не напечатает ни одного значения:</p>
 <span class='rusttest'>fn main() {
     (1..100).map(|x| println!(&quot;{}&quot;, x));
@@ -584,7 +568,7 @@ fn main() {
 <p>Есть масса интересных адаптеров итераторов. <code>take(n)</code> вернет итератор,
 представляющий следующие <code>n</code> элементов исходного итератора. Обратите внимание,
 что это не оказывает никакого влияния на оригинальный итератор. Давайте
-попробуем применить его для бесконечного итератора, рассмотренного
+попробуем применить его для бесконечных итераторов, о которых мы упоминали
 прежде:</p>
 <span class='rusttest'>#![feature(step_by)]
 fn main() {
@@ -630,14 +614,14 @@ fn main() {
 <p>Вы можете соединить все три понятия вместе: начать с итератора, адаптировать его
 несколько раз, а затем потребить результат. Например:</p>
 <span class='rusttest'>fn main() {
-    (1..1000)
+    (1..)
         .filter(|&amp;x| x % 2 == 0)
         .filter(|&amp;x| x % 3 == 0)
         .take(5)
         .collect::&lt;Vec&lt;i32&gt;&gt;();
     
 }</span><pre id='rust-example-rendered' class='rust '>
-(<span class='number'>1</span>..<span class='number'>1000</span>)
+(<span class='number'>1</span>..)
     .<span class='ident'>filter</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>0</span>)
     .<span class='ident'>filter</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>%</span> <span class='number'>3</span> <span class='op'>==</span> <span class='number'>0</span>)
     .<span class='ident'>take</span>(<span class='number'>5</span>)
