@@ -75,7 +75,7 @@ hello.rs:4 }
 расположенные за ними, а в данном примере нет элемента, расположенного после
 последнего комментария.
 
-[rc-new]: http://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.new
+[rc-new]: http://doc.rust-lang.org/std/rc/struct.Rc.html#method.new
 
 ### Написание комментариев документации
 

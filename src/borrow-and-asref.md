@@ -3,8 +3,8 @@
 Типажи [`Borrow`][borrow] и [`AsRef`][asref] очень похожи, но в то же время
 разные. Ниже приводится небольшая памятка об этих двух типажах.
 
-[borrow]: http://doc.rust-lang.org/stable/std/borrow/trait.Borrow.html
-[asref]: http://doc.rust-lang.org/stable/std/convert/trait.AsRef.html
+[borrow]: http://doc.rust-lang.org/std/borrow/trait.Borrow.html
+[asref]: http://doc.rust-lang.org/std/convert/trait.AsRef.html
 
 # Типаж Borrow
 
@@ -20,8 +20,8 @@ fn get<Q: ?Sized>(&self, k: &Q) -> Option<&V>
           Q: Hash + Eq
 ```
 
-[hashmap]: http://doc.rust-lang.org/stable/std/collections/struct.HashMap.html
-[get]: http://doc.rust-lang.org/stable/std/collections/struct.HashMap.html#method.get
+[hashmap]: http://doc.rust-lang.org/std/collections/struct.HashMap.html
+[get]: http://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get
 
 Эта сигнатура является довольно сложной. Параметр `K` - это то, что нас здесь
 интересует. Он ссылается на параметр самого `HashMap`:

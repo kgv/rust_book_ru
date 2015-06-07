@@ -23,7 +23,7 @@ let y: bool = false;
 Вы можете найти больше информации о логических типах (`bool`) в [документации к
 стандартной библиотеке (англ.)][bool].
 
-[bool]: http://doc.rust-lang.org/nightly/std/primitive.bool.html
+[bool]: http://doc.rust-lang.org/std/primitive.bool.html
 
 # Символы (`char`)
 
@@ -41,7 +41,7 @@ let two_hearts = '💕';
 Вы можете найти больше информации о символах (`char`) в [документации к
 стандартной библиотеке (англ.)][char].
 
-[char]: http://doc.rust-lang.org/nightly/std/primitive.char.html
+[char]: http://doc.rust-lang.org/std/primitive.char.html
 
 <a name="numeric-types"></a>
 # Числовые типы
@@ -65,18 +65,18 @@ let y = 1.0; // y has type f64
 Ниже представлен список различных числовых типов, со ссылками на их документацию
 в стандартной библиотеке:
 
-* [i8](http://doc.rust-lang.org/nightly/std/primitive.i8.html)
-* [i16](http://doc.rust-lang.org/nightly/std/primitive.i16.html)
-* [i32](http://doc.rust-lang.org/nightly/std/primitive.i32.html)
-* [i64](http://doc.rust-lang.org/nightly/std/primitive.i64.html)
-* [u8](http://doc.rust-lang.org/nightly/std/primitive.u8.html)
-* [u16](http://doc.rust-lang.org/nightly/std/primitive.u16.html)
-* [u32](http://doc.rust-lang.org/nightly/std/primitive.u32.html)
-* [u64](http://doc.rust-lang.org/nightly/std/primitive.u64.html)
-* [isize](http://doc.rust-lang.org/nightly/std/primitive.isize.html)
-* [usize](http://doc.rust-lang.org/nightly/std/primitive.usize.html)
-* [f32](http://doc.rust-lang.org/nightly/std/primitive.f32.html)
-* [f64](http://doc.rust-lang.org/nightly/std/primitive.f64.html)
+* [i8](http://doc.rust-lang.org/std/primitive.i8.html)
+* [i16](http://doc.rust-lang.org/std/primitive.i16.html)
+* [i32](http://doc.rust-lang.org/std/primitive.i32.html)
+* [i64](http://doc.rust-lang.org/std/primitive.i64.html)
+* [u8](http://doc.rust-lang.org/std/primitive.u8.html)
+* [u16](http://doc.rust-lang.org/std/primitive.u16.html)
+* [u32](http://doc.rust-lang.org/std/primitive.u32.html)
+* [u64](http://doc.rust-lang.org/std/primitive.u64.html)
+* [isize](http://doc.rust-lang.org/std/primitive.isize.html)
+* [usize](http://doc.rust-lang.org/std/primitive.usize.html)
+* [f32](http://doc.rust-lang.org/std/primitive.f32.html)
+* [f64](http://doc.rust-lang.org/std/primitive.f64.html)
 
 Давайте пройдёмся по их категориям:
 
@@ -164,7 +164,7 @@ println!("Второе имя: {}", names[1]);
 Вы можете найти больше информации о массивах (`array`) в [документации к
 стандартной библиотеке (англ.)][array].
 
-[array]: http://doc.rust-lang.org/nightly/std/primitive.array.html
+[array]: http://doc.rust-lang.org/std/primitive.array.html
 
 <a name="slices"></a>
 # Срезы
@@ -190,7 +190,7 @@ let complete = &a[..]; // Срез, содержащий все элементы
 Вы можете найти больше информации о срезах (`slice`) в [документации к
 стандартной библиотеке (англ.)][slice].
 
-[slice]: http://doc.rust-lang.org/nightly/std/primitive.slice.html
+[slice]: http://doc.rust-lang.org/std/primitive.slice.html
 
 # `str`
 
@@ -205,7 +205,7 @@ let complete = &a[..]; // Срез, содержащий все элементы
 Вы можете найти больше информации о строках (`str`) в [документации к
 стандартной библиотеке (англ.)][str].
 
-[str]: http://doc.rust-lang.org/nightly/std/primitive.str.html
+[str]: http://doc.rust-lang.org/std/primitive.str.html
 
 <a name="tuples"></a>
 # Кортежи
@@ -290,7 +290,7 @@ println!("x is {}", x);
 Вы можете найти больше информации о кортежах (`tuple`) в [документации к
 стандартной библиотеке (англ.)][tuple].
 
-[tuple]: http://doc.rust-lang.org/nightly/std/primitive.tuple.html
+[tuple]: http://doc.rust-lang.org/std/primitive.tuple.html
 
 # Функции
 
