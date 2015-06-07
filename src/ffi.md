@@ -184,7 +184,7 @@ pub fn uncompress(src: &[u8]) -> Option<Vec<u8>> {
 случае паники).
 
 Чтобы получить более подробную информацию о деструкторах, смотрите
-[Drop trait](../std/ops/trait.Drop.html).
+[Drop trait](http://doc.rust-lang.org/std/ops/trait.Drop.html).
 
 # Обратные вызовы Rust функций из C кода
 

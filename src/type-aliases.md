@@ -71,5 +71,6 @@ type Result<T> = result::Result<T, ConcreteError>;
 В этом примере мы создаем свою версию типа `Result`, который всегда будет
 использовать перечисление `ConcreteError` в `Result<T, E>` вместо типа `E`.
 Псевдонимы типов часто используются в модулях стандартной библиотеки для
-создания своих псевдонимов для `Result<T, E>`. Например, [io::Result](http://doc
-.rust-lang.org/std/io/type.Result.html).
+создания своих псевдонимов для `Result<T, E>`. Например, [io::Result][ioresult].
+
+[ioresult]: http://doc.rust-lang.org/std/io/type.Result.html

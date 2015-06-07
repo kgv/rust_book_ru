@@ -206,7 +206,7 @@ pub struct TraitObject {
 # }
 ```
 
-[stdraw]: ../std/raw/struct.TraitObject.html
+[stdraw]: http://doc.rust-lang.org/std/raw/struct.TraitObject.html
 
 То есть трейт объект, такой как `&Foo`, состоит из указателя на "данные" и
 указателя на "виртуальную таблицу".

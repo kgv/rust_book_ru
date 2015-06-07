@@ -43,7 +43,7 @@ Rust отслеживает такие комментарии, и использ
 документации. Что важно при документировании таких вещей, как перечисления:
 
 ```rust
-/// The `Option` type. See [the module level documentation](../) for more.
+/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
 enum Option<T> {
     /// No value
     None,
@@ -55,7 +55,7 @@ enum Option<T> {
 Код, приведенный выше работает, а ниже - не работает:
 
 ```rust,ignore
-/// The `Option` type. See [the module level documentation](../) for more.
+/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
 enum Option<T> {
     None, /// No value
     Some(T), /// Some value `T`
