@@ -42,7 +42,7 @@
     * [Типажи](src/traits.md)
     * [Типаж `Drop`](src/drop.md)
     * [Конструкция `if let`](src/if-let.md)
-    * [Трейт объекты](src/trait-objects.md)
+    * [Типажи-объекты](src/trait-objects.md)
     * [Замыкания](src/closures.md)
     * [Универсальный синтаксис вызова функций (UFCS)](src/ufcs.md)
     * [Контейнеры и Модули](src/crates-and-modules.md)
