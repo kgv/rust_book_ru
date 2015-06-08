@@ -190,7 +190,7 @@
 
     <h1 class="title">Типаж Drop (сброс)</h1>
     <p>Мы обсудили типажи. Теперь давайте поговорим о конкретном типаже,
-предоставляемом стандартной библиотекой Rust. Этот типаж - <a href="http://doc.rust-lang.org/stable/std/ops/trait.Drop.html"><code>Drop</code></a>
+предоставляемом стандартной библиотекой Rust. Этот типаж - <a href="http://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a>
 (сброс) - позволяет выполнить некоторый код, когда значение выходит из области
 видимости. Например:</p>
 <span class='rusttest'>struct HasDrop;
@@ -207,7 +207,7 @@ fn main() {
     // сделаем что-то
 
 } // тут x выходит из области видимости
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>HasDrop</span>;
 
 <span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>HasDrop</span> {
@@ -245,7 +245,7 @@ fn main() {
     let firecracker = Firework { strength: 1 };
     let tnt = Firework { strength: 100 };
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Firework</span> {
     <span class='ident'>strength</span>: <span class='ident'>i32</span>,
 }
@@ -273,7 +273,7 @@ fn main() {
 последним вышел.</p>
 
 <p>Так зачем нужен <code>Drop</code>? Часто <code>Drop</code> используют, чтобы освободить ресурсы,
-представленные структурой (<code>struct</code>). Например, счётчик ссылок <a href="http://doc.rust-lang.org/stable/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>
+представленные структурой (<code>struct</code>). Например, счётчик ссылок <a href="http://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>
 уменьшает число активных ссылок в <code>drop()</code>, и когда оно достигает нуля,
 освобождает хранимое значение.</p>
 

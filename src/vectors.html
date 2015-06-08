@@ -190,14 +190,14 @@
 
     <h1 class="title">Вектора</h1>
     <p><em>Вектор</em> - это динамический, &quot;растущий&quot; массив, реализованный в виде
-стандартного библиотечного типа <a href="../std/vec/"><code>Vec&lt;T&gt;</code></a> (где <code>&lt;T&gt;</code> является
-<a href="./generics.html">дженериком</a>). Вектора всегда размещает данные в куче. Вектора и
-<a href="primitive-types.html#slices">срезы</a> - это как <a href="strings.html"><code>String</code></a> и <code>&amp;str</code>. Вы можете создавать их с
-помощью макроса <code>vec!</code>:</p>
+стандартного библиотечного типа <a href="http://doc.rust-lang.org/std/vec/"><code>Vec&lt;T&gt;</code></a>
+(где <code>&lt;T&gt;</code> является <a href="./generics.html">дженериком</a>). Вектора всегда размещает
+данные в куче. Вектора и <a href="primitive-types.html#slices">срезы</a> - это как <a href="strings.html"><code>String</code></a> и <code>&amp;str</code>.
+Вы можете создавать их с помощью макроса <code>vec!</code>:</p>
 <span class='rusttest'>fn main() {
     let v = vec![1, 2, 3]; // v: Vec&lt;i32&gt;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// v: Vec&lt;i32&gt;</span>
 </pre>
 
@@ -210,7 +210,7 @@
 <span class='rusttest'>fn main() {
     let v = vec![0; 10]; // ten zeroes
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0</span>; <span class='number'>10</span>]; <span class='comment'>// ten zeroes</span>
 </pre>
 
@@ -223,7 +223,7 @@
     
     println!(&quot;Теперь длина nums составляет {}&quot;, nums.len()); // Печатает 4
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nums</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// mut nums: Vec&lt;i32&gt;</span>
 
 <span class='ident'>nums</span>.<span class='ident'>push</span>(<span class='number'>4</span>);

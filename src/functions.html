@@ -192,7 +192,7 @@
     <p>Каждая программа на Rust имеет по крайней мере одну функцию - <code>main</code>:</p>
 <span class='rusttest'>fn main() {
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
 }
 </pre>
@@ -205,7 +205,7 @@
     fn foo() {
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span>() {
 }
 </pre>
@@ -217,7 +217,7 @@
         println!(&quot;x равен: {}&quot;, x);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>print_number</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равен: {}&quot;</span>, <span class='ident'>x</span>);
 }
@@ -231,7 +231,7 @@
 fn print_number(x: i32) {
     println!(&quot;x равен: {}&quot;, x);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='ident'>print_number</span>(<span class='number'>5</span>);
 }
@@ -252,7 +252,7 @@ fn print_number(x: i32) {
 fn print_sum(x: i32, y: i32) {
     println!(&quot;сумма чисел: {}&quot;, x + y);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='ident'>print_sum</span>(<span class='number'>5</span>, <span class='number'>6</span>);
 }
@@ -271,7 +271,7 @@ fn print_sum(x: i32, y: i32) {
         println!(&quot;сумма чисел: {}&quot;, x + y);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>print_sum</span>(<span class='ident'>x</span>, <span class='ident'>y</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;сумма чисел: {}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
 }
@@ -296,7 +296,7 @@ fn print_number(x, y) {
         x + 1
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
 }
@@ -311,7 +311,7 @@ fn print_number(x, y) {
         x + 1;
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
 }
@@ -357,7 +357,7 @@ help: consider removing this semicolon:
 <span class='rusttest'>fn main() {
     let x = (let y = 5); // expected identifier, found keyword `let`
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>5</span>); <span class='comment'>// expected identifier, found keyword `let`</span>
 </pre>
 
@@ -373,7 +373,7 @@ help: consider removing this semicolon:
     
     let x = (y = 6);  // x будет присвоено значение `()`, а не `6`
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>);  <span class='comment'>// x будет присвоено значение `()`, а не `6`</span>
@@ -392,7 +392,7 @@ help: consider removing this semicolon:
         x + 1
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>add_one</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
 }
@@ -414,7 +414,7 @@ help: consider removing this semicolon:
         x + 1
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='kw'>return</span> <span class='ident'>x</span>;
 
@@ -430,7 +430,7 @@ help: consider removing this semicolon:
         return x + 1;
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='kw'>return</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
 }
@@ -449,7 +449,7 @@ help: consider removing this semicolon:
         panic!(&quot;Эта функция не возвращает управление!&quot;);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>diverges</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> {
     <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Эта функция не возвращает управление!&quot;</span>);
 }
@@ -470,7 +470,7 @@ help: consider removing this semicolon:
     let x: i32 = diverges();
     let x: String = diverges();
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='ident'>diverges</span>();
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>String</span> <span class='op'>=</span> <span class='ident'>diverges</span>();
 </pre>

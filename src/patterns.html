@@ -206,7 +206,7 @@
         _ =&gt; println!(&quot;anything&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -231,7 +231,7 @@
         _ =&gt; println!(&quot;anything&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -254,7 +254,7 @@
         _ =&gt; println!(&quot;anything&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -275,7 +275,7 @@
         _ =&gt; println!(&quot;something else&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='string'>&#39;💅&#39;</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -298,7 +298,7 @@
         _ =&gt; println!(&quot;anything&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -322,7 +322,7 @@
         _ =&gt; {}
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>struct</span> <span class='ident'>Person</span> {
     <span class='ident'>name</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
@@ -348,7 +348,7 @@
         _ =&gt; println!(&quot;anything&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -374,7 +374,7 @@
         OptionalInt::Missing =&gt; println!(&quot;No such luck.&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>enum</span> <span class='ident'>OptionalInt</span> {
     <span class='ident'>Value</span>(<span class='ident'>i32</span>),
     <span class='ident'>Missing</span>,
@@ -407,7 +407,7 @@
         OptionalInt::Missing =&gt; println!(&quot;No such luck.&quot;),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>enum</span> <span class='ident'>OptionalInt</span> {
     <span class='ident'>Value</span>(<span class='ident'>i32</span>),
     <span class='ident'>Missing</span>,
@@ -434,7 +434,7 @@
         ref r =&gt; println!(&quot;Got a reference to {}&quot;, r),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -454,7 +454,7 @@
         ref mut mr =&gt; println!(&quot;Got a mutable reference to {}&quot;, mr),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
@@ -478,7 +478,7 @@
         Point { x: x, y: y } =&gt; println!(&quot;({},{})&quot;, x, y),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
     <span class='ident'>y</span>: <span class='ident'>i32</span>,
@@ -505,7 +505,7 @@
         Point { x: x, .. } =&gt; println!(&quot;x is {}&quot;, x),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
     <span class='ident'>y</span>: <span class='ident'>i32</span>,
@@ -533,7 +533,7 @@
         Point { y: y, .. } =&gt; println!(&quot;y is {}&quot;, y),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
     <span class='ident'>y</span>: <span class='ident'>i32</span>,
@@ -561,7 +561,7 @@
         Foo { x: Some(ref name), y: None } =&gt; ...
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>name</span>), <span class='ident'>y</span>: <span class='prelude-val'>None</span> } <span class='op'>=&gt;</span> ...
 }

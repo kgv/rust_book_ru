@@ -205,7 +205,7 @@ fn main() {
         }
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Circle</span> {
     <span class='ident'>x</span>: <span class='ident'>f64</span>,
     <span class='ident'>y</span>: <span class='ident'>f64</span>,
@@ -240,7 +240,7 @@ fn main() {
         }
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Circle</span> {
     <span class='ident'>x</span>: <span class='ident'>f64</span>,
     <span class='ident'>y</span>: <span class='ident'>f64</span>,
@@ -276,7 +276,7 @@ fn main() {
         println!(&quot;This shape has an area of {}&quot;, shape.area());
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
 }
@@ -298,7 +298,7 @@ fn main() {
         println!(&quot;This shape has an area of {}&quot;, shape.area());
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>HasArea</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
 }
@@ -358,7 +358,7 @@ fn main() {
     print_area(c);
     print_area(s);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
     <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
 }
@@ -421,7 +421,7 @@ This shape has an area of 1
 <span class='rusttest'>fn main() {
     print_area(5);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='ident'>print_area</span>(<span class='number'>5</span>);
 </pre>
 
@@ -448,7 +448,7 @@ This shape has an area of 1
     
     5.area();
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
     <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
 }
@@ -501,7 +501,7 @@ fn main() {
 
     println!(&quot;{}&quot;, c.area());
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>shapes</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
 
@@ -573,7 +573,7 @@ fn main() {
 
     println!(&quot;{}&quot;, c.area());
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>shapes</span> {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
 
@@ -633,7 +633,7 @@ fn main() {
         x.clone();
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
     <span class='ident'>x</span>.<span class='ident'>clone</span>();
 }
@@ -648,7 +648,7 @@ fn main() {
         println!(&quot;{:?}&quot;, x);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 
 <span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
@@ -673,7 +673,7 @@ fn main() {
         println!(&quot;{:?}&quot;, y);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 
 <span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span>, <span class='ident'>K</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>) {
@@ -705,7 +705,7 @@ fn main() {
     foo(&quot;Hello&quot;, &quot;world&quot;);
     bar(&quot;Hello&quot;, &quot;workd&quot;);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 
 <span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span>, <span class='ident'>K</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>) {
@@ -742,7 +742,7 @@ fn main() {
         println!(&quot;{:?}&quot;, y);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
 
 <span class='kw'>fn</span> <span class='ident'>bar</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>K</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>K</span>)
@@ -779,7 +779,7 @@ fn main() {
         1i32.convert()
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>trait</span> <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>Output</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>convert</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Output</span>;
 }
@@ -816,7 +816,7 @@ fn main() {
         Ok(1.0 / x)
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
     <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
 
@@ -839,7 +839,7 @@ fn main() {
         Ok(1.0 / x)
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialEq</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
     <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
 
@@ -871,7 +871,7 @@ fn main() {
         Ok(one / x)
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>num</span>::<span class='ident'>Float</span>;
 
 <span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Float</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
@@ -899,7 +899,7 @@ fn main() {
     println!(&quot;the inverse of {} is {:?}&quot;, 0.0f32, inverse(0.0f32));
     println!(&quot;the inverse of {} is {:?}&quot;, 0.0f64, inverse(0.0f64));
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f32</span>));
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f64</span>));
 
@@ -918,7 +918,7 @@ fn main() {
         fn baz(&amp;self) { println!(&quot;We called baz.&quot;); }
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>trait</span> <span class='ident'>Foo</span> {
     <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
 
@@ -954,7 +954,7 @@ fn main() {
     let over = OverrideDefault;
     over.baz(); // prints &quot;Override baz!&quot;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>UseDefault</span>;
 
 <span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>UseDefault</span> {

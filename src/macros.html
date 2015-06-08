@@ -228,7 +228,7 @@
     let x: Vec&lt;u32&gt; = vec![1, 2, 3];
     assert_eq!(x, [1, 2, 3]);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 </pre>
 
@@ -245,7 +245,7 @@
     };
     assert_eq!(x, [1, 2, 3]);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> <span class='op'>=</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>temp_vec</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
     <span class='ident'>temp_vec</span>.<span class='ident'>push</span>(<span class='number'>1</span>);
@@ -274,7 +274,7 @@ chapter].</p>
 fn main() {
     assert_eq!(vec![1,2,3], [1, 2, 3]);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>vec</span> {
     ( $( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span> ),<span class='op'>*</span> ) <span class='op'>=&gt;</span> {
         {
@@ -292,7 +292,7 @@ fn main() {
 <span class='rusttest'>fn main() {
     macro_rules! vec { ... }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>vec</span> { ... }
 </pre>
 
@@ -309,7 +309,7 @@ fn main() {
 <span class='rusttest'>fn main() {
     ( $( $x:expr ),* ) =&gt; { ... };
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 ( $( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span> ),<span class='op'>*</span> ) <span class='op'>=&gt;</span> { ... };
 </pre>
 
@@ -337,7 +337,7 @@ fn main() {
 fn main() {
     foo!(y =&gt; 3);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     (<span class='ident'>x</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>e</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;mode X: {}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>e</span>));
     (<span class='ident'>y</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>e</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;mode Y: {}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>e</span>));
@@ -357,7 +357,7 @@ fn main() {
 <span class='rusttest'>fn main() {
     foo!(z =&gt; 3);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='macro'>foo</span><span class='macro'>!</span>(<span class='ident'>z</span> <span class='op'>=&gt;</span> <span class='number'>3</span>);
 </pre>
 
@@ -376,7 +376,7 @@ Rust. Но мы можем соединить кусочки раздробле�
         temp_vec.push($x);
     )*
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 $(
     <span class='ident'>temp_vec</span>.<span class='ident'>push</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>);
 )<span class='op'>*</span>
@@ -400,7 +400,7 @@ $(
         }}
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     () <span class='op'>=&gt;</span> {{
         ...
@@ -465,7 +465,7 @@ fn main() {
 
     assert_eq!(a, [11, 12, 13, 24, 25, 26]);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>o_O</span> {
     (
         $(
@@ -519,7 +519,7 @@ int main() {
 fn main() {
     assert_eq!(25, five_times!(2 + 3));
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>five_times</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='number'>5</span> <span class='op'>*</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>);
 }
@@ -577,7 +577,7 @@ fn main() {
     let state: &amp;str = &quot;reticulating splines&quot;;
     log!(state);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>log</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>msg</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {{
         <span class='kw'>let</span> <span class='ident'>state</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='ident'>get_log_state</span>();
@@ -610,7 +610,7 @@ fn main() {
     foo!();
     println!(&quot;{}&quot;, x);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     () <span class='op'>=&gt;</span> (<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>3</span>);
 }
@@ -631,7 +631,7 @@ fn main() {
     foo!(x);
     println!(&quot;{}&quot;, x);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>v</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (<span class='kw'>let</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>v</span> <span class='op'>=</span> <span class='number'>3</span>);
 }
@@ -652,7 +652,7 @@ fn main() {
     foo!();
     x();
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>foo</span> {
     () <span class='op'>=&gt;</span> (<span class='kw'>fn</span> <span class='ident'>x</span>() { });
 }
@@ -698,7 +698,7 @@ fn main() {
         &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Macros guide&lt;/title&gt;&lt;/head&gt;\
          &lt;body&gt;&lt;h1&gt;Macros are the best!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>write_html</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>w</span>:<span class='ident'>expr</span>, ) <span class='op'>=&gt;</span> (());
 
@@ -805,7 +805,7 @@ fn main() {
 <li><code>stmt</code>: единственный оператор. Например: <code>let x = 3</code>.</li>
 <li><code>block</code>: последовательность операторов, ограниченная фигурными
 скобками. Например: <code>{ log(error, &quot;hi&quot;); return 12; }</code>.</li>
-<li><code>item</code>: <a href="http://doc.rust-lang.org/stable/reference.html#items">элемент</a>. Например: <code>fn foo() { }</code>; <code>struct Bar;</code>.</li>
+<li><code>item</code>: <a href="http://doc.rust-lang.org/reference.html#items">элемент</a>. Например: <code>fn foo() { }</code>; <code>struct Bar;</code>.</li>
 <li><code>meta</code>: &quot;мета-элемент&quot;, как в атрибутах. Например: <code>cfg(target_os = &quot;windows&quot;)</code>.</li>
 <li><code>tt</code>: единственное дерево лексем.</li>
 </ul>
@@ -853,7 +853,7 @@ fn main() {
     #[macro_use(foo, bar)]
     extern crate baz;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>macro_use</span>(<span class='ident'>foo</span>, <span class='ident'>bar</span>)]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>baz</span>;
 </pre>
@@ -896,7 +896,7 @@ mod bar {
 
 // здесь видны: m1, m3, m4
 fn main() { }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>m1</span> { () <span class='op'>=&gt;</span> (()) }
 
 <span class='comment'>// здесь видны: m1</span>
@@ -952,7 +952,7 @@ macro_rules! inc_b {
     ($x:expr) =&gt; ( ::mylib::increment($x) )
 }
 fn main() { }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>increment</span>(<span class='ident'>x</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
     <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>
 }
@@ -982,7 +982,7 @@ macro_rules! inc {
     ($x:expr) =&gt; ( $crate::increment($x) )
 }
 fn main() { }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>inc</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> ( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>increment</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>) )
@@ -1029,7 +1029,7 @@ within Rust&#39;s macro system.</p>
             =&gt; (());
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>bct</span> {
     <span class='comment'>// cmd 0:  d ... =&gt; ...</span>
     (<span class='number'>0</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ps</span>:<span class='ident'>tt</span>),<span class='op'>*</span> ; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>_d</span>:<span class='ident'>tt</span>)

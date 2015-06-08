@@ -218,7 +218,7 @@
 <h3 id="send" class='section-header'><a
                            href="#send"><code>Send</code></a></h3>
 <p>Первый трейт, о котором мы будем говорить, называется
-<a href="../std/marker/trait.Send.html"><code>Send</code></a>. Когда тип <code>T</code> реализует <code>Send</code>, это
+<a href="http://doc.rust-lang.org/std/marker/trait.Send.html"><code>Send</code></a>. Когда тип <code>T</code> реализует <code>Send</code>, это
 указывает компилятору, что право владения переменными этого типа можно безопасно
 перемещать между потоками.</p>
 
@@ -234,7 +234,7 @@
 
 <h3 id="sync" class='section-header'><a
                            href="#sync"><code>Sync</code></a></h3>
-<p>Второй из этих трейтов называется <a href="../std/marker/trait.Sync.html"><code>Sync</code></a>. Когда
+<p>Второй из этих трейтов называется <a href="http://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a>. Когда
 тип <code>T</code> реализует <code>Sync</code>, это указывает компилятору, что переменные этого типа
 не имеют возможности использовать небезопасную память, когда они используются из
 нескольких потоков одновременно.</p>
@@ -261,7 +261,7 @@ fn main() {
         println!(&quot;Hello from a thread!&quot;);
     });
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -284,7 +284,7 @@ fn main() {
 
     println!(&quot;{}&quot;, handle.join().unwrap());
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -337,7 +337,7 @@ fn main() {
 
     thread::sleep_ms(50);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -389,7 +389,7 @@ fn main() {
 
     thread::sleep_ms(50);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Mutex</span>;
 
@@ -417,13 +417,13 @@ fn main() {
                   ^~~~~~~~~~~~~
 </code></pre>
 
-<p>Вы можете видеть, что <a href="../std/sync/struct.Mutex.html"><code>Mutex</code></a> содержит метод
-<a href="../std/sync/struct.Mutex.html#method.lock"><code>lock</code></a>, который имеет следующую
+<p>Вы можете видеть, что <a href="http://doc.rust-lang.org/std/sync/struct.Mutex.html"><code>Mutex</code></a> содержит метод
+<a href="http://doc.rust-lang.org/std/sync/struct.Mutex.html#method.lock"><code>lock</code></a>, который имеет следующую
 сигнатуру:</p>
 <span class='rusttest'>fn main() {
     fn lock(&amp;self) -&gt; LockResult&lt;MutexGuard&lt;T&gt;&gt;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>lock</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LockResult</span><span class='op'>&lt;</span><span class='ident'>MutexGuard</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span>
 </pre>
 
@@ -447,7 +447,7 @@ fn main() {
 
     thread::sleep_ms(50);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
@@ -482,7 +482,7 @@ thread::spawn(move || {
     }
     thread::sleep_ms(50);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
     <span class='ident'>data</span>[<span class='ident'>i</span>] <span class='op'>+=</span> <span class='number'>1</span>;
@@ -534,7 +534,7 @@ fn main() {
         rx.recv();
     }
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>mpsc</span>;
@@ -586,7 +586,7 @@ fn main() {
 
    rx.recv().ok().expect(&quot;Could not receive answer&quot;);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>mpsc</span>;
 
@@ -624,7 +624,7 @@ fn main() {
     
     assert!(result.is_err());
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
 <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {

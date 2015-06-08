@@ -197,7 +197,7 @@
 #![feature(no_std)]
 #![no_std]
 // fn main() {} tricked you, rustdoc!
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='comment'>// a minimal library</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span><span class='op'>=</span><span class='string'>&quot;lib&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>no_std</span>)]</span>
@@ -230,7 +230,7 @@ fn start(_argc: isize, _argv: *const *const u8) -&gt; isize {
 #[lang = &quot;eh_personality&quot;] extern fn eh_personality() {}
 #[lang = &quot;panic_fmt&quot;] fn panic_fmt() -&gt; ! { loop {} }
 // fn main() {} tricked you, rustdoc!
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>start</span>, <span class='ident'>no_std</span>, <span class='ident'>libc</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
 
@@ -271,7 +271,7 @@ pub extern fn main(argc: i32, argv: *const *const u8) -&gt; i32 {
 #[lang = &quot;eh_personality&quot;] extern fn eh_personality() {}
 #[lang = &quot;panic_fmt&quot;] fn panic_fmt() -&gt; ! { loop {} }
 // fn main() {} tricked you, rustdoc!
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>no_std</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_main</span>]</span>
@@ -303,11 +303,11 @@ pub extern fn main(argc: i32, argv: *const *const u8) -&gt; i32 {
 
 <p>Вторая из этих трех функций, <code>eh_personality</code>, используется в механизме
 обработки ошибок компилятора. Она часто отображается на функцию personality
-(специализации) GCC (для получения дополнительной информации смотри <a href="../std/rt/unwind/index.html">реализацию
-libstd</a>), но можно с уверенностью сказать, что для
-контейнеров, которые не вызывают панику, эта функция никогда не будет вызвана.
-Последняя функция, <code>panic_fmt</code>, также используются в механизме обработки ошибок
-компилятора.</p>
+(специализации) GCC (для получения дополнительной информации смотри <a href="http://doc.rust-lang.org/std/rt/unwind/index.html">реализацию
+libstd</a>), но можно с
+уверенностью сказать, что для контейнеров, которые не вызывают панику, эта
+функция никогда не будет вызвана. Последняя функция, <code>panic_fmt</code>, также
+используются в механизме обработки ошибок компилятора.</p>
 
 <h2 id="Использование-основной-библиотеки-(libcore)" class='section-header'><a
                            href="#Использование-основной-библиотеки-(libcore)">Использование основной библиотеки (libcore)</a></h2>
@@ -321,7 +321,7 @@ libstd</a>), но можно с уверенностью сказать, что 
 работает Rust. Стандартная библиотека предоставляет немало функциональных
 возможностей, однако, для Rust также важна производительность. Если стандартная
 библиотека не соответствует этим требованиям, то вместо нее может быть
-использована <a href="../core/index.html">libcore</a>.</p>
+использована <a href="http://doc.rust-lang.org/core/index.html">libcore</a>.</p>
 
 <p>Основная библиотека имеет очень мало зависимостей и гораздо более компактна, чем
 стандартная библиотека. Кроме того, основная библиотека имеет большую часть
@@ -379,7 +379,7 @@ extern fn panic_fmt(args: &amp;core::fmt::Arguments,
 #[lang = &quot;eh_personality&quot;] extern fn eh_personality() {}
 #[start] fn start(argc: isize, argv: *const *const u8) -&gt; isize { 0 }
 fn main() {}
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>lang_items</span>, <span class='ident'>start</span>, <span class='ident'>no_std</span>, <span class='ident'>core</span>, <span class='ident'>libc</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
 

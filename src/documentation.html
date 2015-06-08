@@ -219,7 +219,7 @@
         // implementation goes here
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// Constructs a new `Rc&lt;T&gt;`.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
@@ -234,7 +234,7 @@
 }
 </pre>
 
-<p>Этот код генерирует документацию, которая выглядит <a href="http://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.new">так</a>. В приведенном
+<p>Этот код генерирует документацию, которая выглядит <a href="http://doc.rust-lang.org/std/rc/struct.Rc.html#method.new">так</a>. В приведенном
 коде реализация метода была заменена на обычный комментарий. Первое, на что
 следует обратить внимание в этом примере: используется <code>///</code>, а не <code>//</code>. Символы
 <code>///</code> указывают, что это комментарий документации.</p>
@@ -244,7 +244,7 @@
 <p>Rust отслеживает такие комментарии, и использует их при генерировании
 документации. Что важно при документировании таких вещей, как перечисления:</p>
 <span class='rusttest'>fn main() {
-    /// The `Option` type. See [the module level documentation](../) for more.
+    /// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
     enum Option&lt;T&gt; {
         /// No value
         None,
@@ -252,8 +252,8 @@
         Some(T),
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
-<span class='doccomment'>/// The `Option` type. See [the module level documentation](../) for more.</span>
+}</span><pre class='rust rust-example-rendered'>
+<span class='doccomment'>/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.</span>
 <span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// No value</span>
     <span class='prelude-val'>None</span>,
@@ -264,14 +264,14 @@
 
 <p>Код, приведенный выше работает, а ниже - не работает:</p>
 <span class='rusttest'>fn main() {
-    /// The `Option` type. See [the module level documentation](../) for more.
+    /// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
     enum Option&lt;T&gt; {
         None, /// No value
         Some(T), /// Some value `T`
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
-<span class='doccomment'>/// The `Option` type. See [the module level documentation](../) for more.</span>
+}</span><pre class='rust rust-example-rendered'>
+<span class='doccomment'>/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.</span>
 <span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='prelude-val'>None</span>, <span class='doccomment'>/// No value</span>
     <span class='prelude-val'>Some</span>(<span class='ident'>T</span>), <span class='doccomment'>/// Some value `T`</span>
@@ -297,7 +297,7 @@ hello.rs:4 }
     /// Constructs a new `Rc&lt;T&gt;`.
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// Constructs a new `Rc&lt;T&gt;`.</span>
 </pre>
 
@@ -311,7 +311,7 @@ hello.rs:4 }
     ///
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Other details about constructing `Rc&lt;T&gt;`s, maybe describing complicated</span>
 <span class='doccomment'>/// semantics, maybe additional options, all kinds of stuff.</span>
@@ -327,7 +327,7 @@ hello.rs:4 }
     /// # Examples
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Examples</span>
 </pre>
 
@@ -339,7 +339,7 @@ hello.rs:4 }
     /// # Panics
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Panics</span>
 </pre>
 
@@ -352,7 +352,7 @@ hello.rs:4 }
     /// # Failures
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Failures</span>
 </pre>
 
@@ -364,7 +364,7 @@ hello.rs:4 }
     /// # Safety
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Safety</span>
 </pre>
 
@@ -380,7 +380,7 @@ hello.rs:4 }
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
@@ -412,7 +412,7 @@ hello.rs:4 }
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Simple `&amp;str` patterns:</span>
@@ -441,7 +441,7 @@ hello.rs:4 }
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// println!(&quot;Hello, world&quot;);</span>
 <span class='doccomment'>/// ```</span>
@@ -455,7 +455,7 @@ hello.rs:4 }
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```c</span>
 <span class='doccomment'>/// printf(&quot;Hello, world\n&quot;);</span>
 <span class='doccomment'>/// ```</span>
@@ -481,7 +481,7 @@ hello.rs:4 }
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// println!(&quot;Hello, world&quot;);</span>
 <span class='doccomment'>/// ```</span>
@@ -498,7 +498,7 @@ hello.rs:4 }
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// use std::rc::Rc;</span>
 <span class='doccomment'>///</span>
@@ -511,7 +511,7 @@ hello.rs:4 }
     use std::rc::Rc;
     let five = Rc::new(5);
 }
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>rc</span>::<span class='ident'>Rc</span>;
     <span class='kw'>let</span> <span class='ident'>five</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
@@ -544,7 +544,7 @@ hello.rs:4 }
     /// Some documentation.
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// Some documentation.</span>
 </pre>
 
@@ -562,7 +562,7 @@ hello.rs:4 }
     let y = 6;
     println!(&quot;{}&quot;, x + y);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>;
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
@@ -576,7 +576,7 @@ hello.rs:4 }
     let y = 6;
     println!(&quot;{}&quot;, x + y);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 </pre>
 
@@ -586,7 +586,7 @@ hello.rs:4 }
     let y = 6;
     println!(&quot;{}&quot;, x + y);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>;
 </pre>
 
@@ -596,7 +596,7 @@ hello.rs:4 }
     let y = 6;
     println!(&quot;{}&quot;, x + y);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
 </pre>
 
@@ -654,7 +654,7 @@ macro_rules! panic_unless {
     ($condition:expr, $($rest:expr),+) =&gt; ({ if ! $condition { panic!($($rest),+); } });
 }
 fn main() {}
-</span><pre id='rust-example-rendered' class='rust '>
+</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// Panic with a given message unless an expression evaluates to true.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
@@ -707,7 +707,7 @@ $ cargo test
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```ignore</span>
 <span class='doccomment'>/// fn foo() {</span>
 <span class='doccomment'>/// ```</span>
@@ -724,7 +724,7 @@ $ cargo test
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```should_panic</span>
 <span class='doccomment'>/// assert!(false);</span>
 <span class='doccomment'>/// ```</span>
@@ -740,7 +740,7 @@ $ cargo test
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```no_run</span>
 <span class='doccomment'>/// loop {</span>
 <span class='doccomment'>///     println!(&quot;Hello, world&quot;);</span>
@@ -767,7 +767,7 @@ $ cargo test
         // ...
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>foo</span> {
     <span class='doccomment'>//! This is documentation for the `foo` module.</span>
     <span class='doccomment'>//!</span>
@@ -785,7 +785,7 @@ $ cargo test
     //!
     //! The `foo` module contains a lot of useful functionality blah blah blah
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>//! A module for using `foo`s.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The `foo` module contains a lot of useful functionality blah blah blah</span>
@@ -814,7 +814,7 @@ Rust. Так как комментарии пишутся на Markdown, то ч
     /// ```
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
@@ -856,7 +856,7 @@ This is the example documentation.
     #[doc=&quot;this&quot;]
     fn bar() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// this</span>
 
 <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;this&quot;</span>]</span>
@@ -868,7 +868,7 @@ This is the example documentation.
     
     #![doc=&quot;/// this&quot;]
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>//! this</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;/// this&quot;</span>]</span>
@@ -886,7 +886,7 @@ This is the example documentation.
     
     pub use foo::bar;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>foo</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>foo</span>::<span class='ident'>bar</span>;
@@ -903,7 +903,7 @@ This is the example documentation.
     #[doc(no_inline)]
     pub use foo::bar;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>foo</span>;
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>no_inline</span>)]</span>
@@ -919,7 +919,7 @@ This is the example documentation.
            html_favicon_url = &quot;http://www.rust-lang.org/favicon.ico&quot;,
            html_root_url = &quot;http://doc.rust-lang.org/&quot;)];
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_logo_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png&quot;</span>,
        <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/favicon.ico&quot;</span>,
        <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://doc.rust-lang.org/&quot;</span>)]</span>;
@@ -950,7 +950,7 @@ This is the example documentation.
     /// &lt;script&gt;alert(document.cookie)&lt;/script&gt;
     fn foo() {}
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// &lt;script&gt;alert(document.cookie)&lt;/script&gt;</span>
 </pre>
 

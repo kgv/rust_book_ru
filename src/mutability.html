@@ -196,7 +196,7 @@
     let x = 5;
     x = 6; // ошибка!
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// ошибка!</span>
 </pre>
@@ -207,7 +207,7 @@
     
     x = 6; // нет проблем!
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// нет проблем!</span>
@@ -223,7 +223,7 @@
     let mut x = 5;
     let y = &amp;mut x;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
 </pre>
@@ -237,7 +237,7 @@
     let mut x = 5;
     let mut y = &amp;mut x;
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
 </pre>
@@ -253,7 +253,7 @@
     fn foo(mut x: i32) {
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> (<span class='kw-2'>mut</span> <span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=</span> (<span class='number'>5</span>, <span class='number'>6</span>);
 
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span>) {
@@ -263,14 +263,14 @@
                            href="#Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость">Внутренняя (interior) и внешняя (exterior) изменяемость</a></h1>
 <p>Однако, когда мы говорим, что что-либо &quot;неизменяемо&quot; в Rust, это не означает,
 что оно не может измениться: мы имеем ввиду что-то, что имеет &quot;внешнюю
-изменяемость&quot;. Для примера рассмотрим <a href="http://doc.rust-lang.org/stable/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>:</p>
+изменяемость&quot;. Для примера рассмотрим <a href="http://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>:</p>
 <span class='rusttest'>fn main() {
     use std::sync::Arc;
     
     let x = Arc::new(5);
     let y = x.clone();
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
 
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
@@ -301,7 +301,7 @@
 неизменяемую ссылку (<code>&amp;T</code>). Если бы он возвращал изменяемую ссылку (<code>&amp;mut T</code>),
 то у нас были бы проблемы.</p>
 
-<p>Другие типы, например те, что определены в модуле <a href="http://doc.rust-lang.org/stable/std/cell/index.html"><code>std::cell</code></a>,
+<p>Другие типы, например те, что определены в модуле <a href="http://doc.rust-lang.org/std/cell/index.html"><code>std::cell</code></a>,
 напротив, имеют &quot;внутреннюю изменяемость&quot;. Например:</p>
 <span class='rusttest'>fn main() {
     use std::cell::RefCell;
@@ -310,7 +310,7 @@
     
     let y = x.borrow_mut();
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
 
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='number'>42</span>);
@@ -329,7 +329,7 @@
     let z = x.borrow_mut();
     (y, z);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
 
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='number'>42</span>);
@@ -353,7 +353,7 @@
         mut y: i32, // нельзя
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
     <span class='kw-2'>mut</span> <span class='ident'>y</span>: <span class='ident'>i32</span>, <span class='comment'>// нельзя</span>
@@ -375,7 +375,7 @@
     
     b.x = 10; // error: cannot assign to immutable field `b.x`
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
     <span class='ident'>y</span>: <span class='ident'>i32</span>,
@@ -390,7 +390,7 @@
 <span class='ident'>b</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>; <span class='comment'>// error: cannot assign to immutable field `b.x`</span>
 </pre>
 
-<p>Однако, используя <a href="http://doc.rust-lang.org/stable/std/cell/struct.Cell.html"><code>Cell&lt;T&gt;</code></a>, вы можете эмулировать изменяемость на
+<p>Однако, используя <a href="http://doc.rust-lang.org/std/cell/struct.Cell.html"><code>Cell&lt;T&gt;</code></a>, вы можете эмулировать изменяемость на
 уровне полей:</p>
 <span class='rusttest'>fn main() {
     use std::cell::Cell;
@@ -406,7 +406,7 @@
     
     println!(&quot;y: {:?}&quot;, point.y);
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>Cell</span>;
 
 <span class='kw'>struct</span> <span class='ident'>Point</span> {

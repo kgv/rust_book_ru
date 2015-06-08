@@ -219,7 +219,7 @@ $ cd adder
     fn it_works() {
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
 }
@@ -258,7 +258,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
     fn it_works() {
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
 </pre>
 
@@ -277,7 +277,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         assert!(false);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='boolval'>false</span>);
@@ -339,7 +339,7 @@ thread &#39;&lt;main&gt;&#39; panicked at &#39;Some tests failed&#39;, /home/ste
         assert!(false);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='attribute'>#[<span class='ident'>should_panic</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
@@ -375,7 +375,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         assert_eq!(&quot;Hello&quot;, &quot;world&quot;);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='attribute'>#[<span class='ident'>should_panic</span>]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
@@ -414,7 +414,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         assert_eq!(&quot;Hello&quot;, &quot;world&quot;);
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
 <span class='attribute'>#[<span class='ident'>should_panic</span>(<span class='ident'>expected</span> <span class='op'>=</span> <span class='string'>&quot;assertion failed&quot;</span>)]</span>
 <span class='kw'>fn</span> <span class='ident'>it_works</span>() {
@@ -433,7 +433,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         assert_eq!(4, add_two(2));
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
 }
@@ -468,7 +468,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         }
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
 }
@@ -513,7 +513,7 @@ fn main() {
         }
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_two</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
     <span class='ident'>a</span> <span class='op'>+</span> <span class='number'>2</span>
@@ -569,7 +569,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         assert_eq!(4, adder::add_two(2));
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>adder</span>;
 
 <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -656,7 +656,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
         }
     }
     
-}</span><pre id='rust-example-rendered' class='rust '>
+}</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>//! The `adder` crate provides functions that add numbers to other numbers.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! # Examples</span>
