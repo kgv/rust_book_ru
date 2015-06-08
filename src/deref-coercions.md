@@ -24,7 +24,7 @@ fn main() {
 }
 ```
 
-[deref]: ../std/ops/trait.Deref.html
+[deref]: http://doc.rust-lang.org/std/ops/trait.Deref.html
 
 Это полезно при написании своих указательных типов. Однако, в языке есть
 возможность, связанная с `Deref`: преобразования при разыменовании. Вот правило:

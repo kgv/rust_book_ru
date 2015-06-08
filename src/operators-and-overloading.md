@@ -41,7 +41,7 @@ fn main() {
 связанные с этим трейты расположены в модуле [`std::ops`][stdops]. Проверьте эту
 часть документации для получения полного списка.
 
-[stdops]: ../std/ops/index.html
+[stdops]: http://doc.rust-lang.org/std/ops/index.html
 
 Реализация этих трейтов следует паттерну. Давайте посмотрим на трейт
 [`Add`][add] более детально:
@@ -56,7 +56,7 @@ pub trait Add<RHS = Self> {
 # }
 ```
 
-[add]: ../std/ops/trait.Add.html
+[add]: http://doc.rust-lang.org/std/ops/trait.Add.html
 
 В общей сложности здесь присутствуют три типа: тип `impl Add`, который мы
 реализуем, тип `RHS`, который по умолчанию равен `Self` и тип `Output`. Для

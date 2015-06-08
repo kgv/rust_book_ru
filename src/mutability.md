@@ -72,7 +72,7 @@ let x = Arc::new(5);
 let y = x.clone();
 ```
 
-[arc]: http://doc.rust-lang.org/stable/std/sync/struct.Arc.html 
+[arc]: http://doc.rust-lang.org/std/sync/struct.Arc.html 
 
 Когда мы вызываем метод `clone()`, `Arc<T>` должна обновить счётчик ссылок. Мы
 не использовали модификатор `mut`, а значит `x` - неизменяемая привязка и мы не
@@ -108,7 +108,7 @@ let x = RefCell::new(42);
 let y = x.borrow_mut();
 ```
 
-[stdcell]: http://doc.rust-lang.org/stable/std/cell/index.html
+[stdcell]: http://doc.rust-lang.org/std/cell/index.html
 
 RefCell возвращает изменяемую ссылку `&mut` при помощи метода `borrow_mut()`. А
 не опасно ли это? Что, если мы сделаем так:
@@ -178,6 +178,6 @@ point.y.set(7);
 println!("y: {:?}", point.y);
 ```
 
-[cell]: http://doc.rust-lang.org/stable/std/cell/struct.Cell.html
+[cell]: http://doc.rust-lang.org/std/cell/struct.Cell.html
 
 Это выведет на экран `y: Cell { value: 7 }`. Мы успешно изменили значение `y`.

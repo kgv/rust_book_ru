@@ -314,5 +314,5 @@ fn write_info(info: &Info) -> io::Result<()> {
 возвращает `Result`, что означает, что вы не можете использовать `try!` внутри
 функции `main()`, потому что `main()` ничего не возвращают.
 
-`try!` использует [`From<Error>`](../std/convert/trait.From.html), чтобы
+`try!` использует [`From<Error>`](http://doc.rust-lang.org/std/convert/trait.From.html), чтобы
 определять, что следует вернуть в случае ошибки.

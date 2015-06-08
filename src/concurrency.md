@@ -29,7 +29,7 @@
 ### `Send`
 
 Первый трейт, о котором мы будем говорить, называется
-[`Send`](../std/marker/trait.Send.html). Когда тип `T` реализует `Send`, это
+[`Send`](http://doc.rust-lang.org/std/marker/trait.Send.html). Когда тип `T` реализует `Send`, это
 указывает компилятору, что право владения переменными этого типа можно безопасно
 перемещать между потоками.
 
@@ -45,7 +45,7 @@
 
 ### `Sync`
 
-Второй из этих трейтов называется [`Sync`](../std/marker/trait.Sync.html). Когда
+Второй из этих трейтов называется [`Sync`](http://doc.rust-lang.org/std/marker/trait.Sync.html). Когда
 тип `T` реализует `Sync`, это указывает компилятору, что переменные этого типа
 не имеют возможности использовать небезопасную память, когда они используются из
 нескольких потоков одновременно.
@@ -188,8 +188,8 @@ fn main() {
                   ^~~~~~~~~~~~~
 ```
 
-Вы можете видеть, что [`Mutex`](../std/sync/struct.Mutex.html) содержит метод
-[`lock`](../std/sync/struct.Mutex.html#method.lock), который имеет следующую
+Вы можете видеть, что [`Mutex`](http://doc.rust-lang.org/std/sync/struct.Mutex.html) содержит метод
+[`lock`](http://doc.rust-lang.org/std/sync/struct.Mutex.html#method.lock), который имеет следующую
 сигнатуру:
 
 ```ignore

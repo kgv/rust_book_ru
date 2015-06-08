@@ -77,7 +77,7 @@ println!("raw points at {}", points_at);
 [API документации][rawapi] о них.
 
 [unsafe]: unsafe.html
-[rawapi]: ../std/primitive.pointer.html
+[rawapi]: http://doc.rust-lang.org/std/primitive.pointer.html
 
 # FFI
 

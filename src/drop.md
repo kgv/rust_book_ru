@@ -5,7 +5,7 @@
 (сброс) - позволяет выполнить некоторый код, когда значение выходит из области
 видимости. Например:
 
-[drop]: http://doc.rust-lang.org/stable/std/ops/trait.Drop.html
+[drop]: http://doc.rust-lang.org/std/ops/trait.Drop.html
 
 ```rust
 struct HasDrop;
@@ -65,4 +65,4 @@ fn main() {
 уменьшает число активных ссылок в `drop()`, и когда оно достигает нуля,
 освобождает хранимое значение.
 
-[arc]: http://doc.rust-lang.org/stable/std/sync/struct.Arc.html
+[arc]: http://doc.rust-lang.org/std/sync/struct.Arc.html

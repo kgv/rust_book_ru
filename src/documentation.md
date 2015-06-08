@@ -43,7 +43,7 @@ Rust отслеживает такие комментарии, и использ
 документации. Что важно при документировании таких вещей, как перечисления:
 
 ```rust
-/// The `Option` type. See [the module level documentation](../) for more.
+/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
 enum Option<T> {
     /// No value
     None,
@@ -55,7 +55,7 @@ enum Option<T> {
 Код, приведенный выше работает, а ниже - не работает:
 
 ```rust,ignore
-/// The `Option` type. See [the module level documentation](../) for more.
+/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
 enum Option<T> {
     None, /// No value
     Some(T), /// Some value `T`
@@ -75,7 +75,7 @@ hello.rs:4 }
 расположенные за ними, а в данном примере нет элемента, расположенного после
 последнего комментария.
 
-[rc-new]: http://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.new
+[rc-new]: http://doc.rust-lang.org/std/rc/struct.Rc.html#method.new
 
 ### Написание комментариев документации
 
