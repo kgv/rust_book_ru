@@ -114,13 +114,13 @@
 </li>
 <li><a href='../src/generics.html'><b>6.19.</b> Дженерики</a>
 </li>
-<li><a href='../src/traits.html'><b>6.20.</b> Трейты</a>
+<li><a href='../src/traits.html'><b>6.20.</b> Типажи</a>
 </li>
-<li><a href='../src/drop.html'><b>6.21.</b> Трейт `Drop`</a>
+<li><a href='../src/drop.html'><b>6.21.</b> Типаж `Drop`</a>
 </li>
 <li><a href='../src/if-let.html'><b>6.22.</b> Конструкция `if let`</a>
 </li>
-<li><a href='../src/trait-objects.html'><b>6.23.</b> Трейт объекты</a>
+<li><a href='../src/trait-objects.html'><b>6.23.</b> Типажи-объекты</a>
 </li>
 <li><a href='../src/closures.html'><b>6.24.</b> Замыкания</a>
 </li>
@@ -144,7 +144,7 @@
 </li>
 <li><a href='../src/operators-and-overloading.html'><b>6.34.</b> Operators and Overloading</a>
 </li>
-<li><a href='../src/deref-coercions.html'><b>6.35.</b> Трейт `Deref`</a>
+<li><a href='../src/deref-coercions.html'><b>6.35.</b> Типаж `Deref`</a>
 </li>
 <li><a href='../src/macros.html'><b>6.36.</b> Макросы</a>
 </li>
@@ -190,11 +190,11 @@
 
     <h1 class="title">Перегрузка операций</h1>
     <p>Rust позволяет ограниченную форму перегрузки операций. Есть определенные
-операции, которые могут быть перегружены. Есть специальные трейты, которые вы
+операции, которые могут быть перегружены. Есть специальные типажи, которые вы
 можете реализовать для поддержки конкретной операции между типами. В результате
 чего перегружается операция.</p>
 
-<p>Например, операция <code>+</code> может быть перегружена с помощью трейта <code>Add</code>:</p>
+<p>Например, операция <code>+</code> может быть перегружена с помощью типажа <code>Add</code>:</p>
 <span class='rusttest'>use std::ops::Add;
 
 #[derive(Debug)]
@@ -247,13 +247,13 @@ fn main() {
 </pre>
 
 <p>В <code>main</code> мы можем использовать операцию <code>+</code> для двух <code>Point</code>, так как мы
-реализовали трейт <code>Add&lt;Output=Point&gt;</code> для <code>Point</code>.</p>
+реализовали типаж <code>Add&lt;Output=Point&gt;</code> для <code>Point</code>.</p>
 
 <p>Есть целый ряд операций, которые могут быть перегружены таким образом, и все
-связанные с этим трейты расположены в модуле <a href="http://doc.rust-lang.org/std/ops/index.html"><code>std::ops</code></a>. Проверьте эту
+связанные с этим типажи расположены в модуле <a href="http://doc.rust-lang.org/std/ops/index.html"><code>std::ops</code></a>. Проверьте эту
 часть документации для получения полного списка.</p>
 
-<p>Реализация этих трейтов следует паттерну. Давайте посмотрим на трейт
+<p>Реализация этих типажей следует паттерну. Давайте посмотрим на типаж
 <a href="http://doc.rust-lang.org/std/ops/trait.Add.html"><code>Add</code></a> более детально:</p>
 <span class='rusttest'>fn main() {
     mod foo {
