@@ -648,16 +648,17 @@ macro_rules! inc {
 может быть написано только в корне вашего контейнера, не внутри `mod`. Это
 обеспечивает, что `$crate` раскроется в единственный идентификатор.
 
-# The deep end
+# Во тьме глубин
 
-The introductory chapter mentioned recursive macros, but it did not give the
-full story. Recursive macros are useful for another reason: Each recursive
-invocation gives you another opportunity to pattern-match the macro's
-arguments.
+Вводная глава упоминала рекурсивные макросы, но она не рассказывала всей
+истории. Рекурсивные макросы полезны ещё по одной причине: каждый рекурсивный
+вызов даёт нам ещё одну возможность сопоставить с образцом аргументы макроса.
 
-As an extreme example, it is possible, though hardly advisable, to implement
-the [Bitwise Cyclic Tag](http://esolangs.org/wiki/Bitwise_Cyclic_Tag) automaton
-within Rust's macro system.
+Приведём такой радикальный пример использования данной возможности. С помощью
+рекурсивных макросов можно реализовать конечный автомат типа
+[Bitwise Cyclic Tag](http://esolangs.org/wiki/Bitwise_Cyclic_Tag). Стоит
+заметить, что мы не рекомендуем такой подход, а просто иллюстрируем возможности
+макросов.
 
 ```rust
 macro_rules! bct {
@@ -683,14 +684,13 @@ macro_rules! bct {
 }
 ```
 
-Exercise: use macros to reduce duplication in the above definition of the
-`bct!` macro.
+В качестве упражнения предлагаем читателю определить ещё один макрос, чтобы
+уменьшить степень дублирования кода в определении выше.
 
-# Procedural macros
+# Процедурные макросы
 
-If Rust's macro system can't do what you need, you may want to write a
-[compiler plugin](plugins.html) instead. Compared to `macro_rules!`
-macros, this is significantly more work, the interfaces are much less stable,
-and bugs can be much harder to track down. In exchange you get the
-flexibility of running arbitrary Rust code within the compiler. Syntax
-extension plugins are sometimes called *procedural macros* for this reason.
+Если система макросов не может сделать того, что вам нужно, вы можете написать
+[плагин к компилятору](plugins.html). По сравнению с макросами, это гораздо
+труднее, там ещё более нестабильные интерфейсы, и ещё сложнее найти ошибки. Зато
+вы получаете гибкость - внутри плагина может исполняться произвольный код на
+Rust. Иногда плагины расширения синтаксиса называются *процедурными макросами*.
