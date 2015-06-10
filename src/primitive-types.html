@@ -247,14 +247,14 @@
 
 <p>Если для числового литерала не указан тип, то он будет выведен по умолчанию:</p>
 <span class='rusttest'>fn main() {
-    let x = 42; // x has type i32
+    let x = 42; // x имеет тип i32
     
-    let y = 1.0; // y has type f64
+    let y = 1.0; // y имеет тип f64
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>42</span>; <span class='comment'>// x has type i32</span>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>42</span>; <span class='comment'>// x имеет тип i32</span>
 
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>1.0</span>; <span class='comment'>// y has type f64</span>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>1.0</span>; <span class='comment'>// y имеет тип f64</span>
 </pre>
 
 <p>Ниже представлен список различных числовых типов, со ссылками на их документацию
@@ -478,12 +478,12 @@ IEEE-754 числам с плавающей точкой одинарной и �
 <p>Вы можете устранить неоднозначность трактовки для кортежа, состоящего из одного
 элемента, и значения в скобках с помощью запятой:</p>
 <span class='rusttest'>fn main() {
-    (0,); // single-element tuple
-    (0); // zero in parentheses
+    (0,); // одноэлементный кортеж
+    (0); // ноль в круглых скобках
     
 }</span><pre class='rust rust-example-rendered'>
-(<span class='number'>0</span>,); <span class='comment'>// single-element tuple</span>
-(<span class='number'>0</span>); <span class='comment'>// zero in parentheses</span>
+(<span class='number'>0</span>,); <span class='comment'>// одноэлементный кортеж</span>
+(<span class='number'>0</span>); <span class='comment'>// ноль в круглых скобках</span>
 </pre>
 
 <h2 id="Индексация-кортежей" class='section-header'><a
