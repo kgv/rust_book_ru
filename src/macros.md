@@ -601,10 +601,10 @@ mod bar {
 Атрибуты, относящиеся к макросам,
 [перечислены в справочнике Rust](https://doc.rust-lang.org/stable/reference.html#macro--and-plugin-related-attributes).
 
-# The variable `$crate`
+# Переменная `$crate`
 
-A further difficulty occurs when a macro is used in multiple crates. Say that
-`mylib` defines
+Если макрос используется в нескольких контейнерах, всё становится ещё
+сложнее. Допустим, `mylib` определяет
 
 ```rust
 pub fn increment(x: u32) -> u32 {
@@ -623,15 +623,14 @@ macro_rules! inc_b {
 # fn main() { }
 ```
 
-`inc_a` only works within `mylib`, while `inc_b` only works outside the
-library. Furthermore, `inc_b` will break if the user imports `mylib` under
-another name.
+`inc_a` работает только внутри `mylib`, а `inc_b` - только снаружи. Более того,
+`inc_b` сломается, если пользователь импортирует `mylib` под другим именем.
 
-Rust does not (yet) have a hygiene system for crate references, but it does
-provide a simple workaround for this problem. Within a macro imported from a
-crate named `foo`, the special macro variable `$crate` will expand to `::foo`.
-By contrast, when a macro is defined and then used in the same crate, `$crate`
-will expand to nothing. This means we can write
+В Rust пока нет гигиеничных ссылок на контейнеры, но есть простой способ обойти
+эту проблему. Особая макро-переменная `$crate` раскроется в `::foo` внутри
+макроса, импортированного из контейнера `foo`. А когда макрос определён и
+используется в одном и том же контейнере, `$crate` станет пустой. Это означает,
+что мы можем написать
 
 ```rust
 #[macro_export]
@@ -641,12 +640,13 @@ macro_rules! inc {
 # fn main() { }
 ```
 
-to define a single macro that works both inside and outside our library. The
-function name will expand to either `::increment` or `::mylib::increment`.
+чтобы определить один макрос, который будет работать и внутри, и снаружи
+библиотеки. Имя функции раскроется или в `::increment`, или в
+`::mylib::increment`.
 
-To keep this system simple and correct, `#[macro_use] extern crate ...` may
-only appear at the root of your crate, not inside `mod`. This ensures that
-`$crate` is a single identifier.
+Чтобы эта система работала просто и правильно, `#[macro_use] extern crate ...`
+может быть написано только в корне вашего контейнера, не внутри `mod`. Это
+обеспечивает, что `$crate` раскроется в единственный идентификатор.
 
 # The deep end
 
