@@ -129,14 +129,16 @@ u32`:
 [`regex_macros`](https://github.com/rust-lang/regex/blob/master/regex_macros/src/lib.rs).
 
 
-## Tips and tricks
+## Советы и трюки
 
-Some of the
-[macro debugging tips](macros.html#%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BA%D0%B0-%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D0%BE%D0%B2)
-are applicable.
+Некоторые
+[советы по отладке макросов](macros.html#%D0%9E%D1%82%D0%BB%D0%B0%D0%B4%D0%BA%D0%B0-%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D1%81%D0%BE%D0%B2)
+применимы и в случае плагинов.
 
-You can use [`syntax::parse`](http://doc.rust-lang.org/syntax/parse/index.html) to turn token trees into
-higher-level syntax elements like expressions:
+Можно использовать
+[`syntax::parse`](http://doc.rust-lang.org/syntax/parse/index.html), чтобы
+преобразовать деревья токенов в высокоуровневые элементы синтаксиса, вроде
+выражений:
 
 ```ignore
 fn expand_foo(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
@@ -145,36 +147,38 @@ fn expand_foo(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
     let mut parser = cx.new_parser_from_tts(args);
 
     let expr: P<Expr> = parser.parse_expr();
-```
+    ```
 
-Looking through [`libsyntax` parser
-code](https://github.com/rust-lang/rust/blob/master/src/libsyntax/parse/parser.rs)
-will give you a feel for how the parsing infrastructure works.
+Можно просмотреть код
+[парсера `libsyntax`](https://github.com/rust-lang/rust/blob/master/src/libsyntax/parse/parser.rs),
+чтобы получить представление о работе инфрастуктуры разбора.
 
-Keep the [`Span`s](http://doc.rust-lang.org/syntax/codemap/struct.Span.html) of
-everything you parse, for better error reporting. You can wrap
-[`Spanned`](http://doc.rust-lang.org/syntax/codemap/struct.Spanned.html) around
-your custom data structures.
+Сохраняйте [`Span`ы](http://doc.rust-lang.org/syntax/codemap/struct.Span.html)
+всего, что вы разбираете, чтобы лучше сообщать об ошибках. Вы можете обернуть
+ваши структуры данных в
+[`Spanned`](http://doc.rust-lang.org/syntax/codemap/struct.Spanned.html).
 
-Calling
+Вызов
 [`ExtCtxt::span_fatal`](http://doc.rust-lang.org/syntax/ext/base/struct.ExtCtxt.html#method.span_fatal)
-will immediately abort compilation. It's better to instead call
+сразу прервёт компиляцию. Вместо этого, лучше вызвать
 [`ExtCtxt::span_err`](http://doc.rust-lang.org/syntax/ext/base/struct.ExtCtxt.html#method.span_err)
-and return
+и вернуть
 [`DummyResult`](http://doc.rust-lang.org/syntax/ext/base/struct.DummyResult.html),
-so that the compiler can continue and find further errors.
+чтобы компилятор мог продолжить работу и обнаружить дальнейшие ошибки.
 
-To print syntax fragments for debugging, you can use
-[`span_note`](http://doc.rust-lang.org/syntax/ext/base/struct.ExtCtxt.html#method.span_note) together
-with
-[`syntax::print::pprust::*_to_string`](http://doc.rust-lang.org/syntax/print/pprust/index.html#functions).
+Вы можете использовать
+[`span_note`](http://doc.rust-lang.org/syntax/ext/base/struct.ExtCtxt.html#method.span_note)
+и
+[`syntax::print::pprust::*_to_string`](http://doc.rust-lang.org/syntax/print/pprust/index.html#functions)
+чтобы напечатать синтаксический фрагмент для отладки.
 
-The example above produced an integer literal using
+Пример выше создавал целочисленный литерал с помощью
 [`AstBuilder::expr_usize`](http://doc.rust-lang.org/syntax/ext/build/trait.AstBuilder.html#tymethod.expr_usize).
-As an alternative to the `AstBuilder` trait, `libsyntax` provides a set of
-[quasiquote macros](http://doc.rust-lang.org/syntax/ext/quote/index.html).  They are undocumented and
-very rough around the edges.  However, the implementation may be a good
-starting point for an improved quasiquote as an ordinary plugin library.
+В качестве альтернативы типажу `AstBuilder`, `libsyntax` предоставляет набор
+[макросов квазицитирования](http://doc.rust-lang.org/syntax/ext/quote/index.html).
+Они не документированы и совсем не отполированы. Однако, эта реализация может
+стать неплохой основой для улучшенной библиотеки квазицитирования, которая
+работала бы как обычный плагин.
 
 
 # Lint plugins
