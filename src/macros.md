@@ -601,10 +601,10 @@ mod bar {
 Атрибуты, относящиеся к макросам,
 [перечислены в справочнике Rust](https://doc.rust-lang.org/stable/reference.html#macro--and-plugin-related-attributes).
 
-# The variable `$crate`
+# Переменная `$crate`
 
-A further difficulty occurs when a macro is used in multiple crates. Say that
-`mylib` defines
+Если макрос используется в нескольких контейнерах, всё становится ещё
+сложнее. Допустим, `mylib` определяет
 
 ```rust
 pub fn increment(x: u32) -> u32 {
@@ -623,15 +623,14 @@ macro_rules! inc_b {
 # fn main() { }
 ```
 
-`inc_a` only works within `mylib`, while `inc_b` only works outside the
-library. Furthermore, `inc_b` will break if the user imports `mylib` under
-another name.
+`inc_a` работает только внутри `mylib`, а `inc_b` - только снаружи. Более того,
+`inc_b` сломается, если пользователь импортирует `mylib` под другим именем.
 
-Rust does not (yet) have a hygiene system for crate references, but it does
-provide a simple workaround for this problem. Within a macro imported from a
-crate named `foo`, the special macro variable `$crate` will expand to `::foo`.
-By contrast, when a macro is defined and then used in the same crate, `$crate`
-will expand to nothing. This means we can write
+В Rust пока нет гигиеничных ссылок на контейнеры, но есть простой способ обойти
+эту проблему. Особая макро-переменная `$crate` раскроется в `::foo` внутри
+макроса, импортированного из контейнера `foo`. А когда макрос определён и
+используется в одном и том же контейнере, `$crate` станет пустой. Это означает,
+что мы можем написать
 
 ```rust
 #[macro_export]
@@ -641,23 +640,25 @@ macro_rules! inc {
 # fn main() { }
 ```
 
-to define a single macro that works both inside and outside our library. The
-function name will expand to either `::increment` or `::mylib::increment`.
+чтобы определить один макрос, который будет работать и внутри, и снаружи
+библиотеки. Имя функции раскроется или в `::increment`, или в
+`::mylib::increment`.
 
-To keep this system simple and correct, `#[macro_use] extern crate ...` may
-only appear at the root of your crate, not inside `mod`. This ensures that
-`$crate` is a single identifier.
+Чтобы эта система работала просто и правильно, `#[macro_use] extern crate ...`
+может быть написано только в корне вашего контейнера, но не внутри `mod`. Это
+обеспечивает, что `$crate` раскроется в единственный идентификатор.
 
-# The deep end
+# Во тьме глубин
 
-The introductory chapter mentioned recursive macros, but it did not give the
-full story. Recursive macros are useful for another reason: Each recursive
-invocation gives you another opportunity to pattern-match the macro's
-arguments.
+Вводная глава упоминала рекурсивные макросы, но она не рассказывала всей
+истории. Рекурсивные макросы полезны ещё по одной причине: каждый рекурсивный
+вызов даёт нам ещё одну возможность сопоставить с образцом аргументы макроса.
 
-As an extreme example, it is possible, though hardly advisable, to implement
-the [Bitwise Cyclic Tag](http://esolangs.org/wiki/Bitwise_Cyclic_Tag) automaton
-within Rust's macro system.
+Приведём такой радикальный пример использования данной возможности. С помощью
+рекурсивных макросов можно реализовать конечный автомат типа
+[Bitwise Cyclic Tag](http://esolangs.org/wiki/Bitwise_Cyclic_Tag). Стоит
+заметить, что мы не рекомендуем такой подход, а просто иллюстрируем возможности
+макросов.
 
 ```rust
 macro_rules! bct {
@@ -683,14 +684,13 @@ macro_rules! bct {
 }
 ```
 
-Exercise: use macros to reduce duplication in the above definition of the
-`bct!` macro.
+В качестве упражнения предлагаем читателю определить ещё один макрос, чтобы
+уменьшить степень дублирования кода в определении выше.
 
-# Procedural macros
+# Процедурные макросы
 
-If Rust's macro system can't do what you need, you may want to write a
-[compiler plugin](plugins.html) instead. Compared to `macro_rules!`
-macros, this is significantly more work, the interfaces are much less stable,
-and bugs can be much harder to track down. In exchange you get the
-flexibility of running arbitrary Rust code within the compiler. Syntax
-extension plugins are sometimes called *procedural macros* for this reason.
+Если система макросов не может сделать того, что вам нужно, вы можете написать
+[плагин к компилятору](plugins.html). По сравнению с макросами, это гораздо
+труднее, там ещё более нестабильные интерфейсы, и ещё сложнее найти ошибки. Зато
+вы получаете гибкость - внутри плагина может исполняться произвольный код на
+Rust. Иногда плагины расширения синтаксиса называются *процедурными макросами*.
