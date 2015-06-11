@@ -181,17 +181,18 @@ fn expand_foo(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
 работала бы как обычный плагин.
 
 
-# Lint plugins
+# Плагины синтаксического анализа
 
-Plugins can extend [Rust's lint
-infrastructure](http://doc.rust-lang.org/reference.html#lint-check-attributes) with additional checks for
-code style, safety, etc. You can see
-[`src/test/auxiliary/lint_plugin_test.rs`](https://github.com/rust-lang/rust/blob/master/src/test/auxiliary/lint_plugin_test.rs)
-for a full example, the core of which is reproduced here:
+Плагины могут расширять
+[инфрастуктуру синтаксического анализа Rust](http://doc.rust-lang.org/reference.html#lint-check-attributes),
+предоставляя новые проверки стиля кодирования, безопасности, и т.д. Полный
+пример можно найти в
+[`src/test/auxiliary/lint_plugin_test.rs`](https://github.com/rust-lang/rust/blob/master/src/test/auxiliary/lint_plugin_test.rs).
+Здесь мы приводим его суть:
 
 ```ignore
 declare_lint!(TEST_LINT, Warn,
-              "Warn about items named 'lintme'");
+              "Предупреждать об элементах, названных 'lintme'");
 
 struct Pass;
 
@@ -203,7 +204,7 @@ impl LintPass for Pass {
     fn check_item(&mut self, cx: &Context, it: &ast::Item) {
         let name = token::get_ident(it.ident);
         if name.get() == "lintme" {
-            cx.span_lint(TEST_LINT, it.span, "item is named 'lintme'");
+            cx.span_lint(TEST_LINT, it.span, "элемент называется 'lintme'");
         }
     }
 }
@@ -214,7 +215,7 @@ pub fn plugin_registrar(reg: &mut Registry) {
 }
 ```
 
-Then code like
+Тогда код вроде
 
 ```ignore
 #![plugin(lint_plugin_test)]
@@ -222,7 +223,7 @@ Then code like
 fn lintme() { }
 ```
 
-will produce a compiler warning:
+выдаст предупреждение компилятора:
 
 ```txt
 foo.rs:4:1: 4:16 warning: item is named 'lintme', #[warn(test_lint)] on by default
@@ -230,28 +231,34 @@ foo.rs:4 fn lintme() { }
          ^~~~~~~~~~~~~~~
 ```
 
-The components of a lint plugin are:
+Плагин синтаксического анализа состоит из следующих частей:
 
-* one or more `declare_lint!` invocations, which define static
-  [`Lint`](http://doc.rust-lang.org/rustc/lint/struct.Lint.html) structs;
+* один или больше вызовов `declare_lint!`, которые определяют статические
+  структуры [`Lint`](http://doc.rust-lang.org/rustc/lint/struct.Lint.html);
 
-* a struct holding any state needed by the lint pass (here, none);
+* структура, содержащая состояние, необходимое анализатору (в данном случае, его
+  нет);
 
-* a [`LintPass`](http://doc.rust-lang.org/rustc/lint/trait.LintPass.html)
-  implementation defining how to check each syntax element. A single
-  `LintPass` may call `span_lint` for several different `Lint`s, but should
-  register them all through the `get_lints` method.
+* реализация типажа
+  [`LintPass`](http://doc.rust-lang.org/rustc/lint/trait.LintPass.html),
+  определяющая, как проверять каждый элемент синтаксиса. Один `LintPass` может
+  вызывать `span_lint` для нескольких различных `Lint`, но он должен
+  зарегистрировать их все через метод `get_lints`.
 
-Lint passes are syntax traversals, but they run at a late stage of compilation
-where type information is available. `rustc`'s [built-in
-lints](https://github.com/rust-lang/rust/blob/master/src/librustc/lint/builtin.rs)
-mostly use the same infrastructure as lint plugins, and provide examples of how
-to access type information.
+Проходы синтаксического анализатора - это обходы синтаксического дерева, но они
+выполняются на поздних стадиях компиляции, когда уже доступа информация о
+типах. Встроенные в `rustc`
+[анализы](https://github.com/rust-lang/rust/blob/master/src/librustc/lint/builtin.rs)
+в основном используют ту же инфрастуктуру, что и плагины синтаксического
+анализа. Смотрите их исходный код, чтобы понять, как получать информацию о
+типах.
 
-Lints defined by plugins are controlled by the usual [attributes and compiler
-flags](http://doc.rust-lang.org/reference.html#lint-check-attributes), e.g. `#[allow(test_lint)]` or
-`-A test-lint`. These identifiers are derived from the first argument to
-`declare_lint!`, with appropriate case and punctuation conversion.
+Синтаксические анализы, определяемые плагинами, управляются обычными
+[атрибутами и флагами компилятора](http://doc.rust-lang.org/reference.html#lint-check-attributes),
+т.е. `#[allow(test_lint)]` или `-A test-lint`. Эти идентификаторы выводятся из
+первого аргумента `declare_lint!`, с учётом соответствующих преобразований
+регистра букв и пунктуации.
 
-You can run `rustc -W help foo.rs` to see a list of lints known to `rustc`,
-including those provided by plugins loaded by `foo.rs`.
+Вы можете выполнить команду `rustc -W help foo.rs`, чтобы увидеть весь список
+синтаксических анализов, известных `rustc`, включая те, что загружаются
+из`foo.rs`.
