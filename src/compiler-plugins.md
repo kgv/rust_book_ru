@@ -4,7 +4,7 @@
 
 `rustc`, компилятор Rust, поддерживает плагины. Плагины - это разработанные
 пользователями библиотеки, которые добавляют новые возможности в компилятор: это
-могут быть синтаксические расширения, дополнительные синтаксические анализы
+могут быть расширения синтаксиса, дополнительные синтаксические анализы
 (lints), и другое.
 
 Плагин - это контейнер, собираемый в динамическую библиотеку, и имеющий
@@ -29,17 +29,18 @@
 определений макросов (`macro_rules!`) и обычного кода на Rust, который
 предназначен для непосредственно конечных пользователей библиотеки.
 
-# Syntax extensions
+# Расширения синтаксиса
 
-Plugins can extend Rust's syntax in various ways. One kind of syntax extension
-is the procedural macro. These are invoked the same way as [ordinary
-macros](macros.html), but the expansion is performed by arbitrary Rust
-code that manipulates [syntax trees](http://doc.rust-lang.org/syntax/ast/index.html) at
-compile time.
+Плагины могут по-разному расширять синтаксис Rust. Один из видов расширения
+синтаксиса - это процедурные макросы. Они вызываются так же, как и
+[обычные макросы](macros.html), но их раскрытие производится произвольным кодом
+на Rust, который оперирует
+[синтаксическими деревьями](http://doc.rust-lang.org/syntax/ast/index.html) во
+время компиляции.
 
-Let's write a plugin
-[`roman_numerals.rs`](https://github.com/rust-lang/rust/tree/master/src/test/auxiliary/roman_numerals.rs)
-that implements Roman numeral integer literals.
+Давайте напишем плагин
+[`roman_numerals.rs`](https://github.com/rust-lang/rust/tree/master/src/test/auxiliary/roman_numerals.rs),
+который реализует целочисленные литералы с римскими цифрами.
 
 ```ignore
 #![crate_type="dylib"]
@@ -52,7 +53,7 @@ use syntax::codemap::Span;
 use syntax::parse::token;
 use syntax::ast::{TokenTree, TtToken};
 use syntax::ext::base::{ExtCtxt, MacResult, DummyResult, MacEager};
-use syntax::ext::build::AstBuilder;  // trait for expr_usize
+use syntax::ext::build::AstBuilder;  // типаж для expr_usize
 use rustc::plugin::Registry;
 
 fn expand_rn(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
@@ -67,7 +68,7 @@ fn expand_rn(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
     let text = match args {
         [TtToken(_, token::Ident(s, _))] => token::get_ident(s).to_string(),
         _ => {
-            cx.span_err(sp, "argument should be a single identifier");
+            cx.span_err(sp, "аргумент должен быть единственным идентификатором");
             return DummyResult::any(sp);
         }
     };
@@ -81,7 +82,7 @@ fn expand_rn(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
                 text = &text[rn.len()..];
             }
             None => {
-                cx.span_err(sp, "invalid Roman numeral");
+                cx.span_err(sp, "неправильное римское число");
                 return DummyResult::any(sp);
             }
         }
@@ -96,7 +97,7 @@ pub fn plugin_registrar(reg: &mut Registry) {
 }
 ```
 
-Then we can use `rn!()` like any other macro:
+Тогда мы можем использовать `rn!()` как любой другой макрос:
 
 ```ignore
 #![feature(plugin)]
@@ -107,20 +108,24 @@ fn main() {
 }
 ```
 
-The advantages over a simple `fn(&str) -> u32` are:
+У этого подхода есть преимущества относительно простой функции `fn(&str) ->
+u32`:
 
-* The (arbitrarily complex) conversion is done at compile time.
-* Input validation is also performed at compile time.
-* It can be extended to allow use in patterns, which effectively gives
-  a way to define new literal syntax for any data type.
+* Преобразование (в общем случае, произвольной сложности) делается во время
+  компиляции;
+* Проверка правильности записи литерала также производится во время компиляции;
+* В плагине можно поддержать использование таких литералов в образцах
+  (patterns). В сущности, это позволяет определить новый синтаксис литералов для
+  любого типа данных.
 
-In addition to procedural macros, you can define new
-[`derive`](http://doc.rust-lang.org/reference.html#derive)-like attributes and other kinds of
-extensions.  See
+В дополнение к процедурным макросам, вы можете определять новые атрибуты
+[`derive`](http://doc.rust-lang.org/reference.html#derive) и другие виды
+расширений. Смотрите раздел
 [`Registry::register_syntax_extension`](http://doc.rust-lang.org/rustc/plugin/registry/struct.Registry.html#method.register_syntax_extension)
-and the [`SyntaxExtension`
-enum](http://doc.rust-lang.org/syntax/ext/base/enum.SyntaxExtension.html).  For
-a more involved macro example, see
+и документацию
+[перечисления `SyntaxExtension`](http://doc.rust-lang.org/syntax/ext/base/enum.SyntaxExtension.html).
+В качестве более продвинутого примера с макросами, можно ознакомиться с
+макросами регулярных выражений
 [`regex_macros`](https://github.com/rust-lang/regex/blob/master/regex_macros/src/lib.rs).
 
 
