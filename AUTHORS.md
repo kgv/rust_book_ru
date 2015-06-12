@@ -4,4 +4,5 @@
 * [ithamsteri](https://github.com/ithamsteri)
 * [kgv](https://github.com/kgv)
 * [mkpankov](https://github.com/mkpankov)
+* [rastopyr](https://github.com/rastopyr)
 * [suhr](https://github.com/suhr)
