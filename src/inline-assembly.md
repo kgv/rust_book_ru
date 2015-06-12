@@ -1,9 +1,9 @@
-% Inline Assembly
+% Встроенный ассемблер
 
-For extremely low-level manipulations and performance reasons, one
-might wish to control the CPU directly. Rust supports using inline
-assembly to do this via the `asm!` macro. The syntax roughly matches
-that of GCC & Clang:
+Для экстремально низкоуровневых манипуляций и повышения производительности,
+возможно возникнет необходимость управлять процессором напрямую. Rust
+поддерживает использование встроенного ассемблера и делает это с помощью с
+помощью макроса `asm!`. Синтаксис примерно соответствует синтаксису GCC и Clang:
 
 ```ignore
 asm!(assembly template
@@ -14,16 +14,18 @@ asm!(assembly template
    );
 ```
 
-Any use of `asm` is feature gated (requires `#![feature(asm)]` on the
-crate to allow) and of course requires an `unsafe` block.
+Использование `asm` является закрытой фичей (требуется указать
+`#![feature(asm)]` для контейнера, чтобы разрешить ее использование) и, конечно
+же, требует `unsafe` блока.
 
-> **Note**: the examples here are given in x86/x86-64 assembly, but
-> all platforms are supported.
+> **Примечание**: здесь примеры приведены для x86/x86-64 ассемблера, но
+поддерживаются все платформы.
 
-## Assembly template
+## Шаблон инструкции ассемблера
 
-The `assembly template` is the only required parameter and must be a
-literal string (i.e. `""`)
+Шаблон инструкции ассемблера (assembly template) является единственным
+обязательным параметром, и он должен быть представлен строкой символов (т.е.
+`""`)
 
 ```rust
 #![feature(asm)]
@@ -46,10 +48,12 @@ fn main() {
 }
 ```
 
-(The `feature(asm)` and `#[cfg]`s are omitted from now on.)
+(Далее атрибуты `feature(asm)` и `#[cfg]` будут опущены.)
 
-Output operands, input operands, clobbers and options are all optional
-but you must add the right number of `:` if you skip them:
+Выходные операнды (output operands), входные операнды (input operands),
+задействованное (clobbers) и опции (options) не являются обязательными,
+но вы должны будете добавить соответствующее количество `:` если хотите
+пропустить их:
 
 ```rust
 # #![feature(asm)]
@@ -58,32 +62,33 @@ but you must add the right number of `:` if you skip them:
 asm!("xor %eax, %eax"
     :
     :
-    : "eax"
+    : "{eax}"
    );
 # } }
 ```
 
-Whitespace also doesn't matter:
+Пробельные символы также не имеют значения:
 
 ```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 # fn main() { unsafe {
-asm!("xor %eax, %eax" ::: "eax");
+asm!("xor %eax, %eax" ::: "{eax}");
 # } }
 ```
 
-## Operands
+## Операнды
 
-Input and output operands follow the same format: `:
-"constraints1"(expr1), "constraints2"(expr2), ..."`. Output operand
-expressions must be mutable lvalues:
+Входные и выходные операнды имеют одинаковый формат:
+`:"ограничение1"(выражение1), "ограничение2"(выражение2), ..."`. Выражения для
+выходных операндов должны быть либо изменяемыми, либо неизменяемыми, но еще не
+назначенными, L-значениями:
 
 ```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 fn add(a: i32, b: i32) -> i32 {
-    let mut c = 0;
+    let c: i32;
     unsafe {
         asm!("add $2, $0"
              : "=r"(c)
@@ -100,42 +105,72 @@ fn main() {
 }
 ```
 
-## Clobbers
+Однако, если вы захотите использовать реальные операнды (регистры) в этой
+позиции, то вам потребуется заключить используемый регистр в фигурные скобки
+`{}`, и вы должны будете указать конкретный размер операнда. Это полезно для
+очень низкоуровневого программирования, когда важны регистры, которые вы
+используете:
 
-Some instructions modify registers which might otherwise have held
-different values so we use the clobbers list to indicate to the
-compiler not to assume any values loaded into those registers will
-stay valid.
+```rust
+# #![feature(asm)]
+# #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+# unsafe fn read_byte_in(port: u16) -> u8 {
+let result: u8;
+asm!("in %dx, %al" : "={al}"(result) : "{dx}"(port));
+result
+# }
+```
+
+## Задействованное (Clobbers)
+
+Некоторые инструкции изменяют регистры, которым, в противном случае, могут быть
+присвоены различные значения, поэтому мы используем список задействованного,
+чтобы указать компилятору не допускать, чтобы какие-либо значения были загружены
+в эти регистры, и чтобы они оставались корректными.
 
 ```rust
 # #![feature(asm)]
 # #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
 # fn main() { unsafe {
 // Put the value 0x200 in eax
-asm!("mov $$0x200, %eax" : /* no outputs */ : /* no inputs */ : "eax");
+asm!("mov $$0x200, %eax" : /* no outputs */ : /* no inputs */ : "{eax}");
 # } }
 ```
 
-Input and output registers need not be listed since that information
-is already communicated by the given constraints. Otherwise, any other
-registers used either implicitly or explicitly should be listed.
+Если входные и выходные регистры уже заданы в ограничениях, то их не нужно
+перечислять здесь. В противном случае, любые другие регистры, используемые явно
+или неявно, должны быть перечислены.
 
-If the assembly changes the condition code register `cc` should be
-specified as one of the clobbers. Similarly, if the assembly modifies
-memory, `memory` should also be specified.
+Если ассемблер изменяет регистр кода условия `cc`, то он должен быть указан в
+качестве одного из задействованных. Точно так же, если ассемблер модифицирует
+память, то должно быть указано `memory`.
 
-## Options
+## Опции
 
-The last section, `options` is specific to Rust. The format is comma
-separated literal strings (i.e. `:"foo", "bar", "baz"`). It's used to
-specify some extra info about the inline assembly:
+Последний раздел, `options` специфичен для Rust. Формат представляет собой
+разделенные запятыми текстовые строки (т.е. `:"foo", "bar", "baz"`). Он
+используется для того, чтобы задать некоторые дополнительные данные для
+встроенного ассемблера:
 
-Current valid options are:
+На текущий момент разрешены следующие опции:
 
-1. *volatile* - specifying this is analogous to
-   `__asm__ __volatile__ (...)` in gcc/clang.
-2. *alignstack* - certain instructions expect the stack to be
-   aligned a certain way (i.e. SSE) and specifying this indicates to
-   the compiler to insert its usual stack alignment code
-3. *intel* - use intel syntax instead of the default AT&T.
+1. *volatile* - эта опция аналогична `__asm__ __volatile__ (...)` в gcc/clang.
 
+2. *alignstack* - некоторые инструкции ожидают, что стек был выровнен
+определенным образом (т.е. SSE), и эта опция указывает компилятору вставить свой
+обычный код выравнивания стека
+
+3. *intel* - эта опция указывает использовать синтаксис Intel вместо
+используемого по умолчанию синтаксиса AT&T.
+
+```rust
+# #![feature(asm)]
+# #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+# fn main() {
+let result: i32;
+unsafe {
+   asm!("mov eax, 2" : "={eax}"(result) : : : "intel")
+}
+println!("eax is currently {}", result);
+# }
+```
