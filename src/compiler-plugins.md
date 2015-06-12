@@ -145,7 +145,7 @@ fn expand_foo(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
     let mut parser = cx.new_parser_from_tts(args);
 
     let expr: P<Expr> = parser.parse_expr();
-    ```
+```
 
 Можно просмотреть код
 [парсера `libsyntax`](https://github.com/rust-lang/rust/blob/master/src/libsyntax/parse/parser.rs),
@@ -229,7 +229,7 @@ foo.rs:4 fn lintme() { }
          ^~~~~~~~~~~~~~~
 ```
 
-Плагин статической проверки состоит из следующих частей:
+Плагин статического анализа состоит из следующих частей:
 
 * один или больше вызовов `declare_lint!`, которые определяют статические
   структуры [`Lint`](http://doc.rust-lang.org/rustc/lint/struct.Lint.html);
