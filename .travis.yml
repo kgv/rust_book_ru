@@ -4,19 +4,25 @@ rust: nightly
 sudo: true
 
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - source ./script/env.sh
+
+install:
+  - python --version
+  - ./script/install_rustbook.sh
+  - rustbook --version
+  - ./script/install_calibre.sh
+  - ebook-convert --version
+
+before_script:
+  - ./script/fix.py
+  - ./script/check.py
 
 script:
-  - cd additions/rustbook && cargo build --release
-  - cp ./target/release/rustbook ./
-  - cd ../../ && find . -maxdepth 1 -name '*.md' -exec sed -i 1s/#/%/ {} \;
-  - ./additions/rustbook/rustbook build
+  - ./script/build.sh
 
 after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()" > /dev/null
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash additions/convert_book.sh
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash additions/deploy.sh
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./script/convert.sh
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./script/deploy.sh
 
 branches:
   only: master
