@@ -5,23 +5,18 @@
 Эта книга представляет собой перевод "The Rust Programming Language". Оригинал
 книги расположен [здесь][original].
 
-**ВНИМАНИЕ!** Перевод не окончен, поэтому могут встречаться [ошибки][error].
+**ВНИМАНИЕ!** Перевод окончен в черновом варианте, поэтому могут встречаться [ошибки][error].
 
 * [Читать книгу](http://kgv.github.io/rust_book_ru/)
 * [Скачать в PDF](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.pdf)
 * [Скачать в EPUB](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.epub)
 * [Скачать в MOBI](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.mobi)
 
-[Помощь][github] в переводе приветствуется. ^_^
-
-# Соавторам
+## Соавторам
 
 [Ход выполнения перевода](https://github.com/kgv/rust_book_ru/issues/38).
 
 [Правила перевода](https://github.com/kgv/rust_book_ru/wiki/Правила).
-
-Если вы беретесь за работу над каким-нибудь файлом, просьба отписаться
-[здесь](https://github.com/kgv/rust_book_ru/issues/38).
 
 ## Благодарности
 
