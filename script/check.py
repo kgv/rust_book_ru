@@ -4,7 +4,7 @@ import glob
 import logging
 import re
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 # Check links contains "../".
 def check_relative_links(file):
@@ -28,9 +28,10 @@ def check_broken_links(file):
         for index, line in enumerate(input):
             result = regex.search(line)
             if result != None:
+                line = line.rstrip("\n")
                 results.append({
                     "line_number": index,
-                    "line_string": line.strip(),
+                    "line_string": line,
                 })
     return results
 
@@ -39,35 +40,45 @@ def check_line_width(file):
     results = []
     with open(file, "r") as input:
         for index, line in enumerate(input):
-            if len(line) > 81:
+            line = line.rstrip("\n")
+            length = len(unicode(line,'utf-8'))
+            if length > 80:
                 results.append({
                     "line_number": index,
-                    "line_string": line.strip(),
-                    "line_width": len(line),
+                    "line_string": line,
+                    "line_width": length,
                 })
     return results
 
+print("")
+logging.info("check relative links")
 for file in glob.glob("./src/*.md"):
-    checks = {}
     results = check_relative_links(file)
-    checks["relative_links"] = results
-    results = check_broken_links(file)
-    checks["broken_links"] = results
-    results = check_line_width(file)
-    checks["line_width"] = results
-
-    if checks["relative_links"] or checks["broken_links"] or checks["line_width"]:
-        logging.warning("check error: file: {}, relative links: {}, broken links: {}, line width: {}".format(file, len(checks["relative_links"]), len(checks["broken_links"]), len(checks["line_width"])))
-        if checks["relative_links"]:
-            for result in checks["relative_links"]:
-                logging.debug("relative link error: line number: {line_number}, line: {line_string}".format(**result))
-
-        if checks["broken_links"]:
-            for result in checks["broken_links"]:
-                logging.debug("broken link error: line number: {line_number}, line: {line_string}".format(**result))
-
-        if checks["line_width"]:
-            for result in checks["line_width"]:
-                logging.debug("line width error: line number: {line_number}, line width: {line_width}, line: {line_string}".format(**result))
+    if results:
+        logging.warning("check relative links: error, file: {}, count: {}".format(file, len(results)))
+        for result in results:
+            logging.debug("relative link error: line number: {line_number}, line: {line_string}".format(**result))
     else:
-        logging.info("check ok: file: {}".format(file))
+        logging.info("check relative links: ok, file: {}".format(file))
+
+print("")
+logging.info("check broken width")
+for file in glob.glob("./src/*.md"):
+    results = check_broken_links(file)
+    if results:
+        logging.warning("check broken links: error, file: {}, count: {}".format(file, len(results)))
+        for result in results:
+            logging.debug("broken link error: line number: {line_number}, line: {line_string}".format(**result))
+    else:
+        logging.info("check broken links: ok, file: {}".format(file))
+
+print("")
+logging.info("check line width")
+for file in glob.glob("./src/*.md"):
+    results = check_line_width(file)
+    if results:
+        logging.warning("check line width: error, file: {}, count: {}".format(file, len(results)))
+        for result in results:
+            logging.debug("line width error: line number: {line_number}, line width: {line_width}, line: {line_string}".format(**result))
+    else:
+        logging.info("check line width: ok, file: {}".format(file))
