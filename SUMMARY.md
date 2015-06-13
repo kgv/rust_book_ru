@@ -58,7 +58,7 @@
     * [Макросы](src/macros.md)
     * [Сырые указатели](src/raw-pointers.md)
     * [`unsafe` код](src/unsafe.md)
-* [Нестабильные фичи Rust](src/nightly-rust.md)
+* [Нестабильные возможности Rust](src/nightly-rust.md)
     * [Плагины компилятора](src/compiler-plugins.md)
     * [Встроенный ассемблерный код](src/inline-assembly.md)
     * [Без stdlib](src/no-stdlib.md)
