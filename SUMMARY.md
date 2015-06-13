@@ -63,7 +63,7 @@
     * [Встроенный ассемблерный код](src/inline-assembly.md)
     * [Без stdlib](src/no-stdlib.md)
     * [Внутренние средства](src/intrinsics.md)
-    * [Lang items](src/lang-items.md)
+    * [Элементы языка](src/lang-items.md)
     * [Аргументы линковки](src/link-args.md)
     * [Тесты производительности](src/benchmark-tests.md)
     * [Синтаксис упаковки и шаблоны `match`](src/box-syntax-and-patterns.md)
