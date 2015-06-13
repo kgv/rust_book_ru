@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Lang items</title>
+    <title>Элементы языка (lang items)</title>
 
     <link rel="stylesheet" type="text/css" href="../rust-book.css">
 
@@ -154,7 +154,7 @@
 </li>
 </ul>
 </li>
-<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные фичи Rust</a>
+<li><a href='../src/nightly-rust.html'><b>7.</b> Нестабильные возможности Rust</a>
 <ul class='section'>
 <li><a href='../src/compiler-plugins.html'><b>7.1.</b> Плагины компилятора</a>
 </li>
@@ -164,7 +164,7 @@
 </li>
 <li><a href='../src/intrinsics.html'><b>7.4.</b> Внутренние средства</a>
 </li>
-<li><a href='../src/lang-items.html'><b>7.5.</b> Lang items</a>
+<li><a href='../src/lang-items.html'><b>7.5.</b> Элементы языка</a>
 </li>
 <li><a href='../src/link-args.html'><b>7.6.</b> Аргументы линковки</a>
 </li>
@@ -188,23 +188,22 @@
 <div id='page'>
 
 
-    <h1 class="title">Lang items</h1>
+    <h1 class="title">Элементы языка (lang items)</h1>
     <blockquote>
-<p><strong>Note</strong>: lang items are often provided by crates in the Rust distribution,
-and lang items themselves have an unstable interface. It is recommended to use
-officially distributed crates instead of defining your own lang items.</p>
+<p><strong>Замечание</strong>: многие элементы языка предоставляются контейнерами в
+стандартной поставке Rust, а у самих элементов языка нестабильный
+интерфейс. Рекомендуется использовать официально распространяемые контейнеры,
+вместо того, чтобы определять свои собственные элементы языка.</p>
 </blockquote>
 
-<p>The <code>rustc</code> compiler has certain pluggable operations, that is,
-functionality that isn&#39;t hard-coded into the language, but is
-implemented in libraries, with a special marker to tell the compiler
-it exists. The marker is the attribute <code>#[lang=&quot;...&quot;]</code> and there are
-various different values of <code>...</code>, i.e. various different &#39;lang
-items&#39;.</p>
+<p>У компилятора <code>rustc</code> есть некоторые подключаемые операции, т.е. функционал, не
+встроенный жёстко в язык, а реализованный в библиотеках и специально помеченный
+как элемент языка. Метка - это атрибут <code>#[lang=&quot;...&quot;]</code>. Есть различные значения
+<code>...</code>, т.е.  разные &quot;элементы языка&quot;.</p>
 
-<p>For example, <code>Box</code> pointers require two lang items, one for allocation
-and one for deallocation. A freestanding program that uses the <code>Box</code>
-sugar for dynamic allocations via <code>malloc</code> and <code>free</code>:</p>
+<p>Например, для указателей <code>Box</code> нужны два элемента языка - для выделения памяти и
+для освобождения. Вот программа, не использующая стандартную библиотеку, и
+реализующая <code>Box</code> через <code>malloc</code> и <code>free</code>:</p>
 <span class='rusttest'>#![feature(lang_items, box_syntax, start, no_std, libc)]
 #![no_std]
 
@@ -221,7 +220,7 @@ pub struct Box&lt;T&gt;(*mut T);
 unsafe fn allocate(size: usize, _align: usize) -&gt; *mut u8 {
     let p = libc::malloc(size as libc::size_t) as *mut u8;
 
-    // malloc failed
+    // malloc завершился ошибкой
     if p as usize == 0 {
         abort();
     }
@@ -260,7 +259,7 @@ fn main(argc: isize, argv: *const *const u8) -&gt; isize {
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>allocate</span>(<span class='ident'>size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> {
     <span class='kw'>let</span> <span class='ident'>p</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>libc</span>::<span class='ident'>size_t</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>;
 
-    <span class='comment'>// malloc failed</span>
+    <span class='comment'>// malloc завершился ошибкой</span>
     <span class='kw'>if</span> <span class='ident'>p</span> <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>==</span> <span class='number'>0</span> {
         <span class='ident'>abort</span>();
     }
@@ -284,29 +283,27 @@ fn main(argc: isize, argv: *const *const u8) -&gt; isize {
 <span class='attribute'>#[<span class='ident'>lang</span> <span class='op'>=</span> <span class='string'>&quot;panic_fmt&quot;</span>]</span> <span class='kw'>fn</span> <span class='ident'>panic_fmt</span>() <span class='op'>-&gt;</span> <span class='op'>!</span> { <span class='kw'>loop</span> {} }
 </pre>
 
-<p>Note the use of <code>abort</code>: the <code>exchange_malloc</code> lang item is assumed to
-return a valid pointer, and so needs to do the check internally.</p>
+<p>Заметьте, что <code>exchange_malloc</code> должен возвращать допустимый указатель, поэтому
+он производит проверку внутри и делает <code>abort</code>, если она не прошла.</p>
 
-<p>Other features provided by lang items include:</p>
+<p>Ниже перечислены другие возможности, предоставляемые элементами языка:</p>
 
 <ul>
-<li>overloadable operators via traits: the traits corresponding to the
-<code>==</code>, <code>&lt;</code>, dereferencing (<code>*</code>) and <code>+</code> (etc.) operators are all
-marked with lang items; those specific four are <code>eq</code>, <code>ord</code>,
-<code>deref</code>, and <code>add</code> respectively.</li>
-<li>stack unwinding and general failure; the <code>eh_personality</code>, <code>fail</code>
-and <code>fail_bounds_checks</code> lang items.</li>
-<li>the traits in <code>std::marker</code> used to indicate types of
-various kinds; lang items <code>send</code>, <code>sync</code> and <code>copy</code>.</li>
-<li>the marker types and variance indicators found in
-<code>std::marker</code>; lang items <code>covariant_type</code>,
-<code>contravariant_lifetime</code>, etc.</li>
+<li>перегружаемые операторы через типажи: типажи, соответствующие <code>==</code>, <code>&lt;</code>,
+разыменованию (<code>*</code>), <code>+</code> и другим операторам, помечены как элементы языка;
+конкретно эти типажи помечены как <code>eq</code>, <code>ord</code>, <code>deref</code> и <code>add</code>;</li>
+<li>раскрутка стека и общая ошибка; это элементы <code>eh_personality</code>, <code>fail</code> и
+<code>fail_bounds_check</code>;</li>
+<li>типажи в модуле <code>std::marker</code>, используемые чтобы помечать различные типы;
+элементы <code>send</code>, <code>sync</code> и <code>copy</code>;</li>
+<li>типы-метки и индикаторы вариантности из <code>std::marker</code>; это элементы
+<code>covariant_type</code>, <code>contravariant_lifetime</code> и другие.</li>
 </ul>
 
-<p>Lang items are loaded lazily by the compiler; e.g. if one never uses
-<code>Box</code> then there is no need to define functions for <code>exchange_malloc</code>
-and <code>exchange_free</code>. <code>rustc</code> will emit an error when an item is needed
-but not found in the current crate or any that it depends on.</p>
+<p>Элементы языка загружаются компилятором лениво, т.е. если программа не
+использует <code>Box</code>, вам не нужно определять элементы <code>exchange_malloc</code> и
+<code>exchange_free</code>. <code>rustc</code> выдаст ошибку, если элемент языка необходим, но не
+найден ни в текущем контейнере, ни в его зависимостях.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
