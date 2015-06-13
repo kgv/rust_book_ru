@@ -1,5 +1,6 @@
 #!/bin/sh
 
+ROOT=$(pwd)
 BOOK_DIR=${ROOT}/_book
 REV=$(git rev-parse --short HEAD)
 
@@ -20,3 +21,5 @@ git add -A .
 
 git commit -m "rebuild pages at $REV"
 git push -q upstream HEAD:gh-pages
+
+cd $ROOT
