@@ -7,13 +7,17 @@ before_install:
   - source ./script/env.sh
 
 install:
-  - python --version
   - ./script/install_rustbook.sh
-  - rustbook --version
-  - ./script/install_calibre.sh
-  - ebook-convert --version
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+    ./script/install_calibre.sh
+    fi
 
 before_script:
+  - python --version
+  - rustbook --version
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+    ebook-convert --version
+    fi
   - ./script/fix.py
   - ./script/check.py
 
@@ -21,8 +25,12 @@ script:
   - ./script/build.sh
 
 after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./script/convert.sh
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./script/deploy.sh
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+    ./script/convert.sh
+    fi
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+    ./script/deploy.sh
+    fi
 
 branches:
   only: master
