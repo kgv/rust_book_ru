@@ -15,7 +15,7 @@ fi
 
 mkdir -p $CALIBRE
 cd $CALIBRE
-curl -sf -L -k $URL | tar -Jxv
+curl -sf -L -k --retry 8 --retry-delay 1 $URL | tar -Jxv
 cd $ROOT
 
 export PATH=$PATH:$CALIBRE; echo "INFO:PATH: $PATH"
