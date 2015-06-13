@@ -525,7 +525,7 @@ hello.rs:4 }
 атрибутов контейнера.</li>
 <li>Будут вставлены некоторые общие <code>allow</code> атрибуты, в том числе:
 <code>unused_variables</code>, <code>unused_assignments</code>, <code>unused_mut</code>, <code>unused_attributes</code>,
-<code>dead_code</code>. Небольшие примеры часто вызывают эти строки.</li>
+<code>dead_code</code>. Небольшие примеры часто приводят к срабатыванию этих анализов.</li>
 <li>Если пример не содержит <code>extern crate</code>, то будет вставлено <code>extern crate &lt;mycrate&gt;;</code>.</li>
 <li>Наконец, если пример не содержит <code>fn main</code>, то оставшаяся часть текста будет
 обернута в <code>fn main() { your_code }</code></li>
