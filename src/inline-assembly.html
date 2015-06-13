@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Inline Assembly</title>
+    <title>Встроенный ассемблер</title>
 
     <link rel="stylesheet" type="text/css" href="../rust-book.css">
 
@@ -188,11 +188,12 @@
 <div id='page'>
 
 
-    <h1 class="title">Inline Assembly</h1>
-    <p>For extremely low-level manipulations and performance reasons, one
-might wish to control the CPU directly. Rust supports using inline
-assembly to do this via the <code>asm!</code> macro. The syntax roughly matches
-that of GCC &amp; Clang:</p>
+    <h1 class="title">Встроенный ассемблер</h1>
+    <p>Если вам нужно работать на самом низком уровне или повысить производительность
+программы, то у вас может возникнуть необходимость управлять процессором
+напрямую. Rust поддерживает использование встроенного ассемблера и делает это с
+помощью с помощью макроса <code>asm!</code>. Синтаксис примерно соответствует синтаксису
+GCC и Clang:</p>
 <span class='rusttest'>fn main() {
     asm!(assembly template
        : output operands
@@ -210,18 +211,20 @@ that of GCC &amp; Clang:</p>
    );
 </pre>
 
-<p>Any use of <code>asm</code> is feature gated (requires <code>#![feature(asm)]</code> on the
-crate to allow) and of course requires an <code>unsafe</code> block.</p>
+<p>Использование <code>asm</code> является закрытой возможностью (требуется указать
+<code>#![feature(asm)]</code> для контейнера, чтобы разрешить ее использование) и, конечно
+же, требует <code>unsafe</code> блока.</p>
 
 <blockquote>
-<p><strong>Note</strong>: the examples here are given in x86/x86-64 assembly, but
-all platforms are supported.</p>
+<p><strong>Примечание</strong>: здесь примеры приведены для x86/x86-64 ассемблера, но
+поддерживаются все платформы.</p>
 </blockquote>
 
-<h2 id="assembly-template" class='section-header'><a
-                           href="#assembly-template">Assembly template</a></h2>
-<p>The <code>assembly template</code> is the only required parameter and must be a
-literal string (i.e. <code>&quot;&quot;</code>)</p>
+<h2 id="Шаблон-инструкции-ассемблера" class='section-header'><a
+                           href="#Шаблон-инструкции-ассемблера">Шаблон инструкции ассемблера</a></h2>
+<p>Шаблон инструкции ассемблера (assembly template) является единственным
+обязательным параметром, и он должен быть представлен строкой символов (т.е.
+<code>&quot;&quot;</code>)</p>
 <span class='rusttest'>#![feature(asm)]
 
 #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
@@ -261,45 +264,48 @@ fn main() {
 }
 </pre>
 
-<p>(The <code>feature(asm)</code> and <code>#[cfg]</code>s are omitted from now on.)</p>
+<p>(Далее атрибуты <code>feature(asm)</code> и <code>#[cfg]</code> будут опущены.)</p>
 
-<p>Output operands, input operands, clobbers and options are all optional
-but you must add the right number of <code>:</code> if you skip them:</p>
+<p>Выходные операнды (output operands), входные операнды (input operands),
+затираемое (clobbers) и опции (options) не являются обязательными, но вы должны
+будете добавить соответствующее количество <code>:</code> если хотите пропустить их:</p>
 <span class='rusttest'>#![feature(asm)]
 #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
 fn main() { unsafe {
 asm!(&quot;xor %eax, %eax&quot;
     :
     :
-    : &quot;eax&quot;
+    : &quot;{eax}&quot;
    );
 } }
 </span><pre class='rust rust-example-rendered'>
 <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span>
     :
     :
-    : <span class='string'>&quot;eax&quot;</span>
+    : <span class='string'>&quot;{eax}&quot;</span>
    );
 </pre>
 
-<p>Whitespace also doesn&#39;t matter:</p>
+<p>Пробелы и отступы также не имеют значения:</p>
 <span class='rusttest'>#![feature(asm)]
 #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
 fn main() { unsafe {
-asm!(&quot;xor %eax, %eax&quot; ::: &quot;eax&quot;);
+asm!(&quot;xor %eax, %eax&quot; ::: &quot;{eax}&quot;);
 } }
 </span><pre class='rust rust-example-rendered'>
-<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span> ::: <span class='string'>&quot;eax&quot;</span>);
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span> ::: <span class='string'>&quot;{eax}&quot;</span>);
 </pre>
 
-<h2 id="operands" class='section-header'><a
-                           href="#operands">Operands</a></h2>
-<p>Input and output operands follow the same format: <code>: &quot;constraints1&quot;(expr1), &quot;constraints2&quot;(expr2), ...&quot;</code>. Output operand
-expressions must be mutable lvalues:</p>
+<h2 id="Операнды" class='section-header'><a
+                           href="#Операнды">Операнды</a></h2>
+<p>Входные и выходные операнды имеют одинаковый формат:
+<code>:&quot;ограничение1&quot;(выражение1), &quot;ограничение2&quot;(выражение2), ...&quot;</code>. Выражения для
+выходных операндов должны быть либо изменяемыми, либо неизменяемыми, но еще не
+иницилиализированными, L-значениями:</p>
 <span class='rusttest'>#![feature(asm)]
 #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
 fn add(a: i32, b: i32) -&gt; i32 {
-    let mut c = 0;
+    let c: i32;
     unsafe {
         asm!(&quot;add $2, $0&quot;
              : &quot;=r&quot;(c)
@@ -316,7 +322,7 @@ fn main() {
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>add</span>(<span class='ident'>a</span>: <span class='ident'>i32</span>, <span class='ident'>b</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
-    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='number'>0</span>;
+    <span class='kw'>let</span> <span class='ident'>c</span>: <span class='ident'>i32</span>;
     <span class='kw'>unsafe</span> {
         <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;add $2, $0&quot;</span>
              : <span class='string'>&quot;=r&quot;</span>(<span class='ident'>c</span>)
@@ -331,47 +337,83 @@ fn main() {
 }
 </pre>
 
-<h2 id="clobbers" class='section-header'><a
-                           href="#clobbers">Clobbers</a></h2>
-<p>Some instructions modify registers which might otherwise have held
-different values so we use the clobbers list to indicate to the
-compiler not to assume any values loaded into those registers will
-stay valid.</p>
+<p>Однако, если вы захотите использовать реальные операнды (регистры) в этой
+позиции, то вам потребуется заключить используемый регистр в фигурные скобки
+<code>{}</code>, и вы должны будете указать конкретный размер операнда. Это полезно для
+очень низкоуровневого программирования, когда важны регистры, которые вы
+используете:</p>
+<span class='rusttest'>#![feature(asm)]
+fn main() {
+    #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
+    unsafe fn read_byte_in(port: u16) -&gt; u8 {
+    let result: u8;
+    asm!(&quot;in %dx, %al&quot; : &quot;={al}&quot;(result) : &quot;{dx}&quot;(port));
+    result
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>result</span>: <span class='ident'>u8</span>;
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;in %dx, %al&quot;</span> : <span class='string'>&quot;={al}&quot;</span>(<span class='ident'>result</span>) : <span class='string'>&quot;{dx}&quot;</span>(<span class='ident'>port</span>));
+<span class='ident'>result</span>
+</pre>
+
+<h2 id="Затираемое-(clobbers)" class='section-header'><a
+                           href="#Затираемое-(clobbers)">Затираемое (Clobbers)</a></h2>
+<p>Некоторые инструкции могут изменять значения регистров, поэтому мы используем
+список затираемого. Он указывает компилятору, что тот не должен допускать
+какого-либо изменение значений этих регистров, чтобы они оставались корректными.</p>
 <span class='rusttest'>#![feature(asm)]
 #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
 fn main() { unsafe {
 // Put the value 0x200 in eax
-asm!(&quot;mov $$0x200, %eax&quot; : /* no outputs */ : /* no inputs */ : &quot;eax&quot;);
+asm!(&quot;mov $$0x200, %eax&quot; : /* no outputs */ : /* no inputs */ : &quot;{eax}&quot;);
 } }
 </span><pre class='rust rust-example-rendered'>
 <span class='comment'>// Put the value 0x200 in eax</span>
-<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;mov $$0x200, %eax&quot;</span> : <span class='comment'>/* no outputs */</span> : <span class='comment'>/* no inputs */</span> : <span class='string'>&quot;eax&quot;</span>);
+<span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;mov $$0x200, %eax&quot;</span> : <span class='comment'>/* no outputs */</span> : <span class='comment'>/* no inputs */</span> : <span class='string'>&quot;{eax}&quot;</span>);
 </pre>
 
-<p>Input and output registers need not be listed since that information
-is already communicated by the given constraints. Otherwise, any other
-registers used either implicitly or explicitly should be listed.</p>
+<p>Если входные и выходные регистры уже заданы в ограничениях, то их не нужно
+перечислять здесь. В противном случае, любые другие регистры, используемые явно
+или неявно, должны быть перечислены.</p>
 
-<p>If the assembly changes the condition code register <code>cc</code> should be
-specified as one of the clobbers. Similarly, if the assembly modifies
-memory, <code>memory</code> should also be specified.</p>
+<p>Если ассемблер изменяет регистр кода условия <code>cc</code>, то он должен быть указан в
+качестве одного из затираемых. Точно так же, если ассемблер модифицирует память,
+то должно быть указано <code>memory</code>.</p>
 
-<h2 id="options" class='section-header'><a
-                           href="#options">Options</a></h2>
-<p>The last section, <code>options</code> is specific to Rust. The format is comma
-separated literal strings (i.e. <code>:&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;</code>). It&#39;s used to
-specify some extra info about the inline assembly:</p>
+<h2 id="Опции" class='section-header'><a
+                           href="#Опции">Опции</a></h2>
+<p>Последний раздел, <code>options</code>, специфичен для Rust. Формат представляет собой
+разделенные запятыми текстовые строки (т.е. <code>:&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;</code>). Он
+используется для того, чтобы задать некоторые дополнительные данные для
+встроенного ассемблера:</p>
 
-<p>Current valid options are:</p>
+<p>На текущий момент разрешены следующие опции:</p>
 
 <ol>
-<li><em>volatile</em> - specifying this is analogous to
-<code>__asm__ __volatile__ (...)</code> in gcc/clang.</li>
-<li><em>alignstack</em> - certain instructions expect the stack to be
-aligned a certain way (i.e. SSE) and specifying this indicates to
-the compiler to insert its usual stack alignment code</li>
-<li><em>intel</em> - use intel syntax instead of the default AT&amp;T.</li>
+<li><p><em>volatile</em> - эта опция аналогична <code>__asm__ __volatile__ (...)</code> в gcc/clang;</p></li>
+<li><p><em>alignstack</em> - некоторые инструкции ожидают, что стек был выровнен
+определенным образом (т.е. SSE), и эта опция указывает компилятору вставить
+свой обычный код выравнивания стека;</p></li>
+<li><p><em>intel</em> - эта опция указывает использовать синтаксис Intel вместо
+используемого по умолчанию синтаксиса AT&amp;T.</p></li>
 </ol>
+<span class='rusttest'>#![feature(asm)]
+#[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
+fn main() {
+let result: i32;
+unsafe {
+   asm!(&quot;mov eax, 2&quot; : &quot;={eax}&quot;(result) : : : &quot;intel&quot;)
+}
+println!(&quot;eax is currently {}&quot;, result);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>result</span>: <span class='ident'>i32</span>;
+<span class='kw'>unsafe</span> {
+   <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;mov eax, 2&quot;</span> : <span class='string'>&quot;={eax}&quot;</span>(<span class='ident'>result</span>) : : : <span class='string'>&quot;intel&quot;</span>)
+}
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;eax is currently {}&quot;</span>, <span class='ident'>result</span>);
+</pre>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
