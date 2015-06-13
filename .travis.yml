@@ -3,17 +3,22 @@ rust: nightly
 
 sudo: true
 
-before_install:
-  - source ./script/env.sh
+env:
+  global:
+    - secure: "BHD65B6MzAEod7xYihi8hDxMXfrTwG64RVEY32qG6OOSY/PA0wSMBh8ffaY26gHpL79Q79hBqfvojhGbl5FJZcPQMRmknuCS92gMXsOqnJRcHWgUkUE3KHoKz1NRDmIxEasZ+2k2Iukf4FuNaK5t+8hRHlgEJMBhelK5OLtZzbwsvpxVAO5r/nrusvfoez+jMCJ7g50egi5iyX4EhsG4J6hD2VI+EeT0gjVO/AScKMtmQ0boix1F9Nees9NWG/Pw9TI1ykZ/heSBmBH1YtBCGMmyshVGzSUwh37GC0eUaf3HX+VN7/x7j9QhjH9mLmQVK+Q678hF9uF3u6ykRr1ltEtU7h6aePFDF9O38CtuGDbTJwg2VQKuETyZAejXL2RoeRtrRYLPG7BLShyNJ42+6gu4YzGdfVccFcSxEfNQ5Djn6w6nQ2ezEsPbhNlTve/oIBzISJxvkj7AJYi3kWzfuGRm2ocoGYg7+VCUl8C4xuV9zE/ZLaxNgMru2se7or1FfEBJfU9FUA7BnxDK4DF0MAFlkFyRgpykMpNB4mWGetDlzPaRBilr9AsGMsvIgEbWfmrvA4V6jvvn940IS1OAZ58TbUsEzBHu234gWLPK5q3iqxR4ofoMw8Jn4nR9QNTtXfqxiWJOY+ItQMluVFs8px+7ZhW61RRTCLnQUKOLYGo="
 
 install:
-  - python --version
-  - ./script/install_rustbook.sh
-  - rustbook --version
-  - ./script/install_calibre.sh
-  - ebook-convert --version
+  - source ./script/install_rustbook.sh
+  - if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_BRANCH == "master" ]; then
+      source ./script/install_calibre.sh;
+    fi
 
 before_script:
+  - python --version
+  - rustbook --version
+  - if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_BRANCH == "master" ]; then
+      ebook-convert --version;
+    fi
   - ./script/fix.py
   - ./script/check.py
 
@@ -21,12 +26,12 @@ script:
   - ./script/build.sh
 
 after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./script/convert.sh
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && ./script/deploy.sh
+  - if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_BRANCH == "master" ]; then
+      ./script/convert.sh;
+    fi
+  - if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_BRANCH == "master" ]; then
+      ./script/deploy.sh;
+    fi
 
 branches:
   only: master
-
-env:
-  global:
-    - secure: "BHD65B6MzAEod7xYihi8hDxMXfrTwG64RVEY32qG6OOSY/PA0wSMBh8ffaY26gHpL79Q79hBqfvojhGbl5FJZcPQMRmknuCS92gMXsOqnJRcHWgUkUE3KHoKz1NRDmIxEasZ+2k2Iukf4FuNaK5t+8hRHlgEJMBhelK5OLtZzbwsvpxVAO5r/nrusvfoez+jMCJ7g50egi5iyX4EhsG4J6hD2VI+EeT0gjVO/AScKMtmQ0boix1F9Nees9NWG/Pw9TI1ykZ/heSBmBH1YtBCGMmyshVGzSUwh37GC0eUaf3HX+VN7/x7j9QhjH9mLmQVK+Q678hF9uF3u6ykRr1ltEtU7h6aePFDF9O38CtuGDbTJwg2VQKuETyZAejXL2RoeRtrRYLPG7BLShyNJ42+6gu4YzGdfVccFcSxEfNQ5Djn6w6nQ2ezEsPbhNlTve/oIBzISJxvkj7AJYi3kWzfuGRm2ocoGYg7+VCUl8C4xuV9zE/ZLaxNgMru2se7or1FfEBJfU9FUA7BnxDK4DF0MAFlkFyRgpykMpNB4mWGetDlzPaRBilr9AsGMsvIgEbWfmrvA4V6jvvn940IS1OAZ58TbUsEzBHu234gWLPK5q3iqxR4ofoMw8Jn4nR9QNTtXfqxiWJOY+ItQMluVFs8px+7ZhW61RRTCLnQUKOLYGo="

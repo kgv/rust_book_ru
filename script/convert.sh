@@ -1,5 +1,6 @@
 #!/bin/sh
 
+ROOT=$(pwd)
 BOOK_DIR=${ROOT}/_book
 CONVERTED_DIR=${BOOK_DIR}/converted
 
