@@ -5,7 +5,7 @@ URL=https://code.calibre-ebook.com/dist/linux${HARDWARE_PLATFORM_BIT}
 # https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py
 
 # Check hardware platform bit valid.
-if [ $HARDWARE_PLATFORM_BIT -ne 32 ] && [ $HARDWARE_PLATFORM_BIT -ne 64 ] ; then
+if [ $HARDWARE_PLATFORM_BIT -ne 32 ] && [ $HARDWARE_PLATFORM_BIT -ne 64 ]; then
     echo "ERROR:hardware platform bit: $HARDWARE_PLATFORM_BIT"
     exit -1
 fi
