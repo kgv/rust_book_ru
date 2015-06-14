@@ -15,7 +15,10 @@ fi
 
 mkdir -p $CALIBRE
 cd $CALIBRE
-curl -sf -L -k --retry 8 --retry-delay 1 $URL | tar -Jxv
+until RESULT=$(curl -sf -L -k $URL | tar -Jxv); do
+    echo "ERROR:download calibre: error."
+    sleep 1
+done; echo "$RESULT"
 cd $ROOT
 
 export PATH=$PATH:$CALIBRE; echo "INFO:PATH: $PATH"
