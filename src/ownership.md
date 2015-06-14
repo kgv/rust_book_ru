@@ -65,6 +65,7 @@ fn foo() {
 [heap]: the-stack-and-the-heap.html
 [bindings]: variable-bindings.html
 
+<a name="move-semantics"></a>
 # Семантика перемещения
 
 Хотя тут есть некоторые тонкости: Rust гарантирует, что существует _ровно одна_
