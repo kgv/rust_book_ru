@@ -44,7 +44,7 @@ trait Graph {
 Теперь наши клиенты могут абстрагироваться от определенного `Graph`:
 
 ```rust,ignore
-fn distance<G: Graph>(graph: &G, start: &G::N, end: &G::N) -> uint { ... }
+fn distance<G: Graph>(graph: &G, start: &G::N, end: &G::N) -> u32 { ... }
 ```
 
 Больше нет необходимости иметь дело с типом `E`!
@@ -68,12 +68,9 @@ trait Graph {
 Достаточно просто. Ассоциированные типы используют ключевое слово `type`, и
 расположены внутри тела типажа, наряду с функциями.
 
-These `type` declarations can have all the same thing as functions do. For example,
-if we wanted our `N` type to implement `Display`, so we can print the nodes out,
-we could do this:
-Эти объявления `type` могут иметь все то же самое, как функции делают. Например,
-если бы мы хотели, чтобы тип `N` реализовывал `Display`, чтобы была возможность
-печатать узлы, мы могли бы сделать следующее:
+Эти объявления `type` могут иметь все то же самое, как и при работе с функциями.
+Например, если бы мы хотели, чтобы тип `N` реализовывал `Display`, чтобы была
+возможность печатать узлы, мы могли бы сделать следующее:
 
 ```rust
 use std::fmt;
