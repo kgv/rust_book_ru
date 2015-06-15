@@ -102,5 +102,5 @@ Rustaceans (это дурашливое прозвище, которым мы с
 [stackoverflow]: http://stackoverflow.com/questions/tagged/rust
 
 [irc_ru]: irc://irc.mozilla.org/#rust-ru
-[mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust-ru
+[mibbit_ru]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust-ru
 [google_groups_ru]: https://groups.google.com/forum/#!forum/rust-russian
