@@ -13,7 +13,7 @@
 * [Скачать в MOBI](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.mobi)
 
 **ВНИМАНИЕ!** Идет обсуждение как переводить шутливое название "Rustaceans" в контексте русского Rust комьюнити.
-Вы можете поучаствовать в обсуждении [здесь](https://github.com/kgv/rust_book_ru/issues/176) или проголосовать [здесь](http://strawpoll.me/4644480).
+Вы можете поучаствовать в обсуждении [здесь](https://github.com/kgv/rust_book_ru/issues/176).
 
 ## Соавторам
 
