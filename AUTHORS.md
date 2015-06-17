@@ -1,6 +1,7 @@
-* [D101101](https://github.com/D101101)
+* [d101101](https://github.com/D101101)
 * [dieu](https://github.com/dieu)
 * [funkill](https://github.com/funkill)
+* [hhblaze](https://github.com/hhblaze)
 * [ithamsteri](https://github.com/ithamsteri)
 * [kgv](https://github.com/kgv)
 * [mkpankov](https://github.com/mkpankov)
