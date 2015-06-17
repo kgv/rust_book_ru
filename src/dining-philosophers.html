@@ -190,26 +190,25 @@
 
     <h1 class="title">Обедающие философы</h1>
     <p>Для нашего второго проекта мы выбрали классическую задачу с параллелизмом. Она
-называется &quot;Обедающие философы&quot;. Задача была сформулирована в 1965 году
-Эдсгером Дейкстрой, но мы будем использовать версию задачи,
-<a href="http://www.usingcsp.com/cspbook.pdf">адаптированную</a> в 1985 году Ричардом Хоаром.</p>
+называется &quot;Обедающие философы&quot;. Задача была сформулирована в 1965 году Эдсгером
+Дейкстрой, но мы будем использовать версию задачи, <a href="http://www.usingcsp.com/cspbook.pdf">адаптированную</a> в
+1985 году Ричардом Хоаром.</p>
 
 <blockquote>
-<p>В древние времена, богатые филантропы пригласили погостить пятерых выдающихся
-философов. Им выделили каждому по комнате, в которой они могли заниматься
-своей профессиональной деятельностью - мышлением. Также была общая столовая,
-где стоял большой круглый стол, а вокруг него пять стульев. Каждый стул имел
-табличку с именем философа, который должен был сидеть на нем. Слева от каждого
-философа лежала золотая вилка и в центре стола стояла большая миска со
-спагетти, которая постоянно пополняется. Как подобает философам, они большую
-часть своего времени проводят в раздумьях. Но однажды они почувствовали голод
-и отправились в столовую. Каждый сел на свой стул, взял по вилке и воткнул её
-в миску со спагетти. Но из-за запутанной сущности спагетти потребовалась
-вторая вилка, которая бы отправляла спагетти в рот. Для этого требовалась бы
-вилка справа от каждого философа. Философы положили свои вилки и встали из-за
-стола, продолжая думать. Вилка может быть использована только одним философом
-одновременно. Если другой философ захочет её взять, то ему придется ждать
-когда она освободится.</p>
+<p>В древние времена богатые филантропы пригласили погостить пятерых выдающихся
+философов. Им выделили каждому по комнате, в которой они могли заниматься своей
+профессиональной деятельностью - мышлением. Также была общая столовая, где стоял
+большой круглый стол, а вокруг него пять стульев. Каждый стул имел табличку с
+именем философа, который должен был сидеть на нем. Слева от каждого философа
+лежала золотая вилка, а в центре стола стояла большая миска со спагетти, которая
+постоянно пополнялась. Как подобает философам, они большую часть своего времени
+проводили в раздумьях. Но однажды они почувствовали голод и отправились в
+столовую. Каждый сел на свой стул, взял по вилке и воткнул её в миску со
+спагетти. Но сущность запутанных спагетти такова, что необходима вторая вилка,
+чтобы отправлять спагетти в рот. То есть философу требовалась еще и вилка справа
+от него. Философы положили свои вилки и встали из-за стола, продолжая думать.
+Ведь вилка может быть использована только одним философом одновременно. Если
+другой философ захочет её взять, то ему придется ждать когда она освободится.</p>
 </blockquote>
 
 <p>Эта классическая задача показывает различные элементы параллелизма. Сложность
@@ -219,7 +218,7 @@
 <ol>
 <li>Философ берет вилку в свою левую руку.</li>
 <li>Затем берет вилку в свою правую руку.</li>
-<li>Он ест.</li>
+<li>Ест.</li>
 <li>Кладет вилки на место.</li>
 </ol>
 
@@ -253,7 +252,7 @@ fn main() {
     let p2 = Philosopher::new(&quot;Рая Дунаевская&quot;);
     let p3 = Philosopher::new(&quot;Зарубина Наталья&quot;);
     let p4 = Philosopher::new(&quot;Эмма Гольдман&quot;);
-    let p5 = Philosopher::new(&quot;Шмидт Анна&quot;);
+    let p5 = Philosopher::new(&quot;Анна Шмидт&quot;);
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>Philosopher</span> {
@@ -273,17 +272,20 @@ fn main() {
     <span class='kw'>let</span> <span class='ident'>p2</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>);
-    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>);
 }
 </pre>
 
-<p>Здесь мы создаем <a href="structs.html">структуру</a> представляющую философа. На данный
-момент, нам нужно всего лишь имя. Мы выбрали тип <a href="strings.html"><code>String</code></a> для
-хранения имени вместо <code>&amp;str</code>. Обычно проще работать с типом, владеющим
-данными, чем с типом, использующим ссылки.</p>
+<p>Здесь мы создаем <a href="structs.html"><code>struct</code></a>, представляющую философа. На данный момент
+нам нужно всего лишь имя. Мы выбрали тип <a href="strings.html"><code>String</code></a>, а не <code>&amp;str</code> для
+хранения имени. Обычно проще работать с типом, владеющим данными, чем с типом,
+использующим ссылки.</p>
 
-<p>Посмотрим на это:</p>
+<p>Продолжим:</p>
 <span class='rusttest'>fn main() {
+    struct Philosopher {
+        name: String,
+    }
     impl Philosopher {
         fn new(name: &amp;str) -&gt; Philosopher {
             Philosopher {
@@ -302,21 +304,37 @@ fn main() {
 }
 </pre>
 
-<p>Этот блок <code>impl</code> позволяет объявлять что-нибудь для структуры <code>Philosopher</code>. В
+<p>Этот блок <code>impl</code> позволяет объявить что-либо для структуры <code>Philosopher</code>. В
 нашем случае мы объявляем &quot;статическую функцию&quot; <code>new</code>. Первая строка этой
 функции выглядит так:</p>
 <span class='rusttest'>fn main() {
+    struct Philosopher {
+        name: String,
+    }
+    impl Philosopher {
     fn new(name: &amp;str) -&gt; Philosopher {
+            Philosopher {
+                name: name.to_string(),
+            }
+        }
+    }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
 </pre>
 
-<p>Она принимает один аргумент <code>name</code> типа <code>&amp;str</code>. Это ссылка на другую строку.
-Возвращает новый экземпляр нашей структуры <code>Philosopher</code>.</p>
+<p>Она принимает один аргумент, <code>name</code>, типа <code>&amp;str</code>. Это ссылка на другую строку.
+Она возвращает новый экземпляр нашей структуры <code>Philosopher</code>.</p>
 <span class='rusttest'>fn main() {
+    struct Philosopher {
+        name: String,
+    }
+    impl Philosopher {
+       fn new(name: &amp;str) -&gt; Philosopher {
     Philosopher {
         name: name.to_string(),
+    }
+        }
     }
     
 }</span><pre class='rust rust-example-rendered'>
@@ -325,34 +343,47 @@ fn main() {
 }
 </pre>
 
-<p>Это создаст новый экземпляр <code>Philosopher</code> и присвоит полю <code>name</code> значение
-переданного аргумента <code>name</code>. Но не сам аргумент, а результат его вызова
-<code>.to_string()</code>. Это создаст копию строки нашего указателя <code>&amp;str</code> и даст новый
-экземпляр <code>String</code>, который будет присвоен полю <code>name</code> структуры <code>Philosopher</code>.</p>
+<p>Этот код создаёт новый экземпляр <code>Philosopher</code> и присваивает его полю <code>name</code>
+значение переданного аргумента <code>name</code>. Но используется не сам аргумент, а
+результат вызова его метода <code>.to_string()</code>. Этот вызов создаёт копию строки, на
+которую указывает наш <code>&amp;str</code>, и возвращает новый экземпляр <code>String</code>, который и
+будет присвоен полю <code>name</code> структуры <code>Philosopher</code>.</p>
 
 <p>Почему бы сразу не передавать строку типа <code>String</code> напрямую? Так легче ее
-вызывать. Если мы принимали бы тип <code>String</code>, а тот кто вызывает функцию имеет
-ссылку на строку <code>&amp;str</code>, то должен был бы приводить ее к типу <code>String</code> перед
-каждым вызовом. Это уменьшит гибкость кода и придется <em>каждый раз</em> делать
-копию строки. Для этой небольшой программы это не очень важно, т.к. мы знаем
-что будем использовать только короткие строки.</p>
+вызывать. Если бы мы принимали тип <code>String</code>, а тот, кто вызывает функцию, имел
+бы ссылку на строку, <code>&amp;str</code>, то ему пришлось бы приводить ее к типу <code>String</code>
+перед каждым вызовом. Это уменьшит гибкость кода, и мы будем вынуждены <em>каждый
+раз</em> создавать копию строки. Для этой небольшой программы это не очень важно,
+так как мы знаем, что будем использовать только короткие строки.</p>
 
-<p>И последнее на что вы обратите внимание: мы просто объявляем структуру
-<code>Philosopher</code> и кажется, что ничего больше не делаем. Rust это expression
-ориентированный язык программирования, означающее, что каждое выражение
-возвращает значение. Это применяется для функций у которых автоматически
-возвращается последнее выражение. В нашем случае мы создаем структуру
-<code>Philosopher</code> в последнем выражении функции, которое возвращается функцией.</p>
+<p>И последнее на что следует обратить внимание: мы просто объявляем структуру
+<code>Philosopher</code> и кажется, что ничего больше не делаем. Rust - это язык
+программирования, &quot;ориентированный на выражения&quot;, что означает, что каждое
+выражение возвращает значение. Это верно и для функций, у которых автоматически
+возвращается последнее выражение. Так как в нашем примере в последнем выражении
+функции мы создаем структуру <code>Philosopher</code>, то она и будет возвращена функцией.</p>
 
-<p>Имя функции <code>new()</code> не является особенным в Rust, но негласным соглашением
-принято так называть функции, которые возвращают новые экземпляры структур.
-Давайте посмотрим на функцию <code>main()</code>:</p>
-<span class='rusttest'>fn main() {
+<p>Имя функции <code>new()</code> не регламентируется Rust. Это просто соглашение об
+именовании функций, которые возвращают новые экземпляры структур. Давайте снова
+посмотрим на функцию <code>main()</code>:</p>
+<span class='rusttest'>struct Philosopher {
+    name: String,
+}
+
+impl Philosopher {
+    fn new(name: &amp;str) -&gt; Philosopher {
+        Philosopher {
+            name: name.to_string(),
+        }
+    }
+}
+
+fn main() {
     let p1 = Philosopher::new(&quot;Джудит Батлер&quot;);
     let p2 = Philosopher::new(&quot;Рая Дунаевская&quot;);
     let p3 = Philosopher::new(&quot;Зарубина Наталья&quot;);
     let p4 = Philosopher::new(&quot;Эмма Гольдман&quot;);
-    let p5 = Philosopher::new(&quot;Шмидт Анна&quot;);
+    let p5 = Philosopher::new(&quot;Анна Шмидт&quot;);
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -360,20 +391,22 @@ fn main() {
     <span class='kw'>let</span> <span class='ident'>p2</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>);
-    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>);
+    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>);
 }
 </pre>
 
-<p>Здесь, мы связываем пять переменных с пятью новыми философами. Здесь указаны
-имена некоторых известных философов, но вы можете указать любые другие. Если
-бы мы <em>не объявили</em> свою реализацию функции <code>new()</code>, то наш код выглядел бы
-так:</p>
-<span class='rusttest'>fn main() {
+<p>Здесь мы связываем пять имен переменных с пятью новыми философами. Здесь указаны
+имена некоторых известных философов, но вы можете указать любые другие. Если бы
+мы <em>не объявили</em> свою реализацию функции <code>new()</code>, то наш код выглядел бы так:</p>
+<span class='rusttest'>struct Philosopher {
+    name: String,
+}
+fn main() {
     let p1 = Philosopher { name: &quot;Джудит Батлер&quot;.to_string() };
     let p2 = Philosopher { name: &quot;Рая Дунаевская&quot;.to_string() };
     let p3 = Philosopher { name: &quot;Зарубина Наталья&quot;.to_string() };
     let p4 = Philosopher { name: &quot;Эмма Гольдман&quot;.to_string() };
-    let p5 = Philosopher { name: &quot;Шмидт Анна&quot;.to_string() };
+    let p5 = Philosopher { name: &quot;Анна Шмидт&quot;.to_string() };
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -381,18 +414,18 @@ fn main() {
     <span class='kw'>let</span> <span class='ident'>p2</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Рая Дунаевская&quot;</span>.<span class='ident'>to_string</span>() };
     <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Зарубина Наталья&quot;</span>.<span class='ident'>to_string</span>() };
     <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Эмма Гольдман&quot;</span>.<span class='ident'>to_string</span>() };
-    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Шмидт Анна&quot;</span>.<span class='ident'>to_string</span>() };
+    <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Анна Шмидт&quot;</span>.<span class='ident'>to_string</span>() };
 }
 </pre>
 
-<p>Это было бы очень не очень изящно и трудно читаемо. Использование
-статической функции <code>new</code> имеет много плюсов, в нашем простом случае даст
-более элегантный код.</p>
+<p>Этот код выглядит не слишком изящно. Использование статической функции <code>new</code>
+имеет и другие преимущества, но даже в этом простом случае, её использование
+было оправдано.</p>
 
-<p>Сейчас у нас уже есть каркас программы и теперь можно заняться решением задачи
-с обедающими философами. Начнем с конца: сделаем так, чтобы философ сообщал
-нам когда он закончит есть. Для этого потребуется метод, сообщающий нам об
-окончании обеда, и цикл, запускающий этот метод для каждого философа.</p>
+<p>Теперь у нас уже есть каркас программы, и можно заняться решением задачи с
+обедающими философами. Начнем с конца: сделаем так, чтобы философ сообщал нам,
+когда он закончит есть. Для этого потребуется метод, сообщающий нам об окончании
+приема пищи, и цикл, запускающий этот метод для каждого философа.</p>
 <span class='rusttest'>struct Philosopher {
     name: String,
 }   
@@ -405,7 +438,7 @@ impl Philosopher {
     }
     
     fn eat(&amp;self) {
-        println!(&quot;{} закончила обедать.&quot;, self.name);
+        println!(&quot;{} закончила есть.&quot;, self.name);
     }
 }
 
@@ -415,7 +448,7 @@ fn main() {
         Philosopher::new(&quot;Рая Дунаевская&quot;),
         Philosopher::new(&quot;Зарубина Наталья&quot;),
         Philosopher::new(&quot;Эмма Гольдман&quot;),
-        Philosopher::new(&quot;Шмидт Анна&quot;),
+        Philosopher::new(&quot;Анна Шмидт&quot;),
     ];
 
     for p in &amp;philosophers {
@@ -435,7 +468,7 @@ fn main() {
     }
     
     <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила обедать.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
     }
 }
 
@@ -445,7 +478,7 @@ fn main() {
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>),
-        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>),
     ];
 
     <span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>philosophers</span> {
@@ -454,13 +487,13 @@ fn main() {
 }
 </pre>
 
-<p>Давайте сначала рассмотрим на <code>main()</code>. Вместо того чтобы каждого философа
-привязывать к отдельной переменной, мы создаем <code>Vec&lt;T&gt;</code> c ними. <code>Vec&lt;T&gt;</code>
-называют &quot;вектор&quot; и он является расширенной версией массива. Затем в цикле
-<a href="for-loops.html"><code>for</code></a> мы перебираем вектор, получая ссылку на каждого философа за
-каждую итерацию.</p>
+<p>Давайте сначала рассмотрим функцию <code>main()</code>. Вместо того чтобы создавать пять
+отдельных связанных имен для философов, мы создаем для них <code>Vec&lt;T&gt;</code>. <code>Vec&lt;T&gt;</code>
+называют &quot;вектор&quot;, он является расширяемой версией массива. Затем в цикле
+<a href="for-loops.html"><code>for</code></a> мы перебираем вектор, получая ссылку на очередного философа на
+каждой итерации.</p>
 
-<p>В теле цикла мы вызываем <code>p.eat()</code>, который объявлен выше:</p>
+<p>В теле цикла мы вызываем метод <code>p.eat()</code>, который объявлен выше:</p>
 <span class='rusttest'>fn main() {
     fn eat(&amp;self) {
         println!(&quot;{} закончила есть.&quot;, self.name);
@@ -472,22 +505,22 @@ fn main() {
 }
 </pre>
 
-<p>В Rust методы явно получают параметр self. Вот почему <code>eat()</code> является
-методом, а <code>new</code> статической функцией: <code>new()</code> не получает параметр <code>self</code>.
-Для нашей первой версии <code>eat()</code>, мы только выводим имя философа и сообщение о
-том, что он закончил есть. Запустив эту программу вы получите:</p>
+<p>В Rust методы явно получают параметр <code>self</code>. Вот почему <code>eat()</code> является
+методом, а <code>new</code> - статической функцией: <code>new()</code> не получает параметр <code>self</code>.
+Для нашей первой версии метода <code>eat()</code> мы выводим только имя философа и
+сообщение о том, что он закончил есть. Запустив эту программу вы получите:</p>
 
 <pre><code class="language-text">Джудит Батлер закончила есть.
 Рая Дунаевская закончила есть.
 Зарубина Наталья закончила есть.
 Эмма Гольдман закончила есть.
-Шмидт Анна закончила есть.
+Анна Шмидт закончила есть.
 </code></pre>
 
 <p>Это было не сложно! Осталось чуть-чуть и приступим к самой задаче.</p>
 
-<p>Дальше нам надо сделать так, чтобы философы не только заканчивали есть, но
-также и начинали. Это новая версия программы:</p>
+<p>Дальше нам нужно сделать так, чтобы философы не только заканчивали, но и
+начинали есть. Это новая версия программы:</p>
 <span class='rusttest'>use std::thread;
 
 struct Philosopher {
@@ -516,7 +549,7 @@ fn main() {
         Philosopher::new(&quot;Рая Дунаевская&quot;),
         Philosopher::new(&quot;Зарубина Наталья&quot;),
         Philosopher::new(&quot;Эмма Гольдман&quot;),
-        Philosopher::new(&quot;Шмидт Анна&quot;),
+        Philosopher::new(&quot;Анна Шмидт&quot;),
     ];
 
     for p in &amp;philosophers {
@@ -552,7 +585,7 @@ fn main() {
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>),
-        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>),
     ];
 
     <span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>philosophers</span> {
@@ -561,7 +594,7 @@ fn main() {
 }
 </pre>
 
-<p>Появилось немного изменений. Давайте посмотрим что изменилось:</p>
+<p>Появились некоторые небольшие изменения. Давайте посмотрим, что же изменилось:</p>
 <span class='rusttest'>fn main() {
     use std::thread;
     
@@ -570,7 +603,8 @@ fn main() {
 </pre>
 
 <p>Конструкция <code>use</code> предоставляет доступ к области видимости модуля <code>thread</code> из
-стандартной библиотеки, т.к. мы хотим использовать этот модуль далее в коде.</p>
+стандартной библиотеки. Мы собираемся использовать этот модуль далее в коде, и
+поэтому нам нужно объявить о его использовании.</p>
 <span class='rusttest'>fn main() {
         fn eat(&amp;self) {
             println!(&quot;{} начала есть.&quot;, self.name);
@@ -590,12 +624,12 @@ fn main() {
     }
 </pre>
 
-<p>Здесь мы выводим на экран два сообщения и используем функцию <code>sleep_ms</code> между
-выводом. Эта функция останавливает рабочий поток на 1000 миллисекунд и мы её
-используем для симуляции процесса обеда философа.</p>
+<p>Здесь мы выводим на экран два сообщения и вызываем функцию <code>sleep_ms</code> между
+ними. Эта функция останавливает рабочий поток на 1000 миллисекунд, что
+симулирует процесс приема пищи философа.</p>
 
-<p>Если вы запустите теперь программу, то увидите что теперь каждый философ по
-очереди начинает есть и затем заканчивает:</p>
+<p>Если вы запустите программу теперь, то увидите, что каждый философ, по очереди,
+начинает есть, ест какое-то время и заканчивает есть:</p>
 
 <pre><code class="language-text">Джудит Батлер начала есть.
 Джудит Батлер закончила есть.
@@ -605,15 +639,15 @@ fn main() {
 Зарубина Наталья закончила есть.
 Эмма Гольдман начала есть.
 Эмма Гольдман закончила есть.
-Шмидт Анна начала есть.
-Шмидт Анна закончила есть.
+Анна Шмидт начала есть.
+Анна Шмидт закончила есть.
 </code></pre>
 
-<p>Превосходно! Теперь у нас осталась проблема: наши философы едят по очереди, а
-не одновременно, т.е. мы пока не решили задачу параллелизма.</p>
+<p>Превосходно! Теперь у нас осталась только одна проблема: наши философы едят по
+очереди, а не одновременно, то есть мы пока не решили задачу параллелизма.</p>
 
-<p>Для того, чтобы наши философы начали есть одновременно, нам надо внести
-немного изменений в код:</p>
+<p>Для того, чтобы наши философы начали есть одновременно, нам нужно внести
+некоторые изменения в код:</p>
 <span class='rusttest'>use std::thread;
 
 struct Philosopher {
@@ -642,7 +676,7 @@ fn main() {
         Philosopher::new(&quot;Рая Дунаевская&quot;),
         Philosopher::new(&quot;Зарубина Наталья&quot;),
         Philosopher::new(&quot;Эмма Гольдман&quot;),
-        Philosopher::new(&quot;Шмидт Анна&quot;),
+        Philosopher::new(&quot;Анна Шмидт&quot;),
     ];
 
     let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
@@ -684,7 +718,7 @@ fn main() {
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>),
-        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>),
     ];
 
     <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
@@ -723,12 +757,12 @@ fn main() {
 <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> 
 </pre>
 
-<p>Объявляем новое связывание с именем <code>handles</code>. Мы дали ему такое имя, т.к.
-собираемся создать несколько потоков и для контролирования их работы нужно
-получить дескрипторы каждого из них. Нам надо явно указать здесь тип, а для
-чего это надо мы скажем чуть позже. <code>_</code> это заполнитель типа. Мы говорим
-компилятору &quot;<code>handles</code> это вектор тип которого ты можешь самостоятельно
-вычислить&quot;.</p>
+<p>Объявляем новое связанное имя <code>handles</code>. Мы задали такое имя, потому что
+собираемся создать несколько потоков, в результате чего получим для них
+дескрипторы, с помощью которых сможем контролировать их выполнение. Здесь нам
+нужно явно указать тип, а зачем это необходимо, мы расскажем чуть позже. <code>_</code> -
+это заполнитель типа. Мы говорим компилятору &quot;<code>handles</code> - это вектор, содержащий
+элементы, тип которых Rust должен вывести самостоятельно&quot;.</p>
 <span class='rusttest'>fn main() {
     philosophers.into_iter().map(|p| {
     
@@ -736,11 +770,11 @@ fn main() {
 <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
 </pre>
 
-<p>Мы берем наш список философов и вызываем <code>into_iter()</code>. Это создаст итератор,
-который заберёт право владения (ownership) для каждого философа. Нам надо
-сделать это для передачи в поток. Мы берем этот итератор и вызываем <code>map</code>,
-который принимает замыкание как аргумент и вызывает это замыкание для каждого
-элемента итерации.</p>
+<p>Мы берем наш список философов и вызываем метод <code>into_iter()</code>. Этот метод создаёт
+итератор, который при каждой итерации забирает право владения на соответствующий
+элемент. Это нужно для передачи элемента вектора в поток. Мы берем этот итератор
+и вызываем метод <code>map</code>, который принимает замыкание в качестве аргумента и
+вызывает это замыкание для каждого из элементов итератора.</p>
 <span class='rusttest'>fn main() {
         thread::spawn(move || {
             p.eat();
@@ -752,13 +786,17 @@ fn main() {
     })
 </pre>
 
-<p>Вот здесь происходит сам параллелизм. Функция <code>thread::spawn</code> берет замыкание
-в качестве аргумента и исполняет это замыкание в новом потоке. Это замыкание
-нуждается дополнительном указании ключевого слова <code>move</code>, которое сообщает что
-это замыкание получает право владения (ownership) значениями которое оно
-захватывает. В данном случае переменную <code>p</code> функции <code>map</code>.</p>
+<p>Вот здесь происходит сам параллелизм. Функция <code>thread::spawn</code> принимает в
+качестве аргумента замыкание и исполняет это замыкание в новом потоке. Это
+замыкание дополнительно нуждается в указании ключевого слова <code>move</code>, которое
+сообщает, что это замыкание получает владение переменными, которые оно
+захватывает. В данном случае - переменной <code>p</code> функции <code>map</code>.</p>
 
-<p>Внутри потока мы всего лишь вызываем функцию <code>eat()</code> у <code>p</code>.</p>
+<p>Внутри потока мы всего лишь вызываем метод <code>eat()</code> переменной <code>p</code>. Также
+обратите внимание, что вызов <code>thread::spawn</code> не оканчивается точкой с запятой,
+что превращает его в выражение. Этот нюанс важен, так как возвращается
+правильное значение. Для получения более подробной информации, прочитайте главу
+<a href="functions.html#expressions-vs.-statements">Выражения и операторы</a>.</p>
 <span class='rusttest'>fn main() {
     }).collect();
     
@@ -766,11 +804,12 @@ fn main() {
 }).<span class='ident'>collect</span>();
 </pre>
 
-<p>И в завершении мы получаем результат этих вызовов <code>map</code> и собираем полученный
-результат в в коллекцию с помощью функции <code>collect()</code>. Для того чтобы Rust
-понял какой тип коллекции хотим получить, мы указали для <code>handle</code> тип
-принимаемого значения <code>Vec&lt;T&gt;</code>. Элементы коллекции будут возвращаемые значения
-типа <code>thread::spawn</code>, которые являются ручками их потоков. Вот так!</p>
+<p>По завершении мы получаем результат вызова <code>map</code> и собираем полученный результат
+в коллекцию с помощью метода <code>collect()</code>. Метод <code>collect()</code> создаёт коллекцию
+какого-то типа, и для того, чтобы Rust понял, коллекцию какого типа мы хотим
+получить, мы указали для <code>handle</code> тип принимаемого значения <code>Vec&lt;T&gt;</code>. Элементами
+коллекции будут возвращаемые из методов <code>thread::spawn</code> значения, которые
+являются дескрипторами этих потоков. Вот так!</p>
 <span class='rusttest'>fn main() {
     for h in handles {
         h.join().unwrap();
@@ -782,10 +821,10 @@ fn main() {
 }
 </pre>
 
-<p>В конце функции <code>main()</code> мы в цикле перебираем каждую ручку и вызываем функцию
-<code>join()</code> для каждой ручки, которая блокирует дальнейшее исполнение основного
-потока, пока не завершится дочерний поток. Это позволяет нам быть уверенными,
-что потоки завершат работу до того как произойдет выход их программы.</p>
+<p>В конце функции <code>main()</code> мы в цикле перебираем каждый дескриптор и вызываем для
+него метод <code>join()</code>, который блокирует дальнейшее исполнение основного потока,
+пока не завершится дочерний поток. Это позволяет нам быть уверенными, что потоки
+завершат работу до того как произойдет выход из программы.</p>
 
 <p>Если вы запустите эту программу, то вы увидите, что философы едят не дожидаясь
 своей очереди! У нас многопоточность!</p>
@@ -794,15 +833,15 @@ fn main() {
 Рая Дунаевская закончила есть.
 Эмма Гольдман начала есть.
 Эмма Гольдман закончила есть.
-Шмидт Анна начала есть.
+Анна Шмидт начала есть.
 Джудит Батлер начала есть.
 Джудит Батлер закончила есть.
 Зарубина Наталья начала есть.
 Зарубина Наталья закончила есть.
-Шмидт Анна закончила есть.
+Анна Шмидт закончила есть.
 </code></pre>
 
-<p>Но где же вилки? Они пока ещё не смоделированы у нас.</p>
+<p>Но как же быть с вилками? Их мы пока ещё не смоделировали.</p>
 
 <p>Давайте же начнем. Сначала сделаем новую структуру:</p>
 <span class='rusttest'>fn main() {
@@ -820,13 +859,14 @@ fn main() {
 }
 </pre>
 
-<p>Структура <code>Table</code> имеет вектор мьютексов (<code>Mutex</code>). Мьютекс позволяет
-управлять одновременно выполняющимися потоками, давая доступ к содержимому
-только одному потоку. Это свойство нужно для реализации наших вилок. Мы в коде
-используем пустой кортеж <code>()</code> внутри мьютекса, т.к. мы не собираемся
-использовать значение, а мьютекс использовать только для приостановки потока.</p>
+<p>Структура <code>Table</code> содержит вектор мьютексов (<code>Mutex</code>). Мьютекс - способ
+управления доступом к данным для параллельно выполняющихся потоков: только один
+поток может получить доступ к данным в конкретный момент времени. Это именно то
+свойство, которое нужно для реализации наших вилок. В коде мы используем пустой
+кортеж, <code>()</code>, внутри мьютекса, так как не собираемся использовать это значение,
+а мьютекс используется только для организации доступа.</p>
 
-<p>Давайте изменим программу используя структуру <code>Table</code>:</p>
+<p>Давайте изменим программу, используя структуру <code>Table</code>:</p>
 <span class='rusttest'>use std::thread;
 use std::sync::{Mutex, Arc};
 
@@ -875,7 +915,7 @@ fn main() {
         Philosopher::new(&quot;Рая Дунаевская&quot;, 1, 2),
         Philosopher::new(&quot;Зарубина Наталья&quot;, 2, 3),
         Philosopher::new(&quot;Эмма Гольдман&quot;, 3, 4),
-        Philosopher::new(&quot;Шмидт Анна&quot;, 0, 4),
+        Philosopher::new(&quot;Анна Шмидт&quot;, 0, 4),
     ];
 
     let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
@@ -939,7 +979,7 @@ fn main() {
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>, <span class='number'>1</span>, <span class='number'>2</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>, <span class='number'>2</span>, <span class='number'>3</span>),
         <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>, <span class='number'>3</span>, <span class='number'>4</span>),
-        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
+        <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
     ];
 
     <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
@@ -956,8 +996,8 @@ fn main() {
 }
 </pre>
 
-<p>Много изменений! Однако эта версия является корректно работающей версией.
-Приступим к рассмотрению:</p>
+<p>Много изменений! Однако, с этими изменениями мы получили корректно работающую
+программу. Приступим к рассмотрению:</p>
 <span class='rusttest'>fn main() {
     use std::sync::{Mutex, Arc};
     
@@ -983,10 +1023,10 @@ fn main() {
 </pre>
 
 <p>Нам понадобилось добавить еще два поля в нашу структуру <code>Philosopher</code>. Каждый
-философ должен иметь две вилки: одну для левой руки, другую для правой руки.
-Мы используем тип <code>usize</code> для идентификации каждой вилки. Мы используем его
-при при создании философа, передавая идентификаторы двух вилок. Эти два
-значения будут использоваться полем <code>forks</code> структуры <code>Table</code>.</p>
+философ должен иметь две вилки: одну - для левой руки, другую - для правой руки.
+Мы используем тип <code>usize</code> для идентификации каждой вилки. Мы используем его при
+создании философа, передавая идентификаторы двух вилок. Эти два значения будут
+использоваться полем <code>forks</code> структуры <code>Table</code>.</p>
 <span class='rusttest'>fn main() {
     fn new(name: &amp;str, left: usize, right: usize) -&gt; Philosopher {
         Philosopher {
@@ -1006,7 +1046,7 @@ fn main() {
 }
 </pre>
 
-<p>Используем функцию <code>new()</code> для задания значений <code>left</code> и <code>right</code>.</p>
+<p>Мы используем функцию <code>new()</code> для задания значений <code>left</code> и <code>right</code>.</p>
 <span class='rusttest'>fn main() {
     fn eat(&amp;self, table: &amp;Table) {
         let _left = table.forks[self.left].lock().unwrap();
@@ -1032,25 +1072,28 @@ fn main() {
 }
 </pre>
 
-<p>Здесь появились две новые строки, а также добавили один аргумент <code>table</code>. У
-нас есть доступ к вилкам через структуру <code>Table</code>, передавая в нее
-идентификаторы вилок <code>self.left</code> и <code>self.right</code>. Она хранит в себе <code>Mutex</code> для
-каждой вилки и вызываем <code>lock()</code>, блокируя к ней доступ.</p>
+<p>Здесь появились две новые строки. Мы также добавили один аргумент, <code>table</code>. Мы
+получаем доступ к списку вилок через структуру <code>Table</code>. Затем используем
+идентификаторы вилок <code>self.left</code> и <code>self.right</code> для получения доступа к вилке по
+определенному индексу. В результате чего мы получаем <code>Mutex</code>, который регулирует
+доступ к вилке, и вызываем для него метод <code>lock()</code>, блокируя доступ к вилке.
+Если в настоящее время доступ к вилке уже предоставлен кому-то еще, то мы будем
+блокированы, пока не станет вилке доступной.</p>
 
-<p>Вызов <code>lock()</code> может быть неудачным и если это случится, то нужно будет
-аварийно завершить работу программы. Это может произойти, если вдруг поток
-аварийно завершит работу, а мьютекс останется заблокирован. Такой мьютекс
-называется <a href="https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#poisoning">&quot;отравленным&quot;</a>. Но в нашем случае это не может произойти,
-то мы просто используем <code>unwarp()</code>.</p>
+<p>Вызов метода <code>lock()</code> может потерпеть неудачу, и если это случается, то мы
+аварийно завершаем работу программы. Может возникнуть ситуация, когда поток
+аварийно завершит свою работу, а мьютекс при этом останется заблокированным.
+Такой мьютекс называется <a href="https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#poisoning">&quot;отравленным&quot;</a>. Но в нашем случае это не может
+произойти, потому как мы просто используем метод <code>unwarp()</code>.</p>
 
-<p>В этих двух строках мы результат сохраняем в <code>_left</code> и <code>_right</code>. Зачем мы
-используем знаки подчеркивания в начале идентификаторов имен? Это для того
-чтобы сказать компилятору, что хотим получить значения, которые далее
-<em>не планируем использовать</em>. Таким образом Rust не будет выводить
-предупреждение о неиспользуемых идентификаторов имен.</p>
+<p>Результаты выполнения этих двух строк имеют имена <code>_left</code> и <code>_right</code>
+соответственно. Зачем мы используем знаки подчеркивания в начале имён? Это для
+того, чтобы сказать компилятору, что мы хотим получить значения, которые далее
+<em>не планируем использовать</em>. Таким образом Rust не будет выводить предупреждение
+о неиспользуемых именах.</p>
 
-<p>Когда же освободится мьютекс? Это произойдет когда <code>_left</code> и <code>_right</code> выйдут
-из области видимости, т.е. по окончанию работы функции.</p>
+<p>Когда же мьютекс будет освобождён? Это произойдет автоматически, когда <code>_left</code> и
+<code>_right</code> выйдут из области видимости, то есть по окончании работы функции.</p>
 <span class='rusttest'>fn main() {
         let table = Arc::new(Table { forks: vec![
             Mutex::new(()),
@@ -1070,18 +1113,18 @@ fn main() {
     ]});
 </pre>
 
-<p>Далее в <code>main()</code> мы создаем <code>Table</code> и оборачиваем его в <code>Arc&lt;T&gt;</code>. Это
-&quot;атомарный счетчик ссылок&quot; и нам он нужен для использования нашей структуры
-<code>Table</code> получения доступа в нескольких потоках. Когда мы его будем передавать
-в поток, то будет счетчик увеличиваться, а если поток завершит работу, то
-счетчик уменьшится.</p>
+<p>Далее в <code>main()</code> мы создаем новый экземпляр структуры <code>Table</code> и оборачиваем его
+в <code>Arc&lt;T&gt;</code>. Это &quot;атомарный счетчик ссылок&quot; (&quot;atomic reference count&quot;). Он нужен
+для обеспечения доступа к нашей структуре <code>Table</code> из нескольких потоков. Когда
+он передается в новый поток, то счетчик увеличивается, а когда этот поток
+завершает работу, то счетчик уменьшается.</p>
 <span class='rusttest'>fn main() {
     let philosophers = vec![
         Philosopher::new(&quot;Джудит Батлер&quot;, 0, 1),
         Philosopher::new(&quot;Рая Дунаевская&quot;, 1, 2),
         Philosopher::new(&quot;Зарубина Наталья&quot;, 2, 3),
         Philosopher::new(&quot;Эмма Гольдман&quot;, 3, 4),
-        Philosopher::new(&quot;Шмидт Анна&quot;, 0, 4),
+        Philosopher::new(&quot;Анна Шмидт&quot;, 0, 4),
     ];
     
 }</span><pre class='rust rust-example-rendered'>
@@ -1090,17 +1133,18 @@ fn main() {
     <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Рая Дунаевская&quot;</span>, <span class='number'>1</span>, <span class='number'>2</span>),
     <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>, <span class='number'>2</span>, <span class='number'>3</span>),
     <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>, <span class='number'>3</span>, <span class='number'>4</span>),
-    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Шмидт Анна&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
+    <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
 ];
 </pre>
 
-<p>Здесь мы добавили наши значения <code>left</code> и <code>right</code> при создании структуры
-<code>Philosopher</code>. Здесь есть <em>очень важная</em> деталь на которую следует обратить
-внимание. Посмотрите на последнюю строку создания <code>Philosopher</code>. У Анны Шмидт
-должны бы иметь значения <code>4</code> и <code>0</code> в качестве аргументов, но у нас
-имеют <code>0</code> и <code>4</code>. Это помешает нашей программе попасть в безвыходное состояние,
-если все одновременно возьмут вилки одновременно. Так что давайте представим,
-что один из философов у нас левша!</p>
+<p>Мы добавили наши значения <code>left</code> и <code>right</code> при создании структуры <code>Philosopher</code>.
+Здесь есть <em>очень важная</em> деталь, на которую следует обратить внимание.
+Посмотрите на последнюю строку создания <code>Philosopher</code>. Конструктор Анны Шмидт
+должен был бы принимать в качестве аргументов значения <code>4</code> и <code>0</code>, но вместо
+этого он принимает значения <code>0</code> и <code>4</code>. Это помешает нашей программе попасть в
+безвыходное состояние, если каждый возьмет по одной вилке одновременно. Так что
+давайте представим, что один из философов у нас левша! Это один из способов
+решить данную проблему, и, на мой взгляд, самый простой.</p>
 <span class='rusttest'>fn main() {
     let handles: Vec&lt;_&gt; = philosophers.into_iter().map(|p| {
         let table = table.clone();
@@ -1120,14 +1164,20 @@ fn main() {
 }).<span class='ident'>collect</span>();
 </pre>
 
-<p>Внутри нашего цикла  <code>map()</code>/<code>collect()</code> мы вызываем <code>table.clone()</code>. Метод
-<code>clone()</code> структуры <code>Arc&lt;T&gt;</code> инкрементирует счетчик и когда покинет область
-видимости декрементирует. Вы можете заметить, что мы делаем новое связывание с
-<code>table</code> здесь, затеняя оригинальную <code>table</code>. Это позволяет нам не вводить
-новый уникальный идентификатор.</p>
+<p>Внутри нашего цикла <code>map()</code>/<code>collect()</code> мы вызываем метод <code>table.clone()</code>. Метод
+<code>clone()</code> структуры <code>Arc&lt;T&gt;</code> клонирует значение и инкрементирует счетчик,
+который автоматически декрементируется, когда клонированное значение покинет
+область видимости. Это необходимо для того, чтобы мы знали, как много ссылок на
+<code>table</code> существуют в рамках наших потоков на данный момент времени. Если бы у
+нас не было подсчета ссылок, то мы бы не знали, как и когда освободить хранимое
+значение.</p>
 
-<p>Теперь наша программа работает! Только два философа могут обедать одновременно
-и после запуска программы вы можете получить такой результат.</p>
+<p>Вы можете заметить, что здесь мы выполняем новое связывание с именем <code>table</code>,
+затеняя старое связанное имя <code>table</code>. Это позволяет нам не вводить новое
+уникальное имя.</p>
+
+<p>Теперь наша программа работает! Только два философа могут обедать одновременно.
+После запуска программы вы можете получить такой результат.</p>
 
 <pre><code class="language-text">Рая Дунаевская начала есть.
 Эмма Гольдман начала есть.
@@ -1136,9 +1186,9 @@ fn main() {
 Джудит Батлер начала есть.
 Зарубина Наталья начала есть.
 Джудит Батлер закончила есть.
-Шмидт Анна начала есть.
+Анна Шмидт начала есть.
 Зарубина Наталья закончила есть.
-Шмидт Анна закончила есть.
+Анна Шмидт закончила есть.
 </code></pre>
 
 <p>Поздравляем! Вы реализовали классическую задачу параллелизма на языке Rust.</p>
