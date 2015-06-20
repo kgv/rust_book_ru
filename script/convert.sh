@@ -17,12 +17,10 @@ ebook-convert \
     --language="ru" \
     --book-producer="" \
     --publisher="" \
-    --chapter="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter ')]" \
+    --chapter="//h:h1[@class='title']" \
     --chapter-mark="pagebreak" \
     --page-breaks-before="/" \
-    --level1-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-1 ')]" \
-    --level2-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-2 ')]" \
-    --level3-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-3 ')]" \
+    --level1-toc="//h:h1[@class='title']" \
     --no-chapters-in-toc \
     --max-levels="1" \
     --breadth-first \
@@ -37,12 +35,10 @@ ebook-convert \
     --language="ru" \
     --book-producer="" \
     --publisher="" \
-    --chapter="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter ')]" \
+    --chapter="//h:h1[@class='title']" \
     --chapter-mark="pagebreak" \
     --page-breaks-before="/" \
-    --level1-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-1 ')]" \
-    --level2-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-2 ')]" \
-    --level3-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-3 ')]" \
+    --level1-toc="//h:h1[@class='title']" \
     --no-chapters-in-toc \
     --max-levels="1" \
     --breadth-first
@@ -56,12 +52,10 @@ ebook-convert \
     --language="ru" \
     --book-producer="" \
     --publisher="" \
-    --chapter="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter ')]" \
+    --chapter="//h:h1[@class='title']" \
     --chapter-mark="pagebreak" \
     --page-breaks-before="/" \
-    --level1-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-1 ')]" \
-    --level2-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-2 ')]" \
-    --level3-toc="descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' book-chapter-3 ')]" \
+    --level1-toc="//h:h1[@class='title']" \
     --no-chapters-in-toc \
     --max-levels="1" \
     --breadth-first \
