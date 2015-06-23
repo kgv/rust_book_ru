@@ -236,7 +236,7 @@ Rust, о которой разработчики на Rust должны имет
 сложным. Например, представьте себе следующую последовательность операций:</p>
 
 <ul>
-<li>Я получаю ручку на какой-то ресурс.</li>
+<li>Я получаю абстрактную ссылку на какой-то ресурс.</li>
 <li>Я одалживаю вам ссылку на это ресурс.</li>
 <li>Я решаю, что ресурс мне больше не требуется, и освобождаю его, в то время как
 у вас все еще есть на него ссылка.</li>
@@ -255,20 +255,20 @@ Rust, о которой разработчики на Rust должны имет
 <p>Когда у нас есть функция, которая принимает ссылку в качестве аргумента, мы
 можем явно или неявно указать время жизни ссылки:</p>
 <span class='rusttest'>fn main() {
-    // implicit
+    // неявно
     fn foo(x: &amp;i32) {
     }
     
-    // explicit
+    // явно
     fn bar&lt;&#39;a&gt;(x: &amp;&#39;a i32) {
     }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='comment'>// implicit</span>
+<span class='comment'>// неявно</span>
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='ident'>i32</span>) {
 }
 
-<span class='comment'>// explicit</span>
+<span class='comment'>// явно</span>
 <span class='kw'>fn</span> <span class='ident'>bar</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span>) {
 }
 </pre>
