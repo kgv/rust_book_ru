@@ -190,7 +190,7 @@
 
     <h1 class="title">Условная компиляция</h1>
     <p>В Rust есть специальный атрибут, <code>#[cfg]</code>, который позволяет компилировать код в
-зависимости от флагов переданых компилятору. Он имеет две формы:</p>
+зависимости от флагов, переданных компилятору. Он имеет две формы:</p>
 <span class='rusttest'>fn main() {
     #[cfg(foo)]
     fn foo() {}
@@ -204,7 +204,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>bar</span> <span class='op'>=</span> <span class='string'>&quot;baz&quot;</span>)]</span>
 </pre>
 
-<p>Он также имеет несколько помощников:</p>
+<p>Над атрибутами конфигурации определены логические операции:</p>
 <span class='rusttest'>fn main() {
     #[cfg(any(unix, windows))]
     fn foo() {}
@@ -223,7 +223,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>foo</span>))]</span>
 </pre>
 
-<p>Которые могут быть как угодно вложены:</p>
+<p>Они могут быть как угодно вложены:</p>
 <span class='rusttest'>fn main() {
     #[cfg(any(not(unix), all(target_os=&quot;macos&quot;, target_arch = &quot;powerpc&quot;)))]
     fn foo() {}
@@ -237,20 +237,21 @@ Cargo, то они устанавливаются в <a href="http://doc.crates.
 <code>Cargo.toml</code>:</p>
 
 <pre><code class="language-toml">[features]
-# no features by default
+# по умолчанию, никаких дополнительных возможностей
 default = []
 
-# The “secure-password” feature depends on the bcrypt package.
+# возможность “secure-password” зависит от пакета bcrypt
 secure-password = [&quot;bcrypt&quot;]
 </code></pre>
 
-<p>Если вы сделаете это, то Cargo передаст флаг в <code>rustc</code>:</p>
+<p>Если вы определите такие возможности, Cargo передаст флаг в <code>rustc</code>:</p>
 
 <pre><code class="language-text">--cfg feature=&quot;${feature_name}&quot;
 </code></pre>
 
-<p>Совокупность этих <code>cfg</code> флагов будет определять, какие из них будут активны, и,
-следовательно, какой код будет скомпилирован. Давайте рассмотрим такой код:</p>
+<p>Совокупность этих флагов конфигурации (<code>cfg</code>) будет определять, какие из них
+будут активны, и, следовательно, какой код будет скомпилирован. Давайте
+рассмотрим такой код:</p>
 <span class='rusttest'>fn main() {
     #[cfg(feature = &quot;foo&quot;)]
     mod foo {
@@ -262,10 +263,10 @@ secure-password = [&quot;bcrypt&quot;]
 }
 </pre>
 
-<p>Если скомпилировать его с помощью <code>cargo build --features &quot;foo&quot;</code>, то будет
-передан флаг <code>--cfg feature=&quot;foo&quot;</code> в <code>rustc</code> и выход будет содержать модуль <code>mod foo</code>. Если скомпилировать его с помощью обычной команды <code>cargo build</code>, то
-никаких дополнительных флагов передано не будет, и поэтому, модуль <code>mod foo</code> не
-будет существовать.</p>
+<p>Если скомпилировать его с помощью <code>cargo build --features &quot;foo&quot;</code>, то в <code>rustc</code>
+будет передан флаг <code>--cfg feature=&quot;foo&quot;</code>, и результат будет содержать
+модуль <code>mod foo</code>. Если скомпилировать его с помощью обычной команды <code>cargo build</code>, то никаких дополнительных флагов передано не будет, и поэтому, модуль
+<code>mod foo</code> будет отсутствовать.</p>
 
 <h1 id="cfg_attr" class='section-header'><a
                            href="#cfg_attr">cfg_attr</a></h1>
@@ -297,8 +298,8 @@ secure-password = [&quot;bcrypt&quot;]
 }
 </pre>
 
-<p>Они будут заменены на <code>true</code> или <code>false</code> во время компиляции, в зависимости от
-настройки конфигурации.</p>
+<p>Значение флага будет заменено на <code>true</code> или <code>false</code> во время компиляции, в
+зависимости от настройки конфигурации.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
