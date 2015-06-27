@@ -189,9 +189,9 @@
 
 
     <h1 class="title">Документация</h1>
-    <p>Документация является важной частью любого программного проекта, и в Rust она
-первоклассна. Давайте поговорим об инструментах Rust, предназначенных для
-создания документации к проекту.</p>
+    <p>Документация является важной частью любого программного проекта, и в Rust ей
+уделяется не меньше внимания, чем самому коду. Давайте поговорим об инструментах
+Rust, предназначенных для создания документации к проекту.</p>
 
 <h2 id="О-rustdoc" class='section-header'><a
                            href="#О-rustdoc">О <code>rustdoc</code></a></h2>
@@ -199,14 +199,15 @@
 документацию. <code>rustdoc</code> также используется Cargo через <code>cargo doc</code>.</p>
 
 <p>Документация может быть сгенерирована двумя методами: из исходного кода, и из
-автономных Markdown файлов.</p>
+отдельных файлов в формате Markdown.</p>
 
 <h2 id="Документирование-исходного-кода" class='section-header'><a
                            href="#Документирование-исходного-кода">Документирование исходного кода</a></h2>
 <p>Основной способ документирования проекта на Rust заключается в комментировании
-исходного кода. Для этой цели вы можете использовать комментарии документации:</p>
+исходного кода. Для этой цели вы можете использовать документирующие
+комментарии:</p>
 <span class='rusttest'>fn main() {
-    /// Constructs a new `Rc&lt;T&gt;`.
+    /// Создаёт новый `Rc&lt;T&gt;`.
     ///
     /// # Examples
     ///
@@ -216,11 +217,11 @@
     /// let five = Rc::new(5);
     /// ```
     pub fn new(value: T) -&gt; Rc&lt;T&gt; {
-        // implementation goes here
+        // здесь реализация
     }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// Constructs a new `Rc&lt;T&gt;`.</span>
+<span class='doccomment'>/// Создаёт новый `Rc&lt;T&gt;`.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
@@ -230,51 +231,53 @@
 <span class='doccomment'>/// let five = Rc::new(5);</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>value</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Rc</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='comment'>// implementation goes here</span>
+    <span class='comment'>// здесь реализация</span>
 }
 </pre>
 
 <p>Этот код генерирует документацию, которая выглядит <a href="http://doc.rust-lang.org/std/rc/struct.Rc.html#method.new">так</a>. В приведенном
 коде реализация метода была заменена на обычный комментарий. Первое, на что
-следует обратить внимание в этом примере: используется <code>///</code>, а не <code>//</code>. Символы
-<code>///</code> указывают, что это комментарий документации.</p>
+следует обратить внимание в этом примере, это на использование <code>///</code> вместо
+<code>//</code>. Символы <code>///</code> указывают, что это документирующий комментарий.</p>
 
-<p>Комментарии документации написаны на Markdown.</p>
+<p>Документирующие комментарии пишутся на Markdown.</p>
 
-<p>Rust отслеживает такие комментарии, и использует их при генерировании
-документации. Что важно при документировании таких вещей, как перечисления:</p>
+<p>Rust отслеживает такие комментарии, и использует их при создании документации.</p>
+
+<p>При документировании таких вещей, как перечисления, нужно учитывать некоторые
+особенности работы <code>rustdoc</code>. Такой код работает:</p>
 <span class='rusttest'>fn main() {
-    /// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
+    /// Тип `Option`. Подробнее смотрите [документацию уровня модуля](http://doc.rust-lang.org/).
     enum Option&lt;T&gt; {
-        /// No value
+        /// Нет значения
         None,
-        /// Some value `T`
+        /// Некоторое значение `T`
         Some(T),
     }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.</span>
+<span class='doccomment'>/// Тип `Option`. Подробнее смотрите [документацию уровня модуля](http://doc.rust-lang.org/).</span>
 <span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// No value</span>
+    <span class='doccomment'>/// Нет значения</span>
     <span class='prelude-val'>None</span>,
-    <span class='doccomment'>/// Some value `T`</span>
+    <span class='doccomment'>/// Некоторое значение `T`</span>
     <span class='prelude-val'>Some</span>(<span class='ident'>T</span>),
 }
 </pre>
 
-<p>Код, приведенный выше работает, а ниже - не работает:</p>
+<p>А такой - нет:</p>
 <span class='rusttest'>fn main() {
-    /// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.
+    /// Тип `Option`. Подробнее смотрите [документацию уровня модуля](http://doc.rust-lang.org/).
     enum Option&lt;T&gt; {
-        None, /// No value
-        Some(T), /// Some value `T`
+        None, /// Нет значения
+        Some(T), /// Некоторое значение `T`
     }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// The `Option` type. See [the module level documentation](http://doc.rust-lang.org/) for more.</span>
+<span class='doccomment'>/// Тип `Option`. Подробнее смотрите [документацию уровня модуля](http://doc.rust-lang.org/).</span>
 <span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='prelude-val'>None</span>, <span class='doccomment'>/// No value</span>
-    <span class='prelude-val'>Some</span>(<span class='ident'>T</span>), <span class='doccomment'>/// Some value `T`</span>
+    <span class='prelude-val'>None</span>, <span class='doccomment'>/// Нет значения</span>
+    <span class='prelude-val'>Some</span>(<span class='ident'>T</span>), <span class='doccomment'>/// Некоторое значение `T`</span>
 }
 </pre>
 
@@ -294,27 +297,27 @@ hello.rs:4 }
                            href="#Написание-комментариев-документации">Написание комментариев документации</a></h3>
 <p>Давайте рассмотрим каждую часть приведенного комментария в деталях:</p>
 <span class='rusttest'>fn main() {
-    /// Constructs a new `Rc&lt;T&gt;`.
+    /// Создаёт новый `Rc&lt;T&gt;`.
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// Constructs a new `Rc&lt;T&gt;`.</span>
+<span class='doccomment'>/// Создаёт новый `Rc&lt;T&gt;`.</span>
 </pre>
 
-<p>Первая строка комментария документации должна представлять из себя краткую
+<p>Первая строка документирующего комментария должна представлять из себя краткую
 информацию о функциональности. Одно предложение. Только самое основное.
 Высокоуровневое.</p>
 <span class='rusttest'>fn main() {
     ///
-    /// Other details about constructing `Rc&lt;T&gt;`s, maybe describing complicated
-    /// semantics, maybe additional options, all kinds of stuff.
+    /// Подробности создания `Rc&lt;T&gt;`, возможно, описывающие сложности семантики,
+    /// дополнительные опции, и всё остальное.
     ///
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Other details about constructing `Rc&lt;T&gt;`s, maybe describing complicated</span>
-<span class='doccomment'>/// semantics, maybe additional options, all kinds of stuff.</span>
+<span class='doccomment'>/// Подробности создания `Rc&lt;T&gt;`, возможно, описывающие сложности семантики,</span>
+<span class='doccomment'>/// дополнительные опции, и всё остальное.</span>
 <span class='doccomment'>///</span>
 </pre>
 
@@ -331,8 +334,8 @@ hello.rs:4 }
 <span class='doccomment'>/// # Examples</span>
 </pre>
 
-<p>Далее идут специальные разделы. Они обозначены с заголовком, который начинается
-с <code>#</code>. Существуют три вида заголовков, которые обычно используются. Они не
+<p>Далее идут специальные разделы. Они обознаются заголовком, который начинается с
+<code>#</code>. Существуют три вида заголовков, которые обычно используются. Они не
 являются каким-либо специальным синтаксисом, на данный момент это просто
 соглашение.</p>
 <span class='rusttest'>fn main() {
@@ -343,11 +346,11 @@ hello.rs:4 }
 <span class='doccomment'>/// # Panics</span>
 </pre>
 
-<p>Неустранимые ошибки при неправильном вызове функции (так называемые ошибки
-программирования) в Rust как правило вызывают панику, которая, в крайнем
-случае, убивает весь текущий поток (thread). Если ваша функция имеет подобное
-нетривиальное поведение, другими словами, обнаруживает/вызывает панику, то очень
-важно задокументировать это.</p>
+<p>Раздел <code>Panics</code>. Неустранимые ошибки при неправильном вызове функции (так
+называемые ошибки программирования) в Rust, как правило, вызывают панику,
+которая, в крайнем случае, убивает весь текущий поток (thread). Если ваша
+функция имеет подобное нетривиальное поведение - т.е. обнаруживает/вызывает
+панику, то очень важно задокументировать это.</p>
 <span class='rusttest'>fn main() {
     /// # Failures
     fn foo() {}
@@ -356,10 +359,10 @@ hello.rs:4 }
 <span class='doccomment'>/// # Failures</span>
 </pre>
 
-<p>Если ваша функция или метод возвращает <code>Result&lt;T, E&gt;</code>, то было бы правильно
-описать условия, при которых она возвращает <code>Err(E)</code>. Это чуть менее важно, чем
-описание <code>Panics</code>, потому как неудача кодируется в системе типа, но это не
-значит что стоит пренебрегать этим.</p>
+<p>Раздел <code>Failures</code>. Если ваша функция или метод возвращает <code>Result&lt;T, E&gt;</code>, то
+хорошим тоном является описание условий, при которых она возвращает <code>Err(E)</code>.
+Это чуть менее важно, чем описание <code>Panics</code>, потому как неудача кодируется в
+системе типов, но это не значит, что стоит пренебрегать данной возможностью.</p>
 <span class='rusttest'>fn main() {
     /// # Safety
     fn foo() {}
@@ -368,8 +371,8 @@ hello.rs:4 }
 <span class='doccomment'>/// # Safety</span>
 </pre>
 
-<p>Если ваша функция является <code>unsafe</code>, необходимо пояснить, какие инварианты
-вызова должны поддерживаться.</p>
+<p>Раздел <code>Safety</code>. Если ваша функция является <code>unsafe</code>, необходимо пояснить, какие
+инварианты вызова должны поддерживаться.</p>
 <span class='rusttest'>fn main() {
     /// # Examples
     ///
@@ -391,59 +394,59 @@ hello.rs:4 }
 </pre>
 
 <p>Раздел <code>Examples</code>. Включите в этот раздел один или несколько примеров
-использования функции или метода, и ваши пользователи будут вам благодарны за
-это. Примеры должны размещаться внутри блоков кода, о которых мы сейчас
-поговорим. Этот раздел может иметь более одного подраздела:</p>
+использования функции или метода, и ваши пользователи будут вам благодарны.
+Примеры должны размещаться внутри блоков кода, о которых мы сейчас поговорим.
+Этот раздел может иметь более одного подраздела:</p>
 <span class='rusttest'>fn main() {
     /// # Examples
     ///
-    /// Simple `&amp;str` patterns:
+    /// Простые образцы типа `&amp;str`:
     ///
     /// ```
-    /// let v: Vec&lt;&amp;str&gt; = &quot;Mary had a little lamb&quot;.split(&#39; &#39;).collect();
-    /// assert_eq!(v, vec![&quot;Mary&quot;, &quot;had&quot;, &quot;a&quot;, &quot;little&quot;, &quot;lamb&quot;]);
+    /// let v: Vec&lt;&amp;str&gt; = &quot;И была у них курочка Ряба&quot;.split(&#39; &#39;).collect();
+    /// assert_eq!(v, vec![&quot;И&quot;, &quot;была&quot;, &quot;у&quot;, &quot;них&quot;, &quot;курочка&quot;, &quot;Ряба&quot;]);
     /// ```
     ///
-    /// More complex patterns with a lambda:
+    /// Более сложные образцы с замыканиями:
     ///
     /// ```
-    /// let v: Vec&lt;&amp;str&gt; = &quot;abc1def2ghi&quot;.split(|c: char| c.is_numeric()).collect();
-    /// assert_eq!(v, vec![&quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;]);
+    /// let v: Vec&lt;&amp;str&gt; = &quot;абв1где2жзи&quot;.split(|c: char| c.is_numeric()).collect();
+    /// assert_eq!(v, vec![&quot;абв&quot;, &quot;где&quot;, &quot;жзи&quot;]);
     /// ```
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Simple `&amp;str` patterns:</span>
+<span class='doccomment'>/// Простые образцы типа `&amp;str`:</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
-<span class='doccomment'>/// let v: Vec&lt;&amp;str&gt; = &quot;Mary had a little lamb&quot;.split(&#39; &#39;).collect();</span>
-<span class='doccomment'>/// assert_eq!(v, vec![&quot;Mary&quot;, &quot;had&quot;, &quot;a&quot;, &quot;little&quot;, &quot;lamb&quot;]);</span>
+<span class='doccomment'>/// let v: Vec&lt;&amp;str&gt; = &quot;И была у них курочка Ряба&quot;.split(&#39; &#39;).collect();</span>
+<span class='doccomment'>/// assert_eq!(v, vec![&quot;И&quot;, &quot;была&quot;, &quot;у&quot;, &quot;них&quot;, &quot;курочка&quot;, &quot;Ряба&quot;]);</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// More complex patterns with a lambda:</span>
+<span class='doccomment'>/// Более сложные образцы с замыканиями:</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
-<span class='doccomment'>/// let v: Vec&lt;&amp;str&gt; = &quot;abc1def2ghi&quot;.split(|c: char| c.is_numeric()).collect();</span>
-<span class='doccomment'>/// assert_eq!(v, vec![&quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;]);</span>
+<span class='doccomment'>/// let v: Vec&lt;&amp;str&gt; = &quot;абв1где2жзи&quot;.split(|c: char| c.is_numeric()).collect();</span>
+<span class='doccomment'>/// assert_eq!(v, vec![&quot;абв&quot;, &quot;где&quot;, &quot;жзи&quot;]);</span>
 <span class='doccomment'>/// ```</span>
 </pre>
 
-<p>Давайте детально обсудим блоки кода.</p>
+<p>Давайте подробно обсудим блоки кода.</p>
 
 <h4 id="Блок-кода" class='section-header'><a
                            href="#Блок-кода">Блок кода</a></h4>
 <p>Чтобы написать код на Rust в комментарии, используйте символы ```:</p>
 <span class='rusttest'>fn main() {
     /// ```
-    /// println!(&quot;Hello, world&quot;);
+    /// println!(&quot;Привет, мир&quot;);
     /// ```
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
-<span class='doccomment'>/// println!(&quot;Hello, world&quot;);</span>
+<span class='doccomment'>/// println!(&quot;Привет, мир&quot;);</span>
 <span class='doccomment'>/// ```</span>
 </pre>
 
@@ -467,28 +470,28 @@ hello.rs:4 }
 
 <p>Важно выбрать правильную аннотацию, потому что <code>rustdoc</code> использует ее
 интересным способом: Rust может выполнять проверку работоспособности примеров на
-момент запуска, чтобы они не устаревали. Предположим у вас есть код на C. Если
-вы опустите аннотацию, указывающую, что это код на C, то <code>rustdoc</code> будет думать,
-что это код на Rust, поэтому <code>rustdoc</code> будет жаловаться при попытке создания
-документации.</p>
+момент создания документации. Это позволяет избежать устаревания примеров.
+Предположим, у вас есть код на C. Если вы опустите аннотацию, указывающую, что
+это код на C, то <code>rustdoc</code> будет думать, что это код на Rust, поэтому он
+пожалуется при попытке создания документации.</p>
 
 <h2 id="Тесты-в-документации" class='section-header'><a
                            href="#Тесты-в-документации">Тесты в документации</a></h2>
 <p>Давайте обсудим наш пример документации:</p>
 <span class='rusttest'>fn main() {
     /// ```
-    /// println!(&quot;Hello, world&quot;);
+    /// println!(&quot;Привет, мир&quot;);
     /// ```
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
-<span class='doccomment'>/// println!(&quot;Hello, world&quot;);</span>
+<span class='doccomment'>/// println!(&quot;Привет, мир&quot;);</span>
 <span class='doccomment'>/// ```</span>
 </pre>
 
-<p>Заметьте, что здесь нет нужды в <code>fn main()</code> или чем-нибудь подобном. <code>rustdoc</code>
-автоматически добавит main() обертку вокруг вашего кода в нужном месте.
+<p>Заметьте, что здесь нет нужды в <code>fn main()</code> или чём-нибудь подобном. <code>rustdoc</code>
+автоматически добавит оборачивающий <code>main()</code> вокруг вашего кода в нужном месте.
 Например:</p>
 <span class='rusttest'>fn main() {
     /// ```
@@ -518,12 +521,12 @@ hello.rs:4 }
 }
 </pre>
 
-<p>Вот полный алгоритм, который использует <code>rustdoc</code> для постобработки примеров:</p>
+<p>Вот полный алгоритм, который <code>rustdoc</code> использует для обработки примеров:</p>
 
 <ol>
 <li>Любые ведущие (leading) атрибуты <code>#![foo]</code> остаются без изменений в качестве
 атрибутов контейнера.</li>
-<li>Будут вставлены некоторые общие <code>allow</code> атрибуты, в том числе:
+<li>Будут вставлены некоторые общие атрибуты <code>allow</code>, в том числе:
 <code>unused_variables</code>, <code>unused_assignments</code>, <code>unused_mut</code>, <code>unused_attributes</code>,
 <code>dead_code</code>. Небольшие примеры часто приводят к срабатыванию этих анализов.</li>
 <li>Если пример не содержит <code>extern crate</code>, то будет вставлено <code>extern crate &lt;mycrate&gt;;</code>.</li>
@@ -531,31 +534,31 @@ hello.rs:4 }
 обернута в <code>fn main() { your_code }</code></li>
 </ol>
 
-<p>Хотя иногда этого не достаточно. Например, все эти примеры кода с <code>///</code>, о
-которых мы говорим? Представленный ниже блок кода до обработки <code>rustdoc</code>, в виде
-простого текста:</p>
+<p>Хотя иногда этого не достаточно. Например, что насчёт всех этих примеров кода с
+<code>///</code>, о которых мы говорили? Простой текст, обработанный <code>rustdoc</code>, выглядит
+так:</p>
 
-<pre><code class="language-text">/// Some documentation.
+<pre><code class="language-text">/// Некоторая документация.
 # fn foo() {}
 </code></pre>
 
-<p>выглядит иначе, чем после обработки <code>rustdoc</code>, в виде сгенерированного вывода:</p>
+<p>А исходный текст на Rust после обработки выглядит так:</p>
 <span class='rusttest'>fn main() {
-    /// Some documentation.
+    /// Некоторая документация.
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// Some documentation.</span>
+<span class='doccomment'>/// Некоторая документация.</span>
 </pre>
 
 <p>Да, именно так: вы можете добавлять строки, которые начинаются с <code>#</code>, и они
 будут скрыты в выводе, но при этом будут использоваться во время компиляции
-кода. Вы можете использовать это в своих интересах. Если в комментарии
-документации необходимо обратиться к какой-то функции, то ниже нужно будет
+кода. Вы можете использовать это в своих интересах. Если в документирующем
+комментарии необходимо обратиться к какой-то функции, то ниже нужно будет
 добавить определение этой функции. В то же время, это делается только для того,
 чтобы удовлетворить компилятор, поэтому сокрытие ненужных строк в выводе делает
 пример более ясным. Вы можете использовать эту технику, чтобы детально объяснять
-длинные примеры, сохраняя при этом тестируемость документации. Например, этот
+длинные примеры, сохраняя при этом тестируемость документации. Например, вот
 код:</p>
 <span class='rusttest'>fn main() {
     let x = 5;
@@ -568,7 +571,7 @@ hello.rs:4 }
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
 </pre>
 
-<p>Вот объяснение, которое будет сгенерировано:</p>
+<p>Ниже приведено отрисованное объяснение этого кода.</p>
 
 <p>Сперва мы устанавливаем <code>x</code> равным пяти:</p>
 <span class='rusttest'>fn main() {
@@ -600,7 +603,7 @@ hello.rs:4 }
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
 </pre>
 
-<p>Вот то же самое объяснение, но в виде простого текста:</p>
+<p>А вот то же самое объяснение, но в виде простого текста:</p>
 
 <blockquote>
 <p>Сперва мы устанавливаем <code>x</code> равным пяти:</p>
@@ -626,27 +629,27 @@ println!(&quot;{}&quot;, x + y);
 </blockquote>
 
 <p>Повторяя все части примера, вы можете быть уверены, что ваш пример
-компилируется, а не просто отображает кусоки кода, которые имеют отношение к той
-или иной части вашего объяснения.</p>
+компилируется, а не просто отображает кусочки кода, которые как-то относятся к
+той или иной части вашего объяснения.</p>
 
 <h3 id="Документирование-макросов" class='section-header'><a
                            href="#Документирование-макросов">Документирование макросов</a></h3>
 <p>Вот пример документирования макроса:</p>
-<span class='rusttest'>/// Panic with a given message unless an expression evaluates to true.
+<span class='rusttest'>/// Паниковать с данным сообщением, если только выражение не является истиной.
 ///
 /// # Examples
 ///
 /// ```
 /// # #[macro_use] extern crate foo;
 /// # fn main() {
-/// panic_unless!(1 + 1 == 2, “Math is broken.”);
+/// panic_unless!(1 + 1 == 2, &quot;Математика сломалась.&quot;);
 /// # }
 /// ```
 ///
 /// ```should_panic
 /// # #[macro_use] extern crate foo;
 /// # fn main() {
-/// panic_unless!(true == false, “I’m broken.”);
+/// panic_unless!(true == false, &quot;Я сломан.&quot;);
 /// # }
 /// ```
 #[macro_export]
@@ -655,21 +658,21 @@ macro_rules! panic_unless {
 }
 fn main() {}
 </span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// Panic with a given message unless an expression evaluates to true.</span>
+<span class='doccomment'>/// Паниковать с данным сообщением, если только выражение не является истиной.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// # #[macro_use] extern crate foo;</span>
 <span class='doccomment'>/// # fn main() {</span>
-<span class='doccomment'>/// panic_unless!(1 + 1 == 2, “Math is broken.”);</span>
+<span class='doccomment'>/// panic_unless!(1 + 1 == 2, &quot;Математика сломалась.&quot;);</span>
 <span class='doccomment'>/// # }</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```should_panic</span>
 <span class='doccomment'>/// # #[macro_use] extern crate foo;</span>
 <span class='doccomment'>/// # fn main() {</span>
-<span class='doccomment'>/// panic_unless!(true == false, “I’m broken.”);</span>
+<span class='doccomment'>/// panic_unless!(true == false, &quot;Я сломан.&quot;);</span>
 <span class='doccomment'>/// # }</span>
 <span class='doccomment'>/// ```</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
@@ -678,29 +681,29 @@ fn main() {}
 }
 </pre>
 
-<p>В нем вы можете заметить, три вещи. Во-первых, мы должны собственноручно
-добавить строку с <code>extern crate</code>, для того, чтобы мы могли указать атрибут
-<code>#[macro_use]</code>. Во-вторых, мы также собственноручно должны добавить <code>main()</code>. И
-наконец, разумно будет использовать <code>#</code>, чтобы закомментировать все, что мы
-добавили в первых двух пунктах, что бы оно не отображалось в генерируемом вводе.</p>
+<p>В нем вы можете заметить три вещи. Во-первых, мы должны собственноручно добавить
+строку с <code>extern crate</code> для того, чтобы мы могли указать атрибут <code>#[macro_use]</code>.
+Во-вторых, мы также собственноручно должны добавить <code>main()</code>. И наконец, разумно
+будет использовать <code>#</code>, чтобы закомментировать все, что мы добавили в первых
+двух пунктах, что бы оно не отображалось в генерируемом выводе.</p>
 
 <h3 id="Запуск-тестов-в-документации" class='section-header'><a
                            href="#Запуск-тестов-в-документации">Запуск тестов в документации</a></h3>
 <p>Для запуска тестов можно использовать одну из двух комманд</p>
 
 <pre><code class="language-bash">$ rustdoc --test path/to/my/crate/root.rs
-# or
+# или
 $ cargo test
 </code></pre>
 
 <p>Все верно, <code>cargo test</code> также выполняет тесты, встроенные в документацию. Тем не
 менее, <code>cargo test</code> не будет тестировать исполняемые контейнеры, только
-библиотечные. Это связано с тем, как работает <code>rustdoc</code>: он компонует библиотеку в
-зависимости от результата тестирования, но в случае с исполняемым файлом, его не
-с чем компоновать.</p>
+библиотечные. Это связано с тем, как работает <code>rustdoc</code>: он компонуется с
+библиотекой, которую надо протестировать, но в случае с исполняемым файлом
+компоноваться не с чем.</p>
 
 <p>Есть еще несколько полезных аннотаций, которые помогают <code>rustdoc</code> работать
-правильно (корректно) при тестировании кода:</p>
+правильно при тестировании кода:</p>
 <span class='rusttest'>fn main() {
     /// ```ignore
     /// fn foo() {
@@ -715,7 +718,7 @@ $ cargo test
 
 <p>Аннотация <code>ignore</code> указывает Rust, что код должен быть проигнорирован. Почти во
 всех случаях это не то, что вам нужно, так как эта директива носит очень общий
-характер. Вместо нее лучше использовать аннотацию <code>text</code>, если это не код, или
+характер. Вместо неё лучше использовать аннотацию <code>text</code>, если это не код, или
 <code>#</code>, чтобы получить рабочий пример, отображающий только ту часть, которая вам
 нужна.</p>
 <span class='rusttest'>fn main() {
@@ -748,19 +751,19 @@ $ cargo test
 <span class='doccomment'>/// ```</span>
 </pre>
 
-<p>Аннотация <code>no_run</code> указывает, что что код должен компилироваться, но запускать
-его на выполнение не требуется. Это важно для таких примеров, которые должны
-успешно компилироваться, но которые выполняются в бесконечном цикле! Например:
+<p>Аннотация <code>no_run</code> указывает, что код должен компилироваться, но запускать его
+на выполнение не требуется. Это важно для таких примеров, которые должны успешно
+компилироваться, но выполнение которых оказывается бесконечным циклом! Например:
 &quot;Вот как запустить сетевой сервис&quot;.</p>
 
 <h3 id="Документирование-модулей" class='section-header'><a
                            href="#Документирование-модулей">Документирование модулей</a></h3>
-<p>Rust предоставляет еще один вид комментариев документации, <code>//!</code>. Этот
+<p>Rust предоставляет ещё один вид документирующих комментариев, <code>//!</code>. Этот
 комментарий относится не к следующему за ним элементу, а к элементу, который его
 включает. Другими словами:</p>
 <span class='rusttest'>fn main() {
     mod foo {
-        //! This is documentation for the `foo` module.
+        //! Это документация для модуля `foo`.
         //!
         //! # Examples
     
@@ -769,7 +772,7 @@ $ cargo test
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>foo</span> {
-    <span class='doccomment'>//! This is documentation for the `foo` module.</span>
+    <span class='doccomment'>//! Это документация для модуля `foo`.</span>
     <span class='doccomment'>//!</span>
     <span class='doccomment'>//! # Examples</span>
 
@@ -777,22 +780,22 @@ $ cargo test
 }
 </pre>
 
-<p>Приведенный пример демонстрирует наиболее распространенное использование <code>//!</code>:
+<p>Приведённый пример демонстрирует наиболее распространённое использование <code>//!</code>:
 документирование модуля. Если же модуль расположен в файле <code>foo.rs</code>, то вы,
 открывая его код, часто будете видеть следующее:</p>
 <span class='rusttest'>fn main() {
-    //! A module for using `foo`s.
+    //! Модуль использования разных `foo`.
     //!
-    //! The `foo` module contains a lot of useful functionality blah blah blah
+    //! Модуль `foo` содержит много полезной функциональности ла-ла-ла
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>//! A module for using `foo`s.</span>
+<span class='doccomment'>//! Модуль использования разных `foo`.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! The `foo` module contains a lot of useful functionality blah blah blah</span>
+<span class='doccomment'>//! Модуль `foo` содержит много полезной функциональности ла-ла-ла</span>
 </pre>
 
-<h3 id="Стиль-комментариев-документации" class='section-header'><a
-                           href="#Стиль-комментариев-документации">Стиль комментариев документации</a></h3>
+<h3 id="Стиль-документирующих-комментариев" class='section-header'><a
+                           href="#Стиль-документирующих-комментариев">Стиль документирующих комментариев</a></h3>
 <p>Изучите <a href="https://github.com/rust-lang/rfcs/blob/master/text/0505-api-comment-conventions.md">RFC 505</a> для получения полных сведений о соглашениях по стилю и
 формату документации.</p>
 
@@ -802,8 +805,8 @@ $ cargo test
 Rust. Так как комментарии пишутся на Markdown, то часто эти файлы имеют
 расширение <code>.md</code>.</p>
 
-<p>Когда вы пишете документацию в Markdown файлах, вам не нужно добавлять префикс
-комментария документации, <code>///</code>. Например:</p>
+<p>Когда вы пишете документацию в файлах Markdown, вам не нужно добавлять префикс
+документирующего комментария, <code>///</code>. Например:</p>
 <span class='rusttest'>fn main() {
     /// # Examples
     ///
@@ -835,12 +838,12 @@ let five = Rc::new(5);
 ```
 </code></pre>
 
-<p>когда он находится в Markdown файле. Однако есть один недостаток: Markdown файлы
+<p>когда он находится в файле Markdown. Однако есть один недостаток: файлы Markdown
 должны иметь заголовок наподобие этого:</p>
 
-<pre><code class="language-markdown">% The title
+<pre><code class="language-markdown">% Заголовок
 
-This is the example documentation.
+Это пример документации.
 </code></pre>
 
 <p>Строка, начинающаяся с <code>%</code>, должна быть самой первой строкой файла.</p>
@@ -862,7 +865,7 @@ This is the example documentation.
 <span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;this&quot;</span>]</span>
 </pre>
 
-<p>представленные выше комментарии идентичны, также как и ниже:</p>
+<p>Т.е. представленные выше комментарии идентичны, также как и ниже:</p>
 <span class='rusttest'>fn main() {
     //! this
     
@@ -875,12 +878,13 @@ This is the example documentation.
 </pre>
 
 <p>Вы не часто будете видеть этот атрибут, используемый для написания документации,
-но он может быть полезен, когда изменения некоторых настроек, или при написании
+но он может быть полезен для изменения некоторых настроек, или при написании
 макроса.</p>
 
 <h3 id="Ре-экспорт" class='section-header'><a
                            href="#Ре-экспорт">Ре-экспорт</a></h3>
-<p><code>rustdoc</code> будет показывать документацию для public ре-экспорта в двух местах:</p>
+<p><code>rustdoc</code> будет показывать документацию для общедоступного (public) ре-экспорта
+в двух местах:</p>
 <span class='rusttest'>fn main() {
     extern crate foo;
     
@@ -893,8 +897,8 @@ This is the example documentation.
 </pre>
 
 <p>Это создаст документацию для <code>bar</code> как в документации для контейнера <code>foo</code>, так
-и в документации к вашему контейнеру. То есть будет использована одна и та же
-документация в обоих местах.</p>
+и в документации к вашему контейнеру. То есть в обоих местах будет использована
+одна и та же документация.</p>
 
 <p>Такое поведение может быть подавлено с помощью <code>no_inline</code>:</p>
 <span class='rusttest'>fn main() {
@@ -912,7 +916,7 @@ This is the example documentation.
 
 <h3 id="Управление-html" class='section-header'><a
                            href="#Управление-html">Управление HTML</a></h3>
-<p>Вы можете управлять некоторыми аспектами HTML, который генерируется <code>rustdoc</code>,
+<p>Вы можете управлять некоторыми аспектами HTML, который генерирует <code>rustdoc</code>,
 через атрибут <code>#![doc]</code>:</p>
 <span class='rusttest'>fn main() {
     #![doc(html_logo_url = &quot;http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png&quot;,
@@ -930,22 +934,22 @@ This is the example documentation.
 
 <h2 id="Опции-генерации" class='section-header'><a
                            href="#Опции-генерации">Опции генерации</a></h2>
-<p><code>rustdoc</code> также содержит несколько опций командной строки, для дальнейшей
-кастомизации:</p>
+<p><code>rustdoc</code> также содержит несколько опций командной строки для дальнейшей
+настройки:</p>
 
 <ul>
-<li><code>--html-in-header FILE</code>: включить содержание FILE в конец <code>&lt;head&gt;...&lt;/head&gt;</code>
-раздела.</li>
-<li><code>--html-before-content FILE</code>: включить содержание FILE сразу после <code>&lt;body&gt;</code>,
+<li><code>--html-in-header FILE</code>: включить содержимое FILE в конец раздела
+<code>&lt;head&gt;...&lt;/head&gt;</code>.</li>
+<li><code>--html-before-content FILE</code>: включить содержимое FILE сразу после <code>&lt;body&gt;</code>,
 перед отображаемым содержимым (в том числе строки поиска).</li>
-<li><code>--html-after-content FILE</code>: включить содержание FILE после всего
+<li><code>--html-after-content FILE</code>: включить содержимое FILE после всего
 отображаемого содержимого.</li>
 </ul>
 
 <h2 id="Замечание-по-безопасности" class='section-header'><a
                            href="#Замечание-по-безопасности">Замечание по безопасности</a></h2>
-<p>Комментарии в Markdown документации помещаются в конечную веб-страницу без
-обработки. Будьте осторожны с HTML литералами:</p>
+<p>Комментарии в документации в формате Markdown помещаются в конечную веб-страницу
+без обработки. Будьте осторожны с HTML-литералами:</p>
 <span class='rusttest'>fn main() {
     /// &lt;script&gt;alert(document.cookie)&lt;/script&gt;
     fn foo() {}
