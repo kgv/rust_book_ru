@@ -221,7 +221,7 @@ std::io`, нам бы пришлось здесь написать `std::io::std
 guess`.
 
 [read_line]: http://doc.rust-lang.org/std/io/struct.Stdin.html#method.read_line
-[method]: methods.html
+[method]: method-syntax.html
 
 Помните, как мы выше привязали `guess`? Мы сказали, что она изменяема. Однако,
 `read_line` не получает в качестве аргумента `String`: она получает `&mut
