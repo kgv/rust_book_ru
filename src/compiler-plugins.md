@@ -23,7 +23,7 @@
 внутренние библиотеки `libsyntax` и `librustc` как зависимости для вашего
 контейнера. Обычно это нежелательно, и может потребоваться только если вы
 собираете ещё один, другой, плагин. Статический анализ `plugin_as_library`
-проверяет выполннение этой рекомендации.
+проверяет выполнение этой рекомендации.
 
 Обычная практика - помещать плагины в отдельный контейнер, не содержащий
 определений макросов (`macro_rules!`) и обычного кода на Rust, предназначенного
@@ -149,7 +149,7 @@ fn expand_foo(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
 
 Можно просмотреть код
 [парсера `libsyntax`](https://github.com/rust-lang/rust/blob/master/src/libsyntax/parse/parser.rs),
-чтобы получить представление о работе инфрастуктуры разбора.
+чтобы получить представление о работе инфраструктуры разбора.
 
 Сохраняйте [`Span`ы](http://doc.rust-lang.org/syntax/codemap/struct.Span.html)
 всего, что вы разбираете, чтобы лучше сообщать об ошибках. Вы можете обернуть
@@ -182,7 +182,7 @@ fn expand_foo(cx: &mut ExtCtxt, sp: Span, args: &[TokenTree])
 # Плагины статических проверок
 
 Плагины могут расширять
-[инфрастуктуру статических проверок Rust](http://doc.rust-lang.org/reference.html#lint-check-attributes),
+[инфраструктуру статических проверок Rust](http://doc.rust-lang.org/reference.html#lint-check-attributes),
 предоставляя новые проверки стиля кодирования, безопасности, и т.д. Полный
 пример можно найти в
 [`src/test/auxiliary/lint_plugin_test.rs`](https://github.com/rust-lang/rust/blob/master/src/test/auxiliary/lint_plugin_test.rs).
