@@ -213,7 +213,7 @@
 внутренние библиотеки <code>libsyntax</code> и <code>librustc</code> как зависимости для вашего
 контейнера. Обычно это нежелательно, и может потребоваться только если вы
 собираете ещё один, другой, плагин. Статический анализ <code>plugin_as_library</code>
-проверяет выполннение этой рекомендации.</p>
+проверяет выполнение этой рекомендации.</p>
 
 <p>Обычная практика - помещать плагины в отдельный контейнер, не содержащий
 определений макросов (<code>macro_rules!</code>) и обычного кода на Rust, предназначенного
@@ -404,7 +404,7 @@ fn main() {
 
 <p>Можно просмотреть код
 <a href="https://github.com/rust-lang/rust/blob/master/src/libsyntax/parse/parser.rs">парсера <code>libsyntax</code></a>,
-чтобы получить представление о работе инфрастуктуры разбора.</p>
+чтобы получить представление о работе инфраструктуры разбора.</p>
 
 <p>Сохраняйте <a href="http://doc.rust-lang.org/syntax/codemap/struct.Span.html"><code>Span</code>ы</a>
 всего, что вы разбираете, чтобы лучше сообщать об ошибках. Вы можете обернуть
@@ -436,7 +436,7 @@ fn main() {
 <h1 id="Плагины-статических-проверок" class='section-header'><a
                            href="#Плагины-статических-проверок">Плагины статических проверок</a></h1>
 <p>Плагины могут расширять
-<a href="http://doc.rust-lang.org/reference.html#lint-check-attributes">инфрастуктуру статических проверок Rust</a>,
+<a href="http://doc.rust-lang.org/reference.html#lint-check-attributes">инфраструктуру статических проверок Rust</a>,
 предоставляя новые проверки стиля кодирования, безопасности, и т.д. Полный
 пример можно найти в
 <a href="https://github.com/rust-lang/rust/blob/master/src/test/auxiliary/lint_plugin_test.rs"><code>src/test/auxiliary/lint_plugin_test.rs</code></a>.
