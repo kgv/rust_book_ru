@@ -11,7 +11,8 @@
  * except according to those terms.
  */
 
-@import url(http://fonts.googleapis.com/css?family=Fira+Sans:400,500|Source+Code+Pro|Source+Serif+Pro:400,700&subset=latin,cyrillic,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro:400,700&subset=latin,cyrillic,cyrillic-ext);
+@import url(https://code.cdn.mozilla.net/fonts/fira.css);
 
 @font-face {
     font-family: 'Source Serif Pro';
