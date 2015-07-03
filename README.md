@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/kgv/rust_book_ru](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kgv/rust_book_ru?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Эта книга представляет собой перевод "The Rust Programming Language". Оригинал
+Эта книга представляет собой перевод «The Rust Programming Language». Оригинал
 книги расположен [здесь][original].
 
 **ВНИМАНИЕ!** Перевод окончен в черновом варианте, поэтому могут встречаться [ошибки][error].
@@ -12,7 +12,7 @@
 * [Скачать в EPUB](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.epub)
 * [Скачать в MOBI](https://raw.githubusercontent.com/kgv/rust_book_ru/gh-pages/converted/rustbook.mobi)
 
-**ВНИМАНИЕ!** Идет обсуждение как переводить шутливое название "Rustaceans" в контексте русского Rust комьюнити.
+**ВНИМАНИЕ!** Идет обсуждение как переводить шутливое название «Rustaceans» в контексте русского Rust комьюнити.
 Вы можете поучаствовать в обсуждении [здесь](https://github.com/kgv/rust_book_ru/issues/176).
 
 ## Соавторам
@@ -26,8 +26,8 @@
 Выражаем благодарность [всем, кто принимал участие в создании этой
 книги][authors].
 
-От @kgv: "Хочу поблагодарить моих родителей: **Таню** и **Володю**. Без них не
-было бы этой книги".
+От @kgv: «Хочу поблагодарить моих родителей: **Таню** и **Володю**. Без них не
+было бы этой книги».
 
 ## Ошибки
 
