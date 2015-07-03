@@ -1,1 +1,1 @@
-find -name *.md -execdir sed -i '/```/,/```/{ p; d; }; s/"\([[:punct:][:space:]а-яА-Я]\{1,\}\)"/«\1»/g' {} +
+find -name '*.md' -execdir sed -i '/```/,/```/{ p; d; }; s/"\([- а-яА-Я]\{1,\}\)"/«\1»/g' {} +
