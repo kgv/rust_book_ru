@@ -209,12 +209,11 @@ shorthand for a data type could be valid as either an expression or a pattern.
 
 Операции повтора всегда сопутствуют два основных правила:
 
-1. `$(...)*` walks through one "layer" of repetitions, for all of the `$name`s
-   it contains, in lockstep, and
-2. each `$name` must be under at least as many `$(...)*`s as it was matched
-   against. If it is under more, it'll be duplicated, as appropriate.
-1. `$(...)*` проходит через один «слой» повторений, для всех `$name`, которые он содержит, в ногу, и
-2. каждое `$name` должно быть под крайней мере, столько `$(...)*`, как это было сопоставляется. Если это в более, это будет дублироваться, при необходимости.
+1. `$(...)*` проходит через один «слой» повторений, для всех `$name`, которые он
+   содержит, в ногу, и
+2. каждое `$name` должно быть под, по крайней мере, стольким количеством
+   `$(...)*`, сколько было использовано при сопоставлении. Если оно под большим
+   числом `$(...)*`, `$name` будет дублироваться, при необходимости.
 
 This baroque macro illustrates the duplication of variables from outer
 repetition levels.
