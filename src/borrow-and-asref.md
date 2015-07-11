@@ -23,7 +23,7 @@ fn get<Q: ?Sized>(&self, k: &Q) -> Option<&V>
 [hashmap]: http://doc.rust-lang.org/std/collections/struct.HashMap.html
 [get]: http://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get
 
-Эта сигнатура является довольно сложной. Параметр `K` - это то, что нас здесь
+Эта сигнатура является довольно сложной. Параметр `K` — это то, что нас здесь
 интересует. Он ссылается на параметр самого `HashMap`:
 
 ```rust,ignore
