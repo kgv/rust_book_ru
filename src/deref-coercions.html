@@ -258,11 +258,11 @@ fn main() {
 </pre>
 
 <p>Амперсанд перед значением означает, что мы берём ссылку на него. Поэтому <code>owned</code>
-- это <code>String</code>, а <code>&amp;owned</code> - <code>&amp;String</code>. Поскольку у нас есть реализация типажа
+- это <code>String</code>, а <code>&amp;owned</code> — <code>&amp;String</code>. Поскольку у нас есть реализация типажа
 <code>impl Deref&lt;Target=str&gt; for String</code>, <code>&amp;String</code> разыменуется в <code>&amp;str</code>, что
 устраивает <code>foo()</code>.</p>
 
-<p>Вот и всё. Это правило - одно из немногих мест в Rust, где типы преобразуются
+<p>Вот и всё. Это правило — одно из немногих мест в Rust, где типы преобразуются
 автоматически. Оно позволяет писать гораздо более гибкий код. Например, тип
 <code>Rc&lt;T&gt;</code> реализует <code>Deref&lt;Target=T&gt;</code>, поэтому такой код работает:</p>
 <span class='rusttest'>fn main() {
@@ -353,7 +353,7 @@ fn main() {
 <span class='ident'>f</span>.<span class='ident'>foo</span>();
 </pre>
 
-<p>Несмотря на то, что <code>f</code> - это не ссылка, а <code>foo</code> принимает <code>&amp;self</code>, это будет
+<p>Несмотря на то, что <code>f</code> — это не ссылка, а <code>foo</code> принимает <code>&amp;self</code>, это будет
 работать. Более того, все примеры ниже делают одно и то же:</p>
 <span class='rusttest'>fn main() {
     f.foo();
