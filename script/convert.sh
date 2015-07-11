@@ -8,7 +8,7 @@ mkdir -p $CONVERTED_DIR
 cd $BOOK_DIR
 cp ${ROOT}/static/css/rust-book-pdf.min.css rust-book.css
 
-"$(${ROOT}/script/convert-mobi.sh)"
+"$(${ROOT}/script/convert-epub.sh)"
 
 ebook-convert \
     README.html \
