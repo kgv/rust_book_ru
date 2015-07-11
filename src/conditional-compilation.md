@@ -42,7 +42,7 @@ Cargo, то они устанавливаются в [разделе `[features]
 # по умолчанию, никаких дополнительных возможностей
 default = []
 
-# возможность “secure-password” зависит от пакета bcrypt
+# возможность «secure-password» зависит от пакета bcrypt
 secure-password = ["bcrypt"]
 ```
 
