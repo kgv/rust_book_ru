@@ -20,7 +20,7 @@
     * [Интерфейс внешних функций (FFI)](src/ffi.md)
     * [Каналы сборок](src/release-channels.md)
 * [Синтаксис и семантика](src/syntax-and-semantics.md)
-    * [Связывание переменных](src/variable-bindings.md)
+    * [Связывание имён](src/variable-bindings.md)
     * [Функции](src/functions.md)
     * [Простые типы](src/primitive-types.md)
     * [Комментарии](src/comments.md)
