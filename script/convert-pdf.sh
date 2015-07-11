@@ -3,8 +3,6 @@
 BOOK_DIR=$(pwd)
 CONVERTED_DIR=${BOOK_DIR}/converted
 
-mkdir -p $CONVERTED_DIR
-
 ebook-convert \
     README.html \
     "${CONVERTED_DIR}/rustbook.pdf" \
