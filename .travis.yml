@@ -46,3 +46,9 @@ cache:
   directories:
     - $HOME/calibre
     - $HOME/rustbook
+
+addons:
+  apt:
+    packages:
+    - parallel
+

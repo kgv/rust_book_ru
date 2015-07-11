@@ -8,8 +8,8 @@ mkdir -p $CONVERTED_DIR
 cd $BOOK_DIR
 cp ${ROOT}/static/css/rust-book-pdf.min.css rust-book.css
 
-"$(${ROOT}/script/convert-epub.sh)"
-"$(${ROOT}/script/convert-mobi.sh)"
-"$(${ROOT}/script/convert-pdf.sh)"
+parallel ::: "$(${ROOT}/script/convert-epub.sh)" \
+         "$(${ROOT}/script/convert-mobi.sh)" \
+         "$(${ROOT}/script/convert-pdf.sh)"
 
 cd $ROOT
