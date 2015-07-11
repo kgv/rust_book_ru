@@ -12,7 +12,7 @@ if [ $HARDWARE_PLATFORM_BIT -ne 32 ] && [ $HARDWARE_PLATFORM_BIT -ne 64 ]; then
     exit -1
 fi
 
-if [ ! -f "$CALIBRE"/ebook-convert ]; then
+if [ ! -d "$CALIBRE"/bin ]; then
     mkdir -p $CALIBRE
     cd $CALIBRE
     until RESULT=$(curl -sf -L -k $URL | tar -Jxv); do
