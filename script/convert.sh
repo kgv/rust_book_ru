@@ -9,23 +9,8 @@ cd $BOOK_DIR
 cp ${ROOT}/static/css/rust-book-pdf.min.css rust-book.css
 
 "$(${ROOT}/script/convert-epub.sh)"
+"$(${ROOT}/script/convert-mobi.sh)"
 
-ebook-convert \
-    README.html \
-    "${CONVERTED_DIR}/rustbook.mobi" \
-    --cover="../cover.jpg" \
-    --title="Язык программирования Rust" \
-    --comments="" \
-    --language="ru" \
-    --book-producer="" \
-    --publisher="" \
-    --chapter="//h:h1[@class='title']" \
-    --chapter-mark="pagebreak" \
-    --page-breaks-before="/" \
-    --level1-toc="//h:h1[@class='title']" \
-    --no-chapters-in-toc \
-    --max-levels="1" \
-    --breadth-first
 
 ebook-convert \
     README.html \
