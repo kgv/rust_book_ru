@@ -19,7 +19,7 @@ if [ ! -f "$CALIBRE"/ebook-convert ]; then
         echo "ERROR:download calibre: error."
         sleep 1
     done; echo "$RESULT"
-    cd $HOME
+    cd -
 else
     echo "Using cached $CALIBRE"
 fi
