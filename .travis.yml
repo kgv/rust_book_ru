@@ -45,3 +45,4 @@ notifications:
 cache:
   directories:
     - $HOME/calibre
+    - $HOME/rustbook

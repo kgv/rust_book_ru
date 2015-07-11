@@ -1,5 +1,6 @@
 #!/bin/sh
 
+SAVED_PWD=$(pwd)
 export CALIBRE=$HOME/calibre; echo "INFO:CALIBRE: $CALIBRE"
 
 HARDWARE_PLATFORM_BIT=$(getconf LONG_BIT)
@@ -12,14 +13,14 @@ if [ $HARDWARE_PLATFORM_BIT -ne 32 ] && [ $HARDWARE_PLATFORM_BIT -ne 64 ]; then
     exit -1
 fi
 
-if [ ! -d "$CALIBRE"/bin ]; then
+if [ ! -f "$CALIBRE"/ebook-convert ]; then
     mkdir -p $CALIBRE
     cd $CALIBRE
     until RESULT=$(curl -sf -L -k $URL | tar -Jxv); do
         echo "ERROR:download calibre: error."
         sleep 1
     done; echo "$RESULT"
-    cd -
+    cd $SAVED_PWD
 else
     echo "Using cached $CALIBRE"
 fi
