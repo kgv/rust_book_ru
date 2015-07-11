@@ -1,11 +1,9 @@
 #!/bin/sh
 
-ROOT=$(pwd)
-BOOK_DIR=${ROOT}/_book
+BOOK_DIR=$(pwd)
 CONVERTED_DIR=${BOOK_DIR}/converted
 
 mkdir -p $CONVERTED_DIR
-cd $BOOK_DIR
 
 ebook-convert \
     README.html \
@@ -24,5 +22,3 @@ ebook-convert \
     --max-levels="1" \
     --breadth-first \
     --dont-split-on-page-breaks
-
-cd $ROOT
