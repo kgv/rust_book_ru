@@ -1,7 +1,7 @@
 #!/bin/sh
 
-ROOT=$(pwd)
-export CALIBRE=$ROOT/calibre; echo "INFO:CALIBRE: $CALIBRE"
+SAVED_PWD=$(pwd)
+export CALIBRE=$HOME/calibre; echo "INFO:CALIBRE: $CALIBRE"
 
 HARDWARE_PLATFORM_BIT=$(getconf LONG_BIT)
 URL=https://code.calibre-ebook.com/dist/linux${HARDWARE_PLATFORM_BIT}
@@ -13,12 +13,16 @@ if [ $HARDWARE_PLATFORM_BIT -ne 32 ] && [ $HARDWARE_PLATFORM_BIT -ne 64 ]; then
     exit -1
 fi
 
-mkdir -p $CALIBRE
-cd $CALIBRE
-until RESULT=$(curl -sf -L -k $URL | tar -Jxv); do
-    echo "ERROR:download calibre: error."
-    sleep 1
-done; echo "$RESULT"
-cd $ROOT
+if [ ! -f "$CALIBRE"/ebook-convert ]; then
+    mkdir -p $CALIBRE
+    cd $CALIBRE
+    until RESULT=$(curl -sf -L -k $URL | tar -Jxv); do
+        echo "ERROR:download calibre: error."
+        sleep 1
+    done; echo "$RESULT"
+    cd $SAVED_PWD
+else
+    echo "Using cached $CALIBRE"
+fi
 
 export PATH=$PATH:$CALIBRE; echo "INFO:PATH: $PATH"
