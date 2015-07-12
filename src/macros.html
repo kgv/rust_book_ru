@@ -435,12 +435,11 @@ shorthand for a data type could be valid as either an expression or a pattern.</
 <p>Операции повтора всегда сопутствуют два основных правила:</p>
 
 <ol>
-<li><code>$(...)*</code> walks through one &quot;layer&quot; of repetitions, for all of the <code>$name</code>s
-it contains, in lockstep, and</li>
-<li>each <code>$name</code> must be under at least as many <code>$(...)*</code>s as it was matched
-against. If it is under more, it&#39;ll be duplicated, as appropriate.</li>
-<li><code>$(...)*</code> проходит через один «слой» повторений, для всех <code>$name</code>, которые он содержит, в ногу, и</li>
-<li>каждое <code>$name</code> должно быть под крайней мере, столько <code>$(...)*</code>, как это было сопоставляется. Если это в более, это будет дублироваться, при необходимости.</li>
+<li><code>$(...)*</code> проходит через один «слой» повторений, для всех <code>$name</code>, которые он
+содержит, в ногу, и</li>
+<li>каждое <code>$name</code> должно быть под, по крайней мере, стольким количеством
+<code>$(...)*</code>, сколько было использовано при сопоставлении. Если оно под большим
+числом <code>$(...)*</code>, <code>$name</code> будет дублироваться, при необходимости.</li>
 </ol>
 
 <p>This baroque macro illustrates the duplication of variables from outer
