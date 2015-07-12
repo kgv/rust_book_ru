@@ -45,7 +45,6 @@ notifications:
 cache:
   directories:
     - $HOME/calibre
-    - $HOME/rustbook
 
 addons:
   apt:
