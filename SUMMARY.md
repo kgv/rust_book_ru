@@ -29,7 +29,7 @@
     * [Циклы `for`](src/for-loops.md)
     * [Циклы `while`](src/while-loops.md)
     * [Владение](src/ownership.md)
-    * [Ссылки и Заимствование](src/references-and-borrowing.md)
+    * [Ссылки и заимствование](src/references-and-borrowing.md)
     * [Время жизни](src/lifetimes.md)
     * [Изменяемость (Mutability)](src/mutability.md)
     * [Перечисления](src/enums.md)
