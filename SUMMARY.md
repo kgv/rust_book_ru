@@ -31,7 +31,7 @@
     * [Владение](src/ownership.md)
     * [Ссылки и заимствование](src/references-and-borrowing.md)
     * [Время жизни](src/lifetimes.md)
-    * [Изменяемость (Mutability)](src/mutability.md)
+    * [Изменяемость (mutability)](src/mutability.md)
     * [Перечисления](src/enums.md)
     * [Конструкция `match`](src/match.md)
     * [Структуры](src/structs.md)
