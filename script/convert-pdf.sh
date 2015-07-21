@@ -13,7 +13,7 @@ ebook-convert \
     --book-producer="" \
     --publisher="" \
     --chapter="//h:h1[@class='title']" \
-    --chapter-mark="pagebreak" \
+    --chapter-mark="none" \
     --page-breaks-before="/" \
     --level1-toc="//h:h1[@class='title']" \
     --no-chapters-in-toc \
