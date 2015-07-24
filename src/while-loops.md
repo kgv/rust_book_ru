@@ -3,7 +3,7 @@
 Цикл `while` — это ещё один вид конструкции цикла в Rust. Выглядит он так:
 
 ```rust
-let mut x = 5; // mut x: u32
+let mut x = 5; // mut x: i32
 let mut done = false; // mut done: bool
 
 while !done {
