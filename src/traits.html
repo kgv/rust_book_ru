@@ -216,8 +216,7 @@ fn main() {
     <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
         <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
     }
-}
-</pre>
+}</pre>
 
 <p>Типажи схожи, за исключением того, что мы определяем типаж, содержащий лишь
 сигнатуру метода, а затем реализуем этот типаж для нужной структуры. Например,
@@ -255,8 +254,7 @@ fn main() {
     <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
         <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
     }
-}
-</pre>
+}</pre>
 
 <p>Как вы можете видеть, блок <code>trait</code> очень похож на блок <code>impl</code>. Различие состоит
 лишь в том, что тело метода не определяется, а определяется только его
@@ -279,8 +277,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
-}
-</pre>
+}</pre>
 
 <p>Rust выводит:</p>
 
@@ -301,8 +298,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>HasArea</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
-}
-</pre>
+}</pre>
 
 <p>Синтаксис <code>&lt;T: HasArea&gt;</code> означает <strong>любой тип, реализующий типаж <code>HasArea</code></strong>.
 Так как типажи определяют сигнатуры типов функций, мы можем быть уверены, что
@@ -406,8 +402,7 @@ fn main() {
 
     <span class='ident'>print_area</span>(<span class='ident'>c</span>);
     <span class='ident'>print_area</span>(<span class='ident'>s</span>);
-}
-</pre>
+}</pre>
 
 <p>Ниже показан вывод программы:</p>
 
@@ -422,8 +417,7 @@ This shape has an area of 1
     print_area(5);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='ident'>print_area</span>(<span class='number'>5</span>);
-</pre>
+<span class='ident'>print_area</span>(<span class='number'>5</span>);</pre>
 
 <p>Мы получим ошибку времени компиляции:</p>
 
@@ -461,8 +455,7 @@ This shape has an area of 1
     }
 }
 
-<span class='number'>5</span>.<span class='ident'>area</span>();
-</pre>
+<span class='number'>5</span>.<span class='ident'>area</span>();</pre>
 
 <p>Хотя технически это возможно, но реализация методов для таких примитивных типов
 считается плохим стилем программирования.</p>
@@ -530,8 +523,7 @@ fn main() {
     };
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
-}
-</pre>
+}</pre>
 
 <p>Теперь, когда мы переместили структуры и типажи в свой собственный модуль, мы
 получаем следующую ошибку:</p>
@@ -604,8 +596,7 @@ fn main() {
     };
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
-}
-</pre>
+}</pre>
 
 <p>Это означает, что даже если кто-то сделает что-то плохое, как например добавит
 методы к <code>int</code>, на наш код это не окажет влияния, если вы не объявите <code>use</code> для
@@ -635,8 +626,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
     <span class='ident'>x</span>.<span class='ident'>clone</span>();
-}
-</pre>
+}</pre>
 
 <p>Если вам нужно более одной привязки, то вы можете использовать <code>+</code>:</p>
 <span class='rusttest'>fn main() {
@@ -653,8 +643,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>foo</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Clone</span> <span class='op'>+</span> <span class='ident'>Debug</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
     <span class='ident'>x</span>.<span class='ident'>clone</span>();
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>x</span>);
-}
-</pre>
+}</pre>
 
 <p>Теперь тип <code>T</code> должен реализовавать как типаж <code>Clone</code>, так и типаж <code>Debug</code>.</p>
 
@@ -679,8 +668,7 @@ fn main() {
     <span class='ident'>x</span>.<span class='ident'>clone</span>();
     <span class='ident'>y</span>.<span class='ident'>clone</span>();
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
-}
-</pre>
+}</pre>
 
 <p>Имя функции находится слева, а список параметров — далеко справа. Привязки
 загромождают место.</p>
@@ -722,8 +710,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='ident'>foo</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
     <span class='ident'>bar</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;workd&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p><code>foo()</code> использует синтаксис, показанный ранее, а <code>bar()</code> использует утверждение
 <code>where</code>. Все, что нам нужно сделать, это убрать ограничения при определении
@@ -751,8 +738,7 @@ fn main() {
     <span class='ident'>x</span>.<span class='ident'>clone</span>();
     <span class='ident'>y</span>.<span class='ident'>clone</span>();
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
-}
-</pre>
+}</pre>
 
 <p>Такая гибкость может добавить ясности в сложных ситуациях.</p>
 
@@ -797,8 +783,7 @@ fn main() {
         <span class='comment'>// this is using ConvertTo as if it were &quot;ConvertFrom&lt;i32&gt;&quot;</span>
         <span class='kw'>where</span> <span class='ident'>i32</span>: <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='number'>1i32</span>.<span class='ident'>convert</span>()
-}
-</pre>
+}</pre>
 
 <p>Этот код демонстрирует дополнительные преимущества использования утверждения
 <code>where</code>: оно позволяет задавать ограничение, где с левой стороны располагается
@@ -821,8 +806,7 @@ fn main() {
     <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
 
     <span class='prelude-val'>Ok</span>(<span class='number'>1.0</span> <span class='op'>/</span> <span class='ident'>x</span>)
-}
-</pre>
+}</pre>
 
 <p>Если мы попытаемся скомпилировать его, мы получим такую ошибку:</p>
 
@@ -844,8 +828,7 @@ fn main() {
     <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
 
     <span class='prelude-val'>Ok</span>(<span class='number'>1.0</span> <span class='op'>/</span> <span class='ident'>x</span>)
-}
-</pre>
+}</pre>
 
 <p>Вы получите ошибку:</p>
 
@@ -879,8 +862,7 @@ fn main() {
 
     <span class='kw'>let</span> <span class='ident'>one</span>: <span class='ident'>T</span> <span class='op'>=</span> <span class='ident'>Float</span>::<span class='ident'>one</span>();
     <span class='prelude-val'>Ok</span>(<span class='ident'>one</span> <span class='op'>/</span> <span class='ident'>x</span>)
-}
-</pre>
+}</pre>
 
 <p>Нам следует заменить <code>0.0</code> и <code>1.0</code> соответствующими методами из типажа <code>Float</code>.
 И <code>f32</code>, и <code>f64</code> реализуют типаж <code>Float</code>, так что наша функция будет работать
@@ -904,8 +886,7 @@ fn main() {
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f64</span>));
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f32</span>));
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f64</span>));
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f64</span>));</pre>
 
 <h2 id="Методы-по-умолчанию" class='section-header'><a
                            href="#Методы-по-умолчанию">Методы по умолчанию</a></h2>
@@ -923,8 +904,7 @@ fn main() {
     <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
 
     <span class='kw'>fn</span> <span class='ident'>baz</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called baz.&quot;</span>); }
-}
-</pre>
+}</pre>
 
 <p>При реализации типажа <code>Foo</code> необходимо реализовать метод <code>bar()</code>, но нет
 необходимости в реализации метода <code>baz()</code>. Это поведение будет реализовано по
@@ -973,8 +953,7 @@ fn main() {
 <span class='ident'>default</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;We called baz.&quot;</span>
 
 <span class='kw'>let</span> <span class='ident'>over</span> <span class='op'>=</span> <span class='ident'>OverrideDefault</span>;
-<span class='ident'>over</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;Override baz!&quot;</span>
-</pre>
+<span class='ident'>over</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;Override baz!&quot;</span></pre>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

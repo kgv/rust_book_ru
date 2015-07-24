@@ -205,8 +205,7 @@
 <span class='kw'>enum</span> <span class='ident'>Character</span> {
     <span class='ident'>Digit</span>(<span class='ident'>i32</span>),
     <span class='ident'>Other</span>,
-}
-</pre>
+}</pre>
 
 <p>Большая часть обычных типов могут быть вариантами перечисления. Вот несколько
 примеров:</p>
@@ -222,8 +221,7 @@
 <span class='kw'>struct</span> <span class='ident'>Color</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>);
 <span class='kw'>struct</span> <span class='ident'>Length</span>(<span class='ident'>i32</span>);
 <span class='kw'>struct</span> <span class='ident'>Stats</span> { <span class='ident'>Health</span>: <span class='ident'>i32</span>, <span class='ident'>Mana</span>: <span class='ident'>i32</span>, <span class='ident'>Attack</span>: <span class='ident'>i32</span>, <span class='ident'>Defense</span>: <span class='ident'>i32</span> }
-<span class='kw'>struct</span> <span class='ident'>HeightDatabase</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>);
-</pre>
+<span class='kw'>struct</span> <span class='ident'>HeightDatabase</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span>);</pre>
 
 <p>Здесь мы видим, что, в зависимости от типа, вариант перечисления может
 содержать, а может и не содержать вложенные данные. Например, в перечислении
@@ -263,8 +261,7 @@
 <span class='kw'>let</span> <span class='ident'>four_is_smaller</span> <span class='op'>=</span> <span class='ident'>four</span> <span class='op'>&lt;=</span> <span class='ident'>ten</span>;
 
 <span class='comment'>// Error: `==` is not implemented for type `Character`</span>
-<span class='kw'>let</span> <span class='ident'>four_equals_ten</span> <span class='op'>=</span> <span class='ident'>four</span> <span class='op'>==</span> <span class='ident'>ten</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>four_equals_ten</span> <span class='op'>=</span> <span class='ident'>four</span> <span class='op'>==</span> <span class='ident'>ten</span>;</pre>
 
 <p>Мы используем <code>::</code> синтаксис чтобы использовать имя каждого из вариантов. Их
 область видимости ограничена именем самого перечисления <code>enum</code>. Это позволяет
@@ -275,8 +272,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='ident'>Character</span>::<span class='ident'>Digit</span>(<span class='number'>10</span>);
-<span class='ident'>Hand</span>::<span class='ident'>Digit</span>;
-</pre>
+<span class='ident'>Hand</span>::<span class='ident'>Digit</span>;</pre>
 
 <p>Оба варианта имеют одинаковые имена, <code>Digit</code>, но область видимости каждого из
 них ограничена соответствующим именем <code>enum</code>.</p>

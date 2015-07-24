@@ -232,8 +232,7 @@ Rust, предназначенных для создания документа�
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>value</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Rc</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='comment'>// здесь реализация</span>
-}
-</pre>
+}</pre>
 
 <p>Этот код генерирует документацию, которая выглядит <a href="http://doc.rust-lang.org/std/rc/struct.Rc.html#method.new">так</a>. В приведенном
 коде реализация метода была заменена на обычный комментарий. Первое, на что
@@ -262,8 +261,7 @@ Rust, предназначенных для создания документа�
     <span class='prelude-val'>None</span>,
     <span class='doccomment'>/// Некоторое значение `T`</span>
     <span class='prelude-val'>Some</span>(<span class='ident'>T</span>),
-}
-</pre>
+}</pre>
 
 <p>А такой — нет:</p>
 <span class='rusttest'>fn main() {
@@ -278,8 +276,7 @@ Rust, предназначенных для создания документа�
 <span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='prelude-val'>None</span>, <span class='doccomment'>/// Нет значения</span>
     <span class='prelude-val'>Some</span>(<span class='ident'>T</span>), <span class='doccomment'>/// Некоторое значение `T`</span>
-}
-</pre>
+}</pre>
 
 <p>Вы получите ошибку:</p>
 
@@ -301,8 +298,7 @@ hello.rs:4 }
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// Создаёт новый `Rc&lt;T&gt;`.</span>
-</pre>
+<span class='doccomment'>/// Создаёт новый `Rc&lt;T&gt;`.</span></pre>
 
 <p>Первая строка документирующего комментария должна представлять из себя краткую
 информацию о функциональности. Одно предложение. Только самое основное.
@@ -318,8 +314,7 @@ hello.rs:4 }
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Подробности создания `Rc&lt;T&gt;`, возможно, описывающие сложности семантики,</span>
 <span class='doccomment'>/// дополнительные опции, и всё остальное.</span>
-<span class='doccomment'>///</span>
-</pre>
+<span class='doccomment'>///</span></pre>
 
 <p>Наш исходный пример включал только строку с краткой информацией, но если бы у
 нас было больше информации, о которой следует сказать, мы могли бы добавить эту
@@ -331,8 +326,7 @@ hello.rs:4 }
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// # Examples</span>
-</pre>
+<span class='doccomment'>/// # Examples</span></pre>
 
 <p>Далее идут специальные разделы. Они обознаются заголовком, который начинается с
 <code>#</code>. Существуют три вида заголовков, которые обычно используются. Они не
@@ -343,8 +337,7 @@ hello.rs:4 }
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// # Panics</span>
-</pre>
+<span class='doccomment'>/// # Panics</span></pre>
 
 <p>Раздел <code>Panics</code>. Неустранимые ошибки при неправильном вызове функции (так
 называемые ошибки программирования) в Rust, как правило, вызывают панику,
@@ -356,8 +349,7 @@ hello.rs:4 }
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// # Failures</span>
-</pre>
+<span class='doccomment'>/// # Failures</span></pre>
 
 <p>Раздел <code>Failures</code>. Если ваша функция или метод возвращает <code>Result&lt;T, E&gt;</code>, то
 хорошим тоном является описание условий, при которых она возвращает <code>Err(E)</code>.
@@ -368,8 +360,7 @@ hello.rs:4 }
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// # Safety</span>
-</pre>
+<span class='doccomment'>/// # Safety</span></pre>
 
 <p>Раздел <code>Safety</code>. Если ваша функция является <code>unsafe</code>, необходимо пояснить, какие
 инварианты вызова должны поддерживаться.</p>
@@ -390,8 +381,7 @@ hello.rs:4 }
 <span class='doccomment'>/// use std::rc::Rc;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let five = Rc::new(5);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Раздел <code>Examples</code>. Включите в этот раздел один или несколько примеров
 использования функции или метода, и ваши пользователи будут вам благодарны.
@@ -430,8 +420,7 @@ hello.rs:4 }
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// let v: Vec&lt;&amp;str&gt; = &quot;абв1где2жзи&quot;.split(|c: char| c.is_numeric()).collect();</span>
 <span class='doccomment'>/// assert_eq!(v, vec![&quot;абв&quot;, &quot;где&quot;, &quot;жзи&quot;]);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Давайте подробно обсудим блоки кода.</p>
 
@@ -447,8 +436,7 @@ hello.rs:4 }
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// println!(&quot;Привет, мир&quot;);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Если вы хотите написать код на любом другом языке (не на Rust), вы можете
 добавить аннотацию:</p>
@@ -461,8 +449,7 @@ hello.rs:4 }
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```c</span>
 <span class='doccomment'>/// printf(&quot;Hello, world\n&quot;);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Это позволит использовать подсветку синтаксиса, соответствующую тому языку,
 который был указан в аннотации. Если же это простой текст, то в аннотации
@@ -487,8 +474,7 @@ hello.rs:4 }
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// println!(&quot;Привет, мир&quot;);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Заметьте, что здесь нет нужды в <code>fn main()</code> или чём-нибудь подобном. <code>rustdoc</code>
 автоматически добавит оборачивающий <code>main()</code> вокруг вашего кода в нужном месте.
@@ -506,8 +492,7 @@ hello.rs:4 }
 <span class='doccomment'>/// use std::rc::Rc;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let five = Rc::new(5);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>В конечном итоге это будет тест:</p>
 <span class='rusttest'>fn main() {
@@ -518,8 +503,7 @@ hello.rs:4 }
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>rc</span>::<span class='ident'>Rc</span>;
     <span class='kw'>let</span> <span class='ident'>five</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
-}
-</pre>
+}</pre>
 
 <p>Вот полный алгоритм, который <code>rustdoc</code> использует для обработки примеров:</p>
 
@@ -548,8 +532,7 @@ hello.rs:4 }
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// Некоторая документация.</span>
-</pre>
+<span class='doccomment'>/// Некоторая документация.</span></pre>
 
 <p>Да, именно так: вы можете добавлять строки, которые начинаются с <code>#</code>, и они
 будут скрыты в выводе, но при этом будут использоваться во время компиляции
@@ -568,8 +551,7 @@ hello.rs:4 }
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>;
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);</pre>
 
 <p>Ниже приведено отрисованное объяснение этого кода.</p>
 
@@ -580,8 +562,7 @@ hello.rs:4 }
     println!(&quot;{}&quot;, x + y);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;</pre>
 
 <p>Затем мы устанавливаем <code>y</code> равным шести:</p>
 <span class='rusttest'>fn main() {
@@ -590,8 +571,7 @@ hello.rs:4 }
     println!(&quot;{}&quot;, x + y);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>;</pre>
 
 <p>В конце мы печатаем сумму <code>x</code> и <code>y</code>:</p>
 <span class='rusttest'>fn main() {
@@ -600,8 +580,7 @@ hello.rs:4 }
     println!(&quot;{}&quot;, x + y);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>);</pre>
 
 <p>А вот то же самое объяснение, но в виде простого текста:</p>
 
@@ -678,8 +657,7 @@ fn main() {}
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>panic_unless</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>condition</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rest</span>:<span class='ident'>expr</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> ({ <span class='kw'>if</span> <span class='op'>!</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>condition</span> { <span class='macro'>panic</span><span class='macro'>!</span>($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>rest</span>),<span class='op'>+</span>); } });
-}
-</pre>
+}</pre>
 
 <p>В нем вы можете заметить три вещи. Во-первых, мы должны собственноручно добавить
 строку с <code>extern crate</code> для того, чтобы мы могли указать атрибут <code>#[macro_use]</code>.
@@ -713,8 +691,7 @@ $ cargo test
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```ignore</span>
 <span class='doccomment'>/// fn foo() {</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Аннотация <code>ignore</code> указывает Rust, что код должен быть проигнорирован. Почти во
 всех случаях это не то, что вам нужно, так как эта директива носит очень общий
@@ -730,8 +707,7 @@ $ cargo test
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// ```should_panic</span>
 <span class='doccomment'>/// assert!(false);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Аннотация <code>should_panic</code> указывает <code>rustdoc</code>, что код должен компилироваться, но
 выполнение теста должно завершиться ошибкой.</p>
@@ -748,8 +724,7 @@ $ cargo test
 <span class='doccomment'>/// loop {</span>
 <span class='doccomment'>///     println!(&quot;Hello, world&quot;);</span>
 <span class='doccomment'>/// }</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>Аннотация <code>no_run</code> указывает, что код должен компилироваться, но запускать его
 на выполнение не требуется. Это важно для таких примеров, которые должны успешно
@@ -777,8 +752,7 @@ $ cargo test
     <span class='doccomment'>//! # Examples</span>
 
     <span class='comment'>// ...</span>
-}
-</pre>
+}</pre>
 
 <p>Приведённый пример демонстрирует наиболее распространённое использование <code>//!</code>:
 документирование модуля. Если же модуль расположен в файле <code>foo.rs</code>, то вы,
@@ -791,8 +765,7 @@ $ cargo test
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>//! Модуль использования разных `foo`.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Модуль `foo` содержит много полезной функциональности ла-ла-ла</span>
-</pre>
+<span class='doccomment'>//! Модуль `foo` содержит много полезной функциональности ла-ла-ла</span></pre>
 
 <h3 id="Стиль-документирующих-комментариев" class='section-header'><a
                            href="#Стиль-документирующих-комментариев">Стиль документирующих комментариев</a></h3>
@@ -824,8 +797,7 @@ Rust. Так как комментарии пишутся на Markdown, то ч
 <span class='doccomment'>/// use std::rc::Rc;</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let five = Rc::new(5);</span>
-<span class='doccomment'>/// ```</span>
-</pre>
+<span class='doccomment'>/// ```</span></pre>
 
 <p>преобразуется в</p>
 
@@ -862,8 +834,7 @@ let five = Rc::new(5);
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>/// this</span>
 
-<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;this&quot;</span>]</span>
-</pre>
+<span class='attribute'>#[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;this&quot;</span>]</span></pre>
 
 <p>Т.е. представленные выше комментарии идентичны, также как и ниже:</p>
 <span class='rusttest'>fn main() {
@@ -874,8 +845,7 @@ let five = Rc::new(5);
 }</span><pre class='rust rust-example-rendered'>
 <span class='doccomment'>//! this</span>
 
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;/// this&quot;</span>]</span>
-</pre>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span><span class='op'>=</span><span class='string'>&quot;/// this&quot;</span>]</span></pre>
 
 <p>Вы не часто будете видеть этот атрибут, используемый для написания документации,
 но он может быть полезен для изменения некоторых настроек, или при написании
@@ -893,8 +863,7 @@ let five = Rc::new(5);
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>foo</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>foo</span>::<span class='ident'>bar</span>;
-</pre>
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>foo</span>::<span class='ident'>bar</span>;</pre>
 
 <p>Это создаст документацию для <code>bar</code> как в документации для контейнера <code>foo</code>, так
 и в документации к вашему контейнеру. То есть в обоих местах будет использована
@@ -911,8 +880,7 @@ let five = Rc::new(5);
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>foo</span>;
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>no_inline</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>foo</span>::<span class='ident'>bar</span>;
-</pre>
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>foo</span>::<span class='ident'>bar</span>;</pre>
 
 <h3 id="Управление-html" class='section-header'><a
                            href="#Управление-html">Управление HTML</a></h3>
@@ -926,8 +894,7 @@ let five = Rc::new(5);
 }</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_logo_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png&quot;</span>,
        <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;http://www.rust-lang.org/favicon.ico&quot;</span>,
-       <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://doc.rust-lang.org/&quot;</span>)]</span>;
-</pre>
+       <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://doc.rust-lang.org/&quot;</span>)]</span>;</pre>
 
 <p>В этом примере устанавливается несколько различных опций: логотип, иконка и
 корневой URL.</p>
@@ -955,8 +922,7 @@ let five = Rc::new(5);
     fn foo() {}
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='doccomment'>/// &lt;script&gt;alert(document.cookie)&lt;/script&gt;</span>
-</pre>
+<span class='doccomment'>/// &lt;script&gt;alert(document.cookie)&lt;/script&gt;</span></pre>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

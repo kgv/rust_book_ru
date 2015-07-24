@@ -214,8 +214,7 @@
     <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;two&quot;</span>),
     <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;three&quot;</span>),
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>one</code>.</p>
 
@@ -238,8 +237,7 @@
     <span class='number'>1</span> <span class='op'>|</span> <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one or two&quot;</span>),
     <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;three&quot;</span>),
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>one or two</code>.</p>
 
@@ -260,8 +258,7 @@
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one through five&quot;</span>),
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>one through five</code>.</p>
 
@@ -282,8 +279,7 @@
     <span class='string'>&#39;a&#39;</span> ... <span class='string'>&#39;j&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;early letter&quot;</span>),
     <span class='string'>&#39;k&#39;</span> ... <span class='string'>&#39;z&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;late letter&quot;</span>),
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;something else&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>something else</code>.</p>
 
@@ -304,8 +300,7 @@
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;got a range element {}&quot;</span>, <span class='ident'>e</span>),
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>got a range element 1</code>. Это полезно, когда вы хотите
 сделать сложное сопоставление для части структуры данных:</p>
@@ -333,8 +328,7 @@
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='prelude-val'>Some</span>(<span class='ident'>Person</span> { <span class='ident'>name</span>: <span class='kw-2'>ref</span> <span class='ident'>a</span> <span class='kw-2'>@</span> <span class='prelude-val'>Some</span>(_), .. }) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>a</span>),
     _ <span class='op'>=&gt;</span> {}
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>Some(&quot;Steve&quot;)</code>: мы связали внутреннюю <code>name</code> с <code>a</code>.</p>
 
@@ -354,8 +348,7 @@
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>|</span> <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>8</span> ... <span class='number'>10</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;got a range element {}&quot;</span>, <span class='ident'>e</span>),
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
-}
-</pre>
+}</pre>
 
 <h1 id="Игнорирование-вариантов" class='section-header'><a
                            href="#Игнорирование-вариантов">Игнорирование вариантов</a></h1>
@@ -385,8 +378,7 @@
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int!&quot;</span>),
     <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;No such luck.&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>Got an int!</code>.</p>
 
@@ -419,8 +411,7 @@
     <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='ident'>i</span>) <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>&gt;</span> <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int bigger than five!&quot;</span>),
     <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int!&quot;</span>),
     <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;No such luck.&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>Got an int!</code>.</p>
 
@@ -439,8 +430,7 @@
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='kw-2'>ref</span> <span class='ident'>r</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a reference to {}&quot;</span>, <span class='ident'>r</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>Got a reference to 5</code>.</p>
 
@@ -459,8 +449,7 @@
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>mr</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a mutable reference to {}&quot;</span>, <span class='ident'>mr</span>),
-}
-</pre>
+}</pre>
 
 <h1 id="Деструктуризация" class='section-header'><a
                            href="#Деструктуризация">Деструктуризация</a></h1>
@@ -488,8 +477,7 @@
 
 <span class='kw'>match</span> <span class='ident'>origin</span> {
     <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, <span class='ident'>y</span>: <span class='ident'>y</span> } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;({},{})&quot;</span>, <span class='ident'>x</span>, <span class='ident'>y</span>),
-}
-</pre>
+}</pre>
 
 <p>Если нам нужны значения только некоторых из полей структуры, то мы можем не
 присваивать им всем имена:</p>
@@ -515,8 +503,7 @@
 
 <span class='kw'>match</span> <span class='ident'>origin</span> {
     <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is {}&quot;</span>, <span class='ident'>x</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>x is 0</code>.</p>
 
@@ -543,8 +530,7 @@
 
 <span class='kw'>match</span> <span class='ident'>origin</span> {
     <span class='ident'>Point</span> { <span class='ident'>y</span>: <span class='ident'>y</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y is {}&quot;</span>, <span class='ident'>y</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает <code>y is 0</code>.</p>
 
@@ -564,8 +550,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>match</span> <span class='ident'>x</span> {
     <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>name</span>), <span class='ident'>y</span>: <span class='prelude-val'>None</span> } <span class='op'>=&gt;</span> ...
-}
-</pre>
+}</pre>
 
 <p>Шаблоны являются очень мощным инструментом. Их использование находит очень
 широкое применение.</p>

@@ -229,8 +229,7 @@
     assert_eq!(x, [1, 2, 3]);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];</pre>
 
 <p>Его нельзя реализовать в виде обычной функции, так как он принимает любое
 количество аргументов. Но мы можем представить его в виде синтаксического
@@ -252,8 +251,7 @@
     <span class='ident'>temp_vec</span>.<span class='ident'>push</span>(<span class='number'>2</span>);
     <span class='ident'>temp_vec</span>.<span class='ident'>push</span>(<span class='number'>3</span>);
     <span class='ident'>temp_vec</span>
-};
-</pre>
+};</pre>
 
 <p>Мы можем реализовать это сокращение, используя макрос: <sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
 
@@ -285,16 +283,14 @@ fn main() {
             <span class='ident'>temp_vec</span>
         }
     };
-}
-</pre>
+}</pre>
 
 <p>Вау, тут много нового синтаксиса! Давайте разберем его.</p>
 <span class='rusttest'>fn main() {
     macro_rules! vec { ... }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>vec</span> { ... }
-</pre>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>vec</span> { ... }</pre>
 
 <p>Тут мы определяем макрос с именем <code>vec</code>, аналогично тому, как <code>fn vec</code>
 определяло бы функцию с именем <code>vec</code>. При вызове мы неформально пишем имя
@@ -310,8 +306,7 @@ fn main() {
     ( $( $x:expr ),* ) =&gt; { ... };
     
 }</span><pre class='rust rust-example-rendered'>
-( $( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span> ),<span class='op'>*</span> ) <span class='op'>=&gt;</span> { ... };
-</pre>
+( $( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span> ),<span class='op'>*</span> ) <span class='op'>=&gt;</span> { ... };</pre>
 
 <p>Это очень похоже на конструкцию <code>match</code>, но сопоставление происходит на уровне
 синтаксических деревьев Rust, на этапе компиляции. Точка с запятой не является
@@ -345,8 +340,7 @@ fn main() {
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>foo</span><span class='macro'>!</span>(<span class='ident'>y</span> <span class='op'>=&gt;</span> <span class='number'>3</span>);
-}
-</pre>
+}</pre>
 
 <p>выведет</p>
 
@@ -358,8 +352,7 @@ fn main() {
     foo!(z =&gt; 3);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='macro'>foo</span><span class='macro'>!</span>(<span class='ident'>z</span> <span class='op'>=&gt;</span> <span class='number'>3</span>);
-</pre>
+<span class='macro'>foo</span><span class='macro'>!</span>(<span class='ident'>z</span> <span class='op'>=&gt;</span> <span class='number'>3</span>);</pre>
 
 <p>мы получим ошибку компиляции</p>
 
@@ -379,8 +372,7 @@ Rust. Но мы можем соединить кусочки раздробле�
 }</span><pre class='rust rust-example-rendered'>
 $(
     <span class='ident'>temp_vec</span>.<span class='ident'>push</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>);
-)<span class='op'>*</span>
-</pre>
+)<span class='op'>*</span></pre>
 
 <p>Каждое соответствующее выражение <code>$x</code> будет генерировать одиночный оператор
 <code>push</code> в развернутой форме макроса. Повторение в развернутой форме происходит
@@ -405,8 +397,7 @@ $(
     () <span class='op'>=&gt;</span> {{
         ...
     }}
-}
-</pre>
+}</pre>
 
 <p>Внешние скобки являются частью синтаксиса <code>macro_rules!</code>. На самом деле, вы
 можете использовать <code>()</code> или <code>[]</code> вместо них. Они просто разграничивают правую
@@ -481,8 +472,7 @@ fn main() {
                <span class='number'>20</span>; [<span class='number'>4</span>, <span class='number'>5</span>, <span class='number'>6</span>]);
 
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>, [<span class='number'>11</span>, <span class='number'>12</span>, <span class='number'>13</span>, <span class='number'>24</span>, <span class='number'>25</span>, <span class='number'>26</span>]);
-}
-</pre>
+}</pre>
 
 <p>Это наибольшая синтаксиса совпадений. Эти примеры используют конструкцию
 <code>$(...)*</code>, которая означает «ноль или более» совпадений. Также вы можете
@@ -526,8 +516,7 @@ fn main() {
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>25</span>, <span class='macro'>five_times</span><span class='macro'>!</span>(<span class='number'>2</span> <span class='op'>+</span> <span class='number'>3</span>));
-}
-</pre>
+}</pre>
 
 <p>Метапеременная <code>$x</code> обрабатывается как единый узел выражения, и сохраняет свое
 место в дереве синтаксиса даже после замены.</p>
@@ -590,8 +579,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>state</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;reticulating splines&quot;</span>;
     <span class='macro'>log</span><span class='macro'>!</span>(<span class='ident'>state</span>);
-}
-</pre>
+}</pre>
 
 <p>Это работает, потому что Rust имеет <a href="http://en.wikipedia.org/wiki/Hygienic_macro">систему макросов с соблюдением
 гигиены</a>. Раскрытие каждого макроса происходит в
@@ -618,8 +606,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>foo</span><span class='macro'>!</span>();
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
-}
-</pre>
+}</pre>
 
 <p>Вместо этого вы должны передавать имя переменной при вызове, тогда она будет
 обладать меткой правильного контекста синтаксиса.</p>
@@ -639,8 +626,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>foo</span><span class='macro'>!</span>(<span class='ident'>x</span>);
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
-}
-</pre>
+}</pre>
 
 <p>Это справедливо для <code>let</code> привязок и меток loop, но не для <a href="https://doc.rust-lang.org/stable/reference.html#items">элементов</a>.
 Код, приведенный ниже, компилируется:</p>
@@ -660,8 +646,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>foo</span><span class='macro'>!</span>();
     <span class='ident'>x</span>();
-}
-</pre>
+}</pre>
 
 <h1 id="Рекурсия-макросов" class='section-header'><a
                            href="#Рекурсия-макросов">Рекурсия макросов</a></h1>
@@ -725,8 +710,7 @@ fn main() {
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>,
         <span class='string'>&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Macros guide&lt;/title&gt;&lt;/head&gt;\
          &lt;body&gt;&lt;h1&gt;Macros are the best!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p><a name="debugging-macro-code"></a></p>
 
@@ -857,8 +841,7 @@ fn main() {
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>macro_use</span>(<span class='ident'>foo</span>, <span class='ident'>bar</span>)]</span>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>baz</span>;
-</pre>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>baz</span>;</pre>
 
 <p>Если атрибут записан просто как <code>#[macro_use]</code>, будут загружены все
 макросы. Если атрибута нет, никакие макросы не будут загружены. Загружены могут
@@ -927,8 +910,7 @@ fn main() { }
     <span class='comment'>// здесь видны: m1, m3, m4</span>
 }
 
-<span class='comment'>// здесь видны: m1, m3, m4</span>
-</pre>
+<span class='comment'>// здесь видны: m1, m3, m4</span></pre>
 
 <p>Когда эта библиотека загружается с помощью <code>#[macro_use] extern crate</code>, виден
 только макрос <code>m2</code>.</p>
@@ -967,8 +949,7 @@ fn main() { }
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>inc_b</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> ( ::<span class='ident'>mylib</span>::<span class='ident'>increment</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>) )
-}
-</pre>
+}</pre>
 
 <p><code>inc_a</code> работает только внутри <code>mylib</code>, а <code>inc_b</code> — только снаружи. Более того,
 <code>inc_b</code> сломается, если пользователь импортирует <code>mylib</code> под другим именем.</p>
@@ -987,8 +968,7 @@ fn main() { }
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>inc</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> ( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>increment</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>) )
-}
-</pre>
+}</pre>
 
 <p>чтобы определить один макрос, который будет работать и внутри, и снаружи
 библиотеки. Имя функции раскроется или в <code>::increment</code>, или в
@@ -1053,8 +1033,7 @@ fn main() { }
     <span class='comment'>// halt on empty data string</span>
     ( $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>ps</span>:<span class='ident'>tt</span>),<span class='op'>*</span> ; )
         <span class='op'>=&gt;</span> (());
-}
-</pre>
+}</pre>
 
 <p>В качестве упражнения предлагаем читателю определить ещё один макрос, чтобы
 уменьшить степень дублирования кода в определении выше.</p>

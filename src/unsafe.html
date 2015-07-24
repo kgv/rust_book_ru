@@ -283,8 +283,7 @@
 <span class='comment'>// oops, ref_1 and ref_2 point to the same piece of data (x) and are</span>
 <span class='comment'>// both usable</span>
 <span class='op'>*</span><span class='ident'>ref_1</span> <span class='op'>=</span> <span class='number'>10</span>;
-<span class='op'>*</span><span class='ident'>ref_2</span> <span class='op'>=</span> <span class='number'>20</span>;
-</pre>
+<span class='op'>*</span><span class='ident'>ref_2</span> <span class='op'>=</span> <span class='number'>20</span>;</pre>
 
 <h2 id="Сырье-указатели-(raw-pointers)" class='section-header'><a
                            href="#Сырье-указатели-(raw-pointers)">Сырье указатели (Raw pointers)</a></h2>
@@ -382,8 +381,7 @@ Rust в полной мере).</p>
 <span class='kw'>unsafe</span> {
     <span class='kw'>let</span> <span class='ident'>ref_imm</span>: <span class='kw-2'>&amp;</span><span class='ident'>u32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>p_imm</span>;
     <span class='kw'>let</span> <span class='ident'>ref_mut</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>u32</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='ident'>p_mut</span>;
-}
-</pre>
+}</pre>
 
 <p>Разыменование с помощью конструкции <code>&amp;*x</code> является более предпочтительным, чем с
 использованием <code>transmute</code>. Последнее является гораздо более мощным

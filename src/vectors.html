@@ -197,8 +197,7 @@
     let v = vec![1, 2, 3, 4, 5]; // v: Vec&lt;i32&gt;
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>]; <span class='comment'>// v: Vec&lt;i32&gt;</span>
-</pre>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>]; <span class='comment'>// v: Vec&lt;i32&gt;</span></pre>
 
 <p>(Заметьте, что, в отличие от макроса <code>println!</code>, который мы использовали ранее,
 с <code>vec!</code> используются квадратные скобки <code>[]</code>. Rust разрешает использование и
@@ -210,8 +209,7 @@
     let v = vec![0; 10]; // десять нулей
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0</span>; <span class='number'>10</span>]; <span class='comment'>// десять нулей</span>
-</pre>
+<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0</span>; <span class='number'>10</span>]; <span class='comment'>// десять нулей</span></pre>
 
 <h2 id="Доступ-к-элементам" class='section-header'><a
                            href="#Доступ-к-элементам">Доступ к элементам</a></h2>
@@ -224,8 +222,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>];
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Третий элемент вектора v равен {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>2</span>]);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Третий элемент вектора v равен {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>2</span>]);</pre>
 
 <p>Индексы отсчитываются от <code>0</code>, так что третьим элементом является <code>v[2]</code>.</p>
 
@@ -261,8 +258,7 @@
 
 <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='ident'>v</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Владение вектором и его элементами {}&quot;</span>, <span class='ident'>i</span>);
-}
-</pre>
+}</pre>
 
 <p>У векторов есть много других полезных методов, о которых вы можете прочитать в
 <a href="http://doc.rust-lang.org/std/vec/index.html">документации API</a>.</p>

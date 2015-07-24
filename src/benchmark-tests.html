@@ -240,8 +240,7 @@ fn main() {
     <span class='kw'>fn</span> <span class='ident'>bench_add_two</span>(<span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bencher</span>) {
         <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> <span class='ident'>add_two</span>(<span class='number'>2</span>));
     }
-}
-</pre>
+}</pre>
 
 <p>Обратите внимание на включение возможности (feature gate) <code>test</code>, что включает
 эту нестабильную возможность.</p>
@@ -321,8 +320,7 @@ fn main() {
     <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
         (<span class='number'>0</span>..<span class='number'>1000</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>old</span>, <span class='ident'>new</span><span class='op'>|</span> <span class='ident'>old</span> <span class='op'>^</span> <span class='ident'>new</span>);
     });
-}
-</pre>
+}</pre>
 
 <p>выведет следующие результаты</p>
 
@@ -350,8 +348,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 1 measured
 <span class='ident'>b</span>.<span class='ident'>iter</span>(<span class='op'>||</span> {
     <span class='comment'>// note lack of `;` (could also use an explicit `return`).</span>
     (<span class='number'>0</span>..<span class='number'>1000</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>old</span>, <span class='ident'>new</span><span class='op'>|</span> <span class='ident'>old</span> <span class='op'>^</span> <span class='ident'>new</span>)
-});
-</pre>
+});</pre>
 
 <p>Либо использовать вызов функции <code>test::black_box</code>, которая представляет собой
 «черный ящик», непрозрачный для оптимизатора, тем самым заставляя его
@@ -378,8 +375,7 @@ b.iter(|| {
     <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>test</span>::<span class='ident'>black_box</span>(<span class='number'>1000</span>);
 
     (<span class='number'>0</span>..<span class='ident'>n</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>a</span>, <span class='ident'>b</span><span class='op'>|</span> <span class='ident'>a</span> <span class='op'>^</span> <span class='ident'>b</span>)
-})
-</pre>
+})</pre>
 
 <p>В этом примере не происходит ни чтения, ни изменения значения, что очень дешево
 для малых значений. Большие значения могут быть переданы косвенно для уменьшения

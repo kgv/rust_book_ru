@@ -211,8 +211,7 @@
 
 <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равняется пяти!&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p>При изменении значения <code>x</code> на какое-либо другое, эта строчка не будет выведена
 на экран. Если подробнее, то когда условие будет иметь значение <code>true</code>,
@@ -236,8 +235,7 @@
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равняется пяти!&quot;</span>);
 } <span class='kw'>else</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это не пять :(&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p>Когда необходимо больше одного выбора, можно использовать <code>else if</code>:</p>
 <span class='rusttest'>fn main() {
@@ -260,8 +258,7 @@
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это шесть!&quot;</span>);
 } <span class='kw'>else</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это ни пять, ни шесть :(&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p>Всё это довольно прозаично. Однако, вы также можете сделать такую штуку:</p>
 <span class='rusttest'>fn main() {
@@ -280,8 +277,7 @@
     <span class='number'>10</span>
 } <span class='kw'>else</span> {
     <span class='number'>15</span>
-}; <span class='comment'>// y: i32</span>
-</pre>
+}; <span class='comment'>// y: i32</span></pre>
 
 <p>Которую мы можем (и должны) записать примерно следующим образом:</p>
 <span class='rusttest'>fn main() {
@@ -292,8 +288,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> { <span class='number'>10</span> } <span class='kw'>else</span> { <span class='number'>15</span> }; <span class='comment'>// y: i32</span>
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>5</span> { <span class='number'>10</span> } <span class='kw'>else</span> { <span class='number'>15</span> }; <span class='comment'>// y: i32</span></pre>
 
 <p>Это работает, потому что <code>if</code> является выражением. Его значением является
 значение последнего выражения из выбранной ветви. <code>if</code> без <code>else</code> всегда

@@ -217,8 +217,7 @@ fn main() {
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>, <span class='ident'>i32</span>::<span class='ident'>ID</span>);
-}
-</pre>
+}</pre>
 
 <p>Любая реализация <code>Foo</code> должна будет определить <code>ID</code>. Без этого определения:</p>
 <span class='rusttest'>#![feature(associated_consts)]
@@ -239,8 +238,7 @@ fn main() {
 }
 
 <span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>i32</span> {
-}
-</pre>
+}</pre>
 
 <p>выдаст ошибку</p>
 
@@ -284,8 +282,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>1</span>, <span class='ident'>i32</span>::<span class='ident'>ID</span>);
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5</span>, <span class='ident'>i64</span>::<span class='ident'>ID</span>);
-}
-</pre>
+}</pre>
 
 <p>Как вы можете видеть, при реализации <code>Foo</code>, можно оставить константу
 неопределенной, как в случае для <code>i32</code>. Тогда будет использовано значение по
@@ -310,8 +307,7 @@ fn main() {
 
 <span class='kw'>impl</span> <span class='ident'>Foo</span> {
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>FOO</span>: <span class='ident'>u32</span> <span class='op'>=</span> <span class='number'>3</span>;
-}
-</pre>
+}</pre>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

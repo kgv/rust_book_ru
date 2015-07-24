@@ -273,8 +273,7 @@ fn main() {
     <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p>Здесь мы создаем <a href="structs.html"><code>struct</code></a>, представляющую философа. На данный момент
 нам нужно всего лишь имя. Мы выбрали тип <a href="strings.html"><code>String</code></a>, а не <code>&amp;str</code> для
@@ -301,8 +300,7 @@ fn main() {
             <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
         }
     }
-}
-</pre>
+}</pre>
 
 <p>Этот блок <code>impl</code> позволяет объявить что-либо для структуры <code>Philosopher</code>. В
 нашем случае мы объявляем «статическую функцию» <code>new</code>. Первая строка этой
@@ -320,8 +318,7 @@ fn main() {
     }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {
-</pre>
+<span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Philosopher</span> {</pre>
 
 <p>Она принимает один аргумент, <code>name</code>, типа <code>&amp;str</code>. Это ссылка на другую строку.
 Она возвращает новый экземпляр нашей структуры <code>Philosopher</code>.</p>
@@ -340,8 +337,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='ident'>Philosopher</span> {
     <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>to_string</span>(),
-}
-</pre>
+}</pre>
 
 <p>Этот код создаёт новый экземпляр <code>Philosopher</code> и присваивает его полю <code>name</code>
 значение переданного аргумента <code>name</code>. Но используется не сам аргумент, а
@@ -392,8 +388,7 @@ fn main() {
     <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>);
     <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p>Здесь мы связываем пять имен переменных с пятью новыми философами. Здесь указаны
 имена некоторых известных философов, но вы можете указать любые другие. Если бы
@@ -415,8 +410,7 @@ fn main() {
     <span class='kw'>let</span> <span class='ident'>p3</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Зарубина Наталья&quot;</span>.<span class='ident'>to_string</span>() };
     <span class='kw'>let</span> <span class='ident'>p4</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Эмма Гольдман&quot;</span>.<span class='ident'>to_string</span>() };
     <span class='kw'>let</span> <span class='ident'>p5</span> <span class='op'>=</span> <span class='ident'>Philosopher</span> { <span class='ident'>name</span>: <span class='string'>&quot;Анна Шмидт&quot;</span>.<span class='ident'>to_string</span>() };
-}
-</pre>
+}</pre>
 
 <p>Этот код выглядит не слишком изящно. Использование статической функции <code>new</code>
 имеет и другие преимущества, но даже в этом простом случае, её использование
@@ -484,8 +478,7 @@ fn main() {
     <span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>philosophers</span> {
         <span class='ident'>p</span>.<span class='ident'>eat</span>();
     }
-}
-</pre>
+}</pre>
 
 <p>Давайте сначала рассмотрим функцию <code>main()</code>. Вместо того чтобы создавать пять
 отдельных связанных имен для философов, мы создаем для них <code>Vec&lt;T&gt;</code>. <code>Vec&lt;T&gt;</code>
@@ -502,8 +495,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
-}
-</pre>
+}</pre>
 
 <p>В Rust методы явно получают параметр <code>self</code>. Вот почему <code>eat()</code> является
 методом, а <code>new</code> — статической функцией: <code>new()</code> не получает параметр <code>self</code>.
@@ -591,16 +583,14 @@ fn main() {
     <span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>philosophers</span> {
         <span class='ident'>p</span>.<span class='ident'>eat</span>();
     }
-}
-</pre>
+}</pre>
 
 <p>Появились некоторые небольшие изменения. Давайте посмотрим, что же изменилось:</p>
 <span class='rusttest'>fn main() {
     use std::thread;
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
-</pre>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;</pre>
 
 <p>Конструкция <code>use</code> предоставляет доступ к области видимости модуля <code>thread</code> из
 стандартной библиотеки. Мы собираемся использовать этот модуль далее в коде, и
@@ -621,8 +611,7 @@ fn main() {
         <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
 
         <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
-    }
-</pre>
+    }</pre>
 
 <p>Здесь мы выводим на экран два сообщения и вызываем функцию <code>sleep_ms</code> между
 ними. Эта функция останавливает рабочий поток на 1000 миллисекунд, что
@@ -730,8 +719,7 @@ fn main() {
     <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
         <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>();
     }
-}
-</pre>
+}</pre>
 
 <p>Мы добавили еще один цикл в функцию <code>main()</code>. Теперь она выглядит так:</p>
 <span class='rusttest'>fn main() {
@@ -746,16 +734,14 @@ fn main() {
     <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
         <span class='ident'>p</span>.<span class='ident'>eat</span>();
     })
-}).<span class='ident'>collect</span>();
-</pre>
+}).<span class='ident'>collect</span>();</pre>
 
 <p>Тут добавились трудные к пониманию пять строк кода. Давайте разбираться.</p>
 <span class='rusttest'>fn main() {
     let handles: Vec&lt;_&gt; = 
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> 
-</pre>
+<span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> </pre>
 
 <p>Объявляем новое связанное имя <code>handles</code>. Мы задали такое имя, потому что
 собираемся создать несколько потоков, в результате чего получим для них
@@ -767,8 +753,7 @@ fn main() {
     philosophers.into_iter().map(|p| {
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {
-</pre>
+<span class='ident'>philosophers</span>.<span class='ident'>into_iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>p</span><span class='op'>|</span> {</pre>
 
 <p>Мы берем наш список философов и вызываем метод <code>into_iter()</code>. Этот метод создаёт
 итератор, который при каждой итерации забирает право владения на соответствующий
@@ -783,8 +768,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
     <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
         <span class='ident'>p</span>.<span class='ident'>eat</span>();
-    })
-</pre>
+    })</pre>
 
 <p>Вот здесь происходит сам параллелизм. Функция <code>thread::spawn</code> принимает в
 качестве аргумента замыкание и исполняет это замыкание в новом потоке. Это
@@ -801,8 +785,7 @@ fn main() {
     }).collect();
     
 }</span><pre class='rust rust-example-rendered'>
-}).<span class='ident'>collect</span>();
-</pre>
+}).<span class='ident'>collect</span>();</pre>
 
 <p>По завершении мы получаем результат вызова <code>map</code> и собираем полученный результат
 в коллекцию с помощью метода <code>collect()</code>. Метод <code>collect()</code> создаёт коллекцию
@@ -818,8 +801,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
     <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>();
-}
-</pre>
+}</pre>
 
 <p>В конце функции <code>main()</code> мы в цикле перебираем каждый дескриптор и вызываем для
 него метод <code>join()</code>, который блокирует дальнейшее исполнение основного потока,
@@ -856,8 +838,7 @@ fn main() {
 
 <span class='kw'>struct</span> <span class='ident'>Table</span> {
     <span class='ident'>forks</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Mutex</span><span class='op'>&lt;</span>()<span class='op'>&gt;&gt;</span>,
-}
-</pre>
+}</pre>
 
 <p>Структура <code>Table</code> содержит вектор мьютексов (<code>Mutex</code>). Мьютекс — способ
 управления доступом к данным для параллельно выполняющихся потоков: только один
@@ -993,8 +974,7 @@ fn main() {
     <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
         <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>();
     }
-}
-</pre>
+}</pre>
 
 <p>Много изменений! Однако, с этими изменениями мы получили корректно работающую
 программу. Приступим к рассмотрению:</p>
@@ -1002,8 +982,7 @@ fn main() {
     use std::sync::{Mutex, Arc};
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Mutex</span>, <span class='ident'>Arc</span>};
-</pre>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Mutex</span>, <span class='ident'>Arc</span>};</pre>
 
 <p>Нам далее понадобится структура <code>Arc&lt;T&gt;</code> из модуля стандартной библиотеки
 <code>std::sync</code>. Мы поговорим о ней чуть позже.</p>
@@ -1019,8 +998,7 @@ fn main() {
     <span class='ident'>name</span>: <span class='ident'>String</span>,
     <span class='ident'>left</span>: <span class='ident'>usize</span>,
     <span class='ident'>right</span>: <span class='ident'>usize</span>,
-}
-</pre>
+}</pre>
 
 <p>Нам понадобилось добавить еще два поля в нашу структуру <code>Philosopher</code>. Каждый
 философ должен иметь две вилки: одну — для левой руки, другую — для правой руки.
@@ -1043,8 +1021,7 @@ fn main() {
         <span class='ident'>left</span>: <span class='ident'>left</span>,
         <span class='ident'>right</span>: <span class='ident'>right</span>,
     }
-}
-</pre>
+}</pre>
 
 <p>Мы используем функцию <code>new()</code> для задания значений <code>left</code> и <code>right</code>.</p>
 <span class='rusttest'>fn main() {
@@ -1069,8 +1046,7 @@ fn main() {
     <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} закончила есть.&quot;</span>, <span class='self'>self</span>.<span class='ident'>name</span>);
-}
-</pre>
+}</pre>
 
 <p>Здесь появились две новые строки. Мы также добавили один аргумент, <code>table</code>. Мы
 получаем доступ к списку вилок через структуру <code>Table</code>. Затем используем
@@ -1110,8 +1086,7 @@ fn main() {
         <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
         <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
         <span class='ident'>Mutex</span>::<span class='ident'>new</span>(()),
-    ]});
-</pre>
+    ]});</pre>
 
 <p>Далее в <code>main()</code> мы создаем новый экземпляр структуры <code>Table</code> и оборачиваем его
 в <code>Arc&lt;T&gt;</code>. Это «атомарный счетчик ссылок» (atomic reference count). Он нужен
@@ -1134,8 +1109,7 @@ fn main() {
     <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Зарубина Наталья&quot;</span>, <span class='number'>2</span>, <span class='number'>3</span>),
     <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Эмма Гольдман&quot;</span>, <span class='number'>3</span>, <span class='number'>4</span>),
     <span class='ident'>Philosopher</span>::<span class='ident'>new</span>(<span class='string'>&quot;Анна Шмидт&quot;</span>, <span class='number'>0</span>, <span class='number'>4</span>),
-];
-</pre>
+];</pre>
 
 <p>Мы добавили наши значения <code>left</code> и <code>right</code> при создании структуры <code>Philosopher</code>.
 Здесь есть <em>очень важная</em> деталь, на которую следует обратить внимание.
@@ -1161,8 +1135,7 @@ fn main() {
     <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
         <span class='ident'>p</span>.<span class='ident'>eat</span>(<span class='kw-2'>&amp;</span><span class='ident'>table</span>);
     })
-}).<span class='ident'>collect</span>();
-</pre>
+}).<span class='ident'>collect</span>();</pre>
 
 <p>Внутри нашего цикла <code>map()</code>/<code>collect()</code> мы вызываем метод <code>table.clone()</code>. Метод
 <code>clone()</code> структуры <code>Arc&lt;T&gt;</code> клонирует значение и инкрементирует счетчик,

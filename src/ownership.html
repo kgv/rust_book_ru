@@ -243,8 +243,7 @@ Rust отказывается компилировать программу, к�
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span>() {
     <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
-}
-</pre>
+}</pre>
 
 <p>Когда <code>v</code> входит в область видимости, создаётся новый <a href="http://doc.rust-lang.org/std/vec/struct.Vec.html"><code>Vec&lt;T&gt;</code></a>. В данном
 случае вектор также выделяет из <a href="the-stack-and-the-heap.html">кучи</a> пространство для трёх элементов.
@@ -267,8 +266,7 @@ Rust отказывается компилировать программу, к�
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 
-<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;</pre>
 
 <p>Но, если после этого мы попытаемся использовать <code>v</code>, то получим ошибку:</p>
 <span class='rusttest'>fn main() {
@@ -283,8 +281,7 @@ Rust отказывается компилировать программу, к�
 
 <span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v[0] = {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>0</span>]);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v[0] = {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>0</span>]);</pre>
 
 <p>Ошибка выглядит следующим образом:</p>
 
@@ -316,8 +313,7 @@ println!(&quot;v[0] = {}&quot;, v[0]);
 
 <span class='ident'>take</span>(<span class='ident'>v</span>);
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v[0] = {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>0</span>]);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v[0] = {}&quot;</span>, <span class='ident'>v</span>[<span class='number'>0</span>]);</pre>
 
 <p>Та же самая ошибка: «use of moved value» («используется перемещённое значение»).
 Когда мы передаём право владения куда-то ещё, мы как бы говорим, что мы
@@ -336,8 +332,7 @@ println!(&quot;v[0] = {}&quot;, v[0]);
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 
-<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;</pre>
 
 <p>Первая строка создаёт некоторые данные для вектора в <a href="the-stack-and-the-heap.html">стеке</a>, <code>v</code>. Данные
 самого вектора, однако, сохраняются в <a href="the-stack-and-the-heap.html">куче</a>, и поэтому стековые данные
@@ -371,8 +366,7 @@ println!(&quot;v[0] = {}&quot;, v[0]);
 
 <span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='ident'>v</span>;
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v = {}&quot;</span>, <span class='ident'>v</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;v = {}&quot;</span>, <span class='ident'>v</span>);</pre>
 
 <p>В этом примере <code>v</code> связан с типом <code>i32</code>. Этот тип реализует типаж <code>Copy</code>. Это
 означает, что когда мы присваиваем значение <code>v</code> имени <code>v2</code>, будет создана копия
@@ -402,8 +396,7 @@ println!(&quot;v[0] = {}&quot;, v[0]);
 
     <span class='comment'>// возвращаем владение</span>
     <span class='ident'>v</span>
-}
-</pre>
+}</pre>
 
 <p>Это сильно утомляет. Функция становится тем хуже, чем больше прав владения она
 хочет забрать себе:</p>
@@ -431,8 +424,7 @@ println!(&quot;v[0] = {}&quot;, v[0]);
 <span class='kw'>let</span> <span class='ident'>v1</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 <span class='kw'>let</span> <span class='ident'>v2</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 
-<span class='kw'>let</span> (<span class='ident'>v1</span>, <span class='ident'>v2</span>, <span class='ident'>answer</span>) <span class='op'>=</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>, <span class='ident'>v2</span>);
-</pre>
+<span class='kw'>let</span> (<span class='ident'>v1</span>, <span class='ident'>v2</span>, <span class='ident'>answer</span>) <span class='op'>=</span> <span class='ident'>foo</span>(<span class='ident'>v1</span>, <span class='ident'>v2</span>);</pre>
 
 <p>Брр! Возвращаемый тип, строка возврата, и вызов функции получается намного 
 более сложным.</p>

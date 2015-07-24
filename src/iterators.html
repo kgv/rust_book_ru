@@ -200,8 +200,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>for</span> <span class='ident'>x</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>10</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
-}
-</pre>
+}</pre>
 
 <p>Теперь, когда вы знаете о Rust немного больше, мы можем детально обсудить, как
 же это работает. Диапазоны (<code>0..10</code>) являются «итераторами». Итератор — это
@@ -231,8 +230,7 @@
         },
         <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> { <span class='kw'>break</span> }
     }
-}
-</pre>
+}</pre>
 
 <p>Мы связываем с диапазоном изменяемое имя, которая и является нашим итератором.
 Затем мы используем цикл <code>loop</code> с внутренней конструкцией <code>match</code>. Здесь <code>match</code>
@@ -267,8 +265,7 @@
 
 <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>nums</span>.<span class='ident'>len</span>() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>nums</span>[<span class='ident'>i</span>]);
-}
-</pre>
+}</pre>
 
 <p>Это намного хуже, чем если бы мы использовали итератор непосредственно. Вы
 можете пройти по элементам векторов напрямую, как показано ниже:</p>
@@ -284,8 +281,7 @@
 
 <span class='kw'>for</span> <span class='ident'>num</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>nums</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>num</span>);
-}
-</pre>
+}</pre>
 
 <p>Есть две причины предпочесть прямое использование итератора. Во-первых, это
 яснее выражает наше намерение. Мы обходим элементы вектора, а не индексы с
@@ -313,8 +309,7 @@
 
 <span class='kw'>for</span> <span class='ident'>num</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='ident'>nums</span> {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='op'>*</span><span class='ident'>num</span>);
-}
-</pre>
+}</pre>
 
 <p>Здесь мы явно разыменовываем <code>num</code>. Почему <code>&amp;nums</code> выдает нам ссылки? Во-первых,
 потому что мы явно попросили его об этом с помощью <code>&amp;</code>. Во-вторых, если он будет
@@ -349,8 +344,7 @@
     let one_to_one_hundred = (1..101).collect();
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>one_to_one_hundred</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>101</span>).<span class='ident'>collect</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>one_to_one_hundred</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>101</span>).<span class='ident'>collect</span>();</pre>
 
 <p>Как вы можете видеть, мы вызываем <code>collect()</code> для нашего итератора. <code>collect()</code>
 принимает столько значений, сколько выдаст итератор, и возвращает коллекцию
@@ -361,8 +355,7 @@
     let one_to_one_hundred = (1..101).collect::&lt;Vec&lt;i32&gt;&gt;();
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>one_to_one_hundred</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>101</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;&gt;</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>one_to_one_hundred</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>101</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;&gt;</span>();</pre>
 
 <p>Если помните, синтаксис <code>::&lt;&gt;</code> позволяет задать подсказку типа. Поэтому в
 приведенном примере мы указали, что хотим вектор целых чисел. Хотя не всегда
@@ -372,8 +365,7 @@
     let one_to_one_hundred = (1..101).collect::&lt;Vec&lt;_&gt;&gt;();
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>one_to_one_hundred</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>101</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>one_to_one_hundred</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>101</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;&gt;</span>();</pre>
 
 <p>Эта запись говорит компилятору Rust: «Пожалуйста, собери элементы в <code>Vec&lt;T&gt;</code>, а
 вывод типа <code>T</code> сделай самостоятельно». По этой причине символ <code>_</code> иногда
@@ -397,8 +389,7 @@
 <span class='kw'>match</span> <span class='ident'>greater_than_forty_two</span> {
     <span class='prelude-val'>Some</span>(_) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;У нас есть несколько чисел!&quot;</span>),
     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Числа не найдены :(&quot;</span>),
-}
-</pre>
+}</pre>
 
 <p><code>find</code> принимает замыкание, которое обрабатывает ссылку на каждый элемент
 итератора. Замыкание возвращает <code>true</code>, если элемент является искомым элементом,
@@ -410,8 +401,7 @@
     let sum = (1..4).fold(0, |sum, x| sum + x);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>sum</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>4</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>sum</span>, <span class='ident'>x</span><span class='op'>|</span> <span class='ident'>sum</span> <span class='op'>+</span> <span class='ident'>x</span>);
-</pre>
+<span class='kw'>let</span> <span class='ident'>sum</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>4</span>).<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>sum</span>, <span class='ident'>x</span><span class='op'>|</span> <span class='ident'>sum</span> <span class='op'>+</span> <span class='ident'>x</span>);</pre>
 
 <p><code>fold()</code> — это потребитель, который схематично можно представить в виде:
 <code>fold(base, |accumulator, element| ...)</code>. Он принимает два аргумента: первый -
@@ -457,8 +447,7 @@
     .fold(0, |sum, x| sum + x);
     
 }</span><pre class='rust rust-example-rendered'>
-.<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>sum</span>, <span class='ident'>x</span><span class='op'>|</span> <span class='ident'>sum</span> <span class='op'>+</span> <span class='ident'>x</span>);
-</pre>
+.<span class='ident'>fold</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>sum</span>, <span class='ident'>x</span><span class='op'>|</span> <span class='ident'>sum</span> <span class='op'>+</span> <span class='ident'>x</span>);</pre>
 
 <p>Таким образом, <code>0</code> — это база, <code>sum</code> — это аккумулятор, а <code>x</code> — это элемент. На
 первой итерации мы устанавливаем <code>sum</code> равной <code>0</code>, а <code>x</code> становится первым
@@ -489,8 +478,7 @@
     let nums = 1..100;
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>nums</span> <span class='op'>=</span> <span class='number'>1</span>..<span class='number'>100</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>nums</span> <span class='op'>=</span> <span class='number'>1</span>..<span class='number'>100</span>;</pre>
 
 <p>В этом примере мы никак не использовали диапазон, поэтому он и не создавал
 последовательность. Давайте добавим потребителя:</p>
@@ -498,8 +486,7 @@
     let nums = (1..100).collect::&lt;Vec&lt;i32&gt;&gt;();
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>nums</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;&gt;</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>nums</span> <span class='op'>=</span> (<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;&gt;</span>();</pre>
 
 <p>Теперь <code>collect()</code> потребует, чтобы диапазон выдавал ему какие-нибудь числа,
 поэтому он будет сгенерирует последовательность.</p>
@@ -519,8 +506,7 @@
 
 <span class='kw'>for</span> <span class='ident'>num</span> <span class='kw'>in</span> <span class='ident'>nums</span>.<span class='ident'>iter</span>() {
    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>num</span>);
-}
-</pre>
+}</pre>
 
 <p>Эти два основных итератора хорошо послужат вам. Есть и более продвинутые
 итераторы, в том числе и те, которые генерируют бесконечную последовательность.</p>
@@ -536,8 +522,7 @@
     (1..100).map(|x| x + 1);
     
 }</span><pre class='rust rust-example-rendered'>
-(<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>);
-</pre>
+(<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>);</pre>
 
 <p><code>map</code> вызывается для итератора, и создает новый итератор, каждый элемент
 которого получается в результате вызова замыкания, в качестве аргумента которому
@@ -557,8 +542,7 @@
     (1..100).map(|x| println!(&quot;{}&quot;, x));
     
 }</span><pre class='rust rust-example-rendered'>
-(<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>));
-</pre>
+(<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>));</pre>
 
 <p>Если вы пытаетесь выполнить замыкание ради побочных эффектов (вроде печати), то
 вместо этого просто используйте <code>for</code>.</p>
@@ -576,8 +560,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> (<span class='number'>1</span>..).<span class='ident'>step_by</span>(<span class='number'>5</span>).<span class='ident'>take</span>(<span class='number'>5</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>i</span>);
-}
-</pre>
+}</pre>
 
 <p>Этот код напечатает</p>
 
@@ -600,8 +583,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> (<span class='number'>1</span>..<span class='number'>100</span>).<span class='ident'>filter</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>0</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>i</span>);
-}
-</pre>
+}</pre>
 
 <p>Этот пример будет печатать все четные числа от одного до ста. (Обратите
 внимание, что мы используем образец <code>&amp;x</code>, чтобы извлечь само целое число. Это
@@ -622,8 +604,7 @@ fn main() {
     .<span class='ident'>filter</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>0</span>)
     .<span class='ident'>filter</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>%</span> <span class='number'>3</span> <span class='op'>==</span> <span class='number'>0</span>)
     .<span class='ident'>take</span>(<span class='number'>5</span>)
-    .<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;&gt;</span>();
-</pre>
+    .<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;&gt;</span>();</pre>
 
 <p>Этот код выдаст вектор, содержащий <code>6</code>, <code>12</code>, <code>18</code>, <code>24</code>, <code>30</code>.</p>
 

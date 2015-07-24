@@ -323,8 +323,7 @@ $ cd embed
     <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
         <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='string'>&quot;Could not join a thread!&quot;</span>);
     }
-}
-</pre>
+}</pre>
 
 <p>Часть из этого уже должно выглядеть знакомым из предыдущих примеров. Мы создаем
 десять потоков, собирая их в вектор <code>handles</code>. Внутри каждого потока мы создаем
@@ -368,8 +367,7 @@ src/lib.rs:6             let mut x = 0;
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
-<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>process</span>() {
-</pre>
+<span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>process</span>() {</pre>
 
 <p>Мы добавили новый атрибут, <code>no_mangle</code>. В процессе создания библиотеки Rust, в
 выходном скомпилированном файле происходит изменение имени функции. Причины

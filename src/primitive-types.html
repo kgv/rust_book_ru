@@ -206,8 +206,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='boolval'>true</span>;
 
-<span class='kw'>let</span> <span class='ident'>y</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolval'>false</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolval'>false</span>;</pre>
 
 <p>Логические типы часто используются в <a href="if.html">конструкции <code>if</code></a>.</p>
 
@@ -224,8 +223,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='string'>&#39;x&#39;</span>;
-<span class='kw'>let</span> <span class='ident'>two_hearts</span> <span class='op'>=</span> <span class='string'>&#39;💕&#39;</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>two_hearts</span> <span class='op'>=</span> <span class='string'>&#39;💕&#39;</span>;</pre>
 
 <p>Это означает, что в отличие от некоторых других языков, <code>char</code> в Rust
 представлен не одним байтом, а четырьмя.</p>
@@ -254,8 +252,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>42</span>; <span class='comment'>// x имеет тип i32</span>
 
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>1.0</span>; <span class='comment'>// y имеет тип f64</span>
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='number'>1.0</span>; <span class='comment'>// y имеет тип f64</span></pre>
 
 <p>Ниже представлен список различных числовых типов, со ссылками на их документацию
 в стандартной библиотеке:</p>
@@ -322,8 +319,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// a: [i32; 3]</span>
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>m</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// m: [i32; 3]</span>
-</pre>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>m</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]; <span class='comment'>// m: [i32; 3]</span></pre>
 
 <p>Массивы имеют тип <code>[T; N]</code>. О значении <code>T</code> мы поговорим позже, когда будем
 рассматривать <a href="generics.html">обобщённое программирование</a>. <code>N</code> — это константа
@@ -336,8 +332,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
     let a = [0; 20]; // a: [i32; 20]
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>20</span>]; <span class='comment'>// a: [i32; 20]</span>
-</pre>
+<span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0</span>; <span class='number'>20</span>]; <span class='comment'>// a: [i32; 20]</span></pre>
 
 <p>Вы можете получить число элементов массива <code>a</code> с помощью метода <code>a.len()</code>:</p>
 <span class='rusttest'>fn main() {
@@ -348,8 +343,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Число элементов в a: {}&quot;</span>, <span class='ident'>a</span>.<span class='ident'>len</span>());
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Число элементов в a: {}&quot;</span>, <span class='ident'>a</span>.<span class='ident'>len</span>());</pre>
 
 <p>Вы можете получить определённый элемент массива с помощью <em>индекса</em>:</p>
 <span class='rusttest'>fn main() {
@@ -360,8 +354,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>names</span> <span class='op'>=</span> [<span class='string'>&quot;Graydon&quot;</span>, <span class='string'>&quot;Brian&quot;</span>, <span class='string'>&quot;Niko&quot;</span>]; <span class='comment'>// names: [&amp;str; 3]</span>
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Второе имя: {}&quot;</span>, <span class='ident'>names</span>[<span class='number'>1</span>]);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Второе имя: {}&quot;</span>, <span class='ident'>names</span>[<span class='number'>1</span>]);</pre>
 
 <p>Индексы нумеруются с нуля, как и в большинстве языков программирования, поэтому
 мы получаем первое имя с помощью <code>names[0]</code>, а второе — с помощью <code>names[1]</code>.
@@ -392,8 +385,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>0</span>, <span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>];
 <span class='kw'>let</span> <span class='ident'>middle</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>a</span>[<span class='number'>1</span>..<span class='number'>4</span>]; <span class='comment'>// Срез `a`: только элементы 1, 2, и 3</span>
-<span class='kw'>let</span> <span class='ident'>complete</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>a</span>[..]; <span class='comment'>// Срез, содержащий все элементы массива `a`</span>
-</pre>
+<span class='kw'>let</span> <span class='ident'>complete</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>a</span>[..]; <span class='comment'>// Срез, содержащий все элементы массива `a`</span></pre>
 
 <p>Срезы имеют тип <code>&amp;[T]</code>. О значении <code>T</code> мы поговорим позже, когда будем
 рассматривать <a href="generics.html">обобщённое программирование</a>.</p>
@@ -420,8 +412,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
     let x = (1, &quot;привет&quot;);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;привет&quot;</span>);
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;привет&quot;</span>);</pre>
 
 <p>Этот кортеж из двух элементов создан с помощью скобок и запятой между
 элементами. Вот тот же код, но с аннотациями типов:</p>
@@ -429,8 +420,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
     let x: (i32, &amp;str) = (1, &quot;привет&quot;);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span>: (<span class='ident'>i32</span>, <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;привет&quot;</span>);
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span>: (<span class='ident'>i32</span>, <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='string'>&quot;привет&quot;</span>);</pre>
 
 <p>Как вы можете видеть, тип кортежа выглядит как сам кортеж, но места элементов
 занимают типы. Внимательные читатели также отметят, что кортежи гетерогенны: в
@@ -451,8 +441,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>); <span class='comment'>// x: (i32, i32)</span>
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='number'>2</span>, <span class='number'>3</span>); <span class='comment'>// y: (i32, i32)</span>
 
-<span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>y</span>;
-</pre>
+<span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>y</span>;</pre>
 
 <p>Доступ к полям кортежа можно получить с помощью <em>деконструирующего let</em>. Вот
 пример:</p>
@@ -464,8 +453,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> (<span class='ident'>x</span>, <span class='ident'>y</span>, <span class='ident'>z</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>);
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это {}&quot;</span>, <span class='ident'>x</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x это {}&quot;</span>, <span class='ident'>x</span>);</pre>
 
 <p>Помните, мы <a href="variable-bindings.html">говорили</a>, что левая часть оператора <code>let</code> может больше, чем
 просто присваивать имена? Мы имели ввиду то, что приведено выше. Мы можем
@@ -483,8 +471,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
     
 }</span><pre class='rust rust-example-rendered'>
 (<span class='number'>0</span>,); <span class='comment'>// одноэлементный кортеж</span>
-(<span class='number'>0</span>); <span class='comment'>// ноль в круглых скобках</span>
-</pre>
+(<span class='number'>0</span>); <span class='comment'>// ноль в круглых скобках</span></pre>
 
 <h2 id="Индексация-кортежей" class='section-header'><a
                            href="#Индексация-кортежей">Индексация кортежей</a></h2>
@@ -505,8 +492,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>tuple</span>.<span class='number'>1</span>;
 <span class='kw'>let</span> <span class='ident'>z</span> <span class='op'>=</span> <span class='ident'>tuple</span>.<span class='number'>2</span>;
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is {}&quot;</span>, <span class='ident'>x</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is {}&quot;</span>, <span class='ident'>x</span>);</pre>
 
 <p>Как и в случае индексации массивов, индексы начинаются с нуля, но здесь, в
 отличие от массивов, используется <code>.</code>, а не <code>[]</code>.</p>
@@ -525,8 +511,7 @@ IEEE-754 числам с плавающей точкой одинарной и �
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='ident'>x</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> { <span class='ident'>x</span> }
 
-<span class='kw'>let</span> <span class='ident'>x</span>: <span class='kw'>fn</span>(<span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> <span class='op'>=</span> <span class='ident'>foo</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='kw'>fn</span>(<span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> <span class='op'>=</span> <span class='ident'>foo</span>;</pre>
 
 <p>В данном примере <code>x</code> — это «указатель на функцию», которая принимает в качестве
 аргумента <code>i32</code> и возвращает <code>i32</code>.</p>

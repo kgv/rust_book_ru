@@ -198,8 +198,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// ошибка!</span>
-</pre>
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// ошибка!</span></pre>
 
 <p>Изменяемость можно добавить с помощью ключевого слова <code>mut</code>:</p>
 <span class='rusttest'>fn main() {
@@ -210,8 +209,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
-<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// нет проблем!</span>
-</pre>
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// нет проблем!</span></pre>
 
 <p>Это изменяемое <a href="variable-bindings.html">связанное имя</a>. Когда связанное имя изменяемо, это означает,
 что мы можем поменять связанное с ним значение. В примере выше не то, чтобы само
@@ -225,8 +223,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;</pre>
 
 <p><code>y</code> — это неизменяемое имя для изменяемой ссылки. Это значит, что <code>y</code> нельзя
 связать ещё с чем-то (<code>y = &amp;mut z</code>), но можно изменить то, на что указывает
@@ -239,8 +236,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;
-</pre>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>;</pre>
 
 <p>Теперь <code>y</code> можно связать с другим значением, и само это значение тоже можно
 менять.</p>
@@ -256,8 +252,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> (<span class='kw-2'>mut</span> <span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=</span> (<span class='number'>5</span>, <span class='number'>6</span>);
 
-<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span>) {
-</pre>
+<span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span>) {</pre>
 
 <h1 id="Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость" class='section-header'><a
                            href="#Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость">Внутренняя (interior) и внешняя (exterior) изменяемость</a></h1>
@@ -274,8 +269,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
 
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='number'>5</span>);
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>clone</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>clone</span>();</pre>
 
 <p>Когда мы вызываем метод <code>clone()</code>, <code>Arc&lt;T&gt;</code> должна обновить счётчик ссылок. Мы
 не использовали модификатор <code>mut</code>, а значит <code>x</code> — неизменяемое имя. Мы не можем
@@ -316,8 +310,7 @@
 
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='number'>42</span>);
 
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();</pre>
 
 <p>RefCell возвращает изменяемую ссылку <code>&amp;mut</code> при помощи метода <code>borrow_mut()</code>. А
 не опасно ли это? Что, если мы сделаем так:</p>
@@ -336,8 +329,7 @@
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='number'>42</span>);
 
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();
-<span class='kw'>let</span> <span class='ident'>z</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();
-</pre>
+<span class='kw'>let</span> <span class='ident'>z</span> <span class='op'>=</span> <span class='ident'>x</span>.<span class='ident'>borrow_mut</span>();</pre>
 
 <p>Это приведёт к панике во время исполнения. Вот что делает <code>RefCell</code>: он
 принудительно выполняет проверку правил заимствования во время исполнения и
@@ -365,8 +357,7 @@
 <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='ident'>x</span>: <span class='ident'>i32</span>,
     <span class='kw-2'>mut</span> <span class='ident'>y</span>: <span class='ident'>i32</span>, <span class='comment'>// нельзя</span>
-}
-</pre>
+}</pre>
 
 <p>Изменяемость структуры определяется при её связывании:</p>
 <span class='rusttest'>fn main() {
@@ -395,8 +386,7 @@
 
 <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>5</span>, <span class='ident'>y</span>: <span class='number'>6</span>};
 
-<span class='ident'>b</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>; <span class='comment'>// error: cannot assign to immutable field `b.x`</span>
-</pre>
+<span class='ident'>b</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>; <span class='comment'>// error: cannot assign to immutable field `b.x`</span></pre>
 
 <p>Однако, используя <a href="http://doc.rust-lang.org/std/cell/struct.Cell.html"><code>Cell&lt;T&gt;</code></a>, вы можете эмулировать изменяемость на
 уровне полей:</p>
@@ -426,8 +416,7 @@
 
 <span class='ident'>point</span>.<span class='ident'>y</span>.<span class='ident'>set</span>(<span class='number'>7</span>);
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y: {:?}&quot;</span>, <span class='ident'>point</span>.<span class='ident'>y</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y: {:?}&quot;</span>, <span class='ident'>point</span>.<span class='ident'>y</span>);</pre>
 
 <p>Это выведет на экран <code>y: Cell { value: 7 }</code>. Мы успешно изменили значение <code>y</code>.</p>
 

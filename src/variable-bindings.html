@@ -197,8 +197,7 @@
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-}
-</pre>
+}</pre>
 
 <p>Все операции, производимые ниже, будут происходить в функции <code>main()</code>, так как
 каждый раз вставлять в примеры <code>fn main() {</code> немного утомляет. Убедитесь, что
@@ -213,8 +212,7 @@
     let (x, y) = (1, 2);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> (<span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>);
-</pre>
+<span class='kw'>let</span> (<span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=</span> (<span class='number'>1</span>, <span class='number'>2</span>);</pre>
 
 <p>После завершения этого выражения <code>x</code> будет единицей, a <code>y</code> — двойкой. Шаблоны
 очень мощны, и о них написана отдельная <a href="patterns.html">глава</a>. Но на данный момент
@@ -232,8 +230,7 @@
     let x: i32 = 5;
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>5</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>5</span>;</pre>
 
 <p>Если бы мы попросили вас прочитать это вслух, вы бы сказали «<code>x</code> - это
 связывание типа <code>int</code> со значением <code>пять</code>».</p>
@@ -251,8 +248,7 @@
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>; <span class='comment'>// x: i32</span>
-}
-</pre>
+}</pre>
 
 <p>Обратите внимание на сходство между этим комментарием и синтаксисом, который вы
 используете с <code>let</code>. Включение такого типа комментариев не является
@@ -266,8 +262,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
-<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
-</pre>
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;</pre>
 
 <p>И вы получите ошибку:</p>
 
@@ -284,8 +279,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>; <span class='comment'>// mut x: i32</span>
-<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
-</pre>
+<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;</pre>
 
 <p>Может показаться, что незачем делать связывание неизменяемым по умолчанию. Но
 вспомните, на чём в первую очередь фокусируется Rust: на безопасности. Если вы
@@ -315,8 +309,7 @@
     <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span>;
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello world!&quot;</span>);
-}
-</pre>
+}</pre>
 
 <p>Используйте команду <code>cargo build</code> в командной строке, чтобы собрать проект. Вы
 должны получить предупреждение, но программа будет работать и будет выводить
@@ -343,8 +336,7 @@ src/main.rs:2     let x: i32;
     <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>i32</span>;
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x имеет значение {}&quot;</span>, <span class='ident'>x</span>);
-}
-</pre>
+}</pre>
 
 <p>И попробуйте собрать проект. Вы получите ошибку:</p>
 

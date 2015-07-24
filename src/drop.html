@@ -221,8 +221,7 @@ fn main() {
 
     <span class='comment'>// сделаем что-то</span>
 
-} <span class='comment'>// тут x выходит из области видимости</span>
-</pre>
+} <span class='comment'>// тут x выходит из области видимости</span></pre>
 
 <p>Когда <code>x</code> выходит из области видимости в конце <code>main()</code>, исполнится код
 реализации типажа <code>Drop</code>. У него один метод, который тоже называется <code>drop()</code>.
@@ -259,8 +258,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>firecracker</span> <span class='op'>=</span> <span class='ident'>Firework</span> { <span class='ident'>strength</span>: <span class='number'>1</span> };
     <span class='kw'>let</span> <span class='ident'>tnt</span> <span class='op'>=</span> <span class='ident'>Firework</span> { <span class='ident'>strength</span>: <span class='number'>100</span> };
-}
-</pre>
+}</pre>
 
 <p>Этот код выведет следующее:</p>
 

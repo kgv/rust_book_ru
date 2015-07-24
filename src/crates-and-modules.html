@@ -293,8 +293,7 @@ $ cd phrases
 
     <span class='kw'>mod</span> <span class='ident'>farewells</span> {
     }
-}
-</pre>
+}</pre>
 
 <p>После ключевого слова <code>mod</code>, вы задаете имя модуля. Имена модулей следуют
 соглашениям, как и другие идентификаторы Rust: <code>lower_snake_case</code>. Содержание
@@ -336,16 +335,14 @@ Rust поддерживает это двумя способами.</p>
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>english</span> {
     <span class='comment'>// contents of our module go here</span>
-}
-</pre>
+}</pre>
 
 <p>Мы можем объявить наш модуль в виде:</p>
 <span class='rusttest'>fn main() {
     mod english;
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>mod</span> <span class='ident'>english</span>;
-</pre>
+<span class='kw'>mod</span> <span class='ident'>english</span>;</pre>
 
 <p>Если мы это сделаем, то Rust будет ожидать, что найдет либо файл <code>english.rs</code>,
 либо файл <code>english/mod.rs</code> с содержимым нашего модуля.</p>
@@ -386,8 +383,7 @@ Rust поддерживает это двумя способами.</p>
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>english</span>;
-<span class='kw'>mod</span> <span class='ident'>japanese</span>;
-</pre>
+<span class='kw'>mod</span> <span class='ident'>japanese</span>;</pre>
 
 <p>Эти два объявления информируют Rust, что следует искать: <code>src/english.rs</code> или
 <code>src/english/mod.rs</code>, <code>src/japanese.rs</code> или <code>src/japanese/mod.rs</code>, в зависимости
@@ -400,8 +396,7 @@ Rust поддерживает это двумя способами.</p>
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>mod</span> <span class='ident'>greetings</span>;
-<span class='kw'>mod</span> <span class='ident'>farewells</span>;
-</pre>
+<span class='kw'>mod</span> <span class='ident'>farewells</span>;</pre>
 
 <p>В свою очередь, эти объявления информируют Rust, что следует искать:
 <code>src/english/greetings.rs</code>, <code>src/japanese/greetings.rs</code>,
@@ -423,8 +418,7 @@ Rust поддерживает это двумя способами.</p>
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;Hello!&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>Следующий код в <code>src/english/farewells.rs</code>:</p>
 <span class='rusttest'>fn main() {
@@ -435,8 +429,7 @@ Rust поддерживает это двумя способами.</p>
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;Goodbye.&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>Следующий код в <code>src/japanese/greetings.rs</code>:</p>
 <span class='rusttest'>fn main() {
@@ -447,8 +440,7 @@ Rust поддерживает это двумя способами.</p>
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;こんにちは&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>Конечно, вы можете скопировать и вставить этот код с этой страницы, или просто
 напечатать что-нибудь еще. Вам совершенно не обязательно знать, что на японском
@@ -463,8 +455,7 @@ Rust поддерживает это двумя способами.</p>
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;さようなら&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>(Это «Sayonara», если вам интересно.)</p>
 
@@ -496,8 +487,7 @@ fn main() {
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in Japanese: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>japanese</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in Japanese: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>japanese</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
-}
-</pre>
+}</pre>
 
 <p>Объявление <code>extern crate</code> информирует Rust о том, что для компиляции и компоновки
 кода нам нужен контейнер <code>phrases</code>. После этого объявление мы можем использовать
@@ -551,8 +541,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>::<span class='ident'>hello</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
-}
-</pre>
+}</pre>
 
 <p>В файле <code>src/lib.rs</code> в объявлении модуля <code>english</code> давайте добавим модификатор
 <code>pub</code>:</p>
@@ -562,8 +551,7 @@ fn main() {
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>english</span>;
-<span class='kw'>mod</span> <span class='ident'>japanese</span>;
-</pre>
+<span class='kw'>mod</span> <span class='ident'>japanese</span>;</pre>
 
 <p>В файле <code>src/english/mod.rs</code> давайте сделаем оба модуля с модификатором <code>pub</code>:</p>
 <span class='rusttest'>fn main() {
@@ -572,8 +560,7 @@ fn main() {
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>greetings</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>farewells</span>;
-</pre>
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>farewells</span>;</pre>
 
 <p>В файле <code>src/english/greetings.rs</code> давайте добавим модификатор <code>pub</code> к
 объявлению нашей функции <code>fn</code>:</p>
@@ -585,8 +572,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;Hello!&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>А также в файле <code>src/english/farewells.rs</code>:</p>
 <span class='rusttest'>fn main() {
@@ -597,8 +583,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;Goodbye.&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>Теперь наши контейнеры компилируются, хотя и с предупреждениями о том, что
 функции в модуле <code>japanese</code> не используются:</p>
@@ -647,8 +632,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>greetings</span>::<span class='ident'>hello</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>farewells</span>::<span class='ident'>goodbye</span>());
-}
-</pre>
+}</pre>
 
 <p>Две строки, начинающиеся с <code>use</code>, импортируют соответствующие модули в локальную
 область видимости, поэтому мы можем обратиться к функциям по гораздо более
@@ -673,8 +657,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>hello</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in English: {}&quot;</span>, <span class='ident'>goodbye</span>());
-}
-</pre>
+}</pre>
 
 <p>Но такой подход не является идиоматическим. Он значительно чаще приводит к
 конфликту имен. Для нашей короткой программы это не так важно, но, как только
@@ -699,8 +682,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in English: {}&quot;</span>, <span class='ident'>hello</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in Japanese: {}&quot;</span>, <span class='ident'>hello</span>());
-}
-</pre>
+}</pre>
 
 <p>Rust выдаст нам сообщение об ошибке во время компиляции:</p>
 
@@ -720,16 +702,14 @@ Could not compile `phrases`.
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>greetings</span>;
-<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>;
-</pre>
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::<span class='ident'>farewells</span>;</pre>
 
 <p>Вы можете использовать сокращение:</p>
 <span class='rusttest'>fn main() {
     use phrases::english::{greetings, farewells};
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::{<span class='ident'>greetings</span>, <span class='ident'>farewells</span>};
-</pre>
+<span class='kw'>use</span> <span class='ident'>phrases</span>::<span class='ident'>english</span>::{<span class='ident'>greetings</span>, <span class='ident'>farewells</span>};</pre>
 
 <h2 id="Реэкспорт-с-помощью-pub-use" class='section-header'><a
                            href="#Реэкспорт-с-помощью-pub-use">Реэкспорт с помощью <code>pub use</code></a></h2>
@@ -763,8 +743,7 @@ fn main() {
 
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello in Japanese: {}&quot;</span>, <span class='ident'>japanese</span>::<span class='ident'>hello</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Goodbye in Japanese: {}&quot;</span>, <span class='ident'>japanese</span>::<span class='ident'>goodbye</span>());
-}
-</pre>
+}</pre>
 
 <p>Затем измените файл <code>src/lib.rs</code>, чтобы сделать модуль <code>japanese</code> с публичным:</p>
 <span class='rusttest'>fn main() {
@@ -773,8 +752,7 @@ fn main() {
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>english</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>japanese</span>;
-</pre>
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>japanese</span>;</pre>
 
 <p>Далее, убедитесь, что обе функции публичные, сперва в
 <code>src/japanese/greetings.rs</code>:</p>
@@ -786,8 +764,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hello</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;こんにちは&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>А затем в <code>src/japanese/farewells.rs</code>:</p>
 <span class='rusttest'>fn main() {
@@ -798,8 +775,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>goodbye</span>() <span class='op'>-&gt;</span> <span class='ident'>String</span> {
     <span class='string'>&quot;さようなら&quot;</span>.<span class='ident'>to_string</span>()
-}
-</pre>
+}</pre>
 
 <p>Наконец, измените файл <code>src/japanese/mod.rs</code> вот так:</p>
 <span class='rusttest'>fn main() {
@@ -814,8 +790,7 @@ fn main() {
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>farewells</span>::<span class='ident'>goodbye</span>;
 
 <span class='kw'>mod</span> <span class='ident'>greetings</span>;
-<span class='kw'>mod</span> <span class='ident'>farewells</span>;
-</pre>
+<span class='kw'>mod</span> <span class='ident'>farewells</span>;</pre>
 
 <p>Объявление <code>pub use</code> привносит указанную функцию в эту часть области видимости
 нашей модулной иерархии. Так как мы использовали <code>pub use</code> внутри нашего модуля

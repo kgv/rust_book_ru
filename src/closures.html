@@ -205,8 +205,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>plus_one</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>;
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>, <span class='ident'>plus_one</span>(<span class='number'>1</span>));
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>, <span class='ident'>plus_one</span>(<span class='number'>1</span>));</pre>
 
 <p>Мы создаем связывание, <code>plus_one</code>, и присваиваем ему замыкание. Аргументы
 замыкания располагаются между двумя символами <code>|</code>, а телом замыкания является
@@ -234,8 +233,7 @@
     <span class='ident'>result</span>
 };
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>plus_two</span>(<span class='number'>2</span>));
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>plus_two</span>(<span class='number'>2</span>));</pre>
 
 <p>Обратите внимание, что есть несколько небольших различий между замыканиями и
 обычными функциями, определенными с помощью <code>fn</code>. Первое отличие состоит в том,
@@ -249,8 +247,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>plus_one</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span><span class='op'>|</span> <span class='op'>-&gt;</span> <span class='ident'>i32</span> { <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span> };
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>, <span class='ident'>plus_one</span>(<span class='number'>1</span>));
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>2</span>, <span class='ident'>plus_one</span>(<span class='number'>1</span>));</pre>
 
 <p>Но мы не должны. Почему так? В основном, это было сделано из эргономических
 соображений (соображений удобства). В то время как для именованных функций явное
@@ -274,8 +271,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span>  <span class='ident'>plus_one_v1</span>   (<span class='ident'>x</span>: <span class='ident'>i32</span> ) <span class='op'>-&gt;</span> <span class='ident'>i32</span> { <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span> }
 <span class='kw'>let</span> <span class='ident'>plus_one_v2</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>|</span> <span class='op'>-&gt;</span> <span class='ident'>i32</span> { <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span> };
-<span class='kw'>let</span> <span class='ident'>plus_one_v3</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>|</span>          <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>  ;
-</pre>
+<span class='kw'>let</span> <span class='ident'>plus_one_v3</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>|</span>          <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>1</span>  ;</pre>
 
 <p>Есть небольшие различия, но принцип аналогичен.</p>
 
@@ -293,8 +289,7 @@
 <span class='kw'>let</span> <span class='ident'>num</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='ident'>plus_num</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>num</span>;
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>plus_num</span>(<span class='number'>5</span>));
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>plus_num</span>(<span class='number'>5</span>));</pre>
 
 <p>Это замыкание, <code>plus_num</code>, ссылается на связанную с помощью оператора <code>let</code>
 переменную <code>num</code>, расположенную в своей области видимости. Если говорить более
@@ -310,8 +305,7 @@
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>num</span> <span class='op'>=</span> <span class='number'>5</span>;
 <span class='kw'>let</span> <span class='ident'>plus_num</span> <span class='op'>=</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>num</span>;
 
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>num</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>num</span>;</pre>
 
 <p>Который выдаст следующие ошибки:</p>
 
@@ -353,8 +347,7 @@ fn main() {
 
 } <span class='comment'>// plus_num goes out of scope, borrow of num ends</span>
 
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>num</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>num</span>;</pre>
 
 <p>Однако, Rust также может забирать право владения и перемещать свое окружение,
 если этого требует замыкание:</p>
@@ -370,8 +363,7 @@ fn main() {
 
 <span class='kw'>let</span> <span class='ident'>takes_nums</span> <span class='op'>=</span> <span class='op'>||</span> <span class='ident'>nums</span>;
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>nums</span>);
-</pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>nums</span>);</pre>
 
 <p>Этот код выдаст:</p>
 
@@ -398,8 +390,7 @@ let takes_nums = || nums;
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>num</span> <span class='op'>=</span> <span class='number'>5</span>;
 
-<span class='kw'>let</span> <span class='ident'>owns_num</span> <span class='op'>=</span> <span class='kw'>move</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>num</span>;
-</pre>
+<span class='kw'>let</span> <span class='ident'>owns_num</span> <span class='op'>=</span> <span class='kw'>move</span> <span class='op'>|</span><span class='ident'>x</span>: <span class='ident'>i32</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>num</span>;</pre>
 
 <p>Теперь, когда указано ключевое слово <code>move</code>, переменные следуют нормальной
 семантике перемещения. В данном примере <code>5</code> реализует <code>Copy</code>, поэтому <code>owns_num</code>
@@ -424,8 +415,7 @@ let takes_nums = || nums;
     <span class='ident'>add_num</span>(<span class='number'>5</span>);
 }
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>num</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>num</span>);</pre>
 
 <p>Итак, в этом примере наше замыкание принимает изменяемую ссылку на <code>num</code>. Затем,
 когда мы вызываем замыкание <code>add_num</code>, то, как мы и ожидали, оно изменяет
@@ -453,8 +443,7 @@ let takes_nums = || nums;
     <span class='ident'>add_num</span>(<span class='number'>5</span>);
 }
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5</span>, <span class='ident'>num</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5</span>, <span class='ident'>num</span>);</pre>
 
 <p>Мы всего лишь получаем <code>5</code>. Вместо того, чтобы получать изменяемый заем на
 <code>num</code>, мы получаем право владения на копию.</p>
@@ -514,8 +503,7 @@ Rust мы используем систему типажей для перегр
     <span class='kw'>type</span> <span class='ident'>Output</span>;
 
     <span class='kw'>extern</span> <span class='string'>&quot;rust-call&quot;</span> <span class='kw'>fn</span> <span class='ident'>call_once</span>(<span class='self'>self</span>, <span class='ident'>args</span>: <span class='ident'>Args</span>) <span class='op'>-&gt;</span> <span class='ident'>Self</span>::<span class='ident'>Output</span>;
-}
-</pre>
+}</pre>
 
 <p>Вы можете заметить некоторые различия между этими типажами, но есть одно главное
 различие — <code>self</code>: <code>Fn</code> принимает <code>&amp;self</code>, <code>FnMut</code> принимает <code>&amp;mut self</code>,
@@ -556,8 +544,7 @@ Rust мы используем систему типажей для перегр
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>call_with_one</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>2</span>);
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='ident'>answer</span>);</pre>
 
 <p>Мы передаем наше замыкание <code>|x| x + 2</code>, в функцию <code>call_with_one</code>. Она же
 делает то, о чем говорит ее название: вызывает замыкание, передавая ему <code>1</code> в
@@ -570,8 +557,7 @@ Rust мы используем систему типажей для перегр
        some_closure(1) }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>fn</span> <span class='ident'>call_with_one</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>some_closure</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span>
-</pre>
+<span class='kw'>fn</span> <span class='ident'>call_with_one</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='ident'>some_closure</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span></pre>
 
 <p>Мы принимаем один параметр, который имеет тип <code>F</code>. Мы также возвращаем <code>i32</code>.
 Эта часть не интересна. Следующим важным моментом является:</p>
@@ -581,8 +567,7 @@ Rust мы используем систему типажей для перегр
       some_closure(1) }
     
 }</span><pre class='rust rust-example-rendered'>
-    <span class='kw'>where</span> <span class='ident'>F</span> : <span class='ident'>Fn</span>(<span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {
-</pre>
+    <span class='kw'>where</span> <span class='ident'>F</span> : <span class='ident'>Fn</span>(<span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>i32</span> {</pre>
 
 <p>Так как <code>Fn</code> является типажом, мы можем связать с ним наш обобщенный параметр. В
 этом примере, замыкание принимает <code>i32</code> в качестве аргумента и возвращает <code>i32</code>,
@@ -615,8 +600,7 @@ Rust мы используем систему типажей для перегр
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>call_with_one</span>(<span class='kw-2'>&amp;</span><span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='number'>2</span>);
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='ident'>answer</span>);</pre>
 
 <p>Теперь наша функция в качетве аргумента принимает типаж-объект <code>&amp;Fn</code>. Поэтому мы
 должны создать ссылку на замыкание а затем передать ее в функцию
@@ -650,8 +634,7 @@ Rust мы используем систему типажей для перегр
 <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>factory</span>();
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='number'>4</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>], <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>], <span class='ident'>answer</span>);</pre>
 
 <p>Это выдаст следующие длинные, взаимосвязанные ошибки:</p>
 
@@ -701,8 +684,7 @@ fa ctory() -&gt; (Fn(i32) -&gt; Vec&lt;i32&gt;) {
 <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>factory</span>();
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='number'>4</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>], <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>], <span class='ident'>answer</span>);</pre>
 
 <p>Но тогда мы получим другую ошибку:</p>
 
@@ -736,8 +718,7 @@ fn factory() -&gt; &amp;(Fn(i32) -&gt; i32) {
 <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>factory</span>();
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='number'>1</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>, <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>, <span class='ident'>answer</span>);</pre>
 
 <p>Но мы получим еще ошибку:</p>
 
@@ -788,8 +769,7 @@ assert_eq!(6, answer);
 <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>factory</span>();
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='number'>1</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>, <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>, <span class='ident'>answer</span>);</pre>
 
 <p>Мы используем типаж-объект, полученный в результате упаковки (<code>Box</code>) типажа
 <code>Fn</code>. И остаётся только одна, последняя проблема:</p>
@@ -821,8 +801,7 @@ assert_eq!(6, answer);
 <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>factory</span>();
 
 <span class='kw'>let</span> <span class='ident'>answer</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='number'>1</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>, <span class='ident'>answer</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>6</span>, <span class='ident'>answer</span>);</pre>
 
 <p>Благодаря изменению внутреннего замыкания на <code>move Fn</code> будет создаваться новый
 фрейм стека для нашего замыкания. А благодаря упаковке (<code>Box</code>) замыкания,

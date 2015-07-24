@@ -209,8 +209,7 @@
 <span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='prelude-val'>Some</span>(<span class='ident'>T</span>),
     <span class='prelude-val'>None</span>,
-}
-</pre>
+}</pre>
 
 <p>Часть <code>&lt;T&gt;</code>, которую вы уже видели несколько раз прежде, указывает, что это
 обобщённый тип данных. Внутри перечисления, везде, где мы видим <code>T</code>, мы
@@ -221,8 +220,7 @@
     let x: Option&lt;i32&gt; = Some(5);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='number'>5</span>);
-</pre>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='number'>5</span>);</pre>
 
 <p>В определении типа мы используем <code>Option&lt;i32&gt;</code>. Обратите внимание, что это очень
 похоже на <code>Option&lt;T&gt;</code>. С той лишь разницей, что, в данном конкретном <code>Option</code>,
@@ -238,8 +236,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='number'>5</span>);
 <span class='comment'>// error: mismatched types: expected `core::option::Option&lt;f64&gt;`,</span>
-<span class='comment'>// found `core::option::Option&lt;_&gt;` (expected f64 but found integral variable)</span>
-</pre>
+<span class='comment'>// found `core::option::Option&lt;_&gt;` (expected f64 but found integral variable)</span></pre>
 
 <p>Но это не значит, что мы не можем сделать <code>Option&lt;T&gt;</code>, который содержит <code>f64</code>!
 Просто с левой и с правой сторон выражения объявления переменной типы должны
@@ -250,8 +247,7 @@
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='number'>5</span>);
-<span class='kw'>let</span> <span class='ident'>y</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='number'>5.0f64</span>);
-</pre>
+<span class='kw'>let</span> <span class='ident'>y</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>f64</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='number'>5.0f64</span>);</pre>
 
 <p>Это просто прекрасно. Одно определение — многостороннее использование.</p>
 
@@ -267,8 +263,7 @@
 <span class='kw'>enum</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>E</span><span class='op'>&gt;</span> {
     <span class='prelude-val'>Ok</span>(<span class='ident'>T</span>),
     <span class='prelude-val'>Err</span>(<span class='ident'>E</span>),
-}
-</pre>
+}</pre>
 
 <p>Этот тип является обобщённым сразу для <em>двух</em> типов: <code>T</code> и <code>E</code>. Кстати,
 заглавные буквы может быть любыми, какими хотите. Мы могли бы определить
@@ -283,8 +278,7 @@
 <span class='kw'>enum</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>A</span>, <span class='ident'>Z</span><span class='op'>&gt;</span> {
     <span class='prelude-val'>Ok</span>(<span class='ident'>A</span>),
     <span class='prelude-val'>Err</span>(<span class='ident'>Z</span>),
-}
-</pre>
+}</pre>
 
 <p>если бы захотели. Соглашение гласит, что первый обобщённый параметр для &#39;типа&#39;
 должен быть <code>T</code>, и что для &#39;ошибки&#39; используется <code>E</code>. Но Rust не проверяет
@@ -305,8 +299,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>takes_anything</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) {
     <span class='comment'>// do something with x</span>
-}
-</pre>
+}</pre>
 
 <p>Синтаксис состоит из двух частей: <code>&lt;T&gt;</code> говорит о том, что “эта функция является
 обобщённой по одному типу, <code>T</code>”, а <code>x: T</code> говорит о том, что “х имеет тип <code>T</code>”.</p>
@@ -320,8 +313,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>takes_two_of_the_same_things</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>T</span>) {
     <span class='comment'>// ...</span>
-}
-</pre>
+}</pre>
 
 <p>Мы можем написать версию, которая принимает несколько типов:</p>
 <span class='rusttest'>fn main() {
@@ -332,8 +324,7 @@
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>takes_two_things</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>U</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>, <span class='ident'>y</span>: <span class='ident'>U</span>) {
     <span class='comment'>// ...</span>
-}
-</pre>
+}</pre>
 
 <p>Обобщённые функции наиболее полезны в связке с «ограничениями по типажам», о
 которых мы расскажем в главе <a href="traits.html">Типажи</a>.</p>
@@ -357,8 +348,7 @@
 }
 
 <span class='kw'>let</span> <span class='ident'>int_origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
-<span class='kw'>let</span> <span class='ident'>float_origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0.0</span>, <span class='ident'>y</span>: <span class='number'>0.0</span> };
-</pre>
+<span class='kw'>let</span> <span class='ident'>float_origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0.0</span>, <span class='ident'>y</span>: <span class='number'>0.0</span> };</pre>
 
 <p>Аналогично функциям, мы также объявляем обобщённые параметры в <code>&lt;T&gt;</code>, а затем
 используем их в объявлении типа <code>x: T</code>.</p>

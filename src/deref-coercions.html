@@ -227,8 +227,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>DerefExample</span> { <span class='ident'>value</span>: <span class='string'>&#39;a&#39;</span> };
     <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&#39;a&#39;</span>, <span class='op'>*</span><span class='ident'>x</span>);
-}
-</pre>
+}</pre>
 
 <p>Это полезно при написании своих указательных типов. Однако, в языке есть
 возможность, связанная с <code>Deref</code>: преобразования при разыменовании. Вот правило:
@@ -254,8 +253,7 @@ fn main() {
 <span class='kw'>let</span> <span class='ident'>owned</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>();
 
 <span class='comment'>// Поэтому, такой код работает:</span>
-<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>owned</span>);
-</pre>
+<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>owned</span>);</pre>
 
 <p>Амперсанд перед значением означает, что мы берём ссылку на него. Поэтому <code>owned</code>
 - это <code>String</code>, а <code>&amp;owned</code> — <code>&amp;String</code>. Поскольку у нас есть реализация типажа
@@ -291,8 +289,7 @@ fn main() {
 <span class='kw'>let</span> <span class='ident'>counted</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='ident'>owned</span>);
 
 <span class='comment'>// Поэтому, такой код работает:</span>
-<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>counted</span>);
-</pre>
+<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>counted</span>);</pre>
 
 <p>Мы всего лишь обернули наш <code>String</code> в <code>Rc&lt;T&gt;</code>. Но теперь мы можем передать
 <code>Rc&lt;String&gt;</code> везде, куда мы могли передать <code>String</code>. Сигнатура <code>foo</code> не
@@ -321,8 +318,7 @@ fn main() {
 <span class='comment'>// Vec&lt;T&gt; реализует Deref&lt;Target=[T]&gt;</span>
 <span class='kw'>let</span> <span class='ident'>owned</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 
-<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>owned</span>);
-</pre>
+<span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='ident'>owned</span>);</pre>
 
 <p>Вектора могут разыменовываться в срезы.</p>
 
@@ -350,8 +346,7 @@ fn main() {
 
 <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>Foo</span>;
 
-<span class='ident'>f</span>.<span class='ident'>foo</span>();
-</pre>
+<span class='ident'>f</span>.<span class='ident'>foo</span>();</pre>
 
 <p>Несмотря на то, что <code>f</code> — это не ссылка, а <code>foo</code> принимает <code>&amp;self</code>, это будет
 работать. Более того, все примеры ниже делают одно и то же:</p>
@@ -365,8 +360,7 @@ fn main() {
 <span class='ident'>f</span>.<span class='ident'>foo</span>();
 (<span class='kw-2'>&amp;</span><span class='ident'>f</span>).<span class='ident'>foo</span>();
 (<span class='op'>&amp;&amp;</span><span class='ident'>f</span>).<span class='ident'>foo</span>();
-(<span class='op'>&amp;&amp;</span><span class='op'>&amp;&amp;</span><span class='op'>&amp;&amp;</span><span class='op'>&amp;&amp;</span><span class='ident'>f</span>).<span class='ident'>foo</span>();
-</pre>
+(<span class='op'>&amp;&amp;</span><span class='op'>&amp;&amp;</span><span class='op'>&amp;&amp;</span><span class='op'>&amp;&amp;</span><span class='ident'>f</span>).<span class='ident'>foo</span>();</pre>
 
 <p>Методы <code>Foo</code> можно вызывать и на значении типа <code>&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;Foo</code>, потому что
 компилятор сделает столько разыменований, сколько нужно для совпадения типов.
