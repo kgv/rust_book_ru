@@ -276,15 +276,15 @@ fn main() {
     
     impl Circle {
         fn reference(&amp;self) {
-           println!(&quot;taking self by reference!&quot;);
+           println!(&quot;принимаем self по ссылке!&quot;);
         }
     
         fn mutable_reference(&amp;mut self) {
-           println!(&quot;taking self by mutable reference!&quot;);
+           println!(&quot;принимаем self по изменяемой ссылке!&quot;);
         }
     
         fn takes_ownership(self) {
-           println!(&quot;taking ownership of self!&quot;);
+           println!(&quot;принимаем владение self!&quot;);
         }
     }
     
@@ -297,23 +297,23 @@ fn main() {
 
 <span class='kw'>impl</span> <span class='ident'>Circle</span> {
     <span class='kw'>fn</span> <span class='ident'>reference</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
-       <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;taking self by reference!&quot;</span>);
+       <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;принимаем self по ссылке!&quot;</span>);
     }
 
     <span class='kw'>fn</span> <span class='ident'>mutable_reference</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-       <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;taking self by mutable reference!&quot;</span>);
+       <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;принимаем self по изменяемой ссылке!&quot;</span>);
     }
 
     <span class='kw'>fn</span> <span class='ident'>takes_ownership</span>(<span class='self'>self</span>) {
-       <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;taking ownership of self!&quot;</span>);
+       <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;принимаем владение self!&quot;</span>);
     }
 }</pre>
 
 <h1 id="Цепочка-вызовов-методов" class='section-header'><a
                            href="#Цепочка-вызовов-методов">Цепочка вызовов методов</a></h1>
 <p>Итак, теперь мы знаем, как вызвать метод, например <code>foo.bar()</code>. Но что насчет
-нашего первоначального примера, <code>foo.bar().baz()</code>? Это называется &#39;цепочка
-вызовов&#39;, и мы можем сделать это, вернув <code>self</code>.</p>
+нашего первоначального примера, <code>foo.bar().baz()</code>? Это называется «цепочка
+вызовов», и мы можем сделать это, вернув <code>self</code>.</p>
 <span class='rusttest'>struct Circle {
     x: f64,
     y: f64,
@@ -378,7 +378,7 @@ fn main() {
 <h1 id="Статические-методы" class='section-header'><a
                            href="#Статические-методы">Статические методы</a></h1>
 <p>Вы также можете определить методы, которые не принимают параметр <code>self</code>. Вот
-паттерн, который очень распространен в Rust коде:</p>
+шаблон программирования, который очень распространен в коде на Rust:</p>
 <span class='rusttest'>struct Circle {
     x: f64,
     y: f64,
@@ -423,13 +423,13 @@ fn main() {
 статические методы вызываются с помощью синтаксиса: <code>Struct::method()</code>, а не
 <code>ref.method()</code>.</p>
 
-<h1 id="Паттерн-строитель" class='section-header'><a
-                           href="#Паттерн-строитель">Паттерн строитель</a></h1>
+<h1 id="Шаблон-«строитель»-(builder-pattern)" class='section-header'><a
+                           href="#Шаблон-«строитель»-(builder-pattern)">Шаблон «строитель» (Builder Pattern)</a></h1>
 <p>Давайте предположим, что нам нужно, чтобы наши пользователи могли создавать
 круги и чтобы у них была возможность задавать только те свойства, которые им
 нужны. В противном случае, атрибуты <code>x</code> и <code>y</code> будут <code>0.0</code>, а <code>radius</code> будет
 <code>1.0</code>. Rust не поддерживает перегрузку методов, именованные аргументы или
-переменное количество аргументов. Вместо этого мы используем паттерн строитель.
+переменное количество аргументов. Вместо этого мы используем шаблон «строитель».
 Он выглядит следующим образом:</p>
 <span class='rusttest'>struct Circle {
     x: f64,
@@ -481,7 +481,7 @@ fn main() {
                 .radius(2.0)
                 .finalize();
 
-    println!(&quot;area: {}&quot;, c.area());
+    println!(&quot;площадь: {}&quot;, c.area());
     println!(&quot;x: {}&quot;, c.x);
     println!(&quot;y: {}&quot;, c.y);
 }
@@ -536,18 +536,16 @@ fn main() {
                 .<span class='ident'>radius</span>(<span class='number'>2.0</span>)
                 .<span class='ident'>finalize</span>();
 
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;area: {}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;площадь: {}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x: {}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>x</span>);
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y: {}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>y</span>);
 }</pre>
 
-<p>Все, что мы сделали здесь, это создали еще одну структуру, <code>CircleBuilder</code>. В
+<p>Всё, что мы сделали здесь — это создали ещё одну структуру, <code>CircleBuilder</code>. В
 ней мы определили методы строителя. Также мы определили метод <code>area()</code> в
 <code>Circle</code>. Мы также сделали еще один метод в <code>CircleBuilder</code>: <code>finalize()</code>. Этот
-метод создает наш окончательный <code>Circle</code> из строителя. Таким образом, мы
-использовали систему типов для обеспечения концепции: мы можем использовать
-методы <code>CircleBuilder</code>, которые каким-либо образом ограничивают создание
-<code>Circle</code>, в зависимости от нашего выбора.</p>
+метод создаёт наш окончательный <code>Circle</code> из строителя. Таким образом, мы можем
+использовать методы <code>CircleBuilder</code> чтобы уточнить создание <code>Circle</code>.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
