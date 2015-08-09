@@ -173,3 +173,12 @@ unsafe {
 println!("eax is currently {}", result);
 # }
 ```
+
+## Больше информации
+
+Текущая реализация макроса `asm!` --- это прямое связывание с
+[встроенным ассемблером LLVM][llvm-docs], поэтому изучите и их
+[документацию][llvm-docs], чтобы лучше понять список затираемого, ограничения и
+др.
+
+[llvm-docs]: http://llvm.org/docs/LangRef.html#inline-assembler-expressions
