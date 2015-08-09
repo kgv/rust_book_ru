@@ -183,7 +183,7 @@ fn main() {
 Размещение значения по указателю означает, что, когда мы имеем дело с типажом-
 объектом, размер самого значения не важен, а важен лишь размер указателя.
 
-### Representation Представление
+### Представление
 
 Методы типажа можно вызвать для типажа-объекта с помощью специальной записи
 указателей на функции, традиционно называемой 'виртуальная таблица' ('vtable')
@@ -233,19 +233,19 @@ struct FooVtable {
 // u8:
 
 fn call_method_on_u8(x: *const ()) -> String {
-    // the compiler guarantees that this function is only called
-    // with `x` pointing to a u8
+    // компилятор гарантирует, что эта функция вызывается только
+    // с `x`, указывающим на u8
     let byte: &u8 = unsafe { &*(x as *const u8) };
 
     byte.method()
 }
 
 static Foo_for_u8_vtable: FooVtable = FooVtable {
-    destructor: /* compiler magic */,
+    destructor: /* магия компилятора */,
     size: 1,
     align: 1,
 
-    // cast to a function pointer
+    // преобразование в указатель на функцию
     method: call_method_on_u8 as fn(*const ()) -> String,
 };
 
@@ -253,16 +253,16 @@ static Foo_for_u8_vtable: FooVtable = FooVtable {
 // String:
 
 fn call_method_on_String(x: *const ()) -> String {
-    // the compiler guarantees that this function is only called
-    // with `x` pointing to a String
+    // компилятор гарантирует, что эта функция вызывается только
+    // с `x`, указывающим на String
     let string: &String = unsafe { &*(x as *const String) };
 
     string.method()
 }
 
 static Foo_for_String_vtable: FooVtable = FooVtable {
-    destructor: /* compiler magic */,
-    // values for a 64-bit computer, halve them for 32-bit ones
+    destructor: /* магия компилятора */,
+    // значения для 64-битного компьютера, для 32-битного они в 2 раза меньше
     size: 24,
     align: 8,
 
@@ -311,8 +311,3 @@ let y = TraitObject {
 // y.method();
 (y.vtable.method)(y.data);
 ```
-
-Если `b` или `y` были владельцами типажей-объектов (`Box<Foo>`), то будут
-вызываны деструкторы `(b.vtable.destructor)(b.data)` или
-`(y.vtable.destructor)(y.data)` соответственно, как только они выйдут из своей
-области определения.

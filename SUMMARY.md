@@ -48,7 +48,6 @@
     * [Универсальный синтаксис вызова функций (UFCS)](src/ufcs.md)
     * [Контейнеры (crates) и модули (modules)](src/crates-and-modules.md)
     * [`const` и `static`](src/const-and-static.md)
-    * [Кортежные структуры](src/tuple-structs.md)
     * [Атрибуты](src/attributes.md)
     * [Псевдонимы типов](src/type-aliases.md)
     * [Приведение типов](src/casting-between-types.md)

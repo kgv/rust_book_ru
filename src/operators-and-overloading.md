@@ -82,3 +82,57 @@ impl Add<i32> for Point {
 let p: Point = // ...
 let x: f64 = p + 2i32;
 ```
+
+# Использование типажей операций в обобщённых структурах
+
+Теперь, когда мы знаем, как реализованы типажи операций, мы можем реализовать
+наш типаж `HasArea` и структуру `Square` из [главы о типажах][traits] более
+общим образом:
+
+[traits]: traits.html
+
+```rust
+use std::ops::Mul;
+
+trait HasArea<T> {
+    fn area(&self) -> T;
+}
+
+struct Square<T> {
+    x: T,
+    y: T,
+    side: T,
+}
+
+impl<T> HasArea<T> for Square<T>
+        where T: Mul<Output=T> + Copy {
+    fn area(&self) -> T {
+        self.side * self.side
+    }
+}
+
+fn main() {
+    let s = Square {
+        x: 0.0f64,
+        y: 0.0f64,
+        side: 12.0f64,
+    };
+
+    println!("Площадь s: {}", s.area());
+}
+```
+
+Мы просто объявляем тип-параметр `T` и используем его вместо `f64` в определении
+`HasArea` и `Square`. В реализации нужно сделать более хитрые изменения:
+
+```ignore
+impl<T> HasArea<T> for Square<T>
+        where T: Mul<Output=T> + Copy { ... }
+```
+
+Чтобы реализовать `area`, мы должны мочь умножить операнды друг на друга,
+поэтому мы объявляем `T` как реализующий `std::ops::Mul`. Как и `Add`, `Mul`
+принимает параметр `Output`: т.к. мы знаем, что числа не меняют своего типа,
+когда их умножают, `Output` также объявлен как `T`. `T` также должен
+поддерживать копирование, чтобы Rust не пытался переместить `self.side` в
+возвращаемое значение.
