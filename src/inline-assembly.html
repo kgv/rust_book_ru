@@ -166,7 +166,7 @@
 </li>
 <li><a  href='../src/lang-items.html'><b>7.5.</b> Элементы языка (lang items)</a>
 </li>
-<li><a  href='../src/link-args.html'><b>7.6.</b> Аргументы компоновки (link args)</a>
+<li><a  href='../src/advanced-linking.html'><b>7.6.</b> Продвинутое руководство по компоновке (advanced linkinking)</a>
 </li>
 <li><a  href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
 </li>
@@ -406,6 +406,13 @@ println!(&quot;eax is currently {}&quot;, result);
    <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;mov eax, 2&quot;</span> : <span class='string'>&quot;={eax}&quot;</span>(<span class='ident'>result</span>) : : : <span class='string'>&quot;intel&quot;</span>)
 }
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;eax is currently {}&quot;</span>, <span class='ident'>result</span>);</pre>
+
+<h2 id="Больше-информации" class='section-header'><a
+                           href="#Больше-информации">Больше информации</a></h2>
+<p>Текущая реализация макроса <code>asm!</code> --- это прямое связывание с
+<a href="http://llvm.org/docs/LangRef.html#inline-assembler-expressions">встроенным ассемблером LLVM</a>, поэтому изучите и их
+<a href="http://llvm.org/docs/LangRef.html#inline-assembler-expressions">документацию</a>, чтобы лучше понять список затираемого, ограничения и
+др.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

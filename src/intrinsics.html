@@ -166,7 +166,7 @@
 </li>
 <li><a  href='../src/lang-items.html'><b>7.5.</b> Элементы языка (lang items)</a>
 </li>
-<li><a  href='../src/link-args.html'><b>7.6.</b> Аргументы компоновки (link args)</a>
+<li><a  href='../src/advanced-linking.html'><b>7.6.</b> Продвинутое руководство по компоновке (advanced linkinking)</a>
 </li>
 <li><a  href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
 </li>
@@ -215,7 +215,8 @@ extern &quot;rust-intrinsic&quot; {
     <span class='kw'>fn</span> <span class='ident'>offset</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>dst</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>, <span class='ident'>offset</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span>;
 }</pre>
 
-<p>Как и с любыми другими FFI функциями, их вызов всегда <code>unsafe</code>.</p>
+<p>Как и с любыми другими FFI функциями, их вызов всегда небезопасен и помечен как
+<code>unsafe</code>.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
