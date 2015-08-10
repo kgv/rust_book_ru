@@ -68,11 +68,13 @@
 </li>
 <li><a  href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
 </li>
-<li><a  href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+<li><a  href='../src/choosing-your-guarantees.html'><b>5.8.</b> Choosing your Guarantees</a>
 </li>
-<li><a  href='../src/borrow-and-asref.html'><b>5.9.</b> Типажи `Borrow` и `AsRef`</a>
+<li><a  href='../src/ffi.html'><b>5.9.</b> Интерфейс внешних функций (FFI)</a>
 </li>
-<li><a  href='../src/release-channels.html'><b>5.10.</b> Каналы сборок</a>
+<li><a  href='../src/borrow-and-asref.html'><b>5.10.</b> Типажи `Borrow` и `AsRef`</a>
+</li>
+<li><a  href='../src/release-channels.html'><b>5.11.</b> Каналы сборок</a>
 </li>
 </ul>
 </li>
@@ -98,11 +100,11 @@
 </li>
 <li><a  href='../src/mutability.html'><b>6.10.</b> Изменяемость (mutability)</a>
 </li>
-<li><a  href='../src/enums.html'><b>6.11.</b> Перечисления</a>
+<li><a  href='../src/structs.html'><b>6.11.</b> Структуры</a>
 </li>
-<li><a  href='../src/match.html'><b>6.12.</b> Конструкция `match`</a>
+<li><a  href='../src/enums.html'><b>6.12.</b> Перечисления</a>
 </li>
-<li><a  href='../src/structs.html'><b>6.13.</b> Структуры</a>
+<li><a  href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
 </li>
 <li><a  href='../src/patterns.html'><b>6.14.</b> Шаблоны сопоставления `match`</a>
 </li>
@@ -130,27 +132,25 @@
 </li>
 <li><a class='active' href='../src/const-and-static.html'><b>6.26.</b> `const` и `static`</a>
 </li>
-<li><a  href='../src/tuple-structs.html'><b>6.27.</b> Кортежные структуры</a>
+<li><a  href='../src/attributes.html'><b>6.27.</b> Атрибуты</a>
 </li>
-<li><a  href='../src/attributes.html'><b>6.28.</b> Атрибуты</a>
+<li><a  href='../src/type-aliases.html'><b>6.28.</b> Псевдонимы типов</a>
 </li>
-<li><a  href='../src/type-aliases.html'><b>6.29.</b> Псевдонимы типов</a>
+<li><a  href='../src/casting-between-types.html'><b>6.29.</b> Приведение типов</a>
 </li>
-<li><a  href='../src/casting-between-types.html'><b>6.30.</b> Приведение типов</a>
+<li><a  href='../src/associated-types.html'><b>6.30.</b> Ассоциированные типы</a>
 </li>
-<li><a  href='../src/associated-types.html'><b>6.31.</b> Ассоциированные типы</a>
+<li><a  href='../src/unsized-types.html'><b>6.31.</b> Безразмерные типы</a>
 </li>
-<li><a  href='../src/unsized-types.html'><b>6.32.</b> Безразмерные типы</a>
+<li><a  href='../src/operators-and-overloading.html'><b>6.32.</b> Перегрузка операций</a>
 </li>
-<li><a  href='../src/operators-and-overloading.html'><b>6.33.</b> Перегрузка операций</a>
+<li><a  href='../src/deref-coercions.html'><b>6.33.</b> Преобразования при разыменовании (deref coercions)</a>
 </li>
-<li><a  href='../src/deref-coercions.html'><b>6.34.</b> Преобразования при разыменовании (deref coercions)</a>
+<li><a  href='../src/macros.html'><b>6.34.</b> Макросы</a>
 </li>
-<li><a  href='../src/macros.html'><b>6.35.</b> Макросы</a>
+<li><a  href='../src/raw-pointers.html'><b>6.35.</b> Сырые указатели</a>
 </li>
-<li><a  href='../src/raw-pointers.html'><b>6.36.</b> Сырые указатели</a>
-</li>
-<li><a  href='../src/unsafe.html'><b>6.37.</b> Небезопасный код</a>
+<li><a  href='../src/unsafe.html'><b>6.36.</b> Небезопасный код</a>
 </li>
 </ul>
 </li>
@@ -243,7 +243,7 @@ lifetime):</p>
 <p>Поскольку <code>N</code> изменяемо, один поток может изменить его во время того, как другой
 читает его значение. Это ситуация «гонки» по данным, и она считается
 небезопасным поведением в Rust. Поэтому и чтение, и изменение статического
-изменяемого значения (<code>static mut</code>) является [небезопасным]<a href="unsafe">unsafe</a>, и
+изменяемого значения (<code>static mut</code>) является <a href="unsafe.html">небезопасным</a> (unsafe), и
 обе эти операции должны выполняться в небезопасных блоках (<code>unsafe</code> block):</p>
 <span class='rusttest'>fn main() {
     static mut N: i32 = 5;
@@ -262,8 +262,8 @@ lifetime):</p>
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;N: {}&quot;</span>, <span class='ident'>N</span>);
 }</pre>
 
-<p>Более того, любой тип, хранимый в статической переменной, должен иметь
-ограничение <code>Sync</code>.</p>
+<p>Более того, любой тип, хранимый в статической переменной, должен быть ограничен
+<code>Sync</code> и не может иметь реализации <a href="drop.html"><code>Drop</code></a>.</p>
 
 <h1 id="Инициализация" class='section-header'><a
                            href="#Инициализация">Инициализация</a></h1>
@@ -279,11 +279,6 @@ lifetime):</p>
 постоянных позволяет компилятору провести оптимизации вроде распространения
 постоянных (constant propagation) не только в вашем контейнере, но и в тех,
 которые зависят от него.</p>
-
-<p>Постоянная похожа на <code>#define</code> в C: это дополнительная мета-информация, но у неё
-нет дополнительных накладных расходов во время исполнения программы. Вопрос
-«использовать ли <code>const</code> или <code>static</code> в Rust» похож на вопрос «использовать ли
-<code>#define</code> или <code>static</code> в C».</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

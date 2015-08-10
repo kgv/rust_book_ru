@@ -68,11 +68,13 @@
 </li>
 <li><a  href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
 </li>
-<li><a  href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+<li><a  href='../src/choosing-your-guarantees.html'><b>5.8.</b> Choosing your Guarantees</a>
 </li>
-<li><a  href='../src/borrow-and-asref.html'><b>5.9.</b> Типажи `Borrow` и `AsRef`</a>
+<li><a  href='../src/ffi.html'><b>5.9.</b> Интерфейс внешних функций (FFI)</a>
 </li>
-<li><a  href='../src/release-channels.html'><b>5.10.</b> Каналы сборок</a>
+<li><a  href='../src/borrow-and-asref.html'><b>5.10.</b> Типажи `Borrow` и `AsRef`</a>
+</li>
+<li><a  href='../src/release-channels.html'><b>5.11.</b> Каналы сборок</a>
 </li>
 </ul>
 </li>
@@ -98,11 +100,11 @@
 </li>
 <li><a  href='../src/mutability.html'><b>6.10.</b> Изменяемость (mutability)</a>
 </li>
-<li><a  href='../src/enums.html'><b>6.11.</b> Перечисления</a>
+<li><a class='active' href='../src/structs.html'><b>6.11.</b> Структуры</a>
 </li>
-<li><a  href='../src/match.html'><b>6.12.</b> Конструкция `match`</a>
+<li><a  href='../src/enums.html'><b>6.12.</b> Перечисления</a>
 </li>
-<li><a class='active' href='../src/structs.html'><b>6.13.</b> Структуры</a>
+<li><a  href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
 </li>
 <li><a  href='../src/patterns.html'><b>6.14.</b> Шаблоны сопоставления `match`</a>
 </li>
@@ -130,27 +132,25 @@
 </li>
 <li><a  href='../src/const-and-static.html'><b>6.26.</b> `const` и `static`</a>
 </li>
-<li><a  href='../src/tuple-structs.html'><b>6.27.</b> Кортежные структуры</a>
+<li><a  href='../src/attributes.html'><b>6.27.</b> Атрибуты</a>
 </li>
-<li><a  href='../src/attributes.html'><b>6.28.</b> Атрибуты</a>
+<li><a  href='../src/type-aliases.html'><b>6.28.</b> Псевдонимы типов</a>
 </li>
-<li><a  href='../src/type-aliases.html'><b>6.29.</b> Псевдонимы типов</a>
+<li><a  href='../src/casting-between-types.html'><b>6.29.</b> Приведение типов</a>
 </li>
-<li><a  href='../src/casting-between-types.html'><b>6.30.</b> Приведение типов</a>
+<li><a  href='../src/associated-types.html'><b>6.30.</b> Ассоциированные типы</a>
 </li>
-<li><a  href='../src/associated-types.html'><b>6.31.</b> Ассоциированные типы</a>
+<li><a  href='../src/unsized-types.html'><b>6.31.</b> Безразмерные типы</a>
 </li>
-<li><a  href='../src/unsized-types.html'><b>6.32.</b> Безразмерные типы</a>
+<li><a  href='../src/operators-and-overloading.html'><b>6.32.</b> Перегрузка операций</a>
 </li>
-<li><a  href='../src/operators-and-overloading.html'><b>6.33.</b> Перегрузка операций</a>
+<li><a  href='../src/deref-coercions.html'><b>6.33.</b> Преобразования при разыменовании (deref coercions)</a>
 </li>
-<li><a  href='../src/deref-coercions.html'><b>6.34.</b> Преобразования при разыменовании (deref coercions)</a>
+<li><a  href='../src/macros.html'><b>6.34.</b> Макросы</a>
 </li>
-<li><a  href='../src/macros.html'><b>6.35.</b> Макросы</a>
+<li><a  href='../src/raw-pointers.html'><b>6.35.</b> Сырые указатели</a>
 </li>
-<li><a  href='../src/raw-pointers.html'><b>6.36.</b> Сырые указатели</a>
-</li>
-<li><a  href='../src/unsafe.html'><b>6.37.</b> Небезопасный код</a>
+<li><a  href='../src/unsafe.html'><b>6.36.</b> Небезопасный код</a>
 </li>
 </ul>
 </li>
@@ -258,6 +258,176 @@ fn main() {
 }</pre>
 
 <p>Этот код напечатает <code>Точка находится в (5, 0)</code>.</p>
+
+<p>Rust не поддерживает изменяемость отдельных полей, поэтому вы не можете написать
+что-то вроде такого:</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        mut x: i32,
+        y: i32,
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}</pre>
+
+<p>Изменяемость — это свойство имени, а не самой структуры. Если вы привыкли к
+управлению изменяемостью на уровне полей, сначала это может показаться
+непривычным, но на самом деле такое решение сильно упрощает вещи. Оно даже
+позволяет вам делать имена изменяемыми только на короткое время:</p>
+<span class='rusttest'>struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let mut point = Point { x: 0, y: 0 };
+
+    point.x = 5;
+
+    let point = point; // это новое имя неизменяемо
+
+    point.y = 6; // это вызывает ошибку
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+    <span class='ident'>point</span>.<span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+    <span class='kw'>let</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>point</span>; <span class='comment'>// это новое имя неизменяемо</span>
+
+    <span class='ident'>point</span>.<span class='ident'>y</span> <span class='op'>=</span> <span class='number'>6</span>; <span class='comment'>// это вызывает ошибку</span>
+}</pre>
+
+<h1 id="Синтаксис-обновления-(update-syntax)" class='section-header'><a
+                           href="#Синтаксис-обновления-(update-syntax)">Синтаксис обновления (update syntax)</a></h1>
+<p>Вы можете включить в описание структуры <code>..</code> чтобы показать, что вы хотите
+использовать значения полей какой-то другой структуры. Например:</p>
+<span class='rusttest'>fn main() {
+    struct Point3d {
+        x: i32,
+        y: i32,
+        z: i32,
+    }
+    
+    let mut point = Point3d { x: 0, y: 0, z: 0 };
+    point = Point3d { y: 1, .. point };
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point3d</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+    <span class='ident'>z</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point3d</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span>, <span class='ident'>z</span>: <span class='number'>0</span> };
+<span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point3d</span> { <span class='ident'>y</span>: <span class='number'>1</span>, .. <span class='ident'>point</span> };</pre>
+
+<p>Этот код присваивает <code>point</code> новое <code>y</code>, но оставляет старые <code>x</code> и <code>z</code>. Это не
+обязательно должна быть та же самая структура — вы можете использовать этот
+синтаксис когда создаёте новые структуры, чтобы скопировать значения неуказанных
+полей:</p>
+<span class='rusttest'>fn main() {
+    struct Point3d {
+        x: i32,
+        y: i32,
+        z: i32,
+    }
+    let origin = Point3d { x: 0, y: 0, z: 0 };
+    let point = Point3d { z: 1, x: 2, .. origin };
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point3d</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span>, <span class='ident'>z</span>: <span class='number'>0</span> };
+<span class='kw'>let</span> <span class='ident'>point</span> <span class='op'>=</span> <span class='ident'>Point3d</span> { <span class='ident'>z</span>: <span class='number'>1</span>, <span class='ident'>x</span>: <span class='number'>2</span>, .. <span class='ident'>origin</span> };</pre>
+
+<h1 id="Кортежные-структуры" class='section-header'><a
+                           href="#Кортежные-структуры">Кортежные структуры</a></h1>
+<p>В Rust есть ещё один тип данных, который представляет собой нечто среднее между
+кортежем и структурой. Он называется <em>кортежной структурой</em>. Кортежные структуры
+именуются, а вот у их полей имён нет:</p>
+<span class='rusttest'>fn main() {
+    struct Color(i32, i32, i32);
+    struct Point(i32, i32, i32);
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Color</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>);
+<span class='kw'>struct</span> <span class='ident'>Point</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>);</pre>
+
+<p>Эти два объекта различны, несмотря на то, что у них одинаковые значения:</p>
+<span class='rusttest'>fn main() {
+    struct Color(i32, i32, i32);
+    struct Point(i32, i32, i32);
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>black</span> <span class='op'>=</span> <span class='ident'>Color</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>0</span>);
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>0</span>);</pre>
+
+<p>Почти всегда, вместо кортежной структуры лучше использовать обычную структуру.
+Мы бы скорее объявили типы <code>Color</code> и <code>Point</code> вот так:</p>
+<span class='rusttest'>fn main() {
+    struct Color {
+        red: i32,
+        blue: i32,
+        green: i32,
+    }
+    
+    struct Point {
+        x: i32,
+        y: i32,
+        z: i32,
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Color</span> {
+    <span class='ident'>red</span>: <span class='ident'>i32</span>,
+    <span class='ident'>blue</span>: <span class='ident'>i32</span>,
+    <span class='ident'>green</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+    <span class='ident'>z</span>: <span class='ident'>i32</span>,
+}</pre>
+
+<p>Теперь у нас есть настоящие имена, а не только позиции. Хорошие имена важны, и
+при использовании структуры у нас есть эти имена.</p>
+
+<p>Однако, <em>есть</em> один случай, когда кортежные структуры очень полезны. Это
+кортежная структура с всего одним элементом. Такое использование называется
+<em>новым типом</em>, потому что оно позволяет создать новый тип, отличный от типа
+значения, содержащегося в кортежной структуре. При этом новый тип обозначает
+что-то другое:</p>
+<span class='rusttest'>fn main() {
+    struct Inches(i32);
+    
+    let length = Inches(10);
+    
+    let Inches(integer_length) = length;
+    println!(&quot;Длина в дюймах: {}&quot;, integer_length);
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Inches</span>(<span class='ident'>i32</span>);
+
+<span class='kw'>let</span> <span class='ident'>length</span> <span class='op'>=</span> <span class='ident'>Inches</span>(<span class='number'>10</span>);
+
+<span class='kw'>let</span> <span class='ident'>Inches</span>(<span class='ident'>integer_length</span>) <span class='op'>=</span> <span class='ident'>length</span>;
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Длина в дюймах: {}&quot;</span>, <span class='ident'>integer_length</span>);</pre>
+
+<p>Как вы можете видеть в данном примере, извлечь вложенный целый тип можно с
+помощью деконструирующего <code>let</code>. Мы обсуждали это выше, в разделе «кортежи». В
+данном случае, оператор <code>let Inches(integer_length)</code> присваивает <code>10</code> имени
+<code>integer_length</code>.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

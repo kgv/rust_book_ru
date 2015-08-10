@@ -68,11 +68,13 @@
 </li>
 <li><a  href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
 </li>
-<li><a  href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+<li><a  href='../src/choosing-your-guarantees.html'><b>5.8.</b> Choosing your Guarantees</a>
 </li>
-<li><a  href='../src/borrow-and-asref.html'><b>5.9.</b> Типажи `Borrow` и `AsRef`</a>
+<li><a  href='../src/ffi.html'><b>5.9.</b> Интерфейс внешних функций (FFI)</a>
 </li>
-<li><a  href='../src/release-channels.html'><b>5.10.</b> Каналы сборок</a>
+<li><a  href='../src/borrow-and-asref.html'><b>5.10.</b> Типажи `Borrow` и `AsRef`</a>
+</li>
+<li><a  href='../src/release-channels.html'><b>5.11.</b> Каналы сборок</a>
 </li>
 </ul>
 </li>
@@ -98,11 +100,11 @@
 </li>
 <li><a  href='../src/mutability.html'><b>6.10.</b> Изменяемость (mutability)</a>
 </li>
-<li><a  href='../src/enums.html'><b>6.11.</b> Перечисления</a>
+<li><a  href='../src/structs.html'><b>6.11.</b> Структуры</a>
 </li>
-<li><a  href='../src/match.html'><b>6.12.</b> Конструкция `match`</a>
+<li><a  href='../src/enums.html'><b>6.12.</b> Перечисления</a>
 </li>
-<li><a  href='../src/structs.html'><b>6.13.</b> Структуры</a>
+<li><a  href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
 </li>
 <li><a  href='../src/patterns.html'><b>6.14.</b> Шаблоны сопоставления `match`</a>
 </li>
@@ -130,27 +132,25 @@
 </li>
 <li><a  href='../src/const-and-static.html'><b>6.26.</b> `const` и `static`</a>
 </li>
-<li><a  href='../src/tuple-structs.html'><b>6.27.</b> Кортежные структуры</a>
+<li><a  href='../src/attributes.html'><b>6.27.</b> Атрибуты</a>
 </li>
-<li><a  href='../src/attributes.html'><b>6.28.</b> Атрибуты</a>
+<li><a  href='../src/type-aliases.html'><b>6.28.</b> Псевдонимы типов</a>
 </li>
-<li><a  href='../src/type-aliases.html'><b>6.29.</b> Псевдонимы типов</a>
+<li><a  href='../src/casting-between-types.html'><b>6.29.</b> Приведение типов</a>
 </li>
-<li><a  href='../src/casting-between-types.html'><b>6.30.</b> Приведение типов</a>
+<li><a  href='../src/associated-types.html'><b>6.30.</b> Ассоциированные типы</a>
 </li>
-<li><a  href='../src/associated-types.html'><b>6.31.</b> Ассоциированные типы</a>
+<li><a  href='../src/unsized-types.html'><b>6.31.</b> Безразмерные типы</a>
 </li>
-<li><a  href='../src/unsized-types.html'><b>6.32.</b> Безразмерные типы</a>
+<li><a  href='../src/operators-and-overloading.html'><b>6.32.</b> Перегрузка операций</a>
 </li>
-<li><a  href='../src/operators-and-overloading.html'><b>6.33.</b> Перегрузка операций</a>
+<li><a  href='../src/deref-coercions.html'><b>6.33.</b> Преобразования при разыменовании (deref coercions)</a>
 </li>
-<li><a  href='../src/deref-coercions.html'><b>6.34.</b> Преобразования при разыменовании (deref coercions)</a>
+<li><a  href='../src/macros.html'><b>6.34.</b> Макросы</a>
 </li>
-<li><a  href='../src/macros.html'><b>6.35.</b> Макросы</a>
+<li><a  href='../src/raw-pointers.html'><b>6.35.</b> Сырые указатели</a>
 </li>
-<li><a  href='../src/raw-pointers.html'><b>6.36.</b> Сырые указатели</a>
-</li>
-<li><a  href='../src/unsafe.html'><b>6.37.</b> Небезопасный код</a>
+<li><a  href='../src/unsafe.html'><b>6.36.</b> Небезопасный код</a>
 </li>
 </ul>
 </li>
@@ -417,8 +417,8 @@ fn main() {
 <p>Размещение значения по указателю означает, что, когда мы имеем дело с типажом-
 объектом, размер самого значения не важен, а важен лишь размер указателя.</p>
 
-<h3 id="representation-Представление" class='section-header'><a
-                           href="#representation-Представление">Representation Представление</a></h3>
+<h3 id="Представление" class='section-header'><a
+                           href="#Представление">Представление</a></h3>
 <p>Методы типажа можно вызвать для типажа-объекта с помощью специальной записи
 указателей на функции, традиционно называемой &#39;виртуальная таблица&#39; (&#39;vtable&#39;)
 (создается и управляется компилятором).</p>
@@ -467,19 +467,19 @@ fn main() {
     // u8:
     
     fn call_method_on_u8(x: *const ()) -&gt; String {
-        // the compiler guarantees that this function is only called
-        // with `x` pointing to a u8
+        // компилятор гарантирует, что эта функция вызывается только
+        // с `x`, указывающим на u8
         let byte: &amp;u8 = unsafe { &amp;*(x as *const u8) };
     
         byte.method()
     }
     
     static Foo_for_u8_vtable: FooVtable = FooVtable {
-        destructor: /* compiler magic */,
+        destructor: /* магия компилятора */,
         size: 1,
         align: 1,
     
-        // cast to a function pointer
+        // преобразование в указатель на функцию
         method: call_method_on_u8 as fn(*const ()) -&gt; String,
     };
     
@@ -487,16 +487,16 @@ fn main() {
     // String:
     
     fn call_method_on_String(x: *const ()) -&gt; String {
-        // the compiler guarantees that this function is only called
-        // with `x` pointing to a String
+        // компилятор гарантирует, что эта функция вызывается только
+        // с `x`, указывающим на String
         let string: &amp;String = unsafe { &amp;*(x as *const String) };
     
         string.method()
     }
     
     static Foo_for_String_vtable: FooVtable = FooVtable {
-        destructor: /* compiler magic */,
-        // values for a 64-bit computer, halve them for 32-bit ones
+        destructor: /* магия компилятора */,
+        // значения для 64-битного компьютера, для 32-битного они в 2 раза меньше
         size: 24,
         align: 8,
     
@@ -514,19 +514,19 @@ fn main() {
 <span class='comment'>// u8:</span>
 
 <span class='kw'>fn</span> <span class='ident'>call_method_on_u8</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw'>const</span> ()) <span class='op'>-&gt;</span> <span class='ident'>String</span> {
-    <span class='comment'>// the compiler guarantees that this function is only called</span>
-    <span class='comment'>// with `x` pointing to a u8</span>
+    <span class='comment'>// компилятор гарантирует, что эта функция вызывается только</span>
+    <span class='comment'>// с `x`, указывающим на u8</span>
     <span class='kw'>let</span> <span class='ident'>byte</span>: <span class='kw-2'>&amp;</span><span class='ident'>u8</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='kw-2'>&amp;</span><span class='op'>*</span>(<span class='ident'>x</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>) };
 
     <span class='ident'>byte</span>.<span class='ident'>method</span>()
 }
 
 <span class='kw'>static</span> <span class='ident'>Foo_for_u8_vtable</span>: <span class='ident'>FooVtable</span> <span class='op'>=</span> <span class='ident'>FooVtable</span> {
-    <span class='ident'>destructor</span>: <span class='comment'>/* compiler magic */</span>,
+    <span class='ident'>destructor</span>: <span class='comment'>/* магия компилятора */</span>,
     <span class='ident'>size</span>: <span class='number'>1</span>,
     <span class='ident'>align</span>: <span class='number'>1</span>,
 
-    <span class='comment'>// cast to a function pointer</span>
+    <span class='comment'>// преобразование в указатель на функцию</span>
     <span class='ident'>method</span>: <span class='ident'>call_method_on_u8</span> <span class='kw'>as</span> <span class='kw'>fn</span>(<span class='op'>*</span><span class='kw'>const</span> ()) <span class='op'>-&gt;</span> <span class='ident'>String</span>,
 };
 
@@ -534,16 +534,16 @@ fn main() {
 <span class='comment'>// String:</span>
 
 <span class='kw'>fn</span> <span class='ident'>call_method_on_String</span>(<span class='ident'>x</span>: <span class='op'>*</span><span class='kw'>const</span> ()) <span class='op'>-&gt;</span> <span class='ident'>String</span> {
-    <span class='comment'>// the compiler guarantees that this function is only called</span>
-    <span class='comment'>// with `x` pointing to a String</span>
+    <span class='comment'>// компилятор гарантирует, что эта функция вызывается только</span>
+    <span class='comment'>// с `x`, указывающим на String</span>
     <span class='kw'>let</span> <span class='ident'>string</span>: <span class='kw-2'>&amp;</span><span class='ident'>String</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='kw-2'>&amp;</span><span class='op'>*</span>(<span class='ident'>x</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>String</span>) };
 
     <span class='ident'>string</span>.<span class='ident'>method</span>()
 }
 
 <span class='kw'>static</span> <span class='ident'>Foo_for_String_vtable</span>: <span class='ident'>FooVtable</span> <span class='op'>=</span> <span class='ident'>FooVtable</span> {
-    <span class='ident'>destructor</span>: <span class='comment'>/* compiler magic */</span>,
-    <span class='comment'>// values for a 64-bit computer, halve them for 32-bit ones</span>
+    <span class='ident'>destructor</span>: <span class='comment'>/* магия компилятора */</span>,
+    <span class='comment'>// значения для 64-битного компьютера, для 32-битного они в 2 раза меньше</span>
     <span class='ident'>size</span>: <span class='number'>24</span>,
     <span class='ident'>align</span>: <span class='number'>8</span>,
 
@@ -615,11 +615,6 @@ fn main() {
 
 <span class='comment'>// y.method();</span>
 (<span class='ident'>y</span>.<span class='ident'>vtable</span>.<span class='ident'>method</span>)(<span class='ident'>y</span>.<span class='ident'>data</span>);</pre>
-
-<p>Если <code>b</code> или <code>y</code> были владельцами типажей-объектов (<code>Box&lt;Foo&gt;</code>), то будут
-вызываны деструкторы <code>(b.vtable.destructor)(b.data)</code> или
-<code>(y.vtable.destructor)(y.data)</code> соответственно, как только они выйдут из своей
-области определения.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

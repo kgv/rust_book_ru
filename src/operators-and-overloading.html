@@ -68,11 +68,13 @@
 </li>
 <li><a  href='../src/error-handling.html'><b>5.7.</b> Обработка ошибок</a>
 </li>
-<li><a  href='../src/ffi.html'><b>5.8.</b> Интерфейс внешних функций (FFI)</a>
+<li><a  href='../src/choosing-your-guarantees.html'><b>5.8.</b> Choosing your Guarantees</a>
 </li>
-<li><a  href='../src/borrow-and-asref.html'><b>5.9.</b> Типажи `Borrow` и `AsRef`</a>
+<li><a  href='../src/ffi.html'><b>5.9.</b> Интерфейс внешних функций (FFI)</a>
 </li>
-<li><a  href='../src/release-channels.html'><b>5.10.</b> Каналы сборок</a>
+<li><a  href='../src/borrow-and-asref.html'><b>5.10.</b> Типажи `Borrow` и `AsRef`</a>
+</li>
+<li><a  href='../src/release-channels.html'><b>5.11.</b> Каналы сборок</a>
 </li>
 </ul>
 </li>
@@ -98,11 +100,11 @@
 </li>
 <li><a  href='../src/mutability.html'><b>6.10.</b> Изменяемость (mutability)</a>
 </li>
-<li><a  href='../src/enums.html'><b>6.11.</b> Перечисления</a>
+<li><a  href='../src/structs.html'><b>6.11.</b> Структуры</a>
 </li>
-<li><a  href='../src/match.html'><b>6.12.</b> Конструкция `match`</a>
+<li><a  href='../src/enums.html'><b>6.12.</b> Перечисления</a>
 </li>
-<li><a  href='../src/structs.html'><b>6.13.</b> Структуры</a>
+<li><a  href='../src/match.html'><b>6.13.</b> Конструкция `match`</a>
 </li>
 <li><a  href='../src/patterns.html'><b>6.14.</b> Шаблоны сопоставления `match`</a>
 </li>
@@ -130,27 +132,25 @@
 </li>
 <li><a  href='../src/const-and-static.html'><b>6.26.</b> `const` и `static`</a>
 </li>
-<li><a  href='../src/tuple-structs.html'><b>6.27.</b> Кортежные структуры</a>
+<li><a  href='../src/attributes.html'><b>6.27.</b> Атрибуты</a>
 </li>
-<li><a  href='../src/attributes.html'><b>6.28.</b> Атрибуты</a>
+<li><a  href='../src/type-aliases.html'><b>6.28.</b> Псевдонимы типов</a>
 </li>
-<li><a  href='../src/type-aliases.html'><b>6.29.</b> Псевдонимы типов</a>
+<li><a  href='../src/casting-between-types.html'><b>6.29.</b> Приведение типов</a>
 </li>
-<li><a  href='../src/casting-between-types.html'><b>6.30.</b> Приведение типов</a>
+<li><a  href='../src/associated-types.html'><b>6.30.</b> Ассоциированные типы</a>
 </li>
-<li><a  href='../src/associated-types.html'><b>6.31.</b> Ассоциированные типы</a>
+<li><a  href='../src/unsized-types.html'><b>6.31.</b> Безразмерные типы</a>
 </li>
-<li><a  href='../src/unsized-types.html'><b>6.32.</b> Безразмерные типы</a>
+<li><a class='active' href='../src/operators-and-overloading.html'><b>6.32.</b> Перегрузка операций</a>
 </li>
-<li><a class='active' href='../src/operators-and-overloading.html'><b>6.33.</b> Перегрузка операций</a>
+<li><a  href='../src/deref-coercions.html'><b>6.33.</b> Преобразования при разыменовании (deref coercions)</a>
 </li>
-<li><a  href='../src/deref-coercions.html'><b>6.34.</b> Преобразования при разыменовании (deref coercions)</a>
+<li><a  href='../src/macros.html'><b>6.34.</b> Макросы</a>
 </li>
-<li><a  href='../src/macros.html'><b>6.35.</b> Макросы</a>
+<li><a  href='../src/raw-pointers.html'><b>6.35.</b> Сырые указатели</a>
 </li>
-<li><a  href='../src/raw-pointers.html'><b>6.36.</b> Сырые указатели</a>
-</li>
-<li><a  href='../src/unsafe.html'><b>6.37.</b> Небезопасный код</a>
+<li><a  href='../src/unsafe.html'><b>6.36.</b> Небезопасный код</a>
 </li>
 </ul>
 </li>
@@ -303,6 +303,86 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>p</span>: <span class='ident'>Point</span> <span class='op'>=</span> <span class='comment'>// ...</span>
 <span class='kw'>let</span> <span class='ident'>x</span>: <span class='ident'>f64</span> <span class='op'>=</span> <span class='ident'>p</span> <span class='op'>+</span> <span class='number'>2i32</span>;</pre>
+
+<h1 id="Использование-типажей-операций-в-обобщённых-структурах" class='section-header'><a
+                           href="#Использование-типажей-операций-в-обобщённых-структурах">Использование типажей операций в обобщённых структурах</a></h1>
+<p>Теперь, когда мы знаем, как реализованы типажи операций, мы можем реализовать
+наш типаж <code>HasArea</code> и структуру <code>Square</code> из <a href="traits.html">главы о типажах</a> более
+общим образом:</p>
+<span class='rusttest'>use std::ops::Mul;
+
+trait HasArea&lt;T&gt; {
+    fn area(&amp;self) -&gt; T;
+}
+
+struct Square&lt;T&gt; {
+    x: T,
+    y: T,
+    side: T,
+}
+
+impl&lt;T&gt; HasArea&lt;T&gt; for Square&lt;T&gt;
+        where T: Mul&lt;Output=T&gt; + Copy {
+    fn area(&amp;self) -&gt; T {
+        self.side * self.side
+    }
+}
+
+fn main() {
+    let s = Square {
+        x: 0.0f64,
+        y: 0.0f64,
+        side: 12.0f64,
+    };
+
+    println!(&quot;Площадь s: {}&quot;, s.area());
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::<span class='ident'>Mul</span>;
+
+<span class='kw'>trait</span> <span class='ident'>HasArea</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span>;
+}
+
+<span class='kw'>struct</span> <span class='ident'>Square</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='ident'>x</span>: <span class='ident'>T</span>,
+    <span class='ident'>y</span>: <span class='ident'>T</span>,
+    <span class='ident'>side</span>: <span class='ident'>T</span>,
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>HasArea</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Square</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Mul</span><span class='op'>&lt;</span><span class='ident'>Output</span><span class='op'>=</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>Copy</span> {
+    <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span> {
+        <span class='self'>self</span>.<span class='ident'>side</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>side</span>
+    }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>Square</span> {
+        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
+        <span class='ident'>side</span>: <span class='number'>12.0f64</span>,
+    };
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Площадь s: {}&quot;</span>, <span class='ident'>s</span>.<span class='ident'>area</span>());
+}</pre>
+
+<p>Мы просто объявляем тип-параметр <code>T</code> и используем его вместо <code>f64</code> в определении
+<code>HasArea</code> и <code>Square</code>. В реализации нужно сделать более хитрые изменения:</p>
+<span class='rusttest'>fn main() {
+    impl&lt;T&gt; HasArea&lt;T&gt; for Square&lt;T&gt;
+            where T: Mul&lt;Output=T&gt; + Copy { ... }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>HasArea</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Square</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Mul</span><span class='op'>&lt;</span><span class='ident'>Output</span><span class='op'>=</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>Copy</span> { ... }</pre>
+
+<p>Чтобы реализовать <code>area</code>, мы должны мочь умножить операнды друг на друга,
+поэтому мы объявляем <code>T</code> как реализующий <code>std::ops::Mul</code>. Как и <code>Add</code>, <code>Mul</code>
+принимает параметр <code>Output</code>: т.к. мы знаем, что числа не меняют своего типа,
+когда их умножают, <code>Output</code> также объявлен как <code>T</code>. <code>T</code> также должен
+поддерживать копирование, чтобы Rust не пытался переместить <code>self.side</code> в
+возвращаемое значение.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
