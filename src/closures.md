@@ -152,7 +152,7 @@ let takes_nums = || nums;
 Это тоже самое, как если бы мы передавали `nums` в функцию, которая забирала бы
 право владения на него.
 
-## `move` замыкания
+## Перемещающие замыкания (`move` closures)
 
 Мы можем заставить наше замыкание забирать право владения на свое окружение с
 помощью ключевого слова `move`:
@@ -170,7 +170,7 @@ let owns_num = move |x: i32| x + num;
 ```rust
 let mut num = 5;
 
-{ 
+{
     let mut add_num = |x: i32| num += x;
 
     add_num(5);
@@ -189,7 +189,7 @@ assert_eq!(10, num);
 ```rust
 let mut num = 5;
 
-{ 
+{
     let mut add_num = move |x: i32| num += x;
 
     add_num(5);
