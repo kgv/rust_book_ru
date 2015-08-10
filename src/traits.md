@@ -167,7 +167,7 @@ trait HasArea {
 
 impl HasArea for i32 {
     fn area(&self) -> f64 {
-        println!("это смешно");
+        println!("это нелепо");
 
         *self as f64
     }
