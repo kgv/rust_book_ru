@@ -189,8 +189,11 @@
 
 
     <h1 class="title">Типажи</h1>
-    <p>Вы помните, ключевое слово <code>impl</code>, используемое для вызова функции с синтаксисом
-метода?</p>
+    <p>Типаж --- это возможность объяснить компилятору, что данный тип должен
+предоставлять определённую функциональность.</p>
+
+<p>Вы помните ключевое слово <code>impl</code>, используемое для вызова функции через
+синтаксис метода?</p>
 <span class='rusttest'>#![feature(core)]
 fn main() {
     struct Circle {
@@ -261,12 +264,6 @@ fn main() {
 сигнатура. Когда мы реализуем типаж, мы используем <code>impl Trait for Item</code>, а не
 просто <code>impl Item</code>.</p>
 
-<p>Так что же в этом такого грандиозного? Помните ошибку, которую мы получали для
-нашей обобщённой функции <code>inverse</code>?</p>
-
-<pre><code class="language-text">error: binary operation `==` cannot be applied to type `T`
-</code></pre>
-
 <p>Мы можем использовать типажи для ограничения обобщённых типов. Рассмотрим
 похожую функцию, которая также не компилируется, и выводит ошибку:</p>
 <span class='rusttest'>fn main() {
@@ -285,8 +282,8 @@ fn main() {
 </code></pre>
 
 <p>Поскольку <code>T</code> может быть любого типа, мы не можем быть уверены, что он реализует
-метод <code>area</code>. Но мы можем добавить <strong>ограничение по типажу</strong> к нашему
-обобщённому типу <code>T</code>, гарантируя, что он будет соответствовать требованиям:</p>
+метод <code>area</code>. Но мы можем добавить «ограничение по типажу» к нашему обобщённому
+типу <code>T</code>, гарантируя, что он будет соответствовать требованиям:</p>
 <span class='rusttest'>fn main() {
     trait HasArea {
         fn area(&amp;self) -&gt; f64;
@@ -300,9 +297,9 @@ fn main() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
 }</pre>
 
-<p>Синтаксис <code>&lt;T: HasArea&gt;</code> означает <strong>любой тип, реализующий типаж <code>HasArea</code></strong>.
+<p>Синтаксис <code>&lt;T: HasArea&gt;</code> означает «любой тип, реализующий типаж <code>HasArea</code>».
 Так как типажи определяют сигнатуры типов функций, мы можем быть уверены, что
-любой тип, который реализует <code>HasArea</code> будет иметь метод <code>.area()</code>.</p>
+любой тип, который реализует <code>HasArea</code>, будет иметь метод <code>.area()</code>.</p>
 
 <p>Вот расширенный пример того, как это работает:</p>
 <span class='rusttest'>#![feature(core)]
@@ -335,7 +332,7 @@ impl HasArea for Square {
 }
 
 fn print_area&lt;T: HasArea&gt;(shape: T) {
-    println!(&quot;This shape has an area of {}&quot;, shape.area());
+    println!(&quot;Площадь этой фигуры равна {}&quot;, shape.area());
 }
 
 fn main() {
@@ -384,7 +381,7 @@ fn main() {
 }
 
 <span class='kw'>fn</span> <span class='ident'>print_area</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>HasArea</span><span class='op'>&gt;</span>(<span class='ident'>shape</span>: <span class='ident'>T</span>) {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;This shape has an area of {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Площадь этой фигуры равна {}&quot;</span>, <span class='ident'>shape</span>.<span class='ident'>area</span>());
 }
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
@@ -406,8 +403,8 @@ fn main() {
 
 <p>Ниже показан вывод программы:</p>
 
-<pre><code class="language-text">This shape has an area of 3.141593
-This shape has an area of 1
+<pre><code class="language-text">Площадь этой фигуры равна 3.141593
+Площадь этой фигуры равна 1
 </code></pre>
 
 <p>Как вы можете видеть, теперь <code>print_area</code> не только является обобщённой
@@ -421,12 +418,12 @@ This shape has an area of 1
 
 <p>Мы получим ошибку времени компиляции:</p>
 
-<pre><code class="language-text">error: failed to find an implementation of trait main::HasArea for int
+<pre><code class="language-text">error: the trait `HasArea` is not implemented for the type `_` [E0277]
 </code></pre>
 
 <p>До сих пор мы добавляли реализации типажей лишь для структур, но реализовать
-типаж возможно для любого типа. Технически, мы <em>могли бы</em> реализовать <code>HasArea</code>
-для <code>i32</code>:</p>
+типаж можно для любого типа. Технически, мы <em>могли бы</em> реализовать <code>HasArea</code> для
+<code>i32</code>:</p>
 <span class='rusttest'>fn main() {
     trait HasArea {
         fn area(&amp;self) -&gt; f64;
@@ -434,7 +431,7 @@ This shape has an area of 1
     
     impl HasArea for i32 {
         fn area(&amp;self) -&gt; f64 {
-            println!(&quot;this is silly&quot;);
+            println!(&quot;это нелепо&quot;);
     
             *self as f64
         }
@@ -449,7 +446,7 @@ This shape has an area of 1
 
 <span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>i32</span> {
     <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;this is silly&quot;</span>);
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;это нелепо&quot;</span>);
 
         <span class='op'>*</span><span class='self'>self</span> <span class='kw'>as</span> <span class='ident'>f64</span>
     }
@@ -457,166 +454,69 @@ This shape has an area of 1
 
 <span class='number'>5</span>.<span class='ident'>area</span>();</pre>
 
-<p>Хотя технически это возможно, но реализация методов для таких примитивных типов
-считается плохим стилем программирования.</p>
+<p>Хотя технически это возможно, реализация методов для примитивных типов считается
+плохим стилем программирования.</p>
 
-<p>Такой подход может показаться неконтролируемым, однако есть два ограничения,
-связанные с реализацией типажей, которые мешают коду выйти из-под контроля. Во-
-первых, типажи должны быть объявлены используемыми, с помощью ключевого слова
-<code>use</code>, в той области видимости, где вы хотите использовать методы этих типажей.
-Так, например, следующий код не будет работать:</p>
-<span class='rusttest'>mod shapes {
-    use std::f64::consts;
+<p>Может показаться, что такой подходит легко приводит к бардаку в коде, однако
+есть два ограничения, связанные с реализацией типажей, которые мешают коду выйти
+из-под контроля. Во-первых, если типаж не определён в нашей области видимости,
+он не применяется. Например, стандартная библиотека предоставляет типаж
+<a href="https://doc.rust-lang.org/stable/std/io/trait.Write.html"><code>Write</code></a>, который добавляет типу <code>File</code> функциональность ввода-вывода.
+По умолчанию у <code>File</code> не будет этих методов:</p>
+<span class='rusttest'>fn main() {
+    let mut f = std::fs::File::open(&quot;foo.txt&quot;).ok().expect(&quot;Не могу открыть foo.txt&quot;);
+    let buf = b&quot;whatever&quot;; // литерал строки байт. buf: &amp;[u8; 8]
+    let result = f.write(buf);
+    result.unwrap(); // игнорируем ошибку
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>::<span class='ident'>open</span>(<span class='string'>&quot;foo.txt&quot;</span>).<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='string'>&quot;Не могу открыть foo.txt&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='string'>b&quot;whatever&quot;</span>; <span class='comment'>// литерал строки байт. buf: &amp;[u8; 8]</span>
+<span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>f</span>.<span class='ident'>write</span>(<span class='ident'>buf</span>);</pre>
 
-    trait HasArea {
-        fn area(&amp;self) -&gt; f64;
-    }
+<p>Вот ошибка:</p>
 
-    struct Circle {
-        x: f64,
-        y: f64,
-        radius: f64,
-    }
-
-    impl HasArea for Circle {
-        fn area(&amp;self) -&gt; f64 {
-            consts::PI * (self.radius * self.radius)
-        }
-    }
-}
-
-fn main() {
-    let c = shapes::Circle {
-        x: 0.0f64,
-        y: 0.0f64,
-        radius: 1.0f64,
-    };
-
-    println!(&quot;{}&quot;, c.area());
-}
-</span><pre class='rust rust-example-rendered'>
-<span class='kw'>mod</span> <span class='ident'>shapes</span> {
-    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
-
-    <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
-        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
-    }
-
-    <span class='kw'>struct</span> <span class='ident'>Circle</span> {
-        <span class='ident'>x</span>: <span class='ident'>f64</span>,
-        <span class='ident'>y</span>: <span class='ident'>f64</span>,
-        <span class='ident'>radius</span>: <span class='ident'>f64</span>,
-    }
-
-    <span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Circle</span> {
-        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-            <span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
-        }
-    }
-}
-
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>shapes</span>::<span class='ident'>Circle</span> {
-        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
-        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
-        <span class='ident'>radius</span>: <span class='number'>1.0f64</span>,
-    };
-
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
-}</pre>
-
-<p>Теперь, когда мы переместили структуры и типажи в свой собственный модуль, мы
-получаем следующую ошибку:</p>
-
-<pre><code class="language-text">error: type `shapes::Circle` does not implement any method in scope named `area`
+<pre><code class="language-text">error: type `std::fs::File` does not implement any method in scope named `write`
+let result = f.write(buf);
+               ^~~~~~~~~~
 </code></pre>
 
-<p>Если мы добавим строку с <code>use</code> над функцией <code>main</code> и сделаем нужные элементы
-публичными, все будет в порядке:</p>
-<span class='rusttest'>#![feature(core)]
-mod shapes {
-    use std::f64::consts;
+<p>Сначала мы должны сделать <code>use</code> для типажа <code>Write</code>:</p>
+<span class='rusttest'>fn main() {
+    use std::io::Write;
+    
+    let mut f = std::fs::File::open(&quot;foo.txt&quot;).ok().expect(&quot;Не могу открыть foo.txt&quot;);
+    let buf = b&quot;whatever&quot;;
+    let result = f.write(buf);
+    result.unwrap(); // игнорируем ошибку
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Write</span>;
 
-    pub trait HasArea {
-        fn area(&amp;self) -&gt; f64;
-    }
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>::<span class='ident'>open</span>(<span class='string'>&quot;foo.txt&quot;</span>).<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='string'>&quot;Не могу открыть foo.txt&quot;</span>);
+<span class='kw'>let</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='string'>b&quot;whatever&quot;</span>;
+<span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>f</span>.<span class='ident'>write</span>(<span class='ident'>buf</span>);</pre>
 
-    pub struct Circle {
-        pub x: f64,
-        pub y: f64,
-        pub radius: f64,
-    }
+<p>Это скомпилируется без ошибки.</p>
 
-    impl HasArea for Circle {
-        fn area(&amp;self) -&gt; f64 {
-            consts::PI * (self.radius * self.radius)
-        }
-    }
-}
+<p>Благодаря такой логике работы, даже если кто-то сделает что-то страшное —
+например, добавит методы <code>i32</code>, это не коснётся вас, пока вы не импортируете
+типаж.</p>
 
-use shapes::HasArea;
-
-fn main() {
-    let c = shapes::Circle {
-        x: 0.0f64,
-        y: 0.0f64,
-        radius: 1.0f64,
-    };
-
-    println!(&quot;{}&quot;, c.area());
-}
-</span><pre class='rust rust-example-rendered'>
-<span class='kw'>mod</span> <span class='ident'>shapes</span> {
-    <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>f64</span>::<span class='ident'>consts</span>;
-
-    <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>HasArea</span> {
-        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
-    }
-
-    <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Circle</span> {
-        <span class='kw'>pub</span> <span class='ident'>x</span>: <span class='ident'>f64</span>,
-        <span class='kw'>pub</span> <span class='ident'>y</span>: <span class='ident'>f64</span>,
-        <span class='kw'>pub</span> <span class='ident'>radius</span>: <span class='ident'>f64</span>,
-    }
-
-    <span class='kw'>impl</span> <span class='ident'>HasArea</span> <span class='kw'>for</span> <span class='ident'>Circle</span> {
-        <span class='kw'>fn</span> <span class='ident'>area</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-            <span class='ident'>consts</span>::<span class='ident'>PI</span> <span class='op'>*</span> (<span class='self'>self</span>.<span class='ident'>radius</span> <span class='op'>*</span> <span class='self'>self</span>.<span class='ident'>radius</span>)
-        }
-    }
-}
-
-<span class='kw'>use</span> <span class='ident'>shapes</span>::<span class='ident'>HasArea</span>;
-
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>shapes</span>::<span class='ident'>Circle</span> {
-        <span class='ident'>x</span>: <span class='number'>0.0f64</span>,
-        <span class='ident'>y</span>: <span class='number'>0.0f64</span>,
-        <span class='ident'>radius</span>: <span class='number'>1.0f64</span>,
-    };
-
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>c</span>.<span class='ident'>area</span>());
-}</pre>
-
-<p>Это означает, что даже если кто-то сделает что-то плохое, как например добавит
-методы к <code>int</code>, на наш код это не окажет влияния, если вы не объявите <code>use</code> для
-этого типажа.</p>
-
-<p>Вот еще одно ограничение, связанное с реализацией типажей. Либо типаж, либо тип,
-для которого вы пишете <code>impl</code>, должны находиться в вашем крейте. Таким образом,
-мы могли бы реализовать типаж <code>HasArea</code> для <code>i32</code>, потому что <code>HasArea</code>
-находится в нашем крейте. Но если бы мы попытались реализовать типаж <code>Float</code>,
-предоставляемый самим Rust, для <code>i32</code>, мы не смогли бы этого сделать, потому что
-оба: типаж и тип отсутствуют в нашем крейте.</p>
+<p>Второе ограничение реализации типажей --- это то, что или типаж, или тип, для
+которого вы реализуете типаж, должен быть реализован вами. Мы могли бы
+определить <code>HasArea</code> для <code>i32</code>, потому что <code>HasArea</code> — это наш код. Но если бы
+мы попробовали реализовать для <code>i32</code> <code>ToString</code> — типаж, предоставляемый Rust —
+мы бы не смогли сделать это, потому что ни типаж, ни тип не реализован нами.</p>
 
 <p>Последнее, что нужно сказать о типажах: обобщённые функции с ограничением по
 типажам используют <em>мономорфизацию</em> (<em>mono</em>: один, <em>morph</em>: форма), поэтому они
 диспетчеризуются статически. Что это значит? Посмотрите главу
 <a href="trait-objects.html">Типажи-объекты</a>, чтобы получить больше информации.</p>
 
-<h2 id="Множественные-привязки-к-типажам" class='section-header'><a
-                           href="#Множественные-привязки-к-типажам">Множественные привязки к типажам</a></h2>
-<p>Вы уже видели как можно ограничить обобщенный параметр типа определенным
+<h1 id="Множественные-ограничения-по-типажам" class='section-header'><a
+                           href="#Множественные-ограничения-по-типажам">Множественные ограничения по типажам</a></h1>
+<p>Вы уже видели, как можно ограничить обобщённый параметр типа определённым
 типажом:</p>
 <span class='rusttest'>fn main() {
     fn foo&lt;T: Clone&gt;(x: T) {
@@ -628,7 +528,7 @@ fn main() {
     <span class='ident'>x</span>.<span class='ident'>clone</span>();
 }</pre>
 
-<p>Если вам нужно более одной привязки, то вы можете использовать <code>+</code>:</p>
+<p>Если вам нужно больше одного ограничения, вы можете использовать <code>+</code>:</p>
 <span class='rusttest'>fn main() {
     use std::fmt::Debug;
     
@@ -647,8 +547,8 @@ fn main() {
 
 <p>Теперь тип <code>T</code> должен реализовавать как типаж <code>Clone</code>, так и типаж <code>Debug</code>.</p>
 
-<h2 id="Утверждение-where" class='section-header'><a
-                           href="#Утверждение-where">Утверждение where</a></h2>
+<h1 id="Утверждение-where" class='section-header'><a
+                           href="#Утверждение-where">Утверждение where</a></h1>
 <p>Написание функций с несколькими обобщёнными типами и небольшим количеством
 ограничений по типажам выглядит не так уж плохо, но, с увеличением количества
 зависимостей, синтаксис получается более неуклюжим:</p>
@@ -670,10 +570,10 @@ fn main() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>y</span>);
 }</pre>
 
-<p>Имя функции находится слева, а список параметров — далеко справа. Привязки
+<p>Имя функции находится слева, а список параметров — далеко справа. Ограничения
 загромождают место.</p>
 
-<p>Rust имеет решение на этот счет, и оно называется &#39;утверждение <code>where</code>&#39;:</p>
+<p>Есть решение и для этой проблемы, и оно называется «утверждение <code>where</code>»:</p>
 <span class='rusttest'>use std::fmt::Debug;
 
 fn foo&lt;T: Clone, K: Clone + Debug&gt;(x: T, y: K) {
@@ -689,8 +589,8 @@ fn bar&lt;T, K&gt;(x: T, y: K) where T: Clone, K: Clone + Debug {
 }
 
 fn main() {
-    foo(&quot;Hello&quot;, &quot;world&quot;);
-    bar(&quot;Hello&quot;, &quot;workd&quot;);
+    foo(&quot;Привет&quot;, &quot;мир&quot;);
+    bar(&quot;Привет&quot;, &quot;мир&quot;);
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Debug</span>;
@@ -708,14 +608,14 @@ fn main() {
 }
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='ident'>foo</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;world&quot;</span>);
-    <span class='ident'>bar</span>(<span class='string'>&quot;Hello&quot;</span>, <span class='string'>&quot;workd&quot;</span>);
+    <span class='ident'>foo</span>(<span class='string'>&quot;Привет&quot;</span>, <span class='string'>&quot;мир&quot;</span>);
+    <span class='ident'>bar</span>(<span class='string'>&quot;Привет&quot;</span>, <span class='string'>&quot;мир&quot;</span>);
 }</pre>
 
 <p><code>foo()</code> использует синтаксис, показанный ранее, а <code>bar()</code> использует утверждение
 <code>where</code>. Все, что нам нужно сделать, это убрать ограничения при определении
-типов параметров, а затем добавить <code>where</code> после списка параметров. Для более
-длинного списка, могут быть добавлены пробельные символы:</p>
+типов параметров, а затем добавить <code>where</code> после списка параметров. В более
+длинных списках можно использовать пробелы:</p>
 <span class='rusttest'>fn main() {
     use std::fmt::Debug;
     
@@ -742,7 +642,8 @@ fn main() {
 
 <p>Такая гибкость может добавить ясности в сложных ситуациях.</p>
 
-<p><code>where</code> является более мощным инструментом, чем просто синтаксис. Например:</p>
+<p>На самом деле <code>where</code> не только упрощает написание, это более мощная
+возможность. Например:</p>
 <span class='rusttest'>fn main() {
     trait ConvertTo&lt;Output&gt; {
         fn convert(&amp;self) -&gt; Output;
@@ -752,14 +653,14 @@ fn main() {
         fn convert(&amp;self) -&gt; i64 { *self as i64 }
     }
     
-    // can be called with T == i32
+    // может быть вызван с T == i32
     fn normal&lt;T: ConvertTo&lt;i64&gt;&gt;(x: &amp;T) -&gt; i64 {
         x.convert()
     }
     
-    // can be called with T == i64
+    // может быть вызван с T == i64
     fn inverse&lt;T&gt;() -&gt; T
-            // this is using ConvertTo as if it were &quot;ConvertFrom&lt;i32&gt;&quot;
+            // использует ConvertTo как если бы это было «ConvertFrom&lt;i32&gt;»
             where i32: ConvertTo&lt;T&gt; {
         1i32.convert()
     }
@@ -773,187 +674,164 @@ fn main() {
     <span class='kw'>fn</span> <span class='ident'>convert</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>i64</span> { <span class='op'>*</span><span class='self'>self</span> <span class='kw'>as</span> <span class='ident'>i64</span> }
 }
 
-<span class='comment'>// can be called with T == i32</span>
+<span class='comment'>// может быть вызван с T == i32</span>
 <span class='kw'>fn</span> <span class='ident'>normal</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>i64</span><span class='op'>&gt;&gt;</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>i64</span> {
     <span class='ident'>x</span>.<span class='ident'>convert</span>()
 }
 
-<span class='comment'>// can be called with T == i64</span>
+<span class='comment'>// может быть вызван с T == i64</span>
 <span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>() <span class='op'>-&gt;</span> <span class='ident'>T</span>
-        <span class='comment'>// this is using ConvertTo as if it were &quot;ConvertFrom&lt;i32&gt;&quot;</span>
+        <span class='comment'>// использует ConvertTo как если бы это было «ConvertFrom&lt;i32&gt;»</span>
         <span class='kw'>where</span> <span class='ident'>i32</span>: <span class='ident'>ConvertTo</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='number'>1i32</span>.<span class='ident'>convert</span>()
 }</pre>
 
 <p>Этот код демонстрирует дополнительные преимущества использования утверждения
 <code>where</code>: оно позволяет задавать ограничение, где с левой стороны располагается
-произвольный тип (в данном случае <code>i32</code>), а не только простой параметр типа (как
-например <code>T</code>).</p>
+произвольный тип (в данном случае <code>i32</code>), а не только простой параметр типа
+(вроде <code>T</code>).</p>
 
-<h2 id="Наш-пример-inverse" class='section-header'><a
-                           href="#Наш-пример-inverse">Наш пример <code>inverse</code></a></h2>
-<p>Вернемся к разделу «<a href="generics.html">Обобщённое программирование</a>». мы пытались
-написать такой код:</p>
-<span class='rusttest'>fn main() {
-    fn inverse&lt;T&gt;(x: T) -&gt; Result&lt;T, String&gt; {
-        if x == 0.0 { return Err(&quot;x cannot be zero!&quot;.to_string()); }
-    
-        Ok(1.0 / x)
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
-    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
-
-    <span class='prelude-val'>Ok</span>(<span class='number'>1.0</span> <span class='op'>/</span> <span class='ident'>x</span>)
-}</pre>
-
-<p>Если мы попытаемся скомпилировать его, мы получим такую ошибку:</p>
-
-<pre><code class="language-text">error: binary operation `==` cannot be applied to type `T`
-</code></pre>
-
-<p>Все потому, что тип <code>T</code> является слишком общим: мы не можем знать наверняка, что
-любой случайный <code>T</code> можно сравнивать. Для конкретизации мы можем ограничить его
-типажом. Хотя этот код и не будет работать, но попробуйте сделать следующее:</p>
-<span class='rusttest'>fn main() {
-    fn inverse&lt;T: PartialEq&gt;(x: T) -&gt; Result&lt;T, String&gt; {
-        if x == 0.0 { return Err(&quot;x cannot be zero!&quot;.to_string()); }
-    
-        Ok(1.0 / x)
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>PartialEq</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
-    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='number'>0.0</span> { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()); }
-
-    <span class='prelude-val'>Ok</span>(<span class='number'>1.0</span> <span class='op'>/</span> <span class='ident'>x</span>)
-}</pre>
-
-<p>Вы получите ошибку:</p>
-
-<pre><code class="language-text">error: mismatched types:
- expected `T`,
-    found `_`
-(expected type parameter,
-    found floating-point variable)
-</code></pre>
-
-<p>Как уже было сказано, этот код не будет работать. Это потому, что наш <code>T</code>
-реализует <code>PartialEq</code>, который принимает на вход другой <code>T</code>, но, вместо этого,
-мы передаем переменную с плавающей точкой. Нам нужно другое ограничение. С
-помощью <code>Float</code> можно исправить ошибку:</p>
-<span class='rusttest'>#![feature(std_misc)]
-fn main() {
-    use std::num::Float;
-    
-    fn inverse&lt;T: Float&gt;(x: T) -&gt; Result&lt;T, String&gt; {
-        if x == Float::zero() { return Err(&quot;x cannot be zero!&quot;.to_string()) }
-    
-        let one: T = Float::one();
-        Ok(one / x)
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>num</span>::<span class='ident'>Float</span>;
-
-<span class='kw'>fn</span> <span class='ident'>inverse</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Float</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>T</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
-    <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='ident'>Float</span>::<span class='ident'>zero</span>() { <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;x cannot be zero!&quot;</span>.<span class='ident'>to_string</span>()) }
-
-    <span class='kw'>let</span> <span class='ident'>one</span>: <span class='ident'>T</span> <span class='op'>=</span> <span class='ident'>Float</span>::<span class='ident'>one</span>();
-    <span class='prelude-val'>Ok</span>(<span class='ident'>one</span> <span class='op'>/</span> <span class='ident'>x</span>)
-}</pre>
-
-<p>Нам следует заменить <code>0.0</code> и <code>1.0</code> соответствующими методами из типажа <code>Float</code>.
-И <code>f32</code>, и <code>f64</code> реализуют типаж <code>Float</code>, так что наша функция будет работать
-просто отлично:</p>
-<span class='rusttest'>#![feature(std_misc)]
-fn main() {
-    use std::num::Float;
-    fn inverse&lt;T: Float&gt;(x: T) -&gt; Result&lt;T, String&gt; {
-        if x == Float::zero() { return Err(&quot;x cannot be zero!&quot;.to_string()) }
-        let one: T = Float::one();
-        Ok(one / x)
-    }
-    println!(&quot;the inverse of {} is {:?}&quot;, 2.0f32, inverse(2.0f32));
-    println!(&quot;the inverse of {} is {:?}&quot;, 2.0f64, inverse(2.0f64));
-    
-    println!(&quot;the inverse of {} is {:?}&quot;, 0.0f32, inverse(0.0f32));
-    println!(&quot;the inverse of {} is {:?}&quot;, 0.0f64, inverse(0.0f64));
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f32</span>));
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>2.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>2.0f64</span>));
-
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f32</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f32</span>));
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the inverse of {} is {:?}&quot;</span>, <span class='number'>0.0f64</span>, <span class='ident'>inverse</span>(<span class='number'>0.0f64</span>));</pre>
-
-<h2 id="Методы-по-умолчанию" class='section-header'><a
-                           href="#Методы-по-умолчанию">Методы по умолчанию</a></h2>
-<p>Есть еще одна особенность типажей, которую мы должны охватывать: методы по
-умолчанию. Проще всего это показать на примере:</p>
+<h1 id="Методы-по-умолчанию" class='section-header'><a
+                           href="#Методы-по-умолчанию">Методы по умолчанию</a></h1>
+<p>Есть еще одна особенность типажей, о которой стоит поговорить: методы по
+умолчанию. Проще всего показать это на примере:</p>
 <span class='rusttest'>fn main() {
     trait Foo {
-        fn bar(&amp;self);
+        fn is_valid(&amp;self) -&gt; bool;
     
-        fn baz(&amp;self) { println!(&quot;We called baz.&quot;); }
+        fn is_invalid(&amp;self) -&gt; bool { !self.is_valid() }
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>trait</span> <span class='ident'>Foo</span> {
-    <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
+    <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span>;
 
-    <span class='kw'>fn</span> <span class='ident'>baz</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called baz.&quot;</span>); }
+    <span class='kw'>fn</span> <span class='ident'>is_invalid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>is_valid</span>() }
 }</pre>
 
-<p>При реализации типажа <code>Foo</code> необходимо реализовать метод <code>bar()</code>, но нет
-необходимости в реализации метода <code>baz()</code>. Это поведение будет реализовано по
-умолчанию. По желанию, можно переопределить значение метода по умолчанию:</p>
+<p>В типах, реализующих типаж <code>Foo</code>, нужно реализовать метод <code>is_valid()</code>, а
+<code>is_invalid()</code> будет реализован по-умолчанию. Его поведение можно
+переопределить:</p>
 <span class='rusttest'>fn main() {
     trait Foo {
-    fn bar(&amp;self);
-    fn baz(&amp;self) { println!(&quot;We called baz.&quot;); }
+        fn is_valid(&amp;self) -&gt; bool;
+    
+        fn is_invalid(&amp;self) -&gt; bool { !self.is_valid() }
     }
     struct UseDefault;
     
     impl Foo for UseDefault {
-        fn bar(&amp;self) { println!(&quot;We called bar.&quot;); }
+        fn is_valid(&amp;self) -&gt; bool {
+            println!(&quot;Вызван UseDefault.is_valid.&quot;);
+            true
+        }
     }
     
     struct OverrideDefault;
     
     impl Foo for OverrideDefault {
-        fn bar(&amp;self) { println!(&quot;We called bar.&quot;); }
+        fn is_valid(&amp;self) -&gt; bool {
+            println!(&quot;Вызван OverrideDefault.is_valid.&quot;);
+            true
+        }
     
-        fn baz(&amp;self) { println!(&quot;Override baz!&quot;); }
+        fn is_invalid(&amp;self) -&gt; bool {
+            println!(&quot;Вызван OverrideDefault.is_invalid!&quot;);
+            true // эта реализация противоречит сама себе!
+        }
     }
     
     let default = UseDefault;
-    default.baz(); // prints &quot;We called baz.&quot;
+    assert!(!default.is_invalid()); // печатает «Вызван UseDefault.is_valid.»
     
     let over = OverrideDefault;
-    over.baz(); // prints &quot;Override baz!&quot;
+    assert!(over.is_invalid()); // печатает «Вызван OverrideDefault.is_invalid!»
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>struct</span> <span class='ident'>UseDefault</span>;
 
 <span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>UseDefault</span> {
-    <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called bar.&quot;</span>); }
+    <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Вызван UseDefault.is_valid.&quot;</span>);
+        <span class='boolval'>true</span>
+    }
 }
 
 <span class='kw'>struct</span> <span class='ident'>OverrideDefault</span>;
 
 <span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>OverrideDefault</span> {
-    <span class='kw'>fn</span> <span class='ident'>bar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;We called bar.&quot;</span>); }
+    <span class='kw'>fn</span> <span class='ident'>is_valid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Вызван OverrideDefault.is_valid.&quot;</span>);
+        <span class='boolval'>true</span>
+    }
 
-    <span class='kw'>fn</span> <span class='ident'>baz</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Override baz!&quot;</span>); }
+    <span class='kw'>fn</span> <span class='ident'>is_invalid</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Вызван OverrideDefault.is_invalid!&quot;</span>);
+        <span class='boolval'>true</span> <span class='comment'>// эта реализация противоречит сама себе!</span>
+    }
 }
 
 <span class='kw'>let</span> <span class='ident'>default</span> <span class='op'>=</span> <span class='ident'>UseDefault</span>;
-<span class='ident'>default</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;We called baz.&quot;</span>
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>default</span>.<span class='ident'>is_invalid</span>()); <span class='comment'>// печатает «Вызван UseDefault.is_valid.»</span>
 
 <span class='kw'>let</span> <span class='ident'>over</span> <span class='op'>=</span> <span class='ident'>OverrideDefault</span>;
-<span class='ident'>over</span>.<span class='ident'>baz</span>(); <span class='comment'>// prints &quot;Override baz!&quot;</span></pre>
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>over</span>.<span class='ident'>is_invalid</span>()); <span class='comment'>// печатает «Вызван OverrideDefault.is_invalid!»</span></pre>
+
+<h1 id="Наследование" class='section-header'><a
+                           href="#Наследование">Наследование</a></h1>
+<p>Иногда чтобы реализовать один типаж, нужно реализовать типажи, от которых он
+зависит:</p>
+<span class='rusttest'>fn main() {
+    trait Foo {
+        fn foo(&amp;self);
+    }
+    
+    trait FooBar : Foo {
+        fn foobar(&amp;self);
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>trait</span> <span class='ident'>Foo</span> {
+    <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
+}
+
+<span class='kw'>trait</span> <span class='ident'>FooBar</span> : <span class='ident'>Foo</span> {
+    <span class='kw'>fn</span> <span class='ident'>foobar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>);
+}</pre>
+
+<p>Типы, реализующие <code>FooBar</code>, должны реализовывать <code>Foo</code>:</p>
+<span class='rusttest'>fn main() {
+    trait Foo {
+        fn foo(&amp;self);
+    }
+    trait FooBar : Foo {
+        fn foobar(&amp;self);
+    }
+    struct Baz;
+    
+    impl Foo for Baz {
+        fn foo(&amp;self) { println!(&quot;foo&quot;); }
+    }
+    
+    impl FooBar for Baz {
+        fn foobar(&amp;self) { println!(&quot;foobar&quot;); }
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Baz</span>;
+
+<span class='kw'>impl</span> <span class='ident'>Foo</span> <span class='kw'>for</span> <span class='ident'>Baz</span> {
+    <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;foo&quot;</span>); }
+}
+
+<span class='kw'>impl</span> <span class='ident'>FooBar</span> <span class='kw'>for</span> <span class='ident'>Baz</span> {
+    <span class='kw'>fn</span> <span class='ident'>foobar</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) { <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;foobar&quot;</span>); }
+}</pre>
+
+<p>Если мы забудем реализовать <code>Foo</code>, компилятор скажет нам об этом:</p>
+
+<pre><code class="language-text">error: the trait `main::Foo` is not implemented for the type `main::Baz` [E0277]
+</code></pre>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
