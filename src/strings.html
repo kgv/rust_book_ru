@@ -189,86 +189,102 @@
 
 
     <h1 class="title">Строки</h1>
-    <p>Строки являются важным понятием для любого ведущего программиста. Система
-обработки строк в Rust немного отличается от других языков, в связи с его
-фокусировкой на системный уровень. Всякий раз, когда вы имеете дело со
-структурой данных с переменным размером, все может стать слишком запутанным, и
-строки как раз являются структурой данных с переменным размером. Кроме того,
-работа со строками в Rust также отличается и от некоторых системных языков,
-таких как C.</p>
+    <p>Строки — важное понятие для любого программиста. Система обработки строк в Rust
+немного отличается от других языков, потому что это язык системного
+программирования. Работать со структурами данных с переменным размером довольно
+сложно, и строки — как раз такая структура данных. Кроме того, работа со
+строками в Rust также отличается и от некоторых системных языков, таких как C.</p>
 
 <p>Давайте разбираться в деталях. <em>string</em> — это последовательность скалярных
-значений юникод, закодированных в виде потока UTF-8 байт. Все строки должны быть
+значений юникод, закодированных в виде потока байт UTF-8. Все строки должны быть
 гарантированно валидными UTF-8 последовательностями. Кроме того, строки не
-оканчиваются нулем и могут содержать нулевые байты.</p>
+оканчиваются нулём и могут содержать нулевые байты.</p>
 
 <p>В Rust есть два основных типа строк: <code>&amp;str</code> и <code>String</code>. Сперва поговорим о
-<code>&amp;str</code>. Это произносится как &#39;строковый срез (слайс)&#39;. Строковые литералы имеют
-тип <code>&amp;&#39;static str</code>:</p>
+<code>&amp;str</code> — это «строковый срез». Строковые литералы имеют тип <code>&amp;&#39;static str</code>:</p>
 <span class='rusttest'>fn main() {
-    let string = &quot;Hello there.&quot;; // string: &amp;&#39;static str
+    let greeting = &quot;Всем привет.&quot;; // greeting: &amp;&#39;static str
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>string</span> <span class='op'>=</span> <span class='string'>&quot;Hello there.&quot;</span>; <span class='comment'>// string: &amp;&#39;static str</span></pre>
+<span class='kw'>let</span> <span class='ident'>greeting</span> <span class='op'>=</span> <span class='string'>&quot;Всем привет.&quot;</span>; <span class='comment'>// greeting: &amp;&#39;static str</span></pre>
 
 <p>Эта строка выделяется статически, что означает, что она сохраняется в нашей
 скомпилированной программе и существует в течение всего периода ее выполнения.
-<code>string</code> привязка представляет собой ссылку на эту статически размещенную
-строку. Строковые срезы имеют фиксированный размер и не могут быть изменены.</p>
+Имя <code>greeting</code> представляет собой ссылку на эту статически размещенную строку.
+Строковые срезы имеют фиксированный размер и не могут быть изменены.</p>
 
-<p><code>String</code> же, напротив, выделяется в куче. Эта строка расширяема, а также она
-гарантированно является UTF-8 последовательностью. <code>String</code> обычно создается
+<p><code>String</code> же, напротив, выделяется в куче. Эта строка расширяема, и она также
+гарантированно является последовательностью UTF-8. <code>String</code> обычно создаётся
 путем преобразования из строкового среза с использованием метода <code>to_string</code>.</p>
 <span class='rusttest'>fn main() {
-    let mut s = &quot;Hello&quot;.to_string(); // mut s: String
+    let mut s = &quot;Привет&quot;.to_string(); // mut s: String
     println!(&quot;{}&quot;, s);
     
-    s.push_str(&quot;, world.&quot;);
+    s.push_str(&quot;, мир.&quot;);
     println!(&quot;{}&quot;, s);
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>(); <span class='comment'>// mut s: String</span>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Привет&quot;</span>.<span class='ident'>to_string</span>(); <span class='comment'>// mut s: String</span>
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);
 
-<span class='ident'>s</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;, world.&quot;</span>);
+<span class='ident'>s</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;, мир.&quot;</span>);
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>s</span>);</pre>
 
 <p><code>String</code> преобразуются в <code>&amp;str</code> с помощью <code>&amp;</code>:</p>
 <span class='rusttest'>fn takes_slice(slice: &amp;str) {
-    println!(&quot;Got: {}&quot;, slice);
+    println!(&quot;Получили: {}&quot;, slice);
 }
 
 fn main() {
-    let s = &quot;Hello&quot;.to_string();
+    let s = &quot;Привет&quot;.to_string();
     takes_slice(&amp;s);
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>takes_slice</span>(<span class='ident'>slice</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got: {}&quot;</span>, <span class='ident'>slice</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили: {}&quot;</span>, <span class='ident'>slice</span>);
 }
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Hello&quot;</span>.<span class='ident'>to_string</span>();
+    <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Привет&quot;</span>.<span class='ident'>to_string</span>();
     <span class='ident'>takes_slice</span>(<span class='kw-2'>&amp;</span><span class='ident'>s</span>);
 }</pre>
 
-<p>Представление <code>String</code> как <code>&amp;str</code> является дешевой операцией, но преобразование
-<code>&amp;str</code> в <code>String</code> предполагает выделение памяти. Нет причин делать это, если в
-этом нет необходимости!</p>
+<p>Это преобразование не происходит в случае функций, которые принимают какой-то
+типаж <code>&amp;str</code>, а не сам <code>&amp;str</code>. Например, у метода
+<a href="https://doc.rust-lang.org/stable/std/net/struct.TcpStream.html#method.connect"><code>TcpStream::connect</code></a> есть параметр типа <code>ToSocketAddrs</code>. Сюда можно
+передать <code>&amp;str</code>, но <code>String</code> нужно явно преобразовать с помощью <code>&amp;*</code>.</p>
+<span class='rusttest'>fn main() {
+    use std::net::TcpStream;
+    
+    TcpStream::connect(&quot;192.168.0.1:3000&quot;); // &amp;str parameter
+    
+    let addr_string = &quot;192.168.0.1:3000&quot;.to_string();
+    TcpStream::connect(&amp;*addr_string); // преобразуем addr_string в &amp;str
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>TcpStream</span>;
+
+<span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='string'>&quot;192.168.0.1:3000&quot;</span>); <span class='comment'>// &amp;str parameter</span>
+
+<span class='kw'>let</span> <span class='ident'>addr_string</span> <span class='op'>=</span> <span class='string'>&quot;192.168.0.1:3000&quot;</span>.<span class='ident'>to_string</span>();
+<span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>addr_string</span>); <span class='comment'>// преобразуем addr_string в &amp;str</span></pre>
+
+<p>Представление <code>String</code> как <code>&amp;str</code> — дешёвая операция, но преобразование <code>&amp;str</code>
+в <code>String</code> предполагает выделение памяти. Не стоит делать это без необходимости!</p>
 
 <h2 id="Индексация" class='section-header'><a
                            href="#Индексация">Индексация</a></h2>
 <p>Поскольку строки являются валидными UTF-8 последовательностями, то они не
 поддерживают индексацию:</p>
 <span class='rusttest'>fn main() {
-    let s = &quot;hello&quot;;
+    let s = &quot;привет&quot;;
     
-    println!(&quot;The first letter of s is {}&quot;, s[0]); // ERROR!!!
+    println!(&quot;Первая буква s — {}&quot;, s[0]); // ОШИБКА!!!
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;hello&quot;</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;привет&quot;</span>;
 
-<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;The first letter of s is {}&quot;</span>, <span class='ident'>s</span>[<span class='number'>0</span>]); <span class='comment'>// ERROR!!!</span></pre>
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Первая буква s — {}&quot;</span>, <span class='ident'>s</span>[<span class='number'>0</span>]); <span class='comment'>// ОШИБКА!!!</span></pre>
 
 <p>Как правило, доступ к вектору с помощью <code>[]</code> является очень быстрой операцией.
 Но поскольку каждый символ в строке, закодированной UTF-8, может быть
@@ -276,7 +292,7 @@ fn main() {
 количество литер в строке. Это значительно более дорогая операция, а мы не хотим
 вводить в заблуждение. Кроме того, «литера» — это не совсем то, что определено в
 Unicode. Мы можем выбрать как рассматривать строку: как отдельные байты или как
-кодовые единицы:</p>
+кодовые единицы (codepoints):</p>
 <span class='rusttest'>fn main() {
     let hachiko = &quot;忠犬ハチ公&quot;;
     
@@ -318,16 +334,43 @@ Unicode. Мы можем выбрать как рассматривать стр
 <p>Вы можете получить что-то наподобие индекса, как показано ниже:</p>
 <span class='rusttest'>fn main() {
     let hachiko = &quot;忠犬ハチ公&quot;;
-    let dog = hachiko.chars().nth(1); // kinda like hachiko[1]
+    let dog = hachiko.chars().nth(1); // что-то вроде hachiko[1]
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>dog</span> <span class='op'>=</span> <span class='ident'>hachiko</span>.<span class='ident'>chars</span>().<span class='ident'>nth</span>(<span class='number'>1</span>); <span class='comment'>// kinda like hachiko[1]</span></pre>
+<span class='kw'>let</span> <span class='ident'>dog</span> <span class='op'>=</span> <span class='ident'>hachiko</span>.<span class='ident'>chars</span>().<span class='ident'>nth</span>(<span class='number'>1</span>); <span class='comment'>// что-то вроде hachiko[1]</span></pre>
 
 <p>Это подчеркивает, что мы должны пройти через весь список <code>chars</code>.</p>
 
+<h2 id="Срезы" class='section-header'><a
+                           href="#Срезы">Срезы</a></h2>
+<p>Вы можете получить срез строки с помощью синтаксиса срезов:</p>
+<span class='rusttest'>fn main() {
+    let dog = &quot;hachiko&quot;;
+    let hachi = &amp;dog[0..5];
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>dog</span> <span class='op'>=</span> <span class='string'>&quot;hachiko&quot;</span>;
+<span class='kw'>let</span> <span class='ident'>hachi</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>dog</span>[<span class='number'>0</span>..<span class='number'>5</span>];</pre>
+
+<p>Но заметьте, что это индексы <em>байтов</em>, а не <em>символов</em>. Поэтому этот код
+запаникует:</p>
+<span class='rusttest'>fn main() {
+    let dog = &quot;忠犬ハチ公&quot;;
+    let hachi = &amp;dog[0..2];
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>dog</span> <span class='op'>=</span> <span class='string'>&quot;忠犬ハチ公&quot;</span>;
+<span class='kw'>let</span> <span class='ident'>hachi</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>dog</span>[<span class='number'>0</span>..<span class='number'>2</span>];</pre>
+
+<p>с такой ошибкой:</p>
+
+<pre><code class="language-text">thread &#39;&lt;main&gt;&#39; panicked at &#39;index 0 and/or 2 in `忠犬ハチ公` do not lie on
+character boundary&#39;
+</code></pre>
+
 <h2 id="Конкатенация" class='section-header'><a
                            href="#Конкатенация">Конкатенация</a></h2>
-<p>Если у вас есть <code>String</code>, то вы можете присоединить к ней в конец <code>&amp;str</code>:</p>
+<p>Если у вас есть <code>String</code>, то вы можете присоединить к нему в конец <code>&amp;str</code>:</p>
 <span class='rusttest'>fn main() {
     let hello = &quot;Hello &quot;.to_string();
     let world = &quot;world!&quot;;
