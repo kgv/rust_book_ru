@@ -214,46 +214,6 @@ fn main() {
     }
 }</pre>
 
-<p>Отключаемая возможность <code>advanced_slice_patterns</code> позволяет использовать <code>..</code>,
-чтобы обозначить любое число элементов в шаблоне. Этот символ подстановки можно
-использовать в массиве один раз. Если перед <code>..</code> есть идентификатор, результат
-среза будет связан с этим именем. Например:</p>
-<span class='rusttest'>#![feature(advanced_slice_patterns, slice_patterns)]
-
-fn is_symmetric(list: &amp;[u32]) -&gt; bool {
-    match list {
-        [] | [_] =&gt; true,
-        [x, inside.., y] if x == y =&gt; is_symmetric(inside),
-        _ =&gt; false
-    }
-}
-
-fn main() {
-    let sym = &amp;[0, 1, 4, 2, 4, 1, 0];
-    assert!(is_symmetric(sym));
-
-    let not_sym = &amp;[0, 1, 7, 2, 4, 1, 0];
-    assert!(!is_symmetric(not_sym));
-}
-</span><pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>advanced_slice_patterns</span>, <span class='ident'>slice_patterns</span>)]</span>
-
-<span class='kw'>fn</span> <span class='ident'>is_symmetric</span>(<span class='ident'>list</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u32</span>]) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-    <span class='kw'>match</span> <span class='ident'>list</span> {
-        [] <span class='op'>|</span> [_] <span class='op'>=&gt;</span> <span class='boolval'>true</span>,
-        [<span class='ident'>x</span>, <span class='ident'>inside</span>.., <span class='ident'>y</span>] <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>==</span> <span class='ident'>y</span> <span class='op'>=&gt;</span> <span class='ident'>is_symmetric</span>(<span class='ident'>inside</span>),
-        _ <span class='op'>=&gt;</span> <span class='boolval'>false</span>
-    }
-}
-
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>sym</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='number'>0</span>, <span class='number'>1</span>, <span class='number'>4</span>, <span class='number'>2</span>, <span class='number'>4</span>, <span class='number'>1</span>, <span class='number'>0</span>];
-    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>is_symmetric</span>(<span class='ident'>sym</span>));
-
-    <span class='kw'>let</span> <span class='ident'>not_sym</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='number'>0</span>, <span class='number'>1</span>, <span class='number'>7</span>, <span class='number'>2</span>, <span class='number'>4</span>, <span class='number'>1</span>, <span class='number'>0</span>];
-    <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>is_symmetric</span>(<span class='ident'>not_sym</span>));
-}</pre>
-
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
     </script>
