@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Аргументы компоновки (link args)</title>
+    <title>Продвинутое руководстве по компоновке (advanced linking)</title>
 
     <link rel="stylesheet" type="text/css" href="../rust-book.css">
 
@@ -166,7 +166,7 @@
 </li>
 <li><a  href='../src/lang-items.html'><b>7.5.</b> Элементы языка (lang items)</a>
 </li>
-<li><a class='active' href='../src/advanced-linking.html'><b>7.6.</b> Продвинутое руководство по компоновке (advanced linkinking)</a>
+<li><a class='active' href='../src/advanced-linking.html'><b>7.6.</b> Продвинутое руководство по компоновке (advanced linking)</a>
 </li>
 <li><a  href='../src/benchmark-tests.html'><b>7.7.</b> Тесты производительности</a>
 </li>
@@ -188,11 +188,17 @@
 <div id='page'>
 
 
-    <h1 class="title">Аргументы компоновки (link args)</h1>
-    <p>Еще один способ указать rustc как настроить линковку — с помощью атрибута
-<code>link_args</code>. Этот атрибут применяется к блокам <code>extern</code> и определяет исходные
-флаги, которые нужно передать компоновщику при производстве артефакта.
-Пример использования:</p>
+    <h1 class="title">Продвинутое руководстве по компоновке (advanced linking)</h1>
+    <p>Распространённые ситуации, в которых требовалась компоновка с кодом на Rust, уже
+были рассмотрены в предыдущих главах книги. Однако для поддержки прозрачного
+взаимодействия с нативными библиотеками требуется более широкая поддержка разных
+вариантов компоновки.</p>
+
+<h1 id="Аргументы-компоновки-(link-args)" class='section-header'><a
+                           href="#Аргументы-компоновки-(link-args)">Аргументы компоновки (link args)</a></h1>
+<p>Есть только один способ тонкой настройки компоновки — атрибут <code>link_args</code>.
+Этот атрибут применяется к блокам <code>extern</code>, и указывает сырые аргументы, которые
+должны быть переданы компоновщику при создании артефакта. Например:</p>
 <span class='rusttest'>#![feature(link_args)]
 
 #[link_args = &quot;-foo -bar -baz&quot;]
@@ -204,16 +210,129 @@ fn main() {}
 <span class='attribute'>#[<span class='ident'>link_args</span> <span class='op'>=</span> <span class='string'>&quot;-foo -bar -baz&quot;</span>]</span>
 <span class='kw'>extern</span> {}</pre>
 
-<p>Обратите внимание, что эта возможность в настоящее время находится в закрытых
-возможностях (feature gate), <code>feature(link_args)</code>, потому что это не
-санкционированный способ выполнения компоновки. Сейчас rustc выходит на
-(использует) системный компоновщик, поэтому имеет смысл предоставить
-дополнительные аргументы командной строки, но это не всегда будет так. В будущем
-rustc может использовать LLVM непосредственно, чтобы компоновать нативные
-библиотеки, и в этом случае <code>link_args</code> не будет иметь никакого смысла.</p>
+<p>Обратите внимание, что эта возможность скрыта за <code>feature(link_args)</code>, так как
+это нештатный способ компоновки. В данный момент <code>rustc</code> вызывает системный
+компоновщик (на большинстве систем это <code>gcc</code>, на Windows — <code>link.exe</code>),
+поэтому передача аргументов командной строки имеет смысл. Но реализация не
+всегда будет такой — в будущем <code>rustc</code> может напрямую использовать LLVM для
+связывания с нативными библиотеками, и тогда <code>link_args</code> станет бессмысленным.
+Того же эффекта можно достигнуть с пощощью передачи <code>rustc</code> аргумента <code>-C link-args</code>.</p>
 
-<p>Настоятельно рекомендуется не использовать этот атрибут, вместо него лучше
-использовать более формальный атрибут <code>#[link(...)]</code> для блоков <code>extern</code>.</p>
+<p>Крайне рекомендуется <em>не</em> использовать этот атрибут, и пользоваться вместо него
+более точно определённым атрибутом <code>#link(...)</code> для блоков <code>extern</code>.</p>
+
+<h1 id="Статическое-связывание" class='section-header'><a
+                           href="#Статическое-связывание">Статическое связывание</a></h1>
+<p>Статическое связывание — это процесс создания артефакта, который содержит все
+нужные библиотеки, и потому не потребует установленных библиотек на целевой
+системе. Библиотеки на Rust по умолчанию связываются статически, поэтому
+приложения и библиотеки на Rust можно использовать без установки Rust повсюду.
+Напротив, нативные библиотеки (например, <code>libc</code> и <code>libm</code>) обычно связываются
+динамически, но это можно изменить, и сделать чтобы они также связывались
+статически.</p>
+
+<p>Компоновка — это процесс, который реализуется по-разному на разных платформах.
+На некоторых из них статическое связывание вообще не возможно! Этот раздел
+предполагает знакомство с процессом компоновки на вашей платформе.</p>
+
+<h2 id="linux" class='section-header'><a
+                           href="#linux">Linux</a></h2>
+<p>По умолчанию, программы на Rust для Linux компонуются с системной <code>libc</code> и ещё
+некоторыми библиотеками. Давайте посмотрим на пример на 64-битной машине с
+Linux, GCC и <code>glibc</code> (самой популярной <code>libc</code> на Linux):</p>
+
+<pre><code class="language-text">$ cat example.rs
+fn main() {}
+$ rustc example.rs
+$ ldd example
+        linux-vdso.so.1 =&gt;  (0x00007ffd565fd000)
+        libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fa81889c000)
+        libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fa81867e000)
+        librt.so.1 =&gt; /lib/x86_64-linux-gnu/librt.so.1 (0x00007fa818475000)
+        libgcc_s.so.1 =&gt; /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fa81825f000)
+        libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fa817e9a000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fa818cf9000)
+        libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fa817b93000)
+</code></pre>
+
+<p>Иногда динамическое связывание на Linux нежелательно: например, если вы хотите
+использовать возможности из новых библиотек на старых системах или на целевых
+системах нет таких библиотек.</p>
+
+<p>Статическое связывание возможно с альтернативной <code>libc</code>, <code>musl</code>. Вы можете
+скомпилировать свою версию Rust, которая будет использовать <code>musl</code>, и установить
+её в отдельную директорию, с помощью инструкции, приведённой ниже:</p>
+
+<pre><code class="language-text">$ mkdir musldist
+$ PREFIX=$(pwd)/musldist
+$
+$ # Build musl
+$ wget http://www.musl-libc.org/releases/musl-1.1.10.tar.gz
+[...]
+$ tar xf musl-1.1.10.tar.gz
+$ cd musl-1.1.10/
+musl-1.1.10 $ ./configure --disable-shared --prefix=$PREFIX
+[...]
+musl-1.1.10 $ make
+[...]
+musl-1.1.10 $ make install
+[...]
+musl-1.1.10 $ cd ..
+$ du -h musldist/lib/libc.a
+2.2M    musldist/lib/libc.a
+$
+$ # Build libunwind.a
+$ wget http://llvm.org/releases/3.6.1/llvm-3.6.1.src.tar.xz
+$ tar xf llvm-3.6.1.src.tar.xz
+$ cd llvm-3.6.1.src/projects/
+llvm-3.6.1.src/projects $ svn co http://llvm.org/svn/llvm-project/libcxxabi/trunk/ libcxxabi
+llvm-3.6.1.src/projects $ svn co http://llvm.org/svn/llvm-project/libunwind/trunk/ libunwind
+llvm-3.6.1.src/projects $ sed -i &#39;s#^\(include_directories\).*$#\0\n\1(../libcxxabi/include)#&#39; libunwind/CMakeLists.txt
+llvm-3.6.1.src/projects $ mkdir libunwind/build
+llvm-3.6.1.src/projects $ cd libunwind/build
+llvm-3.6.1.src/projects/libunwind/build $ cmake -DLLVM_PATH=../../.. -DLIBUNWIND_ENABLE_SHARED=0 ..
+llvm-3.6.1.src/projects/libunwind/build $ make
+llvm-3.6.1.src/projects/libunwind/build $ cp lib/libunwind.a $PREFIX/lib/
+llvm-3.6.1.src/projects/libunwind/build $ cd cd ../../../../
+$ du -h musldist/lib/libunwind.a
+164K    musldist/lib/libunwind.a
+$
+$ # Build musl-enabled rust
+$ git clone https://github.com/rust-lang/rust.git muslrust
+$ cd muslrust
+muslrust $ ./configure --target=x86_64-unknown-linux-musl --musl-root=$PREFIX --prefix=$PREFIX
+muslrust $ make
+muslrust $ make install
+muslrust $ cd ..
+$ du -h musldist/bin/rustc
+12K     musldist/bin/rustc
+</code></pre>
+
+<p>Теперь у вас есть сборка Rust с <code>musl</code>! Поскольку мы установили её в отдельную
+корневую директорию, надо удостовериться в том, что система может найти
+исполняемые файлы и библиотеки:</p>
+
+<pre><code class="language-text">$ export PATH=$PREFIX/bin:$PATH
+$ export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
+</code></pre>
+
+<p>Давайте попробуем!</p>
+
+<pre><code class="language-text">$ echo &#39;fn main() { println!(&quot;hi!&quot;); panic!(&quot;failed&quot;); }&#39; &gt; example.rs
+$ rustc --target=x86_64-unknown-linux-musl example.rs
+$ ldd example
+        not a dynamic executable
+$ ./example
+hi!
+thread &#39;&lt;main&gt;&#39; panicked at &#39;failed&#39;, example.rs:1
+</code></pre>
+
+<p>Успех! Эта программа может быть скопирована на почти любую машину с Linux с той
+же архитектурой процессора и будет работать без проблем.</p>
+
+<p><code>cargo build</code> также принимает опцию <code>--target</code>, так что вы можете собирать
+контейнеры как обычно. Однако, возможно вам придётся пересобрать нативные
+библиотеки с <code>musl</code>, чтобы иметь возможность скомпоноваться с ними.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
