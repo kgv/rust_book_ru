@@ -64,7 +64,7 @@
     * [Без stdlib](src/no-stdlib.md)
     * [Внутренние средства (intrinsics)](src/intrinsics.md)
     * [Элементы языка (lang items)](src/lang-items.md)
-    * [Продвинутое руководство по компоновке (advanced linkinking)](src/advanced-linking.md)
+    * [Продвинутое руководство по компоновке (advanced linking)](src/advanced-linking.md)
     * [Тесты производительности](src/benchmark-tests.md)
     * [Синтаксис упаковки и шаблоны `match`](src/box-syntax-and-patterns.md)
     * [Шаблоны `match` для срезов](src/slice-patterns.md)
