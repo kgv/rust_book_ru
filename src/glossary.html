@@ -193,23 +193,6 @@
 необходимые знания в области компьютерной науки, поэтому мы добавили разъяснения
 терминов, которые могут быть незнакомы.</p>
 
-<p><a name="arity"></a></p>
-
-<h3 id="Арность" class='section-header'><a
-                           href="#Арность">Арность</a></h3>
-<p>Арность означает число аргументов, которые принимает функция или операция.</p>
-<span class='rusttest'>fn main() {
-    let x = (2, 3);
-    let y = (4, 6);
-    let z = (8, 2, 6);
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>2</span>, <span class='number'>3</span>);
-<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='number'>4</span>, <span class='number'>6</span>);
-<span class='kw'>let</span> <span class='ident'>z</span> <span class='op'>=</span> (<span class='number'>8</span>, <span class='number'>2</span>, <span class='number'>6</span>);</pre>
-
-<p>В приведенном выше примере <code>x</code> и <code>y</code> имеют арность 2. <code>z</code> имеет арность 3.</p>
-
 <p><a name="abstract-syntax-tree"></a></p>
 
 <h3 id="Абстрактное-синтаксическое-дерево" class='section-header'><a
@@ -233,6 +216,50 @@
    / \
   3   4
 </code></pre>
+
+<p><a name="arity"></a></p>
+
+<h3 id="Арность" class='section-header'><a
+                           href="#Арность">Арность</a></h3>
+<p>Арность означает число аргументов, которые принимает функция или операция.</p>
+<span class='rusttest'>fn main() {
+    let x = (2, 3);
+    let y = (4, 6);
+    let z = (8, 2, 6);
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='number'>2</span>, <span class='number'>3</span>);
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='number'>4</span>, <span class='number'>6</span>);
+<span class='kw'>let</span> <span class='ident'>z</span> <span class='op'>=</span> (<span class='number'>8</span>, <span class='number'>2</span>, <span class='number'>6</span>);</pre>
+
+<p>В приведенном выше примере <code>x</code> и <code>y</code> имеют арность 2. <code>z</code> имеет арность 3.</p>
+
+<p><a name="expression"></a></p>
+
+<h3 id="Выражение" class='section-header'><a
+                           href="#Выражение">Выражение</a></h3>
+<p>В программировании, выражение — это комбинация значений, постоянных,
+переменных и функций, которая вычисляется в одно значение. Например, <code>2 + (3 * 4)</code> — выражение, вычисляющееся в значение <code>14</code>. Стоит заметить, что у
+выражений могут быть побочные эффекты. Например, функция, участвующая в
+выражении, может делать что-то ещё помимо непосредственно возврата значения.</p>
+
+<h3 id="Язык,-ориентированный-на-выражения" class='section-header'><a
+                           href="#Язык,-ориентированный-на-выражения">Язык, ориентированный на выражения</a></h3>
+<p>В ранних языках программирования <a href="glossary.html#expression">выражения</a> и
+<a href="glossary.html#statement">операторы</a> были двумя отдельными видами синтаксиса: выражения
+вычислялись в выражение, а операторы производили действия с побочными эффектами.
+Однако поздние языки уже не имели такого чёткого разделения по этому критерию. В
+языке, ориентированном на выражения, почти любой оператор — это выражение, а
+значит, оно возвращает значение. Следовательно, эти выражения могут сами
+являться частью ещё больших выражений.</p>
+
+<p><a name="statement"></a></p>
+
+<h3 id="Оператор" class='section-header'><a
+                           href="#Оператор">Оператор</a></h3>
+<p>В программировании, оператор — это наименьший отдельный элемент языка, который
+обозначает выполнение компьютером законченного действия. Например, в языке C
+<code>printf(&quot;42&quot;);</code> — это оператор.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
