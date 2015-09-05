@@ -6,7 +6,7 @@
 One important feature of Rust as language is that it lets us control the costs and guarantees
 of a program.
 
-В стандартной библиотеке Rust много «обёрточных типов», которые содержат
+В стандартной библиотеке Rust много «обёрточных типов», которые реализуют
 множество компромиссов между накладными расходами, эргономикой, и гарантиями.
 Многие позволяют выбирать между проверками во время компиляции и проверками во
 время исполнения. Эта глава подробно объяснит несколько избранных абстракций.
@@ -84,8 +84,8 @@ immutable ones, but not both. This guarantee is enforced at compile time, and ha
 runtime. In most cases these two pointer types suffice for sharing cheap references between sections
 of code.
 
-Эти указатели не могут быть скопированы так, что они переживут связанное с ними
-время жизни.
+При копировании эти указатели сохраняют связанное с ними время жизни — они всё
+равно не могут прожить дольше, чем исходное значение, на которое они ссылаются.
 
 These pointers cannot be copied in such a way that they outlive the lifetime associated with them.
 
@@ -184,7 +184,7 @@ data structures and other things.
 
 Что касается памяти, `Rc<T>` — это одно выделение, однако оно будет включать
 два лишних слова (т.е. два значения типа `usize`) по сравнению с обычным
-`Box<T>` (для «сильных» и «слабых» счётчиков ссылок).
+`Box<T>`. Это верно и для «сильных», и для «слабых» счётчиков ссылок.
 
 As far as memory goes, `Rc<T>` is a single allocation, though it will allocate two extra words (i.e.
 two `usize` values) as compared to a regular `Box<T>` (for "strong" and "weak" refcounts).
@@ -214,7 +214,7 @@ if the type cannot be obtained in a mutable form (for example, when it is behind
 
 [The documentation for the `cell` module has a pretty good explanation for these][cell-mod].
 
-Эти типы _обычно_ используют в полях структур, но не ограничены таким
+Эти типы _обычно_ используют в полях структур, но они не ограничены таким
 использованием.
 
 These types are _generally_ found in struct fields, but they may be found elsewhere too.
@@ -223,9 +223,8 @@ These types are _generally_ found in struct fields, but they may be found elsewh
 
 [`Cell<T>`][cell] — это тип, который обеспечивает внутреннюю изменяемость без
 накладных расходов, но только для типов, реализующих типаж `Copy`. Поскольку
-компилятор знает, что все данные, которыми владеет вложенное в `Cell<T>`
-значение, находятся на стеке, их можно просто заменять без страха утечки
-ресурсов.
+компилятор знает, что все данные, вложенные в `Cell<T>`, находятся на стеке, их
+можно просто заменять без страха утечки ресурсов.
 
 [`Cell<T>`][cell] is a type that provides zero-cost interior mutability, but only for `Copy` types.
 Since the compiler knows that all the data owned by the contained value is on the stack, there's
@@ -286,9 +285,9 @@ This relaxes the &ldquo;no aliasing with mutability&rdquo; restriction in places
 unnecessary. However, this also relaxes the guarantees that the restriction provides; so if your
 invariants depend on data stored within `Cell`, you should be careful.
 
-Это применяется в изменении примитивов и других типов, реализующих `Copy`, когда
-нет лёгкого способа сделать это в соответствии с статическими правилами `&` и
-`&mut`.
+Это применяется при изменении примитивов и других типов, реализующих `Copy`,
+когда нет лёгкого способа сделать это в соответствии с статическими правилами
+`&` и `&mut`.
 
 This is useful for mutating primitives and other `Copy` types when there is no easy way of
 doing it in line with the static rules of `&` and `&mut`.
@@ -310,7 +309,6 @@ There is no runtime cost to using `Cell<T>`, however if you are using it to wrap
 structs, it might be worthwhile to instead wrap individual fields in `Cell<T>` since each write is
 otherwise a full copy of the struct.
 
-
 ## `RefCell<T>`
 
 [`RefCell<T>`][refcell] также предоставляет внутреннюю изменяемость, но не
@@ -320,14 +318,14 @@ otherwise a full copy of the struct.
 
 Однако, у этого решения есть накладные расходы. `RefCell<T>` реализует шаблон
 «read-write lock» во время исполнения, а не во время компиляции, как `&T`/
-`&mut T`. Он похож на однопоточный мьютекс. Это делается с помощью функций
-`borrow()` и `borrow_mut()`, которые изменяют внутрений счётчик ссылок и
-возвращают умный указатель, который может быть разыменован без права изменения
-или с ним, соответственно. Счётчик ссылок восстанавливается, когда умные
-указатели выходят из области видимости. С этой системой мы можем динамически
-гарантировать, что во время заимствования с правом изменения никаких других
-ссылок на значение больше нет. Если программист пытается позаимствовать
-значение в этот момент, поток запаникует.
+`&mut T`. Он похож на однопоточный мьютекс. У него есть функции `borrow()` и
+`borrow_mut()`, которые изменяют внутрений счётчик ссылок и возвращают умный
+указатель, который может быть разыменован без права изменения или с ним,
+соответственно. Счётчик ссылок восстанавливается, когда умные указатели выходят
+из области видимости. С этой системой мы можем динамически гарантировать, что во
+время заимствования с правом изменения никаких других ссылок на значение больше
+нет. Если программист пытается позаимствовать значение в этот момент, поток
+запаникует.
 
 Instead, it has a runtime cost. `RefCell<T>` enforces the read-write lock pattern at runtime (it's
 like a single-threaded mutex), unlike `&T`/`&mut T` which do so at compile time. This is done by the
@@ -518,9 +516,9 @@ to share `&` pointers whenever possible.
 ## `Mutex<T>` and `RwLock<T>`
 
 [`Mutex<T>`][mutex] и [`RwLock<T>`][rwlock] предоставляют механизм
-взаимоисключения с помощью охранных значений RAII (охранные значения — это
+взаимоисключения с помощью охранных значений RAII. Охранные значения — это
 объекты, имеющие некоторое состояние, как замок, пока не выполнится их
-деструктор). В обоих случаях, мьютекс непрозрачен, пока на нём не вызовут
+деструктор. В обоих случаях, мьютекс непрозрачен, пока на нём не вызовут
 `lock()`, после чего поток остановится до момента, когда мьютекс может быть
 закрыт, после чего возвращается охранное значение. Оно может быть использовано
 для доступа к вложенным данным с правом изменения, а мьютекс будет снова открыт,
@@ -558,19 +556,20 @@ scope.
 #### Гарантии
 
 Оба этих типа предоставляют безопасное изменение данных из разных потоков, но не
-защищают от взаимной блокировки (deadlock). Некоторая дополнительная безопасноть
-протокола работы с данными может быть получена с помощью системы типов.
+защищают от взаимной блокировки (deadlock). Некоторая дополнительная
+безопасность протокола работы с данными может быть получена с помощью системы
+типов.
 
 Both of these provide safe shared mutability across threads, however they are prone to deadlocks.
 Some level of additional protocol safety can be obtained via the type system.
 
 #### Накладные расходы
 
-Для открытия и закрытия эти типы используют в своей реализации конструкции,
-похожие на атомарные типы, и они довольно дороги (они могут блокировать все
-межпроцессорные чтения из памяти, пока они не закончат работу). Ожидание
-возможности закрытия этих примитивов синхронизации тоже может быть медленным,
-когда производится много одновременных попыток доступа к данным.
+Для поддержания состояния прав чтения и записи эти типы используют в своей
+реализации конструкции, похожие на атомарные типы, и они довольно дороги. Они
+могут блокировать все межпроцессорные чтения из памяти, пока не закончат работу.
+Ожидание возможности закрытия этих примитивов синхронизации тоже может быть
+медленным, когда производится много одновременных попыток доступа к данным.
 
 These use internal atomic-like types to maintain the locks, which are pretty costly (they can block
 all memory reads across processors till they're done). Waiting on these locks can also be slow when
@@ -582,8 +581,8 @@ there's a lot of concurrent access happening.
 
 # Сочетание
 
-Распространённая жалоба на код на Rust — это чтение типов вроде
-`Rc<RefCell<Vec<T>>>` (или ещё более сложные сочетания похожих типов). Не всегда
+Распространённая жалоба на код на Rust — это сложность чтения типов вроде
+`Rc<RefCell<Vec<T>>>` (или ещё более сложных сочетаний похожих типов). Не всегда
 понятно, что делает такая комбинация, или почему автор решил использовать именно
 такой тип. Не ясно и то, в каких случаях сам программист должен использовать
 похожие сочетания типов.
@@ -633,7 +632,7 @@ different `Rc` handles. However, we are able to push and pop from the `Vec<T>` a
 similar to an `&mut Vec<T>` with the borrow checking done at runtime.
 
 Во втором типе заимствуются отдельные элементы, а вектор в целом неизменяем.
-Поэтому мы можем получить ссылки на отдельные элементы, но не может добавлять
+Поэтому мы можем получить ссылки на отдельные элементы, но не можем добавлять
 или удалять элементы. Это похоже на `&mut [T]`[^3], но, опять-таки, проверка
 заимствования производится во время исполнения.
 
@@ -654,8 +653,8 @@ When reading code that uses these, go in step by step and look at the guarantees
 
 Когда вы выбираете сложный тип, поступайте наоборот: решите, какие гарантии вам
 нужны, и в каком «слое» сочетания они понадобятся. Например, если у вас стоит
-выбор между `Vec<RefCell<T>>` и `RefCell<Vec<T>>`, мы должны найти компромисс
-путём рассуждений, как мы делали выше по тексту, и выбрать нужный нам тип.
+выбор между `Vec<RefCell<T>>` и `RefCell<Vec<T>>`, найдите компромисс путём
+рассуждений, как мы делали выше по тексту, и выберите нужный вам тип.
 
 When choosing a composed type, we must do the reverse; figure out which guarantees we want, and at
 which point of the composition we need them. For example, if there is a choice between
