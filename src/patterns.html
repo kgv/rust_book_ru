@@ -200,23 +200,23 @@
     let x = 1;
     
     match x {
-        1 =&gt; println!(&quot;one&quot;),
-        2 =&gt; println!(&quot;two&quot;),
-        3 =&gt; println!(&quot;three&quot;),
-        _ =&gt; println!(&quot;anything&quot;),
+        1 =&gt; println!(&quot;один&quot;),
+        2 =&gt; println!(&quot;два&quot;),
+        3 =&gt; println!(&quot;три&quot;),
+        _ =&gt; println!(&quot;что угодно&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one&quot;</span>),
-    <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;two&quot;</span>),
-    <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;three&quot;</span>),
-    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+    <span class='number'>1</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;один&quot;</span>),
+    <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;два&quot;</span>),
+    <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;три&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что угодно&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>one</code>.</p>
+<p>Этот код напечатает <code>один</code>.</p>
 
 <h1 id="Сопоставление-с-несколькими-шаблонами" class='section-header'><a
                            href="#Сопоставление-с-несколькими-шаблонами">Сопоставление с несколькими шаблонами</a></h1>
@@ -225,21 +225,240 @@
     let x = 1;
     
     match x {
-        1 | 2 =&gt; println!(&quot;one or two&quot;),
-        3 =&gt; println!(&quot;three&quot;),
-        _ =&gt; println!(&quot;anything&quot;),
+        1 | 2 =&gt; println!(&quot;один или два&quot;),
+        3 =&gt; println!(&quot;три&quot;),
+        _ =&gt; println!(&quot;что угодно&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='number'>1</span> <span class='op'>|</span> <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one or two&quot;</span>),
-    <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;three&quot;</span>),
-    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+    <span class='number'>1</span> <span class='op'>|</span> <span class='number'>2</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;один или два&quot;</span>),
+    <span class='number'>3</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;три&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что угодно&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>one or two</code>.</p>
+<p>Этот код напечатает <code>один или два</code>.</p>
+
+<h1 id="Деструктуризация" class='section-header'><a
+                           href="#Деструктуризация">Деструктуризация</a></h1>
+<p>Если вы работаете с составным типом данных, вроде <a href="structs.html"><code>struct</code></a>, вы можете
+разобрать его на части («деструктурировать») внутри шаблона:</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    let origin = Point { x: 0, y: 0 };
+    
+    match origin {
+        Point { x, y } =&gt; println!(&quot;({},{})&quot;, x, y),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>x</span>, <span class='ident'>y</span> } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;({},{})&quot;</span>, <span class='ident'>x</span>, <span class='ident'>y</span>),
+}</pre>
+
+<p>Мы можем использовать <code>:</code>, чтобы привязать значение к новому имени.</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    let origin = Point { x: 0, y: 0 };
+    
+    match origin {
+        Point { x: x1, y: y1 } =&gt; println!(&quot;({},{})&quot;, x1, y1),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x1</span>, <span class='ident'>y</span>: <span class='ident'>y1</span> } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;({},{})&quot;</span>, <span class='ident'>x1</span>, <span class='ident'>y1</span>),
+}</pre>
+
+<p>Если нас интересуют только некоторые значения, мы можем не давать имена всем
+составляющим:</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    let origin = Point { x: 0, y: 0 };
+    
+    match origin {
+        Point { x, .. } =&gt; println!(&quot;x равен {}&quot;, x),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>x</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x равен {}&quot;</span>, <span class='ident'>x</span>),
+}</pre>
+
+<p>Этот код напечатает <code>x равен 0</code>.</p>
+
+<p>Вы можете использовать это в любом сопоставлении: не обязательно игнорировать
+именно первый элемент:</p>
+<span class='rusttest'>fn main() {
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    
+    let origin = Point { x: 0, y: 0 };
+    
+    match origin {
+        Point { y, .. } =&gt; println!(&quot;y равен {}&quot;, y),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Point</span> {
+    <span class='ident'>x</span>: <span class='ident'>i32</span>,
+    <span class='ident'>y</span>: <span class='ident'>i32</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
+
+<span class='kw'>match</span> <span class='ident'>origin</span> {
+    <span class='ident'>Point</span> { <span class='ident'>y</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y равен {}&quot;</span>, <span class='ident'>y</span>),
+}</pre>
+
+<p>Этот код напечатает <code>y равен 0</code>.</p>
+
+<p>Можно произвести деструктуризацию любого составного типа данных — например,
+<a href="primitive-types.html#tuples">кортежей</a> и <a href="enums.html">перечислений</a>.</p>
+
+<h1 id="Игнорирование-связывания" class='section-header'><a
+                           href="#Игнорирование-связывания">Игнорирование связывания</a></h1>
+<p>Вы можете использовать в шаблоне <code>_</code>, чтобы проигнорировать соответствующее
+значение. Например, вот сопоставление <code>Result&lt;T, E&gt;</code>:</p>
+<span class='rusttest'>fn main() {
+    let some_value: Result&lt;i32, &amp;&#39;static str&gt; = Err(&quot;Здесь была какая-то ошибка&quot;);
+    match some_value {
+        Ok(value) =&gt; println!(&quot;получили значение: {}&quot;, value),
+        Err(_) =&gt; println!(&quot;произошла ошибка&quot;),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>match</span> <span class='ident'>some_value</span> {
+    <span class='prelude-val'>Ok</span>(<span class='ident'>value</span>) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;получили значение: {}&quot;</span>, <span class='ident'>value</span>),
+    <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;произошла ошибка&quot;</span>),
+}</pre>
+
+<p>В первой ветви мы привязываем значение варианта <code>Ok</code> к имени <code>value</code>. А в ветви
+обработки варианта <code>Err</code> мы используем <code>_</code>, чтобы проигнорировать конкретную
+ошибку, и просто печатаем общее сообщение.</p>
+
+<p><code>_</code> допустим в любом шаблоне, который связывает имена. Это можно использовать,
+чтобы проигнорировать части большой структуры:</p>
+<span class='rusttest'>fn main() {
+    fn coordinate() -&gt; (i32, i32, i32) {
+        // создаём и возвращаем какой-то кортеж из трёх элементов
+    (1, 2, 3)
+    }
+    
+    let (x, _, z) = coordinate();
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>coordinate</span>() <span class='op'>-&gt;</span> (<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>) {
+    <span class='comment'>// создаём и возвращаем какой-то кортеж из трёх элементов</span>
+}
+
+<span class='kw'>let</span> (<span class='ident'>x</span>, _, <span class='ident'>z</span>) <span class='op'>=</span> <span class='ident'>coordinate</span>();</pre>
+
+<p>Здесь мы связываем первый и последний элемент кортежа с именами <code>x</code> и <code>z</code>
+соответственно, а второй элемент игнорируем.</p>
+
+<p>Похожим образом, в шаблоне можно использовать <code>..</code>, чтобы проигнорировать
+несколько значений.</p>
+<span class='rusttest'>fn main() {
+    enum OptionalTuple {
+        Value(i32, i32, i32),
+        Missing,
+    }
+    
+    let x = OptionalTuple::Value(5, -2, 3);
+    
+    match x {
+        OptionalTuple::Value(..) =&gt; println!(&quot;Получили кортеж!&quot;),
+        OptionalTuple::Missing =&gt; println!(&quot;Вот неудача.&quot;),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>enum</span> <span class='ident'>OptionalTuple</span> {
+    <span class='ident'>Value</span>(<span class='ident'>i32</span>, <span class='ident'>i32</span>, <span class='ident'>i32</span>),
+    <span class='ident'>Missing</span>,
+}
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>OptionalTuple</span>::<span class='ident'>Value</span>(<span class='number'>5</span>, <span class='op'>-</span><span class='number'>2</span>, <span class='number'>3</span>);
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='ident'>OptionalTuple</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили кортеж!&quot;</span>),
+    <span class='ident'>OptionalTuple</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Вот неудача.&quot;</span>),
+}</pre>
+
+<p>Этот код печатает <code>Получили кортеж!</code>.</p>
+
+<h1 id="ref-и-ref-mut" class='section-header'><a
+                           href="#ref-и-ref-mut">ref и ref mut</a></h1>
+<p>Если вы хотите получить <a href="references-and-borrowing.html">ссылку</a>, то используйте ключевое слово <code>ref</code>:</p>
+<span class='rusttest'>fn main() {
+    let x = 5;
+    
+    match x {
+        ref r =&gt; println!(&quot;Получили ссылку на {}&quot;, r),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='kw-2'>ref</span> <span class='ident'>r</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили ссылку на {}&quot;</span>, <span class='ident'>r</span>),
+}</pre>
+
+<p>Этот код напечатает <code>Получили ссылку на 5</code>.</p>
+
+<p>Здесь <code>r</code> внутри <code>match</code> имеет тип <code>&amp;i32</code>. Другими словами, ключевое слово <code>ref</code>
+<em>создает</em> ссылку, для использования в шаблоне. Если вам нужна изменяемая ссылка,
+то <code>ref mut</code> будет работать аналогичным образом:</p>
+<span class='rusttest'>fn main() {
+    let mut x = 5;
+    
+    match x {
+        ref mut mr =&gt; println!(&quot;Получили изменяемую ссылку на {}&quot;, mr),
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+
+<span class='kw'>match</span> <span class='ident'>x</span> {
+    <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>mr</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили изменяемую ссылку на {}&quot;</span>, <span class='ident'>mr</span>),
+}</pre>
 
 <h1 id="Сопоставление-с-диапазоном" class='section-header'><a
                            href="#Сопоставление-с-диапазоном">Сопоставление с диапазоном</a></h1>
@@ -248,40 +467,40 @@
     let x = 1;
     
     match x {
-        1 ... 5 =&gt; println!(&quot;one through five&quot;),
-        _ =&gt; println!(&quot;anything&quot;),
+        1 ... 5 =&gt; println!(&quot;от одного до пяти&quot;),
+        _ =&gt; println!(&quot;что угодно&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;one through five&quot;</span>),
-    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+    <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;от одного до пяти&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что угодно&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>one through five</code>.</p>
+<p>Этот код напечатает <code>от одного до пяти</code>.</p>
 
 <p>Диапазоны в основном используются с числами или одиночными символами (<code>char</code>).</p>
 <span class='rusttest'>fn main() {
     let x = &#39;💅&#39;;
     
     match x {
-        &#39;a&#39; ... &#39;j&#39; =&gt; println!(&quot;early letter&quot;),
-        &#39;k&#39; ... &#39;z&#39; =&gt; println!(&quot;late letter&quot;),
-        _ =&gt; println!(&quot;something else&quot;),
+        &#39;а&#39; ... &#39;и&#39; =&gt; println!(&quot;ранняя буква&quot;),
+        &#39;к&#39; ... &#39;я&#39; =&gt; println!(&quot;поздняя буква&quot;),
+        _ =&gt; println!(&quot;что-то ещё&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='string'>&#39;💅&#39;</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='string'>&#39;a&#39;</span> ... <span class='string'>&#39;j&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;early letter&quot;</span>),
-    <span class='string'>&#39;k&#39;</span> ... <span class='string'>&#39;z&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;late letter&quot;</span>),
-    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;something else&quot;</span>),
+    <span class='string'>&#39;а&#39;</span> ... <span class='string'>&#39;и&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;ранняя буква&quot;</span>),
+    <span class='string'>&#39;к&#39;</span> ... <span class='string'>&#39;я&#39;</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;поздняя буква&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что-то ещё&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>something else</code>.</p>
+<p>Этот код напечатает <code>что-то ещё</code>.</p>
 
 <h1 id="Связывание" class='section-header'><a
                            href="#Связывание">Связывание</a></h1>
@@ -290,19 +509,19 @@
     let x = 1;
     
     match x {
-        e @ 1 ... 5 =&gt; println!(&quot;got a range element {}&quot;, e),
-        _ =&gt; println!(&quot;anything&quot;),
+        e @ 1 ... 5 =&gt; println!(&quot;получили элемент диапазона {}&quot;, e),
+        _ =&gt; println!(&quot;что угодно&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>1</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;got a range element {}&quot;</span>, <span class='ident'>e</span>),
-    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+    <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;получили элемент диапазона {}&quot;</span>, <span class='ident'>e</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что угодно&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>got a range element 1</code>. Это полезно, когда вы хотите
+<p>Этот код напечатает <code>получили элемент диапазона 1</code>. Это полезно, когда вы хотите
 сделать сложное сопоставление для части структуры данных:</p>
 <span class='rusttest'>fn main() {
     #[derive(Debug)]
@@ -338,49 +557,17 @@
     let x = 5;
     
     match x {
-        e @ 1 ... 5 | e @ 8 ... 10 =&gt; println!(&quot;got a range element {}&quot;, e),
-        _ =&gt; println!(&quot;anything&quot;),
+        e @ 1 ... 5 | e @ 8 ... 10 =&gt; println!(&quot;получили элемент диапазона {}&quot;, e),
+        _ =&gt; println!(&quot;что угодно&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>|</span> <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>8</span> ... <span class='number'>10</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;got a range element {}&quot;</span>, <span class='ident'>e</span>),
-    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;anything&quot;</span>),
+    <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>1</span> ... <span class='number'>5</span> <span class='op'>|</span> <span class='ident'>e</span> <span class='kw-2'>@</span> <span class='number'>8</span> ... <span class='number'>10</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;получили элемент диапазона {}&quot;</span>, <span class='ident'>e</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что угодно&quot;</span>),
 }</pre>
-
-<h1 id="Игнорирование-вариантов" class='section-header'><a
-                           href="#Игнорирование-вариантов">Игнорирование вариантов</a></h1>
-<p>Если при сопоставлении вы используете перечисление, содержащее варианты, то вы
-можете указать <code>..</code>, чтобы проигнорировать значение и тип в варианте:</p>
-<span class='rusttest'>fn main() {
-    enum OptionalInt {
-        Value(i32),
-        Missing,
-    }
-    
-    let x = OptionalInt::Value(5);
-    
-    match x {
-        OptionalInt::Value(..) =&gt; println!(&quot;Got an int!&quot;),
-        OptionalInt::Missing =&gt; println!(&quot;No such luck.&quot;),
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>enum</span> <span class='ident'>OptionalInt</span> {
-    <span class='ident'>Value</span>(<span class='ident'>i32</span>),
-    <span class='ident'>Missing</span>,
-}
-
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='number'>5</span>);
-
-<span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int!&quot;</span>),
-    <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;No such luck.&quot;</span>),
-}</pre>
-
-<p>Этот код напечатает <code>Got an int!</code>.</p>
 
 <h1 id="Ограничители-шаблонов" class='section-header'><a
                            href="#Ограничители-шаблонов">Ограничители шаблонов</a></h1>
@@ -394,9 +581,9 @@
     let x = OptionalInt::Value(5);
     
     match x {
-        OptionalInt::Value(i) if i &gt; 5 =&gt; println!(&quot;Got an int bigger than five!&quot;),
-        OptionalInt::Value(..) =&gt; println!(&quot;Got an int!&quot;),
-        OptionalInt::Missing =&gt; println!(&quot;No such luck.&quot;),
+        OptionalInt::Value(i) if i &gt; 5 =&gt; println!(&quot;Получили целое больше пяти!&quot;),
+        OptionalInt::Value(..) =&gt; println!(&quot;Получили целое!&quot;),
+        OptionalInt::Missing =&gt; println!(&quot;Неудача.&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
@@ -408,137 +595,45 @@
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='number'>5</span>);
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='ident'>i</span>) <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>&gt;</span> <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int bigger than five!&quot;</span>),
-    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got an int!&quot;</span>),
-    <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;No such luck.&quot;</span>),
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(<span class='ident'>i</span>) <span class='kw'>if</span> <span class='ident'>i</span> <span class='op'>&gt;</span> <span class='number'>5</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили целое больше пяти!&quot;</span>),
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Value</span>(..) <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили целое!&quot;</span>),
+    <span class='ident'>OptionalInt</span>::<span class='ident'>Missing</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Неудача.&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>Got an int!</code>.</p>
+<p>Этот код напечатает <code>Получили целое!</code>.</p>
 
-<h1 id="ref-и-ref-mut" class='section-header'><a
-                           href="#ref-и-ref-mut">ref и ref mut</a></h1>
-<p>Если вы хотите получить <a href="references-and-borrowing.html">ссылку</a>, то используйте ключевое слово <code>ref</code>:</p>
+<p>Если вы используете <code>if</code> с несколькими шаблонами, он применяется к обоим частям:</p>
 <span class='rusttest'>fn main() {
-    let x = 5;
+    let x = 4;
+    let y = false;
     
     match x {
-        ref r =&gt; println!(&quot;Got a reference to {}&quot;, r),
+        4 | 5 if y =&gt; println!(&quot;да&quot;),
+        _ =&gt; println!(&quot;нет&quot;),
     }
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>4</span>;
+<span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='boolval'>false</span>;
 
 <span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='kw-2'>ref</span> <span class='ident'>r</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a reference to {}&quot;</span>, <span class='ident'>r</span>),
+    <span class='number'>4</span> <span class='op'>|</span> <span class='number'>5</span> <span class='kw'>if</span> <span class='ident'>y</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;да&quot;</span>),
+    _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;нет&quot;</span>),
 }</pre>
 
-<p>Этот код напечатает <code>Got a reference to 5</code>.</p>
+<p>Этот код печатает <code>нет</code>, потому что <code>if</code> применяется ко всему <code>4 | 5</code>, а не
+только к <code>5</code>. Другими словами, приоритет <code>if</code> выглядит так:</p>
 
-<p>Здесь <code>r</code> внутри <code>match</code> имеет тип <code>&amp;i32</code>. Другими словами, ключевое слово <code>ref</code>
-<em>создает</em> ссылку, для использования в шаблоне. Если вам нужна изменяемая ссылка,
-то <code>ref mut</code> будет работать аналогичным образом:</p>
-<span class='rusttest'>fn main() {
-    let mut x = 5;
-    
-    match x {
-        ref mut mr =&gt; println!(&quot;Got a mutable reference to {}&quot;, mr),
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>5</span>;
+<pre><code class="language-text">(4 | 5) if y =&gt; ...
+</code></pre>
 
-<span class='kw'>match</span> <span class='ident'>x</span> {
-    <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>mr</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Got a mutable reference to {}&quot;</span>, <span class='ident'>mr</span>),
-}</pre>
+<p>а не так:</p>
 
-<h1 id="Деструктуризация" class='section-header'><a
-                           href="#Деструктуризация">Деструктуризация</a></h1>
-<p>Если у вас есть сложный тип данных, например <a href="structs.html"><code>struct</code></a>, вы можете
-деструктурировать его внутри шаблона:</p>
-<span class='rusttest'>fn main() {
-    struct Point {
-        x: i32,
-        y: i32,
-    }
-    
-    let origin = Point { x: 0, y: 0 };
-    
-    match origin {
-        Point { x: x, y: y } =&gt; println!(&quot;({},{})&quot;, x, y),
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>struct</span> <span class='ident'>Point</span> {
-    <span class='ident'>x</span>: <span class='ident'>i32</span>,
-    <span class='ident'>y</span>: <span class='ident'>i32</span>,
-}
+<pre><code class="language-text">4 | (5 if y) =&gt; ...
+</code></pre>
 
-<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
-
-<span class='kw'>match</span> <span class='ident'>origin</span> {
-    <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, <span class='ident'>y</span>: <span class='ident'>y</span> } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;({},{})&quot;</span>, <span class='ident'>x</span>, <span class='ident'>y</span>),
-}</pre>
-
-<p>Если нам нужны значения только некоторых из полей структуры, то мы можем не
-присваивать им всем имена:</p>
-<span class='rusttest'>fn main() {
-    struct Point {
-        x: i32,
-        y: i32,
-    }
-    
-    let origin = Point { x: 0, y: 0 };
-    
-    match origin {
-        Point { x: x, .. } =&gt; println!(&quot;x is {}&quot;, x),
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>struct</span> <span class='ident'>Point</span> {
-    <span class='ident'>x</span>: <span class='ident'>i32</span>,
-    <span class='ident'>y</span>: <span class='ident'>i32</span>,
-}
-
-<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
-
-<span class='kw'>match</span> <span class='ident'>origin</span> {
-    <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is {}&quot;</span>, <span class='ident'>x</span>),
-}</pre>
-
-<p>Этот код напечатает <code>x is 0</code>.</p>
-
-<p>Вы можете сделать это для любого поля, а не только для первого:</p>
-<span class='rusttest'>fn main() {
-    struct Point {
-        x: i32,
-        y: i32,
-    }
-    
-    let origin = Point { x: 0, y: 0 };
-    
-    match origin {
-        Point { y: y, .. } =&gt; println!(&quot;y is {}&quot;, y),
-    }
-    
-}</span><pre class='rust rust-example-rendered'>
-<span class='kw'>struct</span> <span class='ident'>Point</span> {
-    <span class='ident'>x</span>: <span class='ident'>i32</span>,
-    <span class='ident'>y</span>: <span class='ident'>i32</span>,
-}
-
-<span class='kw'>let</span> <span class='ident'>origin</span> <span class='op'>=</span> <span class='ident'>Point</span> { <span class='ident'>x</span>: <span class='number'>0</span>, <span class='ident'>y</span>: <span class='number'>0</span> };
-
-<span class='kw'>match</span> <span class='ident'>origin</span> {
-    <span class='ident'>Point</span> { <span class='ident'>y</span>: <span class='ident'>y</span>, .. } <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;y is {}&quot;</span>, <span class='ident'>y</span>),
-}</pre>
-
-<p>Этот код напечатает <code>y is 0</code>.</p>
-
-<p>Такое «деструктурирование» работает для любых сложных типов данных, таких как
-<a href="primitive-types.html#tuples">кортежи</a> или <a href="enums.html">перечисления</a>.</p>
-
-<h1 id="mix-and-match" class='section-header'><a
-                           href="#mix-and-match">Mix and Match</a></h1>
+<h1 id="Заключение" class='section-header'><a
+                           href="#Заключение">Заключение</a></h1>
 <p>Вот так! Существует много разных способов использования конструкции
 сопоставления с шаблоном, и все они могут быть смешаны и состыкованы, в
 зависимости от того, что вы хотите сделать:</p>
@@ -552,8 +647,7 @@
     <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>name</span>), <span class='ident'>y</span>: <span class='prelude-val'>None</span> } <span class='op'>=&gt;</span> ...
 }</pre>
 
-<p>Шаблоны являются очень мощным инструментом. Их использование находит очень
-широкое применение.</p>
+<p>Шаблоны — это очень мощный инструмент. Используйте их.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";

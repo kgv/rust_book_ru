@@ -413,14 +413,17 @@
 
 <p>Это немного запутанно. Давайте рассмотрим значения всех элементов итератора:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>база</th>
 <th>аккумулятор</th>
 <th>элемент</th>
 <th>результат замыкания</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>0</td>
 <td>0</td>
@@ -439,7 +442,8 @@
 <td>3</td>
 <td>6</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Мы вызвали <code>fold()</code> с этими аргументами:</p>
 <span class='rusttest'>fn main() {

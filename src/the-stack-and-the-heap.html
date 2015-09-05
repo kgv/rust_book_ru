@@ -286,31 +286,38 @@ fn main() {
 <p>Эта память вроде гигантского массива: адреса начинаются с нуля и продолжаются до
 конечного числа. Так вот схема нашего первого кадра стека:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>0</td>
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>У нас есть переменная <code>x</code>, расположенная по адресу <code>0</code>, имеющая значение <code>42</code>.</p>
 
 <p>Когда вызывается <code>foo()</code>, выделяется новый стековый кадр:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2</td>
 <td>z</td>
@@ -326,7 +333,8 @@ fn main() {
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Поскольку <code>0</code> было задействовано в первом кадре, для кадра <code>foo()</code> используются
 <code>1</code> и <code>2</code>. При дальнейших вызовах функций стек будет расти вверх.</p>
@@ -340,19 +348,23 @@ fn main() {
 
 <p>После того, как <code>foo()</code> завершается, её кадр будет освобожден:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Address</th>
 <th>Name</th>
 <th>Value</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>0</td>
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>А потом, после <code>main()</code>, даже это последнее значение уходит. Легко!</p>
 
@@ -401,29 +413,36 @@ fn main() {
 
 <p>Сначала вызывается <code>main()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>0</td>
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Затем из <code>main()</code> вызывается <code>foo()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>3</td>
 <td>c</td>
@@ -444,17 +463,21 @@ fn main() {
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>И затем из <code>foo()</code> вызывается <code>bar()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>4</td>
 <td>i</td>
@@ -480,20 +503,24 @@ fn main() {
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Вот что мы имели ввиду раньше, говоря, что наш стек растет вверх.</p>
 
 <p>После того, как <code>bar()</code> завершается, её кадр будет освобожден, оставляя только
 <code>foo()</code> и <code>main()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>3</td>
 <td>c</td>
@@ -514,23 +541,28 @@ fn main() {
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>А затем завершается <code>foo()</code>, оставляя только <code>main()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>0</td>
 <td>x</td>
 <td>42</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>И вот мы закончили. Уловили суть? Это как стопка тарелок: вы кладете наверх, и
 берёте сверху.</p>
@@ -559,13 +591,16 @@ fn main() {
 
 <p>Вот что происходит с памятью, когда вызывается <code>main()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>1</td>
 <td>y</td>
@@ -576,7 +611,8 @@ fn main() {
 <td>x</td>
 <td>??????</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Мы выделяем место для двух переменных в стеке. <code>y</code> представляет собой <code>42</code>,
 тут всё как обычно. Но что насчёт <code>x</code>? Наш <code>x</code> представляет собой <code>Box&lt;i32&gt;</code>,
@@ -585,13 +621,16 @@ fn main() {
 осуществляется вызов <code>Box::new()</code>, который выделяет некоторый объем памяти в
 куче, и кладет туда <code>5</code>. Теперь память выглядит следующим образом:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -612,7 +651,8 @@ fn main() {
 <td>x</td>
 <td>2<sup>30</sup></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>В нашем гипотетическом компьютере 1Гб оперативной памяти (2<sup>30</sup> байт).
 А так как наш стек растет от нуля, то проще всего выделить память с другого
@@ -629,13 +669,16 @@ fn main() {
 освобождена в любом порядке, что в конечном итоге может привести к «дыркам». Вот
 схема размещения памяти программы, проработавшей в течение некоторого времени:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -681,7 +724,8 @@ fn main() {
 <td>x</td>
 <td>2<sup>30</sup></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>В этом примере мы выделили четыре элемента в куче, но освободили лишь два из
 них. Отсюда разрыв между 2<sup>30</sup> и (2<sup>30</sup>) - 3, который в
@@ -699,13 +743,16 @@ fn main() {
 выделена при создании. Отлично! Поэтому, когда <code>x</code> уходит, сначала освобождается
 память, выделенная в куче:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>1</td>
 <td>y</td>
@@ -716,7 +763,8 @@ fn main() {
 <td>x</td>
 <td>??????</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>[moving]: Мы можем продлить время жизни памяти путем передачи права
           собственности, что иногда называют «перемещение из упаковки» («moving
@@ -752,13 +800,16 @@ fn main() {
 
 <p>Когда мы входим в <code>main()</code>, память выглядит следующим образом:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>1</td>
 <td>y</td>
@@ -769,7 +820,8 @@ fn main() {
 <td>x</td>
 <td>5</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Значением <code>x</code> является <code>5</code>, а <code>y</code> представляет собой ссылку на <code>x</code>. То есть, ее
 значением является адрес памяти, по которому расположен <code>x</code>. В данном случае это
@@ -778,13 +830,16 @@ fn main() {
 <p>А что насчёт случая, когда мы вызываем <code>foo()</code>, передавая <code>y</code> в качестве
 аргумента?</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>3</td>
 <td>z</td>
@@ -805,7 +860,8 @@ fn main() {
 <td>x</td>
 <td>5</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Кадры стека используются не только для локальных имён, но также и для
 аргументов. Таким образом, в этом случае, наш кадр должен содержать как <code>i</code>, наш
@@ -878,13 +934,16 @@ fn main() {
 
 <p>Сначала мы вызываем <code>main()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -910,20 +969,24 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Мы выделяем память для <code>j</code>, <code>i</code>, и <code>h</code>. <code>i</code> выделена в куче и поэтому содержит
 указатель на значение в куче.</p>
 
 <p>Далее, в конце вызова <code>main()</code>, вызывается <code>foo()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -964,7 +1027,8 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Пространство выделяется для <code>x</code>, <code>y</code> и <code>z</code>. Аргумент <code>x</code> имеет такое же
 значение, как и <code>j</code>, так как мы передали <code>j</code> в качестве аргумента. Это указатель
@@ -972,13 +1036,16 @@ fn main() {
 
 <p>Далее, <code>foo()</code> вызывает <code>baz()</code>, передавая <code>z</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1029,18 +1096,22 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Мы выделили память для <code>f</code> и <code>g</code>. <code>baz()</code> очень короткая, и когда она
 завершается, мы избавляемся от её кадра стека:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1081,17 +1152,21 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Далее <code>foo()</code> вызывает <code>bar()</code> с аргументами <code>x</code> и <code>z</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1162,7 +1237,8 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Тут мы выделяем другое значение в куче, и поэтому мы вычитаем единицу из
 2<sup>30</sup>. Это выражение написать легче, чем <code>1,073,741,823</code>. В любом
@@ -1170,13 +1246,16 @@ fn main() {
 
 <p>В конце <code>bar()</code> вызывает <code>baz()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1257,19 +1336,23 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Сейчас мы на наибольшей глубине! Поздравляем с достижением данной точки.</p>
 
 <p>После завершения <code>baz()</code>, мы избавляемся от <code>f</code> и <code>g</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1340,19 +1423,23 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>Далее мы выполняем возврат из <code>bar()</code>. В этом случае <code>d</code> представляет собой
 <code>Box&lt;T&gt;</code>, поэтому он также освобождает и то, на что он указывает:
 (2<sup>30</sup>) - 1.</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1393,17 +1480,21 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>И после этого происходит возврат из <code>foo()</code>:</p>
 
-<table><thead>
+<table>
+<thead>
 <tr>
 <th>Адрес</th>
 <th>Имя</th>
 <th>Значение</th>
 </tr>
-</thead><tbody>
+</thead>
+
+<tbody>
 <tr>
 <td>2<sup>30</sup></td>
 <td></td>
@@ -1429,7 +1520,8 @@ fn main() {
 <td>h</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 <p>И вот, наконец, <code>main()</code>, которая очищает все остальное. Когда освобождается <code>i</code>
 (<code>Drop</code>), будет также очищен и конец кучи.</p>
