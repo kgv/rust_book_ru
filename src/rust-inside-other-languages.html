@@ -288,24 +288,26 @@ puts &quot;сделано!&quot;
 $ cd embed
 </code></pre>
 
-<p>Эта программа переписывается на Rust довольно легко:</p>
+<p>Эту программу легко переписать на Rust:</p>
 <span class='rusttest'>fn main() {
     use std::thread;
     
     fn process() {
         let handles: Vec&lt;_&gt; = (0..10).map(|_| {
             thread::spawn(|| {
-                let mut _x = 0;
+                let mut x = 0;
                 for _ in (0..5_000_000) {
-                    _x += 1
+                    x += 1
                 }
+            x
             })
         }).collect();
     
         for h in handles {
-            h.join().ok().expect(&quot;Could not join a thread!&quot;);
+            println!(&quot;Thread finished with count={}&quot;,
+            h.join().map_err(|_| &quot;Could not join a thread!&quot;).unwrap());
         }
-    }
+        println!(&quot;done!&quot;);
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
@@ -313,48 +315,24 @@ $ cd embed
 <span class='kw'>fn</span> <span class='ident'>process</span>() {
     <span class='kw'>let</span> <span class='ident'>handles</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> (<span class='number'>0</span>..<span class='number'>10</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> {
         <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='op'>||</span> {
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>_x</span> <span class='op'>=</span> <span class='number'>0</span>;
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>0</span>;
             <span class='kw'>for</span> _ <span class='kw'>in</span> (<span class='number'>0</span>..<span class='number'>5_000_000</span>) {
-                <span class='ident'>_x</span> <span class='op'>+=</span> <span class='number'>1</span>
+                <span class='ident'>x</span> <span class='op'>+=</span> <span class='number'>1</span>
             }
+        <span class='ident'>x</span>
         })
     }).<span class='ident'>collect</span>();
 
     <span class='kw'>for</span> <span class='ident'>h</span> <span class='kw'>in</span> <span class='ident'>handles</span> {
-        <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='string'>&quot;Could not join a thread!&quot;</span>);
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Thread finished with count={}&quot;</span>,
+        <span class='ident'>h</span>.<span class='ident'>join</span>().<span class='ident'>map_err</span>(<span class='op'>|</span>_<span class='op'>|</span> <span class='string'>&quot;Could not join a thread!&quot;</span>).<span class='ident'>unwrap</span>());
     }
-}</pre>
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;done!&quot;</span>);</pre>
 
-<p>Часть из этого уже должно выглядеть знакомым из предыдущих примеров. Мы создаем
-десять потоков, собирая их в вектор <code>handles</code>. Внутри каждого потока мы создаем
-цикл из пяти миллионов повторений, и прибавляем к <code>_x</code> единицу каждый раз.
-Почему здесь подчеркивание? Ну, если мы удалим его и скомпилируем:</p>
-
-<pre><code class="language-bash">$ cargo build
-   Compiling embed v0.1.0 (file:///home/steve/src/embed)
-src/lib.rs:3:1: 16:2 warning: function is never used: `process`, #[warn(dead_code)] on by default
-src/lib.rs:3 fn process() {
-src/lib.rs:4     let handles: Vec&lt;_&gt; = (0..10).map(|_| {
-src/lib.rs:5         thread::spawn(|| {
-src/lib.rs:6             let mut x = 0;
-src/lib.rs:7             for _ in (0..5_000_000) {
-src/lib.rs:8                 x += 1
-             ...
-src/lib.rs:6:17: 6:22 warning: variable `x` is assigned to, but never used, #[warn(unused_variables)] on by default
-src/lib.rs:6             let mut x = 0;
-                             ^~~~~
-</code></pre>
-
-<p>Первое предупреждение происходит, потому что мы собираем библиотеку. Если бы у
-нас был тест для этой функции, то предупреждение бы пропало. Но сейчас, она
-никогда не вызывается.</p>
-
-<p>Второе предупреждение связано с использованием <code>x</code> вместо <code>_x</code>. Так как мы не
-выполняем каких-либо <em>действий</em> с <code>x</code>, то получаем предупреждение об этом. В
-нашем случае это вполне нормально, так как мы просто пытаемся тратить циклы
-процессора. Префикс подчеркивание перед <code>x</code> удаляет это предупреждение.</p>
-
-<p>В конце мы соединяем все потоки обратно</p>
+<p>Мы уже знакомы с частью этого кода из предыдущих примеров. Мы создаем десять
+потоков, собирая их в вектор <code>handles</code>. Внутри каждого потока мы осуществляем
+пять миллионов повторений в цикле, и прибавляем к <code>x</code> единицу каждый раз.
+Наконец, мы воссоединяем все потоки.</p>
 
 <p>Сейчас, однако, это просто библиотека Rust, которая не включает все необходимое
 для успешного вызова из другого языка. Если мы попытаемся подключить её к
@@ -405,10 +383,10 @@ crate-type = [&quot;dylib&quot;]
 build  deps  examples  libembed.so  native
 </code></pre>
 
-<p>Файл <code>libembed.so</code> и есть наша библиотека «совместно используемых объектов»
-(shared object). Мы можем использовать этот файл также как и любую другую
-динамическую библиотеку, написанную на C! Попутно следует отметить, это может
-быть <code>embed.dll</code> или <code>libembed.dylib</code>, в зависимости от платформы.</p>
+<p>Файл <code>libembed.so</code> — и есть наша динамическая библиотека (shared object). Мы
+можем использовать этот файл также как и любую другую динамическую библиотеку,
+написанную на C! Попутно следует отметить, это может быть <code>embed.dll</code> или
+<code>libembed.dylib</code>, в зависимости от платформы.</p>
 
 <p>Теперь, когда мы получили нашу собранную библиотеку Rust, давайте используем её
 из нашего кода на Ruby.</p>
@@ -517,8 +495,8 @@ print(&quot;сделано!&quot;)
 
 <h1 id="node.js" class='section-header'><a
                            href="#node.js">Node.js</a></h1>
-<p>Node не является языком, но, в настоящее время, это доминирующая реализация для
-выполнения JavaScript на стороне сервера.</p>
+<p>Node — это не язык, но, в настоящее время, это доминирующая реализация
+исполнения JavaScript на сервере.</p>
 
 <p>Для того, чтобы сделать FFI в Node, нам сначала надо установить библиотеку:</p>
 
@@ -540,7 +518,7 @@ console.log(&quot;сделано!&quot;);
 
 <p>Пример больше похож на Ruby, чем на Python. Мы используем модуль <code>ffi</code>, чтобы
 получить доступ к <code>ffi.Library()</code>, который загружает нашу библиотеку. Нам нужно
-указать тип возвращаемого значения и типы аргументов функции: void для
+указать тип возвращаемого значения и типы аргументов функции: <code>void</code> для
 возвращаемого значения и пустой массив для указания отсутствия аргументов. После
 этого мы просто вызываем функцию и печатаем результат.</p>
 
