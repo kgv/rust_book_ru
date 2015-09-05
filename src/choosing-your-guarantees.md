@@ -42,7 +42,7 @@ let y = x;
 упаковку по обычным правилам заимствования, которые проверяются во время
 компиляции.
 
-[box]: ../std/boxed/struct.Box.html
+[box]: https://doc.rust-lang.org/stable/std/boxed/struct.Box.html
 
 ## `&T` и `&mut T`
 
@@ -119,7 +119,7 @@ refcount), который увеличивается каждый раз, ког
 области видимости, соответственно. Отметим, что клонирование не выполняет
 глубокое копирование, а просто увеличивает счётчик и возвращает копию `Rc<T>`.
 
-[rc]: ../std/rc/struct.Rc.html
+[rc]: https://doc.rust-lang.org/stable/std/rc/struct.Rc.html
 
 # Типы-ячейки (cell types)
 
@@ -266,9 +266,9 @@ let x = RefCell::new(vec![1,2,3,4]);
 Во время исполнения каждое заимствование вызывает изменение и проверку счётчика
 ссылок.
 
-[cell-mod]: ../std/cell/
-[cell]: ../std/cell/struct.Cell.html
-[refcell]: ../std/cell/struct.RefCell.html
+[cell-mod]: https://doc.rust-lang.org/stable/std/cell/
+[cell]: https://doc.rust-lang.org/stable/std/cell/struct.Cell.html
+[refcell]: https://doc.rust-lang.org/stable/std/cell/struct.RefCell.html
 [ctxt]: ../rustc/middle/ty/struct.ctxt.html
 
 # Синхронизированные типы
@@ -287,7 +287,7 @@ let x = RefCell::new(vec![1,2,3,4]);
 В модуле [sync][sync] много полезных обёрточных типов для многопоточного
 программирования, но мы затронем только главные из них.
 
-[sync]: ../std/sync/index.html
+[sync]: https://doc.rust-lang.org/stable/std/sync/index.html
 
 ## `Arc<T>`
 
@@ -325,7 +325,7 @@ let x = RefCell::new(vec![1,2,3,4]);
 данными в пределах одного потока, предпочтительнее использовать простые ссылки
 `&`.
 
-[arc]: ../std/sync/struct.Arc.html
+[arc]: https://doc.rust-lang.org/stable/std/sync/struct.Arc.html
 
 ## `Mutex<T>` and `RwLock<T>`
 
@@ -370,8 +370,8 @@ let x = RefCell::new(vec![1,2,3,4]);
 Ожидание возможности закрытия этих примитивов синхронизации тоже может быть
 медленным, когда производится много одновременных попыток доступа к данным.
 
-[rwlock]: ../std/sync/struct.RwLock.html
-[mutex]: ../std/sync/struct.Mutex.html
+[rwlock]: https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html
+[mutex]: https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html
 [sessions]: https://github.com/Munksgaard/rust-sessions
 
 # Сочетание
