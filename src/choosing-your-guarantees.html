@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <title>Choosing your Guarantees</title>
+    <title>Выбор гарантий</title>
 
     <link rel="stylesheet" type="text/css" href="../rust-book.css">
 
@@ -188,128 +188,146 @@
 <div id='page'>
 
 
-    <h1 class="title">Choosing your Guarantees</h1>
-    <p>One important feature of Rust as language is that it lets us control the costs and guarantees
-of a program.</p>
+    <h1 class="title">Выбор гарантий</h1>
+    <p>Одна из важных черт языка Rust — это то, что он позволяет нам управлять
+накладными расходами и гарантиями программы.</p>
 
-<p>There are various &ldquo;wrapper type&rdquo; abstractions in the Rust standard library which embody
-a multitude of tradeoffs between cost, ergonomics, and guarantees. Many let one choose between
-run time and compile time enforcement. This section will explain a few selected abstractions in
-detail.</p>
+<p>В стандартной библиотеке Rust много «обёрточных типов», которые реализуют
+множество компромиссов между накладными расходами, эргономикой, и гарантиями.
+Многие позволяют выбирать между проверками во время компиляции и проверками во
+время исполнения. Эта глава подробно объяснит несколько избранных абстракций.</p>
 
-<p>Before proceeding, it is highly recommended that one reads about <a href="ownership.html">ownership</a> and
-<a href="references-and-borrowing.html">borrowing</a> in Rust.</p>
+<p>Очень рекомендуем сначала познакомиться с <a href="ownership.html">владением</a> и
+<a href="references-and-borrowing.html">заимствованием</a> в Rust.</p>
 
-<h1 id="basic-pointer-types" class='section-header'><a
-                           href="#basic-pointer-types">Basic pointer types</a></h1>
+<h1 id="Основные-типы-указателей" class='section-header'><a
+                           href="#Основные-типы-указателей">Основные типы указателей</a></h1>
 <h2 id="box&lt;t&gt;" class='section-header'><a
                            href="#box&lt;t&gt;"><code>Box&lt;T&gt;</code></a></h2>
-<p><a href="../std/boxed/struct.Box.html"><code>Box&lt;T&gt;</code></a> is pointer which is &ldquo;owned&rdquo;, or a &ldquo;box&rdquo;. While it can hand
-out references to the contained data, it is the only owner of the data. In particular, when
-something like the following occurs:</p>
+<p><a href="https://doc.rust-lang.org/stable/std/boxed/struct.Box.html"><code>Box&lt;T&gt;</code></a> — это указатель, который «владеет» данными, по-другому
+называемый «упаковкой». Хотя он и может выдавать ссылки на данные, содержащиеся
+в нём, он — единственный владелец этих данных. В частности, когда происходит
+что-то вроде этого:</p>
 <span class='rusttest'>fn main() {
     let x = Box::new(1);
     let y = x;
-    // x no longer accessible here
+    // x больше не доступен
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>1</span>);
 <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>x</span>;
-<span class='comment'>// x no longer accessible here</span></pre>
+<span class='comment'>// x больше не доступен</span></pre>
 
-<p>Here, the box was <em>moved</em> into <code>y</code>. As <code>x</code> no longer owns it, the compiler will no longer allow the
-programmer to use <code>x</code> after this. A box can similarly be moved <em>out</em> of a function by returning it.</p>
+<p>Здесь упаковка была <em>перемещена</em> в <code>y</code>. Поскольку <code>x</code> больше не владеет ею, с
+этого момента компилятор не позволит использовать <code>x</code>. Упаковка также может быть
+перемещена <em>из</em> функции — для этого функция возвращает её как свой результат.</p>
 
-<p>When a box (that hasn&#39;t been moved) goes out of scope, destructors are run. These destructors take
-care of deallocating the inner data.</p>
+<p>Когда упаковка, которая не была перемещена, выходит из области видимости,
+выполняются деструкторы. Эти деструкторы освобождают содержащиеся данные.</p>
 
-<p>This is a zero-cost abstraction for dynamic allocation. If you want to allocate some memory on the
-heap and safely pass around a pointer to that memory, this is ideal. Note that you will only be
-allowed to share references to this by the regular borrowing rules, checked at compile time.</p>
+<p>Мы абстрагируемся от динамического выделения памяти, и это абстракция без
+накладных расходов. Это идеальный способ выделить память в куче и безопасно
+передавать указатель на эту память. Заметьте, что вы можете создавать ссылки на
+упаковку по обычным правилам заимствования, которые проверяются во время
+компиляции.</p>
 
-<h2 id="&amp;t-and-&amp;mut-t" class='section-header'><a
-                           href="#&amp;t-and-&amp;mut-t"><code>&amp;T</code> and <code>&amp;mut T</code></a></h2>
-<p>These are immutable and mutable references respectively. They follow the &ldquo;read-write lock&rdquo;
-pattern, such that one may either have only one mutable reference to some data, or any number of
-immutable ones, but not both. This guarantee is enforced at compile time, and has no visible cost at
-runtime. In most cases these two pointer types suffice for sharing cheap references between sections
-of code.</p>
+<h2 id="&amp;t-и-&amp;mut-t" class='section-header'><a
+                           href="#&amp;t-и-&amp;mut-t"><code>&amp;T</code> и <code>&amp;mut T</code></a></h2>
+<p>Это неизменяемые и изменяемые ссылки, соответственно. Они реализуют шаблон
+«read-write lock», т.е. вы можете создать или одну изменяемую ссылку на данные,
+или любое число неизменяемых, но не оба вида ссылок одновременно. Эта гарантия
+проверяется во время компиляции, и ничего не стоит во время исполнения. В
+большинстве случаев эти два типа указателей покрывают все нужды по передаче
+дешёвых ссылок между частями кода.</p>
 
-<p>These pointers cannot be copied in such a way that they outlive the lifetime associated with them.</p>
+<p>При копировании эти указатели сохраняют связанное с ними время жизни — они всё
+равно не могут прожить дольше, чем исходное значение, на которое они ссылаются.</p>
 
-<h2 id="*const-t-and-*mut-t" class='section-header'><a
-                           href="#*const-t-and-*mut-t"><code>*const T</code> and <code>*mut T</code></a></h2>
-<p>These are C-like raw pointers with no lifetime or ownership attached to them. They just point to
-some location in memory with no other restrictions. The only guarantee that these provide is that
-they cannot be dereferenced except in code marked <code>unsafe</code>.</p>
+<h2 id="*const-t-и-*mut-t" class='section-header'><a
+                           href="#*const-t-и-*mut-t"><code>*const T</code> и <code>*mut T</code></a></h2>
+<p>Это сырые указатели в стиле C, не имеющие связанной информации о времени жизни и
+владельце. Они просто указывают на какое-то место в памяти, без дополнительных
+ограничений. Они гарантируют только то, что они могут быть разыменованы только в
+коде, помеченном как «небезопасный».</p>
 
-<p>These are useful when building safe, low cost abstractions like <code>Vec&lt;T&gt;</code>, but should be avoided in
-safe code.</p>
+<p>Они полезны при создании безопасных низкоуровневых абстракций вроде <code>Vec&lt;T&gt;</code>, но
+их следует избегать в безопасном коде.</p>
 
 <h2 id="rc&lt;t&gt;" class='section-header'><a
                            href="#rc&lt;t&gt;"><code>Rc&lt;T&gt;</code></a></h2>
-<p>This is the first wrapper we will cover that has a runtime cost.</p>
+<p>Это первая рассматриваемая обёртка, использование которой влечёт за собой
+накладные расходы во время исполнения.</p>
 
-<p><a href="../std/rc/struct.Rc.html"><code>Rc&lt;T&gt;</code></a> is a reference counted pointer. In other words, this lets us have multiple &quot;owning&quot;
-pointers to the same data, and the data will be dropped (destructors will be run) when all pointers
-are out of scope.</p>
+<p><a href="https://doc.rust-lang.org/stable/std/rc/struct.Rc.html"><code>Rc&lt;T&gt;</code></a> — это указатель со счётчиком ссылок. С его помощью можно
+создавать несколько «владеющих» указателей на одни и те же данные, и эти данные
+будут уничтожены, когда все указатели выйдут из области видимости.</p>
 
-<p>Internally, it contains a shared &ldquo;reference count&rdquo; (also called &ldquo;refcount&rdquo;),
-which is incremented each time the <code>Rc</code> is cloned, and decremented each time one of the <code>Rc</code>s goes
-out of scope. The main responsibility of <code>Rc&lt;T&gt;</code> is to ensure that destructors are called for shared
-data.</p>
+<p>Собственно, внутри у него счётчик ссылок (reference count, или сокращённо
+refcount), который увеличивается каждый раз, когда происходит клонирование <code>Rc</code>,
+и уменьшается когда <code>Rc</code> выходит из области видимости. Основная ответственность
+<code>Rc&lt;T&gt;</code> — удостовериться в том, что для разделяемых данных вызываются
+деструкторы.</p>
 
-<p>The internal data here is immutable, and if a cycle of references is created, the data will be
-leaked. If we want data that doesn&#39;t leak when there are cycles, we need a garbage collector.</p>
+<p>Хранимые данные при этом неизменяемы, и если создаётся цикл ссылок, данные
+утекут. Если нам нужно отсутствие утечек в присутствие циклов, нужно
+использовать сборщик мусора.</p>
 
-<h4 id="guarantees" class='section-header'><a
-                           href="#guarantees">Guarantees</a></h4>
-<p>The main guarantee provided here is that the data will not be destroyed until all references to it
-are out of scope.</p>
+<h4 id="Гарантии" class='section-header'><a
+                           href="#Гарантии">Гарантии</a></h4>
+<p>Здесь главная гарантия в том, что данные не будут уничтожены, пока все ссылки на
+них не исчезнут.</p>
 
-<p>This should be used when we wish to dynamically allocate and share some data (read-only) between
-various portions of your program, where it is not certain which portion will finish using the pointer
-last. It&#39;s a viable alternative to <code>&amp;T</code> when <code>&amp;T</code> is either impossible to statically check for
-correctness, or creates extremely unergonomic code where the programmer does not wish to spend the
-development cost of working with.</p>
+<p>Счётчик ссылок нужно использовать, когда мы хотим динамически выделить какие-то
+данные и предоставить ссылки на эти данные только для чтения, и при этом неясно,
+какая часть программы последней закончит использование ссылки. Это подходящая
+альтернатива <code>&amp;T</code>, когда невозможно статически доказатль правильность <code>&amp;T</code>, или
+когда это создаёт слишком большие неудобства в написании кода, на который
+разработчик не хочет тратить своё время.</p>
 
-<p>This pointer is <em>not</em> thread safe, and Rust will not let it be sent or shared with other threads.
-This lets one avoid the cost of atomics in situations where they are unnecessary.</p>
+<p>Этот указатель <em>не</em> является потокобезопасным, и Rust не позволяет передавать
+его или делиться им с другими потоками. Это позволяет избежать накладных
+расходов от использования атомарных операций там, где они не нужны.</p>
 
-<p>There is a sister smart pointer to this one, <code>Weak&lt;T&gt;</code>. This is a non-owning, but also non-borrowed,
-smart pointer. It is also similar to <code>&amp;T</code>, but it is not restricted in lifetime&mdash;a <code>Weak&lt;T&gt;</code>
-can be held on to forever. However, it is possible that an attempt to access the inner data may fail
-and return <code>None</code>, since this can outlive the owned <code>Rc</code>s. This is useful for cyclic
-data structures and other things.</p>
+<p>Есть похожий умный указатель, <code>Weak&lt;T&gt;</code>. Это невладеющий, но и не заимствуемый,
+умный указатель. Он тоже похож на <code>&amp;T</code>, но не ограничен временем жизни —
+<code>Weak&lt;T&gt;</code> можно не отпускать. Однако, возможна ситуация, когда попытка доступа к
+хранимым в нём данным провалится и вернёт <code>None</code>, поскольку <code>Weak&lt;T&gt;</code> может
+пережить владеющие <code>Rc</code>. Его удобно использовать в случае циклических структур
+данных и некоторых других.</p>
 
-<h4 id="cost" class='section-header'><a
-                           href="#cost">Cost</a></h4>
-<p>As far as memory goes, <code>Rc&lt;T&gt;</code> is a single allocation, though it will allocate two extra words (i.e.
-two <code>usize</code> values) as compared to a regular <code>Box&lt;T&gt;</code> (for &quot;strong&quot; and &quot;weak&quot; refcounts).</p>
+<h4 id="Накладные-расходы" class='section-header'><a
+                           href="#Накладные-расходы">Накладные расходы</a></h4>
+<p>Что касается памяти, <code>Rc&lt;T&gt;</code> — это одно выделение, однако оно будет включать
+два лишних слова (т.е. два значения типа <code>usize</code>) по сравнению с обычным
+<code>Box&lt;T&gt;</code>. Это верно и для «сильных», и для «слабых» счётчиков ссылок.</p>
 
-<p><code>Rc&lt;T&gt;</code> has the computational cost of incrementing/decrementing the refcount whenever it is cloned
-or goes out of scope respectively. Note that a clone will not do a deep copy, rather it will simply
-increment the inner reference count and return a copy of the <code>Rc&lt;T&gt;</code>.</p>
+<p>Вычислительная сложность поддержания <code>Rc&lt;T&gt;</code> заключается в увеличении и
+уменьшении счётчика ссылок каждый раз, когда <code>Rc&lt;T&gt;</code> клонируется или выходит из
+области видимости, соответственно. Отметим, что клонирование не выполняет
+глубокое копирование, а просто увеличивает счётчик и возвращает копию <code>Rc&lt;T&gt;</code>.</p>
 
-<h1 id="cell-types" class='section-header'><a
-                           href="#cell-types">Cell types</a></h1>
-<p><code>Cell</code>s provide interior mutability. In other words, they contain data which can be manipulated even
-if the type cannot be obtained in a mutable form (for example, when it is behind an <code>&amp;</code>-ptr or
-<code>Rc&lt;T&gt;</code>).</p>
+<h1 id="Типы-ячейки-(cell-types)" class='section-header'><a
+                           href="#Типы-ячейки-(cell-types)">Типы-ячейки (cell types)</a></h1>
+<p>Типы <code>Cell</code> предоставляют «внутреннюю» изменяемость. Другими словами, они
+содержат данные, которые можно изменять даже если тип не может быть получен в
+изменяемом виде (например, когда он за указателем <code>&amp;</code> или за <code>Rc&lt;T&gt;</code>).</p>
 
-<p><a href="../std/cell/">The documentation for the <code>cell</code> module has a pretty good explanation for these</a>.</p>
+<p><a href="https://doc.rust-lang.org/stable/std/cell/">Документация модуля <code>cell</code> довольно хорошо объясняет эти вещи</a>.</p>
 
-<p>These types are <em>generally</em> found in struct fields, but they may be found elsewhere too.</p>
+<p>Эти типы <em>обычно</em> используют в полях структур, но они не ограничены таким
+использованием.</p>
 
 <h2 id="cell&lt;t&gt;" class='section-header'><a
                            href="#cell&lt;t&gt;"><code>Cell&lt;T&gt;</code></a></h2>
-<p><a href="../std/cell/struct.Cell.html"><code>Cell&lt;T&gt;</code></a> is a type that provides zero-cost interior mutability, but only for <code>Copy</code> types.
-Since the compiler knows that all the data owned by the contained value is on the stack, there&#39;s
-no worry of leaking any data behind references (or worse!) by simply replacing the data.</p>
+<p><a href="https://doc.rust-lang.org/stable/std/cell/struct.Cell.html"><code>Cell&lt;T&gt;</code></a> — это тип, который обеспечивает внутреннюю изменяемость без
+накладных расходов, но только для типов, реализующих типаж <code>Copy</code>. Поскольку
+компилятор знает, что все данные, вложенные в <code>Cell&lt;T&gt;</code>, находятся на стеке, их
+можно просто заменять без страха утечки ресурсов.</p>
 
-<p>It is still possible to violate your own invariants using this wrapper, so be careful when using it.
-If a field is wrapped in <code>Cell</code>, it&#39;s a nice indicator that the chunk of data is mutable and may not
-stay the same between the time you first read it and when you intend to use it.</p>
+<p>Нарушить инварианты с помощью этой обёртки всё равно можно, поэтому будьте
+осторожны при её использовании. Если поле обёрнуто в <code>Cell</code>, это индикатор того,
+что эти данные изменяемы и поле может не сохранить своё значение с момента
+чтения до момента его использования.</p>
 <span class='rusttest'>fn main() {
     use std::cell::Cell;
     
@@ -332,9 +350,10 @@ stay the same between the time you first read it and when you intend to use it.<
 <span class='ident'>z</span>.<span class='ident'>set</span>(<span class='number'>4</span>);
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>.<span class='ident'>get</span>());</pre>
 
-<p>Note that here we were able to mutate the same value from various immutable references.</p>
+<p>Заметьте, что здесь мы смогли изменить значение через различные ссылки без права
+изменения.</p>
 
-<p>This has the same runtime cost as the following:</p>
+<p>В плане затрат во время исполнения, такой код аналогичен нижеследующему:</p>
 <span class='rusttest'>fn main() {
     let mut x = 1;
     let y = &amp;mut x;
@@ -353,37 +372,44 @@ stay the same between the time you first read it and when you intend to use it.<
 <span class='op'>*</span><span class='ident'>z</span> <span class='op'>=</span> <span class='number'>4</span>;
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);</pre>
 
-<p>but it has the added benefit of actually compiling successfully.</p>
+<p>но имеет преимущество в том, что он действительно компилируется.</p>
 
-<h4 id="guarantees-1" class='section-header'><a
-                           href="#guarantees-1">Guarantees</a></h4>
-<p>This relaxes the &ldquo;no aliasing with mutability&rdquo; restriction in places where it&#39;s
-unnecessary. However, this also relaxes the guarantees that the restriction provides; so if your
-invariants depend on data stored within <code>Cell</code>, you should be careful.</p>
+<h4 id="Гарантии-1" class='section-header'><a
+                           href="#Гарантии-1">Гарантии</a></h4>
+<p>Этот тип ослабляет правило отсутствия совпадающих указателей с правом записи
+там, где оно не нужно. Однако, он также ослабляет гарантии, которые
+предоставляет такое ограничение; поэтому если ваши инварианты зависят от данных,
+хранимых в <code>Cell</code>, будьте осторожны.</p>
 
-<p>This is useful for mutating primitives and other <code>Copy</code> types when there is no easy way of
-doing it in line with the static rules of <code>&amp;</code> and <code>&amp;mut</code>.</p>
+<p>Это применяется при изменении примитивов и других типов, реализующих <code>Copy</code>,
+когда нет лёгкого способа сделать это в соответствии с статическими правилами
+<code>&amp;</code> и <code>&amp;mut</code>.</p>
 
-<p><code>Cell</code> does not let you obtain interior references to the data, which makes it safe to freely
-mutate.</p>
+<p><code>Cell</code> не позволяет получать внутрение ссылки на данные, что позволяет безопасно
+менять его содержимое.</p>
 
-<h4 id="cost-1" class='section-header'><a
-                           href="#cost-1">Cost</a></h4>
-<p>There is no runtime cost to using <code>Cell&lt;T&gt;</code>, however if you are using it to wrap larger (<code>Copy</code>)
-structs, it might be worthwhile to instead wrap individual fields in <code>Cell&lt;T&gt;</code> since each write is
-otherwise a full copy of the struct.</p>
+<h4 id="Накладные-расходы-1" class='section-header'><a
+                           href="#Накладные-расходы-1">Накладные расходы</a></h4>
+<p>Накладные расходы при использовании <code>Cell&lt;T&gt;</code> отсутствуют, однако если вы
+оборачиваете в него большие структуры, есть смысл вместо этого обернуть
+отдельные поля, поскольку иначе каждая запись будет производить полное
+копирование структуры.</p>
 
 <h2 id="refcell&lt;t&gt;" class='section-header'><a
                            href="#refcell&lt;t&gt;"><code>RefCell&lt;T&gt;</code></a></h2>
-<p><a href="../std/cell/struct.RefCell.html"><code>RefCell&lt;T&gt;</code></a> also provides interior mutability, but isn&#39;t restricted to <code>Copy</code> types.</p>
+<p><a href="https://doc.rust-lang.org/stable/std/cell/struct.RefCell.html"><code>RefCell&lt;T&gt;</code></a> также предоставляет внутреннюю изменяемость, но не
+ограничен только типами, реализующими <code>Copy</code>.</p>
 
-<p>Instead, it has a runtime cost. <code>RefCell&lt;T&gt;</code> enforces the read-write lock pattern at runtime (it&#39;s
-like a single-threaded mutex), unlike <code>&amp;T</code>/<code>&amp;mut T</code> which do so at compile time. This is done by the
-<code>borrow()</code> and <code>borrow_mut()</code> functions, which modify an internal reference count and return smart
-pointers which can be dereferenced immutably and mutably respectively. The refcount is restored when
-the smart pointers go out of scope. With this system, we can dynamically ensure that there are never
-any other borrows active when a mutable borrow is active. If the programmer attempts to make such a
-borrow, the thread will panic.</p>
+<p>Однако, у этого решения есть накладные расходы. <code>RefCell&lt;T&gt;</code> реализует шаблон
+«read-write lock» во время исполнения, а не во время компиляции, как <code>&amp;T</code>/
+<code>&amp;mut T</code>. Он похож на однопоточный мьютекс. У него есть функции <code>borrow()</code> и
+<code>borrow_mut()</code>, которые изменяют внутрений счётчик ссылок и возвращают умный
+указатель, который может быть разыменован без права изменения или с ним,
+соответственно. Счётчик ссылок восстанавливается, когда умные указатели выходят
+из области видимости. С этой системой мы можем динамически гарантировать, что во
+время заимствования с правом изменения никаких других ссылок на значение больше
+нет. Если программист пытается позаимствовать значение в этот момент, поток
+запаникует.</p>
 <span class='rusttest'>fn main() {
     use std::cell::RefCell;
     
@@ -410,162 +436,206 @@ borrow, the thread will panic.</p>
     <span class='ident'>my_ref</span>.<span class='ident'>push</span>(<span class='number'>1</span>);
 }</pre>
 
-<p>Similar to <code>Cell</code>, this is mainly useful for situations where it&#39;s hard or impossible to satisfy the
-borrow checker. Generally we know that such mutations won&#39;t happen in a nested form, but it&#39;s good
-to check.</p>
+<p>Как и <code>Cell</code>, это в основном применяется в ситуациях, когда сложно или
+невозможно удовлетворить статическую проверку заимствования. В целом мы знаем,
+что такие изменения не будут происходить вложенным образом, но это стоит
+дополнительно проверить.</p>
 
-<p>For large, complicated programs, it becomes useful to put some things in <code>RefCell</code>s to make things
-simpler. For example, a lot of the maps in <a href="../rustc/middle/ty/struct.ctxt.html">the <code>ctxt</code> struct</a> in the rust compiler internals
-are inside this wrapper. These are only modified once (during creation, which is not right after
-initialization) or a couple of times in well-separated places. However, since this struct is
-pervasively used everywhere, juggling mutable and immutable pointers would be hard (perhaps
-impossible) and probably form a soup of <code>&amp;</code>-ptrs which would be hard to extend. On the other hand,
-the <code>RefCell</code> provides a cheap (not zero-cost) way of safely accessing these. In the future, if
-someone adds some code that attempts to modify the cell when it&#39;s already borrowed, it will cause a
-(usually deterministic) panic which can be traced back to the offending borrow.</p>
+<p>Для больших, сложных программ, есть смысл положить некоторые вещи в <code>RefCell</code>,
+чтобы упростить работу с ними. Например, многие словари в структуре <code>ctxt</code><a href="../rustc/middle/ty/struct.ctxt.html">ctxt</a>
+в компиляторе Rust обёрнуты в этот тип. Они изменяются только однажды — во
+время создания, но не во время инициализации, или несколько раз в явно отдельных
+местах. Однако, поскольку эта структура повсеместно используется везде,
+жонглирование изменяемыми и неизменяемыми указателями было бы очень сложным (или
+невозможным), и наверняка создало бы мешанину указателей <code>&amp;</code>, которую сложно
+было бы расширять. С другой стороны, <code>RefCell</code> предоставляет дешёвый (но не
+бесплатный) способ обращаться к таким данным. В будущем, если кто-то добавит
+код, который пытается изменить ячейку, пока она заимствована, это вызывет
+панику, источник которой можно отследить. И такая паника обычно происходит
+детерминированно.</p>
 
-<p>Similarly, in Servo&#39;s DOM there is a lot of mutation, most of which is local to a DOM type, but some
-of which crisscrosses the DOM and modifies various things. Using <code>RefCell</code> and <code>Cell</code> to guard all
-mutation lets us avoid worrying about mutability everywhere, and it simultaneously highlights the
-places where mutation is <em>actually</em> happening.</p>
+<p>Похожим образом, в DOM Servo много изменения данных, большая часть которого
+происходит внутри типа DOM, но часть выходит за его границы и изменяет
+произвольные вещи. Использование <code>RefCell</code> и <code>Cell</code> для ограждения этих
+изменений позволяет нам избежать необходимости беспокоиться об изменяемости
+везде, и одновременно обозначает места, где изменение <em>действительно</em>
+происходит.</p>
 
-<p>Note that <code>RefCell</code> should be avoided if a mostly simple solution is possible with <code>&amp;</code> pointers.</p>
+<p>Заметьте, что стоит избегать использования <code>RefCell</code>, если возможно достаточно
+простое решение с помощью указателей <code>&amp;</code>.</p>
 
-<h4 id="guarantees-2" class='section-header'><a
-                           href="#guarantees-2">Guarantees</a></h4>
-<p><code>RefCell</code> relaxes the <em>static</em> restrictions preventing aliased mutation, and replaces them with
-<em>dynamic</em> ones. As such the guarantees have not changed.</p>
+<h4 id="Гарантии-2" class='section-header'><a
+                           href="#Гарантии-2">Гарантии</a></h4>
+<p><code>RefCell</code> ослабляет <em>статические</em> ограничения, предотвращающие совпадение
+изменяемых указателей, и заменяет их на <em>динамические</em> ограничения. Сами
+гарантии при этом не изменяются.</p>
 
-<h4 id="cost-2" class='section-header'><a
-                           href="#cost-2">Cost</a></h4>
-<p><code>RefCell</code> does not allocate, but it contains an additional &quot;borrow state&quot;
-indicator (one word in size) along with the data.</p>
+<h4 id="Накладные-расходы-2" class='section-header'><a
+                           href="#Накладные-расходы-2">Накладные расходы</a></h4>
+<p><code>RefCell</code> не выделяет память, но содержит дополнительный индикатор «состояния
+заимствования» (размером в одно слово) вместе с данными.</p>
 
-<p>At runtime each borrow causes a modification/check of the refcount.</p>
+<p>Во время исполнения каждое заимствование вызывает изменение и проверку счётчика
+ссылок.</p>
 
-<h1 id="synchronous-types" class='section-header'><a
-                           href="#synchronous-types">Synchronous types</a></h1>
-<p>Many of the types above cannot be used in a threadsafe manner. Particularly, <code>Rc&lt;T&gt;</code> and
-<code>RefCell&lt;T&gt;</code>, which both use non-atomic reference counts (<em>atomic</em> reference counts are those which
-can be incremented from multiple threads without causing a data race), cannot be used this way. This
-makes them cheaper to use, but we need thread safe versions of these too. They exist, in the form of
-<code>Arc&lt;T&gt;</code> and <code>Mutex&lt;T&gt;</code>/<code>RWLock&lt;T&gt;</code></p>
+<h1 id="Синхронизированные-типы" class='section-header'><a
+                           href="#Синхронизированные-типы">Синхронизированные типы</a></h1>
+<p>Многие из вышеперечисленных типов не могут быть использованы потокобезопасным
+образом. В частности, <code>Rc&lt;T&gt;</code> и <code>RefCell&lt;T&gt;</code>, оба из которых используют
+не-атомарные счётчики ссылок, не могут быть использованы так. (<em>Атомарные</em>
+счётчики ссылок — это такие, которые могут быть увеличены из нескольких
+потоков, не вызывая при этом гонку данных.) Благодаря этому они привносят меньше
+накладных расходов, но нам также потребуются и потокобезопасные варианты этих
+типов. Они существуют — это <code>Arc&lt;T&gt;</code> и <code>Mutex&lt;T&gt;</code>/<code>RWLock&lt;T&gt;</code>.</p>
 
-<p>Note that the non-threadsafe types <em>cannot</em> be sent between threads, and this is checked at compile
-time.</p>
+<p>Заметьте, что не-потокобезопасные типы <em>не могут</em> быть переданы между потоками,
+и это проверяется во время компиляции.</p>
 
-<p>There are many useful wrappers for concurrent programming in the <a href="../std/sync/index.html">sync</a> module, but only the
-major ones will be covered below.</p>
+<p>В модуле <a href="https://doc.rust-lang.org/stable/std/sync/index.html">sync</a> много полезных обёрточных типов для многопоточного
+программирования, но мы затронем только главные из них.</p>
 
 <h2 id="arc&lt;t&gt;" class='section-header'><a
                            href="#arc&lt;t&gt;"><code>Arc&lt;T&gt;</code></a></h2>
-<p><a href="../std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a> is just a version of <code>Rc&lt;T&gt;</code> that uses an atomic reference count (hence, &quot;Arc&quot;).
-This can be sent freely between threads.</p>
+<p><a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a> — это вариант <code>Rc&lt;T&gt;</code>, который использует атомарный счётчик
+ссылок (поэтому «Arc»). Его можно свободно передавать между потоками.</p>
 
-<p>C++&#39;s <code>shared_ptr</code> is similar to <code>Arc</code>, however in the case of C++ the inner data is always mutable.
-For semantics similar to that from C++, we should use <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>, <code>Arc&lt;RwLock&lt;T&gt;&gt;</code>, or
-<code>Arc&lt;UnsafeCell&lt;T&gt;&gt;</code><sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (<code>UnsafeCell&lt;T&gt;</code> is a cell type that can be used to hold any data and has
-no runtime cost, but accessing it requires <code>unsafe</code> blocks). The last one should only be used if we
-are certain that the usage won&#39;t cause any memory unsafety. Remember that writing to a struct is not
-an atomic operation, and many functions like <code>vec.push()</code> can reallocate internally and cause unsafe
-behavior, so even monotonicity may not be enough to justify <code>UnsafeCell</code>.</p>
+<p><code>shared_ptr</code> из C++ похож на <code>Arc</code>, но в случае C++ вложенные данные всегда
+изменяемы. Чтобы получить семантику, похожую на семантику C++, нужно
+использовать <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>, <code>Arc&lt;RwLock&lt;T&gt;&gt;</code>, или <code>Arc&lt;UnsafeCell&lt;T&gt;&gt;</code><sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup>.
+(<code>UnsafeCell&lt;T&gt;</code> — это тип-ячейка, который может содержать любые данные и не
+имеет накладных расходов, но доступ к его содержимому производится только внутри
+небезопасных блоков.) Последний стоит использовать только тогда, когда мы
+уверены в том, что наша работа не вызывет нарушения безопасности памяти.
+Учитывайте, что запись в структуру не атомарна, а многие функции вроде
+<code>vec.push()</code> могут выделять память заново в процессе работы, и тем самым
+вызывать небезопасное поведение.</p>
 
-<h4 id="guarantees-3" class='section-header'><a
-                           href="#guarantees-3">Guarantees</a></h4>
-<p>Like <code>Rc</code>, this provides the (thread safe) guarantee that the destructor for the internal data will
-be run when the last <code>Arc</code> goes out of scope (barring any cycles).</p>
+<h4 id="Гарантии-3" class='section-header'><a
+                           href="#Гарантии-3">Гарантии</a></h4>
+<p>Как и <code>Rc</code>, этот тип гарантирует, что деструктор хранимых в нём данных будет
+вызван, когда последний <code>Arc</code> выходит из области видимости (за исключением
+случаев с циклами). В отличие от <code>Rc</code>, <code>Arc</code> предоставляет эту гарантию и в
+многопоточном окружении.</p>
 
-<h4 id="cost-3" class='section-header'><a
-                           href="#cost-3">Cost</a></h4>
-<p>This has the added cost of using atomics for changing the refcount (which will happen whenever it is
-cloned or goes out of scope). When sharing data from an <code>Arc</code> in a single thread, it is preferable
-to share <code>&amp;</code> pointers whenever possible.</p>
+<h4 id="Накладные-расходы-3" class='section-header'><a
+                           href="#Накладные-расходы-3">Накладные расходы</a></h4>
+<p>Накладные расходы увеличиваются по сравнению с <code>Rc</code>, т.к. теперь для изменения
+счётчика ссылок используются атомарные операции (которые происходят каждый раз
+при клонировании или выходе из области видимости). Когда вы хотите поделиться
+данными в пределах одного потока, предпочтительнее использовать простые ссылки
+<code>&amp;</code>.</p>
 
 <h2 id="mutex&lt;t&gt;-and-rwlock&lt;t&gt;" class='section-header'><a
                            href="#mutex&lt;t&gt;-and-rwlock&lt;t&gt;"><code>Mutex&lt;T&gt;</code> and <code>RwLock&lt;T&gt;</code></a></h2>
-<p><a href="../std/sync/struct.Mutex.html"><code>Mutex&lt;T&gt;</code></a> and <a href="../std/sync/struct.RwLock.html"><code>RwLock&lt;T&gt;</code></a> provide mutual-exclusion via RAII guards (guards are
-objects which maintain some state, like a lock, until their destructor is called). For both of
-these, the mutex is opaque until we call <code>lock()</code> on it, at which point the thread will block
-until a lock can be acquired, and then a guard will be returned. This guard can be used to access
-the inner data (mutably), and the lock will be released when the guard goes out of scope.</p>
+<p><a href="https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html"><code>Mutex&lt;T&gt;</code></a> и <a href="https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html"><code>RwLock&lt;T&gt;</code></a> предоставляют механизм
+взаимоисключения с помощью охранных значений RAII. Охранные значения — это
+объекты, имеющие некоторое состояние, как замок, пока не выполнится их
+деструктор. В обоих случаях, мьютекс непрозрачен, пока на нём не вызовут
+<code>lock()</code>, после чего поток остановится до момента, когда мьютекс может быть
+закрыт, после чего возвращается охранное значение. Оно может быть использовано
+для доступа к вложенным данным с правом изменения, а мьютекс будет снова открыт,
+когда охранное значение выйдет из области видимости.</p>
 <span class='rusttest'>fn main() {
     {
         let guard = mutex.lock();
-        // guard dereferences mutably to the inner type
+        // охранное значение разыменовывается в изменяемое значение
+        // вложенного в мьютекс типа
         *guard += 1;
-    } // lock released when destructor runs
+    } // мьютекс открывается когда выполняется деструктор
     
 }</span><pre class='rust rust-example-rendered'>
 {
     <span class='kw'>let</span> <span class='ident'>guard</span> <span class='op'>=</span> <span class='ident'>mutex</span>.<span class='ident'>lock</span>();
-    <span class='comment'>// guard dereferences mutably to the inner type</span>
+    <span class='comment'>// охранное значение разыменовывается в изменяемое значение</span>
+    <span class='comment'>// вложенного в мьютекс типа</span>
     <span class='op'>*</span><span class='ident'>guard</span> <span class='op'>+=</span> <span class='number'>1</span>;
-} <span class='comment'>// lock released when destructor runs</span></pre>
+} <span class='comment'>// мьютекс открывается когда выполняется деструктор</span></pre>
 
-<p><code>RwLock</code> has the added benefit of being efficient for multiple reads. It is always safe to have
-multiple readers to shared data as long as there are no writers; and <code>RwLock</code> lets readers acquire a
-&quot;read lock&quot;. Such locks can be acquired concurrently and are kept track of via a reference count.
-Writers must obtain a &quot;write lock&quot; which can only be obtained when all readers have gone out of
-scope.</p>
+<p><code>RwLock</code> имеет преимущество — он эффективно работает в случае множественных
+чтений. Ведь читать из общих данных всегда безопасно, пока в эти данные никто не
+хочет писать; и <code>RwLock</code> позволяет читающим получить «право чтения». Право
+чтения может быть получено многими потоками одновременно, и за читающими следит
+счётчик ссылок. Тот же, кто хочет записать данные, должен получить «право
+записи», а оно может быть получено только когда все читающие вышли из области
+видимости.</p>
 
-<h4 id="guarantees-4" class='section-header'><a
-                           href="#guarantees-4">Guarantees</a></h4>
-<p>Both of these provide safe shared mutability across threads, however they are prone to deadlocks.
-Some level of additional protocol safety can be obtained via the type system.</p>
+<h4 id="Гарантии-4" class='section-header'><a
+                           href="#Гарантии-4">Гарантии</a></h4>
+<p>Оба этих типа предоставляют безопасное изменение данных из разных потоков, но не
+защищают от взаимной блокировки (deadlock). Некоторая дополнительная
+безопасность протокола работы с данными может быть получена с помощью системы
+типов.</p>
 
-<h4 id="costs" class='section-header'><a
-                           href="#costs">Costs</a></h4>
-<p>These use internal atomic-like types to maintain the locks, which are pretty costly (they can block
-all memory reads across processors till they&#39;re done). Waiting on these locks can also be slow when
-there&#39;s a lot of concurrent access happening.</p>
+<h4 id="Накладные-расходы-4" class='section-header'><a
+                           href="#Накладные-расходы-4">Накладные расходы</a></h4>
+<p>Для поддержания состояния прав чтения и записи эти типы используют в своей
+реализации конструкции, похожие на атомарные типы, и они довольно дороги. Они
+могут блокировать все межпроцессорные чтения из памяти, пока не закончат работу.
+Ожидание возможности закрытия этих примитивов синхронизации тоже может быть
+медленным, когда производится много одновременных попыток доступа к данным.</p>
 
-<h1 id="composition" class='section-header'><a
-                           href="#composition">Composition</a></h1>
-<p>A common gripe when reading Rust code is with types like <code>Rc&lt;RefCell&lt;Vec&lt;T&gt;&gt;&gt;</code> (or even more more
-complicated compositions of such types). It&#39;s not always clear what the composition does, or why the
-author chose one like this (and when one should be using such a composition in one&#39;s own code)</p>
+<h1 id="Сочетание" class='section-header'><a
+                           href="#Сочетание">Сочетание</a></h1>
+<p>Распространённая жалоба на код на Rust — это сложность чтения типов вроде
+<code>Rc&lt;RefCell&lt;Vec&lt;T&gt;&gt;&gt;</code> (или ещё более сложных сочетаний похожих типов). Не всегда
+понятно, что делает такая комбинация, или почему автор решил использовать именно
+такой тип. Не ясно и то, в каких случаях сам программист должен использовать
+похожие сочетания типов.</p>
 
-<p>Usually, it&#39;s a case of composing together the guarantees that you need, without paying for stuff
-that is unnecessary.</p>
+<p>Обычно, вам понадобятся такие типы, когда вы хотите сочетать гарантии разных
+типов, но не хотите переплачивать за то, что вам не нужно.</p>
 
-<p>For example, <code>Rc&lt;RefCell&lt;T&gt;&gt;</code> is one such composition. <code>Rc&lt;T&gt;</code> itself can&#39;t be dereferenced mutably;
-because <code>Rc&lt;T&gt;</code> provides sharing and shared mutability can lead to unsafe behavior, so we put
-<code>RefCell&lt;T&gt;</code> inside to get dynamically verified shared mutability. Now we have shared mutable data,
-but it&#39;s shared in a way that there can only be one mutator (and no readers) or multiple readers.</p>
+<p>Например, одно из таких сочетаний — это <code>Rc&lt;RefCell&lt;T&gt;&gt;</code>. Сам по себе <code>Rc&lt;T&gt;</code>
+не может быть разыменован с правом изменения; поскольку <code>Rc&lt;T&gt;</code> позволяет
+делиться данными и одновременная попытка изменения данных может привести к
+небезопасному поведению, мы кладём внутрь <code>RefCell&lt;T&gt;</code>, чтобы получить
+динамическую проверку одновременных попыток изменения. Теперь у нас есть
+разделяемые изменяемые данные, но одновременный доступ к ним предоставляется
+только на чтение, а запись всегда исключительна.</p>
 
-<p>Now, we can take this a step further, and have <code>Rc&lt;RefCell&lt;Vec&lt;T&gt;&gt;&gt;</code> or <code>Rc&lt;Vec&lt;RefCell&lt;T&gt;&gt;&gt;</code>. These
-are both shareable, mutable vectors, but they&#39;re not the same.</p>
+<p>Далее мы можем развить эту мысль и получить <code>Rc&lt;RefCell&lt;Vec&lt;T&gt;&gt;&gt;</code> или
+<code>Rc&lt;Vec&lt;RefCell&lt;T&gt;&gt;&gt;</code>. Это — изменяемые, разделяемые между потоками вектора,
+но они не одинаковы.</p>
 
-<p>With the former, the <code>RefCell&lt;T&gt;</code> is wrapping the <code>Vec&lt;T&gt;</code>, so the <code>Vec&lt;T&gt;</code> in its entirety is
-mutable. At the same time, there can only be one mutable borrow of the whole <code>Vec</code> at a given time.
-This means that your code cannot simultaneously work on different elements of the vector from
-different <code>Rc</code> handles. However, we are able to push and pop from the <code>Vec&lt;T&gt;</code> at will. This is
-similar to an <code>&amp;mut Vec&lt;T&gt;</code> with the borrow checking done at runtime.</p>
+<p>В первом типе <code>RefCell&lt;T&gt;</code> оборачивает <code>Vec&lt;T&gt;</code>, поэтому изменяем весь <code>Vec&lt;T&gt;</code>
+целиком. В то же время, это значит, что в каждый момент времени может быть
+только одна ссылка на <code>Vec&lt;T&gt;</code> с правом изменения. Поэтому код не может
+одновременно работать с разными элементами вектора, обращаясь к ним через разные
+<code>Rc</code>. Однако, мы сможем добавлять и удалять элементы вектора в произвольные
+моменты времени. Этот тип похож на <code>&amp;mut Vec&lt;T&gt;</code>, с тем различием, что проверка
+заимствования делается во время исполнения.</p>
 
-<p>With the latter, the borrowing is of individual elements, but the overall vector is immutable. Thus,
-we can independently borrow separate elements, but we cannot push or pop from the vector. This is
-similar to an <code>&amp;mut [T]</code><sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup>, but, again, the borrow checking is at runtime.</p>
+<p>Во втором типе заимствуются отдельные элементы, а вектор в целом неизменяем.
+Поэтому мы можем получить ссылки на отдельные элементы, но не можем добавлять
+или удалять элементы. Это похоже на <code>&amp;mut [T]</code><sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup>, но, опять-таки, проверка
+заимствования производится во время исполнения.</p>
 
-<p>In concurrent programs, we have a similar situation with <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>, which provides shared
-mutability and ownership.</p>
+<p>В многопоточных программах возникает похожая ситуация с <code>Arc&lt;Mutex&lt;T&gt;&gt;</code>, который
+обеспечивает разделяемое владение и одновременное изменение.</p>
 
-<p>When reading code that uses these, go in step by step and look at the guarantees/costs provided.</p>
+<p>Когда вы читаете такой код, рассматривайте гарантии и накладные расходы каждого
+вложенного типа шаг за шагом.</p>
 
-<p>When choosing a composed type, we must do the reverse; figure out which guarantees we want, and at
-which point of the composition we need them. For example, if there is a choice between
-<code>Vec&lt;RefCell&lt;T&gt;&gt;</code> and <code>RefCell&lt;Vec&lt;T&gt;&gt;</code>, we should figure out the tradeoffs as done above and pick
-one.</p>
+<p>Когда вы выбираете сложный тип, поступайте наоборот: решите, какие гарантии вам
+нужны, и в каком «слое» сочетания они понадобятся. Например, если у вас стоит
+выбор между <code>Vec&lt;RefCell&lt;T&gt;&gt;</code> и <code>RefCell&lt;Vec&lt;T&gt;&gt;</code>, найдите компромисс путём
+рассуждений, как мы делали выше по тексту, и выберите нужный вам тип.</p>
 
 <div class="footnotes">
 <hr>
 <ol>
 
 <li id="fn1">
-<p><code>Arc&lt;UnsafeCell&lt;T&gt;&gt;</code> actually won&#39;t compile since <code>UnsafeCell&lt;T&gt;</code> isn&#39;t <code>Send</code> or <code>Sync</code>, but we can wrap it in a type and implement <code>Send</code>/<code>Sync</code> for it manually to get <code>Arc&lt;Wrapper&lt;T&gt;&gt;</code> where <code>Wrapper</code> is <code>struct Wrapper&lt;T&gt;(UnsafeCell&lt;T&gt;)</code>.&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+<p>На самом деле, <code>Arc&lt;UnsafeCell&lt;T&gt;&gt;</code> не скомпилируется, поскольку
+<code>UnsafeCell&lt;T&gt;</code> не реализует <code>Send</code> или <code>Sync</code>, но мы можем обернуть его в
+тип и реализовать для него <code>Send</code>/<code>Sync</code> вручную, чтобы получить
+<code>Arc&lt;Wrapper&lt;T&gt;&gt;</code>, где <code>Wrapper</code> — это <code>struct Wrapper&lt;T&gt;(UnsafeCell&lt;T&gt;)</code>.&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
 </li>
 
 <li id="fn2">
-<p><code>&amp;[T]</code> and <code>&amp;mut [T]</code> are <em>slices</em>; they consist of a pointer and a length and can refer to a portion of a vector or array. <code>&amp;mut [T]</code> can have its elements mutated, however its length cannot be touched.&nbsp;<a href="#fnref2" rev="footnote">&#8617;</a></p>
+<p><code>&amp;[T]</code> и <code>&amp;mut [T]</code> — это <em>срезы</em>; они состоят из указателя и длины, и
+могут ссылаться на часть вектора или массива. <code>&amp;mut [T]</code> также позволяет
+изменять свои элементы, но его длину изменить нельзя.&nbsp;<a href="#fnref2" rev="footnote">&#8617;</a></p>
 </li>
 
 </ol>
