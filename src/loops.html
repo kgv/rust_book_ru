@@ -192,8 +192,7 @@
     <p>На данный момент в Rust есть три способа организовать циклическое исполнение
 кода. Это <code>loop</code>, <code>while</code> и <code>for</code>. У каждого подхода своё применения.</p>
 
-<h2 id="Циклы-loop" class='section-header'><a
-                           href="#Циклы-loop">Циклы <code>loop</code></a></h2>
+<h2 id='Циклы-loop' class='section-header'><a href='#Циклы-loop'>Циклы <code>loop</code></a></h2>
 <p>Бесконечный цикл (<code>loop</code>) — простейшая форма цикла в Rust. С помощью этого
 ключевого слова можно организовать цикл, который продолжается, пока не
 выполнится какой-либо оператор, прерывающий его. Бесконечный цикл в Rust
@@ -208,8 +207,7 @@
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Зациклились!&quot;</span>);
 }</pre>
 
-<h2 id="Циклы-while" class='section-header'><a
-                           href="#Циклы-while">Циклы <code>while</code></a></h2>
+<h2 id='Циклы-while' class='section-header'><a href='#Циклы-while'>Циклы <code>while</code></a></h2>
 <p>Цикл <code>while</code> — это ещё один вид конструкции цикла в Rust. Выглядит он так:</p>
 <span class='rusttest'>fn main() {
     let mut x = 5; // mut x: i32
@@ -263,8 +261,7 @@
 сделать бесконечный цикл, то используйте конструкцию <code>loop</code>. Компилятор
 сможет транслировать ваш код в более эффективный и безопасный машинный код.</p>
 
-<h2 id="Циклы-for" class='section-header'><a
-                           href="#Циклы-for">Циклы <code>for</code></a></h2>
+<h2 id='Циклы-for' class='section-header'><a href='#Циклы-for'>Циклы <code>for</code></a></h2>
 <p>Цикл <code>for</code> нужен для повторения блока кода определённое количество раз. Циклы
 <code>for</code> в Rust работают немного иначе, чем в других языках программирования.
 Например в Си-подобном языке цикл <code>for</code> выглядит так:</p>
@@ -312,13 +309,11 @@
 вручную сложно, и это может приводить к ошибкам даже у опытных программистов на
 C.</p>
 
-<h3 id="Перечисление" class='section-header'><a
-                           href="#Перечисление">Перечисление</a></h3>
+<h3 id='Перечисление' class='section-header'><a href='#Перечисление'>Перечисление</a></h3>
 <p>Если вы хотите отслеживать число прошедших итераций, используйте функцию
 <code>.enumerate()</code>.</p>
 
-<h4 id="С-интервалами" class='section-header'><a
-                           href="#С-интервалами">С интервалами</a></h4><span class='rusttest'>fn main() {
+<h4 id='С-интервалами' class='section-header'><a href='#С-интервалами'>С интервалами</a></h4><span class='rusttest'>fn main() {
     for (i,j) in (5..10).enumerate() {
         println!(&quot;i = {} и j = {}&quot;, i, j);
     }
@@ -339,8 +334,7 @@ i = 4 и j = 9
 
 <p>Не забудьте написать скобки вокруг интервала.</p>
 
-<h4 id="С-итераторами" class='section-header'><a
-                           href="#С-итераторами">С итераторами</a></h4><span class='rusttest'>fn main() {
+<h4 id='С-итераторами' class='section-header'><a href='#С-итераторами'>С итераторами</a></h4><span class='rusttest'>fn main() {
     let lines = &quot;привет\nмир\nhello\nworld&quot;.lines();
     for (linenumber, line) in lines.enumerate() {
         println!(&quot;{}: {}&quot;, linenumber, line);
@@ -359,8 +353,7 @@ i = 4 и j = 9
 3: world
 </code></pre>
 
-<h2 id="Раннее-прерывание-цикла" class='section-header'><a
-                           href="#Раннее-прерывание-цикла">Раннее прерывание цикла</a></h2>
+<h2 id='Раннее-прерывание-цикла' class='section-header'><a href='#Раннее-прерывание-цикла'>Раннее прерывание цикла</a></h2>
 <p>Давайте ещё раз посмотрим на цикл <code>while</code>:</p>
 <span class='rusttest'>fn main() {
     let mut x = 5;
@@ -437,8 +430,7 @@ i = 4 и j = 9
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>x</span>);
 }</pre>
 
-<h2 id="Метки-циклов" class='section-header'><a
-                           href="#Метки-циклов">Метки циклов</a></h2>
+<h2 id='Метки-циклов' class='section-header'><a href='#Метки-циклов'>Метки циклов</a></h2>
 <p>Когда у вас много вложенных циклов, вы можете захотеть указать, к какому именно
 циклу относится <code>break</code> или <code>continue</code>. Как и во многих других языках, по
 умолчанию эти операторы будут относиться к самому внутреннему циклу. Если вы

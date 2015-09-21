@@ -221,8 +221,7 @@ after-free);</li>
 исключением изменений, недопустимых непосредственно для <code>*const T</code>.</li>
 </ul>
 
-<h1 id="Основы" class='section-header'><a
-                           href="#Основы">Основы</a></h1>
+<h1 id='Основы' class='section-header'><a href='#Основы'>Основы</a></h1>
 <p>Создание сырого указателя совершенно безопасно:</p>
 <span class='rusttest'>fn main() {
     let x = 5;
@@ -280,14 +279,12 @@ after-free);</li>
 <p>Для более подробной информации по операциям с сырыми указателями, обратитесь к
 <a href="http://doc.rust-lang.org/std/primitive.pointer.html">API документации</a> о них.</p>
 
-<h1 id="ffi" class='section-header'><a
-                           href="#ffi">FFI</a></h1>
+<h1 id='ffi' class='section-header'><a href='#ffi'>FFI</a></h1>
 <p>Сырые указатели полезны для FFI: <code>*const T</code> и <code>*mut T</code> в Rust приблизительно
 соответствуют <code>const T*</code> и <code>T*</code> в C. Для более подробной информации об этом
 обратитесь к главе <a href="ffi.html">FFI</a>.</p>
 
-<h1 id="Ссылки-и-сырые-указатели" class='section-header'><a
-                           href="#Ссылки-и-сырые-указатели">Ссылки и сырые указатели</a></h1>
+<h1 id='Ссылки-и-сырые-указатели' class='section-header'><a href='#Ссылки-и-сырые-указатели'>Ссылки и сырые указатели</a></h1>
 <p>Во время выполнения и сырой указатель, <code>*</code>, и ссылка, указывающая на тот же
 кусок данных, имеют одинаковое представление. По факту, ссылка <code>&amp;T</code> будет неявно
 приведена к сырому указателю <code>*const T</code> в безопасном коде, аналогично и для

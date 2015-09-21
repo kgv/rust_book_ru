@@ -220,8 +220,7 @@
 иногда они все же нужны для по-настоящему краткой записи хорошо абстрагированной
 части кода. Просто имейте этот компромисс в виду.</p>
 
-<h1 id="Определение-макросов-(Макроопределения)" class='section-header'><a
-                           href="#Определение-макросов-(Макроопределения)">Определение макросов (Макроопределения)</a></h1>
+<h1 id='Определение-макросов-Макроопределения' class='section-header'><a href='#Определение-макросов-Макроопределения'>Определение макросов (Макроопределения)</a></h1>
 <p>Вы, возможно, видели макрос <code>vec!</code>, который используется для инициализации
 <a href="vectors.html">вектора</a> с произвольным количеством элементов.</p>
 <span class='rusttest'>fn main() {
@@ -298,8 +297,7 @@ fn main() {
 является частью синтаксиса вызова и служит для того, чтобы отличать макрос от
 обычной функции.</p>
 
-<h2 id="Сопоставление-(matching)-(Синтаксис-вызова-макрокоманды)" class='section-header'><a
-                           href="#Сопоставление-(matching)-(Синтаксис-вызова-макрокоманды)">Сопоставление (Matching) (Синтаксис вызова макрокоманды)</a></h2>
+<h2 id='Сопоставление-matching-Синтаксис-вызова-макрокоманды' class='section-header'><a href='#Сопоставление-matching-Синтаксис-вызова-макрокоманды'>Сопоставление (Matching) (Синтаксис вызова макрокоманды)</a></h2>
 <p>Макрос определяется с помощью ряда <em>правил</em>, которые представляют собой варианты
 сопоставления с образцом. Выше у нас было</p>
 <span class='rusttest'>fn main() {
@@ -359,8 +357,7 @@ fn main() {
 <pre><code class="language-text">error: no rules expected the token `z`
 </code></pre>
 
-<h2 id="Развертывание-(expansion)-(Синтаксис-преобразования-макрокоманды)" class='section-header'><a
-                           href="#Развертывание-(expansion)-(Синтаксис-преобразования-макрокоманды)">Развертывание (Expansion) (Синтаксис преобразования макрокоманды)</a></h2>
+<h2 id='Развертывание-expansion-Синтаксис-преобразования-макрокоманды' class='section-header'><a href='#Развертывание-expansion-Синтаксис-преобразования-макрокоманды'>Развертывание (Expansion) (Синтаксис преобразования макрокоманды)</a></h2>
 <p>С правой стороны макро правил используется, по большей части, обычный синтаксис
 Rust. Но мы можем соединить кусочки раздробленного синтаксиса, захваченные при
 сопоставлении с соответствующим образцом. Из предыдущего примера:</p>
@@ -421,8 +418,7 @@ shorthand for a data type could be valid as either an expression or a pattern.</
 сокращенная форма для типа данных может быть валидной и как выражение, и как
 шаблон.</p>
 
-<h2 id="Повторение-(repetition)-(Многовариантность)" class='section-header'><a
-                           href="#Повторение-(repetition)-(Многовариантность)">Повторение (Repetition) (Многовариантность)</a></h2>
+<h2 id='Повторение-repetition-Многовариантность' class='section-header'><a href='#Повторение-repetition-Многовариантность'>Повторение (Repetition) (Многовариантность)</a></h2>
 <p>Операции повтора всегда сопутствуют два основных правила:</p>
 
 <ol>
@@ -484,8 +480,7 @@ fn main() {
 «<a href="http://www.cs.indiana.edu/ftp/techreports/TR206.pdf">Macro-by-Example</a>» (PDF
 ссылка).</p>
 
-<h1 id="Гигиена-(hygiene)" class='section-header'><a
-                           href="#Гигиена-(hygiene)">Гигиена (Hygiene)</a></h1>
+<h1 id='Гигиена-hygiene' class='section-header'><a href='#Гигиена-hygiene'>Гигиена (Hygiene)</a></h1>
 <p>Некоторые языки реализуют макросы с помощью простой текстовой замены, что
 приводит к различным проблемам. Например, нижеприведенная C программа напечатает
 <code>13</code> вместо ожидаемого <code>25</code>.</p>
@@ -648,8 +643,7 @@ fn main() {
     <span class='ident'>x</span>();
 }</pre>
 
-<h1 id="Рекурсия-макросов" class='section-header'><a
-                           href="#Рекурсия-макросов">Рекурсия макросов</a></h1>
+<h1 id='Рекурсия-макросов' class='section-header'><a href='#Рекурсия-макросов'>Рекурсия макросов</a></h1>
 <p>Раскрытие макроса также может включать в себя вызовы макросов, в том числе
 вызовы того макроса, который раскрывается. Эти рекурсивные макросы могут быть
 использованы для обработки древовидного ввода, как показано на этом (упрощенном)
@@ -714,8 +708,7 @@ fn main() {
 
 <p><a name="debugging-macro-code"></a></p>
 
-<h1 id="Отладка-макросов" class='section-header'><a
-                           href="#Отладка-макросов">Отладка макросов</a></h1>
+<h1 id='Отладка-макросов' class='section-header'><a href='#Отладка-макросов'>Отладка макросов</a></h1>
 <p>Чтобы увидеть результаты расширения макросов, выполните команду <code>rustc --pretty expanded</code>. Вывод представляет собой целый контейнер, так что вы можете подать
 его обратно в <code>rustc</code>, что иногда выдает лучшие сообщения об ошибках, чем при
 обычной компиляции. Обратите внимание, что вывод <code>--pretty expanded</code> может иметь
@@ -734,8 +727,7 @@ fn main() {
 чтобы выключить его.</p></li>
 </ul>
 
-<h1 id="Требования-синтаксиса" class='section-header'><a
-                           href="#Требования-синтаксиса">Требования синтаксиса</a></h1>
+<h1 id='Требования-синтаксиса' class='section-header'><a href='#Требования-синтаксиса'>Требования синтаксиса</a></h1>
 <p>Код на Rust может быть разобран в <a href="glossary.html#abstract-syntax-tree">синтаксическое дерево</a>, даже когда он
 содержит неразвёрнутые макросы. Это свойство очень полезно для редакторов и
 других инструментов, обрабатывающих исходный код. Оно также влияет на вид
@@ -814,8 +806,7 @@ fn main() {
 <code>$e</code>. Можно изменить синтаксис вызова так, чтобы грамматика отличалась в начале.
 В данном случае можно написать <code>$(T $t:ty)* E $e:exp</code>.</p>
 
-<h1 id="Области-видимости,-импорт-и-экспорт-макросов" class='section-header'><a
-                           href="#Области-видимости,-импорт-и-экспорт-макросов">Области видимости, импорт и экспорт макросов</a></h1>
+<h1 id='Области-видимости-импорт-и-экспорт-макросов' class='section-header'><a href='#Области-видимости-импорт-и-экспорт-макросов'>Области видимости, импорт и экспорт макросов</a></h1>
 <p>Макросы разворачиваются на ранней стадии компиляции, перед разрешением имён.
 Один из недостатков такого подхода в том, что правила видимости для макросов
 отличны от правил для других конструкций языка.</p>
@@ -918,8 +909,7 @@ fn main() { }
 <p>Атрибуты, относящиеся к макросам,
 <a href="https://doc.rust-lang.org/stable/reference.html#macro--and-plugin-related-attributes">перечислены в справочнике Rust</a>.</p>
 
-<h1 id="Переменная-$crate" class='section-header'><a
-                           href="#Переменная-$crate">Переменная <code>$crate</code></a></h1>
+<h1 id='Переменная-crate' class='section-header'><a href='#Переменная-crate'>Переменная <code>$crate</code></a></h1>
 <p>Если макрос используется в нескольких контейнерах, всё становится ещё
 сложнее. Допустим, <code>mylib</code> определяет</p>
 <span class='rusttest'>pub fn increment(x: u32) -&gt; u32 {
@@ -978,8 +968,7 @@ fn main() { }
 может быть написано только в корне вашего контейнера, но не внутри <code>mod</code>. Это
 обеспечивает, что <code>$crate</code> раскроется в единственный идентификатор.</p>
 
-<h1 id="Во-тьме-глубин" class='section-header'><a
-                           href="#Во-тьме-глубин">Во тьме глубин</a></h1>
+<h1 id='Во-тьме-глубин' class='section-header'><a href='#Во-тьме-глубин'>Во тьме глубин</a></h1>
 <p>Вводная глава упоминала рекурсивные макросы, но она не рассказывала всей
 истории. Рекурсивные макросы полезны ещё по одной причине: каждый рекурсивный
 вызов даёт нам ещё одну возможность сопоставить с образцом аргументы макроса.</p>
@@ -1038,12 +1027,10 @@ fn main() { }
 <p>В качестве упражнения предлагаем читателю определить ещё один макрос, чтобы
 уменьшить степень дублирования кода в определении выше.</p>
 
-<h1 id="Распространённые-макросы" class='section-header'><a
-                           href="#Распространённые-макросы">Распространённые макросы</a></h1>
+<h1 id='Распространённые-макросы' class='section-header'><a href='#Распространённые-макросы'>Распространённые макросы</a></h1>
 <p>Вот некоторые распространённые макросы, которые вы увидите в коде на Rust.</p>
 
-<h2 id="panic!" class='section-header'><a
-                           href="#panic!">panic!</a></h2>
+<h2 id='panic' class='section-header'><a href='#panic'>panic!</a></h2>
 <p>Этот макрос вызывает панику текущего потока. Вы можете указать сообщение, с
 которым поток завершится:</p>
 <span class='rusttest'>fn main() {
@@ -1052,8 +1039,7 @@ fn main() { }
 }</span><pre class='rust rust-example-rendered'>
 <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;о нет!&quot;</span>);</pre>
 
-<h2 id="vec!" class='section-header'><a
-                           href="#vec!">vec!</a></h2>
+<h2 id='vec' class='section-header'><a href='#vec'>vec!</a></h2>
 <p>Макрос <code>vec!</code> используется по всей книге, поэтому вы наверняка уже видели его.
 Он упрощает создание <code>Vec&lt;T&gt;</code>:</p>
 <span class='rusttest'>fn main() {
@@ -1070,8 +1056,7 @@ fn main() { }
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>0</span>; <span class='number'>100</span>];</pre>
 
-<h2 id="assert!-and-assert_eq!" class='section-header'><a
-                           href="#assert!-and-assert_eq!">assert! and assert_eq!</a></h2>
+<h2 id='assert-and-assert_eq' class='section-header'><a href='#assert-and-assert_eq'>assert! and assert_eq!</a></h2>
 <p>Эти два макроса используются в тестах. <code>assert!</code> принимает логическое значение.
 <code>assert_eq!</code> принимает два значения и проверяет, что они равны. <code>true</code>
 засчитывается как успех, а <code>false</code> вызывает панику и проваливает тест. Вот так:</p>
@@ -1097,8 +1082,7 @@ fn main() { }
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='number'>5</span> <span class='op'>&lt;</span> <span class='number'>3</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>5</span>, <span class='number'>3</span>);</pre>
 
-<h2 id="try!" class='section-header'><a
-                           href="#try!">try!</a></h2>
+<h2 id='try' class='section-header'><a href='#try'>try!</a></h2>
 <p><code>try!</code> используется для обработки ошибок. Он принимает нечто возвращающее
 <code>Result&lt;T, E&gt;</code> и возвращает <code>T</code> если было возвращено <code>Ok&lt;T&gt;</code>; иначе он делает
 возврат из функции со значением <code>Err(E)</code>. Вроде такого:</p>
@@ -1149,8 +1133,7 @@ fn main() { }
     <span class='prelude-val'>Ok</span>(())
 }</pre>
 
-<h2 id="unreachable!" class='section-header'><a
-                           href="#unreachable!">unreachable!</a></h2>
+<h2 id='unreachable' class='section-header'><a href='#unreachable'>unreachable!</a></h2>
 <p>Этот макрос применяется, когда вы хотите пометить какой-то код, который никогда
 не должен исполняться:</p>
 <span class='rusttest'>fn main() {
@@ -1182,8 +1165,7 @@ fn main() { }
     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Я знаю, что x — это None!&quot;</span>),
 }</pre>
 
-<h2 id="unimplemented!" class='section-header'><a
-                           href="#unimplemented!">unimplemented!</a></h2>
+<h2 id='unimplemented' class='section-header'><a href='#unimplemented'>unimplemented!</a></h2>
 <p>Макрос <code>unimplemented!</code> можно использовать, когда вы хотите, чтобы ваш код
 прошёл проверку типов, но пока не хотите реализовывать его настоящую логику.
 Один из примеров — это реализация типажа с несколькими требуемыми методами.
@@ -1191,8 +1173,7 @@ fn main() { }
 В таком случае, определите остальные методы как <code>unimplemented!</code>, пока не
 захотите наконец реализовать их.</p>
 
-<h1 id="Процедурные-макросы" class='section-header'><a
-                           href="#Процедурные-макросы">Процедурные макросы</a></h1>
+<h1 id='Процедурные-макросы' class='section-header'><a href='#Процедурные-макросы'>Процедурные макросы</a></h1>
 <p>Если система макросов не может сделать того, что вам нужно, вы можете написать
 <a href="compiler-plugins.html">плагин к компилятору</a>. По сравнению с макросами, это гораздо
 труднее, там ещё более нестабильные интерфейсы, и ещё сложнее найти ошибки. Зато

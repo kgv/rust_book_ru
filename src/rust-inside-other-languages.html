@@ -216,8 +216,7 @@ Rust отличным кандидатом на роль вызываемого 
 главе мы рассмотрим именно конкретный частный случай FFI, с тремя примерами, на
 Ruby, Python и JavaScript.</p>
 
-<h1 id="Проблема" class='section-header'><a
-                           href="#Проблема">Проблема</a></h1>
+<h1 id='Проблема' class='section-header'><a href='#Проблема'>Проблема</a></h1>
 <p>Есть много различных проектов, которые мы могли бы выбрать, но мы хотим
 подобрать такой пример, который продемонстрирует явное преимущество Rust над
 многими другими языками: сложные вычисления и многопоточность.</p>
@@ -279,8 +278,7 @@ puts &quot;сделано!&quot;
 долго крутящиеся занятые потоки представляют собой параллельные, требующие
 больших затрат, вычисления.</p>
 
-<h1 id="Библиотека-на-rust" class='section-header'><a
-                           href="#Библиотека-на-rust">Библиотека на Rust</a></h1>
+<h1 id='Библиотека-на-rust' class='section-header'><a href='#Библиотека-на-rust'>Библиотека на Rust</a></h1>
 <p>Давайте перепишем эту задачу на Rust. Во-первых, давайте сделаем новый проект с
 помощью Cargo:</p>
 
@@ -391,8 +389,7 @@ build  deps  examples  libembed.so  native
 <p>Теперь, когда мы получили нашу собранную библиотеку Rust, давайте используем её
 из нашего кода на Ruby.</p>
 
-<h1 id="ruby" class='section-header'><a
-                           href="#ruby">Ruby</a></h1>
+<h1 id='ruby' class='section-header'><a href='#ruby'>Ruby</a></h1>
 <p>Откройте файл <code>embed.rb</code> внутри нашего проекта, и сделайте следующее:</p>
 
 <pre><code class="language-ruby">require &#39;ffi&#39;
@@ -475,8 +472,7 @@ $
 
 <p>Теперь давайте попробуем на Python!</p>
 
-<h1 id="python" class='section-header'><a
-                           href="#python">Python</a></h1>
+<h1 id='python' class='section-header'><a href='#python'>Python</a></h1>
 <p>Создайте файл <code>embed.py</code> в этой директории и поместите в него следующее:</p>
 
 <pre><code class="language-python">from ctypes import cdll
@@ -493,8 +489,7 @@ print(&quot;сделано!&quot;)
 
 <p>На моей системе это заняло <code>0.017</code> секунд. Быстро!</p>
 
-<h1 id="node.js" class='section-header'><a
-                           href="#node.js">Node.js</a></h1>
+<h1 id='nodejs' class='section-header'><a href='#nodejs'>Node.js</a></h1>
 <p>Node — это не язык, но, в настоящее время, это доминирующая реализация
 исполнения JavaScript на сервере.</p>
 
@@ -524,8 +519,7 @@ console.log(&quot;сделано!&quot;);
 
 <p>На моей системе это заняло <code>0.092</code> секунды.</p>
 
-<h1 id="Заключение" class='section-header'><a
-                           href="#Заключение">Заключение</a></h1>
+<h1 id='Заключение' class='section-header'><a href='#Заключение'>Заключение</a></h1>
 <p>Как вы можете видеть, основы, рассмотренные здесь, являются <em>очень</em> простыми.
 Конечно, мы могли бы сделать куда больше того, что мы здесь показали. Посмотрите
 главу <a href="ffi.html">FFI</a> для более подробной информации.</p>

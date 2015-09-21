@@ -194,8 +194,7 @@
 приведения. Второй — <code>transmute</code>, в отличие от первого, позволяет произвольное
 приведение типов и является одной из самых опасных возможностей Rust!</p>
 
-<h1 id="as" class='section-header'><a
-                           href="#as"><code>as</code></a></h1>
+<h1 id='as' class='section-header'><a href='#as'><code>as</code></a></h1>
 <p>Ключевое слово <code>as</code> выполняет обычное приведение типов:</p>
 <span class='rusttest'>fn main() {
     let x: i32 = 5;
@@ -230,8 +229,7 @@ let b = a as u32; // four eights makes 32
 опасны, потому что они делают предположения о том, как реализованы множественные
 нижележащие структуры. Поэтому нам нужно что-то более опасное.</p>
 
-<h1 id="transmute" class='section-header'><a
-                           href="#transmute"><code>transmute</code></a></h1>
+<h1 id='transmute' class='section-header'><a href='#transmute'><code>transmute</code></a></h1>
 <p>Функция <code>transmute</code> предоставляется <a href="intrinsics.html">внутренними средствами компилятора</a>, и то, что она делает, является очень простым, но в то же время
 очень опасным. Она сообщает Rust, чтобы он воспринимал значение одного типа, как
 будто это значение другого типа. Это делается независимо от системы проверки

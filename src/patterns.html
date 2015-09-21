@@ -218,8 +218,7 @@
 
 <p>Этот код напечатает <code>один</code>.</p>
 
-<h1 id="Сопоставление-с-несколькими-шаблонами" class='section-header'><a
-                           href="#Сопоставление-с-несколькими-шаблонами">Сопоставление с несколькими шаблонами</a></h1>
+<h1 id='Сопоставление-с-несколькими-шаблонами' class='section-header'><a href='#Сопоставление-с-несколькими-шаблонами'>Сопоставление с несколькими шаблонами</a></h1>
 <p>Вы можете сопоставлять с несколькими шаблонами, используя <code>|</code>:</p>
 <span class='rusttest'>fn main() {
     let x = 1;
@@ -241,8 +240,7 @@
 
 <p>Этот код напечатает <code>один или два</code>.</p>
 
-<h1 id="Деструктуризация" class='section-header'><a
-                           href="#Деструктуризация">Деструктуризация</a></h1>
+<h1 id='Деструктуризация' class='section-header'><a href='#Деструктуризация'>Деструктуризация</a></h1>
 <p>Если вы работаете с составным типом данных, вроде <a href="structs.html"><code>struct</code></a>, вы можете
 разобрать его на части («деструктурировать») внутри шаблона:</p>
 <span class='rusttest'>fn main() {
@@ -353,8 +351,7 @@
 <p>Можно произвести деструктуризацию любого составного типа данных — например,
 <a href="primitive-types.html#tuples">кортежей</a> и <a href="enums.html">перечислений</a>.</p>
 
-<h1 id="Игнорирование-связывания" class='section-header'><a
-                           href="#Игнорирование-связывания">Игнорирование связывания</a></h1>
+<h1 id='Игнорирование-связывания' class='section-header'><a href='#Игнорирование-связывания'>Игнорирование связывания</a></h1>
 <p>Вы можете использовать в шаблоне <code>_</code>, чтобы проигнорировать соответствующее
 значение. Например, вот сопоставление <code>Result&lt;T, E&gt;</code>:</p>
 <span class='rusttest'>fn main() {
@@ -424,8 +421,7 @@
 
 <p>Этот код печатает <code>Получили кортеж!</code>.</p>
 
-<h1 id="ref-и-ref-mut" class='section-header'><a
-                           href="#ref-и-ref-mut">ref и ref mut</a></h1>
+<h1 id='ref-и-ref-mut' class='section-header'><a href='#ref-и-ref-mut'>ref и ref mut</a></h1>
 <p>Если вы хотите получить <a href="references-and-borrowing.html">ссылку</a>, то используйте ключевое слово <code>ref</code>:</p>
 <span class='rusttest'>fn main() {
     let x = 5;
@@ -460,8 +456,7 @@
     <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>mr</span> <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Получили изменяемую ссылку на {}&quot;</span>, <span class='ident'>mr</span>),
 }</pre>
 
-<h1 id="Сопоставление-с-диапазоном" class='section-header'><a
-                           href="#Сопоставление-с-диапазоном">Сопоставление с диапазоном</a></h1>
+<h1 id='Сопоставление-с-диапазоном' class='section-header'><a href='#Сопоставление-с-диапазоном'>Сопоставление с диапазоном</a></h1>
 <p>Вы можете сопоставлять с диапазоном значений, используя <code>...</code>:</p>
 <span class='rusttest'>fn main() {
     let x = 1;
@@ -502,8 +497,7 @@
 
 <p>Этот код напечатает <code>что-то ещё</code>.</p>
 
-<h1 id="Связывание" class='section-header'><a
-                           href="#Связывание">Связывание</a></h1>
+<h1 id='Связывание' class='section-header'><a href='#Связывание'>Связывание</a></h1>
 <p>Вы можете связать значение с именем с помощью символа <code>@</code>:</p>
 <span class='rusttest'>fn main() {
     let x = 1;
@@ -569,8 +563,7 @@
     _ <span class='op'>=&gt;</span> <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;что угодно&quot;</span>),
 }</pre>
 
-<h1 id="Ограничители-шаблонов" class='section-header'><a
-                           href="#Ограничители-шаблонов">Ограничители шаблонов</a></h1>
+<h1 id='Ограничители-шаблонов' class='section-header'><a href='#Ограничители-шаблонов'>Ограничители шаблонов</a></h1>
 <p>Вы можете ввести <em>ограничители шаблонов</em> (<em>match guards</em>) с помощью <code>if</code>:</p>
 <span class='rusttest'>fn main() {
     enum OptionalInt {
@@ -632,8 +625,7 @@
 <pre><code class="language-text">4 | (5 if y) =&gt; ...
 </code></pre>
 
-<h1 id="Заключение" class='section-header'><a
-                           href="#Заключение">Заключение</a></h1>
+<h1 id='Заключение' class='section-header'><a href='#Заключение'>Заключение</a></h1>
 <p>Вот так! Существует много разных способов использования конструкции
 сопоставления с шаблоном, и все они могут быть смешаны и состыкованы, в
 зависимости от того, что вы хотите сделать:</p>

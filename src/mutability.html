@@ -254,8 +254,7 @@
 
 <span class='kw'>fn</span> <span class='ident'>foo</span>(<span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span>) {</pre>
 
-<h1 id="Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость" class='section-header'><a
-                           href="#Внутренняя-(interior)-и-внешняя-(exterior)-изменяемость">Внутренняя (interior) и внешняя (exterior) изменяемость</a></h1>
+<h1 id='Внутренняя-interior-и-внешняя-exterior-изменяемость' class='section-header'><a href='#Внутренняя-interior-и-внешняя-exterior-изменяемость'>Внутренняя (interior) и внешняя (exterior) изменяемость</a></h1>
 <p>Однако, когда мы говорим, что что-либо «неизменяемо» в Rust, это не означает,
 что оно совсем не может измениться. Мы говорим о «внешней изменяемости». Для
 примера рассмотрим <a href="http://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a>:</p>
@@ -342,8 +341,7 @@
 <p>Всё это подводит нас к другим аспектам правил изменяемости Rust. Давайте
 поговорим о них.</p>
 
-<h2 id="Изменяемость-на-уровне-полей" class='section-header'><a
-                           href="#Изменяемость-на-уровне-полей">Изменяемость на уровне полей</a></h2>
+<h2 id='Изменяемость-на-уровне-полей' class='section-header'><a href='#Изменяемость-на-уровне-полей'>Изменяемость на уровне полей</a></h2>
 <p>Изменяемость — это свойство либо ссылки (<code>&amp;mut</code>), либо имени (<code>let mut</code>). Это
 значит, что, например, у вас не может быть <a href="structs.html">структуры</a>, часть полей
 которой изменяется, а другая часть — нет:</p>

@@ -514,8 +514,7 @@ let result = f.write(buf);
 диспетчеризуются статически. Что это значит? Посмотрите главу
 <a href="trait-objects.html">Типажи-объекты</a>, чтобы получить больше информации.</p>
 
-<h1 id="Множественные-ограничения-по-типажам" class='section-header'><a
-                           href="#Множественные-ограничения-по-типажам">Множественные ограничения по типажам</a></h1>
+<h1 id='Множественные-ограничения-по-типажам' class='section-header'><a href='#Множественные-ограничения-по-типажам'>Множественные ограничения по типажам</a></h1>
 <p>Вы уже видели, как можно ограничить обобщённый параметр типа определённым
 типажом:</p>
 <span class='rusttest'>fn main() {
@@ -547,8 +546,7 @@ let result = f.write(buf);
 
 <p>Теперь тип <code>T</code> должен реализовавать как типаж <code>Clone</code>, так и типаж <code>Debug</code>.</p>
 
-<h1 id="Утверждение-where" class='section-header'><a
-                           href="#Утверждение-where">Утверждение where</a></h1>
+<h1 id='Утверждение-where' class='section-header'><a href='#Утверждение-where'>Утверждение where</a></h1>
 <p>Написание функций с несколькими обобщёнными типами и небольшим количеством
 ограничений по типажам выглядит не так уж плохо, но, с увеличением количества
 зависимостей, синтаксис получается более неуклюжим:</p>
@@ -691,8 +689,7 @@ fn main() {
 произвольный тип (в данном случае <code>i32</code>), а не только простой параметр типа
 (вроде <code>T</code>).</p>
 
-<h1 id="Методы-по-умолчанию" class='section-header'><a
-                           href="#Методы-по-умолчанию">Методы по умолчанию</a></h1>
+<h1 id='Методы-по-умолчанию' class='section-header'><a href='#Методы-по-умолчанию'>Методы по умолчанию</a></h1>
 <p>Есть еще одна особенность типажей, о которой стоит поговорить: методы по
 умолчанию. Проще всего показать это на примере:</p>
 <span class='rusttest'>fn main() {
@@ -777,8 +774,7 @@ fn main() {
 <span class='kw'>let</span> <span class='ident'>over</span> <span class='op'>=</span> <span class='ident'>OverrideDefault</span>;
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>over</span>.<span class='ident'>is_invalid</span>()); <span class='comment'>// печатает «Вызван OverrideDefault.is_invalid!»</span></pre>
 
-<h1 id="Наследование" class='section-header'><a
-                           href="#Наследование">Наследование</a></h1>
+<h1 id='Наследование' class='section-header'><a href='#Наследование'>Наследование</a></h1>
 <p>Иногда чтобы реализовать один типаж, нужно реализовать типажи, от которых он
 зависит:</p>
 <span class='rusttest'>fn main() {

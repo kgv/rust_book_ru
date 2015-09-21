@@ -219,8 +219,7 @@ GCC и Clang:</p>
 поддерживаются все платформы.</p>
 </blockquote>
 
-<h2 id="Шаблон-инструкции-ассемблера" class='section-header'><a
-                           href="#Шаблон-инструкции-ассемблера">Шаблон инструкции ассемблера</a></h2>
+<h2 id='Шаблон-инструкции-ассемблера' class='section-header'><a href='#Шаблон-инструкции-ассемблера'>Шаблон инструкции ассемблера</a></h2>
 <p>Шаблон инструкции ассемблера (assembly template) является единственным
 обязательным параметром, и он должен быть представлен строкой символов (т.е.
 <code>&quot;&quot;</code>)</p>
@@ -292,8 +291,7 @@ asm!(&quot;xor %eax, %eax&quot; ::: &quot;{eax}&quot;);
 </span><pre class='rust rust-example-rendered'>
 <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;xor %eax, %eax&quot;</span> ::: <span class='string'>&quot;{eax}&quot;</span>);</pre>
 
-<h2 id="Операнды" class='section-header'><a
-                           href="#Операнды">Операнды</a></h2>
+<h2 id='Операнды' class='section-header'><a href='#Операнды'>Операнды</a></h2>
 <p>Входные и выходные операнды имеют одинаковый формат:
 <code>:&quot;ограничение1&quot;(выражение1), &quot;ограничение2&quot;(выражение2), ...&quot;</code>. Выражения для
 выходных операндов должны быть либо изменяемыми, либо неизменяемыми, но еще не
@@ -351,8 +349,7 @@ fn main() {
 <span class='macro'>asm</span><span class='macro'>!</span>(<span class='string'>&quot;in %dx, %al&quot;</span> : <span class='string'>&quot;={al}&quot;</span>(<span class='ident'>result</span>) : <span class='string'>&quot;{dx}&quot;</span>(<span class='ident'>port</span>));
 <span class='ident'>result</span></pre>
 
-<h2 id="Затираемое-(clobbers)" class='section-header'><a
-                           href="#Затираемое-(clobbers)">Затираемое (Clobbers)</a></h2>
+<h2 id='Затираемое-clobbers' class='section-header'><a href='#Затираемое-clobbers'>Затираемое (Clobbers)</a></h2>
 <p>Некоторые инструкции могут изменять значения регистров, поэтому мы используем
 список затираемого. Он указывает компилятору, что тот не должен допускать
 какого-либо изменение значений этих регистров, чтобы они оставались корректными.</p>
@@ -374,8 +371,7 @@ asm!(&quot;mov $$0x200, %eax&quot; : /* no outputs */ : /* no inputs */ : &quot;
 качестве одного из затираемых. Точно так же, если ассемблер модифицирует память,
 то должно быть указано <code>memory</code>.</p>
 
-<h2 id="Опции" class='section-header'><a
-                           href="#Опции">Опции</a></h2>
+<h2 id='Опции' class='section-header'><a href='#Опции'>Опции</a></h2>
 <p>Последний раздел, <code>options</code>, специфичен для Rust. Формат представляет собой
 разделенные запятыми текстовые строки (т.е. <code>:&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;</code>). Он
 используется для того, чтобы задать некоторые дополнительные данные для
@@ -407,8 +403,7 @@ println!(&quot;eax is currently {}&quot;, result);
 }
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;eax is currently {}&quot;</span>, <span class='ident'>result</span>);</pre>
 
-<h2 id="Больше-информации" class='section-header'><a
-                           href="#Больше-информации">Больше информации</a></h2>
+<h2 id='Больше-информации' class='section-header'><a href='#Больше-информации'>Больше информации</a></h2>
 <p>Текущая реализация макроса <code>asm!</code> --- это прямое связывание с
 <a href="http://llvm.org/docs/LangRef.html#inline-assembler-expressions">встроенным ассемблером LLVM</a>, поэтому изучите и их
 <a href="http://llvm.org/docs/LangRef.html#inline-assembler-expressions">документацию</a>, чтобы лучше понять список затираемого, ограничения и
