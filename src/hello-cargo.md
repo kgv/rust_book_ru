@@ -81,7 +81,7 @@ TOML очень похож на INI, но с некоторыми дополни
 $ cargo build
    Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
 $ ./target/debug/hello_world
-Hello, world!
+Привет, мир!
 ```
 
 Та-да! Мы собрали наш проект вызвав `cargo build` и запустили его с помощью
@@ -91,7 +91,7 @@ run`:
 ```bash
 $ cargo run
      Running `target/debug/hello_world`
-Hello, world!
+Привет, мир!
 ```
 
 Заметьте, что сейчас мы не пересобирали наш проект. Cargo понял, что мы не
@@ -102,7 +102,7 @@ Hello, world!
 $ cargo run
    Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
      Running `target/debug/hello_world`
-Hello, world!
+Привет, мир!
 ```
 
 На первый взгляд это кажется сложнее, по сравнению с более простым использованием
@@ -189,7 +189,7 @@ Cargo наполнил этот файл значениями по умолча�
 
 ```rust
 fn main() {
-    println!("Hello, world!");
+    println!("Привет, мир!");
 }
 ```
 

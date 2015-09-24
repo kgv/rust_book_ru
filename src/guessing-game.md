@@ -36,11 +36,11 @@ authors = ["Your Name <you@example.com>"]
 Cargo взял эту информацию из вашего рабочего окружения. Если информация не
 корректна, исправьте её.
 
-Наконец, Cargo создал программу `Hello, world!`. Посмотрите файл `src/main.rs`:
+Наконец, Cargo создал программу `Привет, мир!`. Посмотрите файл `src/main.rs`:
 
 ```rust
 fn main() {
-    println!("Hello, world!")
+    println!("Привет, мир!")
 }
 ```
 
@@ -62,7 +62,7 @@ $ cargo build
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/debug/guessing_game`
-Hello, world!
+Привет, мир!
 ```
 
 Великолепно! Команда `run` помогает, когда надо быстро пересобирать проект. Наша
