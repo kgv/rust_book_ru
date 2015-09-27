@@ -36,7 +36,7 @@
 <ul class='section'>
 <li><a  href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a  href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+<li><a  href='../src/hello-world.html'><b>3.2.</b> Привет, мир!</a>
 </li>
 <li><a class='active' href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
@@ -259,7 +259,7 @@ authors = [ &quot;Ваше имя &lt;you@example.ru&gt;&quot; ]
 <pre><code class="language-bash">$ cargo build
    Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
 $ ./target/debug/hello_world
-Hello, world!
+Привет, мир!
 </code></pre>
 
 <p>Та-да! Мы собрали наш проект вызвав <code>cargo build</code> и запустили его с помощью
@@ -267,7 +267,7 @@ Hello, world!
 
 <pre><code class="language-bash">$ cargo run
      Running `target/debug/hello_world`
-Hello, world!
+Привет, мир!
 </code></pre>
 
 <p>Заметьте, что сейчас мы не пересобирали наш проект. Cargo понял, что мы не
@@ -277,7 +277,7 @@ Hello, world!
 <pre><code class="language-bash">$ cargo run
    Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
      Running `target/debug/hello_world`
-Hello, world!
+Привет, мир!
 </code></pre>
 
 <p>На первый взгляд это кажется сложнее, по сравнению с более простым использованием
@@ -356,11 +356,11 @@ authors = [&quot;Ваше Имя &lt;you@example.ru&gt;&quot;]
 
 <p>Также заглянем в <code>src/main.rs</code>:</p>
 <span class='rusttest'>fn main() {
-    println!(&quot;Hello, world!&quot;);
+    println!(&quot;Привет, мир!&quot;);
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello, world!&quot;</span>);
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Привет, мир!&quot;</span>);
 }</pre>
 
 <p>Cargo создал «Hello World!» для нас и вы уже можете приступить к

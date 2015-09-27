@@ -36,7 +36,7 @@
 <ul class='section'>
 <li><a  href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a  href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+<li><a  href='../src/hello-world.html'><b>3.2.</b> Привет, мир!</a>
 </li>
 <li><a  href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
@@ -437,14 +437,14 @@ fn main() {
 думать о чём-то, нужно иметь название для этого.</p>
 
 <h2 id='static' class='section-header'><a href='#static'>&#39;static</a></h2>
-<p>Время жизни с именем «static» — особенное. Оно обозначает, что что-то имеет время
-жизни, равное времени жизни всей программы. Большинство программистов на Rust
-впервые сталкиваются с <code>&#39;static</code>, когда имеют дело со строками:</p>
+<p>Время жизни с именем «static» — особенное. Оно обозначает, что что-то имеет
+время жизни, равное времени жизни всей программы. Большинство программистов на
+Rust впервые сталкиваются с <code>&#39;static</code>, когда имеют дело со строками:</p>
 <span class='rusttest'>fn main() {
-    let x: &amp;&#39;static str = &quot;Hello, world.&quot;;
+    let x: &amp;&#39;static str = &quot;Привет, мир.&quot;;
     
 }</span><pre class='rust rust-example-rendered'>
-<span class='kw'>let</span> <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;Hello, world.&quot;</span>;</pre>
+<span class='kw'>let</span> <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;Привет, мир.&quot;</span>;</pre>
 
 <p>Строковые литералы имеют тип <code>&amp;&#39;static str</code>, потому что ссылка всегда
 действительна: строки располагаются в сегменте данных конечного двоичного файла.

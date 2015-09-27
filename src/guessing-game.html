@@ -36,7 +36,7 @@
 <ul class='section'>
 <li><a  href='../src/installing-rust.html'><b>3.1.</b> Установка Rust</a>
 </li>
-<li><a  href='../src/hello-world.html'><b>3.2.</b> Hello, world!</a>
+<li><a  href='../src/hello-world.html'><b>3.2.</b> Привет, мир!</a>
 </li>
 <li><a  href='../src/hello-cargo.html'><b>3.3.</b> Hello, Cargo!</a>
 </li>
@@ -222,13 +222,13 @@ authors = [&quot;Your Name &lt;you@example.com&gt;&quot;]
 <p>Cargo взял эту информацию из вашего рабочего окружения. Если информация не
 корректна, исправьте её.</p>
 
-<p>Наконец, Cargo создал программу <code>Hello, world!</code>. Посмотрите файл <code>src/main.rs</code>:</p>
+<p>Наконец, Cargo создал программу <code>Привет, мир!</code>. Посмотрите файл <code>src/main.rs</code>:</p>
 <span class='rusttest'>fn main() {
-    println!(&quot;Hello, world!&quot;)
+    println!(&quot;Привет, мир!&quot;)
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hello, world!&quot;</span>)
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Привет, мир!&quot;</span>)
 }</pre>
 
 <p>Давайте попробуем скомпилировать созданный Cargo проект:</p>
@@ -247,7 +247,7 @@ authors = [&quot;Your Name &lt;you@example.com&gt;&quot;]
 <pre><code class="language-bash">$ cargo run
    Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
      Running `target/debug/guessing_game`
-Hello, world!
+Привет, мир!
 </code></pre>
 
 <p>Великолепно! Команда <code>run</code> помогает, когда надо быстро пересобирать проект. Наша
