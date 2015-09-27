@@ -3,7 +3,7 @@
 * [Введение](src/README.md)
 * [C чего начать](src/getting-started.md)
     * [Установка Rust](src/installing-rust.md)
-    * [Hello, world!](src/hello-world.md)
+    * [Привет, мир!](src/hello-world.md)
     * [Hello, Cargo!](src/hello-cargo.md)
 * [Изучение Rust](src/learn-rust.md)
     * [Угадайка](src/guessing-game.md)

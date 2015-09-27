@@ -428,7 +428,7 @@ $ cargo test
 ```rust
 /// ```no_run
 /// loop {
-///     println!("Hello, world");
+///     println!("Привет, мир");
 /// }
 /// ```
 # fn foo() {}
