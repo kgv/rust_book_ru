@@ -308,14 +308,14 @@ for i in &v {
 ### Использование после освобождения (use after free)
 
 Ссылки должны жить так же долго, как и ресурс, на который они ссылаются. Rust
-проверяет области видимоси ваших ссылок, чтобы удостовериться, что это правда.
+проверяет области видимости ваших ссылок, чтобы удостовериться, что это правда.
 
 Если Rust не будет проверять это свойство, то мы можем случайно использовать
 ссылку, которая будет недействительна. Например:
 
 ```rust,ignore
 let y: &i32;
-{ 
+{
     let x = 5;
     y = &x;
 }
@@ -332,7 +332,7 @@ error: `x` does not live long enough
 note: reference must be valid for the block suffix following statement 0 at
 2:16...
 let y: &i32;
-{ 
+{
     let x = 5;
     y = &x;
 }
@@ -373,7 +373,7 @@ note: reference must be valid for the block suffix following statement 0 at
     let y: &i32;
     let x = 5;
     y = &x;
-    
+
     println!("{}", y);
 }
 
@@ -381,7 +381,7 @@ note: ...but borrowed value is only valid for the block suffix following
 statement 1 at 3:14
     let x = 5;
     y = &x;
-    
+
     println!("{}", y);
 }
 ```
