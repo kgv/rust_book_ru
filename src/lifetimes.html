@@ -308,8 +308,9 @@ Rust стоимость абстракций должна быть настол�
 только определением времени жизни <code>&#39;a</code>, написанным между <code>&amp;</code> и <code>mut i32</code>. <code>&amp;mut i32</code> читается как «изменяемая ссылка на i32», а <code>&amp;&#39;a mut i32</code> — как «изменяемая
 ссылка на i32 со временем жизни &#39;a».</p>
 
-<p>Вы также должны будете явно указать время жизни при работе с
-[<code>struct</code>][structs]:</p>
+<h2 id='Внутри-a-hrefstructshtmlstructaов' class='section-header'><a href='#Внутри-a-hrefstructshtmlstructaов'>Внутри <a href="structs.html"><code>struct</code></a>&#39;ов</a></h2>
+<p>Вы также должны будете явно указать время жизни при работе со
+<a href="structs.html"><code>struct</code></a>s:</p>
 <span class='rusttest'>struct Foo&lt;&#39;a&gt; {
     x: &amp;&#39;a i32,
 }
@@ -355,6 +356,64 @@ fn main() {
 убедиться, что ссылка на <code>Foo</code> не может жить дольше, чем ссылка на <code>i32</code>,
 содержащаяся в нем.</p>
 
+<h2 id='Блоки-impl' class='section-header'><a href='#Блоки-impl'>Блоки <code>impl</code></a></h2>
+<p>Давайте реализуем метод для <code>Foo</code>:</p>
+<span class='rusttest'>struct Foo&lt;&#39;a&gt; {
+    x: &amp;&#39;a i32,
+}
+
+impl&lt;&#39;a&gt; Foo&lt;&#39;a&gt; {
+    fn x(&amp;self) -&gt; &amp;&#39;a i32 { self.x }
+}
+
+fn main() {
+    let y = &amp;5; // то же самое, что и `let _y = 5; let y = &amp;_y;`
+    let f = Foo { x: y };
+
+    println!(&quot;x is: {}&quot;, f.x());
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>struct</span> <span class='ident'>Foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span>,
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Foo</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>x</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>i32</span> { <span class='self'>self</span>.<span class='ident'>x</span> }
+}
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>; <span class='comment'>// то же самое, что и `let _y = 5; let y = &amp;_y;`</span>
+    <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='ident'>y</span> };
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;x is: {}&quot;</span>, <span class='ident'>f</span>.<span class='ident'>x</span>());
+}</pre>
+
+<p>Как вы можете видеть, нам нужно объявить время жизни для <code>Foo</code> в строке с
+<code>impl</code>. Мы повторяем <code>&#39;a</code> дважды, как в функциях: <code>impl&lt;&#39;a&gt;</code> определяет  время
+жизни <code>&#39;a</code>, и <code>Foo&lt;&#39;a&gt;</code> использует его.</p>
+
+<h2 id='Несколько-времён-жизни-multiple-lifetimes' class='section-header'><a href='#Несколько-времён-жизни-multiple-lifetimes'>Несколько времён жизни (Multiple lifetimes)</a></h2>
+<p>Если вы имеете несколько ссылок, вы можете использовать одно и то же время
+жизни несколько раз:</p>
+<span class='rusttest'>fn main() {
+    fn x_or_y&lt;&#39;a&gt;(x: &amp;&#39;a str, y: &amp;&#39;a str) -&gt; &amp;&#39;a str {
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>x_or_y</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>, <span class='ident'>y</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span> {</pre>
+
+<p>Этот код говорит, что <code>x</code> и <code>y</code> находятся в одной области видимости друг с
+другом, и что возвращаемое значение живо на протяжении той же области видимости.
+Если вы хотите, чтобы <code>x</code> и <code>y</code> имели разные времена жизни, вы должны 
+использовать параметры нескольких времён жизни:</p>
+<span class='rusttest'>fn main() {
+    fn x_or_y&lt;&#39;a, &#39;b&gt;(x: &amp;&#39;a str, y: &amp;&#39;b str) -&gt; &amp;&#39;a str {
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>x_or_y</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>, <span class='ident'>y</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span> {</pre>
+
+<p>В этом примере <code>x</code> и <code>y</code> имеют различные области видимости, но возвращаемое
+значение имеет то же время жизни, что и <code>x</code>.</p>
+
 <h2 id='Осмысливаем-области-видимости-thinking-in-scopes' class='section-header'><a href='#Осмысливаем-области-видимости-thinking-in-scopes'>Осмысливаем области видимости (Thinking in scopes)</a></h2>
 <p>Один из способов понять, что же такое время жизни — это визуализировать область,
 в которой ссылка является действительной. Например:</p>
@@ -380,7 +439,7 @@ fn main() {
 fn main() {
     let y = &amp;5;           // -+ y входит в область видимости
     let f = Foo { x: y }; // -+ f входит в область видимости
-    // stuff              //  |
+    // что-то             //  |
                           //  |
 }                         // -+ f и y выходят из области видимости
 </span><pre class='rust rust-example-rendered'>
@@ -391,7 +450,7 @@ fn main() {
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
     <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='number'>5</span>;           <span class='comment'>// -+ y входит в область видимости</span>
     <span class='kw'>let</span> <span class='ident'>f</span> <span class='op'>=</span> <span class='ident'>Foo</span> { <span class='ident'>x</span>: <span class='ident'>y</span> }; <span class='comment'>// -+ f входит в область видимости</span>
-    <span class='comment'>// stuff              //  |</span>
+    <span class='comment'>// что-то             //  |</span>
                           <span class='comment'>//  |</span>
 }                         <span class='comment'>// -+ f и y выходят из области видимости</span></pre>
 
