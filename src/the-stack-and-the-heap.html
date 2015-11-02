@@ -1031,18 +1031,68 @@ fn main() {
 
 <p>Далее, <code>foo()</code> вызывает <code>baz()</code>, передавая <code>z</code>:</p>
 
-<p>| Адрес                | Имя | Значение               |
-|----------------------|-----|--=---------------------|
-| (2<sup>30</sup>) - 1 |     | 20                     |
-| ...                  | ... | ...                    |
-| 7                    | g   | 100                    |
-| 6                    | f   | → 4                    |
-| 5                    | z   | → 4                    |
-| 4                    | y   | 10                     |
-| 3                    | x   | → 0                    |
-| 2                    | j   | → 0                    |
-| 1                    | i   | → (2<sup>30</sup>) - 1 |
-| 0                    | h   | 3                      |</p>
+<table>
+<thead>
+<tr>
+<th>Адрес</th>
+<th>Имя</th>
+<th>Значение</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(2<sup>30</sup>) - 1</td>
+<td></td>
+<td>20</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>7</td>
+<td>g</td>
+<td>100</td>
+</tr>
+<tr>
+<td>6</td>
+<td>f</td>
+<td>→ 4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>z</td>
+<td>→ 4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>y</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>x</td>
+<td>→ 0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>j</td>
+<td>→ 0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>i</td>
+<td>→ (2<sup>30</sup>) - 1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>h</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
 
 <p>Мы выделили память для <code>f</code> и <code>g</code>. <code>baz()</code> очень короткая, и когда она
 завершается, мы избавляемся от её кадра стека:</p>
