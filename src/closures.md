@@ -339,37 +339,34 @@ assert_eq!(3, answer);
 разберемся. Вот как вы, наверное, попытаетесь вернуть замыкание из функции:
 
 ```rust,ignore
-fn factory() -> (Fn(i32) -> Vec<i32>) {
-    let vec = vec![1, 2, 3];
+fn factory() -> (Fn(i32) -> i32) {
+    let num = 5;
 
-    |n| vec.push(n)
+    |x| x + num
 }
 
 let f = factory();
 
-let answer = f(4);
-assert_eq!(vec![1, 2, 3, 4], answer);
+let answer = f(1);
+assert_eq!(6, answer);
 ```
 
 Это выдаст следующие длинные, взаимосвязанные ошибки:
 
 ```text
 error: the trait `core::marker::Sized` is not implemented for the type
-`core::ops::Fn(i32) -> collections::vec::Vec<i32>` [E0277]
-f = factory();
-^
-note: `core::ops::Fn(i32) -> collections::vec::Vec<i32>` does not have a
-constant size known at compile-time
-f = factory();
-^
-error: the trait `core::marker::Sized` is not implemented for the type
-`core::ops::Fn(i32) -> collections::vec::Vec<i32>` [E0277]
-factory() -> (Fn(i32) -> Vec<i32>) {
-             ^~~~~~~~~~~~~~~~~~~~~
-note: `core::ops::Fn(i32) -> collections::vec::Vec<i32>` does not have a constant size known at compile-time
-fa ctory() -> (Fn(i32) -> Vec<i32>) {
-              ^~~~~~~~~~~~~~~~~~~~~
-
+`core::ops::Fn(i32) -> i32` [E0277]
+fn factory() -> (Fn(i32) -> i32) {
+                ^~~~~~~~~~~~~~~~
+note: `core::ops::Fn(i32) -> i32` does not have a constant size known at compile-time
+fn factory() -> (Fn(i32) -> i32) {
+                ^~~~~~~~~~~~~~~~
+error: the trait `core::marker::Sized` is not implemented for the type `core::ops::Fn(i32) -> i32` [E0277]
+let f = factory();
+    ^
+note: `core::ops::Fn(i32) -> i32` does not have a constant size known at compile-time
+let f = factory();
+    ^
 ```
 
 Для того чтобы вернуть что-то из функции, Rust должен знать, какой размер имеет
@@ -380,16 +377,16 @@ fa ctory() -> (Fn(i32) -> Vec<i32>) {
 известный размер. Таким образом, следовало бы написать так:
 
 ```rust,ignore
-fn factory() -> &(Fn(i32) -> Vec<i32>) {
-    let vec = vec![1, 2, 3];
+fn factory() -> &(Fn(i32) -> i32) {
+    let num = 5;
 
-    |n| vec.push(n)
+    |x| x + num
 }
 
 let f = factory();
 
-let answer = f(4);
-assert_eq!(vec![1, 2, 3, 4], answer);
+let answer = f(1);
+assert_eq!(6, answer);
 ```
 
 Но тогда мы получим другую ошибку:
@@ -466,12 +463,13 @@ assert_eq!(6, answer);
 `Fn`. И остаётся только одна, последняя проблема:
 
 ```text
-error: `num` does not live long enough
+error: closure may outlive the current function, but it borrows `num`,
+which is owned by the current function [E0373]
 Box::new(|x| x + num)
          ^~~~~~~~~~~
 ```
 
-Мы все еще по-прежнему ссылаемся на родительский фрейм стека. С этии последним
+Мы все еще по-прежнему ссылаемся на родительский фрейм стека. С этим последним
 исправлением мы сможем наконец выполнить нашу задачу:
 
 ```rust
