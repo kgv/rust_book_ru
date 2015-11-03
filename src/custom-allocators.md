@@ -28,11 +28,12 @@
 В результате он возвращается назад к стандартным API (таких как `malloc` и
 `free`), для получения и освобождения памяти.
 
-# Switching Allocators
+# Переключение менеджеров памяти
 
-Although the compiler's default choices may work most of the time, it's often
-necessary to tweak certain aspects. Overriding the compiler's decision about
-which allocator is in use is done simply by linking to the desired allocator:
+Несмотря на то что в большинстве случаев нам подойдет стандартный выбор
+компилятора, часто бывает необходимо настроить определенные аспекты. Для того
+чтобы переопределить решение компилятора о том, какой именно менеджер
+использовать, достаточно просто скомпоновать с желаемым менеджером:
 
 ```rust,no_run
 #![feature(alloc_system)]
@@ -40,14 +41,15 @@ which allocator is in use is done simply by linking to the desired allocator:
 extern crate alloc_system;
 
 fn main() {
-    let a = Box::new(4); // allocates from the system allocator
+    let a = Box::new(4); // выделение памяти с помощью системного менеджера
     println!("{}", a);
 }
 ```
 
-In this example the binary generated will not link to jemalloc by default but
-instead use the system allocator. Conversely to generate a dynamic library which
-uses jemalloc by default one would write:
+В этом примере сгенерированный исполняемый файл будет скомпонован с системным
+менеджером, вместо менеджера по умолчанию — jemalloc. И наоборот, чтобы
+сгенерировать динамическую библиотеку, которая использует jemalloc по умолчанию
+нужно написать:
 
 ```rust,ignore
 #![feature(alloc_jemalloc)]
@@ -56,7 +58,7 @@ uses jemalloc by default one would write:
 extern crate alloc_jemalloc;
 
 pub fn foo() {
-    let a = Box::new(4); // allocates from jemalloc
+    let a = Box::new(4); // выделение памяти с помощью jemalloc
     println!("{}", a);
 }
 # fn main() {}
