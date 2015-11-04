@@ -69,5 +69,6 @@
     * [Синтаксис упаковки и шаблоны `match`](src/box-syntax-and-patterns.md)
     * [Шаблоны `match` для срезов](src/slice-patterns.md)
     * [Ассоциированные константы](src/associated-constants.md)
+    * [Пользовательские менеджеры памяти](src/custom-allocators.md)
 * [Глоссарий](src/glossary.md)
 * [Академические исследования](src/academic-research.md)
