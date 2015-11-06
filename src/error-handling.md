@@ -1378,6 +1378,7 @@ fn file_double_verbose<P: AsRef<Path>>(file_path: P) -> Result<i32, CliError> {
     let n: i32 = try!(contents.trim().parse().map_err(CliError::Parse));
     Ok(2 * n)
 }
+```
 
 Обратите внимание, что здесь у нас еще остались вызовы `map_err`. Почему?
 Вспомните определения [`try!`](#code-try-def) и [`From`](#code-from-def).
