@@ -264,46 +264,44 @@ fn main() {}
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>a</span>);
 }</pre>
 
-<h1 id='writing-a-custom-allocator' class='section-header'><a href='#writing-a-custom-allocator'>Writing a custom allocator</a></h1>
-<p>Sometimes even the choices of jemalloc vs the system allocator aren&#39;t enough and
-an entirely new custom allocator is required. In this you&#39;ll write your own
-crate which implements the allocator API (e.g. the same as <code>alloc_system</code> or
-<code>alloc_jemalloc</code>). As an example, let&#39;s take a look at a simplified and
-annotated version of <code>alloc_system</code></p>
+<h1 id='Написание-своего-менеджера-памяти' class='section-header'><a href='#Написание-своего-менеджера-памяти'>Написание своего менеджера памяти</a></h1>
+<p>Иногда даже выбора между jemalloc и системным менеджером недостаточно и
+необходим совершенно новый менеджер памяти. В этом случае мы напишем наш
+собственный контейнер, который будет предоставлять API менеджера памяти (также
+как и <code>alloc_system</code> или <code>alloc_jemalloc</code>). Для примера давайте рассмотрим
+упрощенную и аннотированную версию <code>alloc_system</code>:</p>
 <span class='rusttest'>// only needed for rustdoc --test down below
 #![feature(lang_items)]
-// The compiler needs to be instructed that this crate is an allocator in order
-// to realize that when this is linked in another allocator like jemalloc should
-// not be linked in
+// Компилятору нужно указать, что этот контейнер является менеджером памяти, для
+// того что бы при компоновке он не использовал другой менеджер.
 #![feature(allocator)]
 #![allocator]
 
-// Allocators are not allowed to depend on the standard library which in turn
-// requires an allocator in order to avoid circular dependencies. This crate,
-// however, can use all of libcore.
+// Менеджерам памяти не позволяют зависеть от стандартной библиотеки, которая в
+// свою очередь зависит от менеджера, чтобы избежать циклической зависимости.
+// Однако этот контейнер может использовать все из libcore.
 #![feature(no_std)]
 #![no_std]
 
-// Let&#39;s give a unique name to our custom allocator
+// Давайте дадим какое-нибудь уникальное имя нашему менеджеру.
 #![crate_name = &quot;my_allocator&quot;]
 #![crate_type = &quot;rlib&quot;]
 
-// Our system allocator will use the in-tree libc crate for FFI bindings. Note
-// that currently the external (crates.io) libc cannot be used because it links
-// to the standard library (e.g. `#![no_std]` isn&#39;t stable yet), so that&#39;s why
-// this specifically requires the in-tree version.
+// Наш системный менеджер будет использовать поставляемый вместе с компилятором
+// контейнер libc для связи с FFI. Имейте ввиду, что на данный момент внешний
+// (crates.io) libc не может быть использован, поскольку он компонуется со
+// стандартной библиотекой (`#![no_std]` все еще нестабилен).
 #![feature(libc)]
 extern crate libc;
 
-// Listed below are the five allocation functions currently required by custom
-// allocators. Their signatures and symbol names are not currently typechecked
-// by the compiler, but this is a future extension and are required to match
-// what is found below.
+// Ниже перечислены пять функций, необходимые пользовательскому менеджеру памяти.
+// Их сигнатуры и имена на данный момент не проверяются компилятором, но это
+// вскоре будет реализовано, так что они должны соответствовать тому, что
+// находится ниже.
 //
-// Note that the standard `malloc` and `realloc` functions do not provide a way
-// to communicate alignment so this implementation would need to be improved
-// with respect to alignment in that aspect.
-
+// Имейте ввиду, что стандартные `malloc` и `realloc` не предоставляют опций для
+// выравнивания, так что эта реализация должна быть улучшена и поддерживать
+// выравнивание.
 #[no_mangle]
 pub extern fn __rust_allocate(size: usize, _align: usize) -&gt; *mut u8 {
     unsafe { libc::malloc(size as libc::size_t) as *mut u8 }
@@ -325,7 +323,7 @@ pub extern fn __rust_reallocate(ptr: *mut u8, _old_size: usize, size: usize,
 #[no_mangle]
 pub extern fn __rust_reallocate_inplace(_ptr: *mut u8, old_size: usize,
                                         _size: usize, _align: usize) -&gt; usize {
-    old_size // this api is not supported by libc
+    old_size // libc не поддерживает этот API
 }
 
 #[no_mangle]
@@ -341,38 +339,36 @@ fn main() {}
 #[no_mangle] pub extern fn rust_eh_register_frames () {}
 #[no_mangle] pub extern fn rust_eh_unregister_frames () {}
 </span><pre class='rust rust-example-rendered'>
-<span class='comment'>// The compiler needs to be instructed that this crate is an allocator in order</span>
-<span class='comment'>// to realize that when this is linked in another allocator like jemalloc should</span>
-<span class='comment'>// not be linked in</span>
+<span class='comment'>// Компилятору нужно указать, что этот контейнер является менеджером памяти, для</span>
+<span class='comment'>// того что бы при компоновке он не использовал другой менеджер.</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>allocator</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allocator</span>]</span>
 
-<span class='comment'>// Allocators are not allowed to depend on the standard library which in turn</span>
-<span class='comment'>// requires an allocator in order to avoid circular dependencies. This crate,</span>
-<span class='comment'>// however, can use all of libcore.</span>
+<span class='comment'>// Менеджерам памяти не позволяют зависеть от стандартной библиотеки, которая в</span>
+<span class='comment'>// свою очередь зависит от менеджера, чтобы избежать циклической зависимости.</span>
+<span class='comment'>// Однако этот контейнер может использовать все из libcore.</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>no_std</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>no_std</span>]</span>
 
-<span class='comment'>// Let&#39;s give a unique name to our custom allocator</span>
+<span class='comment'>// Давайте дадим какое-нибудь уникальное имя нашему менеджеру.</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;my_allocator&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_type</span> <span class='op'>=</span> <span class='string'>&quot;rlib&quot;</span>]</span>
 
-<span class='comment'>// Our system allocator will use the in-tree libc crate for FFI bindings. Note</span>
-<span class='comment'>// that currently the external (crates.io) libc cannot be used because it links</span>
-<span class='comment'>// to the standard library (e.g. `#![no_std]` isn&#39;t stable yet), so that&#39;s why</span>
-<span class='comment'>// this specifically requires the in-tree version.</span>
+<span class='comment'>// Наш системный менеджер будет использовать поставляемый вместе с компилятором</span>
+<span class='comment'>// контейнер libc для связи с FFI. Имейте ввиду, что на данный момент внешний</span>
+<span class='comment'>// (crates.io) libc не может быть использован, поскольку он компонуется со</span>
+<span class='comment'>// стандартной библиотекой (`#![no_std]` все еще нестабилен).</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>libc</span>)]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
-<span class='comment'>// Listed below are the five allocation functions currently required by custom</span>
-<span class='comment'>// allocators. Their signatures and symbol names are not currently typechecked</span>
-<span class='comment'>// by the compiler, but this is a future extension and are required to match</span>
-<span class='comment'>// what is found below.</span>
+<span class='comment'>// Ниже перечислены пять функций, необходимые пользовательскому менеджеру памяти.</span>
+<span class='comment'>// Их сигнатуры и имена на данный момент не проверяются компилятором, но это</span>
+<span class='comment'>// вскоре будет реализовано, так что они должны соответствовать тому, что</span>
+<span class='comment'>// находится ниже.</span>
 <span class='comment'>//</span>
-<span class='comment'>// Note that the standard `malloc` and `realloc` functions do not provide a way</span>
-<span class='comment'>// to communicate alignment so this implementation would need to be improved</span>
-<span class='comment'>// with respect to alignment in that aspect.</span>
-
+<span class='comment'>// Имейте ввиду, что стандартные `malloc` и `realloc` не предоставляют опций для</span>
+<span class='comment'>// выравнивания, так что эта реализация должна быть улучшена и поддерживать</span>
+<span class='comment'>// выравнивание.</span>
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
 <span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>__rust_allocate</span>(<span class='ident'>size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> {
     <span class='kw'>unsafe</span> { <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='ident'>size</span> <span class='kw'>as</span> <span class='ident'>libc</span>::<span class='ident'>size_t</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span> }
@@ -394,7 +390,7 @@ fn main() {}
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
 <span class='kw'>pub</span> <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>__rust_reallocate_inplace</span>(<span class='ident'>_ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u8</span>, <span class='ident'>old_size</span>: <span class='ident'>usize</span>,
                                         <span class='ident'>_size</span>: <span class='ident'>usize</span>, <span class='ident'>_align</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
-    <span class='ident'>old_size</span> <span class='comment'>// this api is not supported by libc</span>
+    <span class='ident'>old_size</span> <span class='comment'>// libc не поддерживает этот API</span>
 }
 
 <span class='attribute'>#[<span class='ident'>no_mangle</span>]</span>
@@ -403,35 +399,37 @@ fn main() {}
 }
 </pre>
 
-<p>After we compile this crate, it can be used as follows:</p>
+<p>После того как мы скомпилировали этот контейнер, мы можем использовать его
+следующим образом:</p>
 <span class='rusttest'>extern crate my_allocator;
 
 fn main() {
-    let a = Box::new(8); // allocates memory via our custom allocator crate
+    let a = Box::new(8); // выделение памяти с помощью нашего контейнера
     println!(&quot;{}&quot;, a);
 }
 </span><pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>my_allocator</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>8</span>); <span class='comment'>// allocates memory via our custom allocator crate</span>
+    <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>8</span>); <span class='comment'>// выделение памяти с помощью нашего контейнера</span>
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>a</span>);
 }</pre>
 
-<h1 id='custom-allocator-limitations' class='section-header'><a href='#custom-allocator-limitations'>Custom allocator limitations</a></h1>
-<p>There are a few restrictions when working with custom allocators which may cause
-compiler errors:</p>
+<h1 id='Ограничения-пользовательских-менеджеров-памяти' class='section-header'><a href='#Ограничения-пользовательских-менеджеров-памяти'>Ограничения пользовательских менеджеров памяти</a></h1>
+<p>Несколько ограничений при работе с пользовательским менеджером памяти, которые
+могут быть причиной ошибок компиляции:</p>
 
 <ul>
-<li><p>Any one artifact may only be linked to at most one allocator. Binaries,
-dylibs, and staticlibs must link to exactly one allocator, and if none have
-been explicitly chosen the compiler will choose one. On the other hand rlibs
-do not need to link to an allocator (but still can).</p></li>
-<li><p>A consumer of an allocator is tagged with <code>#![needs_allocator]</code> (e.g. the
-<code>liballoc</code> crate currently) and an <code>#[allocator]</code> crate cannot transitively
-depend on a crate which needs an allocator (e.g. circular dependencies are not
-allowed). This basically means that allocators must restrict themselves to
-libcore currently.</p></li>
+<li><p>Любой артефакт может быть скомпонован только с одним менеджером. Исполняемые
+файлы, динамические библиотеки и статические библиотеки должны быть
+скомпонованы с одним менеджером, и если не один не был указан, то компилятор
+сам выберет один. В то же время Rust библиотеки (rlibs) не нуждаются в
+компоновке с  менеджером (но это возможно).</p></li>
+<li><p>Потребитель какого-либо менеджера памяти имеет пометку <code>#![needs_allocator]</code>
+(в данном случае контейнер <code>liballoc</code>) и какой-либо контейнер <code>#[allocator]</code>
+не может транзитивно зависеть от контейнера, которому нужен менеджер (т.е.
+циклическая зависимость не допускается). Это означает, что менеджеры памяти в
+данный момент должны ограничить себя только libcore.</p></li>
 </ul>
 
     <script type="text/javascript">
