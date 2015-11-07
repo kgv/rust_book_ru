@@ -64,49 +64,47 @@ pub fn foo() {
 # fn main() {}
 ```
 
-# Writing a custom allocator
+# Написание своего менеджера памяти
 
-Sometimes even the choices of jemalloc vs the system allocator aren't enough and
-an entirely new custom allocator is required. In this you'll write your own
-crate which implements the allocator API (e.g. the same as `alloc_system` or
-`alloc_jemalloc`). As an example, let's take a look at a simplified and
-annotated version of `alloc_system`
+Иногда даже выбора между jemalloc и системным менеджером недостаточно и
+необходим совершенно новый менеджер памяти. В этом случае мы напишем наш
+собственный контейнер, который будет предоставлять API менеджера памяти (также
+как и `alloc_system` или `alloc_jemalloc`). Для примера давайте рассмотрим
+упрощенную и аннотированную версию `alloc_system`:
 
 ```rust,no_run
 # // only needed for rustdoc --test down below
 # #![feature(lang_items)]
-// The compiler needs to be instructed that this crate is an allocator in order
-// to realize that when this is linked in another allocator like jemalloc should
-// not be linked in
+// Компилятору нужно указать, что этот контейнер является менеджером памяти, для
+// того что бы при компоновке он не использовал другой менеджер.
 #![feature(allocator)]
 #![allocator]
 
-// Allocators are not allowed to depend on the standard library which in turn
-// requires an allocator in order to avoid circular dependencies. This crate,
-// however, can use all of libcore.
+// Менеджерам памяти не позволяют зависеть от стандартной библиотеки, которая в
+// свою очередь зависит от менеджера, чтобы избежать циклической зависимости.
+// Однако этот контейнер может использовать все из libcore.
 #![feature(no_std)]
 #![no_std]
 
-// Let's give a unique name to our custom allocator
+// Давайте дадим какое-нибудь уникальное имя нашему менеджеру.
 #![crate_name = "my_allocator"]
 #![crate_type = "rlib"]
 
-// Our system allocator will use the in-tree libc crate for FFI bindings. Note
-// that currently the external (crates.io) libc cannot be used because it links
-// to the standard library (e.g. `#![no_std]` isn't stable yet), so that's why
-// this specifically requires the in-tree version.
+// Наш системный менеджер будет использовать поставляемый вместе с компилятором
+// контейнер libc для связи с FFI. Имейте ввиду, что на данный момент внешний
+// (crates.io) libc не может быть использован, поскольку он компонуется со
+// стандартной библиотекой (`#![no_std]` все еще нестабилен).
 #![feature(libc)]
 extern crate libc;
 
-// Listed below are the five allocation functions currently required by custom
-// allocators. Their signatures and symbol names are not currently typechecked
-// by the compiler, but this is a future extension and are required to match
-// what is found below.
+// Ниже перечислены пять функций, необходимые пользовательскому менеджеру памяти.
+// Их сигнатуры и имена на данный момент не проверяются компилятором, но это
+// вскоре будет реализовано, так что они должны соответствовать тому, что
+// находится ниже.
 //
-// Note that the standard `malloc` and `realloc` functions do not provide a way
-// to communicate alignment so this implementation would need to be improved
-// with respect to alignment in that aspect.
-
+// Имейте ввиду, что стандартные `malloc` и `realloc` не предоставляют опций для
+// выравнивания, так что эта реализация должна быть улучшена и поддерживать
+// выравнивание.
 #[no_mangle]
 pub extern fn __rust_allocate(size: usize, _align: usize) -> *mut u8 {
     unsafe { libc::malloc(size as libc::size_t) as *mut u8 }
@@ -128,7 +126,7 @@ pub extern fn __rust_reallocate(ptr: *mut u8, _old_size: usize, size: usize,
 #[no_mangle]
 pub extern fn __rust_reallocate_inplace(_ptr: *mut u8, old_size: usize,
                                         _size: usize, _align: usize) -> usize {
-    old_size // this api is not supported by libc
+    old_size // libc не поддерживает этот API
 }
 
 #[no_mangle]
@@ -145,29 +143,31 @@ pub extern fn __rust_usable_size(size: usize, _align: usize) -> usize {
 # #[no_mangle] pub extern fn rust_eh_unregister_frames () {}
 ```
 
-After we compile this crate, it can be used as follows:
+После того как мы скомпилировали этот контейнер, мы можем использовать его
+следующим образом:
 
 ```rust,ignore
 extern crate my_allocator;
 
 fn main() {
-    let a = Box::new(8); // allocates memory via our custom allocator crate
+    let a = Box::new(8); // выделение памяти с помощью нашего контейнера
     println!("{}", a);
 }
 ```
 
-# Custom allocator limitations
+# Ограничения пользовательских менеджеров памяти
 
-There are a few restrictions when working with custom allocators which may cause
-compiler errors:
+Несколько ограничений при работе с пользовательским менеджером памяти, которые
+могут быть причиной ошибок компиляции:
 
-* Any one artifact may only be linked to at most one allocator. Binaries,
-  dylibs, and staticlibs must link to exactly one allocator, and if none have
-  been explicitly chosen the compiler will choose one. On the other hand rlibs
-  do not need to link to an allocator (but still can).
+* Любой артефакт может быть скомпонован только с одним менеджером. Исполняемые
+  файлы, динамические библиотеки и статические библиотеки должны быть
+  скомпонованы с одним менеджером, и если не один не был указан, то компилятор
+  сам выберет один. В то же время Rust библиотеки (rlibs) не нуждаются в
+  компоновке с  менеджером (но это возможно).
 
-* A consumer of an allocator is tagged with `#![needs_allocator]` (e.g. the
-  `liballoc` crate currently) and an `#[allocator]` crate cannot transitively
-  depend on a crate which needs an allocator (e.g. circular dependencies are not
-  allowed). This basically means that allocators must restrict themselves to
-  libcore currently.
+* Потребитель какого-либо менеджера памяти имеет пометку `#![needs_allocator]`
+  (в данном случае контейнер `liballoc`) и какой-либо контейнер `#[allocator]`
+  не может транзитивно зависеть от контейнера, которому нужен менеджер (т.е.
+  циклическая зависимость не допускается). Это означает, что менеджеры памяти в
+  данный момент должны ограничить себя только libcore.
