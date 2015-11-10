@@ -17,7 +17,7 @@
     * [Итераторы](src/iterators.md)
     * [Многозадачность](src/concurrency.md)
     * [Обработка ошибок](src/error-handling.md)
-    * [Choosing your Guarantees](src/choosing-your-guarantees.md)
+    * [Выбор гарантий](src/choosing-your-guarantees.md)
     * [Интерфейс внешних функций (FFI)](src/ffi.md)
     * [Типажи `Borrow` и `AsRef`](src/borrow-and-asref.md)
     * [Каналы сборок](src/release-channels.md)
