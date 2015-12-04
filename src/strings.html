@@ -203,21 +203,54 @@
 оканчиваются нулём и могут содержать нулевые байты.</p>
 
 <p>В Rust есть два основных типа строк: <code>&amp;str</code> и <code>String</code>. Сперва поговорим о
-<code>&amp;str</code> — это «строковый срез». Строковые литералы имеют тип <code>&amp;&#39;static str</code>:</p>
+<code>&amp;str</code> — это «строковый срез». Строковые срезы имеют фиксированный размер и
+не могут быть изменены. Они представляют собой ссылку на последовательность
+байт UTF-8:</p>
 <span class='rusttest'>fn main() {
     let greeting = &quot;Всем привет.&quot;; // greeting: &amp;&#39;static str
     
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>greeting</span> <span class='op'>=</span> <span class='string'>&quot;Всем привет.&quot;</span>; <span class='comment'>// greeting: &amp;&#39;static str</span></pre>
 
-<p>Эта строка выделяется статически, что означает, что она сохраняется в нашей
-скомпилированной программе и существует в течение всего периода ее выполнения.
-Имя <code>greeting</code> представляет собой ссылку на эту статически размещенную строку.
-Строковые срезы имеют фиксированный размер и не могут быть изменены.</p>
+<p><code>&quot;Всем привет.&quot;</code> — это строковый литерал, его тип — <code>&amp;&#39;static str</code>.
+Строковые литералы являются статически размещенными строковыми срезами. Это
+означает, что они сохраняются внутри нашей скомпилированной программы и
+существуют в течение всего периода ее выполнения. Имя <code>greeting</code> представляет
+собой ссылку на эту статически размещенную строку. Любая функция, ожидающая
+строковый срез, может также принять в качестве аргумента строковый литерал.</p>
 
-<p><code>String</code> же, напротив, выделяется в куче. Эта строка расширяема, и она также
-гарантированно является последовательностью UTF-8. <code>String</code> обычно создаётся
-путем преобразования из строкового среза с использованием метода <code>to_string</code>.</p>
+<p>Строковые литералы могут состоять из нескольких строк. Такие литералы можно
+записывать в двух разных формах. Первая будет включать в себя перевод на новую
+строку и ведущие пробелы:</p>
+<span class='rusttest'>fn main() {
+    let s = &quot;foo
+        bar&quot;;
+    
+    assert_eq!(&quot;foo\n        bar&quot;, s);
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;foo
+    bar&quot;</span>;
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;foo\n        bar&quot;</span>, <span class='ident'>s</span>);</pre>
+
+<p>Вторая форма, включающая в себя <code>\</code>, вырезает пробелы и перевод на новую строку:</p>
+<span class='rusttest'>fn main() {
+    let s = &quot;foo\
+        bar&quot;; 
+    
+    assert_eq!(&quot;foobar&quot;, s);
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;foo\
+    bar&quot;</span>; 
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;foobar&quot;</span>, <span class='ident'>s</span>);</pre>
+
+<p>Но в Rust есть не только <code>&amp;str</code>. Тип <code>String</code> представляет собой строку, 
+размещенную в куче. Эта строка расширяема, и она также гарантированно является 
+последовательностью UTF-8. <code>String</code> обычно создаётся путем преобразования из 
+строкового среза с использованием метода <code>to_string</code>.</p>
 <span class='rusttest'>fn main() {
     let mut s = &quot;Привет&quot;.to_string(); // mut s: String
     println!(&quot;{}&quot;, s);
@@ -258,7 +291,7 @@ fn main() {
 <span class='rusttest'>fn main() {
     use std::net::TcpStream;
     
-    TcpStream::connect(&quot;192.168.0.1:3000&quot;); // &amp;str parameter
+    TcpStream::connect(&quot;192.168.0.1:3000&quot;); // параметр &amp;str
     
     let addr_string = &quot;192.168.0.1:3000&quot;.to_string();
     TcpStream::connect(&amp;*addr_string); // преобразуем addr_string в &amp;str
@@ -266,7 +299,7 @@ fn main() {
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::<span class='ident'>TcpStream</span>;
 
-<span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='string'>&quot;192.168.0.1:3000&quot;</span>); <span class='comment'>// &amp;str parameter</span>
+<span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='string'>&quot;192.168.0.1:3000&quot;</span>); <span class='comment'>// параметр &amp;str</span>
 
 <span class='kw'>let</span> <span class='ident'>addr_string</span> <span class='op'>=</span> <span class='string'>&quot;192.168.0.1:3000&quot;</span>.<span class='ident'>to_string</span>();
 <span class='ident'>TcpStream</span>::<span class='ident'>connect</span>(<span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>addr_string</span>); <span class='comment'>// преобразуем addr_string в &amp;str</span></pre>
@@ -340,7 +373,7 @@ Unicode. Мы можем выбрать как рассматривать стр
 }</span><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>dog</span> <span class='op'>=</span> <span class='ident'>hachiko</span>.<span class='ident'>chars</span>().<span class='ident'>nth</span>(<span class='number'>1</span>); <span class='comment'>// что-то вроде hachiko[1]</span></pre>
 
-<p>Это подчеркивает, что мы должны пройти через весь список <code>chars</code>.</p>
+<p>Это подчеркивает, что мы должны пройти по списку <code>chars</code> от его начала.</p>
 
 <h2 id='Срезы' class='section-header'><a href='#Срезы'>Срезы</a></h2>
 <p>Вы можете получить срез строки с помощью синтаксиса срезов:</p>
