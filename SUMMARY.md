@@ -2,9 +2,6 @@
 
 * [Введение](src/INTRODUCTION.md)
 * [C чего начать](src/getting-started.md)
-    * [Установка Rust](src/installing-rust.md)
-    * [Привет, мир!](src/hello-world.md)
-    * [Hello, Cargo!](src/hello-cargo.md)
 * [Изучение Rust](src/learn-rust.md)
     * [Угадайка](src/guessing-game.md)
     * [Обедающие философы](src/dining-philosophers.md)
