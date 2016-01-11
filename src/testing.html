@@ -322,16 +322,27 @@ thread &#39;&lt;main&gt;&#39; panicked at &#39;Some tests failed&#39;, /home/ste
 <pre><code class="language-text">test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured
 </code></pre>
 
-<p>Мы также получаем ненулевой код состояния:</p>
+<p>Мы также получаем ненулевой код состояния. Можно использовать <code>$?</code> на OS X и Linux:</p>
 
 <pre><code class="language-bash">$ echo $?
 101
 </code></pre>
 
+<p>На Windows, если вы используете <code>cmd</code>:</p>
+
+<pre><code class="language-bash">    echo %ERRORLEVEL%
+</code></pre>
+
+<p>И если вы используете PowerShell:</p>
+
+<pre><code class="language-bash">    echo $LASTEXITCODE # сам код
+    echo $? # логическое, успешно или не успешно
+</code></pre>
+
 <p>Это бывает полезно, если вы хотите интегрировать <code>cargo test</code> в сторонний
 инструмент.</p>
 
-<p>Мы можем инвертировать ожидаемый результат теста с помощью атрибута:
+<p>Можно инвертировать ожидаемый результат теста с помощью атрибута:
 <code>should_panic</code>:</p>
 <span class='rusttest'>fn main() {
     #[test]
@@ -444,6 +455,72 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 <p>Это распространенное использование макроса <code>assert_eq!</code>: вызывать некоторую
 функцию с известными аргументами и сравнить результат её вызова с ожидаемым
 результатом.</p>
+
+<h1 id='Тесты-с-атрибутом-ignore' class='section-header'><a href='#Тесты-с-атрибутом-ignore'>Тесты с атрибутом <code>ignore</code></a></h1>
+<p>Некоторые тесты могу занимать много времени на выполнение. Такие тесты могут
+быть отключены по умолчанию с помощью атрибута <code>ignore</code>:</p>
+<span class='rusttest'>fn main() {
+    fn it_works() {
+        assert_eq!(4, add_two(2));
+    }
+    
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // код, который занимает час на выполнение
+    }
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>it_works</span>() {
+    <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>4</span>, <span class='ident'>add_two</span>(<span class='number'>2</span>));
+}
+
+<span class='attribute'>#[<span class='ident'>test</span>]</span>
+<span class='attribute'>#[<span class='ident'>ignore</span>]</span>
+<span class='kw'>fn</span> <span class='ident'>expensive_test</span>() {
+    <span class='comment'>// код, который занимает час на выполнение</span>
+}</pre>
+
+<p>Теперь запустим наши тесты и видим, что <code>it_works</code> запускается, а
+<code>expensive_test</code> нет:</p>
+
+<pre><code class="language-bash">$ cargo test
+   Compiling adder v0.0.1 (file:///home/you/projects/adder)
+     Running target/adder-91b3e234d4ed382a
+
+running 2 tests
+test expensive_test ... ignored
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Дорогостоящие тесты могут быть запущены с помощью команды
+<code>cargo test -- --ignored</code>:</p>
+
+<pre><code class="language-bash">$ cargo test -- --ignored
+     Running target/adder-91b3e234d4ed382a
+
+running 1 test
+test expensive_test ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre>
+
+<p>Аргумент <code>--ignored</code> — это аргумент для тестового исполняемого файла, а не для
+Cargo, именно поэтому команда выглядит так <code>cargo test -- --ignored</code>.</p>
 
 <h1 id='Тесты-в-модуле-test' class='section-header'><a href='#Тесты-в-модуле-test'>Тесты в модуле <code>test</code></a></h1>
 <p>Есть один нюанс, из-за которого наш пример нельзя назвать идиоматичным:
@@ -614,8 +691,8 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 <p>Нет ничего лучше, чем документация с примерами. Нет ничего хуже, чем примеры,
 которые на самом деле не работают, потому что код изменился с тех пор, как была
 написана документация. Для того, чтобы такой ситуации не возникало, Rust
-поддерживает автоматический запуск примеров в документации. Вот дополненный
-<code>src/lib.rs</code> с примерами:</p>
+поддерживает автоматический запуск примеров в документации (имейте ввиду, что
+это работает только с библиотеками). Вот дополненный <code>src/lib.rs</code> с примерами:</p>
 <span class='rusttest'>fn main() {
     //! Контейнер `adder` предоставляет функции сложения чисел.
     //!
@@ -719,6 +796,12 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured
 функциональных тестов. Цифры на конце будут увеличиваться автоматически, если вы
 добавите еще примеров. Например, при добавлении ещё одного функционального
 теста, он получит имя <code>add_two_1</code>.</p>
+
+<p>Мы не рассмотрели все детали написания тестов в документации. Подробнее
+смотрите главу <a href="documentation.html">Документация</a>.</p>
+
+<p>Последнее замечание: тесты в документации <em>не работают</em> для исполняемых файлов.
+Подробнее об организации файлов можно узнать в главе <a href="crates-and-modules.html">Контейнеры и модули</a>.</p>
 
     <script type="text/javascript">
         window.playgroundUrl = "http://play.rust-lang.org";
