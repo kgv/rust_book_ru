@@ -1,6 +1,6 @@
 % Библиография
 
-Это список материалов имеющих отношние к Rust. Он включает в себя
+Это — список материалов, имеющих отношние к Rust. Он включает в себя
 предварительные исследования, которые в тот или иной момент оказали влияние на
 структуру Rust'а, а также публикации о Rust.
 
@@ -33,7 +33,7 @@
 * [Non-blocking steal-half work queues](http://www.cs.bgu.ac.il/%7Ehendlerd/papers/p280-hendler.pdf)
 * [Reagents: expressing and composing fine-grained concurrency](http://www.mpi-sws.org/~turon/reagents.pdf)
 * [Algorithms for scalable synchronization of shared-memory multiprocessors](https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf)
-* [Epoc-based reclamation](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf).
+* [Epoch-based reclamation](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf).
 
 ### Другое
 
