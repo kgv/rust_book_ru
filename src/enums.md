@@ -69,6 +69,7 @@ fn process_color_change(msg: Message) {
 
 Конструктор перечисления может быть также использован как обычная функция.
 Например:
+
 ```rust
 # enum Message {
 # Write(String),
