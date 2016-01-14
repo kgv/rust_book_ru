@@ -71,4 +71,4 @@
     * [Ассоциированные константы](src/associated-constants.md)
     * [Пользовательские менеджеры памяти](src/custom-allocators.md)
 * [Глоссарий](src/glossary.md)
-* [Академические исследования](src/academic-research.md)
+* [Библиография](src/bibliography.md)

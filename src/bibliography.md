@@ -1,8 +1,8 @@
-% Академические исследования
+% Библиография
 
-Неполный перечень работ, которые оказали какое-то влияние на Rust.
-
-Рекомендуется для вдохновения и лучшего понимания предпосылок Rust.
+Это — список материалов, имеющих отношние к Rust. Он включает в себя
+предварительные исследования, которые в тот или иной момент оказали влияние на
+структуру Rust'а, а также публикации о Rust.
 
 ### Система типов
 
@@ -33,6 +33,7 @@
 * [Non-blocking steal-half work queues](http://www.cs.bgu.ac.il/%7Ehendlerd/papers/p280-hendler.pdf)
 * [Reagents: expressing and composing fine-grained concurrency](http://www.mpi-sws.org/~turon/reagents.pdf)
 * [Algorithms for scalable synchronization of shared-memory multiprocessors](https://www.cs.rochester.edu/u/scott/papers/1991_TOCS_synch.pdf)
+* [Epoch-based reclamation](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-579.pdf).
 
 ### Другое
 
@@ -47,7 +48,7 @@ Systems Level
 Language](http://www.cs.indiana.edu/~eholk/papers/hips2013.pdf). Early GPU work by Eric Holk.
 * [Parallel closures: a new twist on an old
   idea](https://www.usenix.org/conference/hotpar12/parallel-closures-new-twist-old-idea)
-  - not exactly about rust, but by nmatsakis
+  - not exactly about Rust, but by nmatsakis
 * [Patina: A Formalization of the Rust Programming
   Language](ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf). Early
   formalization of a subset of the type system, by Eric Reed.
@@ -60,8 +61,9 @@ Language](http://www.cs.indiana.edu/~eholk/papers/hips2013.pdf). Early GPU work 
   Rust](http://scialex.github.io/reenix.pdf). Undergrad paper by Alex
   Light.
 * [Evaluation of performance and productivity metrics of potential
-  programming languages in the HPC environment](). Bachelor's thesis by
-  Florian Wilkens. Compares C, Go and Rust.
+  programming languages in the HPC environment]
+  (http://octarineparrot.com/assets/mrfloya-thesis-ba.pdf).
+  Bachelor's thesis by Florian Wilkens. Compares C, Go and Rust.
 * [Nom, a byte oriented, streaming, zero copy, parser combinators library
   in Rust](http://spw15.langsec.org/papers/couprie-nom.pdf). By
   Geoffroy Couprie, research for VLC.
@@ -71,3 +73,10 @@ Language](http://www.cs.indiana.edu/~eholk/papers/hips2013.pdf). Early GPU work 
 * [Code Refinement of Stencil
   Codes](http://compilers.cs.uni-saarland.de/papers/ppl14_web.pdf). Another
   paper using Impala.
+* [Parallelization in Rust with fork-join and
+  friends](http://publications.lib.chalmers.se/records/fulltext/219016/219016.pdf). Linus
+  Farnstrand's master's thesis.
+* [Session Types for
+  Rust](http://munksgaard.me/papers/laumann-munksgaard-larsen.pdf). Philip
+  Munksgaard's master's thesis. Research for Servo.
+* [Ownership is Theft: Experiences Building an Embedded OS in Rust - Amit Levy, et. al.](http://amitlevy.com/papers/tock-plos2015.pdf)
