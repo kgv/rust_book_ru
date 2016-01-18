@@ -11,7 +11,7 @@ git init
 git config user.name "travis-ci.org"
 git config user.email "travis-ci.org@users.noreply.github.com"
 
-git remote add upstream "https://${GH_PAGES}@github.com/kgv/rust_book_ru.git"
+git remote add upstream "https://${GH_PAGES}@github.com/ruRust/rust_book_ru.git"
 git fetch upstream
 git reset upstream/gh-pages
 
