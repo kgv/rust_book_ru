@@ -7,6 +7,7 @@ CONVERTED_DIR=${BOOK_DIR}/converted
 mkdir -p $CONVERTED_DIR
 cd $BOOK_DIR
 cp ${ROOT}/static/css/rust-book-pdf.min.css rust-book.css
+cp ${ROOT}/static/css/rust.css rust.css
 
 parallel ::: "${ROOT}/script/convert-epub.sh" \
          "${ROOT}/script/convert-mobi.sh" \
