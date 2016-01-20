@@ -63,7 +63,7 @@
 ## Ресурсы
 
 * rustbook расположен [здесь][rustbook]
-* github репозиторий расположен [здесь][github]
+* репозиторий расположен [здесь][github]
 
 [authors]: https://github.com/ruRust/rust_book_ru/blob/master/AUTHORS.md
 [original]: https://doc.rust-lang.org/book
