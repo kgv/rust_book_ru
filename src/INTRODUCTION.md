@@ -56,4 +56,4 @@
 [book]: https://github.com/rust-lang/rust/tree/master/src/doc/book
 
 Исходные файлы перевода этой книги на русский язык также находятся на GitHub:
-[https://github.com/ruRust/rust_book_ruu](https://github.com/ruRust/rust_book_ru)
+[https://github.com/ruRust/rust_book_ru](https://github.com/ruRust/rust_book_ru)
