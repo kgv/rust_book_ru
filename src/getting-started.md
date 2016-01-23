@@ -68,13 +68,6 @@ Rust довольно большой, однако, не все платформ
 |  Target                       | std |rustc|cargo| notes                      |
 |-------------------------------|-----|-----|-----|----------------------------|
 | `i686-pc-windows-msvc`        |  ✓  |  ✓  |  ✓  | 32-bit MSVC (Windows 7+)   |
-| `x86_64-unknown-linux-musl`   |  ✓  |     |     | 64-bit Linux with MUSL     |
-| `arm-linux-androideabi`       |  ✓  |     |     | ARM Android                |
-| `arm-unknown-linux-gnueabi`   |  ✓  |  ✓  |     | ARM Linux (2.6.18+)        |
-| `arm-unknown-linux-gnueabihf` |  ✓  |  ✓  |     | ARM Linux (2.6.18+)        |
-| `aarch64-unknown-linux-gnu`   |  ✓  |     |     | ARM64 Linux (2.6.18+)      |
-| `mips-unknown-linux-gnu`      |  ✓  |     |     | MIPS Linux (2.6.18+)       |
-| `mipsel-unknown-linux-gnu`    |  ✓  |     |     | MIPS (LE) Linux (2.6.18+)  |
 
 ### Третий уровень
 
@@ -86,8 +79,15 @@ Rust довольно большой, однако, не все платформ
 
 |  Target                       | std |rustc|cargo| notes                      |
 |-------------------------------|-----|-----|-----|----------------------------|
+| `x86_64-unknown-linux-musl`   |  ✓  |     |     | 64-bit Linux with MUSL     |
+| `arm-linux-androideabi`       |  ✓  |     |     | ARM Android                |
 | `i686-linux-android`          |  ✓  |     |     | 32-bit x86 Android         |
 | `aarch64-linux-android`       |  ✓  |     |     | ARM64 Android              |
+| `arm-unknown-linux-gnueabi`   |  ✓  |  ✓  |     | ARM Linux (2.6.18+)        |
+| `arm-unknown-linux-gnueabihf` |  ✓  |  ✓  |     | ARM Linux (2.6.18+)        |
+| `aarch64-unknown-linux-gnu`   |  ✓  |     |     | ARM64 Linux (2.6.18+)      |
+| `mips-unknown-linux-gnu`      |  ✓  |     |     | MIPS Linux (2.6.18+)       |
+| `mipsel-unknown-linux-gnu`    |  ✓  |     |     | MIPS (LE) Linux (2.6.18+)  |
 | `powerpc-unknown-linux-gnu`   |  ✓  |     |     | PowerPC Linux (2.6.18+)    |
 | `i386-apple-ios`              |  ✓  |     |     | 32-bit x86 iOS             |
 | `x86_64-apple-ios`            |  ✓  |     |     | 64-bit x86 iOS             |
