@@ -6,7 +6,6 @@ REV=$(git rev-parse --short HEAD)
 
 cd $BOOK_DIR
 cp ${ROOT}/static/css/rust-book.min.css rust-book.css
-cp ${ROOT}/static/css/rust.css .
 
 git init
 git config user.name "travis-ci.org"
