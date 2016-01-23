@@ -55,7 +55,7 @@
     * [Интерфейс внешних функций (FFI)](src/ffi.md)
     * [Типажи `Borrow` и `AsRef`](src/borrow-and-asref.md)
     * [Каналы сборок](src/release-channels.md)
-    * [Using Rust without the standard library](using-rust-without-the-standard-library.md)
+    * [Using Rust without the standard library](src/using-rust-without-the-standard-library.md)
 * [Нестабильные возможности Rust](src/nightly-rust.md)
     * [Плагины к компилятору](src/compiler-plugins.md)
     * [Встроенный ассемблерный код](src/inline-assembly.md)
