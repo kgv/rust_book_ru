@@ -55,7 +55,7 @@
 [github.com/rust-lang/rust/tree/master/src/doc/trpl](https://github.com/rust-lang/rust/tree/master/src/doc/trpl)
 
 Исходные файлы перевода этой книги на русский язык также находятся на GitHub:
-[github.com/kgv/rust_book_ru](https://github.com/kgv/rust_book_ru)
+[github.com/ruRust/rust_book_ru](https://github.com/ruRust/rust_book_ru)
 
 ## Краткое введение в Rust
 
