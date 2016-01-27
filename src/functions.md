@@ -215,12 +215,62 @@ fn diverges() -> ! {
 
 `panic!` — это макрос, как и `println!()`, который мы встречали ранее. В отличие
 от `println!()`, `panic!()` вызывает остановку текущего потока исполнения с
-заданным сообщением.
+заданным сообщением. Поскольку эта функция вызывает остановку исполнения, она
+никогда не вернёт управление. Поэтому тип её возвращаемого значения обозначается
+знаком `!` и читается как «расходится».
 
-Поскольку эта функция вызывает остановку исполнения, она никогда не вернёт
-управление. Поэтому тип её возвращаемого значения обозначается знаком `!` и
-читается как «расходится». Значение расходящейся функции может быть использовано
-как значение любого типа:
+Если добавить функцию `diverges()` и запустить её, то вы получите следующее
+сообщение:
+
+```text
+thread ‘<main>’ panicked at ‘This function never returns!’, hello.rs:2
+```
+
+Для получение более подробной информации вы можете посмотреть трассировку
+установив переменную среды `RUST_BACKTRACE`:
+
+```text
+$ RUST_BACKTRACE=1 ./diverges
+thread '<main>' panicked at 'This function never returns!', hello.rs:2
+stack backtrace:
+   1:     0x7f402773a829 - sys::backtrace::write::h0942de78b6c02817K8r
+   2:     0x7f402773d7fc - panicking::on_panic::h3f23f9d0b5f4c91bu9w
+   3:     0x7f402773960e - rt::unwind::begin_unwind_inner::h2844b8c5e81e79558Bw
+   4:     0x7f4027738893 - rt::unwind::begin_unwind::h4375279447423903650
+   5:     0x7f4027738809 - diverges::h2266b4c4b850236beaa
+   6:     0x7f40277389e5 - main::h19bb1149c2f00ecfBaa
+   7:     0x7f402773f514 - rt::unwind::try::try_fn::h13186883479104382231
+   8:     0x7f402773d1d8 - __rust_try
+   9:     0x7f402773f201 - rt::lang_start::ha172a3ce74bb453aK5w
+  10:     0x7f4027738a19 - main
+  11:     0x7f402694ab44 - __libc_start_main
+  12:     0x7f40277386c8 - <unknown>
+  13:                0x0 - <unknown>
+```
+
+`RUST_BACKTRACE` так же работает при выполнении команды `run`:
+
+```text
+$ RUST_BACKTRACE=1 cargo run
+     Running `target/debug/diverges`
+thread '<main>' panicked at 'This function never returns!', hello.rs:2
+stack backtrace:
+   1:     0x7f402773a829 - sys::backtrace::write::h0942de78b6c02817K8r
+   2:     0x7f402773d7fc - panicking::on_panic::h3f23f9d0b5f4c91bu9w
+   3:     0x7f402773960e - rt::unwind::begin_unwind_inner::h2844b8c5e81e79558Bw
+   4:     0x7f4027738893 - rt::unwind::begin_unwind::h4375279447423903650
+   5:     0x7f4027738809 - diverges::h2266b4c4b850236beaa
+   6:     0x7f40277389e5 - main::h19bb1149c2f00ecfBaa
+   7:     0x7f402773f514 - rt::unwind::try::try_fn::h13186883479104382231
+   8:     0x7f402773d1d8 - __rust_try
+   9:     0x7f402773f201 - rt::lang_start::ha172a3ce74bb453aK5w
+  10:     0x7f4027738a19 - main
+  11:     0x7f402694ab44 - __libc_start_main
+  12:     0x7f40277386c8 - <unknown>
+  13:                0x0 - <unknown>
+```
+
+Значение расходящейся функции может быть использовано как значение любого типа:
 
 ```should_panic
 # fn diverges() -> ! {
@@ -228,4 +278,35 @@ fn diverges() -> ! {
 # }
 let x: i32 = diverges();
 let x: String = diverges();
+```
+
+## Указатели на функции
+
+Можно объявить имя связанное с функцией:
+
+```rust
+let f: fn(i32) -> i32;
+```
+
+`f` — это имя связанное с указателем на функцию, которая принимает в качестве
+аргумента `i32` и возвращает `i32`. Например:
+
+```rust
+fn plus_one(i: i32) -> i32 {
+    i + 1
+}
+
+// без вывода типа
+let f: fn(i32) -> i32 = plus_one;
+
+// с выводом типа
+let f = plus_one;
+```
+
+Теперь мы можем использовать `f`, что бы вызвать функцию:
+
+```rust
+# fn plus_one(i: i32) -> i32 { i + 1 }
+# let f = plus_one;
+let six = f(5);
 ```
