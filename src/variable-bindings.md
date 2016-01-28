@@ -198,7 +198,8 @@ fn main() {
         let y: i32 = 3;
         println!("Значение x равно {} и значение y равно {}", x, y);
     }
-    println!("Значение x равно {} и значение y равно {}", x, y); // Это не заработает
+    // Ошибка компиляции
+    println!("Значение x равно {} и значение y равно {}", x, y);
 }
 ```
 
@@ -209,16 +210,13 @@ fn main() {
 ```bash
 $ cargo build
    Compiling hello v0.1.0 (file:///home/you/projects/hello_world)
-main.rs:7:62: 7:63 error: unresolved name `y`. Did you mean `x`? [E0425]
-main.rs:7     println!("Значение x равно {} и значение y равно {}", x, y); // Это не заработает
+main.rs:8:62: 8:63 error: unresolved name `y`. Did you mean `x`? [E0425]
+main.rs:8     println!("Значение x равно {} и значение y равно {}", x, y);
                                                                        ^
-note: in expansion of format_args!
-<std macros>:2:25: 2:56 note: expansion site
-<std macros>:1:1: 2:62 note: in expansion of print!
-<std macros>:3:1: 3:54 note: expansion site
-<std macros>:1:1: 3:58 note: in expansion of println!
-main.rs:7:5: 7:65 note: expansion site
-main.rs:7:62: 7:63 help: run `rustc --explain E0425` to see a detailed explanation
+<std macros>:2:25: 2:56 note: in this expansion of format_args!
+<std macros>:3:1: 3:54 note: in this expansion of print! (defined in <std macros>)
+main.rs:8:5: 8:65 note: in this expansion of println! (defined in <std macros>)
+main.rs:8:62: 8:63 help: run `rustc --explain E0425` to see a detailed explanation
 error: aborting due to previous error
 Could not compile `hello`.
 
@@ -244,13 +242,13 @@ println!("{}", x); // Выводит "42"
 Затенение и изменяемое связывание могут казаться двумя сторонами одной монеты, но
 они являются двумя отдельными концепциями, которые не всегда взаимозаменяемы.
 Например, затенение позволяет связать имя с другим типом или изменить связь с
-изменяемой на неизменяемою.
+изменяемой на неизменяемую.
 
 ```rust
 let mut x: i32 = 1;
 x = 7;
-let x = x; // теперь x неизменяемое и связанно с 7
+let x = x; // теперь X неизменяемое и связанно с 7
 
 let y = 4;
-let y = "Я так же могу быть связан с текстом!"; // теперь y другого типа
+let y = "Я так же могу быть связан с текстом!"; // теперь Y другого типа
 ```
