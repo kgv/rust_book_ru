@@ -7,7 +7,6 @@ REV=$(git rev-parse --short HEAD)
 cd $BOOK_DIR
 cp ${ROOT}/static/css/rust-book.min.css rustbook.css
 sed -i "s/@import url('..\/rust.css');/@import url('.\/rust.css');/g" rustbook.css
-cp static/css/rust.css .
 
 git init
 git config user.name "travis-ci.org"
