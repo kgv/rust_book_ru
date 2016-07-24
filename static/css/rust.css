@@ -340,8 +340,6 @@ pre.rust { position: relative; }
     top: 0;
     right: 10px;
     font-size: 150%;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
 }
 
 .unstable-feature {
