@@ -4,9 +4,9 @@ SAVED_PWD=$(pwd)
 export RUSTBOOK=$HOME/rustbook; echo "INFO:RUSTBOOK: $RUSTBOOK"
 
 if [ ! -f "$RUSTBOOK"/target/release/rustbook ]; then
-    git clone https://github.com/steveklabnik/rustbook $RUSTBOOK
+    git clone https://github.com/mkpankov/rustbook $RUSTBOOK
     cd $RUSTBOOK
-    git checkout e19eebb99443a6bf3f88e3f4e6b1dd21d3f3bf05
+    git checkout 402f5017ce79eb5e208539352678ded7b65ac527
     cargo build --release
     cd $SAVED_PWD
 else
