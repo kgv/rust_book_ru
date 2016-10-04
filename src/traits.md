@@ -337,7 +337,7 @@ fn normal<T: ConvertTo<i64>>(x: &T) -> i64 {
 
 // может быть вызван с T == i64
 fn inverse<T>() -> T
-        // использует ConvertTo как если бы это было «ConvertFrom<i32>»
+        // использует ConvertTo как если бы это было «ConvertTo<i64>»
         where i32: ConvertTo<T> {
     1i32.convert()
 }
