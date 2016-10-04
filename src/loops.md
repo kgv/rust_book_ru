@@ -132,7 +132,7 @@ i = 4 и j = 9
 #### С итераторами
 
 ```rust
-# let lines = "привет\nмир\nhello\nworld".lines();
+let lines = "привет\nмир\nhello\nworld".lines();
 for (linenumber, line) in lines.enumerate() {
     println!("{}: {}", linenumber, line);
 }
