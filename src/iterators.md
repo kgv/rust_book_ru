@@ -157,8 +157,8 @@ let greater_than_forty_two = (0..100)
                              .find(|x| *x > 42);
 
 match greater_than_forty_two {
-    Some(_) => println!("У нас есть несколько чисел!"),
-    None => println!("Числа не найдены :("),
+    Some(_) => println!("Мы нашли число!"),
+    None => println!("Число не найдено :("),
 }
 ```
 
