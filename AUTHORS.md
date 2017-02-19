@@ -1,4 +1,3 @@
-* [d101101](https://github.com/D101101)
 * [dieu](https://github.com/dieu)
 * [funkill](https://github.com/funkill)
 * [hhblaze](https://github.com/hhblaze)
@@ -8,4 +7,5 @@
 * [mkpankov](https://github.com/mkpankov)
 * [rastopyr](https://github.com/rastopyr)
 * [suhr](https://github.com/suhr)
+* [vessd](https://github.com/vessd)
 * [vkibalyuk](https://github.com/VKibalyuk)
